@@ -44,6 +44,7 @@ bool GameScene::init()
 	UIScroll* uiScroll = UIScroll::create(720.0f, 200.0f);
 	uiScroll->setPosition(Vec2(visibleSize.width / 2, 980));
 	uiScroll->addEventText("AAAAAAAA");
+	//uiScroll->addEventText("bbbbbbbb");
 	addChild(uiScroll);
 
     return true;
