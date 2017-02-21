@@ -2,7 +2,43 @@
   <PropertyGroup Name="JHCocosUI" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
-      <RootFolder Name="." />
+      <RootFolder Name=".">
+        <Folder Name="fonts">
+          <Fnt Name="topnum.fnt" />
+        </Folder>
+        <Folder Name="ui">
+          <Image Name="room.jpg" />
+          <Image Name="top_r_autumn.png" />
+          <Image Name="top_r_spring.png" />
+          <Image Name="top_r_summer.png" />
+          <Image Name="top_r_winner.png" />
+          <Image Name="top_w_cloudy.png" />
+          <Image Name="top_w_rainy.png" />
+          <Image Name="top_w_snow.png" />
+          <Image Name="top_w_sunshine.png" />
+          <Image Name="topbg.png" />
+          <Image Name="topbox.png" />
+          <Image Name="topdegree.png" />
+          <Image Name="topeventwordbox.png" />
+          <Image Name="tophero0.png" />
+          <Image Name="tophungerbar.png" />
+          <Image Name="tophungerbg.png" />
+          <Image Name="topinnerinjurybar.png" />
+          <Image Name="topinnerinjurybg.png" />
+          <Image Name="toplifebar.png" />
+          <Image Name="toplifebg.png" />
+          <Image Name="toplivedaysicon.png" />
+          <Image Name="topoutinjurybar.png" />
+          <Image Name="topoutinjurybg.png" />
+          <Image Name="topspiritbar.png" />
+          <Image Name="topspiritbg.png" />
+          <Image Name="toptemperature.png" />
+          <Image Name="toptimeicon.png" />
+        </Folder>
+        <Project Name="homeLayer.csd" Type="Layer" />
+        <Project Name="topBarNode.csd" Type="Node" />
+        <PlistInfo Name="uipacker.csi" Type="Plist" />
+      </RootFolder>
     </Group>
   </SolutionFolder>
 </Solution>

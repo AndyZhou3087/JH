@@ -1,0 +1,35 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="uipacker" Type="Plist" ID="cc6e5a17-5c92-48c4-82e3-3c7ef4e886d4" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="True" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="ui/top_r_autumn.png" />
+      <FilePathData Path="ui/top_r_spring.png" />
+      <FilePathData Path="ui/top_r_summer.png" />
+      <FilePathData Path="ui/top_r_winner.png" />
+      <FilePathData Path="ui/top_w_cloudy.png" />
+      <FilePathData Path="ui/top_w_rainy.png" />
+      <FilePathData Path="ui/top_w_snow.png" />
+      <FilePathData Path="ui/top_w_sunshine.png" />
+      <FilePathData Path="ui/topbg.png" />
+      <FilePathData Path="ui/topbox.png" />
+      <FilePathData Path="ui/topdegree.png" />
+      <FilePathData Path="ui/topeventwordbox.png" />
+      <FilePathData Path="ui/tophero0.png" />
+      <FilePathData Path="ui/tophungerbar.png" />
+      <FilePathData Path="ui/tophungerbg.png" />
+      <FilePathData Path="ui/topoutinjurybar.png" />
+      <FilePathData Path="ui/topoutinjurybg.png" />
+      <FilePathData Path="ui/toplifebar.png" />
+      <FilePathData Path="ui/toplifebg.png" />
+      <FilePathData Path="ui/toplivedaysicon.png" />
+      <FilePathData Path="ui/topinnerinjurybar.png" />
+      <FilePathData Path="ui/topinnerinjurybg.png" />
+      <FilePathData Path="ui/topspiritbar.png" />
+      <FilePathData Path="ui/topspiritbg.png" />
+      <FilePathData Path="ui/toptemperature.png" />
+      <FilePathData Path="ui/toptimeicon.png" />
+      <FilePathData Path="ui/room.jpg" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>
