@@ -96,7 +96,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/top_r_spring.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/top_r_season0.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="wheather" ActionTag="315300657" Tag="24" IconVisible="False" LeftMargin="-108.3451" RightMargin="49.3451" TopMargin="-187.2544" BottomMargin="133.2544" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="17" BottomEage="17" Scale9OriginX="19" Scale9OriginY="17" Scale9Width="21" Scale9Height="20" ctype="ImageViewObjectData">
             <Size X="59.0000" Y="54.0000" />
@@ -106,7 +106,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/top_w_sunshine.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/top_weather0.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="livedaysincon" ActionTag="-1982682368" Tag="25" IconVisible="False" LeftMargin="-19.9214" RightMargin="-38.0786" TopMargin="-185.2547" BottomMargin="134.2547" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="16" BottomEage="16" Scale9OriginX="19" Scale9OriginY="16" Scale9Width="20" Scale9Height="19" ctype="ImageViewObjectData">
             <Size X="58.0000" Y="51.0000" />
@@ -151,8 +151,8 @@
           </AbstractNodeData>
           <AbstractNodeData Name="timelbl" ActionTag="-1641961463" Tag="29" IconVisible="False" LeftMargin="153.4320" RightMargin="-205.4320" TopMargin="-170.0310" BottomMargin="139.0310" TouchEnable="True" LabelText="13:15" ctype="TextBMFontObjectData">
             <Size X="52.0000" Y="31.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="179.4320" Y="154.5310" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="153.4320" Y="154.5310" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />

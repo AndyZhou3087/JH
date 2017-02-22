@@ -3,18 +3,28 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
+#include "UIScroll.h"
+#include "TopBar.h"
+#include "Nature.h"
+#include "Hero.h"
 class GameScene : public cocos2d::Layer
 {
 public:
+	GameScene();
+	~GameScene();
     static cocos2d::Scene* createScene();
 
+	virtual void onExit();
     virtual bool init();
     
 	CREATE_FUNC(GameScene);
 
 private:
-	Node* topBar;
+	TopBar* topBar;
 	Node* homeLayer;
-};
+	UIScroll* uiScroll;
 
+};
+extern Nature* g_natureData;
+extern Hero* g_heroData;
 #endif // __GAME_SCENE_H__

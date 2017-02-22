@@ -1,8 +1,22 @@
-#include "GameScene.h"
+﻿#include "GameScene.h"
 #include "TopBar.h"
 #include "HomeLayer.h"
 #include "UIScroll.h"
+#include "GameDataSave.h"
 USING_NS_CC;
+
+Nature* g_natureData;
+Hero* g_heroData;
+GameScene::GameScene()
+{
+
+}
+GameScene::~GameScene()
+{
+	delete g_heroData;
+	delete g_natureData;
+	GameDataSave::purgeGameSave();
+}
 
 Scene* GameScene::createScene()
 {
@@ -33,19 +47,33 @@ bool GameScene::init()
 	homeLayer = HomeLayer::create();
 	addChild(homeLayer);
 
-	topBar = TopBar::create();
-	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
-	addChild(topBar);
+	g_natureData = new Nature;
+	g_natureData->setTime(GameDataSave::getInstance()->getNatureTime());
+	g_natureData->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
+
+	g_heroData = new Hero;
+	g_heroData->setLifeValue(100);
+	g_heroData->setMaxLifeValue(100);
+	g_heroData->setLiveDays(GameDataSave::getInstance()->getLiveDays());
 
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 980));
-	this->addChild(bg);
+	this->addChild(bg, 1);
 
-	UIScroll* uiScroll = UIScroll::create(720.0f, 200.0f);
+	uiScroll = UIScroll::create(500.0f, 132.0f);
 	uiScroll->setPosition(Vec2(visibleSize.width / 2, 980));
-	uiScroll->addEventText("AAAAAAAA");
-	//uiScroll->addEventText("bbbbbbbb");
-	addChild(uiScroll);
+	addChild(uiScroll, 1);
 
+	topBar = TopBar::create();
+	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
+	topBar->setScrollContainer(uiScroll);
+	addChild(topBar);
+	
     return true;
+}
+void GameScene::onExit()
+{
+	int ntime = g_natureData->getTime();
+	GameDataSave::getInstance()->setNatureTime(ntime);
+	Layer::onExit();
 }

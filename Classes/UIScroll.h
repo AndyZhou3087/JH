@@ -15,6 +15,7 @@ public:
 
 	static UIScroll* UIScroll::create(float width, float height);
 	void addEventText(std::string text, int fontsize = 16, Color3B color3b = Color3B(0,0,0));
+	void clean();
 
 private:
 	float m_width;

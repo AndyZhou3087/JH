@@ -2,14 +2,14 @@
   <PropertyGroup Name="uipacker" Type="Plist" ID="cc6e5a17-5c92-48c4-82e3-3c7ef4e886d4" Version="3.10.0.0" />
   <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="True" AllowTrim="True" ctype="PlistInfoData">
     <ImageFiles>
-      <FilePathData Path="ui/top_r_autumn.png" />
-      <FilePathData Path="ui/top_r_spring.png" />
-      <FilePathData Path="ui/top_r_summer.png" />
-      <FilePathData Path="ui/top_r_winner.png" />
-      <FilePathData Path="ui/top_w_cloudy.png" />
-      <FilePathData Path="ui/top_w_rainy.png" />
-      <FilePathData Path="ui/top_w_snow.png" />
-      <FilePathData Path="ui/top_w_sunshine.png" />
+      <FilePathData Path="ui/top_r_season2.png" />
+      <FilePathData Path="ui/top_r_season0.png" />
+      <FilePathData Path="ui/top_r_season1.png" />
+      <FilePathData Path="ui/top_r_season3.png" />
+      <FilePathData Path="ui/top_weather1.png" />
+      <FilePathData Path="ui/top_weather2.png" />
+      <FilePathData Path="ui/top_weather3.png" />
+      <FilePathData Path="ui/top_weather0.png" />
       <FilePathData Path="ui/topbg.png" />
       <FilePathData Path="ui/topbox.png" />
       <FilePathData Path="ui/topdegree.png" />

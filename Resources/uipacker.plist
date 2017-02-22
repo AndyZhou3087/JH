@@ -4,7 +4,7 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>ui/top_r_autumn.png</key>
+			<key>ui/top_r_season2.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{725,1942},{54,50}}</string>
@@ -15,7 +15,7 @@
 				<key>sourceSize</key>
 				<string>{54,50}</string>
 			</dict>
-			<key>ui/top_r_spring.png</key>
+			<key>ui/top_r_season0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{431,2004},{58,42}}</string>
@@ -26,7 +26,7 @@
 				<key>sourceSize</key>
 				<string>{58,42}</string>
 			</dict>
-			<key>ui/top_r_summer.png</key>
+			<key>ui/top_r_season1.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{676,1887},{55,55}}</string>
@@ -37,7 +37,7 @@
 				<key>sourceSize</key>
 				<string>{55,55}</string>
 			</dict>
-			<key>ui/top_r_winner.png</key>
+			<key>ui/top_r_season3.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{725,1996},{49,53}}</string>
@@ -48,7 +48,7 @@
 				<key>sourceSize</key>
 				<string>{49,53}</string>
 			</dict>
-			<key>ui/top_w_cloudy.png</key>
+			<key>ui/top_weather1.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{619,1968},{63,52}}</string>
@@ -59,7 +59,7 @@
 				<key>sourceSize</key>
 				<string>{63,52}</string>
 			</dict>
-			<key>ui/top_w_rainy.png</key>
+			<key>ui/top_weather2.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{637,1819},{68,56}}</string>
@@ -70,7 +70,7 @@
 				<key>sourceSize</key>
 				<string>{68,56}</string>
 			</dict>
-			<key>ui/top_w_snow.png</key>
+			<key>ui/top_weather3.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{619,1900},{68,57}}</string>
@@ -81,7 +81,7 @@
 				<key>sourceSize</key>
 				<string>{68,57}</string>
 			</dict>
-			<key>ui/top_w_sunshine.png</key>
+			<key>ui/top_weather0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{671,1968},{59,54}}</string>
