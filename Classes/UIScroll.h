@@ -17,6 +17,9 @@ public:
 	void addEventText(std::string text, int fontsize = 16, Color3B color3b = Color3B(0,0,0));
 
 private:
+	float m_width;
+	float m_height;
+	Layer* m_containerLayer;
 	ScrollView *scrollView;
 	void scrollViewDidScroll(ScrollView* view);
 
