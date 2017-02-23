@@ -23,6 +23,8 @@ private:
 	TopBar* topBar;
 	Node* homeLayer;
 	UIScroll* uiScroll;
+private:
+	void loadSaveData();
 
 };
 extern Nature* g_natureData;

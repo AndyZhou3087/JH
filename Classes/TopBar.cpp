@@ -26,15 +26,17 @@ bool TopBar::init()
 	reason->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 	reason->setName("reason");
 
-	std::string str = StringUtils::format("%d", g_natureData->getReason());
-	livedayslbl->setString(str);
+	std::string str = StringUtils::format("ui/top_r_season%d.png", GameDataSave::getInstance()->getNatureReason());
+	reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	wheather = (cocos2d::ui::ImageView*)csbnode->getChildByName("wheather");
 	wheather->setName("wheather");
 	wheather->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	str = StringUtils::format("%d", g_natureData->getReason());
-	livedayslbl->setString(str);
+	str = StringUtils::format("ui/top_weather%d.png", GameDataSave::getInstance()->getNatureWheather());
+	wheather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	wheather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::ImageView* livedaysincon = (cocos2d::ui::ImageView*)csbnode->getChildByName("livedaysincon");
 	livedaysincon->setName("livedays");
@@ -48,21 +50,25 @@ bool TopBar::init()
 	temperature->setName("temperature");
 	temperature->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-
 	livedayslbl = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("livedayslbl");
 	livedayslbl->setName("livedays");
 	livedayslbl->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	str = StringUtils::format("%d", g_heroData->getLiveDays());
+	str = StringUtils::format("%d", GameDataSave::getInstance()->getLiveDays());
 	livedayslbl->setString(str);
 
 	timelbl = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("timelbl");
 	timelbl->setName("time");
 	timelbl->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
+	str = StringUtils::format("%d", GameDataSave::getInstance()->getNatureTime());
+	timelbl->setString(str);
 
 	templbl = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("templbl");
 	templbl->setName("temperature");
 	templbl->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
+
+	str = StringUtils::format("%d", GameDataSave::getInstance()->getNatureTemperature());
+	templbl->setString(str);
 
 	cocos2d::ui::ImageView* outinjury = (cocos2d::ui::ImageView*)csbnode->getChildByName("topoutinjurybg");
 	outinjury->setName("outinjury");
@@ -154,16 +160,24 @@ void TopBar::updataUI(float dt)
 	{
 		pastmin = 0;
 		int livedays = g_heroData->getLiveDays() + 1;
-		GameDataSave::getInstance()->setLiveDays(livedays);
+
 		g_heroData->setLiveDays(livedays);
 		str = StringUtils::format("%d", livedays);
 		livedayslbl->setString(str);
 		g_natureData->ChangeReason(livedays);
 		g_natureData->ChangeWheather();
 
+		str = StringUtils::format("ui/top_r_season%d.png", g_natureData->getReason());
+		reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+		str = StringUtils::format("ui/top_weather%d.png", g_natureData->getWheather());
+		wheather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		wheather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+		GameDataSave::getInstance()->setLiveDays(livedays);
 		GameDataSave::getInstance()->setNatureReason(g_natureData->getReason());
 		GameDataSave::getInstance()->setNatureWheather(g_natureData->getWheather());
-
 	}
 
 	GameDataSave::getInstance()->setNatureTemperature(g_natureData->getTemperature());

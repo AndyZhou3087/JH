@@ -69,8 +69,19 @@ bool GameScene::init()
 	topBar->setScrollContainer(uiScroll);
 	addChild(topBar);
 	
+	loadSaveData();
+
     return true;
 }
+
+void GameScene::loadSaveData()
+{
+	g_natureData->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
+	g_natureData->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
+	g_natureData->setTime(GameDataSave::getInstance()->getNatureTime());
+	g_natureData->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
+}
+
 void GameScene::onExit()
 {
 	int ntime = g_natureData->getTime();
