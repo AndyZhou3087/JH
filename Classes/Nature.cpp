@@ -3,21 +3,26 @@
 int Nature::ReasonCDays = 90;
 
 int WheatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
+int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, {-20, 0} };
 Nature::Nature()
 {
-	m_temperature = 10;
+
 	m_time = 0;
 	m_reason = EReason::Spring;
 	m_wheather = EWheather::Suny;
 	m_daynight = EDAYNIGTH::Night;
+	srand(systime());
+	int r = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
+	m_temperature = r;
 }
 
 
 Nature::~Nature()
 {
+
 }
 
-void Nature::ChangeWheather()
+int Nature::systime()
 {
 	time_t timep;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -27,7 +32,11 @@ void Nature::ChangeWheather()
 	gettimeofday(&tv, NULL);
 	timep = tv.tv_sec;
 #endif
-	srand(timep);
+	return timep;
+}
+void Nature::ChangeWheather()
+{
+	srand(systime());
 	int r = rand() % 100;
 	int i = 0;
 	for (i = 0; i < 4; i++)
@@ -69,7 +78,12 @@ void Nature::ChangeReason(int livedays)
 		r = Winter;
 	}
 	if (r != m_reason)
+	{
 		setReason(r);
+		srand(systime());
+		int  t = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
+		setTemperature(t);
+	}
 
 }
 void Nature::ChangeDayNight(int time)

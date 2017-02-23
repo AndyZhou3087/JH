@@ -8,14 +8,14 @@
         </Folder>
         <Folder Name="ui">
           <Image Name="room.jpg" />
-          <Image Name="top_r_season2.png" />
           <Image Name="top_r_season0.png" />
           <Image Name="top_r_season1.png" />
+          <Image Name="top_r_season2.png" />
           <Image Name="top_r_season3.png" />
+          <Image Name="top_weather0.png" />
           <Image Name="top_weather1.png" />
           <Image Name="top_weather2.png" />
           <Image Name="top_weather3.png" />
-          <Image Name="top_weather0.png" />
           <Image Name="topbg.png" />
           <Image Name="topbox.png" />
           <Image Name="topdegree.png" />

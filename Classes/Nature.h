@@ -40,6 +40,7 @@ public:
 public:
 	int static ReasonCDays;//¼¾½ÚÇĞ»»ÌìÊı
 private:
+	int static systime();
 };
 #endif
 

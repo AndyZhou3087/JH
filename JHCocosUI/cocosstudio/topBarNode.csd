@@ -48,7 +48,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topoutinjurybg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="topinnerinjurybg" ActionTag="628565220" Tag="19" IconVisible="False" LeftMargin="-75.6900" RightMargin="-3.3100" TopMargin="-100.3500" BottomMargin="20.3500" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="28" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="topinnerinjurybg" ActionTag="628565220" Tag="19" IconVisible="False" LeftMargin="-75.6900" RightMargin="-3.3100" TopMargin="-100.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="28" ctype="ImageViewObjectData">
             <Size X="79.0000" Y="80.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-36.1900" Y="60.3500" />
@@ -58,7 +58,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topinnerinjurybg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tophungerbg" ActionTag="-1543547275" Tag="20" IconVisible="False" LeftMargin="43.4200" RightMargin="-115.4200" TopMargin="-103.3500" BottomMargin="20.3500" LeftEage="23" RightEage="23" TopEage="27" BottomEage="27" Scale9OriginX="23" Scale9OriginY="27" Scale9Width="26" Scale9Height="29" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="tophungerbg" ActionTag="-1543547275" Tag="20" IconVisible="False" LeftMargin="43.4200" RightMargin="-115.4200" TopMargin="-103.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="23" RightEage="23" TopEage="27" BottomEage="27" Scale9OriginX="23" Scale9OriginY="27" Scale9Width="26" Scale9Height="29" ctype="ImageViewObjectData">
             <Size X="72.0000" Y="83.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="79.4200" Y="61.8500" />
@@ -68,7 +68,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/tophungerbg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="topspiritbg" ActionTag="-1453310125" Tag="21" IconVisible="False" LeftMargin="155.5400" RightMargin="-228.5400" TopMargin="-109.3500" BottomMargin="20.3500" LeftEage="24" RightEage="24" TopEage="29" BottomEage="29" Scale9OriginX="24" Scale9OriginY="29" Scale9Width="25" Scale9Height="31" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="topspiritbg" ActionTag="-1453310125" Tag="21" IconVisible="False" LeftMargin="155.5400" RightMargin="-228.5400" TopMargin="-109.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="24" RightEage="24" TopEage="29" BottomEage="29" Scale9OriginX="24" Scale9OriginY="29" Scale9Width="25" Scale9Height="31" ctype="ImageViewObjectData">
             <Size X="73.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="192.0400" Y="64.8500" />
@@ -78,7 +78,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topspiritbg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="toplifebg" ActionTag="648671161" Tag="22" IconVisible="False" LeftMargin="268.6600" RightMargin="-347.6600" TopMargin="-101.3500" BottomMargin="20.3500" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="29" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="toplifebg" ActionTag="648671161" Tag="22" IconVisible="False" LeftMargin="268.6600" RightMargin="-347.6600" TopMargin="-101.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="29" ctype="ImageViewObjectData">
             <Size X="79.0000" Y="81.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="308.1600" Y="60.8500" />
