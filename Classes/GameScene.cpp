@@ -5,16 +5,14 @@
 #include "GameDataSave.h"
 USING_NS_CC;
 
-Nature* g_natureData;
-Hero* g_heroData;
+Nature* g_nature;
+Hero* g_hero;
 GameScene::GameScene()
 {
 
 }
 GameScene::~GameScene()
 {
-	delete g_heroData;
-	delete g_natureData;
 	GameDataSave::purgeGameSave();
 }
 
@@ -47,14 +45,17 @@ bool GameScene::init()
 	homeLayer = HomeLayer::create();
 	addChild(homeLayer);
 
-	g_natureData = new Nature;
-	g_natureData->setTime(GameDataSave::getInstance()->getNatureTime());
-	g_natureData->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
+	g_nature = Nature::create();
+	this->addChild(g_nature);
 
-	g_heroData = new Hero;
-	g_heroData->setLifeValue(100);
-	g_heroData->setMaxLifeValue(100);
-	g_heroData->setLiveDays(GameDataSave::getInstance()->getLiveDays());
+	g_hero = Hero::create();
+	this->addChild(g_hero);
+
+	loadSaveData();
+
+	g_hero->setLifeValue(100);
+	g_hero->setMaxLifeValue(100);
+
 
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 980));
@@ -69,22 +70,47 @@ bool GameScene::init()
 	topBar->setScrollContainer(uiScroll);
 	addChild(topBar);
 	
-	loadSaveData();
+
+
 
     return true;
 }
 
 void GameScene::loadSaveData()
 {
-	g_natureData->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
-	g_natureData->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
-	g_natureData->setTime(GameDataSave::getInstance()->getNatureTime());
-	g_natureData->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
+	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
+	g_nature->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
+	g_nature->setTime(GameDataSave::getInstance()->getNatureTime());
+	g_nature->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
+	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
+
+	g_hero->setLifeValue(GameDataSave::getInstance()->getHeroLife());
+	g_hero->setMaxLifeValue(GameDataSave::getInstance()->getHeroMaxLife());
+	g_hero->setOutinjuryValue(GameDataSave::getInstance()->getHeroOutinjury());
+	g_hero->setInnerinjuryValue(GameDataSave::getInstance()->getHeroInnerinjury());
+	g_hero->setHungerValue(GameDataSave::getInstance()->getHeroHunger());
+	g_hero->setSpiritValue(GameDataSave::getInstance()->getHeroSpirit());
+
 }
 
 void GameScene::onExit()
 {
-	int ntime = g_natureData->getTime();
-	GameDataSave::getInstance()->setNatureTime(ntime);
+	saveAllData();
+
 	Layer::onExit();
+}
+
+void GameScene::saveAllData()
+{
+	GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
+	GameDataSave::getInstance()->setNatureWheather(g_nature->getWheather());
+	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
+	GameDataSave::getInstance()->setNatureTime(g_nature->getTime());
+	GameDataSave::getInstance()->setLiveDays(g_nature->getPastDays());
+	GameDataSave::getInstance()->setHeroLife(g_hero->getLifeValue());
+	GameDataSave::getInstance()->setHeroMaxLife(g_hero->getMaxLifeValue());
+	GameDataSave::getInstance()->setHeroOutinjury(g_hero->getOutinjuryValue());
+	GameDataSave::getInstance()->setHeroInnerinjury(g_hero->getInnerinjuryValue());
+	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());
+	GameDataSave::getInstance()->setHeroSpirit(g_hero->getSpiritValue());
 }

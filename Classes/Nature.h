@@ -23,7 +23,7 @@ typedef enum
 	Night
 }EDAYNIGTH;
 
-class Nature
+class Nature:public Node
 {
 public:
 	Nature();
@@ -33,14 +33,21 @@ public:
 	CC_SYNTHESIZE(EReason, m_reason, Reason);
 	CC_SYNTHESIZE(EWheather, m_wheather, Wheather);
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
+	CC_SYNTHESIZE(int, m_pastdays, PastDays);
 
 	void ChangeWheather();
-	void ChangeReason(int livedays);
-	void ChangeDayNight(int time);
+	void ChangeReason();
+	void ChangeDayNight();
+
+	virtual bool init();
+
+	CREATE_FUNC(Nature);
+
 public:
 	int static ReasonCDays;//¼¾½ÚÇÐ»»ÌìÊý
 private:
 	int static systime();
+	void updateData(float dt);
 };
 #endif
 

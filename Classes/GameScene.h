@@ -25,8 +25,9 @@ private:
 	UIScroll* uiScroll;
 private:
 	void loadSaveData();
+	void saveAllData();
 
 };
-extern Nature* g_natureData;
-extern Hero* g_heroData;
+extern Nature* g_nature;
+extern Hero* g_hero;
 #endif // __GAME_SCENE_H__

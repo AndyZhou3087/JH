@@ -6,7 +6,7 @@ int WheatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62
 int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, {-20, 0} };
 Nature::Nature()
 {
-
+	m_pastdays = 0;
 	m_time = 0;
 	m_reason = EReason::Spring;
 	m_wheather = EWheather::Suny;
@@ -16,10 +16,15 @@ Nature::Nature()
 	m_temperature = r;
 }
 
-
 Nature::~Nature()
 {
 
+}
+
+bool Nature::init()
+{
+	this->schedule(schedule_selector(Nature::updateData), 0.2f);
+	return true;
 }
 
 int Nature::systime()
@@ -57,9 +62,9 @@ void Nature::ChangeWheather()
 
 }
 
-void Nature::ChangeReason(int livedays)
+void Nature::ChangeReason()
 {
-	int yudays = livedays % (4 * ReasonCDays);
+	int yudays = m_pastdays % (4 * ReasonCDays);
 	EReason r = Spring;
 	if (yudays < ReasonCDays)
 	{
@@ -86,9 +91,9 @@ void Nature::ChangeReason(int livedays)
 	}
 
 }
-void Nature::ChangeDayNight(int time)
+void Nature::ChangeDayNight()
 {
-	if (time < 60 * 6 - 1 || time >= 18 * 60)
+	if (m_time < 60 * 6 - 1 || m_time >= 18 * 60)
 	{
 		if (m_daynight == Day)
 		{
@@ -105,4 +110,18 @@ void Nature::ChangeDayNight(int time)
 			setTemperature(m_temperature + 5);
 		}
 	}
+}
+
+void Nature::updateData(float dt)
+{
+	m_time += 10;
+	if (m_time >= 1440)
+	{
+		m_time = 0;
+		m_pastdays++;
+
+		ChangeReason();
+		ChangeWheather();
+	}
+	ChangeDayNight();
 }

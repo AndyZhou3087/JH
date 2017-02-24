@@ -25,6 +25,11 @@ private:
 	cocos2d::ui::TextBMFont* timelbl;
 	cocos2d::ui::TextBMFont* templbl;
 	int pastmin;//–Èƒ‚∑÷÷”£¨
+	ProgressTimer* outinjuryBar;
+	ProgressTimer* innerinjuryBar;
+	ProgressTimer* hungerBar;
+	ProgressTimer* spiritBar;
+	ProgressTimer* lifeBar;
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	UIScroll* m_uiscroll;
