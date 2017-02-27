@@ -29,6 +29,15 @@
       <FilePathData Path="ui/toptemperature.png" />
       <FilePathData Path="ui/toptimeicon.png" />
       <FilePathData Path="ui/room.jpg" />
+      <FilePathData Path="ui/bed.png" />
+      <FilePathData Path="ui/cooktable.png" />
+      <FilePathData Path="ui/exerciseroom.png" />
+      <FilePathData Path="ui/fence .png" />
+      <FilePathData Path="ui/forgingtable.png" />
+      <FilePathData Path="ui/furnace .png" />
+      <FilePathData Path="ui/medicinekit.png" />
+      <FilePathData Path="ui/repertory.png" />
+      <FilePathData Path="ui/winemake.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="2048" />
   </Content>
