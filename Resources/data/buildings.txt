@@ -1,0 +1,11 @@
+{"b":[
+{"name":"bed","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"cooktable","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"forgingtable","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"winemake","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"medicinekit","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"fence","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"furnace","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"exerciseroom","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]},
+{"name":"winetable","maxlevel":3, "needtime":[30,40,50], "needres":[[1,1,2],[1,2,1],[2,2,2]]}
+]}

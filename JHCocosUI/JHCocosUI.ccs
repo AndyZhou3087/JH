@@ -7,6 +7,14 @@
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="ui">
+          <Image Name="bed.png" />
+          <Image Name="cooktable.png" />
+          <Image Name="exerciseroom.png" />
+          <Image Name="fence .png" />
+          <Image Name="forgingtable.png" />
+          <Image Name="furnace .png" />
+          <Image Name="medicinekit.png" />
+          <Image Name="repertory.png" />
           <Image Name="room.jpg" />
           <Image Name="top_r_season0.png" />
           <Image Name="top_r_season1.png" />
@@ -34,6 +42,7 @@
           <Image Name="topspiritbg.png" />
           <Image Name="toptemperature.png" />
           <Image Name="toptimeicon.png" />
+          <Image Name="winemake.png" />
         </Folder>
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
