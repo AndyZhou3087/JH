@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Goods :public Node
+class Goods :public Sprite
 {
 public:
 	Goods();

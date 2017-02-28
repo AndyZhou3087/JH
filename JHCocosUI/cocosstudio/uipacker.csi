@@ -34,10 +34,12 @@
       <FilePathData Path="ui/exerciseroom.png" />
       <FilePathData Path="ui/fence .png" />
       <FilePathData Path="ui/forgingtable.png" />
-      <FilePathData Path="ui/furnace .png" />
+      <FilePathData Path="ui/furnace.png" />
       <FilePathData Path="ui/medicinekit.png" />
       <FilePathData Path="ui/repertory.png" />
       <FilePathData Path="ui/winemake.png" />
+      <FilePathData Path="ui/syssmallbg.png" />
+      <FilePathData Path="ui/syssmalltie.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="2048" />
   </Content>

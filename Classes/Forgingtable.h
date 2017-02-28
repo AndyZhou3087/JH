@@ -1,19 +1,19 @@
 
 /********************************************************************
-*	 ¥≤
+*	 ∂Õ‘ÏÃ®
 *********************************************************************/
 
-#ifndef _BED_H_
-#define _BED_H_
+#ifndef _FORGINGTABLE_H_
+#define _FORGINGTABLE_H_
 #include "Building.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Bed :public Building
+class Forgingtable :public Building
 {
 public:
-	Bed();
-	~Bed();
+	Forgingtable();
+	~Forgingtable();
 
 public:
 	virtual void build();
@@ -21,7 +21,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(Bed);
+	CREATE_FUNC(Forgingtable);
 };
 #endif
 

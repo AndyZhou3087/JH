@@ -2,6 +2,7 @@
 #include "CommonFuncs.h"
 #include "GameDataSave.h"
 #include "GameScene.h"
+#include "SysSmallBox.h"
 
 TopBar::TopBar()
 {
@@ -149,17 +150,22 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* cnode = (Node*)pSender;
+		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)
 		{
 			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了hero"));
 		}
 		else if (cnode->getName().compare("reason") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了季节"));
+			int rv = g_nature->getReason();
+			std::string str = StringUtils::format("ui/top_r_season%d.png", rv);
+			sbox = SysSmallBox::create(str, reasonname[rv], reasondesc[rv]);
 		}
 		else if (cnode->getName().compare("wheather") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了天气"));
+			int rw = g_nature->getWheather();
+			std::string str = StringUtils::format("ui/top_weather%d.png", rw);
+			sbox = SysSmallBox::create(str, weathername[rw], weatherdesc[rw]);
 		}
 		else if (cnode->getName().compare("livedays") == 0)
 		{
@@ -193,7 +199,8 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		{
 			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了生命值"));
 		}
-
+		if (sbox != NULL)
+			this->getParent()->addChild(sbox);
 	}
 }
 

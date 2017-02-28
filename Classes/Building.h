@@ -14,8 +14,8 @@ public:
 
 protected:
 	int goodvaule;
-	virtual void build();
-	virtual void repair();
+	virtual void build(){};
+	virtual void repair(){};
 
 };
 #endif

@@ -4,6 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="fonts">
+          <TTF Name="STXINGKA.TTF" />
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="ui">
@@ -12,10 +13,12 @@
           <Image Name="exerciseroom.png" />
           <Image Name="fence .png" />
           <Image Name="forgingtable.png" />
-          <Image Name="furnace .png" />
+          <Image Name="furnace.png" />
           <Image Name="medicinekit.png" />
           <Image Name="repertory.png" />
           <Image Name="room.jpg" />
+          <Image Name="syssmallbg.png" />
+          <Image Name="syssmalltie.png" />
           <Image Name="top_r_season0.png" />
           <Image Name="top_r_season1.png" />
           <Image Name="top_r_season2.png" />
@@ -47,6 +50,7 @@
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
+        <Project Name="sysSmallLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

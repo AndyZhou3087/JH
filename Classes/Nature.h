@@ -49,5 +49,12 @@ private:
 	int static systime();
 	void updateData(float dt);
 };
+
+static std::string reasonname[] = { "春", "夏", "秋", "冬" };
+static std::string reasondesc[] = { "春春春春春春春春", "夏夏夏夏夏夏", "秋秋秋秋秋", "冬冬冬冬冬冬" };
+
+static std::string weathername[] = {"晴天", "阴天", "下雨", "下雪"};
+static std::string weatherdesc[] = { "晴天晴天晴天晴天", "阴天阴天阴天阴天", "下雨下雨下雨下雨下雨", "下雪下雪下雪下雪下雪" };
+
 #endif
 

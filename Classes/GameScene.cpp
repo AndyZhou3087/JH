@@ -70,9 +70,6 @@ bool GameScene::init()
 	topBar->setScrollContainer(uiScroll);
 	addChild(topBar);
 	
-
-
-
     return true;
 }
 

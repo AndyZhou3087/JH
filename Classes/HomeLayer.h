@@ -12,6 +12,8 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(HomeLayer);
+private:
+	void onclick(Ref* pSender);
 };
 #endif
 

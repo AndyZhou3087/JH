@@ -1,19 +1,19 @@
 
 /********************************************************************
-*	 ´²
+*	 ¾Æ×À
 *********************************************************************/
 
-#ifndef _BED_H_
-#define _BED_H_
+#ifndef _WINETABLE_H_
+#define _WINETABLE_H_
 #include "Building.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Bed :public Building
+class WineTable :public Building
 {
 public:
-	Bed();
-	~Bed();
+	WineTable();
+	~WineTable();
 
 public:
 	virtual void build();
@@ -21,7 +21,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(Bed);
+	CREATE_FUNC(WineTable);
 };
 #endif
 

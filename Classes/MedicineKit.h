@@ -1,19 +1,19 @@
 
 /********************************************************************
-*	 ¥≤
+*	 “©œ‰
 *********************************************************************/
 
-#ifndef _BED_H_
-#define _BED_H_
+#ifndef _MEDICINEKIT_H_
+#define _MEDICINEKIT_H_
 #include "Building.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Bed :public Building
+class MedicineKit :public Building
 {
 public:
-	Bed();
-	~Bed();
+	MedicineKit();
+	~MedicineKit();
 
 public:
 	virtual void build();
@@ -21,7 +21,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(Bed);
+	CREATE_FUNC(MedicineKit);
 };
 #endif
 

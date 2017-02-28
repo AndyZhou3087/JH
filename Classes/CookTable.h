@@ -3,17 +3,17 @@
 *	 ´²
 *********************************************************************/
 
-#ifndef _BED_H_
-#define _BED_H_
+#ifndef _COOKTABLE_H_
+#define _COOKTABLE_H_
 #include "Building.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Bed :public Building
+class CookTable :public Building
 {
 public:
-	Bed();
-	~Bed();
+	CookTable();
+	~CookTable();
 
 public:
 	virtual void build();
@@ -21,7 +21,7 @@ public:
 
 	virtual bool init();
 
-	CREATE_FUNC(Bed);
+	CREATE_FUNC(CookTable);
 };
 #endif
 

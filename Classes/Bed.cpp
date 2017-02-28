@@ -20,10 +20,12 @@ void Bed::build()
 
 bool Bed::init()
 {
-	Sprite* self = Sprite::createWithSpriteFrameName("ui/bed.png");
-	this->addChild(self);
+	if (Sprite::initWithSpriteFrameName("ui/bed.png"))
+	{
 
-	return true;
+		return true;
+	}
+	return false;
 }
 
 void Bed::repair()
