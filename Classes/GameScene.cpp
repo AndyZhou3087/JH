@@ -76,7 +76,7 @@ bool GameScene::init()
 void GameScene::loadSaveData()
 {
 	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
-	g_nature->setWheather((EWheather)GameDataSave::getInstance()->getNatureWheather());
+	g_nature->setWeather((EWeather)GameDataSave::getInstance()->getNatureWeather());
 	g_nature->setTime(GameDataSave::getInstance()->getNatureTime());
 	g_nature->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
 	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
@@ -100,7 +100,7 @@ void GameScene::onExit()
 void GameScene::saveAllData()
 {
 	GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
-	GameDataSave::getInstance()->setNatureWheather(g_nature->getWheather());
+	GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
 	GameDataSave::getInstance()->setNatureTime(g_nature->getTime());
 	GameDataSave::getInstance()->setLiveDays(g_nature->getPastDays());

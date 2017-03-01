@@ -2,14 +2,14 @@
 
 int Nature::ReasonCDays = 90;
 
-int WheatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
+int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
 int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, {-20, 0} };
 Nature::Nature()
 {
 	m_pastdays = 0;
 	m_time = 0;
 	m_reason = EReason::Spring;
-	m_wheather = EWheather::Suny;
+	m_weather = EWeather::Suny;
 	m_daynight = EDAYNIGTH::Night;
 	srand(systime());
 	int r = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
@@ -39,23 +39,23 @@ int Nature::systime()
 #endif
 	return timep;
 }
-void Nature::ChangeWheather()
+void Nature::ChangeWeather()
 {
 	srand(systime());
 	int r = rand() % 100;
 	int i = 0;
 	for (i = 0; i < 4; i++)
 	{
-		if (r < WheatherWeight[m_reason][i])
+		if (r < WeatherWeight[m_reason][i])
 		{
 			break;
 		}
 	}
-	EWheather w = (EWheather)i;
-	if (w != m_wheather)
+	EWeather w = (EWeather)i;
+	if (w != m_weather)
 	{
-		int c = w - m_wheather;
-		setWheather(w);
+		int c = w - m_weather;
+		setWeather(w);
 		setTemperature(m_temperature - c * 5);
 	}
 
@@ -121,7 +121,7 @@ void Nature::updateData(float dt)
 		m_pastdays++;
 
 		ChangeReason();
-		ChangeWheather();
+		ChangeWeather();
 	}
 	ChangeDayNight();
 }

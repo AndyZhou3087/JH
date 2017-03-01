@@ -7,8 +7,9 @@
           <FilePathData Path="uipacker.csi" />
           <FilePathData Path="homeLayer.csd" />
           <FilePathData Path="sysSmallLayer.csd" />
+          <FilePathData Path="bedUiLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="sysSmallLayer.csd" />
+        <ActiveDocument Path="uipacker.csi" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

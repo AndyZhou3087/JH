@@ -12,8 +12,8 @@ public:
 	int getNatureTime();
 	void setNatureTime(int val);
 
-	int getNatureWheather();
-	void setNatureWheather(int val);
+	int getNatureWeather();
+	void setNatureWeather(int val);
 
 	int getNatureReason();
 	void setNatureReason(int val);

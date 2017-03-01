@@ -20,7 +20,7 @@ public:
 private:
 	cocos2d::ui::ImageView* heroimg;
 	cocos2d::ui::ImageView* reason;
-	cocos2d::ui::ImageView* wheather;
+	cocos2d::ui::ImageView* weather;
 	cocos2d::ui::TextBMFont* livedayslbl;
 	cocos2d::ui::TextBMFont* timelbl;
 	cocos2d::ui::TextBMFont* templbl;

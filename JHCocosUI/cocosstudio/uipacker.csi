@@ -1,6 +1,6 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="uipacker" Type="Plist" ID="cc6e5a17-5c92-48c4-82e3-3c7ef4e886d4" Version="3.10.0.0" />
-  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="True" AllowTrim="True" ctype="PlistInfoData">
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
     <ImageFiles>
       <FilePathData Path="ui/top_r_season2.png" />
       <FilePathData Path="ui/top_r_season0.png" />
@@ -40,7 +40,18 @@
       <FilePathData Path="ui/winemake.png" />
       <FilePathData Path="ui/syssmallbg.png" />
       <FilePathData Path="ui/syssmalltie.png" />
+      <FilePathData Path="ui/builditem.png" />
+      <FilePathData Path="ui/normalboxgb.png" />
+      <FilePathData Path="ui/backbtn.png" />
+      <FilePathData Path="ui/buildsmall.png" />
+      <FilePathData Path="ui/resbox.png" />
+      <FilePathData Path="ui/buildprogressbar.png" />
+      <FilePathData Path="ui/buildprogressbg.png" />
+      <FilePathData Path="ui/normalbtn.png" />
+      <FilePathData Path="ui/buildbedicon.png" />
+      <FilePathData Path="ui/sleepicon.png" />
+      <FilePathData Path="ui/winetable.png" />
     </ImageFiles>
-    <MaxSize Width="2048" Height="2048" />
+    <MaxSize Width="4096" Height="4096" />
   </Content>
 </PlistInfoProjectFile>

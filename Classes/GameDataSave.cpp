@@ -88,11 +88,11 @@ void GameDataSave::setNatureTime(int val)
 	saveIntDataByKey("ndaytime", val);
 }
 
-int GameDataSave::getNatureWheather()
+int GameDataSave::getNatureWeather()
 {
 	return loadIntDataByKey("nwhather");
 }
-void GameDataSave::setNatureWheather(int val)
+void GameDataSave::setNatureWeather(int val)
 {
 	saveIntDataByKey("nwhather", val);
 }

@@ -16,7 +16,7 @@ typedef enum
 	Cloudy,
 	Rainy,
 	Snowy
-}EWheather;
+}EWeather;
 typedef enum
 {
 	Day = 0,
@@ -31,11 +31,11 @@ public:
 	CC_SYNTHESIZE(int, m_temperature, Temperature);
 	CC_SYNTHESIZE(int, m_time, Time);//虚拟一天时间，0.2s--对应1min
 	CC_SYNTHESIZE(EReason, m_reason, Reason);
-	CC_SYNTHESIZE(EWheather, m_wheather, Wheather);
+	CC_SYNTHESIZE(EWeather, m_weather, Weather);
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
 	CC_SYNTHESIZE(int, m_pastdays, PastDays);
 
-	void ChangeWheather();
+	void ChangeWeather();
 	void ChangeReason();
 	void ChangeDayNight();
 
@@ -51,10 +51,15 @@ private:
 };
 
 static std::string reasonname[] = { "春", "夏", "秋", "冬" };
-static std::string reasondesc[] = { "春春春春春春春春", "夏夏夏夏夏夏", "秋秋秋秋秋", "冬冬冬冬冬冬" };
+static std::string reasondesc1[] = { "春春春春", "夏夏夏夏", "秋秋秋秋", "冬冬冬冬冬冬冬冬冬冬冬冬" };
+static std::string reasondesc[] = { "春春春春春春春春", "夏夏夏夏夏夏", "秋秋秋秋秋秋秋秋秋秋", "冬冬冬冬冬冬" };
 
 static std::string weathername[] = {"晴天", "阴天", "下雨", "下雪"};
-static std::string weatherdesc[] = { "晴天晴天晴天晴天", "阴天阴天阴天阴天", "下雨下雨下雨下雨下雨", "下雪下雪下雪下雪下雪" };
+static std::string weatherdesc1[] = { "晴天晴天晴天", "阴天阴天阴天", "下雨下雨下雨", "下雪下雪下雪" };
+static std::string weatherdesc[] = { "晴天晴天晴天晴天", "阴天阴天阴天阴天阴天", "下雨下雨下雨下雨下雨", "下雪下雪下雪下雪下雪" };
+
+static std::string liveDayDesc = {"记录生活时间，以便制定更合理的计划"};
+static std::string timeDesc = { "06:00-18:00白天 18:00-06:00黑夜" };
 
 #endif
 

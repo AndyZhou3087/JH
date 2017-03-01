@@ -49,26 +49,38 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="1578976933" Tag="34" IconVisible="False" LeftMargin="328.9687" RightMargin="347.0313" TopMargin="566.9114" BottomMargin="669.0886" FontSize="40" LabelText="秋" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="44.0000" Y="44.0000" />
+          <AbstractNodeData Name="title" ActionTag="1578976933" Tag="34" IconVisible="False" LeftMargin="354.9687" RightMargin="365.0313" TopMargin="588.9114" BottomMargin="691.0886" FontSize="35" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="350.9687" Y="691.0886" />
+            <Position X="354.9687" Y="691.0886" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.4875" Y="0.5399" />
-            <PreSize X="0.0611" Y="0.0344" />
+            <PrePosition X="0.4930" Y="0.5399" />
+            <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="150.0000" RightMargin="170.0000" TopMargin="669.0000" BottomMargin="589.0000" IsCustomSize="True" FontSize="20" LabelText="text" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="400.0000" Y="22.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="150.0000" Y="600.0000" />
+          <AbstractNodeData Name="title1" ActionTag="-2050491902" Tag="26" IconVisible="False" LeftMargin="347.0000" RightMargin="373.0000" TopMargin="635.0000" BottomMargin="645.0000" FontSize="30" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="347.0000" Y="645.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2083" Y="0.4688" />
-            <PreSize X="0.5556" Y="0.0172" />
+            <PrePosition X="0.4819" Y="0.5039" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="175.0000" RightMargin="195.0000" TopMargin="679.0000" BottomMargin="451.0000" IsCustomSize="True" FontSize="25" LabelText="&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="350.0000" Y="150.0000" />
+            <AnchorPoint ScaleY="1.0000" />
+            <Position X="175.0000" Y="601.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.2431" Y="0.4695" />
+            <PreSize X="0.4861" Y="0.1172" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

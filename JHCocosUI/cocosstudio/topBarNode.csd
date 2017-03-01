@@ -98,7 +98,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/top_r_season0.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="wheather" ActionTag="315300657" Tag="24" IconVisible="False" LeftMargin="-108.3451" RightMargin="49.3451" TopMargin="-187.2544" BottomMargin="133.2544" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="17" BottomEage="17" Scale9OriginX="19" Scale9OriginY="17" Scale9Width="21" Scale9Height="20" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="weather" ActionTag="315300657" Tag="24" IconVisible="False" LeftMargin="-108.3451" RightMargin="49.3451" TopMargin="-187.2544" BottomMargin="133.2544" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="17" BottomEage="17" Scale9OriginX="19" Scale9OriginY="17" Scale9Width="21" Scale9Height="20" ctype="ImageViewObjectData">
             <Size X="59.0000" Y="54.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-78.8451" Y="160.2544" />

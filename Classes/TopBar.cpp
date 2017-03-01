@@ -31,13 +31,13 @@ bool TopBar::init()
 	reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
-	wheather = (cocos2d::ui::ImageView*)csbnode->getChildByName("wheather");
-	wheather->setName("wheather");
-	wheather->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
+	weather = (cocos2d::ui::ImageView*)csbnode->getChildByName("weather");
+	weather->setName("weather");
+	weather->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	str = StringUtils::format("ui/top_weather%d.png", g_nature->getWheather());
-	wheather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	wheather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
+	weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::ImageView* livedaysincon = (cocos2d::ui::ImageView*)csbnode->getChildByName("livedaysincon");
 	livedaysincon->setName("livedays");
@@ -159,48 +159,57 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		{
 			int rv = g_nature->getReason();
 			std::string str = StringUtils::format("ui/top_r_season%d.png", rv);
-			sbox = SysSmallBox::create(str, reasonname[rv], reasondesc[rv]);
+			sbox = SysSmallBox::create(BoxType::REASON, str, reasonname[rv], reasondesc1[rv], reasondesc[rv]);
 		}
-		else if (cnode->getName().compare("wheather") == 0)
+		else if (cnode->getName().compare("weather") == 0)
 		{
-			int rw = g_nature->getWheather();
+			int rw = g_nature->getWeather();
 			std::string str = StringUtils::format("ui/top_weather%d.png", rw);
-			sbox = SysSmallBox::create(str, weathername[rw], weatherdesc[rw]);
+			sbox = SysSmallBox::create(BoxType::WEATHER, str, weathername[rw], weatherdesc1[rw], weatherdesc[rw]);
 		}
 		else if (cnode->getName().compare("livedays") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了生存天数"));
+			std::string str = StringUtils::format("%d天", g_nature->getPastDays());
+			sbox = SysSmallBox::create(BoxType::LIVEDAYS, "ui/toplivedaysicon.png", str,"", liveDayDesc);
+
 		}
 		else if (cnode->getName().compare("time") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了时间"));
+			std::string str = StringUtils::format("%02d:%02d", g_nature->getTime() / 60, g_nature->getTime() % 60);
+			sbox = SysSmallBox::create(BoxType::TIME, "ui/toptimeicon.png", str, "", timeDesc);
 		}
 		else if (cnode->getName().compare("temperature") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了温度"));
+			std::string str = StringUtils::format("%d℃", g_nature->getTemperature());
+			sbox = SysSmallBox::create(BoxType::TEMPERATURE, "ui/toptemperature.png", str, "", "");
 		}
 		else if (cnode->getName().compare("outinjury") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了外伤"));
+			std::string str = "外伤";
+			sbox = SysSmallBox::create(BoxType::OUTERINJURY, "ui/topoutinjurybg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("innerinjury") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了内伤"));
+			std::string str = "内伤";
+			sbox = SysSmallBox::create(BoxType::OUTERINJURY, "ui/topinnerinjurybg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("hunger") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了饥饿"));
+			std::string str = "饱食度";
+			sbox = SysSmallBox::create(BoxType::HUNGER, "ui/tophungerbg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("spirit") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了精神"));
+			std::string str = "精神";
+			sbox = SysSmallBox::create(BoxType::SPIRIT, "ui/topspiritbg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("life") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了生命值"));
+			std::string str = "生命";
+			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, "", "");
 		}
 		if (sbox != NULL)
-			this->getParent()->addChild(sbox);
+			this->getParent()->addChild(sbox, 2);
 	}
 }
 
@@ -219,13 +228,13 @@ void TopBar::updataUI(float dt)
 		reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
-		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWheather());
-		wheather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-		wheather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
+		weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 		GameDataSave::getInstance()->setLiveDays(livedays);
 		GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
-		GameDataSave::getInstance()->setNatureWheather(g_nature->getWheather());
+		GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
 	}
 
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());

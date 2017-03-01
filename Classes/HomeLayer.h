@@ -2,6 +2,7 @@
 #define _HOME_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
+#include "Building.h"
 USING_NS_CC;
 class HomeLayer:public Layer
 {
@@ -14,6 +15,8 @@ public:
 	CREATE_FUNC(HomeLayer);
 private:
 	void onclick(Ref* pSender);
+	std::vector<Building*> Vec_Buildings;
+	void loadJsonData();
 };
 #endif
 
