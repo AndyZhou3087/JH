@@ -14,6 +14,7 @@ public:
 
 	CREATE_FUNC(BedUILayer);
 private:
+	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };
 #endif
 
