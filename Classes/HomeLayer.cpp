@@ -114,7 +114,7 @@ void HomeLayer::onclick(Ref* pSender)
 	std::string nodename = node->getName();
 	if (nodename.compare("bed") == 0)
 	{
-		Layer* layer = BedUILayer::create();
+		Layer* layer = BedUILayer::create(Vec_Buildings[0]);
 		this->getParent()->addChild(layer, 3);
 	}
 }

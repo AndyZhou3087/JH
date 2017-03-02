@@ -75,3 +75,19 @@ void Hero::updateData(float dt)
 		m_spirit = 0;
 
 }
+
+void Hero::sleep(int hour)
+{
+	sleephour = hour;
+	this->schedule(schedule_selector(Hero::sleepbystep), 1.0f, 4, 0.0f);
+}
+
+void Hero::sleepbystep(float dt)
+{
+	m_life += m_maxlife * 10 * sleephour / 100 / 5;
+	if (m_life > m_maxlife)
+	{
+		m_life = m_maxlife;
+		this->unschedule(schedule_selector(Hero::sleepbystep));
+	}
+}

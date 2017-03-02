@@ -48,9 +48,12 @@
       <FilePathData Path="ui/buildprogressbar.png" />
       <FilePathData Path="ui/buildprogressbg.png" />
       <FilePathData Path="ui/normalbtn.png" />
-      <FilePathData Path="ui/buildbedicon.png" />
-      <FilePathData Path="ui/sleepicon.png" />
+      <FilePathData Path="ui/sbed.png" />
+      <FilePathData Path="ui/ba0.png" />
       <FilePathData Path="ui/winetable.png" />
+      <FilePathData Path="ui/res1.png" />
+      <FilePathData Path="ui/res2.png" />
+      <FilePathData Path="ui/res3.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

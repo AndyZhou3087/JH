@@ -11,6 +11,7 @@ typedef struct
 	int level;
 	std::vector<int> needtime;
 	std::vector<std::vector<int>> Res;
+	char cname[32];
 }BuidingData;
 class Building :public Goods
 {
@@ -18,11 +19,12 @@ public:
 	Building();
 	~Building();
 	void parseData(rapidjson::Value& jsonvalue);
-public:
 
+public:
+	BuidingData data;
 protected:
 	int goodvaule;
-	BuidingData data;
+
 	virtual void build(){};
 	virtual void repair(){};
 

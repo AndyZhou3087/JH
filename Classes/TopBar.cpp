@@ -136,7 +136,7 @@ bool TopBar::init()
 	lifeBar->setPosition(life->getPosition());
 	this->addChild(lifeBar);
 
-	schedule(schedule_selector(TopBar::updataUI), 0.2f);
+	schedule(schedule_selector(TopBar::updataUI), 1.0f);
 	return true;
 }
 
@@ -216,7 +216,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 void TopBar::updataUI(float dt)
 {
 	std::string str;
-	pastmin += 10;
+	pastmin += g_nature->getTimeInterval();
 	if (pastmin >= 1440)
 	{
 		pastmin = 0;

@@ -19,6 +19,8 @@ public:
 	CC_SYNTHESIZE(int, m_spirit, SpiritValue);
 	CC_SYNTHESIZE(int, m_life, LifeValue);
 	CC_SYNTHESIZE(int, m_maxlife, MaxLifeValue);
+	void sleep(int hour);
+	
 public:
 	static int MAXInnerinjuryValue;
 	static int MAXOutinjuryValue;
@@ -26,7 +28,10 @@ public:
 	static int MAXSpiritValue;
 private:
 	void updateData(float dt);
-
+	void sleepbystep(float dt);
+private:
+	int sleephour;
 };
+
 #endif
 

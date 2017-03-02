@@ -34,6 +34,7 @@ public:
 	CC_SYNTHESIZE(EWeather, m_weather, Weather);
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
 	CC_SYNTHESIZE(int, m_pastdays, PastDays);
+	CC_SYNTHESIZE(int, m_timeinterval, TimeInterval);
 
 	void ChangeWeather();
 	void ChangeReason();

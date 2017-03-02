@@ -17,6 +17,11 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 	{
 		rapidjson::Value& value = jsonvalue["name"];
 		strcpy(data.name, value.GetString());
+
+		value = jsonvalue["cname"];
+		strcpy(data.cname, value.GetString());
+
+		data.level = 0;
 		value = jsonvalue["maxlevel"];
 		data.maxlevel = value.GetInt();
 		value = jsonvalue["needtime"];
