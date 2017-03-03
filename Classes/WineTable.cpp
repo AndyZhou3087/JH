@@ -29,7 +29,7 @@ bool WineTable::init()
 	return false;
 }
 
-void WineTable::action(float acsec, int exminute)
+void WineTable::action(int minute, int exminute)
 {
-	g_hero->drinking(acsec);
+	g_hero->drinking(minute / 5);
 }

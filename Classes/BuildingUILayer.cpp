@@ -187,7 +187,7 @@ void BuildingUILayer::parseBuildActionJSon()
 			data.blv = value.GetInt();
 
 			value = jsonvalue["time"];
-			data.actime = value.GetDouble();
+			data.actime = value.GetInt();
 
 			if (jsonvalue.HasMember("extime"))
 				value = jsonvalue["extime"];

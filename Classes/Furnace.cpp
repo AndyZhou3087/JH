@@ -29,7 +29,7 @@ bool Furnace::init()
 	return false;
 }
 
-void Furnace::action(float acsec, int exminute)
+void Furnace::action(int minute, int exminute)
 {
 	g_nature->setTemperature(g_nature->getTemperature() + 15);
 	this->scheduleOnce(schedule_selector(Furnace::warmover), exminute / 5);

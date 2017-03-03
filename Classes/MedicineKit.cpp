@@ -28,7 +28,7 @@ bool MedicineKit::init()
 	return false;
 }
 
-void MedicineKit::action(float acsec, int exminute)
+void MedicineKit::action(int minute, int exminute)
 {
 
 }

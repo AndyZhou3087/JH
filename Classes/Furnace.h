@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual void build();
-	virtual void action(float acsec, int exminute);
+	virtual void action(int minute, int exminute);
 	virtual bool init();
 	void warmover(float dt);
 

@@ -21,7 +21,7 @@ public:
 	void parseData(rapidjson::Value& jsonvalue);
 
 	virtual void build();
-	virtual void action(float acsec, int exminute);
+	virtual void action(int minute, int exminute);
 public:
 	BuidingData data;
 protected:

@@ -28,7 +28,7 @@ bool Forgingtable::init()
 	return false;
 }
 
-void Forgingtable::action(float acsec, int exminute)
+void Forgingtable::action(int minute, int exminute)
 {
 
 }

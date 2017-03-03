@@ -32,7 +32,7 @@ bool Bed::init()
 	return false;
 }
 
-void Bed::action(float acsec, int exminute)
+void Bed::action(int minute, int exminute)
 {
 	g_nature->setTimeInterval(exminute / 5);
 	g_hero->sleep(exminute / 60);

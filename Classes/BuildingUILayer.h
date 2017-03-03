@@ -11,7 +11,7 @@ typedef struct
 	std::vector<int> res;
 	int blv;
 	char actext[32];
-	float actime;//制作时间，真实时间,秒为单位
+	int actime;
 	int extime;
 }BuildActionData;
 

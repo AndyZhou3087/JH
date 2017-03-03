@@ -28,7 +28,7 @@ bool CookTable::init()
 	return false;
 }
 
-void CookTable::action(float acsec, int exminute)
+void CookTable::action(int minute, int exminute)
 {
 
 }

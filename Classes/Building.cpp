@@ -54,7 +54,7 @@ void Building::build()
 	g_nature->setTimeInterval(data.needtime[data.level] / 5);
 }
 
-void Building::action(float acsec, int exminute)
+void Building::action(int minute, int exminute)
 {
 
 }

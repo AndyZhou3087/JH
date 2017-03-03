@@ -9,7 +9,7 @@ int Hero::MAXSpiritValue = 100;
 #define InnerinjurySpeed 1
 #define OutinjurySpeed 1
 #define SpiritSpeed 2
-#define LifeLostSpeed 2//百分百
+#define LifeLostSpeed 2//百分比
 
 #define SeriousInnerinjury 40
 #define SeriousOutinjury 40
