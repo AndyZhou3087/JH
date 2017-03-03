@@ -20,15 +20,12 @@ public:
 	~Building();
 	void parseData(rapidjson::Value& jsonvalue);
 
+	virtual void build();
+	virtual void action(float acsec, int exminute);
 public:
 	BuidingData data;
 protected:
 	int goodvaule;
-
-	virtual void build(){};
-	virtual void repair(){};
-
-
 };
 #endif
 

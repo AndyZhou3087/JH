@@ -1,4 +1,4 @@
-﻿#include "GameScene.h"
+#include "GameScene.h"
 #include "TopBar.h"
 #include "HomeLayer.h"
 #include "UIScroll.h"

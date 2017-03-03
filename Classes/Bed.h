@@ -1,6 +1,6 @@
 
 /********************************************************************
-*	 ´²
+*	 åºŠ
 *********************************************************************/
 
 #ifndef _BED_H_
@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual void build();
-	virtual void repair();
+	virtual void action(float acsec, int exminute);
 
 	virtual bool init();
 

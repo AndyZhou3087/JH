@@ -1,4 +1,4 @@
-﻿#include "CommonFuncs.h"
+#include "CommonFuncs.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #include "../cocos2d//external//win32-specific/icon/include/iconv.h"
 #endif

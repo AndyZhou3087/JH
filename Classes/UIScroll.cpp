@@ -1,6 +1,6 @@
 #include "UIScroll.h"
 
-#define DIFF 5//Ìí¼Ó¿Ø¼þµÄ¼ä¸ô
+#define DIFF 5//æ·»åŠ æŽ§ä»¶çš„é—´éš”
 #define MAXCOUNT 10
 UIScroll::UIScroll()
 {
@@ -77,7 +77,7 @@ void UIScroll::addEventText(std::string text, int fontsize, Color3B color3b)
 		totalNodeH += tlbl->getContentSize().height;
 	}
 
-	//Ìí¼ÓÐÂµÄÄÚÈÝÊ±£¬ÏÈ»¬µ½×îÏÂ
+	//æ·»åŠ æ–°çš„å†…å®¹æ—¶ï¼Œå…ˆæ»‘åˆ°æœ€ä¸‹
 	scrollView->setContentOffset(Vec2(0, 0));
 
 

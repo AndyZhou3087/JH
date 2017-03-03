@@ -1,6 +1,7 @@
 #include "Furnace.h"
+#include "Nature.h"
 
-
+extern Nature* g_nature;
 Furnace::Furnace()
 {
 	goodvaule = 100;
@@ -28,7 +29,13 @@ bool Furnace::init()
 	return false;
 }
 
-void Furnace::repair()
+void Furnace::action(float acsec, int exminute)
 {
+	g_nature->setTemperature(g_nature->getTemperature() + 15);
+	this->scheduleOnce(schedule_selector(Furnace::warmover), exminute / 5);
+}
 
+void Furnace::warmover(float dt)
+{
+	g_nature->setTemperature(g_nature->getTemperature() - 15);
 }

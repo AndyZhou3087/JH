@@ -1,4 +1,7 @@
 #include "Building.h"
+#include "Nature.h"
+
+extern Nature* g_nature;
 
 Building::Building()
 {
@@ -44,4 +47,14 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 		}
 	}
 
-};
+}
+
+void Building::build()
+{
+	g_nature->setTimeInterval(data.needtime[data.level] / 5);
+}
+
+void Building::action(float acsec, int exminute)
+{
+
+}

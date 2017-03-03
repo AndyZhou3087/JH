@@ -28,7 +28,7 @@ bool WineMaker::init()
 	return false;
 }
 
-void WineMaker::repair()
+void WineMaker::action(float acsec, int exminute)
 {
 
 }

@@ -110,7 +110,7 @@ void SysSmallBox::updataUI(float dt)
 		if (lastvalue != v)
 		{
 			lastvalue = g_nature->getPastDays();
-			std::string str = StringUtils::format("%dÌì", g_nature->getPastDays());
+			std::string str = StringUtils::format("%då¤©", g_nature->getPastDays());
 			titleTxt->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 
@@ -136,7 +136,7 @@ void SysSmallBox::updataUI(float dt)
 		if (lastvalue != v)
 		{
 			lastvalue = g_nature->getTemperature();
-			std::string str = StringUtils::format("%d¡æ", g_nature->getTemperature());
+			std::string str = StringUtils::format("%dâ„ƒ", g_nature->getTemperature());
 			titleTxt->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 

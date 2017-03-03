@@ -1,6 +1,7 @@
 #include "WineTable.h"
+#include "Hero.h"
 
-
+extern Hero* g_hero;
 WineTable::WineTable()
 {
 	goodvaule = 100;
@@ -28,7 +29,7 @@ bool WineTable::init()
 	return false;
 }
 
-void WineTable::repair()
+void WineTable::action(float acsec, int exminute)
 {
-
+	g_hero->drinking(acsec);
 }

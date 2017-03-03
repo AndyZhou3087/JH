@@ -1,6 +1,6 @@
 
 /********************************************************************
-*	 Äð¾ÆÆ÷
+*	 é…¿é…’å™¨
 *********************************************************************/
 
 #ifndef _WineMaker_H_
@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual void build();
-	virtual void repair();
+	virtual void action(float acsec, int exminute);
 
 	virtual bool init();
 

@@ -13,7 +13,7 @@ public:
 
 	bool init(float width, float height);
 
-	static UIScroll* UIScroll::create(float width, float height);
+	static UIScroll* create(float width, float height);
 	void addEventText(std::string text, int fontsize = 16, Color3B color3b = Color3B(0,0,0));
 	void clean();
 
@@ -25,8 +25,8 @@ private:
 	void scrollViewDidScroll(ScrollView* view);
 
 	void onTouchEnded(Touch*touch, Event *unused_event);
-	bool onTouchBegan(Touch * touch, Event *unused_event);//��ʼ״̬
-	void onTouchMoved(Touch *touch, Event *unused_event);//�ƶ�״̬
+	bool onTouchBegan(Touch * touch, Event *unused_event);//开始状态
+	void onTouchMoved(Touch *touch, Event *unused_event);//移动状态
 };
 #endif
 

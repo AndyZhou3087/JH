@@ -1,5 +1,9 @@
 #include "Bed.h"
+#include "Nature.h"
+#include "Hero.h"
 
+extern Nature* g_nature;
+extern Hero* g_hero;
 
 Bed::Bed()
 {
@@ -28,7 +32,8 @@ bool Bed::init()
 	return false;
 }
 
-void Bed::repair()
+void Bed::action(float acsec, int exminute)
 {
-
+	g_nature->setTimeInterval(exminute / 5);
+	g_hero->sleep(exminute / 60);
 }

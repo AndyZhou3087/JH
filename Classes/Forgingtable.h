@@ -1,6 +1,6 @@
 
 /********************************************************************
-*	 ∂Õ‘ÏÃ®
+*	 ÈîªÈÄ†Âè∞
 *********************************************************************/
 
 #ifndef _FORGINGTABLE_H_
@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual void build();
-	virtual void repair();
+	virtual void action(float acsec, int exminute);
 
 	virtual bool init();
 

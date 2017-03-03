@@ -29,7 +29,7 @@ public:
 	Nature();
 	~Nature();
 	CC_SYNTHESIZE(int, m_temperature, Temperature);
-	CC_SYNTHESIZE(int, m_time, Time);//ĞéÄâÒ»ÌìÊ±¼ä£¬0.2s--¶ÔÓ¦1min
+	CC_SYNTHESIZE(int, m_time, Time);//è™šæ‹Ÿä¸€å¤©æ—¶é—´ï¼Œ0.2s--å¯¹åº”1min
 	CC_SYNTHESIZE(EReason, m_reason, Reason);
 	CC_SYNTHESIZE(EWeather, m_weather, Weather);
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
@@ -45,22 +45,22 @@ public:
 	CREATE_FUNC(Nature);
 
 public:
-	int static ReasonCDays;//¼¾½ÚÇĞ»»ÌìÊı
+	int static ReasonCDays;//å­£èŠ‚åˆ‡æ¢å¤©æ•°
 private:
 	int static systime();
 	void updateData(float dt);
 };
 
-static std::string reasonname[] = { "´º", "ÏÄ", "Çï", "¶¬" };
-static std::string reasondesc1[] = { "´º´º´º´º", "ÏÄÏÄÏÄÏÄ", "ÇïÇïÇïÇï", "¶¬¶¬¶¬¶¬¶¬¶¬¶¬¶¬¶¬¶¬¶¬¶¬" };
-static std::string reasondesc[] = { "´º´º´º´º´º´º´º´º", "ÏÄÏÄÏÄÏÄÏÄÏÄ", "ÇïÇïÇïÇïÇïÇïÇïÇïÇïÇï", "¶¬¶¬¶¬¶¬¶¬¶¬" };
+static std::string reasonname[] = { "æ˜¥", "å¤", "ç§‹", "å†¬" };
+static std::string reasondesc1[] = { "æ˜¥æ˜¥æ˜¥æ˜¥", "å¤å¤å¤å¤", "ç§‹ç§‹ç§‹ç§‹", "å†¬å†¬å†¬å†¬å†¬å†¬å†¬å†¬å†¬å†¬å†¬å†¬" };
+static std::string reasondesc[] = { "æ˜¥æ˜¥æ˜¥æ˜¥æ˜¥æ˜¥æ˜¥æ˜¥", "å¤å¤å¤å¤å¤å¤", "ç§‹ç§‹ç§‹ç§‹ç§‹ç§‹ç§‹ç§‹ç§‹ç§‹", "å†¬å†¬å†¬å†¬å†¬å†¬" };
 
-static std::string weathername[] = {"ÇçÌì", "ÒõÌì", "ÏÂÓê", "ÏÂÑ©"};
-static std::string weatherdesc1[] = { "ÇçÌìÇçÌìÇçÌì", "ÒõÌìÒõÌìÒõÌì", "ÏÂÓêÏÂÓêÏÂÓê", "ÏÂÑ©ÏÂÑ©ÏÂÑ©" };
-static std::string weatherdesc[] = { "ÇçÌìÇçÌìÇçÌìÇçÌì", "ÒõÌìÒõÌìÒõÌìÒõÌìÒõÌì", "ÏÂÓêÏÂÓêÏÂÓêÏÂÓêÏÂÓê", "ÏÂÑ©ÏÂÑ©ÏÂÑ©ÏÂÑ©ÏÂÑ©" };
+static std::string weathername[] = {"æ™´å¤©", "é˜´å¤©", "ä¸‹é›¨", "ä¸‹é›ª"};
+static std::string weatherdesc1[] = { "æ™´å¤©æ™´å¤©æ™´å¤©", "é˜´å¤©é˜´å¤©é˜´å¤©", "ä¸‹é›¨ä¸‹é›¨ä¸‹é›¨", "ä¸‹é›ªä¸‹é›ªä¸‹é›ª" };
+static std::string weatherdesc[] = { "æ™´å¤©æ™´å¤©æ™´å¤©æ™´å¤©", "é˜´å¤©é˜´å¤©é˜´å¤©é˜´å¤©é˜´å¤©", "ä¸‹é›¨ä¸‹é›¨ä¸‹é›¨ä¸‹é›¨ä¸‹é›¨", "ä¸‹é›ªä¸‹é›ªä¸‹é›ªä¸‹é›ªä¸‹é›ª" };
 
-static std::string liveDayDesc = {"¼ÇÂ¼Éú»îÊ±¼ä£¬ÒÔ±ãÖÆ¶¨¸üºÏÀíµÄ¼Æ»®"};
-static std::string timeDesc = { "06:00-18:00°×Ìì 18:00-06:00ºÚÒ¹" };
+static std::string liveDayDesc = {"è®°å½•ç”Ÿæ´»æ—¶é—´ï¼Œä»¥ä¾¿åˆ¶å®šæ›´åˆç†çš„è®¡åˆ’"};
+static std::string timeDesc = { "06:00-18:00ç™½å¤© 18:00-06:00é»‘å¤œ" };
 
 #endif
 

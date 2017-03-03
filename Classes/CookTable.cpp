@@ -28,7 +28,7 @@ bool CookTable::init()
 	return false;
 }
 
-void CookTable::repair()
+void CookTable::action(float acsec, int exminute)
 {
 
 }

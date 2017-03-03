@@ -54,6 +54,28 @@
       <FilePathData Path="ui/res1.png" />
       <FilePathData Path="ui/res2.png" />
       <FilePathData Path="ui/res3.png" />
+      <FilePathData Path="ui/scooktable.png" />
+      <FilePathData Path="ui/ba1.png" />
+      <FilePathData Path="ui/ba2.png" />
+      <FilePathData Path="ui/bb0.png" />
+      <FilePathData Path="ui/bb1.png" />
+      <FilePathData Path="ui/e0.png" />
+      <FilePathData Path="ui/e1.png" />
+      <FilePathData Path="ui/e2.png" />
+      <FilePathData Path="ui/e3.png" />
+      <FilePathData Path="ui/e4.png" />
+      <FilePathData Path="ui/sforgingtable.png" />
+      <FilePathData Path="ui/bwine.png" />
+      <FilePathData Path="ui/swinemake.png" />
+      <FilePathData Path="ui/bm0.png" />
+      <FilePathData Path="ui/bm1.png" />
+      <FilePathData Path="ui/bm2.png" />
+      <FilePathData Path="ui/smedicinekit.png" />
+      <FilePathData Path="ui/bh0.png" />
+      <FilePathData Path="ui/bh1.png" />
+      <FilePathData Path="ui/sfurnace.png" />
+      <FilePathData Path="ui/bw0.png" />
+      <FilePathData Path="ui/swinetable.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

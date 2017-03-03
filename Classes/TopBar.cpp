@@ -153,7 +153,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("µã»÷ÁËhero"));
+			m_uiscroll->addEventText(CommonFuncs::gbk2utf("ç‚¹å‡»äº†hero"));
 		}
 		else if (cnode->getName().compare("reason") == 0)
 		{
@@ -169,7 +169,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		}
 		else if (cnode->getName().compare("livedays") == 0)
 		{
-			std::string str = StringUtils::format("%dÌì", g_nature->getPastDays());
+			std::string str = StringUtils::format("%då¤©", g_nature->getPastDays());
 			sbox = SysSmallBox::create(BoxType::LIVEDAYS, "ui/toplivedaysicon.png", str,"", liveDayDesc);
 
 		}
@@ -180,32 +180,32 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		}
 		else if (cnode->getName().compare("temperature") == 0)
 		{
-			std::string str = StringUtils::format("%d¡æ", g_nature->getTemperature());
+			std::string str = StringUtils::format("%dâ„ƒ", g_nature->getTemperature());
 			sbox = SysSmallBox::create(BoxType::TEMPERATURE, "ui/toptemperature.png", str, "", "");
 		}
 		else if (cnode->getName().compare("outinjury") == 0)
 		{
-			std::string str = "ÍâÉË";
+			std::string str = "å¤–ä¼¤";
 			sbox = SysSmallBox::create(BoxType::OUTERINJURY, "ui/topoutinjurybg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("innerinjury") == 0)
 		{
-			std::string str = "ÄÚÉË";
+			std::string str = "å†…ä¼¤";
 			sbox = SysSmallBox::create(BoxType::OUTERINJURY, "ui/topinnerinjurybg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("hunger") == 0)
 		{
-			std::string str = "±¥Ê³¶È";
+			std::string str = "é¥±é£Ÿåº¦";
 			sbox = SysSmallBox::create(BoxType::HUNGER, "ui/tophungerbg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("spirit") == 0)
 		{
-			std::string str = "¾«Éñ";
+			std::string str = "ç²¾ç¥";
 			sbox = SysSmallBox::create(BoxType::SPIRIT, "ui/topspiritbg.png", str, "", "");
 		}
 		else if (cnode->getName().compare("life") == 0)
 		{
-			std::string str = "ÉúÃü";
+			std::string str = "ç”Ÿå‘½";
 			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, "", "");
 		}
 		if (sbox != NULL)

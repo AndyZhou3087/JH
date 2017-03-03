@@ -24,7 +24,7 @@ private:
 	cocos2d::ui::TextBMFont* livedayslbl;
 	cocos2d::ui::TextBMFont* timelbl;
 	cocos2d::ui::TextBMFont* templbl;
-	int pastmin;//ÐéÄâ·ÖÖÓ£¬
+	int pastmin;//è™šæ‹Ÿåˆ†é’Ÿï¼Œ
 	ProgressTimer* outinjuryBar;
 	ProgressTimer* innerinjuryBar;
 	ProgressTimer* hungerBar;

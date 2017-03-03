@@ -9,7 +9,7 @@ int Hero::MAXSpiritValue = 100;
 #define InnerinjurySpeed 1
 #define OutinjurySpeed 1
 #define SpiritSpeed 2
-#define LifeLostSpeed 2//�ٷְ�
+#define LifeLostSpeed 2//百分百
 
 #define SeriousInnerinjury 40
 #define SeriousOutinjury 40
@@ -89,5 +89,20 @@ void Hero::sleepbystep(float dt)
 	{
 		m_life = m_maxlife;
 		this->unschedule(schedule_selector(Hero::sleepbystep));
+	}
+}
+
+void Hero::drinking(float drinktime)
+{
+	this->schedule(schedule_selector(Hero::drinkbystep), drinktime / 5, 4, 0.0f);
+}
+
+void Hero::drinkbystep(float dt)
+{
+	m_spirit += 10;
+	if (m_spirit > MAXSpiritValue)
+	{
+		m_spirit = MAXSpiritValue;
+		this->unschedule(schedule_selector(Hero::drinkbystep));
 	}
 }

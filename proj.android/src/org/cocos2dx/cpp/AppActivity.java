@@ -27,6 +27,27 @@ THE SOFTWARE.
 package org.cocos2dx.cpp;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
+
+import android.os.Bundle;
+import android.view.WindowManager;
+
 
 public class AppActivity extends Cocos2dxActivity {
+    protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);	
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	}
+    
+    public Cocos2dxGLSurfaceView onCreateView() {
+    	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
+    	// llk should create stencil buffer
+    	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
+    	
+    	return glSurfaceView;
+    }
+
+    static {
+        System.loadLibrary("cocos2dcpp");
+    } 
 }

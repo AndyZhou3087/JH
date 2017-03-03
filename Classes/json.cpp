@@ -13,11 +13,9 @@ std::string JsonWriter(rapidjson::Document& doc)
 bool JsonReader(std::string& strData, rapidjson::Document& doc)
 {
 	bool result = true;
-
 	doc.Parse<0>(strData.c_str());
-	if (doc.HasParseError())  //´òÓ¡½âÎö´íÎó
+	if (doc.HasParseError())  //æ‰“å°è§£æžé”™è¯¯
 	{
-		//log("JsonReader %s\n", doc.GetParseError());
 		result = false;
 	}
 	return result;
@@ -26,24 +24,11 @@ bool JsonReader(std::string& strData, rapidjson::Document& doc)
 
 rapidjson::Document ReadJsonFile(const std::string& name)
 {
-	std::string file = name;
 	rapidjson::Document doc;
-
-	FILE* fp = fopen(file.c_str(), "rt");
-
-	if(fp != NULL) 
+	std::string filestr = FileUtils::getInstance()->getStringFromFile(name);
+	if (filestr.length() > 0)
 	{
-		fseek(fp, 0, SEEK_END);
-		int len = ftell(fp);
-		fseek(fp, 0, SEEK_SET);
-
-		char tmp[1024*10] = {0};
-
-		fread(tmp, 1, len, fp);
-		fclose(fp);
-
-		std::string data = tmp;
-		JsonReader(data, doc);
+		JsonReader(filestr, doc);
 	}
 
 	return doc;
