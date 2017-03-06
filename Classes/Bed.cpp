@@ -1,6 +1,7 @@
 #include "Bed.h"
 #include "Nature.h"
 #include "Hero.h"
+#include "Const.h"
 
 extern Nature* g_nature;
 extern Hero* g_hero;
@@ -34,6 +35,6 @@ bool Bed::init()
 
 void Bed::action(int minute, int exminute)
 {
-	g_nature->setTimeInterval(exminute / 5);
+	g_nature->setTimeInterval(exminute / (TIMESCALE* ACTION_BAR_TIME));
 	g_hero->sleep(exminute / 60);
 }

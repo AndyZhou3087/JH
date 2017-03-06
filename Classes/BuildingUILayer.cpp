@@ -1,4 +1,4 @@
-#include "BuildingUILayer.h"
+﻿#include "BuildingUILayer.h"
 #include "json.h"
 #include "Bed.h"
 #include "MyActionProgressTimer.h"
@@ -103,7 +103,7 @@ void BuildingUILayer::loadActionUi()
 
 	if (vec_actionItem.size() <= 0)
 	{
-		for (unsigned int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			Node *acnode = CSLoader::createNode("actionNode.csb");
 			acnode->setPosition(Vec2(scrollview->getContentSize().width / 2, scrollinnerheight - itemheight / 2 - i * itemheight));
@@ -112,7 +112,7 @@ void BuildingUILayer::loadActionUi()
 		}
 	}
 
-	for (unsigned int i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
 
 		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
@@ -135,7 +135,7 @@ void BuildingUILayer::loadActionUi()
 
 		if (m_build->data.level >= map_buidACData[name].at(i).blv)
 		{
-			for (int m = 0; m < map_buidACData[name].at(i).res.size(); m++)
+			for (unsigned int m = 0; m < map_buidACData[name].at(i).res.size(); m++)
 			{
 				int restypecount = map_buidACData[name].at(i).res.at(m);
 				if (restypecount > 0)
@@ -190,7 +190,10 @@ void BuildingUILayer::parseBuildActionJSon()
 			data.actime = value.GetInt();
 
 			if (jsonvalue.HasMember("extime"))
+			{
 				value = jsonvalue["extime"];
+				data.extime = value.GetInt();
+			}
 			else
 				data.extime = 0;
 
@@ -217,14 +220,14 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		{
 			buildbtn->setEnabled(false);
 			buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
-			buildbar->runAction(Sequence::create(MyProgressTo::create(5.0f, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
+			buildbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
 			m_build->build();
 		}
 		else
 		{
-			for (int i = 0; i < vec_actionbtn.size(); i++)
+			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
-			vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(5.0f, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
+			vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
 			int actime = map_buidACData[m_build->data.name].at(tag - ACTION).actime;
 			int extime = map_buidACData[m_build->data.name].at(tag - ACTION).extime;
 			m_build->action(actime, extime);
@@ -249,7 +252,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	}
 	else
 	{
-		for (int i = 0; i < vec_actionbtn.size(); i++)
+		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
 	}
@@ -258,7 +261,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 void BuildingUILayer::updataBuildRes()
 {
 	cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
-	for (int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
+	for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
 	{
 		cocos2d::ui::Widget* resitem = NULL;
 		cocos2d::ui::Text* rescount = NULL;

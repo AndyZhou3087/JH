@@ -36,7 +36,7 @@
       <FilePathData Path="ui/forgingtable.png" />
       <FilePathData Path="ui/furnace.png" />
       <FilePathData Path="ui/medicinekit.png" />
-      <FilePathData Path="ui/repertory.png" />
+      <FilePathData Path="ui/storageroom.png" />
       <FilePathData Path="ui/winemake.png" />
       <FilePathData Path="ui/syssmallbg.png" />
       <FilePathData Path="ui/syssmalltie.png" />
@@ -76,6 +76,7 @@
       <FilePathData Path="ui/sfurnace.png" />
       <FilePathData Path="ui/bw0.png" />
       <FilePathData Path="ui/swinetable.png" />
+      <FilePathData Path="ui/storagesepline.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

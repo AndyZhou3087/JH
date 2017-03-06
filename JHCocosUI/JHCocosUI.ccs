@@ -39,7 +39,6 @@
           <Image Name="medicinekit.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="normalbtn.png" />
-          <Image Name="repertory.png" />
           <Image Name="res1.png" />
           <Image Name="res2.png" />
           <Image Name="res3.png" />
@@ -50,6 +49,8 @@
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
           <Image Name="smedicinekit.png" />
+          <Image Name="storageroom.png" />
+          <Image Name="storagesepline.png" />
           <Image Name="swinemake.png" />
           <Image Name="swinetable.png" />
           <Image Name="syssmallbg.png" />

@@ -1,5 +1,5 @@
 #include "Hero.h"
-
+#include "Const.h"
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
@@ -32,7 +32,7 @@ Hero::~Hero()
 
 bool Hero::init()
 {
-	this->schedule(schedule_selector(Hero::updateData), 12.0f);
+	this->schedule(schedule_selector(Hero::updateData), 60.0f / TIMESCALE);
 	return true;
 }
 
@@ -79,12 +79,12 @@ void Hero::updateData(float dt)
 void Hero::sleep(int hour)
 {
 	sleephour = hour;
-	this->schedule(schedule_selector(Hero::sleepbystep), 1.0f, 4, 0.0f);
+	this->schedule(schedule_selector(Hero::sleepbystep), ACTION_BAR_TIME, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::sleepbystep(float dt)
 {
-	m_life += m_maxlife * 10 * sleephour / 100 / 5;
+	m_life += m_maxlife * 15 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
 	if (m_life > m_maxlife)
 	{
 		m_life = m_maxlife;
@@ -92,14 +92,14 @@ void Hero::sleepbystep(float dt)
 	}
 }
 
-void Hero::drinking(float drinktime)
+void Hero::drinking()
 {
-	this->schedule(schedule_selector(Hero::drinkbystep), drinktime / 5, 4, 0.0f);
+	this->schedule(schedule_selector(Hero::drinkbystep), ACTION_BAR_TIME, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::drinkbystep(float dt)
 {
-	m_spirit += 10;
+	m_spirit += 1;
 	if (m_spirit > MAXSpiritValue)
 	{
 		m_spirit = MAXSpiritValue;

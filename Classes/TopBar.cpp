@@ -1,4 +1,4 @@
-#include "TopBar.h"
+﻿#include "TopBar.h"
 #include "CommonFuncs.h"
 #include "GameDataSave.h"
 #include "GameScene.h"
@@ -94,8 +94,8 @@ bool TopBar::init()
 	Sprite* sprite0 = Sprite::createWithSpriteFrameName("ui/topoutinjurybar.png");
 	outinjuryBar = ProgressTimer::create(sprite0);
 	outinjuryBar->setType(ProgressTimer::Type::BAR);
-	outinjuryBar->setBarChangeRate(ccp(0, 1));
-	outinjuryBar->setMidpoint(ccp(0, 0));
+	outinjuryBar->setBarChangeRate(Vec2(0, 1));
+	outinjuryBar->setMidpoint(Vec2(0, 0));
 	outinjuryBar->setPercentage(g_hero->getOutinjuryValue());
 	outinjuryBar->setPosition(outinjury->getPosition());
 	this->addChild(outinjuryBar);
@@ -103,8 +103,8 @@ bool TopBar::init()
 	Sprite* sprite1 = Sprite::createWithSpriteFrameName("ui/topinnerinjurybar.png");
 	innerinjuryBar = ProgressTimer::create(sprite1);
 	innerinjuryBar->setType(ProgressTimer::Type::BAR);
-	innerinjuryBar->setBarChangeRate(ccp(0, 1));
-	innerinjuryBar->setMidpoint(ccp(0, 0));
+	innerinjuryBar->setBarChangeRate(Vec2(0, 1));
+	innerinjuryBar->setMidpoint(Vec2(0, 0));
 	innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
 	innerinjuryBar->setPosition(innerinjury->getPosition());
 	this->addChild(innerinjuryBar);
@@ -112,8 +112,8 @@ bool TopBar::init()
 	Sprite* sprite2 = Sprite::createWithSpriteFrameName("ui/tophungerbar.png");
 	hungerBar = ProgressTimer::create(sprite2);
 	hungerBar->setType(ProgressTimer::Type::BAR);
-	hungerBar->setBarChangeRate(ccp(0, 1));
-	hungerBar->setMidpoint(ccp(0, 0));
+	hungerBar->setBarChangeRate(Vec2(0, 1));
+	hungerBar->setMidpoint(Vec2(0, 0));
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	hungerBar->setPosition(hunger->getPosition());
 	this->addChild(hungerBar);
@@ -121,8 +121,8 @@ bool TopBar::init()
 	Sprite* sprite3 = Sprite::createWithSpriteFrameName("ui/topspiritbar.png");
 	spiritBar = ProgressTimer::create(sprite3);
 	spiritBar->setType(ProgressTimer::Type::BAR);
-	spiritBar->setBarChangeRate(ccp(0, 1));
-	spiritBar->setMidpoint(ccp(0, 0));
+	spiritBar->setBarChangeRate(Vec2(0, 1));
+	spiritBar->setMidpoint(Vec2(0, 0));
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	spiritBar->setPosition(spirit->getPosition());
 	this->addChild(spiritBar);
@@ -130,13 +130,13 @@ bool TopBar::init()
 	Sprite* sprite4 = Sprite::createWithSpriteFrameName("ui/toplifebar.png");
 	lifeBar = ProgressTimer::create(sprite4);
 	lifeBar->setType(ProgressTimer::Type::BAR);
-	lifeBar->setBarChangeRate(ccp(0, 1));
-	lifeBar->setMidpoint(ccp(0, 0));
+	lifeBar->setBarChangeRate(Vec2(0, 1));
+	lifeBar->setMidpoint(Vec2(0, 0));
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
 	lifeBar->setPosition(life->getPosition());
 	this->addChild(lifeBar);
 
-	schedule(schedule_selector(TopBar::updataUI), 1.0f);
+	schedule(schedule_selector(TopBar::updataUI), 0.2f);
 	return true;
 }
 
@@ -175,7 +175,9 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		}
 		else if (cnode->getName().compare("time") == 0)
 		{
-			std::string str = StringUtils::format("%02d:%02d", g_nature->getTime() / 60, g_nature->getTime() % 60);
+			int hour = g_nature->getTime() / 60;
+			int minute = (int)g_nature->getTime() % 60;
+			std::string str = StringUtils::format("%02d:%02d", hour, minute);
 			sbox = SysSmallBox::create(BoxType::TIME, "ui/toptimeicon.png", str, "", timeDesc);
 		}
 		else if (cnode->getName().compare("temperature") == 0)
@@ -217,9 +219,9 @@ void TopBar::updataUI(float dt)
 {
 	std::string str;
 	pastmin += g_nature->getTimeInterval();
-	if (pastmin >= 1440)
+	if (pastmin >= 1440.0f)
 	{
-		pastmin = 0;
+		pastmin = 0.0f;
 		int livedays = g_nature->getPastDays();
 		str = StringUtils::format("%d", livedays);
 		livedayslbl->setString(str);
@@ -238,7 +240,11 @@ void TopBar::updataUI(float dt)
 	}
 
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
-	str = StringUtils::format("%02d:%02d", pastmin / 60, pastmin % 60);
+
+	int hour = pastmin / 60;
+	int minute = (int)pastmin % 60;
+
+	str = StringUtils::format("%02d:%02d", hour, minute);
 	timelbl->setString(str);
 	str = StringUtils::format("%d", g_nature->getTemperature());
 	templbl->setString(str);

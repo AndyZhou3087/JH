@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="bedUiLayer" Type="Layer" ID="b314b99f-0303-4aa1-b14d-b438f01316f8" Version="3.10.0.0" />
+  <PropertyGroup Name="buidingUiLayer" Type="Layer" ID="b314b99f-0303-4aa1-b14d-b438f01316f8" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -66,19 +66,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="-842860513" Tag="52" IconVisible="False" LeftMargin="38.0001" RightMargin="31.9999" TopMargin="493.9997" BottomMargin="386.0003" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="650.0000" Y="400.0000" />
+          <AbstractNodeData Name="ScrollView" ActionTag="-842860513" Tag="52" IconVisible="False" LeftMargin="37.9994" RightMargin="32.0006" TopMargin="492.0000" BottomMargin="208.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="650.0000" Y="580.0000" />
             <AnchorPoint />
-            <Position X="38.0001" Y="386.0003" />
+            <Position X="37.9994" Y="208.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0528" Y="0.3016" />
-            <PreSize X="0.9028" Y="0.3125" />
+            <PrePosition X="0.0528" Y="0.1625" />
+            <PreSize X="0.9028" Y="0.4531" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="650" Height="400" />
+            <InnerNodeSize Width="650" Height="700" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

@@ -1,26 +1,24 @@
 /********************************************************************
-* 床
+* 仓库
 *********************************************************************/
 
-#ifndef _BED_H_
-#define _BED_H_
+#ifndef _STORAGE_H_
+#define _STORAGE_H_
 #include "Building.h"
 #include "cocos2d.h"
 USING_NS_CC;
 
-class Bed :public Building
+class StorageRoom :public Building
 {
 public:
-	Bed();
-	~Bed();
+	StorageRoom();
+	~StorageRoom();
 
 public:
-	virtual void build();
-	virtual void action(int minute, int exminute);
 
 	virtual bool init();
 
-	CREATE_FUNC(Bed);
+	CREATE_FUNC(StorageRoom);
 };
 #endif
 

@@ -28,7 +28,7 @@
             <FileData Type="MarkedSubImage" Path="ui/bed.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_2" ActionTag="-142714784" Tag="22" IconVisible="False" LeftMargin="77.0003" RightMargin="546.9996" TopMargin="610.5000" BottomMargin="556.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_2" ActionTag="-142714784" Tag="22" IconVisible="False" LeftMargin="77.0003" RightMargin="546.9997" TopMargin="610.5000" BottomMargin="556.5000" ctype="SpriteObjectData">
             <Size X="96.0000" Y="113.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="125.0003" Y="613.0000" />
@@ -92,6 +92,17 @@
             <PrePosition X="0.6181" Y="0.6250" />
             <PreSize X="0.1514" Y="0.1461" />
             <FileData Type="MarkedSubImage" Path="ui/winemake.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="storageroom_5" ActionTag="-2123269183" Tag="35" IconVisible="False" LeftMargin="1.0000" RightMargin="511.0000" TopMargin="984.0000" BottomMargin="80.0000" ctype="SpriteObjectData">
+            <Size X="208.0000" Y="216.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="105.0000" Y="188.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1458" Y="0.1469" />
+            <PreSize X="0.2889" Y="0.1688" />
+            <FileData Type="MarkedSubImage" Path="ui/storageroom.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

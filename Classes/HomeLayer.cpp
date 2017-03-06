@@ -7,7 +7,9 @@
 #include "MedicineKit.h"
 #include "WineTable.h"
 #include "WineMaker.h"
+#include "StorageRoom.h"
 #include "BuildingUILayer.h"
+#include "StorageUILayer.h"
 HomeLayer::HomeLayer()
 {
 }
@@ -113,6 +115,15 @@ bool HomeLayer::init()
 
 	loadJsonData();
 
+	Building* storageroom = StorageRoom::create();
+	MenuItemSprite* storageroomItem = MenuItemSprite::create(
+		storageroom,
+		storageroom,
+		storageroom,
+		CC_CALLBACK_1(HomeLayer::onStorageRoom, this));
+	storageroomItem->setPosition(Vec2(105, 188));
+	menu->addChild(storageroomItem);
+
 	return true;
 }
 
@@ -136,4 +147,10 @@ void HomeLayer::loadJsonData()
 		rapidjson::Value& oneBuild = allBuilds[i];
 		Vec_Buildings[i]->parseData(oneBuild);
 	}
+}
+
+void HomeLayer::onStorageRoom(Ref* pSender)
+{
+	Layer* layer = StorageUILayer::create();
+	this->getParent()->addChild(layer, 3);
 }

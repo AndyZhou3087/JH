@@ -1,5 +1,6 @@
 #include "Nature.h"
 #include "Const.h"
+
 int Nature::ReasonCDays = 90;
 
 int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
@@ -115,10 +116,10 @@ void Nature::ChangeDayNight()
 
 void Nature::updateData(float dt)
 {
-	m_time += 10;
-	if (m_time >= 1440)
+	m_time += NORMAL_TIMEINTERVAL;
+	if (m_time >= 1440.0f)
 	{
-		m_time = 0;
+		m_time = 0.0f;
 		m_pastdays++;
 
 		ChangeReason();

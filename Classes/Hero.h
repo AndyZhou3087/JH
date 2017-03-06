@@ -20,7 +20,7 @@ public:
 	CC_SYNTHESIZE(int, m_life, LifeValue);
 	CC_SYNTHESIZE(int, m_maxlife, MaxLifeValue);
 	void sleep(int hour);
-	void drinking(float drinktime);
+	void drinking();
 public:
 	static int MAXInnerinjuryValue;
 	static int MAXOutinjuryValue;

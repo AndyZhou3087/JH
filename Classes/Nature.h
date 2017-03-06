@@ -1,7 +1,8 @@
-#ifndef _NATURE_H_
+﻿#ifndef _NATURE_H_
 #define _NATURE_H_
 #include "cocos2d.h"
 USING_NS_CC;
+#define NORMAL_TIMEINTERVAL 1.0f
 typedef enum
 {
 	Spring = 0,
@@ -29,12 +30,12 @@ public:
 	Nature();
 	~Nature();
 	CC_SYNTHESIZE(int, m_temperature, Temperature);
-	CC_SYNTHESIZE(int, m_time, Time);//虚拟一天时间，0.2s--对应1min
+	CC_SYNTHESIZE(float, m_time, Time);//虚拟一天时间，0.2s--对应1min
 	CC_SYNTHESIZE(EReason, m_reason, Reason);
 	CC_SYNTHESIZE(EWeather, m_weather, Weather);
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
 	CC_SYNTHESIZE(int, m_pastdays, PastDays);
-	CC_SYNTHESIZE(int, m_timeinterval, TimeInterval);
+	CC_SYNTHESIZE(float, m_timeinterval, TimeInterval);
 
 	void ChangeWeather();
 	void ChangeReason();

@@ -1,4 +1,4 @@
-#include "SysSmallBox.h"
+﻿#include "SysSmallBox.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
 SysSmallBox::SysSmallBox()
@@ -123,7 +123,9 @@ void SysSmallBox::updataUI(float dt)
 		if (lastvalue != v)
 		{
 			lastvalue = g_nature->getTime();
-			std::string str = StringUtils::format("%02d:%02d", g_nature->getTime() / 60, g_nature->getTime() % 60);
+			int hour = lastvalue / 60;
+			int minute = (int)lastvalue % 60;
+			std::string str = StringUtils::format("%02d:%02d", hour, minute);
 			titleTxt->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 

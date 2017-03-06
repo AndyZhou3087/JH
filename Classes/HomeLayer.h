@@ -15,6 +15,7 @@ public:
 	CREATE_FUNC(HomeLayer);
 private:
 	void onclick(Ref* pSender);
+	void onStorageRoom(Ref* pSender);
 	std::vector<Building*> Vec_Buildings;
 	void loadJsonData();
 };

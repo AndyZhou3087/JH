@@ -31,5 +31,5 @@ bool WineTable::init()
 
 void WineTable::action(int minute, int exminute)
 {
-	g_hero->drinking(minute / 5);
+	g_hero->drinking();
 }
