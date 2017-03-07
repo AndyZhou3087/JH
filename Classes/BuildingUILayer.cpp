@@ -5,6 +5,7 @@
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "Const.h"
+#include "StorageRoom.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -60,6 +61,8 @@ bool BuildingUILayer::init(Building* build)
 	std::string iconstr = StringUtils::format("ui/s%s.png", m_build->data.name);
 	buildicon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 	buildicon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
+
+	buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
 
 	updataBuildRes();
 
@@ -117,7 +120,7 @@ void BuildingUILayer::loadActionUi()
 
 		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
 		cocos2d::ui::ImageView* icon = (cocos2d::ui::ImageView*)item->getChildByName("box")->getChildByName("icon");
-		
+
 		std::string iconstr = StringUtils::format("ui/%s.png", map_buidACData[name].at(i).icon);
 		icon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
@@ -154,8 +157,12 @@ void BuildingUILayer::loadActionUi()
 					cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
 					rescount->setVisible(true);
 
-					str = StringUtils::format("%d/%d", restypecount % 1000, restypecount % 1000);
+					int hascount = StorageRoom::getCountByTypeId(restypecount / 1000);
+					int needcount = restypecount % 1000;
+					str = StringUtils::format("%d/%d", hascount, needcount);
 					rescount->setString(str);
+					if (hascount < needcount)
+						rescount->setTextColor(Color4B::RED);
 				}
 			}
 			actbtn->setEnabled(true);
@@ -220,7 +227,6 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		if (tag == BUILD)
 		{
 			buildbtn->setEnabled(false);
-			buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
 			buildbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
 			m_build->build();
 		}
@@ -253,7 +259,6 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	if (type == BUILD)
 	{
-		m_build->data.level++;
 		if (m_build->data.level > 0)
 		{
 			scrollview->setVisible(true);
@@ -268,6 +273,16 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
+		int id = atoi(map_buidACData[m_build->data.name].at(type - ACTION).icon);
+		if (id > 0)
+		{
+			StorageData data;
+			data.type = MEDICINAL;
+			data.id = id;
+			data.count = 0;
+			data.count++;
+			StorageRoom::add(data);
+		}
 	}
 }
 
@@ -301,9 +316,13 @@ void BuildingUILayer::updataBuildRes()
 				res->setScale(0.38f);
 				resitem->addChild(res);
 
-				str = StringUtils::format("%d/%d", restypecount % 1000, restypecount % 1000);
+				int hascount = StorageRoom::getCountByTypeId(restypecount / 1000);
+				int needcount = restypecount % 1000;
+				str = StringUtils::format("%d/%d", hascount, needcount);
 				rescount->setVisible(true);
 				rescount->setString(str);
+				if (hascount < needcount)
+					rescount->setTextColor(Color4B::RED);
 			}
 			buildbtn->setEnabled(true);
 		}

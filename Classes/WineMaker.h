@@ -16,7 +16,6 @@ public:
 	~WineMaker();
 
 public:
-	virtual void build();
 	virtual void action(int minute, int exminute);
 
 	virtual bool init();

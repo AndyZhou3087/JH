@@ -13,12 +13,6 @@ CookTable::~CookTable()
 
 }
 
-void CookTable::build()
-{
-
-}
-
-
 bool CookTable::init()
 {
 	if (Sprite::initWithSpriteFrameName("ui/cooktable.png"))

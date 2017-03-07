@@ -13,12 +13,6 @@ WineTable::~WineTable()
 
 }
 
-void WineTable::build()
-{
-
-}
-
-
 bool WineTable::init()
 {
 	if (Sprite::initWithSpriteFrameName("ui/winetable.png"))

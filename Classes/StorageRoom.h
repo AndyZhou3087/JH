@@ -43,9 +43,10 @@ public:
 
 	void loadStorageData();
 	void saveStorageData();
-
-	static void add(StorageData sdata);
-	static void use(int type, int id);
+	static std::map<int, std::vector<StorageData>> map_storageData;
+	static void add(StorageData data);
+	static void use(int id);
+	static int getCountByTypeId(int id);
 };
 #endif
 

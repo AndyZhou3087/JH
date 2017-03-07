@@ -17,12 +17,6 @@ Bed::~Bed()
 
 }
 
-void Bed::build()
-{
-
-}
-
-
 bool Bed::init()
 {
 	if (Sprite::initWithSpriteFrameName("ui/bed.png"))

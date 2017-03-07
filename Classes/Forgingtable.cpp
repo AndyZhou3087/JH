@@ -15,11 +15,6 @@ Forgingtable::~Forgingtable()
 
 }
 
-void Forgingtable::build()
-{
-
-}
-
 
 bool Forgingtable::init()
 {

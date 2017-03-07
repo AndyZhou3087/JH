@@ -3,9 +3,7 @@
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 
-static std::map<int, std::vector<StorageData>> map_storageData;
-
-
+std::map<int, std::vector<StorageData>> StorageRoom::map_storageData;
 StorageRoom::StorageRoom()
 {
 	loadStorageData();
@@ -35,7 +33,7 @@ void StorageRoom::saveStorageData()
 		int size = map_storageData[i].size();
 		for (int j = 0; j < size; j++)
 		{
-			StorageData sdata = map_storageData[i].at[j];
+			StorageData sdata = map_storageData[i][j];
 			int tempid = sdata.type * 1000 + sdata.id;
 			str = StringUtils::format("%d-%d", tempid, sdata.count);
 			if (j < size - 1)
@@ -65,23 +63,55 @@ void StorageRoom::loadStorageData()
 	}
 }
 
-void StorageRoom::add(StorageData sdata)
+void StorageRoom::add(StorageData data)
 {
-	map_storageData[sdata.type].push_back(sdata);
+	for (unsigned int i = 0; i < map_storageData[data.type].size(); i++)
+	{
+		StorageData *sdata = &map_storageData[data.type][i];
+		if (data.id == sdata->id)
+		{
+			sdata->count++;
+		}
+		else
+		{
+			map_storageData[data.type].push_back(data);
+		}
+		return;
+	}
+	map_storageData[data.type].push_back(data);
 }
 
-void StorageRoom::use(int type, int id)
+void StorageRoom::use(int id)
 {
-	for (unsigned int i = 0; i < map_storageData[type].size(); i++)
+	for (int type = 0; type < map_storageData.size(); type++)
 	{
-		StorageData *sdata = &map_storageData[type][i];
-		if (id == sdata->id)
+		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
 		{
-			if (--sdata->count <= 0)
+			StorageData *sdata = &map_storageData[type][i];
+			if (id == sdata->id)
 			{
-				map_storageData[type].erase(map_storageData[type].begin() + i);
+				if (--sdata->count <= 0)
+				{
+					map_storageData[type].erase(map_storageData[type].begin() + i);
+				}
+				break;
 			}
-			break;
 		}
 	}
+}
+
+int StorageRoom::getCountByTypeId(int id)
+{
+	for (int type = 0; type < map_storageData.size(); type++)
+	{
+		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
+		{
+			StorageData *sdata = &map_storageData[type][i];
+			if (id == sdata->id)
+			{
+				return sdata->count;
+			}
+		}
+	}
+	return 0;
 }

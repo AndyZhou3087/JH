@@ -1,6 +1,6 @@
 #ifndef _GAMEDATA_SAVE_H_
 #define _GAMEDATA_SAVE_H_
-
+#include "cocos2d.h"
 class GameDataSave
 {
 public:
@@ -41,6 +41,9 @@ public:
 
 	std::string getStorageData();
 	void setStorageData(std::string valstr);
+
+	int getBuildLV(std::string buildname);
+	void setBuildLV(std::string buildname, int val);
 
 private:
 	static GameDataSave* _Context;

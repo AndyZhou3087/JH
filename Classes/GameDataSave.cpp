@@ -122,3 +122,14 @@ void GameDataSave::setStorageData(std::string valstr)
 {
 	saveStringDataByKey("storage", valstr);
 }
+
+int GameDataSave::getBuildLV(std::string buildname)
+{
+	std::string rname = StringUtils::format("%slv", buildname.c_str());
+	return loadIntDataByKey(rname);
+}
+void GameDataSave::setBuildLV(std::string buildname, int val)
+{
+	std::string rname = StringUtils::format("%slv", buildname.c_str());
+	saveIntDataByKey(rname, val);
+}

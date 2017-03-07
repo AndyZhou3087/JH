@@ -14,12 +14,6 @@ Furnace::~Furnace()
 
 }
 
-void Furnace::build()
-{
-
-}
-
-
 bool Furnace::init()
 {
 	if (Sprite::initWithSpriteFrameName("ui/furnace.png"))

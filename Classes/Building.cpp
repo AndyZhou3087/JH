@@ -1,6 +1,7 @@
 #include "Building.h"
 #include "Nature.h"
 #include "Const.h"
+#include "GameDataSave.h"
 
 extern Nature* g_nature;
 
@@ -25,7 +26,7 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 		value = jsonvalue["cname"];
 		strcpy(data.cname, value.GetString());
 
-		data.level = 0;
+		data.level = GameDataSave::getInstance()->getBuildLV(data.name);;
 		value = jsonvalue["maxlevel"];
 		data.maxlevel = atoi(value.GetString());
 		value = jsonvalue["needtime"];
@@ -54,6 +55,9 @@ void Building::build()
 {
 	float time = data.needtime[data.level] / (ACTION_BAR_TIME * TIMESCALE);
 	g_nature->setTimeInterval(time);
+	data.level++;
+	GameDataSave::getInstance()->setBuildLV(data.name, data.level);
+
 }
 
 void Building::action(int minute, int exminute)

@@ -12,12 +12,6 @@ MedicineKit::~MedicineKit()
 
 }
 
-void MedicineKit::build()
-{
-
-}
-
-
 bool MedicineKit::init()
 {
 	if (Sprite::initWithSpriteFrameName("ui/medicinekit.png"))

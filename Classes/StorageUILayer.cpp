@@ -6,7 +6,6 @@
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源1", "资源2"};
 
-extern std::map<int, std::vector<StorageData>> map_storageData;
 StorageUILayer::StorageUILayer()
 {
 
@@ -56,7 +55,11 @@ bool StorageUILayer::init()
 	{
 		dataheigth += typerow[i] * 130;
 	}
-	scrollview->setInnerContainerSize(Size(650, textheigth + dataheigth));
+	int innerheight = textheigth + dataheigth;
+	int contentheight = scrollview->getContentSize().height;
+	if (innerheight < contentheight)
+		innerheight = contentheight;
+	scrollview->setInnerContainerSize(Size(650, innerheight));
 
 	for (int i = 0; i < RES_MAX; i++)
 	{
@@ -74,7 +77,7 @@ bool StorageUILayer::init()
 
 			}
 			Sprite * sepline = Sprite::createWithSpriteFrameName("ui/storagesepline.png");
-			sepline->setPosition(Vec2(sepline->getContentSize().width / 2 + 40, textheigth + dataheigth - 35 - preheight));
+			sepline->setPosition(Vec2(sepline->getContentSize().width / 2 + 40, innerheight - 35 - preheight));
 			scrollview->addChild(sepline);
 			Label* namelbl = Label::createWithTTF(CommonFuncs::gbk2utf(name[i].c_str()), "fonts/STXINGKA.TTF", 22);
 			namelbl->setColor(Color3B(0, 0, 0));
@@ -115,5 +118,5 @@ int StorageUILayer::getCountByType(int type)
 {
 	//int test[] = { 5, 0, 6, 2, 0, 0, 7, 3 };
 	//return test[type];
-	return map_storageData[type].size();
+	return StorageRoom::map_storageData[type].size();
 }
