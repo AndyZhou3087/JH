@@ -1,11 +1,12 @@
 {"b":[
-{"name":"bed","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,0],[1002,2002,3002],[1003,2003,3003]], "cname":"床"},
-{"name":"cooktable","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"灶台"},
-{"name":"forgingtable","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"锻造台"},
-{"name":"winemake","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"酿酒器"},
-{"name":"medicinekit","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"药箱"},
-{"name":"furnace","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"暖炉"},
-{"name":"winetable","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"酒桌"},
-{"name":"exerciseroom","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"练功房"},
-{"name":"fence","maxlevel":3, "needtime":[30,40,50], "needres":[[1001,2001,3002],[1001,2002,3001],[1002,2002,3002]], "cname":"栅栏"}
+{"name":"bed","maxlevel":"1","needtime":[60],"needres":[[4002,7002,1002]],"cname":"床"},
+{"name":"cooktable","maxlevel":"2","needtime":[50,90],"needres":[[2002,1003,0],[2004,1005,0]],"cname":"灶台"},
+{"name":"forgingtable","maxlevel":"3","needtime":[60,140,220],"needres":[[4002,2002,1002],[4004,2004,1004,14002],[4006,2006,1006,14004]],"cname":"锻造台"},
+{"name":"winemake","maxlevel":"1","needtime":[40],"needres":[[4003,1001,0]],"cname":"酿酒器"},
+{"name":"medicinekit","maxlevel":"2","needtime":[30,70],"needres":[[4003,0,0],[4005,1002,0]],"cname":"药箱"},
+{"name":"furnace","maxlevel":"1","needtime":[40],"needres":[[1002,2002,0]],"cname":"暖炉"},
+{"name":"winetable","maxlevel":"1","needtime":[20],"needres":[[4002,0,0]],"cname":"酒桌"},
+{"name":"exerciseroom","maxlevel":"1","needtime":[150],"needres":[[4005,1005,2005]],"cname":"练功房"},
+{"name":"fence","maxlevel":"1","needtime":[100],"needres":[[4008,1002,0]],"cname":"栅栏"}
+
 ]}

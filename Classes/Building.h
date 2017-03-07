@@ -22,6 +22,7 @@ public:
 
 	virtual void build();
 	virtual void action(int minute, int exminute);
+	CC_SYNTHESIZE(float, m_actionBarTime, ActionBarTime);
 public:
 	BuidingData data;
 protected:

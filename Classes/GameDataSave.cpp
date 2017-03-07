@@ -113,3 +113,12 @@ void GameDataSave::setNatureTemperature(int val)
 {
 	saveIntDataByKey("ntempe", val);
 }
+
+std::string GameDataSave::getStorageData()
+{
+	return loadStringDataByKey("storage");
+}
+void GameDataSave::setStorageData(std::string valstr)
+{
+	saveStringDataByKey("storage", valstr);
+}

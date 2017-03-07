@@ -5,6 +5,8 @@
 #include "Const.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源1", "资源2"};
+
+extern std::map<int, std::vector<StorageData>> map_storageData;
 StorageUILayer::StorageUILayer()
 {
 
@@ -17,6 +19,7 @@ StorageUILayer::~StorageUILayer()
 
 bool StorageUILayer::init()
 {
+
 	m_csbnode = CSLoader::createNode("buidingUiLayer.csb");
 	m_csbnode->setPosition(Vec2(0, -100));
 	this->addChild(m_csbnode);
@@ -31,7 +34,7 @@ bool StorageUILayer::init()
 	scrollview->setPositionY(200);
 	
 	int textheigth = 0;
-	for (int i = 0; i <= RES_2; i++)
+	for (int i = 0; i < RES_MAX; i++)
 	{
 		int count = getCountByType(i);
 		if (count > 0)
@@ -49,13 +52,13 @@ bool StorageUILayer::init()
 	}
 	
 	int dataheigth = 0;
-	for (int i = 0; i <= RES_2; i++)
+	for (int i = 0; i < RES_MAX; i++)
 	{
 		dataheigth += typerow[i] * 130;
 	}
 	scrollview->setInnerContainerSize(Size(650, textheigth + dataheigth));
 
-	for (int i = 0; i <= RES_2; i++)
+	for (int i = 0; i < RES_MAX; i++)
 	{
 		int icount = getCountByType(i);
 		if (icount > 0)

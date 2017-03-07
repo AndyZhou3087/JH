@@ -52,4 +52,20 @@ inline int loadIntDataByKey(string key, int defaultValue = 0){
 	return atoi(s.c_str());
 #endif
 }
+
+inline std::string loadStringDataByKey(string key, std::string defaultValue = ""){
+	char buffer[32];
+	sprintf(buffer, "%s", key.c_str());
+
+	string s = UserDefault::getInstance()->getStringForKey(buffer);
+	if (s == "") {
+		return defaultValue;
+	}
+#if encrypt_data
+	string parseKey = parseData(s);
+	return parseKey;
+#else
+	return s;
+#endif
+}
 #endif // _H_UTILITY_H_

@@ -10,6 +10,7 @@
 #include "StorageRoom.h"
 #include "BuildingUILayer.h"
 #include "StorageUILayer.h"
+
 HomeLayer::HomeLayer()
 {
 }

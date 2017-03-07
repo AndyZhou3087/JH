@@ -51,25 +51,14 @@
       <FilePathData Path="ui/sbed.png" />
       <FilePathData Path="ui/ba0.png" />
       <FilePathData Path="ui/winetable.png" />
-      <FilePathData Path="ui/res1.png" />
-      <FilePathData Path="ui/res2.png" />
-      <FilePathData Path="ui/res3.png" />
       <FilePathData Path="ui/scooktable.png" />
       <FilePathData Path="ui/ba1.png" />
       <FilePathData Path="ui/ba2.png" />
       <FilePathData Path="ui/bb0.png" />
       <FilePathData Path="ui/bb1.png" />
-      <FilePathData Path="ui/e0.png" />
-      <FilePathData Path="ui/e1.png" />
-      <FilePathData Path="ui/e2.png" />
-      <FilePathData Path="ui/e3.png" />
-      <FilePathData Path="ui/e4.png" />
       <FilePathData Path="ui/sforgingtable.png" />
       <FilePathData Path="ui/bwine.png" />
       <FilePathData Path="ui/swinemake.png" />
-      <FilePathData Path="ui/bm0.png" />
-      <FilePathData Path="ui/bm1.png" />
-      <FilePathData Path="ui/bm2.png" />
       <FilePathData Path="ui/smedicinekit.png" />
       <FilePathData Path="ui/bh0.png" />
       <FilePathData Path="ui/bh1.png" />
@@ -77,6 +66,29 @@
       <FilePathData Path="ui/bw0.png" />
       <FilePathData Path="ui/swinetable.png" />
       <FilePathData Path="ui/storagesepline.png" />
+      <FilePathData Path="ui/1.png" />
+      <FilePathData Path="ui/10.png" />
+      <FilePathData Path="ui/11.png" />
+      <FilePathData Path="ui/12.png" />
+      <FilePathData Path="ui/13.png" />
+      <FilePathData Path="ui/14.png" />
+      <FilePathData Path="ui/15.png" />
+      <FilePathData Path="ui/16.png" />
+      <FilePathData Path="ui/17.png" />
+      <FilePathData Path="ui/18.png" />
+      <FilePathData Path="ui/19.png" />
+      <FilePathData Path="ui/2.png" />
+      <FilePathData Path="ui/20.png" />
+      <FilePathData Path="ui/21.png" />
+      <FilePathData Path="ui/22.png" />
+      <FilePathData Path="ui/23.png" />
+      <FilePathData Path="ui/3.png" />
+      <FilePathData Path="ui/4.png" />
+      <FilePathData Path="ui/5.png" />
+      <FilePathData Path="ui/6.png" />
+      <FilePathData Path="ui/7.png" />
+      <FilePathData Path="ui/8.png" />
+      <FilePathData Path="ui/9.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

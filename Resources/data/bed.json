@@ -1,5 +1,5 @@
 {"bc":[
-{"icon":"ba0", "res":[1001,2001,3001], "blv":1, "actext":"睡觉", "time":10, "extime":60},
-{"icon":"ba1", "res":[1001,2001,3001], "blv":1, "actext":"睡觉", "time":10, "extime":180},
-{"icon":"ba2", "res":[1001,2001,3001], "blv":1, "actext":"睡觉", "time":10, "extime":480}
+{"id":"ba0","res":[0,0,0],"blv":"1","actext":"休息","time":"20","extime":"60"},
+{"id":"ba1","res":[0,0,0],"blv":"1","actext":"休息","time":"20","extime":"180"},
+{"id":"ba2","res":[0,0,0],"blv":"1","actext":"休息","time":"20","extime":"480"}
 ]}

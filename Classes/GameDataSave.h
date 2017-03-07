@@ -39,6 +39,9 @@ public:
 	int getHeroMaxLife();
 	void setHeroMaxLife(int val);
 
+	std::string getStorageData();
+	void setStorageData(std::string valstr);
+
 private:
 	static GameDataSave* _Context;
 

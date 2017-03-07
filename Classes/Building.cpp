@@ -6,7 +6,7 @@ extern Nature* g_nature;
 
 Building::Building()
 {
-
+	m_actionBarTime = ACTION_BAR_TIME;
 }
 
 
@@ -27,7 +27,7 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 
 		data.level = 0;
 		value = jsonvalue["maxlevel"];
-		data.maxlevel = value.GetInt();
+		data.maxlevel = atoi(value.GetString());
 		value = jsonvalue["needtime"];
 		for (int i = 0; i < data.maxlevel; i++)
 		{

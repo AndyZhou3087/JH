@@ -4,27 +4,9 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "Building.h"
+#include "StorageRoom.h"
 USING_NS_CC;
-typedef struct
-{
-	int id;
-	int type;
-	int count;
 
-}StorageData;
-
-typedef enum
-{
-	FOOD = 0,
-	MEDICINAL,
-	WEAPON,
-	PROTECT_EQU,
-	N_GONG,//内功
-	W_GONG,//外功
-	RES_1,
-	RES_2
-
-}StorageType;
 
 class StorageUILayer :public Layer
 {
@@ -39,10 +21,9 @@ private:
 	Node* m_csbnode;
 
 	cocos2d::ui::ScrollView* scrollview;
-	std::map<int,std::vector<StorageData>> map_storageData;
 private:
-	int typecount[RES_2 + 1];
-	int typerow[RES_2 + 1];
+	int typecount[RES_MAX];
+	int typerow[RES_MAX];
 	int getCountByType(int type);
 };
 #endif

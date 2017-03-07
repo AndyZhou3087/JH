@@ -19,9 +19,15 @@ public:
 	virtual void build();
 	virtual void action(int minute, int exminute);
 	virtual bool init();
-	void warmover(float dt);
+
+
 
 	CREATE_FUNC(Furnace);
+
+private:
+	int extime;
+	void warm(float dt);
+	void warmover(float dt);
 };
 #endif
 

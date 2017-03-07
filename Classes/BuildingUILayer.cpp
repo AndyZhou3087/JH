@@ -144,9 +144,10 @@ void BuildingUILayer::loadActionUi()
 					cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
 					resitem->setVisible(true);
 
-					str = StringUtils::format("ui/res%d.png", restypecount / 1000);
+					str = StringUtils::format("ui/%d.png", restypecount / 1000);
 					Sprite* res = Sprite::createWithSpriteFrameName(str);
 					res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
+					res->setScale(0.38f);
 					resitem->addChild(res);
 
 					str = StringUtils::format("count%d", m);
@@ -180,19 +181,19 @@ void BuildingUILayer::parseBuildActionJSon()
 		rapidjson::Value& jsonvalue = bc[i];
 		if (jsonvalue.IsObject())
 		{
-			rapidjson::Value& value = jsonvalue["icon"];
+			rapidjson::Value& value = jsonvalue["id"];
 			strcpy(data.icon, value.GetString());
 
 			value = jsonvalue["blv"];
-			data.blv = value.GetInt();
+			data.blv = atoi(value.GetString());
 
 			value = jsonvalue["time"];
-			data.actime = value.GetInt();
+			data.actime = atoi(value.GetString());
 
 			if (jsonvalue.HasMember("extime"))
 			{
 				value = jsonvalue["extime"];
-				data.extime = value.GetInt();
+				data.extime = atoi(value.GetString());
 			}
 			else
 				data.extime = 0;
@@ -227,9 +228,21 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		{
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
-			vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
+
 			int actime = map_buidACData[m_build->data.name].at(tag - ACTION).actime;
 			int extime = map_buidACData[m_build->data.name].at(tag - ACTION).extime;
+
+			if (actime < TIMESCALE* ACTION_BAR_TIME)
+			{
+				m_build->setActionBarTime(actime / TIMESCALE);
+			}
+			else
+			{
+				m_build->setActionBarTime(ACTION_BAR_TIME);
+			}
+
+			vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(m_build->getActionBarTime(), 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
+
 			m_build->action(actime, extime);
 		}
 	}
@@ -261,24 +274,31 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 void BuildingUILayer::updataBuildRes()
 {
 	cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
-	for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
+
+	int level = m_build->data.level;
+
+	if (level >= m_build->data.maxlevel)
+		level = m_build->data.maxlevel - 1;
+
+	for (unsigned int i = 0; i < m_build->data.Res[level].size(); i++)
 	{
-		cocos2d::ui::Widget* resitem = NULL;
-		cocos2d::ui::Text* rescount = NULL;
+		std::string str = StringUtils::format("res%d", i);
+		cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
+
+		str = StringUtils::format("count%d", i);
+		cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
+
 		if (m_build->data.level < m_build->data.maxlevel)
 		{
-			int restypecount = m_build->data.Res[m_build->data.level].at(i);
+			int restypecount = m_build->data.Res[level].at(i);
 			if (restypecount > 0)
 			{
-				std::string str = StringUtils::format("res%d", i);
-				resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
 				resitem->setVisible(true);
-				str = StringUtils::format("count%d", i);
-				rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
 
-				str = StringUtils::format("ui/res%d.png", restypecount / 1000);
+				str = StringUtils::format("ui/%d.png", restypecount / 1000);
 				Sprite* res = Sprite::createWithSpriteFrameName(str);
 				res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
+				res->setScale(0.38f);
 				resitem->addChild(res);
 
 				str = StringUtils::format("%d/%d", restypecount % 1000, restypecount % 1000);
