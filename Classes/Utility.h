@@ -68,4 +68,7 @@ inline std::string loadStringDataByKey(string key, std::string defaultValue = ""
 	return s;
 #endif
 }
+
+
+
 #endif // _H_UTILITY_H_
