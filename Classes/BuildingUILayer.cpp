@@ -205,6 +205,14 @@ void BuildingUILayer::parseBuildActionJSon()
 			else
 				data.extime = 0;
 
+			if (jsonvalue.HasMember("type"))
+			{
+				value = jsonvalue["type"];
+				data.type = atoi(value.GetString());
+			}
+			else
+				data.type = -1;
+
 			value = jsonvalue["actext"];
 			strcpy(data.actext, value.GetString());
 
@@ -277,10 +285,9 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		if (id > 0)
 		{
 			StorageData data;
-			data.type = MEDICINAL;
+			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
 			data.id = id;
-			data.count = 0;
-			data.count++;
+			data.count = 1;
 			StorageRoom::add(data);
 		}
 	}

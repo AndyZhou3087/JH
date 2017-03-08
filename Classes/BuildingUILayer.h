@@ -13,6 +13,7 @@ typedef struct
 	char actext[32];
 	int actime;
 	int extime;
+	int type;
 }BuildActionData;
 
 typedef enum

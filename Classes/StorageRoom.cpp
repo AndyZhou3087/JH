@@ -25,22 +25,22 @@ bool StorageRoom::init()
 	return false;
 }
 
-void StorageRoom::saveStorageData()
+void StorageRoom::save()
 {
 	std::string str;
-	for (int i = 0; i < map_storageData.size(); i++)
+	int mapsize = map_storageData.size();
+	for (int i = 0; i < mapsize; i++)
 	{
 		int size = map_storageData[i].size();
 		for (int j = 0; j < size; j++)
 		{
 			StorageData sdata = map_storageData[i][j];
 			int tempid = sdata.type * 1000 + sdata.id;
-			str = StringUtils::format("%d-%d", tempid, sdata.count);
-			if (j < size - 1)
-				str.append(";");
+			std::string idstr = StringUtils::format("%d-%d;", tempid, sdata.count);
+			str.append(idstr);
 		}
 	}
-	GameDataSave::getInstance()->setStorageData(str);
+	GameDataSave::getInstance()->setStorageData(str.substr(0, str.length() - 1));
 }
 
 void StorageRoom::loadStorageData()
@@ -65,25 +65,28 @@ void StorageRoom::loadStorageData()
 
 void StorageRoom::add(StorageData data)
 {
+	bool isnew = true;
 	for (unsigned int i = 0; i < map_storageData[data.type].size(); i++)
 	{
 		StorageData *sdata = &map_storageData[data.type][i];
 		if (data.id == sdata->id)
 		{
-			sdata->count++;
+			isnew = false;
+			sdata->count += data.count;
 		}
 		else
 		{
-			map_storageData[data.type].push_back(data);
+			isnew = true;
 		}
-		return;
 	}
-	map_storageData[data.type].push_back(data);
+	if (isnew)
+		map_storageData[data.type].push_back(data);
+	StorageRoom::save();
 }
 
 void StorageRoom::use(int id)
 {
-	for (int type = 0; type < map_storageData.size(); type++)
+	for (unsigned int type = 0; type < map_storageData.size(); type++)
 	{
 		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
 		{
@@ -98,11 +101,12 @@ void StorageRoom::use(int id)
 			}
 		}
 	}
+	StorageRoom::save();
 }
 
 int StorageRoom::getCountByTypeId(int id)
 {
-	for (int type = 0; type < map_storageData.size(); type++)
+	for (unsigned int type = 0; type < map_storageData.size(); type++)
 	{
 		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
 		{

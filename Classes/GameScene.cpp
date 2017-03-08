@@ -3,6 +3,7 @@
 #include "HomeLayer.h"
 #include "UIScroll.h"
 #include "GameDataSave.h"
+#include "StorageRoom.h"
 USING_NS_CC;
 
 Nature* g_nature;

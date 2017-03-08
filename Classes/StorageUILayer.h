@@ -19,7 +19,7 @@ public:
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;
-
+	void onclick(Ref* pSender);
 	cocos2d::ui::ScrollView* scrollview;
 private:
 	int typecount[RES_MAX];

@@ -42,7 +42,7 @@ public:
 	CREATE_FUNC(StorageRoom);
 
 	void loadStorageData();
-	void saveStorageData();
+	static void save();
 	static std::map<int, std::vector<StorageData>> map_storageData;
 	static void add(StorageData data);
 	static void use(int id);

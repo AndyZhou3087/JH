@@ -51,6 +51,16 @@
           <Image Name="fence .png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
+          <Image Name="heroppoint.png" />
+          <Image Name="heroselectbg.png" />
+          <Image Name="hp3.png" />
+          <Image Name="hp4.png" />
+          <Image Name="hp5.png" />
+          <Image Name="hp6.png" />
+          <Image Name="hp8-1.png" />
+          <Image Name="hp8-2.png" />
+          <Image Name="hp8-3.png" />
+          <Image Name="hp8-4.png" />
           <Image Name="medicinekit.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="normalbtn.png" />
@@ -102,6 +112,8 @@
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
+        <Project Name="heroStateLayer.csd" Type="Layer" />
+        <Project Name="heroAttribNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

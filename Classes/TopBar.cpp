@@ -3,6 +3,7 @@
 #include "GameDataSave.h"
 #include "GameScene.h"
 #include "SysSmallBox.h"
+#include "HeroStateUILayer.h"
 
 TopBar::TopBar()
 {
@@ -153,7 +154,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)
 		{
-			m_uiscroll->addEventText(CommonFuncs::gbk2utf("点击了hero"));
+			this->getParent()->addChild(HeroStateUILayer::create(), 2);
 		}
 		else if (cnode->getName().compare("reason") == 0)
 		{

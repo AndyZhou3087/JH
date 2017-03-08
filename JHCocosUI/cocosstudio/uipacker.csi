@@ -89,6 +89,16 @@
       <FilePathData Path="ui/7.png" />
       <FilePathData Path="ui/8.png" />
       <FilePathData Path="ui/9.png" />
+      <FilePathData Path="ui/heroppoint.png" />
+      <FilePathData Path="ui/heroselectbg.png" />
+      <FilePathData Path="ui/hp3.png" />
+      <FilePathData Path="ui/hp4.png" />
+      <FilePathData Path="ui/hp5.png" />
+      <FilePathData Path="ui/hp6.png" />
+      <FilePathData Path="ui/hp8-1.png" />
+      <FilePathData Path="ui/hp8-2.png" />
+      <FilePathData Path="ui/hp8-3.png" />
+      <FilePathData Path="ui/hp8-4.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

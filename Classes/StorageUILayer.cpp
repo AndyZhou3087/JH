@@ -86,9 +86,32 @@ bool StorageUILayer::init()
 
 			for (int m = 0; m < icount; m++)
 			{
+
 				Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-				box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
-				scrollview->addChild(box);
+				//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
+				//scrollview->addChild(box);
+
+				MenuItemSprite* boxItem = MenuItemSprite::create(
+					box,
+					box,
+					box,
+					CC_CALLBACK_1(StorageUILayer::onclick, this));
+				boxItem->setTag(0);
+				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m / 5 * 130));
+				Menu* menu = Menu::create();
+				menu->addChild(boxItem);
+				menu->setPosition(Vec2(0, 0));
+				scrollview->addChild(menu);
+
+				std::string str = StringUtils::format("ui/%d.png", StorageRoom::map_storageData[i].at(m).id);
+				Sprite * res = Sprite::createWithSpriteFrameName(str);
+				res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+				box->addChild(res);
+
+				str = StringUtils::format("%d", StorageRoom::map_storageData[i].at(m).count);
+				Label * reslbl = Label::createWithSystemFont(str, "", 18);
+				reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+				box->addChild(reslbl);
 			}
 		}
 	}
@@ -112,6 +135,11 @@ void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	{
 		this->removeFromParentAndCleanup(true);
 	}
+}
+
+void StorageUILayer::onclick(Ref* pSender)
+{
+	
 }
 
 int StorageUILayer::getCountByType(int type)

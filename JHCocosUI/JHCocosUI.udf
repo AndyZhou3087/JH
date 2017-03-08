@@ -9,8 +9,10 @@
           <FilePathData Path="sysSmallLayer.csd" />
           <FilePathData Path="buidingUiLayer.csd" />
           <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="heroStateLayer.csd" />
+          <FilePathData Path="heroAttribNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="uipacker.csi" />
+        <ActiveDocument Path="heroAttribNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">
