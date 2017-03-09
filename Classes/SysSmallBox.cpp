@@ -3,11 +3,13 @@
 #include "GameScene.h"
 SysSmallBox::SysSmallBox()
 {
+	lastvalue = -1;
 }
 
 
 SysSmallBox::~SysSmallBox()
 {
+	lastvalue = -1;
 }
 
 bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, std::string title1, std::string text)
@@ -142,5 +144,93 @@ void SysSmallBox::updataUI(float dt)
 			titleTxt->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 
+	}
+
+	if (mType == OUTERINJURY)
+	{
+		int v = g_hero->getOutinjuryValue();
+
+		if (lastvalue != v)
+		{
+			lastvalue = g_hero->getOutinjuryValue();
+			int index = 0;
+			int valuerange[] = { 90, 70, 40, 30, 20, 10, 0 };
+			for (int i = 0; i < 7; i++)
+			{
+				if (g_hero->getOutinjuryValue() >= valuerange[i])
+				{
+					index = i;
+					break;
+				}
+			}
+
+			title1Txt->setString(CommonFuncs::gbk2utf(outInjurydesc1[index].c_str()));
+		}
+	}
+	if (mType == INNERINJURY)
+	{
+		int v = g_hero->getInnerinjuryValue();
+
+		if (lastvalue != v)
+		{
+			lastvalue = g_hero->getInnerinjuryValue();
+			int index = 0;
+			int valuerange[] = { 90, 70, 40, 30, 20, 10, 0 };
+			for (int i = 0; i < 7; i++)
+			{
+				if (g_hero->getInnerinjuryValue() >= valuerange[i])
+				{
+					index = i;
+					break;
+				}
+			}
+			title1Txt->setString(CommonFuncs::gbk2utf(innerInjurydesc1[index].c_str()));
+		}
+	
+	}
+	if (mType == HUNGER)
+	{
+		int v = g_hero->getHungerValue();
+
+		if (lastvalue != v)
+		{
+			lastvalue = g_hero->getHungerValue();
+			int index = 0;
+			int valuerange[] = { 90, 70, 40, 30, 20, 10, 0 };
+			for (int i = 0; i < 7; i++)
+			{
+				if (g_hero->getHungerValue() >= valuerange[i])
+				{
+					index = i;
+					break;
+				}
+			}
+			title1Txt->setString(CommonFuncs::gbk2utf(hungerdesc1[index].c_str()));
+		}
+	}
+	if (mType == SPIRIT)
+	{
+		int v = floorl(g_hero->getSpiritValue());
+
+		if (lastvalue != v)
+		{
+			lastvalue = v;
+			int index = 0;
+			int valuerange[] = { 90, 70, 40, 30, 20, 10, 0 };
+			for (int i = 0; i < 7; i++)
+			{
+				if (g_hero->getSpiritValue() >= valuerange[i])
+				{
+					index = i;
+					break;
+				}
+			}
+			title1Txt->setString(CommonFuncs::gbk2utf(spiritInjurydesc1[index].c_str()));
+		}
+	}
+	if (mType == LIFE)
+	{
+		std::string livevaluestr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+		title1Txt->setString(CommonFuncs::gbk2utf(livevaluestr.c_str()));
 	}
 }

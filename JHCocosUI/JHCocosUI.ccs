@@ -48,7 +48,7 @@
           <Image Name="bwine.png" />
           <Image Name="cooktable.png" />
           <Image Name="exerciseroom.png" />
-          <Image Name="fence .png" />
+          <Image Name="fence.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
           <Image Name="heroppoint.png" />
@@ -61,6 +61,70 @@
           <Image Name="hp8-2.png" />
           <Image Name="hp8-3.png" />
           <Image Name="hp8-4.png" />
+          <Image Name="m10-1.png" />
+          <Image Name="m10-2.png" />
+          <Image Name="m10-3.png" />
+          <Image Name="m10-4.png" />
+          <Image Name="m10-5.png" />
+          <Image Name="m1-1.png" />
+          <Image Name="m11-1.png" />
+          <Image Name="m11-2.png" />
+          <Image Name="m11-3.png" />
+          <Image Name="m11-4.png" />
+          <Image Name="m11-5.png" />
+          <Image Name="m11-6.png" />
+          <Image Name="m11-7.png" />
+          <Image Name="m1-2.png" />
+          <Image Name="m12-1.png" />
+          <Image Name="m1-3.png" />
+          <Image Name="m1-4.png" />
+          <Image Name="m2-1.png" />
+          <Image Name="m2-2.png" />
+          <Image Name="m2-3.png" />
+          <Image Name="m2-4.png" />
+          <Image Name="m2-5.png" />
+          <Image Name="m3-1.png" />
+          <Image Name="m3-2.png" />
+          <Image Name="m3-3.png" />
+          <Image Name="m3-4.png" />
+          <Image Name="m4-1.png" />
+          <Image Name="m4-10.png" />
+          <Image Name="m4-2.png" />
+          <Image Name="m4-3.png" />
+          <Image Name="m4-4.png" />
+          <Image Name="m4-5.png" />
+          <Image Name="m4-6.png" />
+          <Image Name="m4-7.png" />
+          <Image Name="m4-8.png" />
+          <Image Name="m4-9.png" />
+          <Image Name="m5-1.png" />
+          <Image Name="m5-2.png" />
+          <Image Name="m5-3.png" />
+          <Image Name="m6-1.png" />
+          <Image Name="m6-2.png" />
+          <Image Name="m6-3.png" />
+          <Image Name="m6-4.png" />
+          <Image Name="m7-1.png" />
+          <Image Name="m7-10.png" />
+          <Image Name="m7-11.png" />
+          <Image Name="m7-12.png" />
+          <Image Name="m7-2.png" />
+          <Image Name="m7-3.png" />
+          <Image Name="m7-4.png" />
+          <Image Name="m7-5.png" />
+          <Image Name="m7-6.png" />
+          <Image Name="m7-7.png" />
+          <Image Name="m7-8.png" />
+          <Image Name="m7-9.png" />
+          <Image Name="m8-1.png" />
+          <Image Name="m8-2.png" />
+          <Image Name="m9-1.png" />
+          <Image Name="m9-2.png" />
+          <Image Name="m9-3.png" />
+          <Image Name="m9-4.png" />
+          <Image Name="m9-5.png" />
+          <Image Name="m9-6.png" />
+          <Image Name="mapbg.jpg" />
           <Image Name="medicinekit.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="normalbtn.png" />
@@ -108,12 +172,14 @@
         </Folder>
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
+        <Project Name="heroAttribNode.csd" Type="Node" />
+        <Project Name="heroStateLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="heroStateLayer.csd" Type="Layer" />
-        <Project Name="heroAttribNode.csd" Type="Node" />
+        <Project Name="mapLayer.csd" Type="Layer" />
+        <Project Name="outDoorLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

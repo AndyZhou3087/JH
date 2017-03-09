@@ -61,7 +61,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title1" ActionTag="-2050491902" Tag="26" IconVisible="False" LeftMargin="347.0000" RightMargin="373.0000" TopMargin="635.0000" BottomMargin="645.0000" FontSize="30" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="title1" ActionTag="-2050491902" Tag="26" IconVisible="False" LeftMargin="347.0000" RightMargin="373.0000" TopMargin="635.0000" BottomMargin="645.0000" FontSize="25" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="347.0000" Y="645.0000" />
@@ -73,14 +73,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="175.0000" RightMargin="195.0000" TopMargin="679.0000" BottomMargin="451.0000" IsCustomSize="True" FontSize="25" LabelText="&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="350.0000" Y="150.0000" />
+          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="151.0000" RightMargin="168.0000" TopMargin="679.0000" BottomMargin="451.0000" IsCustomSize="True" FontSize="18" LabelText="&#xA;" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="401.0000" Y="150.0000" />
             <AnchorPoint ScaleY="1.0000" />
-            <Position X="175.0000" Y="601.0000" />
+            <Position X="151.0000" Y="601.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2431" Y="0.4695" />
-            <PreSize X="0.4861" Y="0.1172" />
+            <PrePosition X="0.2097" Y="0.4695" />
+            <PreSize X="0.5569" Y="0.1172" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

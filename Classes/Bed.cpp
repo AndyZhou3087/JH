@@ -29,6 +29,6 @@ bool Bed::init()
 
 void Bed::action(int minute, int exminute)
 {
-	g_nature->setTimeInterval(exminute / (TIMESCALE* ACTION_BAR_TIME));
+	g_nature->setTimeInterval(exminute / (TIMESCALE* getActionBarTime()));
 	g_hero->sleep(exminute / 60);
 }

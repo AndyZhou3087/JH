@@ -105,6 +105,17 @@
             <FileData Type="MarkedSubImage" Path="ui/storageroom.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Sprite_1" ActionTag="908432284" Tag="83" IconVisible="False" LeftMargin="540.5000" RightMargin="0.5000" TopMargin="1183.5000" BottomMargin="-0.5000" ctype="SpriteObjectData">
+            <Size X="179.0000" Y="97.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="630.0000" Y="48.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8750" Y="0.0375" />
+            <PreSize X="0.2486" Y="0.0758" />
+            <FileData Type="MarkedSubImage" Path="ui/fence.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

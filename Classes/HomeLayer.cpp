@@ -8,8 +8,10 @@
 #include "WineTable.h"
 #include "WineMaker.h"
 #include "StorageRoom.h"
+#include "Fence.h"
 #include "BuildingUILayer.h"
 #include "StorageUILayer.h"
+#include "OutDoor.h"
 
 HomeLayer::HomeLayer()
 {
@@ -125,6 +127,15 @@ bool HomeLayer::init()
 	storageroomItem->setPosition(Vec2(105, 188));
 	menu->addChild(storageroomItem);
 
+	Building* fence = Fence::create();
+	MenuItemSprite* fenceItem = MenuItemSprite::create(
+		fence,
+		fence,
+		fence,
+		CC_CALLBACK_1(HomeLayer::onFence, this));
+	fenceItem->setPosition(Vec2(630, 48));
+	menu->addChild(fenceItem);
+
 	return true;
 }
 
@@ -153,5 +164,11 @@ void HomeLayer::loadJsonData()
 void HomeLayer::onStorageRoom(Ref* pSender)
 {
 	Layer* layer = StorageUILayer::create();
+	this->getParent()->addChild(layer, 3);
+}
+
+void HomeLayer::onFence(Ref* pSender)
+{
+	Layer* layer = OutDoor::create();
 	this->getParent()->addChild(layer, 3);
 }

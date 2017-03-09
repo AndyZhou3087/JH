@@ -3,7 +3,7 @@
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
-int Hero::MAXSpiritValue = 100;
+int Hero::MAXSpiritValue = 100.0f;
 
 #define HungerSpeed 5
 #define InnerinjurySpeed 1
@@ -79,12 +79,12 @@ void Hero::updateData(float dt)
 void Hero::sleep(int hour)
 {
 	sleephour = hour;
-	this->schedule(schedule_selector(Hero::sleepbystep), ACTION_BAR_TIME, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
+	this->schedule(schedule_selector(Hero::sleepbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::sleepbystep(float dt)
 {
-	m_life += m_maxlife * 15 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
+	m_life += m_maxlife * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
 	if (m_life > m_maxlife)
 	{
 		m_life = m_maxlife;
@@ -94,12 +94,12 @@ void Hero::sleepbystep(float dt)
 
 void Hero::drinking()
 {
-	this->schedule(schedule_selector(Hero::drinkbystep), ACTION_BAR_TIME, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
+	this->schedule(schedule_selector(Hero::drinkbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::drinkbystep(float dt)
 {
-	m_spirit += 1;
+	m_spirit += 0.5f;
 	if (m_spirit > MAXSpiritValue)
 	{
 		m_spirit = MAXSpiritValue;
