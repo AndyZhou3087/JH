@@ -146,7 +146,7 @@ void HomeLayer::onclick(Ref* pSender)
 	int nodetag = node->getTag();
 
 	Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
-	this->getParent()->addChild(layer, 3);
+	this->addChild(layer);
 }
 
 void HomeLayer::loadJsonData()
@@ -164,11 +164,11 @@ void HomeLayer::loadJsonData()
 void HomeLayer::onStorageRoom(Ref* pSender)
 {
 	Layer* layer = StorageUILayer::create();
-	this->getParent()->addChild(layer, 3);
+	this->addChild(layer);
 }
 
 void HomeLayer::onFence(Ref* pSender)
 {
 	Layer* layer = OutDoor::create();
-	this->getParent()->addChild(layer, 3);
+	this->addChild(layer);
 }

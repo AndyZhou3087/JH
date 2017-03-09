@@ -44,7 +44,7 @@ bool GameScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	homeLayer = HomeLayer::create();
-	addChild(homeLayer);
+	addChild(homeLayer, 3);
 
 	g_nature = Nature::create();
 	this->addChild(g_nature);
@@ -60,16 +60,16 @@ bool GameScene::init()
 
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 980));
-	this->addChild(bg, 1);
+	this->addChild(bg, 2);
 
 	uiScroll = UIScroll::create(500.0f, 132.0f);
 	uiScroll->setPosition(Vec2(visibleSize.width / 2, 980));
-	addChild(uiScroll, 1);
+	addChild(uiScroll, 2);
 
 	topBar = TopBar::create();
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
 	topBar->setScrollContainer(uiScroll);
-	addChild(topBar);
+	addChild(topBar, 1);
 	
     return true;
 }

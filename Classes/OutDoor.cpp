@@ -52,8 +52,8 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		this->getParent()->addChild(MapLayer::create());
-		this->removeFromParentAndCleanup(true);
+		Director::getInstance()->getRunningScene()->addChild(MapLayer::create());
+		this->getParent()->removeFromParentAndCleanup(true);
 
 	}
 }

@@ -28,8 +28,17 @@ bool MapLayer::init()
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 
 	}
+	float offsetx = 0.0f;
+	float offsety = 0.0f;
+	Size scollviewsize = mapscroll->getContentSize();
 	Vec2 pos = mapbg->getChildren().at(0)->getPosition();
-	mapscroll->setInnerContainerPosition(Vec2(pos.x - 360, pos.y));
+
+	if (pos.x > scollviewsize.width / 2)
+		offsetx = pos.x - scollviewsize.width / 2;
+	if (pos.y > scollviewsize.height / 2)
+		offsety = pos.y - scollviewsize.height / 2;
+
+	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 	return true;
 }
 

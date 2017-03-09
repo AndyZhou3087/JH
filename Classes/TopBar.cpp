@@ -154,7 +154,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)
 		{
-			this->getParent()->addChild(HeroStateUILayer::create(), 2);
+			this->getParent()->addChild(HeroStateUILayer::create(), 4);
 		}
 		else if (cnode->getName().compare("reason") == 0)
 		{
@@ -260,7 +260,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, livevaluestr, lifedesc);
 		}
 		if (sbox != NULL)
-			this->getParent()->addChild(sbox, 2);
+			this->getParent()->addChild(sbox, 4);
 	}
 }
 
