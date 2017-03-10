@@ -162,6 +162,12 @@
       <FilePathData Path="ui/m9-4.png" />
       <FilePathData Path="ui/m9-5.png" />
       <FilePathData Path="ui/m9-6.png" />
+      <FilePathData Path="ui/xline.png" />
+      <FilePathData Path="ui/disbtn.png" />
+      <FilePathData Path="ui/66.png" />
+      <FilePathData Path="ui/67.png" />
+      <FilePathData Path="ui/68.png" />
+      <FilePathData Path="ui/69.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

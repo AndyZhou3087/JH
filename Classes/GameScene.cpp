@@ -4,6 +4,7 @@
 #include "UIScroll.h"
 #include "GameDataSave.h"
 #include "StorageRoom.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -40,6 +41,8 @@ bool GameScene::init()
         return false;
     }
     
+	GlobalData::init();
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 

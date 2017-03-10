@@ -28,6 +28,10 @@
           <Image Name="4.png" />
           <Image Name="5.png" />
           <Image Name="6.png" />
+          <Image Name="66.png" />
+          <Image Name="67.png" />
+          <Image Name="68.png" />
+          <Image Name="69.png" />
           <Image Name="7.png" />
           <Image Name="8.png" />
           <Image Name="9.png" />
@@ -47,6 +51,7 @@
           <Image Name="bw0.png" />
           <Image Name="bwine.png" />
           <Image Name="cooktable.png" />
+          <Image Name="disbtn.png" />
           <Image Name="exerciseroom.png" />
           <Image Name="fence.png" />
           <Image Name="forgingtable.png" />
@@ -169,17 +174,21 @@
           <Image Name="toptimeicon.png" />
           <Image Name="winemake.png" />
           <Image Name="winetable.png" />
+          <Image Name="xline.png" />
         </Folder>
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
+        <Project Name="mapLayer.csd" Type="Layer" />
+        <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="mapLayer.csd" Type="Layer" />
-        <Project Name="outDoorLayer.csd" Type="Layer" />
+        <Project Name="resNode.csd" Type="Node" />
+        <Project Name="homeHillLayer.csd" Type="Layer" />
+        <Project Name="hintLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

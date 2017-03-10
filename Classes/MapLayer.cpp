@@ -1,5 +1,7 @@
 #include "MapLayer.h"
 #include "json.h"
+#include "HomeLayer.h"
+#include "HomeHill.h"
 
 MapLayer::MapLayer()
 {
@@ -46,6 +48,19 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		Node* node = (Node*)pSender;
+		int nodetag = node->getTag();
 
+		if (nodetag == 1001)
+		{
+			this->getParent()->addChild(HomeLayer::create());
+			this->removeFromParentAndCleanup(true);
+		}
+		else
+		{
+			this->getParent()->addChild(HomeHill::create());
+			this->removeFromParentAndCleanup(true);
+			
+		}
 	}
 }
