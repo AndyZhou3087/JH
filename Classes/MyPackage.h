@@ -34,7 +34,8 @@ public:
 	static void setMax(int val);
 
 private:
-	static std::vector<PackageData> vec_packages;
+	static std::map<int,std::vector<PackageData>> map_packages;
+	static int max;
 };
 #endif
 
