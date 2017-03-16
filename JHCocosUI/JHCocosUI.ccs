@@ -180,15 +180,16 @@
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
+        <Project Name="hintLayer.csd" Type="Layer" />
+        <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
+        <Project Name="resNode.csd" Type="Node" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="resNode.csd" Type="Node" />
-        <Project Name="homeHillLayer.csd" Type="Layer" />
-        <Project Name="hintLayer.csd" Type="Layer" />
+        <Project Name="actionGetLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

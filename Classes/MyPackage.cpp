@@ -21,7 +21,7 @@ int MyPackage::add(PackageData pdata)
 		return -1;
 	else
 	{
-		for (unsigned int i = 0; i < map_packages.size; i++)
+		for (unsigned int i = 0; i < map_packages.size(); i++)
 		{
 			int size = map_packages[i].size();
 			if (size > 0)

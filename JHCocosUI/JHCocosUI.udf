@@ -7,8 +7,13 @@
           <FilePathData Path="sysSmallLayer.csd" />
           <FilePathData Path="mapLayer.csd" />
           <FilePathData Path="homeLayer.csd" />
+          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="homeHillLayer.csd" />
+          <FilePathData Path="actionGetLayer.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="hintLayer.csd" />
+        <ActiveDocument Path="actionGetLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

@@ -53,14 +53,12 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 
 		if (nodetag == 1001)
 		{
-			this->getParent()->addChild(HomeLayer::create());
+			this->getParent()->addChild(HomeLayer::create(), 1, "homelayer");
 			this->removeFromParentAndCleanup(true);
 		}
 		else
 		{
-			this->getParent()->addChild(HomeHill::create());
-			this->removeFromParentAndCleanup(true);
-			
+			this->getParent()->addChild(HomeHill::create(), 3);	
 		}
 	}
 }

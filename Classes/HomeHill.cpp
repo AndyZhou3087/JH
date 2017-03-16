@@ -2,8 +2,10 @@
 #include "json.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
+#include "ActionGetLayer.h"
+#include "Const.h"
 
-std::string acname[] = {"战斗","采集", "砍伐", "挖掘" };
+
 HomeHill::HomeHill()
 {
 	pasttime = 0;
@@ -96,6 +98,17 @@ bool HomeHill::init()
 
 	}
 	this->schedule(schedule_selector(HomeHill::updateUI),0.2f);
+
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	return true;
 }
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -122,9 +135,10 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 			}
 		}
 		if (GlobalData::vec_resData[node->getTag()].count > 0)
-			GlobalData::vec_resData[node->getTag()].count--;
-		if (!isself)
 		{
+			GlobalData::vec_resData[node->getTag()].count--;
+			ActionGetLayer* layer = ActionGetLayer::create(data->res, data->type, data->actype);
+			this->addChild(layer);
 
 		}
 	}

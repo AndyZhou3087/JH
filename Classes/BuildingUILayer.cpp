@@ -37,7 +37,7 @@ bool BuildingUILayer::init(Building* build)
 {
 	m_build = build;
 	m_csbnode = CSLoader::createNode("buidingUiLayer.csb");
-	m_csbnode->setPosition(Vec2(0, -100));
+	m_csbnode->setPosition(Vec2(0, -90));
 	this->addChild(m_csbnode);
 
 	cocos2d::ui::Text* title = (cocos2d::ui::Text*)m_csbnode->getChildByName("title");

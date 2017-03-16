@@ -2,6 +2,7 @@
 #include "json.h"
 
 std::vector<ResData> GlobalData::vec_resData;
+std::vector<PackageData> GlobalData::vec_getResData;
 
 GlobalData::GlobalData()
 {

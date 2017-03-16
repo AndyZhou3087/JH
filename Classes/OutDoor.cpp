@@ -17,7 +17,7 @@ bool OutDoor::init()
 {
 
 	m_csbnode = CSLoader::createNode("outDoorLayer.csb");
-	m_csbnode->setPosition(Vec2(0, -100));
+	m_csbnode->setPosition(Vec2(0, -90));
 	this->addChild(m_csbnode);
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
@@ -52,8 +52,10 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		Director::getInstance()->getRunningScene()->addChild(MapLayer::create());
-		this->getParent()->removeFromParentAndCleanup(true);
+		this->getParent()->addChild(MapLayer::create(), 1, "maplayer");
+		this->getParent()->removeChildByName("homelayer");
+
+		this->removeFromParentAndCleanup(true);
 
 	}
 }

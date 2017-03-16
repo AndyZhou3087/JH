@@ -1,6 +1,7 @@
 #ifndef _GLOBALDATA_H_
 #define _GLOBALDATA_H_
 #include "cocos2d.h"
+#include "MyPackage.h"
 USING_NS_CC;
 
 
@@ -30,7 +31,7 @@ public:
 
 public:
 	static std::vector<ResData> vec_resData;
-	static std::
+	static std::vector<PackageData> vec_getResData;
 };
 #endif
 
