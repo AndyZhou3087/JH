@@ -1,4 +1,4 @@
-#ifndef _BEDUI_LAYER_H_
+﻿#ifndef _BEDUI_LAYER_H_
 #define _BEDUI_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"

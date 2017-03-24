@@ -1,4 +1,4 @@
-#ifndef _GOODS_H_
+﻿#ifndef _GOODS_H_
 #define _GOODS_H_
 #include "cocos2d.h"
 USING_NS_CC;

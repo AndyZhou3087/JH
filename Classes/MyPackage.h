@@ -1,4 +1,4 @@
-/********************************************************************
+﻿/********************************************************************
 * 背包
 *********************************************************************/
 
@@ -15,7 +15,6 @@ typedef struct
 
 }PackageData;
 
-
 class MyPackage
 {
 public:
@@ -25,6 +24,7 @@ public:
 public:
 
 	static int add(PackageData pdata);
+	static void cutone(int index);
 	static void takeoff();
 	static bool isFull(PackageData pdata);
 	static void save();
@@ -32,9 +32,11 @@ public:
 
 	static int getMax();
 	static void setMax(int val);
-
+	static int getSize();
+public:
+	static std::vector<PackageData> vec_packages;
 private:
-	static std::map<int,std::vector<PackageData>> map_packages;
+	
 	static int max;
 };
 #endif

@@ -1,4 +1,4 @@
-#ifndef _UISCROLL_H_
+﻿#ifndef _UISCROLL_H_
 #define _UISCROLL_H_
 #include "cocos2d.h"
 #include "cocos-ext.h"

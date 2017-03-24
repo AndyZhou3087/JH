@@ -1,4 +1,4 @@
-#ifndef _GAMEDATA_SAVE_H_
+﻿#ifndef _GAMEDATA_SAVE_H_
 #define _GAMEDATA_SAVE_H_
 #include "cocos2d.h"
 class GameDataSave
@@ -44,6 +44,18 @@ public:
 
 	int getBuildLV(std::string buildname);
 	void setBuildLV(std::string buildname, int val);
+
+	cocos2d::Vec2 getHeroPos();
+	void setHeroPos(cocos2d::Vec2 val);
+
+	std::string getTempStorage(std::string addrname);
+	void setTempStorage(std::string addrname, std::string vstr);
+
+	std::string getPackage();
+	void setPackage(std::string vstr);
+
+	std::string getResData();
+	void setResData(std::string vstr);
 
 private:
 	static GameDataSave* _Context;

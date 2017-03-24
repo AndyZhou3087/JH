@@ -1,4 +1,4 @@
-#include "Furnace.h"
+﻿#include "Furnace.h"
 #include "Nature.h"
 #include "Const.h"
 extern Nature* g_nature;

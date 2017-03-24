@@ -1,4 +1,4 @@
-#ifndef _SYSSMALL_BOX_H_
+﻿#ifndef _SYSSMALL_BOX_H_
 #define _SYSSMALL_BOX_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"

@@ -1,4 +1,4 @@
-#include "Hero.h"
+﻿#include "Hero.h"
 #include "Const.h"
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;

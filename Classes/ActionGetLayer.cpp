@@ -3,8 +3,9 @@
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "MyPackage.h"
+#include "Const.h"
+#include "GameDataSave.h"
 
-std::string acname[] = {"战斗","采集", "砍伐", "挖掘" };
 ActionGetLayer::ActionGetLayer()
 {
 }
@@ -14,73 +15,32 @@ ActionGetLayer::~ActionGetLayer()
 {
 }
 
-bool ActionGetLayer::init(std::vector<int> vec_id, int type, int actype)
+bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actype)
 {
 	Node* csbnode = CSLoader::createNode("actionGetLayer.csb");
 	this->addChild(csbnode);
 
+	mtype = type;
+	mrid = rid;
+
+	cocos2d::ui::Text* actiontext = (cocos2d::ui::Text*)csbnode->getChildByName("actiontext");
+	actiontext->setString(acname[actype]);
+
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onBack, this));
 
-	cocos2d::ui::Widget* getbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("getbtn");
+	cocos2d::ui::Button* getbtn = (cocos2d::ui::Button*)csbnode->getChildByName("getbtn");
 	getbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onGet, this));
+	std::string str = StringUtils::format("继续%s", acname[actype].c_str());
+	getbtn->setTitleText(CommonFuncs::gbk2utf(str.c_str()));
 
-	cocos2d::ui::Widget* getallbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("allgetbtn");
+	cocos2d::ui::Button* getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
 	getallbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onAllGet, this));
 
-	rewardRes_ids = vec_id;
+	rewardids = res_ids;
 
-	for (unsigned int i = 0; i < vec_id.size(); i++)
-	{
-		unsigned int m = 0;
-		for ( m = 0; m < GlobalData::vec_getResData.size(); m++)
-		{
-			if (vec_id[i] == GlobalData::vec_getResData[m].id)
-			{
-				GlobalData::vec_getResData[m].count++;
-				break;
-			}
-		}
-
-		if (m == GlobalData::vec_getResData.size())
-		{
-			PackageData data;
-			data.id = vec_id[i];
-			data.type = type;
-			data.count = 1;
-			GlobalData::vec_getResData.push_back(data);
-		}
-		
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(ActionGetLayer::onRewardItem, this));
-		boxItem->setTag(i);
-		boxItem->setPosition(Vec2(150 + i * 135, 512));
-		Menu* menu = Menu::create();
-		menu->addChild(boxItem);
-		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("resitem%d", i);
-		this->addChild(menu, 0, name );
-
-		std::string str = StringUtils::format("ui/%d.png", vec_id[i]);
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
-		int count = 0;
-		for (unsigned m = 0; m < GlobalData::vec_getResData.size(); m++)
-		{
-			if (vec_id[i] == GlobalData::vec_getResData[m].id)
-				count = GlobalData::vec_getResData[m].count;
-		}
-		str = StringUtils::format("%d", count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
-	}
+	doAction();
+	updata();
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -94,15 +54,103 @@ bool ActionGetLayer::init(std::vector<int> vec_id, int type, int actype)
 	return true;
 }
 
-void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
+void ActionGetLayer::doAction()
 {
+	for (unsigned int i = 0; i < rewardids.size(); i++)
+	{
+		unsigned int m = 0;
+		for (m = 0; m < getResData.size(); m++)
+		{
+			if (rewardids[i] == getResData[m].id)
+			{
+				getResData[m].count++;
+				break;
+			}
+		}
 
+		if (m == getResData.size())
+		{
+			PackageData data;
+			data.id = rewardids[i];
+			data.type = mtype - 1;
+			data.count = 1;
+			getResData.push_back(data);
+		}
+	}
 }
 
-ActionGetLayer* ActionGetLayer::create(std::vector<int> vec_id, int type, int actype)
+void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
+{
+	Node* node = (Node*)pSender;
+	PackageData* data = (PackageData*)node->getUserData();
+
+	removeitem();
+
+	int count = data->count - 1;
+	if (count <= 0)
+	{
+		std::vector<PackageData>::iterator it;
+		for (it = getResData.begin(); it != getResData.end(); ++it)
+		{
+			if (it->id == data->id)
+			{
+				PackageData pdata;
+				pdata.type = data->type;
+				pdata.id = data->id;
+				pdata.count = 1;
+				if (MyPackage::add(pdata) == 0)
+				{
+					data->count--;
+					getResData.erase(it);
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		PackageData pdata;
+		pdata.type = data->type;
+		pdata.id = data->id;
+		pdata.count = 1;
+		if (MyPackage::add(pdata) == 0)
+		{
+			data->count--;
+		}
+	}
+	saveTempData();
+	updata();
+}
+
+void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
+{
+	removeitem();
+	Node* node = (Node*)pSender;
+	int index = node->getTag();
+	PackageData data = MyPackage::vec_packages[index];
+	unsigned int i = 0;
+	for (i = 0; i < getResData.size(); i++)
+	{
+		if (data.id == getResData[i].id)
+		{
+			getResData[i].count++;
+			break;
+		}
+	}
+
+	if (i == getResData.size())
+	{
+		getResData.push_back(data);
+	}
+	saveTempData();
+	MyPackage::cutone(index);
+	updata();
+}
+
+ActionGetLayer* ActionGetLayer::create(int rid, std::vector<int> res_ids, int type, int actype)
 {
 	ActionGetLayer *pRet = new ActionGetLayer();
-	if (pRet && pRet->init(vec_id, type, actype))
+	if (pRet && pRet->init(rid, res_ids, type, actype))
 	{
 		pRet->autorelease();
 	}
@@ -126,7 +174,13 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		if (GlobalData::vec_resData[mrid].count > 0)
+		{
+			GlobalData::vec_resData[mrid].count--;
+			removeitem();
+			doAction();
+			updata();
+		}
 	}
 }
 
@@ -134,11 +188,125 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		removeitem();
 
+		for (unsigned int i = 0; i < getResData.size(); i++)
+		{
+			int count = getResData[i].count;
+			for (int m = 0; m < count; m++)
+			{
+				PackageData data = getResData[i];
+				data.count = 1;
+				if (MyPackage::add(data) == 0)
+				{
+					if (--getResData[i].count <= 0)
+					{
+						getResData.erase(getResData.begin() + i);
+						break;
+					}
+				}
+			}
+
+		}
+
+		updata();
 	}
+}
+
+void ActionGetLayer::saveTempData()
+{
+	std::string str;
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string onestr = StringUtils::format("%d-%d;", getResData[i].id * 1000 + getResData[i].type, getResData[i].count);
+		str.append(onestr);
+	}
+	GameDataSave::getInstance()->setTempStorage("m1-1", str.substr(0, str.length() - 1));
 }
 
 void ActionGetLayer::updata()
 {
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
 
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(ActionGetLayer::onRewardItem, this));
+		boxItem->setTag(i);
+		boxItem->setUserData(&getResData[i]);
+		boxItem->setPosition(Vec2(150 + i * 135, 512));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("resitem%d", i);
+		this->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%d.png", getResData[i].id);
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+
+		str = StringUtils::format("%d", getResData[i].count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
+	}
+
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(ActionGetLayer::onPackageItem, this));
+		boxItem->setTag(i);
+		boxItem->setPosition(Vec2(110 + i * 125, 305));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("pitem%d", i);
+		this->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%d.png", MyPackage::vec_packages[i].id);
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+		str = StringUtils::format("%d", MyPackage::vec_packages[i].count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
+	}
+}
+
+
+void ActionGetLayer::removeitem()
+{
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
+
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		std::string name = StringUtils::format("pitem%d", i);
+		this->removeChildByName(name);
+	}
+}
+
+void ActionGetLayer::onExit()
+{
+	std::string str;
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string onestr = StringUtils::format("%d-%d;", getResData[i].id * 1000 + getResData[i].type, getResData[i].count);
+		str.append(onestr);
+	}
+	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));
+	Layer::onExit();
 }

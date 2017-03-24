@@ -1,4 +1,4 @@
-#include "Bed.h"
+﻿#include "Bed.h"
 #include "Nature.h"
 #include "Hero.h"
 #include "Const.h"

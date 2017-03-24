@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "Const.h"
 
-const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源1", "资源2"};
+const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源", "资源2"};
 
 StorageUILayer::StorageUILayer()
 {
@@ -84,7 +84,7 @@ bool StorageUILayer::init()
 			namelbl->setPosition(Vec2(25, 25));
 			sepline->addChild(namelbl);
 
-			for (int m = 0; m < icount; m++)
+			for (int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
 			{
 
 				Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
@@ -139,7 +139,7 @@ void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 void StorageUILayer::onclick(Ref* pSender)
 {
-	
+	Node* node = (Node*)pSender;
 }
 
 int StorageUILayer::getCountByType(int type)

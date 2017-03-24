@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="68" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
             <Size X="720.0000" Y="892.0000" />
             <Children>
               <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" ctype="SpriteObjectData">
@@ -32,13 +32,23 @@
                     <PreSize X="0.0240" Y="0.0372" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-1.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="m1-3" ActionTag="-346385861" Tag="13" IconVisible="False" LeftMargin="1258.5601" RightMargin="695.4399" TopMargin="1173.0000" BottomMargin="177.0000" TouchEnable="True" Scale9Width="46" Scale9Height="46" ctype="ImageViewObjectData">
+                    <Size X="46.0000" Y="46.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1281.5601" Y="200.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.6408" Y="0.1433" />
+                    <PreSize X="0.0230" Y="0.0330" />
+                    <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
+                  </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
                 <Position />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
-                <PreSize X="2.7778" Y="1.5650" />
+                <PreSize X="1.0000" Y="1.0000" />
                 <FileData Type="Normal" Path="ui/mapbg.jpg" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>

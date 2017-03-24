@@ -1,4 +1,4 @@
-#include "GameDataSave.h"
+﻿#include "GameDataSave.h"
 #include "cocos2d.h"
 #include "Utility.h"
 #include "Hero.h"
@@ -132,4 +132,48 @@ void GameDataSave::setBuildLV(std::string buildname, int val)
 {
 	std::string rname = StringUtils::format("%slv", buildname.c_str());
 	saveIntDataByKey(rname, val);
+}
+
+cocos2d::Vec2 GameDataSave::getHeroPos()
+{
+	int x = loadIntDataByKey("herox", 0);
+	int y = loadIntDataByKey("heroy", 0);
+	return Vec2(x, y);
+}
+
+void GameDataSave::setHeroPos(cocos2d::Vec2 val)
+{
+	saveIntDataByKey("herox", (int)val.x);
+	saveIntDataByKey("heroy", (int)val.y);
+}
+
+std::string GameDataSave::getTempStorage(std::string addrname)
+{
+	std::string str = StringUtils::format("%s-temps", addrname.c_str());
+	return loadStringDataByKey(str);
+}
+
+void GameDataSave::setTempStorage(std::string addrname, std::string vstr)
+{
+	std::string str = StringUtils::format("%s-temps", addrname.c_str());
+	saveStringDataByKey(str, vstr);
+}
+
+std::string GameDataSave::getPackage()
+{
+	return loadStringDataByKey("packages");
+}
+
+void GameDataSave::setPackage(std::string vstr)
+{
+	saveStringDataByKey("packages", vstr);
+}
+
+std::string GameDataSave::getResData()
+{
+	return loadStringDataByKey("resdata");
+}
+void GameDataSave::setResData(std::string vstr)
+{
+	saveStringDataByKey("resdata", vstr);
 }

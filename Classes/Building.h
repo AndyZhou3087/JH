@@ -1,4 +1,4 @@
-#ifndef _BUILDING_H_
+﻿#ifndef _BUILDING_H_
 #define _BUILDING_H_
 #include "cocos2d.h"
 #include "Goods.h"

@@ -1,4 +1,4 @@
-#ifndef _MAP_LAYER_H_
+﻿#ifndef _MAP_LAYER_H_
 #define _MAP_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
@@ -13,8 +13,16 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(MapLayer);
+	void showMoveToDest();
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void Arrive(float dt);
+private:
+	float m_distance;
+	Vec2 destPos;
+	std::string addrname;
+	Sprite* herohead;
 };
+extern MapLayer* g_maplayer;
 #endif
 

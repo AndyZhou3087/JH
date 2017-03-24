@@ -1,4 +1,4 @@
-#include "Fence.h"
+﻿#include "Fence.h"
 #include "Const.h"
 
 Fence::Fence()

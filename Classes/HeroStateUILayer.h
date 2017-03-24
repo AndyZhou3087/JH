@@ -1,4 +1,4 @@
-#ifndef _HEROSTATEUI_LAYER_H_
+﻿#ifndef _HEROSTATEUI_LAYER_H_
 #define _HEROSTATEUI_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"

@@ -1,4 +1,4 @@
-#include "WineTable.h"
+﻿#include "WineTable.h"
 #include "Hero.h"
 
 extern Hero* g_hero;

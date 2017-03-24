@@ -1,4 +1,4 @@
-
+﻿
 #include "json.h"
 std::string JsonWriter(rapidjson::Document& doc)
 {

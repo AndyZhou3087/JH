@@ -1,4 +1,4 @@
-#ifndef __GAME_SCENE_H__
+﻿#ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
@@ -18,7 +18,6 @@ public:
     virtual bool init();
     
 	CREATE_FUNC(GameScene);
-
 private:
 	TopBar* topBar;
 	Node* homeLayer;
@@ -26,8 +25,11 @@ private:
 private:
 	void loadSaveData();
 	void saveAllData();
+	void updata(float dt);
+	void timerSaveResData(float dt);
 
 };
 extern Nature* g_nature;
 extern Hero* g_hero;
+extern GameScene* g_gameLayer;
 #endif // __GAME_SCENE_H__

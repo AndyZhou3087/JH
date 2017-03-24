@@ -1,4 +1,4 @@
-#ifndef _TOPBAR_H_
+﻿#ifndef _TOPBAR_H_
 #define _TOPBAR_H_
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"

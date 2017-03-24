@@ -1,8 +1,15 @@
-#include "MapLayer.h"
+﻿#include "MapLayer.h"
 #include "json.h"
 #include "HomeLayer.h"
 #include "HomeHill.h"
+#include "GoWhereLayer.h"
+#include "GameDataSave.h"
+#include "Const.h"
+#include "GameScene.h"
 
+static Vec2 heroPos;
+
+MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
 }
@@ -23,10 +30,7 @@ bool MapLayer::init()
 	int mapnamecount = mapbg->getChildrenCount();
 	for (int i = 0; i < mapnamecount; i++)
 	{
-		int ctag = mapbg->getChildren().at(i)->getTag();
-
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)mapbg->getChildren().at(i);
-		mapname->setTag(ctag);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 
 	}
@@ -41,6 +45,27 @@ bool MapLayer::init()
 		offsety = pos.y - scollviewsize.height / 2;
 
 	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
+
+	m_distance = 0.0f;
+	Vec2 hpos = GameDataSave::getInstance()->getHeroPos();
+	if (hpos.isZero())
+		heroPos = mapbg->getChildByName("m1-1")->getPosition();
+	else
+		heroPos = hpos;
+	herohead = Sprite::createWithSpriteFrameName("ui/herohead1.png");
+	herohead->setAnchorPoint(Vec2(0.5, 0));
+	herohead->setPosition(heroPos);
+	mapscroll->addChild(herohead);
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	return true;
 }
 
@@ -49,16 +74,33 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;
-		int nodetag = node->getTag();
-
-		if (nodetag == 1001)
-		{
-			this->getParent()->addChild(HomeLayer::create(), 1, "homelayer");
-			this->removeFromParentAndCleanup(true);
-		}
+		addrname = node->getName();
+		destPos = node->getPosition();
+		m_distance = fabsf(heroPos.distance(destPos));
+		WHERELAYER_TYPE type = ARRIVE;
+		if (m_distance <= 1.0f)
+			type = ARRIVE;
 		else
-		{
-			this->getParent()->addChild(HomeHill::create(), 3);	
-		}
+			type = GOWHERE;
+		Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(addrname, type, m_distance));
+
 	}
+}
+
+void MapLayer::showMoveToDest()
+{
+	float dt = m_distance / HERO_MOVE_SPEED;
+	float permin = dt / (TIMESCALE*4.0f);
+	g_nature->setTimeInterval(permin);
+	this->scheduleOnce(schedule_selector(MapLayer::Arrive), 4.0f);
+	herohead->runAction(MoveTo::create(4.0f, destPos));
+}
+
+void MapLayer::Arrive(float dt)
+{
+	g_nature->setTimeInterval(1);
+	heroPos = destPos;
+	GameDataSave::getInstance()->setHeroPos(destPos);
+
+	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(addrname, ARRIVE));
 }

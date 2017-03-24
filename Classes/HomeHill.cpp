@@ -8,7 +8,6 @@
 
 HomeHill::HomeHill()
 {
-	pasttime = 0;
 }
 
 
@@ -23,10 +22,8 @@ bool HomeHill::init()
 
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(HomeHill::onBack, this));
-
-	loadJsonData();
 	
-	int ressize = vec_resid.size();
+	int ressize = GlobalData::vec_hillResid.size();
 	scrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
 
 	int itemheight = 140;
@@ -56,9 +53,9 @@ bool HomeHill::init()
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData data = GlobalData::vec_resData[m];
-			if (vec_resid[i] == data.id)
+			if (GlobalData::vec_hillResid[i] == data.id)
 			{
-				actionbtn->setTag(m);
+				actionbtn->setTag(data.id);
 				std::string str = StringUtils::format("ui/%d.png", data.id);
 				iconimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 				iconimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
@@ -124,40 +121,30 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;
-
-		ResData* data = &GlobalData::vec_resData[node->getTag()];
-		bool isself = true;
-		for (unsigned int i = 0; i<data->res.size(); i++)
+		unsigned int i = 0;
+		ResData* data = NULL;
+		for (i = 0; i<GlobalData::vec_resData.size(); i++)
 		{
-			if (data->id != data->res.at(i))
-			{
-				isself = false;
-			}
+			data = &GlobalData::vec_resData[i];
+			if (data->id == node->getTag())
+				break;
 		}
-		if (GlobalData::vec_resData[node->getTag()].count > 0)
+
+		
+
+		if (GlobalData::vec_resData[i].count > 0)
 		{
-			GlobalData::vec_resData[node->getTag()].count--;
-			ActionGetLayer* layer = ActionGetLayer::create(data->res, data->type, data->actype);
+			GlobalData::vec_resData[i].count--;
+			ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
 			this->addChild(layer);
 
 		}
 	}
 }
 
-void HomeHill::loadJsonData()
-{
-	rapidjson::Document doc = ReadJsonFile("data/homehill.json");
-	rapidjson::Value& values = doc["sh"];
-	for (unsigned int i = 0; i < values.Size(); i++)
-	{
-		vec_resid.push_back(values[i].GetInt());
-	}
-}
-
 void HomeHill::updateUI(float dt)
 {
-	pasttime += 1;
-	for (unsigned int i = 0; i < vec_resid.size(); i++)
+	for (unsigned int i = 0; i < GlobalData::vec_hillResid.size(); i++)
 	{
 		std::string namestr = StringUtils::format("node%d", i);
 		Node* resnode = scrollView->getChildByName(namestr);
@@ -169,35 +156,27 @@ void HomeHill::updateUI(float dt)
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData* data = &GlobalData::vec_resData[m];
-			if (vec_resid[i] == data->id)
+			if (GlobalData::vec_hillResid[i] == data->id)
 			{
 				std::string str = StringUtils::format("%d", data->count);
 				count->setString(str);
-				float fs = ((float)data->speed) / 60.0f;
-				str = StringUtils::format("%.1fh", fs);
+				str = StringUtils::format("%.1fh", data->speed / 60.f);
 				speed->setString(str);
 
-				float wfs = fs * data->max;
-				str = StringUtils::format("%.1fh", wfs);
+				str = StringUtils::format("%.1fh", (data->speed* data->max - data->waittime) / 60.f);
 				waittime->setString(str);
-				data->pastmin += pasttime;
-				if (data->pastmin >= data->speed)
-				{
-					data->pastmin = 0;
-					data->count++;
-				}
-
+	
 				if (data->count <= 0)
 				{
 					waittext->setVisible(true);
 					waittime->setVisible(true);
+					count->setColor(Color3B::RED);
 				}
 				else
 				{
-					if (data->count >= data->max)
-						data->count = data->max;
 					waittext->setVisible(false);
 					waittime->setVisible(false);
+					count->setColor(Color3B::BLACK);
 				}
 			}
 		}

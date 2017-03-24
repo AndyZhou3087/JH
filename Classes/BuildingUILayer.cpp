@@ -284,7 +284,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		int id = atoi(map_buidACData[m_build->data.name].at(type - ACTION).icon);
 		if (id > 0)
 		{
-			StorageData data;
+			PackageData data;
 			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
 			data.id = id;
 			data.count = 1;

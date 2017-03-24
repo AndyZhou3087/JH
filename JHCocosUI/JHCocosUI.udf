@@ -3,17 +3,17 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="hintLayer.csd" />
-          <FilePathData Path="sysSmallLayer.csd" />
+          <FilePathData Path="npcNode.csd" />
           <FilePathData Path="mapLayer.csd" />
-          <FilePathData Path="homeLayer.csd" />
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="npcLayer.csd" />
+          <FilePathData Path="tempStorageLayer.csd" />
+          <FilePathData Path="outDoorLayer.csd" />
+          <FilePathData Path="goWhereLayer.csd" />
           <FilePathData Path="resNode.csd" />
-          <FilePathData Path="homeHillLayer.csd" />
-          <FilePathData Path="actionGetLayer.csd" />
-          <FilePathData Path="buidingUiLayer.csd" />
-          <FilePathData Path="actionNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="actionGetLayer.csd" />
+        <ActiveDocument Path="mapLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

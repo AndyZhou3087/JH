@@ -13,15 +13,14 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(HomeHill);
+
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void loadJsonData();
 	void updateUI(float dt);
 private:
-	std::vector<int> vec_resid;
+
 	cocos2d::ui::ScrollView* scrollView;
-	int pasttime;
 };
 #endif
 

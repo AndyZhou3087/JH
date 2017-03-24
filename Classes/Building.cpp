@@ -1,4 +1,4 @@
-#include "Building.h"
+﻿#include "Building.h"
 #include "Nature.h"
 #include "Const.h"
 #include "GameDataSave.h"

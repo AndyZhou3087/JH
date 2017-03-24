@@ -1,4 +1,4 @@
-/********************************************************************
+﻿/********************************************************************
 * 仓库
 *********************************************************************/
 
@@ -6,15 +6,8 @@
 #define _STORAGE_H_
 #include "Building.h"
 #include "cocos2d.h"
+#include "MyPackage.h"
 USING_NS_CC;
-
-typedef struct
-{
-	int id;
-	int type;
-	int count;
-
-}StorageData;
 
 typedef enum
 {
@@ -41,10 +34,10 @@ public:
 
 	CREATE_FUNC(StorageRoom);
 
-	void loadStorageData();
+	static void loadStorageData();
 	static void save();
-	static std::map<int, std::vector<StorageData>> map_storageData;
-	static void add(StorageData data);
+	static std::map<int, std::vector<PackageData>> map_storageData;
+	static void add(PackageData data);
 	static void use(int id);
 	static int getCountByTypeId(int id);
 };

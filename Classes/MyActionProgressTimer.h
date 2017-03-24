@@ -1,4 +1,4 @@
-
+﻿
 #ifndef __MY_ACTION_CCPROGRESS_TIMER_H__
 #define __MY_ACTION_CCPROGRESS_TIMER_H__
 

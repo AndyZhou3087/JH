@@ -1,4 +1,4 @@
-#include "Nature.h"
+﻿#include "Nature.h"
 #include "Const.h"
 
 int Nature::ReasonCDays = 90;

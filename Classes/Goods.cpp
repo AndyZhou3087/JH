@@ -1,4 +1,4 @@
-#include "Goods.h"
+﻿#include "Goods.h"
 
 
 Goods::Goods()

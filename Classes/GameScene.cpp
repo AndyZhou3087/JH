@@ -1,4 +1,4 @@
-#include "GameScene.h"
+﻿#include "GameScene.h"
 #include "TopBar.h"
 #include "HomeLayer.h"
 #include "UIScroll.h"
@@ -9,6 +9,8 @@ USING_NS_CC;
 
 Nature* g_nature;
 Hero* g_hero;
+
+GameScene* g_gameLayer = NULL;
 GameScene::GameScene()
 {
 
@@ -24,10 +26,10 @@ Scene* GameScene::createScene()
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-	auto layer = GameScene::create();
+	g_gameLayer = GameScene::create();
 
     // add layer as a child to scene
-    scene->addChild(layer);
+	scene->addChild(g_gameLayer);
 
     // return the scene
     return scene;
@@ -41,7 +43,10 @@ bool GameScene::init()
         return false;
     }
     
-	GlobalData::init();
+	GlobalData::loadResJsonData();
+	GlobalData::loadHillResJsonData();
+	GlobalData::loadMapJsonData();
+	GlobalData::loadNpcJsonData();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -74,6 +79,9 @@ bool GameScene::init()
 	topBar->setScrollContainer(uiScroll);
 	addChild(topBar, 2);
 	
+	this->schedule(schedule_selector(GameScene::updata), 0.2f);
+	this->schedule(schedule_selector(GameScene::timerSaveResData), 3.0f);
+
     return true;
 }
 
@@ -92,6 +100,9 @@ void GameScene::loadSaveData()
 	g_hero->setHungerValue(GameDataSave::getInstance()->getHeroHunger());
 	g_hero->setSpiritValue(GameDataSave::getInstance()->getHeroSpirit());
 
+	StorageRoom::loadStorageData();
+	MyPackage::load();
+	GlobalData::loadResData();
 }
 
 void GameScene::onExit()
@@ -114,4 +125,45 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroInnerinjury(g_hero->getInnerinjuryValue());
 	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());
 	GameDataSave::getInstance()->setHeroSpirit(g_hero->getSpiritValue());
+}
+
+void GameScene::updata(float dt)
+{
+	for (unsigned int i = 0; i < GlobalData::vec_hillResid.size(); i++)
+	{
+		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
+		{
+			ResData* data = &GlobalData::vec_resData[m];
+			if (GlobalData::vec_hillResid[i] == data->id)
+			{
+				if (data->count <= 0)
+				{
+					data->pastmin = 0;
+					data->waittime += 1;
+					if (data->waittime >= data->speed * data->max)
+					{
+						data->count = data->max;
+						data->waittime = 0.0f;
+					}
+				}
+				else
+				{
+					data->pastmin += 1;
+					if (data->pastmin >= data->speed)
+					{
+						data->pastmin = 0;
+						data->count++;
+					}
+
+					if (data->count >= data->max)
+						data->count = data->max;
+				}
+			}
+		}
+	}
+}
+
+void GameScene::timerSaveResData(float dt)
+{
+	GlobalData::saveResData();
 }

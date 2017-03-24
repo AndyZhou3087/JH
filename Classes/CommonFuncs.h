@@ -1,4 +1,4 @@
-#ifndef _COMMONFUNCS_H_
+﻿#ifndef _COMMONFUNCS_H_
 #define _COMMONFUNCS_H_
 #include <iostream>
 #include "cocos2d.h"

@@ -56,6 +56,7 @@
           <Image Name="fence.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
+          <Image Name="herohead1.png" />
           <Image Name="heroppoint.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="hp3.png" />
@@ -133,6 +134,7 @@
           <Image Name="medicinekit.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="normalbtn.png" />
+          <Image Name="npcicon.png" />
           <Image Name="resbox.png" />
           <Image Name="room.jpg" />
           <Image Name="sbed.png" />
@@ -146,6 +148,19 @@
           <Image Name="swinetable.png" />
           <Image Name="syssmallbg.png" />
           <Image Name="syssmalltie.png" />
+          <Image Name="t001.jpg" />
+          <Image Name="t002.jpg" />
+          <Image Name="t003.jpg" />
+          <Image Name="t004.jpg" />
+          <Image Name="t005.jpg" />
+          <Image Name="t006.jpg" />
+          <Image Name="t007.jpg" />
+          <Image Name="t008.jpg" />
+          <Image Name="t009.jpg" />
+          <Image Name="t010.jpg" />
+          <Image Name="t011.jpg" />
+          <Image Name="t012.jpg" />
+          <Image Name="t013.jpg" />
           <Image Name="top_r_season0.png" />
           <Image Name="top_r_season1.png" />
           <Image Name="top_r_season2.png" />
@@ -176,8 +191,10 @@
           <Image Name="winetable.png" />
           <Image Name="xline.png" />
         </Folder>
+        <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
+        <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
         <Project Name="hintLayer.csd" Type="Layer" />
@@ -187,9 +204,11 @@
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
+        <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="actionGetLayer.csd" Type="Layer" />
+        <Project Name="npcNode.csd" Type="Node" />
+        <Project Name="npcLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

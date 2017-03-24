@@ -168,6 +168,21 @@
       <FilePathData Path="ui/67.png" />
       <FilePathData Path="ui/68.png" />
       <FilePathData Path="ui/69.png" />
+      <FilePathData Path="ui/t001.jpg" />
+      <FilePathData Path="ui/t002.jpg" />
+      <FilePathData Path="ui/t003.jpg" />
+      <FilePathData Path="ui/t004.jpg" />
+      <FilePathData Path="ui/t005.jpg" />
+      <FilePathData Path="ui/t006.jpg" />
+      <FilePathData Path="ui/t007.jpg" />
+      <FilePathData Path="ui/t008.jpg" />
+      <FilePathData Path="ui/t009.jpg" />
+      <FilePathData Path="ui/t010.jpg" />
+      <FilePathData Path="ui/t011.jpg" />
+      <FilePathData Path="ui/t012.jpg" />
+      <FilePathData Path="ui/t013.jpg" />
+      <FilePathData Path="ui/herohead1.png" />
+      <FilePathData Path="ui/npcicon.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="28" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="-283934747" Tag="33" IconVisible="False" LeftMargin="0.0000" TopMargin="393.9950" BottomMargin="0.0050" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="normalboxgb" ActionTag="-283934747" Tag="33" IconVisible="False" TopMargin="393.9950" BottomMargin="0.0050" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="886.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="443.0050" />

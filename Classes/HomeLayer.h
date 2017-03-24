@@ -1,4 +1,4 @@
-#ifndef _HOME_LAYER_H_
+﻿#ifndef _HOME_LAYER_H_
 #define _HOME_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
@@ -18,8 +18,11 @@ private:
 	void onclick(Ref* pSender);
 	void onStorageRoom(Ref* pSender);
 	void onFence(Ref* pSender);
-	std::vector<Building*> Vec_Buildings;
+	
 	void loadJsonData();
+private:
+	Building* m_storageroom;
+	std::vector<Building*> Vec_Buildings;
 };
 #endif
 

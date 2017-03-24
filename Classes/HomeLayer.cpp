@@ -1,4 +1,4 @@
-#include "HomeLayer.h"
+﻿#include "HomeLayer.h"
 #include "json.h"
 #include "Bed.h"
 #include "Furnace.h"
@@ -118,11 +118,11 @@ bool HomeLayer::init()
 
 	loadJsonData();
 
-	Building* storageroom = StorageRoom::create();
+	m_storageroom = StorageRoom::create();
 	MenuItemSprite* storageroomItem = MenuItemSprite::create(
-		storageroom,
-		storageroom,
-		storageroom,
+		m_storageroom,
+		m_storageroom,
+		m_storageroom,
 		CC_CALLBACK_1(HomeLayer::onStorageRoom, this));
 	storageroomItem->setPosition(Vec2(105, 188));
 	menu->addChild(storageroomItem);
@@ -135,6 +135,23 @@ bool HomeLayer::init()
 		CC_CALLBACK_1(HomeLayer::onFence, this));
 	fenceItem->setPosition(Vec2(630, 48));
 	menu->addChild(fenceItem);
+
+
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		StorageRoom::add(MyPackage::vec_packages[i]);
+	}
+	MyPackage::takeoff();
+
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
 }
@@ -170,5 +187,5 @@ void HomeLayer::onStorageRoom(Ref* pSender)
 void HomeLayer::onFence(Ref* pSender)
 {
 	Layer* layer = OutDoor::create();
-	this->getParent()->addChild(layer, 3);
+	Director::getInstance()->getRunningScene()->addChild(layer);
 }

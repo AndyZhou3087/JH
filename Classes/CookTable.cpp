@@ -1,4 +1,4 @@
-#include "CookTable.h"
+﻿#include "CookTable.h"
 #include "Nature.h"
 #include "Const.h"
 extern Nature* g_nature;

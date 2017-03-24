@@ -1,4 +1,4 @@
-#include "Forgingtable.h"
+﻿#include "Forgingtable.h"
 
 #include "Nature.h"
 #include "Const.h"

@@ -1,4 +1,4 @@
-#include "UIScroll.h"
+﻿#include "UIScroll.h"
 
 #define DIFF 5//添加控件的间隔
 #define MAXCOUNT 10

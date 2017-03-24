@@ -1,7 +1,6 @@
-#ifndef _GLOBALDATA_H_
+﻿#ifndef _GLOBALDATA_H_
 #define _GLOBALDATA_H_
 #include "cocos2d.h"
-#include "MyPackage.h"
 USING_NS_CC;
 
 
@@ -18,8 +17,34 @@ typedef struct
 	char desc[200];
 	std::vector<int> res;
 	int pastmin;
+	float waittime;
 
 }ResData;
+
+typedef struct
+{
+	char strid[10];
+	std::vector<std::string> npcs;
+	char cname[32];
+	char tpngname[10];
+	std::string desc;
+}MapData;
+
+typedef struct
+{
+	char id[10];
+	char name[32];
+	int type;
+	int life;
+	int atk;
+	int exp;
+	int df;
+	std::vector<std::string> winres;
+	std::vector<int> winresrnd;
+	std::vector<std::string> exchgres;
+	std::vector<std::vector<std::string>> exchgneedres;
+}NpcData;
+
 class GlobalData
 {
 public:
@@ -27,11 +52,17 @@ public:
 	~GlobalData();
 
 public:
-	static void init();
-
+	static void loadResJsonData();
+	static void saveResData();
+	static void loadResData();
+	static void loadHillResJsonData();
+	static void loadMapJsonData();
+	static void loadNpcJsonData();
 public:
 	static std::vector<ResData> vec_resData;
-	static std::vector<PackageData> vec_getResData;
+	static std::vector<int> vec_hillResid;
+	static std::map<std::string, MapData> map_maps;
+	static std::map<std::string, NpcData> map_npcs;
 };
 #endif
 

@@ -1,9 +1,10 @@
-
+ï»¿
 #ifndef _H_CONST_H_
 #define _H_CONST_H_
 #include "cocos2d.h"
-#define TIMESCALE 5.0f//Ê±¼ä±ÈÀı³ß
-#define ACTION_BAR_TIME 4.0f//½¨ÖşÎïÖĞ½ø¶ÈÌõÃëÊı
+#define TIMESCALE 5.0f//æ—¶é—´æ¯”ä¾‹å°º
+#define ACTION_BAR_TIME 4.0f//å»ºç­‘ç‰©ä¸­è¿›åº¦æ¡ç§’æ•°
+#define HERO_MOVE_SPEED 1.5f
 
-static std::string acname[] = { "Õ½¶·", "²É¼¯", "¿³·¥", "ÍÚ¾ò" };
+static std::string acname[] = { "æˆ˜æ–—", "é‡‡é›†", "ç ä¼", "æŒ–æ˜" };
 #endif // _H_CONST_H_
