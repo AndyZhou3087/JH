@@ -47,15 +47,13 @@ bool MapLayer::init()
 	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 
 	m_distance = 0.0f;
-	Vec2 hpos = GameDataSave::getInstance()->getHeroPos();
-	if (hpos.isZero())
-		heroPos = mapbg->getChildByName("m1-1")->getPosition();
-	else
-		heroPos = hpos;
-	herohead = Sprite::createWithSpriteFrameName("ui/herohead1.png");
-	herohead->setAnchorPoint(Vec2(0.5, 0));
-	herohead->setPosition(heroPos);
-	mapscroll->addChild(herohead);
+	std::string addr = GameDataSave::getInstance()->getHeroAddr();
+	heroPos = mapbg->getChildByName(addr)->getPosition();
+
+	m_herohead = Sprite::createWithSpriteFrameName("ui/herohead1.png");
+	m_herohead->setAnchorPoint(Vec2(0.5, 0));
+	m_herohead->setPosition(heroPos);
+	mapscroll->addChild(m_herohead);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -74,15 +72,15 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;
-		addrname = node->getName();
-		destPos = node->getPosition();
-		m_distance = fabsf(heroPos.distance(destPos));
+		m_addrname = node->getName();
+		m_destPos = node->getPosition();
+		m_distance = fabsf(heroPos.distance(m_destPos));
 		WHERELAYER_TYPE type = ARRIVE;
 		if (m_distance <= 1.0f)
 			type = ARRIVE;
 		else
 			type = GOWHERE;
-		Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(addrname, type, m_distance));
+		Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, type, m_distance));
 
 	}
 }
@@ -93,14 +91,14 @@ void MapLayer::showMoveToDest()
 	float permin = dt / (TIMESCALE*4.0f);
 	g_nature->setTimeInterval(permin);
 	this->scheduleOnce(schedule_selector(MapLayer::Arrive), 4.0f);
-	herohead->runAction(MoveTo::create(4.0f, destPos));
+	m_herohead->runAction(MoveTo::create(4.0f, m_destPos));
 }
 
 void MapLayer::Arrive(float dt)
 {
 	g_nature->setTimeInterval(1);
-	heroPos = destPos;
-	GameDataSave::getInstance()->setHeroPos(destPos);
+	heroPos = m_destPos;
+	GameDataSave::getInstance()->setHeroAddr(m_addrname);
 
-	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(addrname, ARRIVE));
+	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, ARRIVE));
 }

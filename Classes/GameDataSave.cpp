@@ -134,17 +134,14 @@ void GameDataSave::setBuildLV(std::string buildname, int val)
 	saveIntDataByKey(rname, val);
 }
 
-cocos2d::Vec2 GameDataSave::getHeroPos()
+std::string GameDataSave::getHeroAddr()
 {
-	int x = loadIntDataByKey("herox", 0);
-	int y = loadIntDataByKey("heroy", 0);
-	return Vec2(x, y);
+	return loadStringDataByKey("heroaddr", "m1-1");
 }
 
-void GameDataSave::setHeroPos(cocos2d::Vec2 val)
+void GameDataSave::setHeroAddr(std::string addr)
 {
-	saveIntDataByKey("herox", (int)val.x);
-	saveIntDataByKey("heroy", (int)val.y);
+	saveStringDataByKey("heroaddr", addr);
 }
 
 std::string GameDataSave::getTempStorage(std::string addrname)

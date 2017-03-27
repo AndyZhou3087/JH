@@ -183,6 +183,9 @@
       <FilePathData Path="ui/t013.jpg" />
       <FilePathData Path="ui/herohead1.png" />
       <FilePathData Path="ui/npcicon.png" />
+      <FilePathData Path="ui/fighticon.png" />
+      <FilePathData Path="ui/fighthpbar.png" />
+      <FilePathData Path="ui/fighthpbg.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

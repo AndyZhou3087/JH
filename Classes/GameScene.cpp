@@ -5,6 +5,7 @@
 #include "GameDataSave.h"
 #include "StorageRoom.h"
 #include "GlobalData.h"
+#include "MapLayer.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -51,8 +52,17 @@ bool GameScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	homeLayer = HomeLayer::create();
-	addChild(homeLayer, 1, "homelayer");
+	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
+	if (addrstr.compare("m1-1") == 0)
+	{
+		homeLayer = HomeLayer::create();
+		addChild(homeLayer, 1, "homelayer");
+	}
+	else
+	{
+		g_maplayer = MapLayer::create();
+		addChild(g_maplayer, 1, "maplayer");
+	}
 
 	g_nature = Nature::create();
 	this->addChild(g_nature);

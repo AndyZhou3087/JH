@@ -19,9 +19,9 @@ private:
 	void Arrive(float dt);
 private:
 	float m_distance;
-	Vec2 destPos;
-	std::string addrname;
-	Sprite* herohead;
+	Vec2 m_destPos;
+	std::string m_addrname;
+	Sprite* m_herohead;
 };
 extern MapLayer* g_maplayer;
 #endif

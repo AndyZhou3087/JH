@@ -54,6 +54,9 @@
           <Image Name="disbtn.png" />
           <Image Name="exerciseroom.png" />
           <Image Name="fence.png" />
+          <Image Name="fighthpbar.png" />
+          <Image Name="fighthpbg.png" />
+          <Image Name="fighticon.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
           <Image Name="herohead1.png" />
@@ -201,14 +204,15 @@
         <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
+        <Project Name="npcLayer.csd" Type="Layer" />
+        <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="npcNode.csd" Type="Node" />
-        <Project Name="npcLayer.csd" Type="Layer" />
+        <Project Name="fightLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

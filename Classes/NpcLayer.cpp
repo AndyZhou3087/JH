@@ -2,6 +2,7 @@
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "GlobalData.h"
+#include "FightLayer.h"
 
 NpcLayer::NpcLayer()
 {
@@ -104,7 +105,9 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		Node* node = (Node*)pSender;
+		std::string npcid = node->getParent()->getName();
+		this->addChild(FightLayer::create(GlobalData::map_maps[m_addrstr].cname, GlobalData::map_npcs[npcid].name));
 	}
 }
 

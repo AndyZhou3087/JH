@@ -45,8 +45,8 @@ public:
 	int getBuildLV(std::string buildname);
 	void setBuildLV(std::string buildname, int val);
 
-	cocos2d::Vec2 getHeroPos();
-	void setHeroPos(cocos2d::Vec2 val);
+	std::string getHeroAddr();
+	void setHeroAddr(std::string val);
 
 	std::string getTempStorage(std::string addrname);
 	void setTempStorage(std::string addrname, std::string vstr);

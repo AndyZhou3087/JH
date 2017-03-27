@@ -6,14 +6,17 @@
           <FilePathData Path="npcNode.csd" />
           <FilePathData Path="mapLayer.csd" />
           <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="hintLayer.csd" />
-          <FilePathData Path="npcLayer.csd" />
-          <FilePathData Path="tempStorageLayer.csd" />
-          <FilePathData Path="outDoorLayer.csd" />
           <FilePathData Path="goWhereLayer.csd" />
-          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="actionGetLayer.csd" />
+          <FilePathData Path="npcLayer.csd" />
+          <FilePathData Path="outDoorLayer.csd" />
+          <FilePathData Path="tempStorageLayer.csd" />
+          <FilePathData Path="fightLayer.csd" />
+          <FilePathData Path="hintLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="mapLayer.csd" />
+        <ActiveDocument Path="hintLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">
