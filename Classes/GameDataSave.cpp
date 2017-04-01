@@ -62,22 +62,12 @@ void GameDataSave::setHeroSpirit(int val)
 
 int GameDataSave::getHeroLife()
 {
-	return loadIntDataByKey("life", 100);
+	return loadIntDataByKey("life", -1);
 }
 void GameDataSave::setHeroLife(int val)
 {
 	saveIntDataByKey("life", val);
 }
-
-int GameDataSave::getHeroMaxLife()
-{
-	return loadIntDataByKey("maxlife", 100);
-}
-void GameDataSave::setHeroMaxLife(int val)
-{
-	saveIntDataByKey("maxlife", val);
-}
-
 
 int GameDataSave::getNatureTime()
 {
@@ -107,7 +97,7 @@ void GameDataSave::setNatureReason(int val)
 
 int GameDataSave::getNatureTemperature()
 {
-	return loadIntDataByKey("ntempe");
+	return loadIntDataByKey("ntempe", -1000);
 }
 void GameDataSave::setNatureTemperature(int val)
 {
@@ -173,4 +163,22 @@ std::string GameDataSave::getResData()
 void GameDataSave::setResData(std::string vstr)
 {
 	saveStringDataByKey("resdata", vstr);
+}
+
+int GameDataSave::getHeroId()
+{
+	return loadIntDataByKey("heroid", 1);
+}
+void GameDataSave::setHeroId(int id)
+{
+	saveIntDataByKey("heroid", id);
+}
+
+int GameDataSave::getHeroLV()
+{
+	return loadIntDataByKey("herolv", 1);
+}
+void GameDataSave::setHeroLV(int lv)
+{
+	saveIntDataByKey("herolv", lv);
 }

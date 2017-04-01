@@ -18,6 +18,7 @@ typedef struct
 	std::vector<int> res;
 	int pastmin;
 	float waittime;
+	std::string unitname;
 
 }ResData;
 
@@ -45,6 +46,42 @@ typedef struct
 	std::vector<std::vector<std::string>> exchgneedres;
 }NpcData;
 
+typedef struct
+{
+	int id;
+	char name[32];
+	std::vector<int> vec_atk;
+	std::vector<int> vec_df;
+	std::vector<int> vec_exp;
+	std::vector<int> vec_maxhp;
+}HeroAtrData;
+
+typedef struct
+{
+	char id[32];
+	int maxlv;
+	std::vector<int> vec_bns;
+	std::vector<int> vec_exp;
+	int lv;
+	std::string cname;
+	std::string desc;
+}WG_NGData;
+
+
+typedef enum
+{
+	FOOD = 0,
+	MEDICINAL,
+	WEAPON,
+	PROTECT_EQU,
+	N_GONG,//内功
+	W_GONG,//外功
+	RES_1,
+	TOOLS,
+	RES_MAX
+
+}StorageType;
+
 class GlobalData
 {
 public:
@@ -58,11 +95,15 @@ public:
 	static void loadHillResJsonData();
 	static void loadMapJsonData();
 	static void loadNpcJsonData();
+	static void loadHeroAtrJsonData();
+	static void loadWG_NGJsonData();
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<int> vec_hillResid;
 	static std::map<std::string, MapData> map_maps;
 	static std::map<std::string, NpcData> map_npcs;
+	static std::map<int, HeroAtrData> map_heroAtr;
+	static std::map<std::string, WG_NGData> map_wgngs;
 };
 #endif
 

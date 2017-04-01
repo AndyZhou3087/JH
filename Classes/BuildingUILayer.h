@@ -14,6 +14,7 @@ typedef struct
 	int actime;
 	int extime;
 	int type;
+	int extype;
 }BuildActionData;
 
 typedef enum

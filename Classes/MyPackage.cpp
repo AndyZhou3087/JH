@@ -25,7 +25,7 @@ int MyPackage::add(PackageData pdata)
 		int index = 0;
 		for (unsigned int i = 0; i < vec_packages.size(); i++)
 		{
-			if (pdata.id == vec_packages[i].id)
+			if (pdata.strid.compare(vec_packages[i].strid) == 0)
 			{
 				if (vec_packages[i].count < 10)
 				{
@@ -75,7 +75,7 @@ bool MyPackage::isFull(PackageData pdata)
 	{
 		for (unsigned int i = 0; i < vec_packages.size(); i++)
 		{
-			if (vec_packages[i].id != pdata.id)
+			if (vec_packages[i].strid.compare(pdata.strid) != 0)
 				index++;
 			else
 			{
@@ -98,7 +98,8 @@ void MyPackage::save()
 	std::string str;
 	for (unsigned int i = 0; i < vec_packages.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%d-%d;", vec_packages[i].id * 1000 + vec_packages[i].type, vec_packages[i].count);
+		//"%s-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d;", vec_packages[i].strid.c_str(), vec_packages[i].type, vec_packages[i].count, vec_packages[i].extype, vec_packages[i].lv);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setPackage(str.substr(0, str.length() - 1));
@@ -113,11 +114,14 @@ void MyPackage::load()
 	{
 		std::vector<std::string> tmp;
 		CommonFuncs::split(vec_retstr[i], tmp, "-");
-		int idtype = atoi(tmp[0].c_str());
 		PackageData data;
-		data.id = idtype / 1000;
-		data.type = idtype % 1000;
-		data.count = atoi(tmp[1].c_str());
+
+		data.strid = tmp[0];
+		data.type = atoi(tmp[1].c_str());
+		data.count = atoi(tmp[2].c_str());
+		data.extype = atoi(tmp[3].c_str());
+		data.lv = atoi(tmp[4].c_str());
+
 		vec_packages.push_back(data);
 	}
 }

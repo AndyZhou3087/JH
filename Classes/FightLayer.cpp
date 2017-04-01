@@ -3,6 +3,8 @@
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "CommonFuncs.h"
+#include "HintBox.h"
+#include "GameScene.h"
 
 FightLayer::FightLayer()
 {
@@ -28,7 +30,7 @@ FightLayer* FightLayer::create(std::string addrname, std::string npcname)
 	return pRet;
 }
 
-bool FightLayer::init(std::string addrname, std::string npcname)
+bool FightLayer::init(std::string addrname, std::string npcid)
 {
 	Node* csbnode = CSLoader::createNode("fightLayer.csb");
 	this->addChild(csbnode);
@@ -37,8 +39,34 @@ bool FightLayer::init(std::string addrname, std::string npcname)
 	addrnametxt->setString(addrname);
 
 	cocos2d::ui::Text* npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
-	npcnametxt->setString(npcname);
+	npcnametxt->setString(GlobalData::map_npcs[npcid].name);
 	
+	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
+	heronametxt->setString(g_hero->getMyName());
+
+	herohpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("herohpvaluetext");
+	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	herohpvaluetext->setString(hpstr);
+
+	int herohppercent = 100 *  g_hero->getLifeValue() / g_hero->getMaxLifeValue();
+
+	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
+	herohpbar->setPercent(herohppercent);
+
+	npcmaxhp = GlobalData::map_npcs[npcid].life;
+	npchp = npcmaxhp;
+
+	npcatk = GlobalData::map_npcs[npcid].atk;
+	npcdf = GlobalData::map_npcs[npcid].df;
+
+	npchpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("npchpvaluetext");
+	hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	npchpvaluetext->setString(hpstr);
+
+	int npchppercent = 100 * npchp / npcmaxhp;
+	npchpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("npchpbar");
+	npchpbar->setPercent(npchppercent);
+
 	m_escapebtn = (cocos2d::ui::Button*)csbnode->getChildByName("escapebtn");
 	m_escapebtn->addTouchEventListener(CC_CALLBACK_2(FightLayer::onEscape, this));
 	m_escapebtn->setTag(0);
@@ -47,7 +75,7 @@ bool FightLayer::init(std::string addrname, std::string npcname)
 	m_fihgtScorll->setPosition(Vec2(37, 128));
 	csbnode->addChild(m_fihgtScorll);
 
-
+	this->schedule(schedule_selector(FightLayer::updata), 1.0f);
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -67,11 +95,44 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		if (node->getTag() == 0)
 		{
-
+			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("逃跑成功！"));
+			addChild(hbox);
+			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+			m_escapebtn->setTag(1);
 		}
 		else
 		{
 			this->removeFromParentAndCleanup(true);
 		}
 	}
+}
+
+void FightLayer::updata(float dt)
+{
+	std::string gfname = g_hero->getAtrByType(H_WG);
+	int gfBonusAck = 0;
+	if (gfname.length() > 0)
+		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+	npchp = npchp + npcdf - (g_hero->getAtkValue() + gfBonusAck);
+	g_hero->setLifeValue(g_hero->getLifeValue() + g_hero->getDfValue() - npcatk);
+
+	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	herohpvaluetext->setString(hpstr);
+	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
+	herohpbar->setPercent(herohppercent);
+
+	hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	npchpvaluetext->setString(hpstr);
+	int npchppercent = 100 * npchp / npcmaxhp;
+	npchpbar->setPercent(npchppercent);
+
+	if (npchp <= 0 || g_hero->getLifeValue() <= 0)
+	{
+		this->unschedule(schedule_selector(FightLayer::updata));
+		if (npchp <= 0)
+		{
+
+		}
+	}
+
 }

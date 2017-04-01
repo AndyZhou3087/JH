@@ -13,12 +13,21 @@ public:
 
 	bool init(std::string addrname, std::string npcname);
 
-	static FightLayer* create(std::string addrname, std::string npcname);
+	static FightLayer* create(std::string addrname, std::string npcid);
 private:
 	void onEscape (cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
 	UIScroll* m_fihgtScorll;
 	cocos2d::ui::Button* m_escapebtn;
+	cocos2d::ui::Text* herohpvaluetext;
+	cocos2d::ui::Text* npchpvaluetext;
+	cocos2d::ui::LoadingBar* herohpbar;
+	cocos2d::ui::LoadingBar* npchpbar;
+	int npchp;
+	int npcmaxhp;
+	int npcatk;
+	int npcdf;
+	void updata(float dt);
 };
 #endif
 

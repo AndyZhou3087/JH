@@ -21,7 +21,7 @@ public:
 private:
 	TopBar* topBar;
 	Node* homeLayer;
-	UIScroll* uiScroll;
+	
 private:
 	void loadSaveData();
 	void saveAllData();
@@ -32,4 +32,5 @@ private:
 extern Nature* g_nature;
 extern Hero* g_hero;
 extern GameScene* g_gameLayer;
+extern UIScroll* g_uiScroll;
 #endif // __GAME_SCENE_H__

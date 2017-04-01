@@ -24,10 +24,43 @@
           <Image Name="21.png" />
           <Image Name="22.png" />
           <Image Name="23.png" />
+          <Image Name="24.png" />
+          <Image Name="25.png" />
+          <Image Name="26.png" />
           <Image Name="3.png" />
+          <Image Name="36.png" />
+          <Image Name="37.png" />
+          <Image Name="38.png" />
+          <Image Name="39.png" />
           <Image Name="4.png" />
+          <Image Name="40.png" />
+          <Image Name="41.png" />
+          <Image Name="42.png" />
+          <Image Name="43.png" />
+          <Image Name="44.png" />
+          <Image Name="45.png" />
+          <Image Name="46.png" />
+          <Image Name="47.png" />
+          <Image Name="48.png" />
+          <Image Name="49.png" />
           <Image Name="5.png" />
+          <Image Name="50.png" />
+          <Image Name="51.png" />
+          <Image Name="52.png" />
+          <Image Name="53.png" />
+          <Image Name="54.png" />
+          <Image Name="55.png" />
+          <Image Name="56.png" />
+          <Image Name="57.png" />
+          <Image Name="58.png" />
+          <Image Name="59.png" />
           <Image Name="6.png" />
+          <Image Name="60.png" />
+          <Image Name="61.png" />
+          <Image Name="62.png" />
+          <Image Name="63.png" />
+          <Image Name="64.png" />
+          <Image Name="65.png" />
           <Image Name="66.png" />
           <Image Name="67.png" />
           <Image Name="68.png" />
@@ -39,8 +72,6 @@
           <Image Name="ba1.png" />
           <Image Name="ba2.png" />
           <Image Name="backbtn.png" />
-          <Image Name="bb0.png" />
-          <Image Name="bb1.png" />
           <Image Name="bed.png" />
           <Image Name="bh0.png" />
           <Image Name="bh1.png" />
@@ -190,13 +221,86 @@
           <Image Name="topspiritbg.png" />
           <Image Name="toptemperature.png" />
           <Image Name="toptimeicon.png" />
+          <Image Name="w001.png" />
+          <Image Name="w002.png" />
+          <Image Name="w003.png" />
+          <Image Name="w004.png" />
+          <Image Name="w005.png" />
+          <Image Name="w006.png" />
+          <Image Name="w007.png" />
+          <Image Name="w008.png" />
+          <Image Name="w009.png" />
+          <Image Name="w010.png" />
+          <Image Name="w011.png" />
+          <Image Name="w012.png" />
+          <Image Name="w013.png" />
+          <Image Name="w014.png" />
+          <Image Name="w015.png" />
+          <Image Name="w016.png" />
+          <Image Name="w017.png" />
+          <Image Name="w018.png" />
+          <Image Name="w019.png" />
+          <Image Name="w020.png" />
+          <Image Name="w021.png" />
+          <Image Name="w022.png" />
+          <Image Name="w023.png" />
+          <Image Name="w024.png" />
+          <Image Name="w025.png" />
+          <Image Name="w026.png" />
+          <Image Name="w027.png" />
+          <Image Name="w028.png" />
+          <Image Name="w029.png" />
+          <Image Name="w030.png" />
+          <Image Name="w031.png" />
+          <Image Name="w032.png" />
+          <Image Name="w033.png" />
+          <Image Name="w034.png" />
+          <Image Name="w035.png" />
+          <Image Name="w036.png" />
+          <Image Name="w037.png" />
+          <Image Name="w038.png" />
+          <Image Name="w039.png" />
+          <Image Name="w040.png" />
+          <Image Name="w041.png" />
           <Image Name="winemake.png" />
           <Image Name="winetable.png" />
+          <Image Name="wintitle.png" />
+          <Image Name="x001.png" />
+          <Image Name="x002.png" />
+          <Image Name="x003.png" />
+          <Image Name="x004.png" />
+          <Image Name="x005.png" />
+          <Image Name="x006.png" />
+          <Image Name="x007.png" />
+          <Image Name="x008.png" />
+          <Image Name="x009.png" />
+          <Image Name="x010.png" />
+          <Image Name="x011.png" />
+          <Image Name="x012.png" />
+          <Image Name="x013.png" />
+          <Image Name="x014.png" />
+          <Image Name="x015.png" />
+          <Image Name="x016.png" />
+          <Image Name="x017.png" />
+          <Image Name="x018.png" />
+          <Image Name="x019.png" />
+          <Image Name="x020.png" />
+          <Image Name="x021.png" />
+          <Image Name="x022.png" />
+          <Image Name="x023.png" />
+          <Image Name="x024.png" />
+          <Image Name="x025.png" />
+          <Image Name="x026.png" />
+          <Image Name="x027.png" />
+          <Image Name="x028.png" />
+          <Image Name="x029.png" />
+          <Image Name="x030.png" />
           <Image Name="xline.png" />
         </Folder>
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
+        <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
@@ -212,7 +316,7 @@
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
-        <Project Name="fightLayer.csd" Type="Layer" />
+        <Project Name="winLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

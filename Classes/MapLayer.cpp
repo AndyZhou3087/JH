@@ -6,6 +6,8 @@
 #include "GameDataSave.h"
 #include "Const.h"
 #include "GameScene.h"
+#include "CommonFuncs.h"
+#include "GlobalData.h"
 
 static Vec2 heroPos;
 
@@ -100,5 +102,31 @@ void MapLayer::Arrive(float dt)
 	heroPos = m_destPos;
 	GameDataSave::getInstance()->setHeroAddr(m_addrname);
 
+	if (m_distance > 1.0f)
+	{
+		std::string npcnames;
+		int npcsize = GlobalData::map_maps[m_addrname].npcs.size();
+		if (npcsize > 0)
+		{
+			npcnames.append(CommonFuncs::gbk2utf("这里有"));
+			for (int i = 0; i < npcsize; i++)
+			{
+				npcnames.append(GlobalData::map_npcs[GlobalData::map_maps[m_addrname].npcs[i]].name);
+				if (i == npcsize - 1)
+					npcnames.append(CommonFuncs::gbk2utf("。"));
+				else
+					npcnames.append(CommonFuncs::gbk2utf("，"));
+			}
+		}
+
+		std::string str;
+		str.append(CommonFuncs::gbk2utf("你跑得双腿发麻，来到了"));
+		str.append(GlobalData::map_maps[m_addrname].cname);
+		str.append(CommonFuncs::gbk2utf("，"));
+		str.append(GlobalData::map_maps[m_addrname].desc);
+		str.append(CommonFuncs::gbk2utf("。"));
+		str.append(npcnames);
+		g_uiScroll->addEventText(str.c_str());
+	}
 	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, ARRIVE));
 }

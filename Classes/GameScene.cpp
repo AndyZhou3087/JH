@@ -12,6 +12,8 @@ Nature* g_nature;
 Hero* g_hero;
 
 GameScene* g_gameLayer = NULL;
+
+UIScroll* g_uiScroll;
 GameScene::GameScene()
 {
 
@@ -48,6 +50,7 @@ bool GameScene::init()
 	GlobalData::loadHillResJsonData();
 	GlobalData::loadMapJsonData();
 	GlobalData::loadNpcJsonData();
+	GlobalData::loadHeroAtrJsonData();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -72,21 +75,18 @@ bool GameScene::init()
 
 	loadSaveData();
 
-	g_hero->setLifeValue(100);
-	g_hero->setMaxLifeValue(100);
-
 
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
 	this->addChild(bg, 3);
 
-	uiScroll = UIScroll::create(500.0f, 132.0f);
-	uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
-	addChild(uiScroll, 3);
+	g_uiScroll = UIScroll::create(500.0f, 132.0f);
+	g_uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
+	addChild(g_uiScroll, 3);
 
 	topBar = TopBar::create();
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
-	topBar->setScrollContainer(uiScroll);
+	topBar->setScrollContainer(g_uiScroll);
 	addChild(topBar, 2);
 	
 	this->schedule(schedule_selector(GameScene::updata), 0.2f);
@@ -100,15 +100,33 @@ void GameScene::loadSaveData()
 	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
 	g_nature->setWeather((EWeather)GameDataSave::getInstance()->getNatureWeather());
 	g_nature->setTime(GameDataSave::getInstance()->getNatureTime());
-	g_nature->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
-	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
 
-	g_hero->setLifeValue(GameDataSave::getInstance()->getHeroLife());
-	g_hero->setMaxLifeValue(GameDataSave::getInstance()->getHeroMaxLife());
+	int localtemp = GameDataSave::getInstance()->getNatureTemperature();
+	if (localtemp > -1000)
+		g_nature->setTemperature(localtemp);
+	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
+	
+
 	g_hero->setOutinjuryValue(GameDataSave::getInstance()->getHeroOutinjury());
 	g_hero->setInnerinjuryValue(GameDataSave::getInstance()->getHeroInnerinjury());
 	g_hero->setHungerValue(GameDataSave::getInstance()->getHeroHunger());
 	g_hero->setSpiritValue(GameDataSave::getInstance()->getHeroSpirit());
+	int heroid = GameDataSave::getInstance()->getHeroId();
+	g_hero->setMyID(heroid);
+	g_hero->setMyName(GlobalData::map_heroAtr[heroid].name);
+	int lv = GameDataSave::getInstance()->getHeroLV();
+	g_hero->setLVValue(lv);
+	g_hero->setAtkValue(GlobalData::map_heroAtr[heroid].vec_atk[lv - 1]);
+	g_hero->setDfValue(GlobalData::map_heroAtr[heroid].vec_df[lv - 1]);
+	g_hero->setMaxLifeValue(GlobalData::map_heroAtr[heroid].vec_maxhp[lv-1]);
+
+	int hlife = GameDataSave::getInstance()->getHeroLife();
+	if (hlife > -1)
+		g_hero->setLifeValue(hlife);
+	else
+	{
+		g_hero->setLifeValue(g_hero->getMaxLifeValue());
+	}
 
 	StorageRoom::loadStorageData();
 	MyPackage::load();
@@ -130,7 +148,6 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setNatureTime(g_nature->getTime());
 	GameDataSave::getInstance()->setLiveDays(g_nature->getPastDays());
 	GameDataSave::getInstance()->setHeroLife(g_hero->getLifeValue());
-	GameDataSave::getInstance()->setHeroMaxLife(g_hero->getMaxLifeValue());
 	GameDataSave::getInstance()->setHeroOutinjury(g_hero->getOutinjuryValue());
 	GameDataSave::getInstance()->setHeroInnerinjury(g_hero->getInnerinjuryValue());
 	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());

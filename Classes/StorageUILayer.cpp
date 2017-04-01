@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "Const.h"
 
-const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源", "资源2"};
+const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源", "工具"};
 
 StorageUILayer::StorageUILayer()
 {
@@ -84,7 +84,7 @@ bool StorageUILayer::init()
 			namelbl->setPosition(Vec2(25, 25));
 			sepline->addChild(namelbl);
 
-			for (int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
+			for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
 			{
 
 				Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
@@ -103,7 +103,7 @@ bool StorageUILayer::init()
 				menu->setPosition(Vec2(0, 0));
 				scrollview->addChild(menu);
 
-				std::string str = StringUtils::format("ui/%d.png", StorageRoom::map_storageData[i].at(m).id);
+				std::string str = StringUtils::format("ui/%s.png", StorageRoom::map_storageData[i].at(m).strid.c_str());
 				Sprite * res = Sprite::createWithSpriteFrameName(str);
 				res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 				box->addChild(res);

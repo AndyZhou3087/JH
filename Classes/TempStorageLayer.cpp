@@ -74,12 +74,14 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 		std::vector<PackageData>::iterator it;
 		for (it = tempResData.begin(); it != tempResData.end(); ++it)
 		{
-			if (it->id == data->id)
+			if (it->strid.compare(data->strid) == 0)
 			{
 				PackageData pdata;
 				pdata.type = data->type;
-				pdata.id = data->id;
+				pdata.strid = data->strid;
 				pdata.count = 1;
+				pdata.lv = data->lv;
+				pdata.extype = data->extype;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -93,8 +95,10 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 	{
 		PackageData pdata;
 		pdata.type = data->type;
-		pdata.id = data->id;
+		pdata.strid = data->strid;
 		pdata.count = 1;
+		pdata.lv = data->lv;
+		pdata.extype = data->extype;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -113,7 +117,7 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 	unsigned int i = 0;
 	for (i = 0; i < tempResData.size(); i++)
 	{
-		if (data.id == tempResData[i].id)
+		if (data.strid == tempResData[i].strid)
 		{
 			tempResData[i].count++;
 			break;
@@ -163,11 +167,12 @@ void TempStorageLayer::loadTempData()
 	{
 		std::vector<std::string> tmp;
 		CommonFuncs::split(vec_retstr[i], tmp, "-");
-		int idtype = atoi(tmp[0].c_str());
 		PackageData data;
-		data.id = idtype/1000;
-		data.type = idtype % 1000;
-		data.count = atoi(tmp[1].c_str());
+		data.strid = tmp[0];
+		data.type = atoi(tmp[1].c_str());
+		data.count = atoi(tmp[2].c_str());
+		data.extype = atoi(tmp[3].c_str());
+		data.lv = atoi(tmp[4].c_str());
 		tempResData.push_back(data);
 	}
 }
@@ -177,7 +182,7 @@ void TempStorageLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < tempResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%d-%d;", tempResData[i].id * 1000 + tempResData[i].type, tempResData[i].count);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d;", tempResData[i].strid.c_str() + tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage(m_addrname, str.substr(0, str.length() - 1));
@@ -236,7 +241,7 @@ void TempStorageLayer::updata()
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", tempResData[i].id);
+		std::string str = StringUtils::format("ui/%s.png", tempResData[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -265,7 +270,7 @@ void TempStorageLayer::updata()
 		std::string name = StringUtils::format("pitem%d", i);
 		this->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", MyPackage::vec_packages[i].id);
+		std::string str = StringUtils::format("ui/%s.png", MyPackage::vec_packages[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);

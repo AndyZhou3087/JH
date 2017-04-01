@@ -35,8 +35,7 @@ void StorageRoom::save()
 		for (int j = 0; j < size; j++)
 		{
 			PackageData sdata = map_storageData[it->first][j];
-			int tempid = sdata.type * 1000 + sdata.id;
-			std::string idstr = StringUtils::format("%d-%d;", tempid, sdata.count);
+			std::string idstr = StringUtils::format("%s-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv);
 			str.append(idstr);
 		}
 	}
@@ -55,10 +54,11 @@ void StorageRoom::loadStorageData()
 		CommonFuncs::split(tmp[i], tmp2, "-");
 
 		PackageData sdata;
-		int idtype = atoi(tmp2[0].c_str());
-		sdata.type = idtype / 1000;
-		sdata.id = idtype % 1000;
-		sdata.count = atoi(tmp2[1].c_str());
+		sdata.strid = tmp2[0];
+		sdata.type = atoi(tmp2[1].c_str());
+		sdata.count = atoi(tmp2[2].c_str());
+		sdata.extype = atoi(tmp2[3].c_str());
+		sdata.lv = atoi(tmp2[4].c_str());
 		map_storageData[sdata.type].push_back(sdata);
 	}
 }
@@ -70,7 +70,7 @@ void StorageRoom::add(PackageData data)
 	for (i = 0; i < typesize; i++)
 	{
 		PackageData *sdata = &map_storageData[data.type][i];
-		if (data.id == sdata->id)
+		if (data.strid.compare(sdata->strid) == 0)
 		{
 			sdata->count += data.count;
 			break;
@@ -82,14 +82,14 @@ void StorageRoom::add(PackageData data)
 	StorageRoom::save();
 }
 
-void StorageRoom::use(int id)
+void StorageRoom::use(std::string strid)
 {
 	for (unsigned int type = 0; type < map_storageData.size(); type++)
 	{
 		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
 		{
 			PackageData *sdata = &map_storageData[type][i];
-			if (id == sdata->id)
+			if (strid.compare(sdata->strid) == 0)
 			{
 				if (--sdata->count <= 0)
 				{
@@ -102,14 +102,14 @@ void StorageRoom::use(int id)
 	StorageRoom::save();
 }
 
-int StorageRoom::getCountByTypeId(int id)
+int StorageRoom::getCountById(std::string strid)
 {
 	for (unsigned int type = 0; type < map_storageData.size(); type++)
 	{
 		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
 		{
 			PackageData *sdata = &map_storageData[type][i];
-			if (id == sdata->id)
+			if (strid.compare(sdata->strid) == 0)
 			{
 				return sdata->count;
 			}

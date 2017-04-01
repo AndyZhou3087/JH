@@ -29,6 +29,7 @@ private:
 	std::vector<int> rewardids;
 	std::vector<PackageData> getResData;
 	int mtype;
+	int m_actype;
 };
 #endif
 

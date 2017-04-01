@@ -5,6 +5,7 @@
 #include "MyPackage.h"
 #include "Const.h"
 #include "GameDataSave.h"
+#include "GameScene.h"
 
 ActionGetLayer::ActionGetLayer()
 {
@@ -22,7 +23,7 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 
 	mtype = type;
 	mrid = rid;
-
+	m_actype = actype;
 	cocos2d::ui::Text* actiontext = (cocos2d::ui::Text*)csbnode->getChildByName("actiontext");
 	actiontext->setString(acname[actype]);
 
@@ -61,7 +62,7 @@ void ActionGetLayer::doAction()
 		unsigned int m = 0;
 		for (m = 0; m < getResData.size(); m++)
 		{
-			if (rewardids[i] == getResData[m].id)
+			if (rewardids[i] == atoi(getResData[m].strid.c_str()))
 			{
 				getResData[m].count++;
 				break;
@@ -71,9 +72,12 @@ void ActionGetLayer::doAction()
 		if (m == getResData.size())
 		{
 			PackageData data;
-			data.id = rewardids[i];
+			std::string idstr = StringUtils::format("%d", rewardids[i]);
+			data.strid = idstr;
 			data.type = mtype - 1;
 			data.count = 1;
+			data.lv = 0;
+			data.extype = 0;
 			getResData.push_back(data);
 		}
 	}
@@ -92,11 +96,13 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 		std::vector<PackageData>::iterator it;
 		for (it = getResData.begin(); it != getResData.end(); ++it)
 		{
-			if (it->id == data->id)
+			if (it->strid.compare(data->strid) == 0)
 			{
 				PackageData pdata;
 				pdata.type = data->type;
-				pdata.id = data->id;
+				pdata.strid = data->strid;
+				pdata.lv = data->lv;
+				pdata.extype = data->extype;
 				pdata.count = 1;
 				if (MyPackage::add(pdata) == 0)
 				{
@@ -111,7 +117,9 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 	{
 		PackageData pdata;
 		pdata.type = data->type;
-		pdata.id = data->id;
+		pdata.strid = data->strid;
+		pdata.lv = data->lv;
+		pdata.extype = data->extype;
 		pdata.count = 1;
 		if (MyPackage::add(pdata) == 0)
 		{
@@ -131,7 +139,7 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 	unsigned int i = 0;
 	for (i = 0; i < getResData.size(); i++)
 	{
-		if (data.id == getResData[i].id)
+		if (data.strid.compare(getResData[i].strid) == 0)
 		{
 			getResData[i].count++;
 			break;
@@ -180,6 +188,18 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			removeitem();
 			doAction();
 			updata();
+
+			std::string desc;
+			if (g_hero->getAtrByType((HeroAtrType)m_actype).length() > 0)
+			{
+				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
+			}
+			else
+			{
+				desc = CommonFuncs::gbk2utf(acdesc[m_actype].c_str());
+			}
+			desc.append(GlobalData::vec_resData[mrid].unitname);
+			g_uiScroll->addEventText(desc);
 		}
 	}
 }
@@ -218,10 +238,10 @@ void ActionGetLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%d-%d;", getResData[i].id * 1000 + getResData[i].type, getResData[i].count);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d;", getResData[i].strid.c_str(), getResData[i].type, getResData[i].count, getResData[i].extype, getResData[i].lv);
 		str.append(onestr);
 	}
-	GameDataSave::getInstance()->setTempStorage("m1-1", str.substr(0, str.length() - 1));
+	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));
 }
 
 void ActionGetLayer::updata()
@@ -244,7 +264,7 @@ void ActionGetLayer::updata()
 		std::string name = StringUtils::format("resitem%d", i);
 		this->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", getResData[i].id);
+		std::string str = StringUtils::format("ui/%s.png", getResData[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -272,7 +292,7 @@ void ActionGetLayer::updata()
 		std::string name = StringUtils::format("pitem%d", i);
 		this->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", MyPackage::vec_packages[i].id);
+		std::string str = StringUtils::format("ui/%s.png", MyPackage::vec_packages[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -301,12 +321,6 @@ void ActionGetLayer::removeitem()
 
 void ActionGetLayer::onExit()
 {
-	std::string str;
-	for (unsigned int i = 0; i < getResData.size(); i++)
-	{
-		std::string onestr = StringUtils::format("%d-%d;", getResData[i].id * 1000 + getResData[i].type, getResData[i].count);
-		str.append(onestr);
-	}
-	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));
+	saveTempData();
 	Layer::onExit();
 }

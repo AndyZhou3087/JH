@@ -4,6 +4,8 @@
 #include "CommonFuncs.h"
 #include "ActionGetLayer.h"
 #include "Const.h"
+#include "GameScene.h"
+#include "CommonFuncs.h"
 
 
 HomeHill::HomeHill()
@@ -130,13 +132,23 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				break;
 		}
 
-		
-
 		if (GlobalData::vec_resData[i].count > 0)
 		{
 			GlobalData::vec_resData[i].count--;
 			ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
 			this->addChild(layer);
+			
+			std::string desc;
+			if (g_hero->getAtrByType((HeroAtrType)data->actype).length() > 0)
+			{
+				desc = CommonFuncs::gbk2utf(acdesc1[data->actype].c_str());
+			}
+			else
+			{
+				desc = CommonFuncs::gbk2utf(acdesc[data->actype].c_str());
+			}
+			desc.append(data->unitname);
+			g_uiScroll->addEventText(desc);
 
 		}
 	}

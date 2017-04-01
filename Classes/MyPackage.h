@@ -9,9 +9,11 @@ USING_NS_CC;
 
 typedef struct
 {
-	int id;
+	std::string strid;
 	int type;
 	int count;
+	int lv;//内功，外功等级，
+	int extype;//用于区分采集1，砍伐2，挖掘工具3，其他类型为0
 
 }PackageData;
 

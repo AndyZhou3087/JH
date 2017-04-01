@@ -3,6 +3,20 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
+
+typedef enum
+{
+	H_WEAPON = 0,
+	H_GATHER,
+	H_FELL,
+	H_EXCAVATE,
+	H_WG,
+	H_NG,
+	H_ARMOR,
+	H_MOUNT,
+	H_MAX
+}HeroAtrType;
+
 class Hero:public Node
 {
 public:
@@ -19,6 +33,15 @@ public:
 	CC_SYNTHESIZE(float, m_spirit, SpiritValue);
 	CC_SYNTHESIZE(int, m_life, LifeValue);
 	CC_SYNTHESIZE(int, m_maxlife, MaxLifeValue);
+	CC_SYNTHESIZE(int, m_atk, AtkValue);
+	CC_SYNTHESIZE(int, m_df, DfValue);
+	CC_SYNTHESIZE(int, m_exp, ExpValue);
+	CC_SYNTHESIZE(int, m_lv, LVValue);
+	CC_SYNTHESIZE(std::string, m_name, MyName);
+	CC_SYNTHESIZE(int, m_id, MyID);
+
+	void setAtrByType(HeroAtrType type, std::string value);
+	std::string getAtrByType(HeroAtrType type);
 	void sleep(int hour);
 	void drinking();
 public:
@@ -32,6 +55,7 @@ private:
 	void drinkbystep(float dt);
 private:
 	int sleephour;
+	std::string heroAtrIdStr[H_MAX];
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

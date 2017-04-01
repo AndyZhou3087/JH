@@ -1,5 +1,7 @@
 ﻿#include "Nature.h"
 #include "Const.h"
+#include "GameScene.h"
+#include "CommonFuncs.h"
 
 int Nature::ReasonCDays = 90;
 
@@ -58,7 +60,8 @@ void Nature::ChangeWeather()
 	{
 		int c = w - m_weather;
 		setWeather(w);
-		setTemperature(m_temperature - c * 5);
+		setTemperature(m_temperature + c * 5);
+		g_uiScroll->addEventText(CommonFuncs::gbk2utf(weatherEventText[w].c_str()));
 	}
 
 
@@ -90,6 +93,7 @@ void Nature::ChangeReason()
 		srand(systime());
 		int  t = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
 		setTemperature(t);
+		g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[r].c_str()));
 	}
 
 }
@@ -101,6 +105,7 @@ void Nature::ChangeDayNight()
 		{
 			setDayOrNight(Night);
 			setTemperature(m_temperature - 5);
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf(dayEventText[1].c_str()));
 		}
 		
 	}
@@ -110,6 +115,7 @@ void Nature::ChangeDayNight()
 		{
 			setDayOrNight(Day);
 			setTemperature(m_temperature + 5);
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[0].c_str()));
 		}
 	}
 }

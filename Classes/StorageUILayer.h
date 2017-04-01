@@ -5,6 +5,7 @@
 #include "ui/CocosGUI.h"
 #include "Building.h"
 #include "StorageRoom.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 

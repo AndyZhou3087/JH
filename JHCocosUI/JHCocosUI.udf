@@ -15,8 +15,16 @@
           <FilePathData Path="tempStorageLayer.csd" />
           <FilePathData Path="fightLayer.csd" />
           <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="heroAttribNode.csd" />
+          <FilePathData Path="homeLayer.csd" />
+          <FilePathData Path="heroStateLayer.csd" />
+          <FilePathData Path="homeHillLayer.csd" />
+          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="sysSmallLayer.csd" />
+          <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="winLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="hintLayer.csd" />
+        <ActiveDocument Path="mapLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

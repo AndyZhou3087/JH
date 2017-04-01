@@ -22,6 +22,10 @@ Hero::Hero()
 	m_outinjury = MAXOutinjuryValue;
 	m_hunger = MAXHungerValue;
 	m_spirit = MAXSpiritValue;
+	for (int i = 0; i < H_MAX; i++)
+	{
+		heroAtrIdStr[i] = "";
+	}
 }
 
 
@@ -105,4 +109,14 @@ void Hero::drinkbystep(float dt)
 		m_spirit = MAXSpiritValue;
 		this->unschedule(schedule_selector(Hero::drinkbystep));
 	}
+}
+
+void Hero::setAtrByType(HeroAtrType type, std::string value)
+{
+	heroAtrIdStr[type] = value;
+}
+
+std::string Hero::getAtrByType(HeroAtrType type)
+{
+	return heroAtrIdStr[type];
 }

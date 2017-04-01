@@ -5,6 +5,7 @@
 #include "HeroProperNode.h"
 #include "StorageRoom.h"
 #include "GameScene.h"
+#include "GlobalData.h"
 
 OutDoor::OutDoor()
 {
@@ -118,7 +119,7 @@ void OutDoor::updata()
 		std::string name = StringUtils::format("resitem%d", i);
 		scrollview->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", allStorageData[i]->id);
+		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -146,7 +147,7 @@ void OutDoor::updata()
 		std::string name = StringUtils::format("pitem%d", i);
 		this->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%d.png", MyPackage::vec_packages[i].id);
+		std::string str = StringUtils::format("ui/%s.png", MyPackage::vec_packages[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -170,12 +171,14 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		std::vector<PackageData>::iterator it;
 		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end(); ++it)
 		{
-			if (it->id == data->id)
+			if (it->strid.compare(data->strid) == 0)
 			{
 				PackageData pdata;
 				pdata.type = data->type;
-				pdata.id = data->id;
+				pdata.strid = data->strid;
 				pdata.count = 1;
+				pdata.lv = data->lv;
+				pdata.extype = data->extype;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -189,8 +192,10 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 	{
 		PackageData pdata;
 		pdata.type = data->type;
-		pdata.id = data->id;
+		pdata.strid = data->strid;
 		pdata.count = 1;
+		pdata.lv = data->lv;
+		pdata.extype = data->extype;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;

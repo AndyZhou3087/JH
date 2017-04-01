@@ -11,6 +11,10 @@ std::map<std::string, MapData> GlobalData::map_maps;
 
 std::map<std::string, NpcData> GlobalData::map_npcs;
 
+std::map<int, HeroAtrData> GlobalData::map_heroAtr;
+
+std::map<std::string, WG_NGData> GlobalData::map_wgngs;
+
 GlobalData::GlobalData()
 {
 
@@ -59,6 +63,9 @@ void GlobalData::loadResJsonData()
 		strcpy(data.cname, v.GetString());
 		v = item["desc"];
 		strcpy(data.desc, v.GetString());
+
+		v = item["unit"];
+		data.unitname = v.GetString();
 		vec_resData.push_back(data);
 
 	}
@@ -133,17 +140,23 @@ void GlobalData::loadNpcJsonData()
 		v = item["winres"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
-			data.winres.push_back(v[m].GetString());
+			std::string str = v[m].GetString();
+			if (str.length() > 1)
+				data.winres.push_back(str);
 		}
 		v = item["winresrnd"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
-			data.winresrnd.push_back(atoi(v[m].GetString()));
+			std::string str = v[m].GetString();
+			if (str.length() > 1)
+				data.winresrnd.push_back(atoi(str.c_str()));
 		}
 		v = item["exchg"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
-			data.exchgres.push_back(v[m].GetString());
+			std::string str = v[m].GetString();
+			if (str.length() > 1)
+				data.exchgres.push_back(str);
 		}
 		v = item["exchgneed"];
 		for (unsigned int m = 0; m < v.Size(); m++)
@@ -154,7 +167,9 @@ void GlobalData::loadNpcJsonData()
 				std::vector<std::string> vec_temp;
 				for (unsigned int n = 0; n < ndresitem.Size(); n++)
 				{
-					vec_temp.push_back(ndresitem[m].GetString());
+					std::string str = ndresitem[m].GetString();
+					if (str.length() > 1)
+						vec_temp.push_back(str);
 				}
 				data.exchgneedres.push_back(vec_temp);
 			}
@@ -186,5 +201,115 @@ void GlobalData::loadResData()
 		vec_resData[i].count = atoi(tmp[0].c_str());
 		vec_resData[i].pastmin = atoi(tmp[1].c_str());
 		vec_resData[i].waittime = atof(tmp[2].c_str());
+	}
+}
+
+void GlobalData::loadHeroAtrJsonData()
+{
+	rapidjson::Document doc = ReadJsonFile("data/heroatr.json");
+	rapidjson::Value& values = doc["h"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		HeroAtrData data;
+		rapidjson::Value& v = vitem["id"];
+		data.id = atoi(v.GetString());
+
+		v = vitem["name"];
+		strcpy(data.name, v.GetString());
+
+		v = vitem["atk"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_atk.push_back(v[i].GetInt());
+		}
+
+		v = vitem["df"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_df.push_back(v[i].GetInt());
+		}
+
+		v = vitem["exp"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_exp.push_back(v[i].GetInt());
+		}
+
+		v = vitem["maxhp"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_maxhp.push_back(v[i].GetInt());
+		}
+		map_heroAtr[data.id] = data;
+	}
+}
+
+void GlobalData::loadWG_NGJsonData()
+{
+	rapidjson::Document doc = ReadJsonFile("data/wg.json");
+	rapidjson::Value& values = doc["w"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		WG_NGData data;
+		rapidjson::Value& v = vitem["id"];
+		strcpy(data.id, v.GetString());
+
+		v = vitem["cname"];
+		data.cname = v.GetString();
+
+		v = vitem["maxlv"];
+		data.maxlv = atoi(v.GetString());
+
+		v = vitem["desc"];
+		data.desc = v.GetString();
+
+		v = vitem["bns"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_bns.push_back(v[i].GetInt());
+		}
+
+		v = vitem["exp"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_exp.push_back(v[i].GetInt());
+		}
+		data.lv = 0;
+		map_wgngs[data.id] = data;
+	}
+
+	doc = ReadJsonFile("data/ng.json");
+	values = doc["n"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		WG_NGData data;
+		rapidjson::Value& v = vitem["id"];
+		strcpy(data.id, v.GetString());
+
+		v = vitem["cname"];
+		data.cname = v.GetString();
+
+		v = vitem["maxlv"];
+		data.maxlv = atoi(v.GetString());
+
+		v = vitem["desc"];
+		data.desc = v.GetString();
+
+		v = vitem["bns"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_bns.push_back(v[i].GetInt());
+		}
+
+		v = vitem["exp"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_exp.push_back(v[i].GetInt());
+		}
+		data.lv = 0;
+		map_wgngs[data.id] = data;
 	}
 }

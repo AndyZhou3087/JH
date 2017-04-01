@@ -157,7 +157,8 @@ void BuildingUILayer::loadActionUi()
 					cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
 					rescount->setVisible(true);
 
-					int hascount = StorageRoom::getCountByTypeId(restypecount / 1000);
+					std::string strid = StringUtils::format("%d", restypecount / 1000);
+					int hascount = StorageRoom::getCountById(strid);
 					int needcount = restypecount % 1000;
 					str = StringUtils::format("%d/%d", hascount, needcount);
 					rescount->setString(str);
@@ -215,6 +216,14 @@ void BuildingUILayer::parseBuildActionJSon()
 
 			value = jsonvalue["actext"];
 			strcpy(data.actext, value.GetString());
+
+			if (jsonvalue.HasMember("extype"))
+			{
+				value = jsonvalue["extype"];
+				data.extype = atoi(value.GetString());
+			}
+			else
+				data.extype = 0;
 
 			value = jsonvalue["res"];
 			for (unsigned int i = 0; i < value.Size(); i++)
@@ -286,8 +295,11 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		{
 			PackageData data;
 			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
-			data.id = id;
+			std::string idstr = StringUtils::format("%d", id);
+			data.strid = idstr;
 			data.count = 1;
+			data.lv = 0;
+			data.extype = map_buidACData[m_build->data.name].at(type - ACTION).extype;
 			StorageRoom::add(data);
 		}
 	}
@@ -322,8 +334,8 @@ void BuildingUILayer::updataBuildRes()
 				res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
 				res->setScale(0.38f);
 				resitem->addChild(res);
-
-				int hascount = StorageRoom::getCountByTypeId(restypecount / 1000);
+				std::string strid = StringUtils::format("%d", restypecount / 1000);
+				int hascount = StorageRoom::getCountById(strid);
 				int needcount = restypecount % 1000;
 				str = StringUtils::format("%d/%d", hascount, needcount);
 				rescount->setVisible(true);
