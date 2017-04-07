@@ -1,8 +1,8 @@
 {"n":[
 {"id":"n001","name":"山贼","type":"1","life":"104","atk":"11","df":"6","exp":"11","winres":["4001","2001","1001"],"winresrnd":["30","30","30"],"exchg":[],"exchgneed":[]},
-{"id":"n002","name":"兔子","type":"1","life":"100","atk":"10","df":"5","exp":"10","winres":["6001","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
+{"id":"n002","name":"兔子","type":"1","life":"20","atk":"2","df":"1","exp":"10","winres":["6001","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
 {"id":"n003","name":"狼","type":"1","life":"108","atk":"12","df":"7","exp":"11","winres":["7001","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
-{"id":"n004","name":"田伯光","type":"1","life":"141","atk":"24","df":"18","exp":"15","winres":["w009","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
+{"id":"n004","name":"田伯光","type":"1","life":"10","atk":"1","df":"1","exp":"15","winres":["w009","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
 {"id":"n005","name":"平一指","type":"1","life":"136","atk":"19","df":"14","exp":"14","winres":["10001","11001","0"],"winresrnd":["50","50","0"],"exchg":[],"exchgneed":[]},
 {"id":"n006","name":"胡斐","type":"1","life":"195","atk":"42","df":"36","exp":"20","winres":["w002","0","0"],"winresrnd":["100","0","0"],"exchg":[],"exchgneed":[]},
 {"id":"n007","name":"田归农","type":"1","life":"165","atk":"32","df":"26","exp":"17","winres":["0","0","0"],"winresrnd":["0","0","0"],"exchg":[],"exchgneed":[]},

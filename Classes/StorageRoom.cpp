@@ -35,7 +35,7 @@ void StorageRoom::save()
 		for (int j = 0; j < size; j++)
 		{
 			PackageData sdata = map_storageData[it->first][j];
-			std::string idstr = StringUtils::format("%s-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv);
+			std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue);
 			str.append(idstr);
 		}
 	}
@@ -59,6 +59,8 @@ void StorageRoom::loadStorageData()
 		sdata.count = atoi(tmp2[2].c_str());
 		sdata.extype = atoi(tmp2[3].c_str());
 		sdata.lv = atoi(tmp2[4].c_str());
+		sdata.exp = atoi(tmp2[5].c_str());
+		sdata.goodvalue = atoi(tmp2[6].c_str());
 		map_storageData[sdata.type].push_back(sdata);
 	}
 }

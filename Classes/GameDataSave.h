@@ -60,6 +60,12 @@ public:
 	int getHeroLV();
 	void setHeroLV(int lv);
 
+	int getHeroExp();
+	void setHeroExp(int val);
+
+	bool getHeroIsOut();
+	void setHeroIsOut(bool val);
+
 private:
 	static GameDataSave* _Context;
 

@@ -67,6 +67,7 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		g_hero->setIsOut(true);
 		g_maplayer = MapLayer::create();
 		g_gameLayer->addChild(g_maplayer, 1, "maplayer");
 		g_gameLayer->removeChildByName("homelayer");
@@ -179,6 +180,8 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 				pdata.count = 1;
 				pdata.lv = data->lv;
 				pdata.extype = data->extype;
+				pdata.exp = data->extype;
+				pdata.goodvalue = data->goodvalue;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -196,6 +199,8 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		pdata.count = 1;
 		pdata.lv = data->lv;
 		pdata.extype = data->extype;
+		pdata.exp = data->exp;
+		pdata.goodvalue = data->goodvalue;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;

@@ -1,6 +1,7 @@
 ﻿#ifndef _HERO_H_
 #define _HERO_H_
 #include "cocos2d.h"
+#include "MyPackage.h"
 USING_NS_CC;
 
 
@@ -39,9 +40,10 @@ public:
 	CC_SYNTHESIZE(int, m_lv, LVValue);
 	CC_SYNTHESIZE(std::string, m_name, MyName);
 	CC_SYNTHESIZE(int, m_id, MyID);
+	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
-	void setAtrByType(HeroAtrType type, std::string value);
-	std::string getAtrByType(HeroAtrType type);
+	void setAtrByType(HeroAtrType type, PackageData* pData);
+	PackageData* getAtrByType(HeroAtrType type);
 	void sleep(int hour);
 	void drinking();
 public:
@@ -55,7 +57,7 @@ private:
 	void drinkbystep(float dt);
 private:
 	int sleephour;
-	std::string heroAtrIdStr[H_MAX];
+	std::map<HeroAtrType, PackageData*> map_heroAtr;
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

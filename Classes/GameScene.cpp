@@ -55,6 +55,12 @@ bool GameScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	g_nature = Nature::create();
+	this->addChild(g_nature);
+
+	g_hero = Hero::create();
+	this->addChild(g_hero);
+
 	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
 	if (addrstr.compare("m1-1") == 0)
 	{
@@ -66,12 +72,6 @@ bool GameScene::init()
 		g_maplayer = MapLayer::create();
 		addChild(g_maplayer, 1, "maplayer");
 	}
-
-	g_nature = Nature::create();
-	this->addChild(g_nature);
-
-	g_hero = Hero::create();
-	this->addChild(g_hero);
 
 	loadSaveData();
 
@@ -116,10 +116,14 @@ void GameScene::loadSaveData()
 	g_hero->setMyName(GlobalData::map_heroAtr[heroid].name);
 	int lv = GameDataSave::getInstance()->getHeroLV();
 	g_hero->setLVValue(lv);
-	g_hero->setAtkValue(GlobalData::map_heroAtr[heroid].vec_atk[lv - 1]);
-	g_hero->setDfValue(GlobalData::map_heroAtr[heroid].vec_df[lv - 1]);
-	g_hero->setMaxLifeValue(GlobalData::map_heroAtr[heroid].vec_maxhp[lv-1]);
+	int exp = GameDataSave::getInstance()->getHeroExp();
+	g_hero->setExpValue(exp);
+	g_hero->setIsOut(GameDataSave::getInstance()->getHeroIsOut());
 
+	g_hero->setAtkValue(GlobalData::map_heroAtr[heroid].vec_atk[lv]);
+	g_hero->setDfValue(GlobalData::map_heroAtr[heroid].vec_df[lv]);
+	g_hero->setMaxLifeValue(GlobalData::map_heroAtr[heroid].vec_maxhp[lv]);
+	
 	int hlife = GameDataSave::getInstance()->getHeroLife();
 	if (hlife > -1)
 		g_hero->setLifeValue(hlife);
@@ -152,6 +156,10 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroInnerinjury(g_hero->getInnerinjuryValue());
 	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());
 	GameDataSave::getInstance()->setHeroSpirit(g_hero->getSpiritValue());
+	GameDataSave::getInstance()->setHeroLV(g_hero->getLVValue());
+	GameDataSave::getInstance()->setHeroId(g_hero->getMyID());
+	GameDataSave::getInstance()->setHeroExp(g_hero->getExpValue());
+	GameDataSave::getInstance()->setHeroIsOut(g_hero->getIsOut());
 }
 
 void GameScene::updata(float dt)
@@ -161,7 +169,7 @@ void GameScene::updata(float dt)
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData* data = &GlobalData::vec_resData[m];
-			if (GlobalData::vec_hillResid[i] == data->id)
+			if (data->strid.compare(GlobalData::vec_hillResid[i]) == 0)
 			{
 				if (data->count <= 0)
 				{

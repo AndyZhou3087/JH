@@ -299,6 +299,8 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			data.strid = idstr;
 			data.count = 1;
 			data.lv = 0;
+			data.exp = 0;
+			data.goodvalue = 100;
 			data.extype = map_buidACData[m_build->data.name].at(type - ACTION).extype;
 			StorageRoom::add(data);
 		}

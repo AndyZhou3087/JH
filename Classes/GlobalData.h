@@ -6,7 +6,7 @@ USING_NS_CC;
 
 typedef struct
 {
-	int id;
+	std::string strid;
 	int count;
 	int max;
 	int speed;
@@ -99,7 +99,7 @@ public:
 	static void loadWG_NGJsonData();
 public:
 	static std::vector<ResData> vec_resData;
-	static std::vector<int> vec_hillResid;
+	static std::vector<std::string> vec_hillResid;
 	static std::map<std::string, MapData> map_maps;
 	static std::map<std::string, NpcData> map_npcs;
 	static std::map<int, HeroAtrData> map_heroAtr;

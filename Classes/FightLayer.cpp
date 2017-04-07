@@ -5,6 +5,7 @@
 #include "CommonFuncs.h"
 #include "HintBox.h"
 #include "GameScene.h"
+#include "Winlayer.h"
 
 FightLayer::FightLayer()
 {
@@ -35,8 +36,21 @@ bool FightLayer::init(std::string addrname, std::string npcid)
 	Node* csbnode = CSLoader::createNode("fightLayer.csb");
 	this->addChild(csbnode);
 
+	m_addrname = addrname;
+	m_npcid = npcid;
+
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrnametxt->setString(addrname);
+
+	cocos2d::ui::ImageView* npcicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+
+	std::string str = StringUtils::format("ui/%s.png", npcid.c_str());
+	SpriteFrame* sf = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
+	if (sf != NULL)
+	{
+		npcicon->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		npcicon->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	}
 
 	cocos2d::ui::Text* npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcnametxt->setString(GlobalData::map_npcs[npcid].name);
@@ -109,30 +123,67 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 void FightLayer::updata(float dt)
 {
-	std::string gfname = g_hero->getAtrByType(H_WG);
 	int gfBonusAck = 0;
-	if (gfname.length() > 0)
+	if (g_hero->getAtrByType(H_WG) != NULL)
+	{
+		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
 		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
-	npchp = npchp + npcdf - (g_hero->getAtkValue() + gfBonusAck);
-	g_hero->setLifeValue(g_hero->getLifeValue() + g_hero->getDfValue() - npcatk);
+	}
 
-	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
-	herohpvaluetext->setString(hpstr);
-	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
-	herohpbar->setPercent(herohppercent);
+	int heroCurAck = g_hero->getAtkValue() + gfBonusAck;
+	int npchurt = heroCurAck - npcdf;
+	if (npchurt < heroCurAck * 10 / 100)
+		npchp -= heroCurAck * 10 / 100;
+	else
+		npchp -= npchurt;
 
-	hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	if (npchp < 0)
+		npchp = 0;
+
+
+	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
 	npchpvaluetext->setString(hpstr);
 	int npchppercent = 100 * npchp / npcmaxhp;
 	npchpbar->setPercent(npchppercent);
 
-	if (npchp <= 0 || g_hero->getLifeValue() <= 0)
+	if (npchp <= 0)
 	{
 		this->unschedule(schedule_selector(FightLayer::updata));
-		if (npchp <= 0)
-		{
 
-		}
+		Winlayer* layer = Winlayer::create(m_addrname, m_npcid);
+		Director::getInstance()->getRunningScene()->addChild(layer);
+		this->removeFromParentAndCleanup(true);
+		return;
+	}
+
+	int gfBonusDf = 0;
+	if (g_hero->getAtrByType(H_NG) != NULL)
+	{
+		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
+		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+	}
+
+	int curheroHp = 0;
+	int curheroDf = g_hero->getDfValue() + gfBonusDf;
+	int herohurt = npcatk - curheroDf;
+
+	if (herohurt < npcatk * 10 / 100)
+		curheroHp = g_hero->getLifeValue() - npcatk * 10 / 100;
+	else
+		curheroHp -= herohurt;
+
+	if (curheroHp < 0)
+		curheroHp = 0;
+	g_hero->setLifeValue(curheroHp);
+
+	hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	herohpvaluetext->setString(hpstr);
+	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
+	herohpbar->setPercent(herohppercent);
+
+	if (g_hero->getLifeValue() <= 0)
+	{
+		this->unschedule(schedule_selector(FightLayer::updata));
 	}
 
 }

@@ -23,6 +23,7 @@ private:
 	void removeitem();
 	void saveTempData();
 	int static systime();
+	void updataLV();
 private:
 	std::string m_npcid;
 	std::vector<PackageData> getRewardData;

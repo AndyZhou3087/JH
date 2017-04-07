@@ -12,6 +12,7 @@
 #include "BuildingUILayer.h"
 #include "StorageUILayer.h"
 #include "OutDoor.h"
+#include "GameScene.h"
 
 HomeLayer::HomeLayer()
 {
@@ -143,6 +144,7 @@ bool HomeLayer::init()
 	}
 	MyPackage::takeoff();
 
+	g_hero->setIsOut(false);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)

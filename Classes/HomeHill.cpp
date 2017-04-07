@@ -6,6 +6,7 @@
 #include "Const.h"
 #include "GameScene.h"
 #include "CommonFuncs.h"
+#include "FightLayer.h"
 
 
 HomeHill::HomeHill()
@@ -55,10 +56,10 @@ bool HomeHill::init()
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData data = GlobalData::vec_resData[m];
-			if (GlobalData::vec_hillResid[i] == data.id)
+			if (GlobalData::vec_hillResid[i].compare(data.strid) == 0)
 			{
-				actionbtn->setTag(data.id);
-				std::string str = StringUtils::format("ui/%d.png", data.id);
+				actionbtn->setName(data.strid);
+				std::string str = StringUtils::format("ui/%s.png", data.strid.c_str());
 				iconimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 				iconimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
@@ -128,27 +129,36 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		for (i = 0; i<GlobalData::vec_resData.size(); i++)
 		{
 			data = &GlobalData::vec_resData[i];
-			if (data->id == node->getTag())
+			if (data->strid.compare(node->getName()) == 0)
 				break;
 		}
 
 		if (GlobalData::vec_resData[i].count > 0)
 		{
 			GlobalData::vec_resData[i].count--;
-			ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
-			this->addChild(layer);
-			
-			std::string desc;
-			if (g_hero->getAtrByType((HeroAtrType)data->actype).length() > 0)
+
+			if (atoi(data->strid.c_str()) != 0)//资源采集挖掘
 			{
-				desc = CommonFuncs::gbk2utf(acdesc1[data->actype].c_str());
+				ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
+				this->addChild(layer);
+
+				std::string desc;
+				if (g_hero->getAtrByType((HeroAtrType)data->actype) != NULL)
+				{
+					desc = CommonFuncs::gbk2utf(acdesc1[data->actype].c_str());
+				}
+				else
+				{
+					desc = CommonFuncs::gbk2utf(acdesc[data->actype].c_str());
+				}
+				desc.append(data->unitname);
+				g_uiScroll->addEventText(desc);
 			}
-			else
+			else//兔子，狼战斗界面
 			{
-				desc = CommonFuncs::gbk2utf(acdesc[data->actype].c_str());
+				FightLayer* layer = FightLayer::create(GlobalData::map_npcs["m1-2"].name, data->strid);
+				this->addChild(layer);
 			}
-			desc.append(data->unitname);
-			g_uiScroll->addEventText(desc);
 
 		}
 	}
@@ -168,7 +178,7 @@ void HomeHill::updateUI(float dt)
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData* data = &GlobalData::vec_resData[m];
-			if (GlobalData::vec_hillResid[i] == data->id)
+			if (GlobalData::vec_hillResid[i].compare(data->strid) == 0)
 			{
 				std::string str = StringUtils::format("%d", data->count);
 				count->setString(str);

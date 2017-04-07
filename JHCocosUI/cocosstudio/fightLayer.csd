@@ -66,7 +66,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon_1" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="77.3578" RightMargin="408.6422" TopMargin="575.0692" BottomMargin="614.9308" ctype="SpriteObjectData">
+          <AbstractNodeData Name="heroicon" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="77.3578" RightMargin="408.6422" TopMargin="575.0692" BottomMargin="614.9308" ctype="SpriteObjectData">
             <Size X="234.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="194.3578" Y="659.9308" />
@@ -77,16 +77,15 @@
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon_2" ActionTag="-274535916" Tag="127" IconVisible="False" LeftMargin="440.6602" RightMargin="45.3398" TopMargin="575.0692" BottomMargin="614.9308" ctype="SpriteObjectData">
+          <AbstractNodeData Name="npcicon" ActionTag="-440786904" Tag="38" IconVisible="False" LeftMargin="441.0000" RightMargin="45.0000" TopMargin="575.0000" BottomMargin="615.0000" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="166" Scale9Height="32" ctype="ImageViewObjectData">
             <Size X="234.0000" Y="90.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="557.6602" Y="659.9308" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="441.0000" Y="660.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7745" Y="0.5156" />
+            <PrePosition X="0.6125" Y="0.5156" />
             <PreSize X="0.3250" Y="0.0703" />
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="155.8781" RightMargin="436.1219" TopMargin="583.2919" BottomMargin="650.7081" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
@@ -111,13 +110,13 @@
             <FileData Type="MarkedSubImage" Path="ui/fighticon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="518.0309" RightMargin="73.9691" TopMargin="583.2919" BottomMargin="650.7081" FontSize="42" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="527.0309" RightMargin="64.9691" TopMargin="581.2919" BottomMargin="652.7081" FontSize="42" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="518.0309" Y="673.7081" />
+            <Position X="527.0309" Y="675.7081" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7195" Y="0.5263" />
+            <PrePosition X="0.7320" Y="0.5279" />
             <PreSize X="0.1778" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

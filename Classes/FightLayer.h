@@ -28,6 +28,8 @@ private:
 	int npcatk;
 	int npcdf;
 	void updata(float dt);
+	std::string m_addrname;
+	std::string m_npcid;
 };
 #endif
 

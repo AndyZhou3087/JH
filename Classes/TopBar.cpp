@@ -62,7 +62,11 @@ bool TopBar::init()
 	timelbl = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("timelbl");
 	timelbl->setName("time");
 	timelbl->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
-	str = StringUtils::format("%d", g_nature->getTime());
+
+	int hour = g_nature->getTime() / 60;
+	int minute = (int)g_nature->getTime() % 60;
+	str = StringUtils::format("%02d:%02d", hour, minute);
+
 	timelbl->setString(str);
 
 	templbl = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("templbl");

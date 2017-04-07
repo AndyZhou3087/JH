@@ -5,7 +5,7 @@
 #include "json.h"
 
 std::vector<ResData> GlobalData::vec_resData;
-std::vector<int> GlobalData::vec_hillResid;
+std::vector<std::string> GlobalData::vec_hillResid;
 
 std::map<std::string, MapData> GlobalData::map_maps;
 
@@ -35,7 +35,7 @@ void GlobalData::loadResJsonData()
 		ResData data;
 		rapidjson::Value& item = values[i];
 		rapidjson::Value& v = item["id"];
-		data.id = atoi(v.GetString());
+		data.strid = v.GetString();
 		v = item["max"];
 		data.max = atoi(v.GetString());
 
@@ -77,7 +77,7 @@ void GlobalData::loadHillResJsonData()
 	rapidjson::Value& values = doc["sh"];
 	for (unsigned int i = 0; i < values.Size(); i++)
 	{
-		vec_hillResid.push_back(values[i].GetInt());
+		vec_hillResid.push_back(values[i].GetString());
 	}
 }
 

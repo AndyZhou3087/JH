@@ -22,10 +22,6 @@ Hero::Hero()
 	m_outinjury = MAXOutinjuryValue;
 	m_hunger = MAXHungerValue;
 	m_spirit = MAXSpiritValue;
-	for (int i = 0; i < H_MAX; i++)
-	{
-		heroAtrIdStr[i] = "";
-	}
 }
 
 
@@ -111,12 +107,12 @@ void Hero::drinkbystep(float dt)
 	}
 }
 
-void Hero::setAtrByType(HeroAtrType type, std::string value)
+void Hero::setAtrByType(HeroAtrType type, PackageData* pData)
 {
-	heroAtrIdStr[type] = value;
+	map_heroAtr[type] = pData;
 }
 
-std::string Hero::getAtrByType(HeroAtrType type)
+PackageData* Hero::getAtrByType(HeroAtrType type)
 {
-	return heroAtrIdStr[type];
+	return map_heroAtr[type];
 }

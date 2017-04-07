@@ -78,6 +78,8 @@ void ActionGetLayer::doAction()
 			data.count = 1;
 			data.lv = 0;
 			data.extype = 0;
+			data.exp = 0;
+			data.goodvalue = 100;
 			getResData.push_back(data);
 		}
 	}
@@ -104,6 +106,8 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.lv = data->lv;
 				pdata.extype = data->extype;
 				pdata.count = 1;
+				pdata.exp = data->exp;
+				pdata.goodvalue = data->goodvalue;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -121,6 +125,8 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.lv = data->lv;
 		pdata.extype = data->extype;
 		pdata.count = 1;
+		pdata.exp = data->exp;
+		pdata.goodvalue = data->goodvalue;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -190,7 +196,7 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			updata();
 
 			std::string desc;
-			if (g_hero->getAtrByType((HeroAtrType)m_actype).length() > 0)
+			if (g_hero->getAtrByType((HeroAtrType)m_actype) != NULL)
 			{
 				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
 			}

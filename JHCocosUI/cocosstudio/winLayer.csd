@@ -38,7 +38,7 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="227900822" Tag="218" IconVisible="False" LeftMargin="310.4998" RightMargin="310.5002" TopMargin="496.7233" BottomMargin="728.2767" FontSize="50" LabelText="后山" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="title" ActionTag="227900822" Tag="218" IconVisible="False" LeftMargin="310.4971" RightMargin="310.5029" TopMargin="496.7227" BottomMargin="728.2773" FontSize="50" LabelText="后山" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="99.0000" Y="55.0000" />
             <AnchorPoint ScaleX="0.5185" ScaleY="0.4850" />
             <Position X="361.8286" Y="754.9523" />

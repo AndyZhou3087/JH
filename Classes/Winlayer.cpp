@@ -4,6 +4,7 @@
 #include "MyPackage.h"
 #include "Const.h"
 #include "GameDataSave.h"
+#include "GameScene.h"
 
 Winlayer::Winlayer()
 {
@@ -67,7 +68,7 @@ bool Winlayer::init(std::string addr, std::string npcid)
 				for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
 				{
 					ResData rdata = GlobalData::vec_resData[i];
-					if (rdata.id == res / 1000)
+					if (atoi(rdata.strid.c_str()) == res / 1000)
 					{
 						data.type = rdata.type;
 						break;
@@ -102,8 +103,6 @@ bool Winlayer::init(std::string addr, std::string npcid)
 			getRewardData.push_back(data);
 		}
 	}
-
-
 	updata();
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -116,6 +115,53 @@ bool Winlayer::init(std::string addr, std::string npcid)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
+}
+
+void Winlayer::updataLV()
+{
+	int winexp = GlobalData::map_npcs[m_npcid].exp;
+	g_hero->setExpValue(g_hero->getExpValue() + winexp);
+	int curlv = g_hero->getLVValue();
+	unsigned int i = 0;
+	int lv = 0;
+	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getMyID()].vec_exp;
+	for (i = 0; i < vec_heroExp.size(); i++)
+	{
+		if (g_hero->getExpValue() > vec_heroExp[i])
+		{
+			lv = i;
+		}
+	}
+	if (lv != curlv)
+	{
+		g_hero->setLVValue(lv);
+		g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv]);
+	}
+
+	for (int m = H_WG; m <= H_NG; m++)
+	{
+		PackageData* gfData = g_hero->getAtrByType((HeroAtrType)m);
+		if (gfData != NULL)
+		{
+			std::string gfname = gfData->strid;
+			std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
+			gfData->exp += winexp * 3 / 2;
+			for (i = 0; i < vec_gfExp.size(); i++)
+			{
+				if (gfData->exp > vec_gfExp[i])
+				{
+					lv = i;
+				}
+			}
+			if (lv != curlv)
+			{
+				gfData->lv = lv;
+				gfData->exp = gfData->exp - vec_gfExp[lv];
+			}
+		}
+
+	}
+
 }
 
 void Winlayer::onRewardItem(cocos2d::Ref* pSender)
@@ -139,6 +185,8 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.lv = data->lv;
 				pdata.extype = data->extype;
 				pdata.count = 1;
+				pdata.exp = data->exp;
+				pdata.goodvalue = data->goodvalue;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -156,6 +204,8 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.lv = data->lv;
 		pdata.extype = data->extype;
 		pdata.count = 1;
+		pdata.exp = data->exp;
+		pdata.goodvalue = data->goodvalue;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -251,7 +301,7 @@ void Winlayer::updata()
 			CC_CALLBACK_1(Winlayer::onRewardItem, this));
 		boxItem->setTag(i);
 		boxItem->setUserData(&getRewardData[i]);
-		boxItem->setPosition(Vec2(150 + i * 135, 512));
+		boxItem->setPosition(Vec2(150 + i * 135, 440));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));
@@ -279,7 +329,7 @@ void Winlayer::updata()
 			box,
 			CC_CALLBACK_1(Winlayer::onPackageItem, this));
 		boxItem->setTag(i);
-		boxItem->setPosition(Vec2(110 + i * 125, 305));
+		boxItem->setPosition(Vec2(110 + i * 125, 240));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));

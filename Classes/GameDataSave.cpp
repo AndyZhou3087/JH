@@ -182,3 +182,23 @@ void GameDataSave::setHeroLV(int lv)
 {
 	saveIntDataByKey("herolv", lv);
 }
+
+
+int GameDataSave::getHeroExp()
+{
+	return loadIntDataByKey("heroexp", 0);
+}
+void GameDataSave::setHeroExp(int val)
+{
+	saveIntDataByKey("heroexp", val);
+}
+
+bool GameDataSave::getHeroIsOut()
+{
+	int isout = loadIntDataByKey("heroisout", 0);
+	return isout == 0?false:true;
+}
+void GameDataSave::setHeroIsOut(bool val)
+{
+	saveIntDataByKey("heroisout", val==true?1:0);
+}
