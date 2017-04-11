@@ -214,18 +214,18 @@ void HeroProperNode::onItem(Ref* pSender)
 	std::string str = StringUtils::format("ui/%s.png", udata->strid.c_str());
 	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-	//if (isout)
-	//{
-	//	int i = 0;
-	//	for (i = 0; i < MyPackage::getSize(); i++)
-	//	{
-	//		if (udata->strid.compare(MyPackage::vec_packages[i].strid) == 0)
-	//		{
-	//			break;
-	//		}
-	//	}
-	//	MyPackage::cutone(i);
-	//}
+	if (isout)
+	{
+		int i = 0;
+		for (i = 0; i < MyPackage::getSize(); i++)
+		{
+			if (udata->strid.compare(MyPackage::vec_packages[i].strid) == 0)
+			{
+				break;
+			}
+		}
+		MyPackage::cutone(i);
+	}
 }
 
 void HeroProperNode::removeitem()
