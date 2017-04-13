@@ -133,7 +133,7 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 		tempResData.push_back(data);
 	}
 	saveTempData();
-	MyPackage::cutone(index);
+	MyPackage::cutone(data.strid);
 	updata();
 }
 

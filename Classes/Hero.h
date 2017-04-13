@@ -42,22 +42,24 @@ public:
 	CC_SYNTHESIZE(int, m_id, MyID);
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
-	void setAtrByType(HeroAtrType type, PackageData* pData);
-	PackageData* getAtrByType(HeroAtrType type);
+	void setAtrByType(HeroAtrType type, PackageData pData);
+	PackageData getAtrByType(HeroAtrType type);
 	void sleep(int hour);
 	void drinking();
+
 public:
 	static int MAXInnerinjuryValue;
 	static int MAXOutinjuryValue;
 	static int MAXHungerValue;
 	static int MAXSpiritValue;
+	std::map<HeroAtrType, PackageData> map_heroAtr;
 private:
 	void updateData(float dt);
 	void sleepbystep(float dt);
 	void drinkbystep(float dt);
 private:
 	int sleephour;
-	std::map<HeroAtrType, PackageData*> map_heroAtr;
+
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

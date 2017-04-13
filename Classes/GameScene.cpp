@@ -6,6 +6,7 @@
 #include "StorageRoom.h"
 #include "GlobalData.h"
 #include "MapLayer.h"
+#include "CommonFuncs.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -135,6 +136,31 @@ void GameScene::loadSaveData()
 	StorageRoom::loadStorageData();
 	MyPackage::load();
 	GlobalData::loadResData();
+	loadSavedHeroPropData();
+}
+
+void GameScene::loadSavedHeroPropData()
+{
+	std::string strval = GameDataSave::getInstance()->getHeroProperData();
+	std::vector<std::string> tmp;
+	CommonFuncs::split(strval, tmp, ";");
+
+	for (unsigned int i = 0; i < tmp.size(); i++)
+	{
+		std::vector<std::string> tmp2;
+		CommonFuncs::split(tmp[i], tmp2, "-");
+
+		PackageData sdata;
+		sdata.strid = tmp2[0];
+		sdata.type = atoi(tmp2[1].c_str());
+		sdata.count = atoi(tmp2[2].c_str());
+		sdata.extype = atoi(tmp2[3].c_str());
+		sdata.lv = atoi(tmp2[4].c_str());
+		sdata.exp = atoi(tmp2[5].c_str());
+		sdata.goodvalue = atoi(tmp2[6].c_str());
+		g_hero->setAtrByType((HeroAtrType)i, sdata);
+		//g_hero->set [sdata.type].push_back(sdata);
+	}
 }
 
 void GameScene::onExit()

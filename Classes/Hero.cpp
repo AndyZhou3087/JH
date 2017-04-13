@@ -107,12 +107,12 @@ void Hero::drinkbystep(float dt)
 	}
 }
 
-void Hero::setAtrByType(HeroAtrType type, PackageData* pData)
+void Hero::setAtrByType(HeroAtrType type, PackageData pData)
 {
 	map_heroAtr[type] = pData;
 }
 
-PackageData* Hero::getAtrByType(HeroAtrType type)
+PackageData Hero::getAtrByType(HeroAtrType type)
 {
 	return map_heroAtr[type];
 }

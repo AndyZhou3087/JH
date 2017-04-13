@@ -143,7 +143,7 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				this->addChild(layer);
 
 				std::string desc;
-				if (g_hero->getAtrByType((HeroAtrType)data->actype) != NULL)
+				if (g_hero->getAtrByType((HeroAtrType)data->actype).count > 0)
 				{
 					desc = CommonFuncs::gbk2utf(acdesc1[data->actype].c_str());
 				}

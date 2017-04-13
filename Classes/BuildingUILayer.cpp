@@ -290,12 +290,12 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
-		int id = atoi(map_buidACData[m_build->data.name].at(type - ACTION).icon);
-		if (id > 0)
+		std::string strid = map_buidACData[m_build->data.name].at(type - ACTION).icon;
+		if (strid.length() > 0)
 		{
 			PackageData data;
 			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
-			std::string idstr = StringUtils::format("%d", id);
+			std::string idstr = StringUtils::format("%s", strid.c_str());
 			data.strid = idstr;
 			data.count = 1;
 			data.lv = 0;

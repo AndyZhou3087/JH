@@ -24,6 +24,7 @@ private:
 	
 private:
 	void loadSaveData();
+	void loadSavedHeroPropData();
 	void saveAllData();
 	void updata(float dt);
 	void timerSaveResData(float dt);

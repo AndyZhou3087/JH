@@ -14,6 +14,7 @@ public:
 	~HeroProperNode();
 
 	virtual bool init();
+	virtual void onExit();
 	CREATE_FUNC(HeroProperNode);
 private:
 	void onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -22,6 +23,8 @@ private:
 	cocos2d::ui::ScrollView* m_scrollView;
 	void onItem(Ref* pSender);
 	void removeitem();
+	void addCarryData(HeroAtrType index);
+	void saveData();
 private:
 	Node* csbroot;
 	cocos2d::ui::ImageView* propeImages[8];
@@ -30,8 +33,9 @@ private:
 	cocos2d::ui::Text* title;
 	int lastclickindex;
 	bool isout;
-	std::vector<PackageData*> vec_carryData;
+	std::map<HeroAtrType, std::vector<PackageData>> map_carryData;
 	Sprite* m_select;
+	Node* m_lastSelectedItem;
 };
 #endif
 

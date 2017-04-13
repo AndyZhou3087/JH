@@ -124,9 +124,9 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 void FightLayer::updata(float dt)
 {
 	int gfBonusAck = 0;
-	if (g_hero->getAtrByType(H_WG) != NULL)
+	if (g_hero->getAtrByType(H_WG).count > 0)
 	{
-		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
+		std::string gfname = g_hero->getAtrByType(H_WG).strid;
 		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
@@ -157,9 +157,9 @@ void FightLayer::updata(float dt)
 	}
 
 	int gfBonusDf = 0;
-	if (g_hero->getAtrByType(H_NG) != NULL)
+	if (g_hero->getAtrByType(H_NG).count > 0)
 	{
-		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
+		std::string gfname = g_hero->getAtrByType(H_NG).strid;
 		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 

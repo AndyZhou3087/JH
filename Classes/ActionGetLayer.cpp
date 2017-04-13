@@ -157,7 +157,7 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 		getResData.push_back(data);
 	}
 	saveTempData();
-	MyPackage::cutone(index);
+	MyPackage::cutone(data.strid);
 	updata();
 }
 
@@ -196,7 +196,7 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			updata();
 
 			std::string desc;
-			if (g_hero->getAtrByType((HeroAtrType)m_actype) != NULL)
+			if (g_hero->getAtrByType((HeroAtrType)m_actype).count > 0)
 			{
 				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
 			}

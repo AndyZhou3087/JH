@@ -97,6 +97,7 @@ public:
 	static void loadNpcJsonData();
 	static void loadHeroAtrJsonData();
 	static void loadWG_NGJsonData();
+
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<std::string> vec_hillResid;

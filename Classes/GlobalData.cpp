@@ -313,3 +313,4 @@ void GlobalData::loadWG_NGJsonData()
 		map_wgngs[data.id] = data;
 	}
 }
+

@@ -5,6 +5,7 @@
 #include "GameScene.h"
 #include "GlobalData.h"
 #include "StorageRoom.h"
+#include "GameDataSave.h"
 
 const std::string name[] = { "外功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
 
@@ -13,6 +14,7 @@ const HeroAtrType Atrytpe[] = { H_WG, H_NG, H_WEAPON, H_ARMOR, H_GATHER, H_FELL,
 HeroProperNode::HeroProperNode()
 {
 	lastclickindex = -1;
+	m_lastSelectedItem = NULL;
 }
 
 
@@ -34,10 +36,23 @@ bool HeroProperNode::init()
 		cocos2d::ui::Button* imgbtn = (cocos2d::ui::Button*)csbroot->getChildByName(str);
 		imgbtn->setTag(i);
 		imgbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
+		addCarryData(Atrytpe[i]);
+
+		PackageData hpdata = g_hero->getAtrByType(Atrytpe[i]);
+		if (hpdata.count > 0)
+		{
+			for (unsigned int m = 0; m < map_carryData[Atrytpe[i]].size(); m++)
+			{
+				PackageData carrydata = map_carryData[Atrytpe[i]][m];
+				if (carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
+				{
+					str = StringUtils::format("ui/%s.png", hpdata.strid.c_str());
+					propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+					propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+				}
+			}
+		}
 	}
-
-
-
 
 
 	heroselectbg = (cocos2d::ui::Widget*)csbroot->getChildByName("heroselectbg");
@@ -79,7 +94,6 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 
 		if (lastclickindex == tag)
 			return;
-
 		removeitem();
 		showSelectFrame(Atrytpe[tag]);
 
@@ -93,51 +107,55 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 	}
 }
 
-void HeroProperNode::showSelectFrame(HeroAtrType index)
+void HeroProperNode::addCarryData(HeroAtrType index)
 {
-	vec_carryData.clear();
 	if (g_hero->getIsOut())
 	{
-		for (unsigned int i = 0; i < MyPackage::getSize(); i++)
+		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
-			PackageData* data = &MyPackage::vec_packages[i];
-			if (index == H_WEAPON && data->type == WEAPON)
-				vec_carryData.push_back(data);
-			else if (index == H_GATHER && data->extype == 1)
-				vec_carryData.push_back(data);
-			else if (index == H_FELL && data->extype == 2)
-				vec_carryData.push_back(data);
-			else if (index == H_EXCAVATE && data->extype == 3)
-				vec_carryData.push_back(data);
-			else if (index == H_WG && data->type == W_GONG)
-				vec_carryData.push_back(data);
-			else if (index == H_NG && data->type == N_GONG)
-				vec_carryData.push_back(data);
-			else if (index == H_ARMOR && data->type == PROTECT_EQU)
-				vec_carryData.push_back(data);
+			PackageData data = MyPackage::vec_packages[i];
+			if (index == H_WEAPON && data.type == WEAPON)
+				map_carryData[index].push_back(data);
+			else if (index == H_GATHER && data.extype == 1)
+				map_carryData[index].push_back(data);
+			else if (index == H_FELL && data.extype == 2)
+				map_carryData[index].push_back(data);
+			else if (index == H_EXCAVATE && data.extype == 3)
+				map_carryData[index].push_back(data);
+			else if (index == H_WG && data.type == W_GONG)
+				map_carryData[index].push_back(data);
+			else if (index == H_NG && data.type == N_GONG)
+				map_carryData[index].push_back(data);
+			else if (index == H_ARMOR && data.type == PROTECT_EQU)
+				map_carryData[index].push_back(data);
 		}
+		if (g_hero->getAtrByType(index).count > 0)
+		{
+			map_carryData[index].insert(map_carryData[index].begin(), g_hero->getAtrByType(index));
+		}
+
 	}
 	else
 	{
 		if (index == H_WEAPON)
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[WEAPON].size(); m++)
-				vec_carryData.push_back(&StorageRoom::map_storageData[WEAPON][m]);
+				map_carryData[index].push_back(StorageRoom::map_storageData[WEAPON][m]);
 		}
 		else if (index == H_WG)
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[W_GONG].size(); m++)
-				vec_carryData.push_back(&StorageRoom::map_storageData[W_GONG][m]);
+				map_carryData[index].push_back(StorageRoom::map_storageData[W_GONG][m]);
 		}
 		else if (index == H_NG)
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[N_GONG].size(); m++)
-				vec_carryData.push_back(&StorageRoom::map_storageData[N_GONG][m]);
+				map_carryData[index].push_back(StorageRoom::map_storageData[N_GONG][m]);
 		}
 		else if (index == H_ARMOR)
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[PROTECT_EQU].size(); m++)
-				vec_carryData.push_back(&StorageRoom::map_storageData[PROTECT_EQU][m]);
+				map_carryData[index].push_back(StorageRoom::map_storageData[PROTECT_EQU][m]);
 		}
 		else
 		{
@@ -149,18 +167,23 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 				for (unsigned int m = 0; m < StorageRoom::map_storageData[TOOLS].size(); m++)
 				{
 					if (StorageRoom::map_storageData[TOOLS][m].extype == 1 && index == H_GATHER)
-						vec_carryData.push_back(&StorageRoom::map_storageData[TOOLS][m]);
+						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
 					else if (StorageRoom::map_storageData[TOOLS][m].extype == 2 && index == H_FELL)
-						vec_carryData.push_back(&StorageRoom::map_storageData[TOOLS][m]);
+						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
 					else if (StorageRoom::map_storageData[TOOLS][m].extype == 3 && index == H_EXCAVATE)
-						vec_carryData.push_back(&StorageRoom::map_storageData[TOOLS][m]);
+						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
 				}
 			}
 		}
-
+		if (g_hero->getAtrByType(index).count > 0)
+		{
+			map_carryData[index].insert(map_carryData[index].begin(), g_hero->getAtrByType(index));
+		}
 	}
-
-	int tempsize = vec_carryData.size();
+}
+void HeroProperNode::showSelectFrame(HeroAtrType index)
+{
+	int tempsize = map_carryData[index].size();
 	int itemheight = 135;
 	int row = tempsize % 4 == 0 ? tempsize / 4 : (tempsize / 4 + 1);
 	int innerheight = itemheight * row;
@@ -179,7 +202,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 			box,
 			CC_CALLBACK_1(HeroProperNode::onItem, this));
 		boxItem->setTag(index);
-		boxItem->setUserData(vec_carryData[i]);
+		boxItem->setUserData(&map_carryData[index][i]);
 		boxItem->setPosition(Vec2(70 + i % 4 * 135, innerheight - i / 4 * itemheight - itemheight / 2));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
@@ -187,7 +210,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%s.png", vec_carryData[i]->strid.c_str());
+		std::string str = StringUtils::format("ui/%s.png", map_carryData[index][i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
@@ -197,42 +220,118 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		//reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		//box->addChild(reslbl);
 	}
-	if (tempsize <= 0)
+
+	m_select->setVisible(false);
+	if (tempsize > 0)
 	{
-		m_select->setVisible(false);
+		PackageData hpdata = g_hero->getAtrByType(index);
+		if (hpdata.count > 0)
+		{
+			for (int i = 0; i < tempsize; i++)
+			{
+				PackageData carrydata = map_carryData[index][i];
+				if (carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
+				{
+					std::string name = StringUtils::format("resitem%d", i);
+					Node* node = m_scrollView->getChildByName(name)->getChildren().at(0);
+					m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width / 2, node->getPositionY() + node->getContentSize().height / 2));
+					m_select->setVisible(true);
+					break;
+				}
+			}
+		}
 	}
 }
 
 void HeroProperNode::onItem(Ref* pSender)
 {
 	Node* node = (Node*)pSender;
+
 	HeroAtrType atrype = (HeroAtrType)node->getTag();
 	PackageData* udata = (PackageData*)node->getUserData();
-	g_hero->setAtrByType(atrype, udata);
 	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));
-	m_select->setVisible(true);
-	std::string str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+	
+	std::string str;
+
+	if (m_select->isVisible())
+	{
+		if (udata->type >= TOOLS)
+			str = StringUtils::format("ui/hp%d-%d.png", udata->type+1, udata->extype);
+		else
+			str = StringUtils::format("ui/hp%d.png", udata->type+1);
+
+		m_select->setVisible(false);
+	}
+	else
+	{
+		m_select->setVisible(true);
+		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+	}
+
+
 	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	if (isout)
 	{
-		int i = 0;
-		for (i = 0; i < MyPackage::getSize(); i++)
+		if (m_select->isVisible())
 		{
-			if (udata->strid.compare(MyPackage::vec_packages[i].strid) == 0)
-			{
-				break;
-			}
+			MyPackage::cutone(udata->strid);
+			g_hero->setAtrByType(atrype, *udata);
 		}
-		MyPackage::cutone(i);
+		else
+		{
+			MyPackage::add(g_hero->getAtrByType(atrype));
+			PackageData data;
+			data.count = -1;
+			g_hero->setAtrByType(atrype, data);
+		}
+		
 	}
+	else
+	{
+		if (m_select->isVisible())
+		{
+			StorageRoom::use(udata->strid);
+			g_hero->setAtrByType(atrype, *udata);
+		}
+		else
+		{
+			StorageRoom::add(g_hero->getAtrByType(atrype));
+			PackageData data;
+			data.count = -1;
+			g_hero->setAtrByType(atrype, data);
+		}
+	}
+	m_lastSelectedItem = node;
 }
 
 void HeroProperNode::removeitem()
 {
-	for (unsigned int i = 0; i < vec_carryData.size(); i++)
+	if (lastclickindex > 0)
 	{
-		std::string name = StringUtils::format("resitem%d", i);
-		m_scrollView->removeChildByName(name);
+		for (unsigned int i = 0; i < map_carryData[Atrytpe[lastclickindex]].size(); i++)
+		{
+			std::string name = StringUtils::format("resitem%d", i);
+			m_scrollView->removeChildByName(name);
+		}
 	}
+}
+
+void HeroProperNode::saveData()
+{
+	std::string str;
+	for (int i = H_WEAPON; i < H_MAX; i++)
+	{
+		PackageData sdata =	g_hero->getAtrByType((HeroAtrType)i);
+	
+		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue);
+		str.append(idstr);
+	}
+	GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));
+}
+
+void HeroProperNode::onExit()
+{
+	saveData();
+	Node::onExit();
 }

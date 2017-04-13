@@ -140,8 +140,8 @@ void Winlayer::updataLV()
 
 	for (int m = H_WG; m <= H_NG; m++)
 	{
-		PackageData* gfData = g_hero->getAtrByType((HeroAtrType)m);
-		if (gfData != NULL)
+		PackageData* gfData = &g_hero->getAtrByType((HeroAtrType)m);
+		if (gfData->count > 0)
 		{
 			std::string gfname = gfData->strid;
 			std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
@@ -236,7 +236,7 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 		getRewardData.push_back(data);
 	}
 	saveTempData();
-	MyPackage::cutone(index);
+	MyPackage::cutone(data.strid);
 	updata();
 }
 

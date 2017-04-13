@@ -218,7 +218,7 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 	PackageData data = MyPackage::vec_packages[index];
 	data.count = 1;
 	StorageRoom::add(data);
-	MyPackage::cutone(index);
+	MyPackage::cutone(data.strid);
 	updata();
 	
 }

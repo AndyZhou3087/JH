@@ -202,3 +202,12 @@ void GameDataSave::setHeroIsOut(bool val)
 {
 	saveIntDataByKey("heroisout", val==true?1:0);
 }
+
+std::string GameDataSave::getHeroProperData()
+{
+	return loadStringDataByKey("heroproper");
+}
+void GameDataSave::setHeroProperData(std::string strval)
+{
+	saveStringDataByKey("heroproper", strval);
+}

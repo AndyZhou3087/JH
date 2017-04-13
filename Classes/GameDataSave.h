@@ -66,6 +66,9 @@ public:
 	bool getHeroIsOut();
 	void setHeroIsOut(bool val);
 
+	std::string getHeroProperData();
+	void setHeroProperData(std::string strval);
+
 private:
 	static GameDataSave* _Context;
 
