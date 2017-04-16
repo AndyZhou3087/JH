@@ -57,18 +57,18 @@
           <Image Name="a019.png" />
           <Image Name="a020.png" />
           <Image Name="atrselected.png" />
-          <Image Name="ba0.png" />
-          <Image Name="ba1.png" />
-          <Image Name="ba2.png" />
+          <Image Name="0-ba0.png" />
+          <Image Name="0-ba1.png" />
+          <Image Name="0-ba2.png" />
           <Image Name="backbtn.png" />
           <Image Name="bed.png" />
-          <Image Name="bh0.png" />
-          <Image Name="bh1.png" />
+          <Image Name="0-bh0.png" />
+          <Image Name="0-bh1.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
           <Image Name="buildsmall.png" />
-          <Image Name="bw0.png" />
+          <Image Name="0-bw0.png" />
           <Image Name="bwine.png" />
           <Image Name="cooktable.png" />
           <Image Name="disbtn.png" />
@@ -318,6 +318,7 @@
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="resDetailsLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
