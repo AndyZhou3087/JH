@@ -231,11 +231,24 @@ void BuildingUILayer::parseBuildActionJSon()
 			{
 				data.res.push_back(value[i].GetInt());
 			}
-			value = jsonvalue["name"];
-			data.cname = value["name"].GetString();
-
-			value = jsonvalue["desc"];
-			data.desc = value["desc"].GetString();
+			if (jsonvalue.HasMember("name"))
+			{
+				value = jsonvalue["name"];
+				data.cname = value.GetString();
+			}
+			else
+			{
+				data.cname = "";
+			}
+			if (jsonvalue.HasMember("desc"))
+			{
+				value = jsonvalue["desc"];
+				data.desc = value.GetString();
+			}
+			else
+			{
+				data.desc = "";
+			}
 
 			map_buidACData[m_build->data.name].push_back(data);
 		}
