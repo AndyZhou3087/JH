@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "Const.h"
 #include "StorageRoom.h"
+#include "HintBox.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -243,12 +244,36 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	{
 		if (tag == BUILD)
 		{
+			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
+			{
+				int restypecount = m_build->data.Res[m_build->data.level].at(i);
+				std::string strid = StringUtils::format("%d", restypecount / 1000);
+				if (StorageRoom::getCountById(strid) < restypecount%1000)
+				{
+					HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("没有足够的资源!"));
+					addChild(layer);
+					return;
+				}
+			}
+
 			buildbtn->setEnabled(false);
 			buildbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
 			m_build->build();
 		}
 		else
 		{
+			for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(tag - ACTION).res.size(); m++)
+			{
+				int restypecount = map_buidACData[m_build->data.name].at(tag - ACTION).res.at(m);
+				std::string strid = StringUtils::format("%d", restypecount / 1000);
+				if (StorageRoom::getCountById(strid) < restypecount % 1000)
+				{
+					HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("没有足够的资源!"));
+					this->addChild(layer);
+					return;
+				}
+			}
+
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
 
@@ -281,6 +306,14 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			scrollview->setVisible(true);
 			buildbtn->setTitleText(CommonFuncs::gbk2utf("升级"));
 		}
+
+		for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
+		{
+			int restypecount = m_build->data.Res[m_build->data.level].at(i);
+			std::string strid = StringUtils::format("%d", restypecount / 1000);
+			StorageRoom::use(strid, restypecount % 1000);
+		}
+
 		updataBuildRes();
 		buildbar->setPercent(0);
 		loadActionUi();
@@ -291,7 +324,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
 		std::string strid = map_buidACData[m_build->data.name].at(type - ACTION).icon;
-		if (strid.length() > 0)
+		if (strid.length() > 0 && strid.compare(0,1, "0") != 0)
 		{
 			PackageData data;
 			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
@@ -304,6 +337,15 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			data.extype = map_buidACData[m_build->data.name].at(type - ACTION).extype;
 			StorageRoom::add(data);
 		}
+
+		for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(type - ACTION).res.size(); m++)
+		{
+			int restypecount = map_buidACData[m_build->data.name].at(type - ACTION).res.at(m);
+			std::string strid = StringUtils::format("%d", restypecount / 1000);
+			StorageRoom::use(strid, restypecount % 1000);
+		}
+
+		updataActionRes(type - ACTION);
 	}
 }
 
@@ -354,6 +396,30 @@ void BuildingUILayer::updataBuildRes()
 			buildbar->setVisible(false);
 			buildnode->getChildByName("item")->getChildByName("progressbg")->setVisible(false);
 			buildbtn->setTitleText(CommonFuncs::gbk2utf("最高级"));
+		}
+	}
+}
+
+void BuildingUILayer::updataActionRes(int index)
+{
+	cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[index]->getChildByName("item");
+
+	for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(index).res.size(); m++)
+	{
+		int restypecount = map_buidACData[m_build->data.name].at(index).res.at(m);
+		if (restypecount > 0)
+		{
+			std::string str = StringUtils::format("count%d", m);
+			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
+			rescount->setVisible(true);
+
+			std::string strid = StringUtils::format("%d", restypecount / 1000);
+			int hascount = StorageRoom::getCountById(strid);
+			int needcount = restypecount % 1000;
+			str = StringUtils::format("%d/%d", hascount, needcount);
+			rescount->setString(str);
+			if (hascount < needcount)
+				rescount->setTextColor(Color4B::RED);
 		}
 	}
 }

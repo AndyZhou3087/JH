@@ -24,6 +24,7 @@ private:
 	void saveTempData();
 	int static systime();
 	void updataLV();
+	bool checkifHasGF(std::string gfid);
 private:
 	std::string m_npcid;
 	std::vector<PackageData> getRewardData;

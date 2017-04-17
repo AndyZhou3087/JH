@@ -84,7 +84,7 @@ void StorageRoom::add(PackageData data)
 	StorageRoom::save();
 }
 
-void StorageRoom::use(std::string strid)
+void StorageRoom::use(std::string strid, int count)
 {
 	for (unsigned int type = 0; type < map_storageData.size(); type++)
 	{
@@ -93,7 +93,8 @@ void StorageRoom::use(std::string strid)
 			PackageData *sdata = &map_storageData[type][i];
 			if (strid.compare(sdata->strid) == 0)
 			{
-				if (--sdata->count <= 0)
+				sdata->count -= count;
+				if (sdata->count <= 0)
 				{
 					map_storageData[type].erase(map_storageData[type].begin() + i);
 				}

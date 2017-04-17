@@ -44,7 +44,7 @@ bool HeroProperNode::init()
 			for (unsigned int m = 0; m < map_carryData[Atrytpe[i]].size(); m++)
 			{
 				PackageData carrydata = map_carryData[Atrytpe[i]][m];
-				if (carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
+				if (carrydata.strid.length() > 0 && carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
 				{
 					str = StringUtils::format("ui/%s.png", hpdata.strid.c_str());
 					propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);

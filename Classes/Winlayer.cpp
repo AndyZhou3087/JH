@@ -5,6 +5,7 @@
 #include "Const.h"
 #include "GameDataSave.h"
 #include "GameScene.h"
+#include "StorageRoom.h"
 
 Winlayer::Winlayer()
 {
@@ -78,6 +79,7 @@ bool Winlayer::init(std::string addr, std::string npcid)
 			}
 			else
 			{
+
 				std::string strid = winres[i];
 				data.strid = strid;
 				data.count = 1;
@@ -100,7 +102,8 @@ bool Winlayer::init(std::string addr, std::string npcid)
 			}
 			data.lv = 0;
 			data.extype = 0;
-			getRewardData.push_back(data);
+			if ((data.type == W_GONG || data.type == N_GONG) && !checkifHasGF(winres[i]))
+				getRewardData.push_back(data);
 		}
 	}
 	updata();
@@ -380,4 +383,26 @@ int Winlayer::systime()
 	timep = tv.tv_sec;
 #endif
 	return timep;
+}
+
+bool Winlayer::checkifHasGF(std::string gfid)
+{
+	if (g_hero->getAtrByType(H_WG).count > 0 || g_hero->getAtrByType(H_NG).count > 0)
+		return true;
+	else
+	{
+		for (int i = 0; i < MyPackage::getSize(); i++)
+		{
+			if (MyPackage::vec_packages[i].strid.compare(gfid) == 0)
+				return true;
+		}
+		for (unsigned i = 0; i < StorageRoom::map_storageData[N_GONG].size(); i++)
+		{
+			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfid) == 0)
+				return true;
+			else if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfid) == 0)
+				return true;
+		}
+	}
+	return false;
 }

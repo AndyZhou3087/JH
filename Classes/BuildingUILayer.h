@@ -47,6 +47,7 @@ private:
 	void onfinish(Ref* pSender, BACTIONTYPE type);
 	void updataBuildRes();
 	void loadActionUi();
+	void updataActionRes(int index);
 	void parseBuildActionJSon();
 private:
 	std::map<std::string, std::vector<BuildActionData>> map_buidACData;

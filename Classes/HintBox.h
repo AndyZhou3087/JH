@@ -1,5 +1,4 @@
 
-
 #ifndef __HINTBOX__
 #define __HINTBOX__
 
