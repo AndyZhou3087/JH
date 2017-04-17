@@ -231,6 +231,12 @@ void BuildingUILayer::parseBuildActionJSon()
 			{
 				data.res.push_back(value[i].GetInt());
 			}
+			value = jsonvalue["name"];
+			data.cname = value["name"].GetString();
+
+			value = jsonvalue["desc"];
+			data.desc = value["desc"].GetString();
+
 			map_buidACData[m_build->data.name].push_back(data);
 		}
 	}
@@ -335,6 +341,8 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			data.exp = 0;
 			data.goodvalue = 100;
 			data.extype = map_buidACData[m_build->data.name].at(type - ACTION).extype;
+			data.name = map_buidACData[m_build->data.name].at(type - ACTION).cname;
+			data.desc = map_buidACData[m_build->data.name].at(type - ACTION).desc;
 			StorageRoom::add(data);
 		}
 

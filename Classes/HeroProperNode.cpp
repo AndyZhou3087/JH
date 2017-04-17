@@ -324,7 +324,7 @@ void HeroProperNode::saveData()
 	{
 		PackageData sdata =	g_hero->getAtrByType((HeroAtrType)i);
 	
-		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue);
+		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue,sdata.name.c_str(), sdata.desc.c_str());
 		str.append(idstr);
 	}
 	GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));

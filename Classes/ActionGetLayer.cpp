@@ -80,6 +80,16 @@ void ActionGetLayer::doAction()
 			data.extype = 0;
 			data.exp = 0;
 			data.goodvalue = 100;
+
+			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			{
+				if (GlobalData::vec_resData[i].strid.compare(idstr) == 0)
+				{
+					data.name = GlobalData::vec_resData[i].cname;
+					data.desc = GlobalData::vec_resData[i].desc;
+					break;
+				}
+			}
 			getResData.push_back(data);
 		}
 	}
@@ -108,6 +118,8 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.count = 1;
 				pdata.exp = data->exp;
 				pdata.goodvalue = data->goodvalue;
+				pdata.name = data->name;
+				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -127,6 +139,8 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.count = 1;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
+		pdata.name = data->name;
+		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -244,7 +258,7 @@ void ActionGetLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d;", getResData[i].strid.c_str(), getResData[i].type, getResData[i].count, getResData[i].extype, getResData[i].lv);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", getResData[i].strid.c_str(), getResData[i].type, getResData[i].count, getResData[i].extype, getResData[i].lv, getResData[i].exp, getResData[i].goodvalue, getResData[i].name.c_str(), getResData[i].desc.c_str());
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));

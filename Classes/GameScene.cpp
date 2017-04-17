@@ -158,6 +158,8 @@ void GameScene::loadSavedHeroPropData()
 		sdata.lv = atoi(tmp2[4].c_str());
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());
+		sdata.name = tmp2[7];
+		sdata.desc = tmp2[8];
 		g_hero->setAtrByType((HeroAtrType)i, sdata);
 		//g_hero->set [sdata.type].push_back(sdata);
 	}

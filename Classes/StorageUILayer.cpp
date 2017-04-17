@@ -3,6 +3,7 @@
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "Const.h"
+#include "ResDetailsLayer.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源", "工具"};
 
@@ -97,6 +98,7 @@ bool StorageUILayer::init()
 					box,
 					CC_CALLBACK_1(StorageUILayer::onclick, this));
 				boxItem->setTag(0);
+				boxItem->setUserData(&StorageRoom::map_storageData[i].at(m));
 				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m / 5 * 130));
 				Menu* menu = Menu::create();
 				menu->addChild(boxItem);
@@ -140,6 +142,10 @@ void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 void StorageUILayer::onclick(Ref* pSender)
 {
 	Node* node = (Node*)pSender;
+	PackageData* data = (PackageData*)node->getUserData();
+	ResDetailsLayer* layer = ResDetailsLayer::create(data);
+	this->addChild(layer);
+
 }
 
 int StorageUILayer::getCountByType(int type)

@@ -190,6 +190,8 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.count = 1;
 				pdata.exp = data->exp;
 				pdata.goodvalue = data->goodvalue;
+				pdata.name = data->name;
+				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -209,6 +211,8 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.count = 1;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
+		pdata.name = data->name;
+		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;

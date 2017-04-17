@@ -15,6 +15,8 @@ typedef struct
 	int extime;
 	int type;
 	int extype;
+	std::string cname;
+	std::string desc;
 }BuildActionData;
 
 typedef enum

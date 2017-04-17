@@ -16,6 +16,8 @@ typedef struct _PackageData
 	int extype;//用于区分采集1，砍伐2，挖掘工具3，其他类型为0
 	int exp;
 	int goodvalue;
+	std::string name;
+	std::string desc;
 	_PackageData()
 	{
 		strid = "";
@@ -25,6 +27,8 @@ typedef struct _PackageData
 		extype = 0;
 		exp = 0;
 		goodvalue = 0;
+		name = "";
+		desc = "";
 	}
 
 }PackageData;

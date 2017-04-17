@@ -182,6 +182,8 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 				pdata.extype = data->extype;
 				pdata.exp = data->extype;
 				pdata.goodvalue = data->goodvalue;
+				pdata.name = data->name;
+				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -201,6 +203,8 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		pdata.extype = data->extype;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
+		pdata.name = data->name;
+		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
