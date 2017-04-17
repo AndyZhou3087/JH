@@ -521,7 +521,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/ba0.png</key>
+			<key>ui/0-ba0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1356,206},{106,106}}</string>
@@ -554,7 +554,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/ba1.png</key>
+			<key>ui/0-ba1.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1312,598},{106,106}}</string>
@@ -565,7 +565,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/ba2.png</key>
+			<key>ui/0-ba2.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1398,450},{106,106}}</string>
@@ -620,7 +620,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/bh0.png</key>
+			<key>ui/0-bh0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{990,1329},{106,106}}</string>
@@ -631,7 +631,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/bh1.png</key>
+			<key>ui/0-bh1.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1089,1181},{106,106}}</string>
@@ -653,7 +653,7 @@
 				<key>sourceSize</key>
 				<string>{106,106}</string>
 			</dict>
-			<key>ui/bw0.png</key>
+			<key>ui/0-bw0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1239,895},{106,106}}</string>
