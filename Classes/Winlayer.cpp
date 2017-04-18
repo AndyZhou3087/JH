@@ -143,7 +143,8 @@ void Winlayer::updataLV()
 
 	for (int m = H_WG; m <= H_NG; m++)
 	{
-		PackageData* gfData = &g_hero->getAtrByType((HeroAtrType)m);
+		PackageData tmpdata = g_hero->getAtrByType((HeroAtrType)m);
+		PackageData* gfData = &tmpdata;
 		if (gfData->count > 0)
 		{
 			std::string gfname = gfData->strid;

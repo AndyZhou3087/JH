@@ -194,7 +194,7 @@ void TempStorageLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < tempResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", tempResData[i].strid.c_str() + tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].name.c_str(), tempResData[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].name.c_str(), tempResData[i].desc.c_str());
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage(m_addrname, str.substr(0, str.length() - 1));

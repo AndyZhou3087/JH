@@ -8,6 +8,12 @@
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="ui">
+          <Image Name="0-ba0.png" />
+          <Image Name="0-ba1.png" />
+          <Image Name="0-ba2.png" />
+          <Image Name="0-bh0.png" />
+          <Image Name="0-bh1.png" />
+          <Image Name="0-bw0.png" />
           <Image Name="1.png" />
           <Image Name="10.png" />
           <Image Name="11.png" />
@@ -57,18 +63,12 @@
           <Image Name="a019.png" />
           <Image Name="a020.png" />
           <Image Name="atrselected.png" />
-          <Image Name="0-ba0.png" />
-          <Image Name="0-ba1.png" />
-          <Image Name="0-ba2.png" />
           <Image Name="backbtn.png" />
           <Image Name="bed.png" />
-          <Image Name="0-bh0.png" />
-          <Image Name="0-bh1.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
           <Image Name="buildsmall.png" />
-          <Image Name="0-bw0.png" />
           <Image Name="bwine.png" />
           <Image Name="cooktable.png" />
           <Image Name="disbtn.png" />
@@ -312,13 +312,13 @@
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
+        <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="resDetailsLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

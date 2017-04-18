@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="56" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="1016169031" Tag="27" IconVisible="False" LeftMargin="0.0000" TopMargin="393.9950" BottomMargin="0.0050" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="normalboxgb" ActionTag="1016169031" Tag="27" IconVisible="False" TopMargin="393.9950" BottomMargin="0.0050" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="886.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="443.0050" />
@@ -65,7 +65,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="161008347" Tag="72" IconVisible="False" LeftMargin="34.1422" RightMargin="35.8578" TopMargin="611.3918" BottomMargin="68.6082" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="161008347" Tag="72" IconVisible="False" LeftMargin="34.1422" RightMargin="35.8578" TopMargin="611.3918" BottomMargin="68.6082" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="650.0000" Y="600.0000" />
             <AnchorPoint />
             <Position X="34.1422" Y="68.6082" />
