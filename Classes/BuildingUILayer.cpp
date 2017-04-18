@@ -8,6 +8,8 @@
 #include "StorageRoom.h"
 #include "HintBox.h"
 
+std::map<std::string, std::vector<BuildActionData>> BuildingUILayer::map_buidACData;
+
 BuildingUILayer::BuildingUILayer()
 {
 
@@ -218,6 +220,16 @@ void BuildingUILayer::parseBuildActionJSon()
 			value = jsonvalue["actext"];
 			strcpy(data.actext, value.GetString());
 
+			if (jsonvalue.HasMember("ep"))
+			{
+				value = jsonvalue["ep"];
+
+				for (unsigned int m = 0; m < value.Size(); m++)
+				{
+					data.ep.push_back(value[m].GetInt());
+				}
+			}
+
 			if (jsonvalue.HasMember("extype"))
 			{
 				value = jsonvalue["extype"];
@@ -366,7 +378,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			StorageRoom::use(strid, restypecount % 1000);
 		}
 
-		updataActionRes(type - ACTION);
+		updataActionRes();
 	}
 }
 
@@ -421,26 +433,35 @@ void BuildingUILayer::updataBuildRes()
 	}
 }
 
-void BuildingUILayer::updataActionRes(int index)
+void BuildingUILayer::updataActionRes()
 {
-	cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[index]->getChildByName("item");
+	std::string name = m_build->data.name;
 
-	for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(index).res.size(); m++)
+	int size = map_buidACData[name].size();
+
+	for (int i = 0; i < size; i++)
 	{
-		int restypecount = map_buidACData[m_build->data.name].at(index).res.at(m);
-		if (restypecount > 0)
+		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
+		if (m_build->data.level >= map_buidACData[name].at(i).blv)
 		{
-			std::string str = StringUtils::format("count%d", m);
-			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
-			rescount->setVisible(true);
+			for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(i).res.size(); m++)
+			{
+				int restypecount = map_buidACData[m_build->data.name].at(i).res.at(m);
+				if (restypecount > 0)
+				{
+					std::string str = StringUtils::format("count%d", m);
+					cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
+					rescount->setVisible(true);
 
-			std::string strid = StringUtils::format("%d", restypecount / 1000);
-			int hascount = StorageRoom::getCountById(strid);
-			int needcount = restypecount % 1000;
-			str = StringUtils::format("%d/%d", hascount, needcount);
-			rescount->setString(str);
-			if (hascount < needcount)
-				rescount->setTextColor(Color4B::RED);
+					std::string strid = StringUtils::format("%d", restypecount / 1000);
+					int hascount = StorageRoom::getCountById(strid);
+					int needcount = restypecount % 1000;
+					str = StringUtils::format("%d/%d", hascount, needcount);
+					rescount->setString(str);
+					if (hascount < needcount)
+						rescount->setTextColor(Color4B::RED);
+				}
+			}
 		}
 	}
 }

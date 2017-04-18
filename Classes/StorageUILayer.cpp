@@ -33,6 +33,28 @@ bool StorageUILayer::init()
 	scrollview->setContentSize(Size(650, 750));
 	scrollview->setPositionY(200);
 	
+	updateResContent();
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+
+	return true;
+}
+
+
+void StorageUILayer::updateResContent()
+{
+	for (unsigned int i = 0; i < scrollview->getChildren().size(); i++)
+	{
+		scrollview->getChildren().at(i)->removeFromParentAndCleanup(true);
+	}
 	int textheigth = 0;
 	for (int i = 0; i < RES_MAX; i++)
 	{
@@ -50,7 +72,7 @@ bool StorageUILayer::init()
 			typerow[i] = 0;
 		}
 	}
-	
+
 	int dataheigth = 0;
 	for (int i = 0; i < RES_MAX; i++)
 	{
@@ -117,18 +139,6 @@ bool StorageUILayer::init()
 			}
 		}
 	}
-
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [=](Touch *touch, Event *event)
-	{
-		return true;
-	};
-
-	listener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-
-	return true;
 }
 
 void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

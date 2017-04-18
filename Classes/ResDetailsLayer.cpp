@@ -2,6 +2,10 @@
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "StorageRoom.h"
+#include "GameScene.h"
+#include "Hero.h"
+#include "BuildingUILayer.h"
+#include "StorageUILayer.h"
 bool ResDetailsLayer::init(PackageData* pdata)
 {
 	
@@ -17,9 +21,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	cocos2d::ui::Button* okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
 	okbtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onOk, this));
 
+	if (pdata->type == FOOD || pdata->type == MEDICINAL)
+		okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall")->getChildByName("Image");
 
-	std::string str = StringUtils::format("ui/%s", pdata->strid.c_str());
+	std::string str = StringUtils::format("ui/%s.png", pdata->strid.c_str());
 	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
@@ -74,8 +80,67 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	{
 		if (m_packageData->type == FOOD)
 		{
+			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			{
+				if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
+				{
+					int addvalue = GlobalData::vec_resData[i].ep[0];
+					int hungervale = g_hero->getHungerValue();
+					if (addvalue + hungervale > Hero::MAXHungerValue)
+						g_hero->setHungerValue(Hero::MAXHungerValue);
+					else
+						g_hero->setHungerValue(addvalue + hungervale);
+
+					StorageRoom::use(m_packageData->strid);
+					break;
+				}
+			}
+		}
+		else if (m_packageData->type == MEDICINAL)
+		{
+			bool isInRes = false;
+			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			{
+				if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
+				{
+					isInRes = true;
+					int addvalue = GlobalData::vec_resData[i].ep[0];
+					int hungervale = g_hero->getHungerValue();
+					if (addvalue + hungervale > Hero::MAXHungerValue)
+						g_hero->setHungerValue(Hero::MAXHungerValue);
+					else
+						g_hero->setHungerValue(addvalue + hungervale);
+					StorageRoom::use(m_packageData->strid);
+					break;
+				}
+			}
+			if (!isInRes)
+			{
+				for (unsigned int i = 0; i < BuildingUILayer::map_buidACData["medicinekit"].size(); i++)
+				{
+					if (m_packageData->strid.compare(BuildingUILayer::map_buidACData["medicinekit"][i].icon) == 0)
+					{
+						int wvalue = BuildingUILayer::map_buidACData["medicinekit"][i].ep[0];
+						int nvalue = BuildingUILayer::map_buidACData["medicinekit"][i].ep[1];
+						int outvalue = g_hero->getOutinjuryValue();
+						if (wvalue + outvalue > Hero::MAXOutinjuryValue)
+							g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
+						else
+							g_hero->setOutinjuryValue(wvalue + outvalue);
+						int invalue = g_hero->getInnerinjuryValue();
+						if (invalue + nvalue > Hero::MAXInnerinjuryValue)
+							g_hero->setInnerinjuryValue(Hero::MAXInnerinjuryValue);
+						else
+							g_hero->setInnerinjuryValue(invalue + nvalue);
+						StorageRoom::use(m_packageData->strid);
+						break;
+					}
+				}
+			}
 
 		}
+		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
+		storageUI->updateResContent();
 		removSelf();
 	}
 }

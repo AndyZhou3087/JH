@@ -9,6 +9,7 @@ typedef struct
 {
 	char icon[20];
 	std::vector<int> res;
+	std::vector<int> ep;
 	int blv;
 	char actext[32];
 	int actime;
@@ -34,6 +35,8 @@ public:
 	virtual bool init(Building* build);
 
 	static BuildingUILayer* create(Building* build);
+
+	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -49,10 +52,9 @@ private:
 	void onfinish(Ref* pSender, BACTIONTYPE type);
 	void updataBuildRes();
 	void loadActionUi();
-	void updataActionRes(int index);
+	void updataActionRes();
 	void parseBuildActionJSon();
 private:
-	std::map<std::string, std::vector<BuildActionData>> map_buidACData;
 	std::vector<Node*> vec_actionItem;
 };
 #endif

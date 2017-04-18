@@ -75,7 +75,7 @@ bool Winlayer::init(std::string addr, std::string npcid)
 						break;
 					}
 				}
-
+				getRewardData.push_back(data);
 			}
 			else
 			{

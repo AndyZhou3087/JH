@@ -17,6 +17,7 @@ public:
 
 	virtual bool init();
 	CREATE_FUNC(StorageUILayer);
+	void updateResContent();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;

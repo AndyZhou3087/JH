@@ -11,7 +11,7 @@
 {"id":"10","max":"19","perhour":"3.1","type":"2","ep":[20],"cname":"三七","actype":"1","res":[10],"desc":"可以治疗内伤的草药","unit":"1根三七"},
 {"id":"11","max":"12","perhour":"4.9","type":"2","ep":[20],"cname":"降真香","actype":"1","res":[11],"desc":"可以治疗外伤的草药","unit":"1根降真香"},
 {"id":"12","max":"-1","perhour":"-1","type":"7","ep":[0],"cname":"玄铁","actype":"0","res":[12],"desc":"传说中锻造神器需要的材料","unit":"1块玄铁"},
-{"id":"13","max":"28","perhour":"2.8","type":"7","ep":[0],"cname":"水","actype":"0","res":[0],"desc":"生活的必须品","unit":"1桶水"},
+{"id":"13","max":"28","perhour":"2.8","type":"7","ep":[0],"cname":"水","actype":"1","res":[0],"desc":"生活的必须品","unit":"1桶水"},
 {"id":"66","max":"27","perhour":"2.2","type":"7","ep":[0],"cname":"松树","actype":"2","res":[4],"desc":"质地坚硬的树木，砍伐可以获得木材","unit":"1根木材"},
 {"id":"n002","max":"11","perhour":"4.7","type":"1","ep":[0],"cname":"兔子","actype":"0","res":[6],"desc":"灵活的兔子，抓到就可以吃肉了","unit":"1块肉"},
 {"id":"n003","max":"14","perhour":"2.9","type":"1","ep":[0],"cname":"狼","actype":"0","res":[7],"desc":"凶狠的野狼，抓到就会有一张兽皮了","unit":"1张兽皮"},
