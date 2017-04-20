@@ -15,6 +15,7 @@ std::map<int, HeroAtrData> GlobalData::map_heroAtr;
 
 std::map<std::string, WG_NGData> GlobalData::map_wgngs;
 
+std::map<std::string, EquipData> GlobalData::map_equips;
 GlobalData::GlobalData()
 {
 
@@ -268,13 +269,13 @@ void GlobalData::loadWG_NGJsonData()
 		v = vitem["bns"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_bns.push_back(v[i].GetInt());
+			data.vec_bns.push_back(v[j].GetInt());
 		}
 
 		v = vitem["exp"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_exp.push_back(v[i].GetInt());
+			data.vec_exp.push_back(v[j].GetInt());
 		}
 		data.lv = 0;
 		map_wgngs[data.id] = data;
@@ -301,16 +302,41 @@ void GlobalData::loadWG_NGJsonData()
 		v = vitem["bns"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_bns.push_back(v[i].GetInt());
+			data.vec_bns.push_back(v[j].GetInt());
 		}
 
 		v = vitem["exp"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_exp.push_back(v[i].GetInt());
+			data.vec_exp.push_back(v[j].GetInt());
 		}
 		data.lv = 0;
 		map_wgngs[data.id] = data;
 	}
+}
+
+void GlobalData::loadEquipJsonData()
+{
+	rapidjson::Document doc = ReadJsonFile("data/equip.json");
+	rapidjson::Value& values = doc["ae"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		EquipData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["id"];
+		data.id = v.GetString();
+		v = item["type"];
+		data.type = atoi(v.GetString()) - 1;
+		v = item["atk"];
+		data.atk = atoi(v.GetString());
+		v = item["df"];
+		data.df = atoi(v.GetString());
+		v = item["cname"];
+		data.cname = v.GetString();
+		v = item["desc"];
+		data.desc = v.GetString();
+		map_equips[data.id] = data;
+	}
+
 }
 

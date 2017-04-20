@@ -51,10 +51,7 @@ bool StorageUILayer::init()
 
 void StorageUILayer::updateResContent()
 {
-	for (unsigned int i = 0; i < scrollview->getChildren().size(); i++)
-	{
-		scrollview->getChildren().at(i)->removeFromParentAndCleanup(true);
-	}
+	scrollview->removeAllChildren();
 	int textheigth = 0;
 	for (int i = 0; i < RES_MAX; i++)
 	{

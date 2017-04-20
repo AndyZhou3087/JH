@@ -71,7 +71,7 @@ bool Winlayer::init(std::string addr, std::string npcid)
 					ResData rdata = GlobalData::vec_resData[i];
 					if (atoi(rdata.strid.c_str()) == res / 1000)
 					{
-						data.type = rdata.type;
+						data.type = rdata.type - 1;
 						break;
 					}
 				}

@@ -67,6 +67,16 @@ typedef struct
 	std::string desc;
 }WG_NGData;
 
+typedef struct
+{
+	std::string id;
+	int type;
+	int atk;
+	int df;
+	std::string cname;
+	std::string desc;
+}EquipData;
+
 
 typedef enum
 {
@@ -97,6 +107,7 @@ public:
 	static void loadNpcJsonData();
 	static void loadHeroAtrJsonData();
 	static void loadWG_NGJsonData();
+	static void loadEquipJsonData();
 
 public:
 	static std::vector<ResData> vec_resData;
@@ -105,6 +116,7 @@ public:
 	static std::map<std::string, NpcData> map_npcs;
 	static std::map<int, HeroAtrData> map_heroAtr;
 	static std::map<std::string, WG_NGData> map_wgngs;
+	static std::map<std::string, EquipData> map_equips;
 };
 #endif
 

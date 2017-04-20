@@ -4,6 +4,7 @@
 #include "HeroProperNode.h"
 #include "GameScene.h"
 #include "Hero.h"
+#include "GlobalData.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源1", "资源2"};
 
@@ -113,9 +114,34 @@ void HeroStateUILayer::updateStatus(float dt)
 	std::string str = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herostatus[8]->setString(str);
 
-	str = StringUtils::format("%d", g_hero->getAtkValue());
+	int weaponAtk = 0;
+	int wgAtk = 0;
+	if (g_hero->getAtrByType(H_WEAPON).count > 0)
+	{
+		std::string strid = g_hero->getAtrByType(H_WEAPON).strid;
+		weaponAtk = GlobalData::map_equips[strid].atk;
+	}
+	if (g_hero->getAtrByType(H_WG).count > 0)
+	{
+		std::string strid = g_hero->getAtrByType(H_WG).strid;
+		wgAtk = GlobalData::map_wgngs[strid].vec_bns[GlobalData::map_wgngs[strid].lv];
+	}
+	str = StringUtils::format("%d", g_hero->getAtkValue() + weaponAtk + wgAtk);
 	herostatus[9]->setString(str);
 
-	str = StringUtils::format("%d", g_hero->getDfValue());
+	int adf = 0;
+	int ngdf = 0;
+	if (g_hero->getAtrByType(H_NG).count > 0)
+	{
+		std::string gfname = g_hero->getAtrByType(H_NG).strid;
+		ngdf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+	}
+
+	if (g_hero->getAtrByType(H_ARMOR).count > 0)
+	{
+		std::string aname = g_hero->getAtrByType(H_ARMOR).strid;
+		adf = GlobalData::map_equips[aname].df;
+	}
+	str = StringUtils::format("%d", g_hero->getDfValue() + ngdf + adf);
 	herostatus[10]->setString(str);
 }

@@ -183,6 +183,7 @@ void BuildingUILayer::loadActionUi()
 
 void BuildingUILayer::parseBuildActionJSon()
 {
+	map_buidACData[m_build->data.name].clear();
 	std::string jsonfilename = StringUtils::format("data/%s.json", m_build->data.name);
 	rapidjson::Document doc = ReadJsonFile(jsonfilename);
 	rapidjson::Value& bc = doc["bc"];
