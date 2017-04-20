@@ -79,7 +79,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desclbl" ActionTag="800121182" Tag="125" IconVisible="False" LeftMargin="133.4196" RightMargin="126.5804" TopMargin="646.1957" BottomMargin="483.8043" IsCustomSize="True" FontSize="25" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desclbl" ActionTag="800121182" Tag="125" IconVisible="False" LeftMargin="133.4196" RightMargin="126.5804" TopMargin="646.1957" BottomMargin="483.8043" IsCustomSize="True" FontSize="25" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="460.0000" Y="150.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="363.4196" Y="558.8043" />

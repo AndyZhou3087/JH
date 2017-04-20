@@ -107,7 +107,7 @@ bool Winlayer::init(std::string addr, std::string npcid)
 		}
 	}
 	updata();
-
+	updataLV();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{

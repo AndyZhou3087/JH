@@ -51,7 +51,8 @@ private:
 	int static systime();
 	void updateData(float dt);
 };
-
+static int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
+static int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, { -20, 0 } };
 static std::string reasonname[] = { "春", "夏", "秋", "冬" };
 static std::string reasondesc1[] = { "春暖花开", "骄阳似火", "金风玉露", "银装素裹" };
 static std::string reasondesc[] = { "万物复苏，野外的动物逐渐变多。", "雨过天晴，各种矿类暴露在野外。", "果实累累，山中水果进入丰收期。", "林寒洞肃，树苗已长成参天大树。" };

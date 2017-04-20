@@ -113,6 +113,7 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			addChild(hbox);
 			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
 			m_escapebtn->setTag(1);
+			this->unschedule(schedule_selector(FightLayer::updata));
 		}
 		else
 		{

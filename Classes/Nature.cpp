@@ -5,19 +5,11 @@
 
 int Nature::ReasonCDays = 90;
 
-int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
-int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, {-20, 0} };
 Nature::Nature()
 {
 	m_timeinterval = NORMAL_TIMEINTERVAL;
-	m_pastdays = 0;
-	m_time = 0;
-	m_reason = EReason::Spring;
-	m_weather = EWeather::Suny;
-	m_daynight = EDAYNIGTH::Night;
+
 	srand(systime());
-	int r = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
-	m_temperature = r;
 }
 
 Nature::~Nature()

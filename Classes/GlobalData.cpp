@@ -222,25 +222,25 @@ void GlobalData::loadHeroAtrJsonData()
 		v = vitem["atk"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_atk.push_back(v[i].GetInt());
+			data.vec_atk.push_back(v[j].GetInt());
 		}
 
 		v = vitem["df"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_df.push_back(v[i].GetInt());
+			data.vec_df.push_back(v[j].GetInt());
 		}
 
 		v = vitem["exp"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_exp.push_back(v[i].GetInt());
+			data.vec_exp.push_back(v[j].GetInt());
 		}
 
 		v = vitem["maxhp"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
-			data.vec_maxhp.push_back(v[i].GetInt());
+			data.vec_maxhp.push_back(v[j].GetInt());
 		}
 		map_heroAtr[data.id] = data;
 	}
@@ -282,10 +282,11 @@ void GlobalData::loadWG_NGJsonData()
 	}
 
 	doc = ReadJsonFile("data/ng.json");
-	values = doc["n"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	rapidjson::Value& nvalues = doc["n"];
+	int a = nvalues.Size();
+	for (unsigned int i = 0; i < nvalues.Size(); i++)
 	{
-		rapidjson::Value& vitem = values[i];
+		rapidjson::Value& vitem = nvalues[i];
 		WG_NGData data;
 		rapidjson::Value& v = vitem["id"];
 		strcpy(data.id, v.GetString());

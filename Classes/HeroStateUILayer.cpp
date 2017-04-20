@@ -32,12 +32,13 @@ bool HeroStateUILayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(HeroStateUILayer::onBack, this));
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < sizeof(herostatus) / sizeof(herostatus[0]); i++)
 	{
 		std::string str = StringUtils::format("herostate%d", i);
 		herostatus[i] = (cocos2d::ui::Text*)m_csbnode->getChildByName(str);
 	}
-	this->schedule(schedule_selector(HeroStateUILayer::updateStatus),0.2f);
+	updateStatus(0);
+	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -144,4 +145,9 @@ void HeroStateUILayer::updateStatus(float dt)
 	}
 	str = StringUtils::format("%d", g_hero->getDfValue() + ngdf + adf);
 	herostatus[10]->setString(str);
+
+	str = StringUtils::format("%d", g_hero->getExpValue());
+	herostatus[11]->setString(str);
+	str = StringUtils::format("%d", g_hero->getLVValue() + 1);
+	herostatus[12]->setString(str);
 }

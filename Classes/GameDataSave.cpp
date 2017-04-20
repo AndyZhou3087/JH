@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "Utility.h"
 #include "Hero.h"
+#include "Nature.h"
 GameDataSave* GameDataSave::_Context = NULL;
 GameDataSave* GameDataSave::getInstance() {
 	if (_Context == NULL) {
@@ -80,7 +81,7 @@ void GameDataSave::setNatureTime(int val)
 
 int GameDataSave::getNatureWeather()
 {
-	return loadIntDataByKey("nwhather");
+	return loadIntDataByKey("nwhather", EWeather::Suny);
 }
 void GameDataSave::setNatureWeather(int val)
 {
@@ -88,7 +89,7 @@ void GameDataSave::setNatureWeather(int val)
 }
 int GameDataSave::getNatureReason()
 {
-	return loadIntDataByKey("nreason");
+	return loadIntDataByKey("nreason", EReason::Spring);
 }
 void GameDataSave::setNatureReason(int val)
 {
@@ -97,7 +98,8 @@ void GameDataSave::setNatureReason(int val)
 
 int GameDataSave::getNatureTemperature()
 {
-	return loadIntDataByKey("ntempe", -1000);
+	int r = tempeRange[getNatureReason()][0] + rand() % (tempeRange[getNatureReason()][1] - tempeRange[getNatureReason()][0] + 1);
+	return loadIntDataByKey("ntempe", r);
 }
 void GameDataSave::setNatureTemperature(int val)
 {
@@ -176,7 +178,7 @@ void GameDataSave::setHeroId(int id)
 
 int GameDataSave::getHeroLV()
 {
-	return loadIntDataByKey("herolv", 1);
+	return loadIntDataByKey("herolv", 0);
 }
 void GameDataSave::setHeroLV(int lv)
 {

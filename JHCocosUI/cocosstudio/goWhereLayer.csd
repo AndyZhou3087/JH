@@ -104,21 +104,21 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text1" ActionTag="-209861601" Tag="64" IconVisible="False" LeftMargin="84.7730" RightMargin="556.2270" TopMargin="1019.6288" BottomMargin="225.3712" FontSize="32" LabelText="距离：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="79.0000" Y="35.0000" />
+          <AbstractNodeData Name="text1" ActionTag="-209861601" Tag="64" IconVisible="False" LeftMargin="52.7730" RightMargin="524.2270" TopMargin="1019.6288" BottomMargin="225.3712" FontSize="32" LabelText="消耗时间：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="143.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="124.2730" Y="242.8712" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.1726" Y="0.1897" />
-            <PreSize X="0.1097" Y="0.0273" />
+            <PreSize X="0.1986" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="fast" ActionTag="601599852" Tag="65" IconVisible="False" LeftMargin="216.5089" RightMargin="503.4911" TopMargin="1037.1288" BottomMargin="242.8712" FontSize="32" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <AnchorPoint ScaleY="0.5000" />
             <Position X="216.5089" Y="242.8712" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />

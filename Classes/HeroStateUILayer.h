@@ -17,7 +17,7 @@ public:
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;
-	cocos2d::ui::Text* herostatus[11];
+	cocos2d::ui::Text* herostatus[13];
 private:
 	void updateStatus(float dt);
 };

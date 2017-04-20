@@ -150,7 +150,7 @@ void TempStorageLayer::removeitem()
 		m_scrollView->removeChildByName(name);
 	}
 
-	for (unsigned int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
 		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
@@ -264,7 +264,7 @@ void TempStorageLayer::updata()
 		box->addChild(reslbl);
 	}
 
-	for (unsigned int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
 
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");

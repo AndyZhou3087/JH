@@ -51,8 +51,17 @@ bool GoWhereLayer::init(std::string addrname, WHERELAYER_TYPE type, float distan
 	desc->setString(mdata.desc);
 
 	cocos2d::ui::Text* fast = (cocos2d::ui::Text*)csbnode->getChildByName("fast");
-	std::string faststr = StringUtils::format("%.1fh", distance / (HERO_MOVE_SPEED * 60));
-	fast->setString(faststr);
+
+	float fmin = distance / (HERO_MOVE_SPEED);
+
+	int minute = (int)fmin;
+	std::string faststr;
+	if (minute / 60 > 0)
+		faststr = StringUtils::format("%d小时%d分钟", minute / 60, minute%60);
+	else
+		faststr = StringUtils::format("%d分钟", minute);
+	
+	fast->setString(CommonFuncs::gbk2utf(faststr.c_str()));
 
 	cocos2d::ui::Text* fasttitle = (cocos2d::ui::Text*)csbnode->getChildByName("text1");
 	

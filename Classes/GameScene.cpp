@@ -103,10 +103,7 @@ void GameScene::loadSaveData()
 	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
 	g_nature->setWeather((EWeather)GameDataSave::getInstance()->getNatureWeather());
 	g_nature->setTime(GameDataSave::getInstance()->getNatureTime());
-
-	int localtemp = GameDataSave::getInstance()->getNatureTemperature();
-	if (localtemp > -1000)
-		g_nature->setTemperature(localtemp);
+	g_nature->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
 	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
 	
 
