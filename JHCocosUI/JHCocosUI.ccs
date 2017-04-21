@@ -7,6 +7,23 @@
           <TTF Name="STXINGKA.TTF" />
           <Fnt Name="topnum.fnt" />
         </Folder>
+        <Folder Name="images">
+          <Image Name="logo.png" />
+          <Image Name="selectherobg.jpg" />
+          <Image Name="shero1.jpg" />
+          <Image Name="shero1_s.jpg" />
+          <Image Name="shero1name.png" />
+          <Image Name="shero2.jpg" />
+          <Image Name="shero2_s.jpg" />
+          <Image Name="shero2name.png" />
+          <Image Name="shero3.jpg" />
+          <Image Name="shero3_s.jpg" />
+          <Image Name="shero3name.png" />
+          <Image Name="shero4.jpg" />
+          <Image Name="shero4_s.jpg" />
+          <Image Name="shero4name.png" />
+          <Image Name="startbg.jpg" />
+        </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
           <Image Name="0-ba1.png" />
@@ -90,6 +107,9 @@
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
           <Image Name="herohead1.png" />
+          <Image Name="herohead2.png" />
+          <Image Name="herohead3.png" />
+          <Image Name="herohead4.png" />
           <Image Name="heroppoint.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="hp3.png" />
@@ -174,9 +194,14 @@
           <Image Name="room.jpg" />
           <Image Name="sbed.png" />
           <Image Name="scooktable.png" />
+          <Image Name="select.png" />
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
+          <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
+          <Image Name="ssepline.jpg" />
+          <Image Name="sstartbtn.png" />
+          <Image Name="startbtn.png" />
           <Image Name="storageroom.png" />
           <Image Name="storagesepline.png" />
           <Image Name="swinemake.png" />
@@ -208,7 +233,10 @@
           <Image Name="topbox.png" />
           <Image Name="topdegree.png" />
           <Image Name="topeventwordbox.png" />
-          <Image Name="tophero0.png" />
+          <Image Name="tophero1.png" />
+          <Image Name="tophero2.png" />
+          <Image Name="tophero3.png" />
+          <Image Name="tophero4.png" />
           <Image Name="tophungerbar.png" />
           <Image Name="tophungerbg.png" />
           <Image Name="topinnerinjurybar.png" />
@@ -222,6 +250,7 @@
           <Image Name="topspiritbg.png" />
           <Image Name="toptemperature.png" />
           <Image Name="toptimeicon.png" />
+          <Image Name="unselect.png" />
           <Image Name="w001.png" />
           <Image Name="w002.png" />
           <Image Name="w003.png" />
@@ -314,11 +343,13 @@
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
+        <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="selectHeroLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

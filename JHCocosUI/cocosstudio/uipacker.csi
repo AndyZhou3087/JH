@@ -14,7 +14,7 @@
       <FilePathData Path="ui/topbox.png" />
       <FilePathData Path="ui/topdegree.png" />
       <FilePathData Path="ui/topeventwordbox.png" />
-      <FilePathData Path="ui/tophero0.png" />
+      <FilePathData Path="ui/tophero1.png" />
       <FilePathData Path="ui/tophungerbar.png" />
       <FilePathData Path="ui/tophungerbg.png" />
       <FilePathData Path="ui/topoutinjurybar.png" />
@@ -290,6 +290,18 @@
       <FilePathData Path="ui/e009.png" />
       <FilePathData Path="ui/e010.png" />
       <FilePathData Path="ui/atrselected.png" />
+      <FilePathData Path="ui/startbtn.png" />
+      <FilePathData Path="ui/select.png" />
+      <FilePathData Path="ui/slock.png" />
+      <FilePathData Path="ui/ssepline.jpg" />
+      <FilePathData Path="ui/sstartbtn.png" />
+      <FilePathData Path="ui/unselect.png" />
+      <FilePathData Path="ui/herohead2.png" />
+      <FilePathData Path="ui/herohead3.png" />
+      <FilePathData Path="ui/herohead4.png" />
+      <FilePathData Path="ui/tophero2.png" />
+      <FilePathData Path="ui/tophero3.png" />
+      <FilePathData Path="ui/tophero4.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

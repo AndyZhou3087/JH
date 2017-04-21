@@ -25,7 +25,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/tophero0.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/tophero1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="topbox" ActionTag="436177225" Tag="5" IconVisible="False" LeftMargin="-225.4999" RightMargin="-359.5001" TopMargin="-217.0000" BottomMargin="103.0000" ctype="SpriteObjectData">
             <Size X="585.0000" Y="114.0000" />
