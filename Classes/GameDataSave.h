@@ -69,8 +69,16 @@ public:
 	std::string getHeroProperData();
 	void setHeroProperData(std::string strval);
 
+	std::string getHeroUnlockData();
+	void setHeroUnlockData(std::string strval);
+
+	std::string getUserId();
+	void setUserId(std::string val);
+private:
+	std::string addUIDString(std::string val);
 private:
 	static GameDataSave* _Context;
+	static std::string userid;
 
 };
 #endif

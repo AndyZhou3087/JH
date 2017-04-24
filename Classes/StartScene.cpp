@@ -1,5 +1,6 @@
 ﻿#include "StartScene.h"
 #include "SelectHeroScene.h"
+#include "GameScene.h"
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -46,6 +47,9 @@ bool StartScene::init()
 	cocos2d::ui::Widget* savedbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("savedbtn");
 	savedbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onLoadSaved, this));
 
+	cocos2d::ui::Widget* continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
+	continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
+
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onShop, this));
 
@@ -65,6 +69,15 @@ void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Scene* scene = SelectHeroScene::createScene();
+		Director::getInstance()->replaceScene(scene);
+	}
+}
+
+void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		Scene* scene = GameScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
 }

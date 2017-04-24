@@ -197,6 +197,7 @@
           <Image Name="select.png" />
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
+          <Image Name="shopsepline.png" />
           <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
           <Image Name="ssepline.jpg" />
@@ -343,13 +344,14 @@
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
+        <Project Name="selectHeroLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="selectHeroLayer.csd" Type="Layer" />
+        <Project Name="buyDetailsLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

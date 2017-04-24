@@ -109,6 +109,15 @@ public:
 	static void loadWG_NGJsonData();
 	static void loadEquipJsonData();
 
+	static void loadUnlockHeroData();
+	static void setUnlockHero(int index, bool val);
+	static bool getUnlocHero(int index);
+
+	static int getSysSecTime();
+
+	static std::string getUId();
+	static void setUId(std::string struid);
+
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<std::string> vec_hillResid;
@@ -117,6 +126,10 @@ public:
 	static std::map<int, HeroAtrData> map_heroAtr;
 	static std::map<std::string, WG_NGData> map_wgngs;
 	static std::map<std::string, EquipData> map_equips;
+
+private:
+	static bool unlockhero[4];
+	static std::string uid;
 };
 #endif
 

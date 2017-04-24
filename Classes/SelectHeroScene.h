@@ -16,14 +16,16 @@ public:
     virtual bool init();
     
 	CREATE_FUNC(SelectHeroScene);
+	void unlockSucc(int index);
 private:
 	cocos2d::ui::ImageView* heroimg[4];
 	cocos2d::ui::ImageView* selectimg[4];
-	cocos2d::ui::Widget* heroname[4];
+	cocos2d::ui::Widget* heronameimg[4];
+	cocos2d::ui::Widget* lock[4];
 	int _lastSelect;
 private:
 	void onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-
+	void onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };
 
 #endif

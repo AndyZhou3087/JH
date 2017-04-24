@@ -127,7 +127,7 @@ void Winlayer::updataLV()
 	int curlv = g_hero->getLVValue();
 	unsigned int i = 0;
 	int lv = 0;
-	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getMyID()].vec_exp;
+	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getID()].vec_exp;
 	for (i = 0; i < vec_heroExp.size(); i++)
 	{
 		if (g_hero->getExpValue() > vec_heroExp[i])

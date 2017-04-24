@@ -21,7 +21,7 @@ bool HintBox::init(std::string text)
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
-		removSelf();
+		//removSelf();
 		return true;
 	};
 	listener->setSwallowTouches(true);

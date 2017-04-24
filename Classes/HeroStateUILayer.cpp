@@ -6,7 +6,7 @@
 #include "Hero.h"
 #include "GlobalData.h"
 
-const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "外功", "资源1", "资源2"};
+const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源1", "资源2"};
 
 HeroStateUILayer::HeroStateUILayer()
 {

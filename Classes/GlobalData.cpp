@@ -16,6 +16,11 @@ std::map<int, HeroAtrData> GlobalData::map_heroAtr;
 std::map<std::string, WG_NGData> GlobalData::map_wgngs;
 
 std::map<std::string, EquipData> GlobalData::map_equips;
+
+bool GlobalData::unlockhero[4];
+
+std::string GlobalData::uid = "";
+
 GlobalData::GlobalData()
 {
 
@@ -338,6 +343,57 @@ void GlobalData::loadEquipJsonData()
 		data.desc = v.GetString();
 		map_equips[data.id] = data;
 	}
+}
 
+void GlobalData::loadUnlockHeroData()
+{
+	std::string str = GameDataSave::getInstance()->getHeroUnlockData();
+	std::vector<std::string> tmp;
+	CommonFuncs::split(str, tmp, "-");
+
+	for (unsigned int i = 0; i < tmp.size(); i++)
+	{
+		unlockhero[i] = atoi(tmp[i].c_str()) == 1 ? true : false;
+	}
+}
+
+void GlobalData::setUnlockHero(int index, bool val)
+{
+	unlockhero[index] = val;
+	std::string str;
+	for (int i = 0; i < 4; i++)
+	{
+		str.append("%d;", unlockhero[i]);
+	}
+	GameDataSave::getInstance()->setHeroUnlockData(str.substr(0, str.length() - 1));
+}
+
+bool GlobalData::getUnlocHero(int index)
+{
+	return unlockhero[index];
+}
+
+int GlobalData::getSysSecTime()
+{
+	time_t timep;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	time(&timep);
+#else
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	timep = tv.tv_sec;
+#endif
+	return timep;
+}
+
+std::string GlobalData::getUId()
+{
+	uid = GameDataSave::getInstance()->getUserId();
+	return uid;
+}
+void GlobalData::setUId(std::string struid)
+{
+	uid = struid;
+	GameDataSave::getInstance()->setUserId(struid);
 }
 

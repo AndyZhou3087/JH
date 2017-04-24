@@ -4,6 +4,7 @@
 #include "Hero.h"
 #include "Nature.h"
 GameDataSave* GameDataSave::_Context = NULL;
+std::string GameDataSave::userid = "";
 GameDataSave* GameDataSave::getInstance() {
 	if (_Context == NULL) {
 		_Context = new GameDataSave;
@@ -17,199 +18,225 @@ void GameDataSave::purgeGameSave() {
 
 int GameDataSave::getLiveDays()
 {
-	return loadIntDataByKey("livedays");
+	return loadIntDataByKey(addUIDString("livedays"));
 }
 
 void GameDataSave::setLiveDays(int val)
 {
-	saveIntDataByKey("livedays", val);
+	saveIntDataByKey(addUIDString("livedays"), val);
 }
 
 int GameDataSave::getHeroOutinjury()
 {
-	return loadIntDataByKey("outinjury", Hero::MAXOutinjuryValue);
+	return loadIntDataByKey(addUIDString("outinjury"), Hero::MAXOutinjuryValue);
 }
 void GameDataSave::setHeroOutinjury(int val)
 {
-	saveIntDataByKey("outinjury", val);
+	saveIntDataByKey(addUIDString("outinjury"), val);
 }
 
 int GameDataSave::getHeroInnerinjury()
 {
-	return loadIntDataByKey("innerinjury", Hero::MAXInnerinjuryValue);
+	return loadIntDataByKey(addUIDString("innerinjury"), Hero::MAXInnerinjuryValue);
 }
 void GameDataSave::setHeroInnerinjury(int val)
 {
-	saveIntDataByKey("innerinjury", val);
+	saveIntDataByKey(addUIDString("innerinjury"), val);
 }
 
 int GameDataSave::getHeroHunger()
 {
-	return loadIntDataByKey("hunger", Hero::MAXHungerValue);
+	return loadIntDataByKey(addUIDString("hunger"), Hero::MAXHungerValue);
 }
 void GameDataSave::setHeroHunger(int val)
 {
-	saveIntDataByKey("hunger", val);
+	saveIntDataByKey(addUIDString("hunger"), val);
 }
 
 int GameDataSave::getHeroSpirit()
 {
-	return loadIntDataByKey("spirit", Hero::MAXSpiritValue);
+	return loadIntDataByKey(addUIDString("spirit"), Hero::MAXSpiritValue);
 }
 void GameDataSave::setHeroSpirit(int val)
 {
-	saveIntDataByKey("spirit", val);
+	saveIntDataByKey(addUIDString("spirit"), val);
 }
 
 int GameDataSave::getHeroLife()
 {
-	return loadIntDataByKey("life", -1);
+	return loadIntDataByKey(addUIDString("life"), -1);
 }
 void GameDataSave::setHeroLife(int val)
 {
-	saveIntDataByKey("life", val);
+	saveIntDataByKey(addUIDString("life"), val);
 }
 
 int GameDataSave::getNatureTime()
 {
-	return loadIntDataByKey("ndaytime");
+	return loadIntDataByKey(addUIDString("ndaytime"));
 }
 void GameDataSave::setNatureTime(int val)
 {
-	saveIntDataByKey("ndaytime", val);
+	saveIntDataByKey(addUIDString("ndaytime"), val);
 }
 
 int GameDataSave::getNatureWeather()
 {
-	return loadIntDataByKey("nwhather", EWeather::Suny);
+	return loadIntDataByKey(addUIDString("nwhather"), EWeather::Suny);
 }
 void GameDataSave::setNatureWeather(int val)
 {
-	saveIntDataByKey("nwhather", val);
+	saveIntDataByKey(addUIDString("nwhather"), val);
 }
 int GameDataSave::getNatureReason()
 {
-	return loadIntDataByKey("nreason", EReason::Spring);
+	return loadIntDataByKey(addUIDString("nreason"), EReason::Spring);
 }
 void GameDataSave::setNatureReason(int val)
 {
-	saveIntDataByKey("nreason", val);
+	saveIntDataByKey(addUIDString("nreason"), val);
 }
 
 int GameDataSave::getNatureTemperature()
 {
 	int r = tempeRange[getNatureReason()][0] + rand() % (tempeRange[getNatureReason()][1] - tempeRange[getNatureReason()][0] + 1);
-	return loadIntDataByKey("ntempe", r);
+	return loadIntDataByKey(addUIDString("ntempe"), r);
 }
 void GameDataSave::setNatureTemperature(int val)
 {
-	saveIntDataByKey("ntempe", val);
+	saveIntDataByKey(addUIDString("ntempe"), val);
 }
 
 std::string GameDataSave::getStorageData()
 {
-	return loadStringDataByKey("storage");
+	return loadStringDataByKey(addUIDString("storage"));
 }
 void GameDataSave::setStorageData(std::string valstr)
 {
-	saveStringDataByKey("storage", valstr);
+	saveStringDataByKey(addUIDString("storage"), valstr);
 }
 
 int GameDataSave::getBuildLV(std::string buildname)
 {
 	std::string rname = StringUtils::format("%slv", buildname.c_str());
-	return loadIntDataByKey(rname);
+	return loadIntDataByKey(addUIDString(rname));
 }
 void GameDataSave::setBuildLV(std::string buildname, int val)
 {
 	std::string rname = StringUtils::format("%slv", buildname.c_str());
-	saveIntDataByKey(rname, val);
+	saveIntDataByKey(addUIDString(rname), val);
 }
 
 std::string GameDataSave::getHeroAddr()
 {
-	return loadStringDataByKey("heroaddr", "m1-1");
+	return loadStringDataByKey(addUIDString("heroaddr"), "m1-1");
 }
 
 void GameDataSave::setHeroAddr(std::string addr)
 {
-	saveStringDataByKey("heroaddr", addr);
+	saveStringDataByKey(addUIDString("heroaddr"), addr);
 }
 
 std::string GameDataSave::getTempStorage(std::string addrname)
 {
 	std::string str = StringUtils::format("%s-temps", addrname.c_str());
-	return loadStringDataByKey(str);
+	return loadStringDataByKey(addUIDString(str));
 }
 
 void GameDataSave::setTempStorage(std::string addrname, std::string vstr)
 {
 	std::string str = StringUtils::format("%s-temps", addrname.c_str());
-	saveStringDataByKey(str, vstr);
+	saveStringDataByKey(addUIDString(str), vstr);
 }
 
 std::string GameDataSave::getPackage()
 {
-	return loadStringDataByKey("packages");
+	return loadStringDataByKey(addUIDString("packages"));
 }
 
 void GameDataSave::setPackage(std::string vstr)
 {
-	saveStringDataByKey("packages", vstr);
+	saveStringDataByKey(addUIDString("packages"), vstr);
 }
 
 std::string GameDataSave::getResData()
 {
-	return loadStringDataByKey("resdata");
+	return loadStringDataByKey(addUIDString("resdata"));
 }
 void GameDataSave::setResData(std::string vstr)
 {
-	saveStringDataByKey("resdata", vstr);
+	saveStringDataByKey(addUIDString("resdata"), vstr);
 }
 
 int GameDataSave::getHeroId()
 {
-	return loadIntDataByKey("heroid", 1);
+	return loadIntDataByKey(addUIDString("heroid"), 1);
 }
 void GameDataSave::setHeroId(int id)
 {
-	saveIntDataByKey("heroid", id);
+	saveIntDataByKey(addUIDString("heroid"), id);
 }
 
 int GameDataSave::getHeroLV()
 {
-	return loadIntDataByKey("herolv", 0);
+	return loadIntDataByKey(addUIDString("herolv"), 0);
 }
 void GameDataSave::setHeroLV(int lv)
 {
-	saveIntDataByKey("herolv", lv);
+	saveIntDataByKey(addUIDString("herolv"), lv);
 }
 
 
 int GameDataSave::getHeroExp()
 {
-	return loadIntDataByKey("heroexp", 0);
+	return loadIntDataByKey(addUIDString("heroexp"), 0);
 }
 void GameDataSave::setHeroExp(int val)
 {
-	saveIntDataByKey("heroexp", val);
+	saveIntDataByKey(addUIDString("heroexp"), val);
 }
 
 bool GameDataSave::getHeroIsOut()
 {
-	int isout = loadIntDataByKey("heroisout", 0);
+	int isout = loadIntDataByKey(addUIDString("heroisout"), 0);
 	return isout == 0?false:true;
 }
 void GameDataSave::setHeroIsOut(bool val)
 {
-	saveIntDataByKey("heroisout", val==true?1:0);
+	saveIntDataByKey(addUIDString("heroisout"), val == true ? 1 : 0);
 }
 
 std::string GameDataSave::getHeroProperData()
 {
-	return loadStringDataByKey("heroproper");
+	return loadStringDataByKey(addUIDString("heroproper"));
 }
 void GameDataSave::setHeroProperData(std::string strval)
 {
-	saveStringDataByKey("heroproper", strval);
+	saveStringDataByKey(addUIDString("heroproper"), strval);
 }
+
+std::string GameDataSave::getHeroUnlockData()
+{
+	return loadStringDataByKey(addUIDString("herounlock"), "1-0-0-0");
+}
+void GameDataSave::setHeroUnlockData(std::string strval)
+{
+	saveStringDataByKey(addUIDString("herounlock"), strval);
+}
+
+std::string GameDataSave::getUserId()
+{
+	return loadStringDataByKey("uid");
+}
+
+void GameDataSave::setUserId(std::string val)
+{
+	userid = val;
+	saveStringDataByKey("uid", val);
+}
+
+std::string GameDataSave::addUIDString(std::string val)
+{
+	return userid + val;
+}
+

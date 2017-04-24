@@ -17,6 +17,7 @@ public:
 	CREATE_FUNC(StartScene);
 private:
 	void onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

@@ -3304,6 +3304,17 @@
 				<key>sourceSize</key>
 				<string>{181,238}</string>
 			</dict>
+			<key>ui/shopsepline.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{678,4090},{418,6}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{418,6}</string>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>

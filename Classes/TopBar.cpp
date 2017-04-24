@@ -23,6 +23,9 @@ bool TopBar::init()
 	heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroimg");
 	heroimg->setName("hero");
 	heroimg->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
+	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getID());
+	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
+	heroimg->setContentSize(Sprite::createWithSpriteFrameName(heroidstr)->getContentSize());
 
 	reason = (cocos2d::ui::ImageView*)csbnode->getChildByName("reason");
 	reason->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));

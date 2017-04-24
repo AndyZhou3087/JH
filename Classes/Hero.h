@@ -39,7 +39,7 @@ public:
 	CC_SYNTHESIZE(int, m_exp, ExpValue);
 	CC_SYNTHESIZE(int, m_lv, LVValue);
 	CC_SYNTHESIZE(std::string, m_name, MyName);
-	CC_SYNTHESIZE(int, m_id, MyID);
+	CC_SYNTHESIZE(int, m_id, ID);
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
 	void setAtrByType(HeroAtrType type, PackageData pData);

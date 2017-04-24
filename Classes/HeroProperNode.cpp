@@ -7,7 +7,7 @@
 #include "StorageRoom.h"
 #include "GameDataSave.h"
 
-const std::string name[] = { "外功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
+const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
 
 const HeroAtrType Atrytpe[] = { H_WG, H_NG, H_WEAPON, H_ARMOR, H_GATHER, H_FELL, H_EXCAVATE, H_MOUNT };
 

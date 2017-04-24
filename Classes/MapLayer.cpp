@@ -52,9 +52,11 @@ bool MapLayer::init()
 	std::string addr = GameDataSave::getInstance()->getHeroAddr();
 	heroPos = mapbg->getChildByName(addr)->getPosition();
 
-	m_herohead = Sprite::createWithSpriteFrameName("ui/herohead1.png");
+	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getID());
+	m_herohead = Sprite::createWithSpriteFrameName(heroidstr);
 	m_herohead->setAnchorPoint(Vec2(0.5, 0));
 	m_herohead->setPosition(heroPos);
+
 	mapscroll->addChild(m_herohead);
 
 	auto listener = EventListenerTouchOneByOne::create();

@@ -112,7 +112,7 @@ void GameScene::loadSaveData()
 	g_hero->setHungerValue(GameDataSave::getInstance()->getHeroHunger());
 	g_hero->setSpiritValue(GameDataSave::getInstance()->getHeroSpirit());
 	int heroid = GameDataSave::getInstance()->getHeroId();
-	g_hero->setMyID(heroid);
+	g_hero->setID(heroid);
 	g_hero->setMyName(GlobalData::map_heroAtr[heroid].name);
 	int lv = GameDataSave::getInstance()->getHeroLV();
 	g_hero->setLVValue(lv);
@@ -184,7 +184,7 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());
 	GameDataSave::getInstance()->setHeroSpirit(g_hero->getSpiritValue());
 	GameDataSave::getInstance()->setHeroLV(g_hero->getLVValue());
-	GameDataSave::getInstance()->setHeroId(g_hero->getMyID());
+	GameDataSave::getInstance()->setHeroId(g_hero->getID());
 	GameDataSave::getInstance()->setHeroExp(g_hero->getExpValue());
 	GameDataSave::getInstance()->setHeroIsOut(g_hero->getIsOut());
 }
