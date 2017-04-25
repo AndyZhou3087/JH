@@ -79,7 +79,6 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		lastclickindex = -1;
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
 	}
@@ -92,7 +91,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 
-		if (lastclickindex == tag)
+		if (lastclickindex == tag && heroselectbg->isVisible())
 			return;
 		removeitem();
 		showSelectFrame(Atrytpe[tag]);
@@ -307,7 +306,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 void HeroProperNode::removeitem()
 {
-	if (lastclickindex > 0)
+	if (lastclickindex >= 0)
 	{
 		for (unsigned int i = 0; i < map_carryData[Atrytpe[lastclickindex]].size(); i++)
 		{
