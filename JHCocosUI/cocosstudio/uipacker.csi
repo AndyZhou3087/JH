@@ -303,6 +303,7 @@
       <FilePathData Path="ui/tophero3.png" />
       <FilePathData Path="ui/tophero4.png" />
       <FilePathData Path="ui/shopsepline.png" />
+      <FilePathData Path="ui/startbtndis.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

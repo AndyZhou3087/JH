@@ -26,8 +26,8 @@ bool BuyDetailsLayer::init(std::string imagepath, std::string name, std::string 
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	image->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 
-	nameTxt->setString(name);
-	descTxt->setString(desc);
+	nameTxt->setString(CommonFuncs::gbk2utf(name.c_str()));
+	descTxt->setString(CommonFuncs::gbk2utf(desc.c_str()));
 	std::string pricestr = StringUtils::format("￥%d.00", price);
 	priceTxt->setString(CommonFuncs::gbk2utf(pricestr.c_str()));
 
@@ -78,5 +78,6 @@ void BuyDetailsLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		SelectHeroScene* layer = (SelectHeroScene*)this->getParent();
 		if (layer != NULL)
 			layer->unlockSucc(this->getTag());
+		this->removeFromParentAndCleanup(true);
 	}
 }

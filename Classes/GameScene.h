@@ -18,6 +18,7 @@ public:
     virtual bool init();
     
 	CREATE_FUNC(GameScene);
+	void heroRevive();
 private:
 	TopBar* topBar;
 	Node* homeLayer;
@@ -28,6 +29,7 @@ private:
 	void saveAllData();
 	void updata(float dt);
 	void timerSaveResData(float dt);
+	void checkiflive(float dt);
 
 };
 extern Nature* g_nature;

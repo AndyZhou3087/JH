@@ -34,6 +34,7 @@ GlobalData::~GlobalData()
 
 void GlobalData::loadResJsonData()
 {
+	vec_resData.clear();
 	rapidjson::Document doc = ReadJsonFile("data/res.json");
 	rapidjson::Value& values = doc["r"];
 	for (unsigned int i = 0; i < values.Size(); i++)
@@ -79,6 +80,7 @@ void GlobalData::loadResJsonData()
 
 void GlobalData::loadHillResJsonData()
 {
+	vec_hillResid.clear();
 	rapidjson::Document doc = ReadJsonFile("data/homehill.json");
 	rapidjson::Value& values = doc["sh"];
 	for (unsigned int i = 0; i < values.Size(); i++)
@@ -363,7 +365,8 @@ void GlobalData::setUnlockHero(int index, bool val)
 	std::string str;
 	for (int i = 0; i < 4; i++)
 	{
-		str.append("%d;", unlockhero[i]);
+		std::string tmp = StringUtils::format("%d-", unlockhero[i]);
+		str.append(tmp);
 	}
 	GameDataSave::getInstance()->setHeroUnlockData(str.substr(0, str.length() - 1));
 }
@@ -395,5 +398,20 @@ void GlobalData::setUId(std::string struid)
 {
 	uid = struid;
 	GameDataSave::getInstance()->setUserId(struid);
+}
+
+std::string GlobalData::getDefaultStorage(int heroindex)
+{
+	rapidjson::Document doc = ReadJsonFile("data/defaultstorage.json");
+	rapidjson::Value& values = doc["ds"];
+
+	int size = values.Size();
+	if (size > 0 && heroindex <= size)
+	{
+		rapidjson::Value& item = values[heroindex-1];
+		rapidjson::Value& v = item["val"];
+		return v.GetString();
+	}
+	return "";
 }
 

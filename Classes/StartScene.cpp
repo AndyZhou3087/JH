@@ -1,6 +1,7 @@
 ﻿#include "StartScene.h"
 #include "SelectHeroScene.h"
 #include "GameScene.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -49,6 +50,10 @@ bool StartScene::init()
 
 	cocos2d::ui::Widget* continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
 	continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
+	std::string uid = GlobalData::getUId();
+
+	continuebtn->setEnabled(uid.length() <= 0?false:true);
+	continuebtn->setBright(uid.length() <= 0 ? false : true);
 
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onShop, this));
@@ -77,7 +82,11 @@ void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		std::string uid = GlobalData::getUId();
+		GlobalData::setUId(uid);
+
 		Scene* scene = GameScene::createScene();
+
 		Director::getInstance()->replaceScene(scene);
 	}
 }

@@ -1,5 +1,16 @@
 <UserData Version="3.10.0.0">
   <Properties>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="deathLayer.csd" />
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="startLayer.csd" />
+          <FilePathData Path="heroStateLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="heroStateLayer.csd" />
+      </Value>
+    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />

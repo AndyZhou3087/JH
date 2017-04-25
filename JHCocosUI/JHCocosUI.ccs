@@ -8,6 +8,8 @@
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="images">
+          <Image Name="dead.jpg" />
+          <Image Name="gameovertext.png" />
           <Image Name="logo.png" />
           <Image Name="selectherobg.jpg" />
           <Image Name="shero1.jpg" />
@@ -203,6 +205,7 @@
           <Image Name="ssepline.jpg" />
           <Image Name="sstartbtn.png" />
           <Image Name="startbtn.png" />
+          <Image Name="startbtndis.png" />
           <Image Name="storageroom.png" />
           <Image Name="storagesepline.png" />
           <Image Name="swinemake.png" />
@@ -331,6 +334,7 @@
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
+        <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
@@ -351,7 +355,8 @@
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="buyDetailsLayer.csd" Type="Layer" />
+        <Project Name="reviveLayer.csd" Type="Layer" />
+        <Project Name="deathLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

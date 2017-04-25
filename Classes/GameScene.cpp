@@ -7,6 +7,7 @@
 #include "GlobalData.h"
 #include "MapLayer.h"
 #include "CommonFuncs.h"
+#include "ReviveLayer.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -64,6 +65,9 @@ bool GameScene::init()
 	g_hero = Hero::create();
 	this->addChild(g_hero);
 
+
+	loadSaveData();
+
 	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
 	if (addrstr.compare("m1-1") == 0)
 	{
@@ -75,9 +79,6 @@ bool GameScene::init()
 		g_maplayer = MapLayer::create();
 		addChild(g_maplayer, 1, "maplayer");
 	}
-
-	loadSaveData();
-
 
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
@@ -94,7 +95,7 @@ bool GameScene::init()
 	
 	this->schedule(schedule_selector(GameScene::updata), 0.2f);
 	this->schedule(schedule_selector(GameScene::timerSaveResData), 3.0f);
-
+	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
     return true;
 }
 
@@ -112,7 +113,7 @@ void GameScene::loadSaveData()
 	g_hero->setHungerValue(GameDataSave::getInstance()->getHeroHunger());
 	g_hero->setSpiritValue(GameDataSave::getInstance()->getHeroSpirit());
 	int heroid = GameDataSave::getInstance()->getHeroId();
-	g_hero->setID(heroid);
+	g_hero->setHeadID(heroid);
 	g_hero->setMyName(GlobalData::map_heroAtr[heroid].name);
 	int lv = GameDataSave::getInstance()->getHeroLV();
 	g_hero->setLVValue(lv);
@@ -184,7 +185,7 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroHunger(g_hero->getHungerValue());
 	GameDataSave::getInstance()->setHeroSpirit(g_hero->getSpiritValue());
 	GameDataSave::getInstance()->setHeroLV(g_hero->getLVValue());
-	GameDataSave::getInstance()->setHeroId(g_hero->getID());
+	GameDataSave::getInstance()->setHeroId(g_hero->getHeadID());
 	GameDataSave::getInstance()->setHeroExp(g_hero->getExpValue());
 	GameDataSave::getInstance()->setHeroIsOut(g_hero->getIsOut());
 }
@@ -228,4 +229,21 @@ void GameScene::updata(float dt)
 void GameScene::timerSaveResData(float dt)
 {
 	GlobalData::saveResData();
+}
+
+void GameScene::checkiflive(float dt)
+{
+	if (g_hero->getLifeValue() <= 0)
+	{
+		this->unschedule(schedule_selector(GameScene::checkiflive));
+		Director::getInstance()->pause();
+		ReviveLayer* layer = ReviveLayer::create();
+		Director::getInstance()->getRunningScene()->addChild(layer, 10);
+	}
+}
+
+void GameScene::heroRevive()
+{
+	g_hero->revive();
+	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
 }

@@ -157,7 +157,7 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 			else//兔子，狼战斗界面
 			{
 				FightLayer* layer = FightLayer::create(GlobalData::map_npcs["m1-2"].name, data->strid);
-				this->addChild(layer);
+				Director::getInstance()->getRunningScene()->addChild(layer, 1, "fightlayer");
 			}
 
 		}

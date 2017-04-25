@@ -51,8 +51,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
-		removSelf();
 		return true;
+	};
+	listener->onTouchEnded = [=](Touch *touch, Event *event)
+	{
+		removSelf();
 	};
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -167,8 +170,11 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			}
 
 		}
-		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
-		storageUI->updateResContent();
+		if (m_packageData->type == FOOD || m_packageData->type == MEDICINAL)
+		{
+			StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
+			storageUI->updateResContent();
+		}
 		removSelf();
 	}
 }

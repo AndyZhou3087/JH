@@ -66,16 +66,6 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="FileNode_1" ActionTag="1012960639" Tag="230" IconVisible="True" LeftMargin="353.5789" RightMargin="366.4211" TopMargin="462.3159" BottomMargin="817.6841" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint />
-            <Position X="353.5789" Y="817.6841" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4911" Y="0.6388" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="heroAttribNode.csd" Plist="" />
-          </AbstractNodeData>
           <AbstractNodeData Name="herostatetext0" ActionTag="178132997" Tag="255" IconVisible="False" LeftMargin="86.9110" RightMargin="493.0890" TopMargin="637.5505" BottomMargin="607.4495" FontSize="32" LabelText="饥饿状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="140.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

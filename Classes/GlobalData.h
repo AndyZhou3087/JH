@@ -118,6 +118,8 @@ public:
 	static std::string getUId();
 	static void setUId(std::string struid);
 
+	static std::string getDefaultStorage(int heroindex);
+
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<std::string> vec_hillResid;

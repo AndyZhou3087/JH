@@ -333,15 +333,9 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	if (type == BUILD)
 	{
-		if (m_build->data.level > 0)
+		for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level - 1].size(); i++)
 		{
-			scrollview->setVisible(true);
-			buildbtn->setTitleText(CommonFuncs::gbk2utf("升级"));
-		}
-
-		for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
-		{
-			int restypecount = m_build->data.Res[m_build->data.level].at(i);
+			int restypecount = m_build->data.Res[m_build->data.level - 1].at(i);
 			std::string strid = StringUtils::format("%d", restypecount / 1000);
 			StorageRoom::use(strid, restypecount % 1000);
 		}
@@ -389,6 +383,22 @@ void BuildingUILayer::updataBuildRes()
 
 	int level = m_build->data.level;
 
+	if (level > 0)
+	{
+		if (level == m_build->data.maxlevel)
+		{
+			buildbar->setVisible(false);
+			buildnode->getChildByName("item")->getChildByName("progressbg")->setVisible(false);
+			buildbtn->setEnabled(false);
+			buildbtn->setTitleText(CommonFuncs::gbk2utf("最高级"));
+		}
+		else
+		{
+			scrollview->setVisible(true);
+			buildbtn->setTitleText(CommonFuncs::gbk2utf("升级"));
+		}
+	}
+
 	if (level >= m_build->data.maxlevel)
 		level = m_build->data.maxlevel - 1;
 
@@ -427,9 +437,6 @@ void BuildingUILayer::updataBuildRes()
 		{
 			resitem->setVisible(false);
 			rescount->setVisible(false);
-			buildbar->setVisible(false);
-			buildnode->getChildByName("item")->getChildByName("progressbg")->setVisible(false);
-			buildbtn->setTitleText(CommonFuncs::gbk2utf("最高级"));
 		}
 	}
 }

@@ -23,9 +23,12 @@ private:
 	cocos2d::ui::Widget* heronameimg[4];
 	cocos2d::ui::Widget* lock[4];
 	int _lastSelect;
+	bool isMoving;
 private:
 	void onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void clickMoveFinish(float dt);
 };
 
 #endif

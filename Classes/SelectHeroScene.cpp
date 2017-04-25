@@ -13,6 +13,7 @@ int heroprice[] = { 0, 2, 4, 6 };
 SelectHeroScene::SelectHeroScene()
 {
 	_lastSelect = 1;
+	isMoving = false;
 }
 SelectHeroScene::~SelectHeroScene()
 {
@@ -103,9 +104,10 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			this->addChild(layer);
 			return;
 		}
-		if (_lastSelect == tag)
+		if (_lastSelect == tag || isMoving)
 			return;
 
+		isMoving = true;
 		std::string str = StringUtils::format("images/shero%d.jpg", tag);
 		heroimg[tag - 1]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 		heroimg[tag - 1]->setContentSize(Sprite::create(str)->getContentSize());
@@ -130,6 +132,7 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		heronameimg[_lastSelect - 1]->setPositionX(selectimg[_lastSelect - 1]->getContentSize().width / 2);
 		
 		int headsize = sizeof(heroimg) / sizeof(heroimg[0]);
+
 		int leftperwidth = (720 - selectimg[tag - 1]->getContentSize().width) /(headsize - 1);
 		for (int i = 0; i < headsize; i++)
 		{
@@ -149,7 +152,7 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			heroimg[i]->runAction(MoveTo::create(0.1f, Vec2(movex, heroimg[i]->getPositionY())));
 			
 		}
-
+		this->scheduleOnce(schedule_selector(SelectHeroScene::clickMoveFinish), 0.1f);
 		_lastSelect = tag;
 	}
 }
@@ -171,5 +174,10 @@ void SelectHeroScene::unlockSucc(int index)
 {
 	lock[index - 1]->setVisible(false);
 	GlobalData::setUnlockHero(index - 1, true);
+}
+
+void SelectHeroScene::clickMoveFinish(float dt)
+{
+	isMoving = false;
 }
 

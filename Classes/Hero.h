@@ -39,14 +39,14 @@ public:
 	CC_SYNTHESIZE(int, m_exp, ExpValue);
 	CC_SYNTHESIZE(int, m_lv, LVValue);
 	CC_SYNTHESIZE(std::string, m_name, MyName);
-	CC_SYNTHESIZE(int, m_id, ID);
+	CC_SYNTHESIZE(int, m_hid, HeadID);
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
 	void setAtrByType(HeroAtrType type, PackageData pData);
 	PackageData getAtrByType(HeroAtrType type);
 	void sleep(int hour);
 	void drinking();
-
+	void revive();
 public:
 	static int MAXInnerinjuryValue;
 	static int MAXOutinjuryValue;

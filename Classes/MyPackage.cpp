@@ -114,6 +114,7 @@ void MyPackage::save()
 
 void MyPackage::load()
 {
+	vec_packages.clear();
 	std::string datastr = GameDataSave::getInstance()->getPackage();
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");

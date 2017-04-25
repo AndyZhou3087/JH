@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "Hero.h"
 #include "Nature.h"
+#include "GlobalData.h"
 GameDataSave* GameDataSave::_Context = NULL;
 std::string GameDataSave::userid = "";
 GameDataSave* GameDataSave::getInstance() {
@@ -109,7 +110,7 @@ void GameDataSave::setNatureTemperature(int val)
 
 std::string GameDataSave::getStorageData()
 {
-	return loadStringDataByKey(addUIDString("storage"));
+	return loadStringDataByKey(addUIDString("storage"), GlobalData::getDefaultStorage(getHeroId()));
 }
 void GameDataSave::setStorageData(std::string valstr)
 {

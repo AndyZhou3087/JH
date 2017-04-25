@@ -107,7 +107,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	{
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
-		this->addChild(FightLayer::create(GlobalData::map_maps[m_addrstr].cname, npcid));
+		Director::getInstance()->getRunningScene()->addChild(FightLayer::create(GlobalData::map_maps[m_addrstr].cname, npcid), 1, "fightlayer");
 	}
 }
 

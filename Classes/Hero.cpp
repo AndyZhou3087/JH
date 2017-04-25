@@ -112,3 +112,11 @@ PackageData Hero::getAtrByType(HeroAtrType type)
 {
 	return map_heroAtr[type];
 }
+void Hero::revive()
+{
+	setOutinjuryValue(MAXOutinjuryValue);
+	setInnerinjuryValue(MAXInnerinjuryValue);
+	setLifeValue(getMaxLifeValue());
+	setHungerValue(MAXHungerValue);
+	setSpiritValue(MAXSpiritValue);
+}

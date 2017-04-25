@@ -44,6 +44,12 @@ void StorageRoom::save()
 
 void StorageRoom::loadStorageData()
 {
+	std::map<int, std::vector<PackageData>>::iterator it;
+	for (it = map_storageData.begin(); it != map_storageData.end(); ++it)
+	{
+		map_storageData[it->first].clear();
+	}
+
 	std::string strval = GameDataSave::getInstance()->getStorageData();
 	std::vector<std::string> tmp;
 	CommonFuncs::split(strval, tmp, ";");

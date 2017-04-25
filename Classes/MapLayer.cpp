@@ -52,7 +52,7 @@ bool MapLayer::init()
 	std::string addr = GameDataSave::getInstance()->getHeroAddr();
 	heroPos = mapbg->getChildByName(addr)->getPosition();
 
-	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getID());
+	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getHeadID());
 	m_herohead = Sprite::createWithSpriteFrameName(heroidstr);
 	m_herohead->setAnchorPoint(Vec2(0.5, 0));
 	m_herohead->setPosition(heroPos);

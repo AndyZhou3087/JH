@@ -21,8 +21,11 @@ bool HintBox::init(std::string text)
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
-		//removSelf();
 		return true;
+	};
+	listener->onTouchEnded = [=](Touch *touch, Event *event)
+	{
+		removSelf();
 	};
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
