@@ -8,5 +8,4 @@
 {"name":"winetable","maxlevel":"1","needtime":[20],"needres":[[4002,0,0]],"cname":"酒桌","desc":"用来喝酒最好不过"},
 {"name":"exerciseroom","maxlevel":"1","needtime":[150],"needres":[[4005,1005,2005]],"cname":"练功房","desc":"闭关修炼的地方"},
 {"name":"fence","maxlevel":"1","needtime":[100],"needres":[[4008,1002,0]],"cname":"栅栏","desc":"可以抵御盗贼的光顾"}
-
 ]}

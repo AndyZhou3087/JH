@@ -1,7 +1,6 @@
 ﻿#ifndef _BUILDING_H_
 #define _BUILDING_H_
 #include "cocos2d.h"
-#include "Goods.h"
 #include "json.h"
 USING_NS_CC;
 typedef struct

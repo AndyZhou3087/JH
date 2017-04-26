@@ -59,6 +59,10 @@
           <Image Name="66.png" />
           <Image Name="69.png" />
           <Image Name="7.png" />
+          <Image Name="70.png" />
+          <Image Name="71.png" />
+          <Image Name="72.png" />
+          <Image Name="73.png" />
           <Image Name="8.png" />
           <Image Name="9.png" />
           <Image Name="a001.png" />
@@ -84,6 +88,7 @@
           <Image Name="atrselected.png" />
           <Image Name="backbtn.png" />
           <Image Name="bed.png" />
+          <Image Name="blank.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
@@ -108,6 +113,12 @@
           <Image Name="fighticon.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
+          <Image Name="goodsbg.png" />
+          <Image Name="goodssepline.png" />
+          <Image Name="gp1.png" />
+          <Image Name="gp2.png" />
+          <Image Name="gp3.png" />
+          <Image Name="gp4.png" />
           <Image Name="herohead1.png" />
           <Image Name="herohead2.png" />
           <Image Name="herohead3.png" />
@@ -199,6 +210,7 @@
           <Image Name="select.png" />
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
+          <Image Name="shopbtn.png" />
           <Image Name="shopsepline.png" />
           <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
@@ -335,6 +347,7 @@
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
+        <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
@@ -348,6 +361,7 @@
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
+        <Project Name="reviveLayer.csd" Type="Layer" />
         <Project Name="selectHeroLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
@@ -355,8 +369,8 @@
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="reviveLayer.csd" Type="Layer" />
-        <Project Name="deathLayer.csd" Type="Layer" />
+        <Project Name="goodsNode.csd" Type="Node" />
+        <Project Name="shopLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -26,7 +26,7 @@ typedef struct _PackageData
 		lv = 0;
 		extype = 0;
 		exp = 0;
-		goodvalue = 0;
+		goodvalue = 100;
 		name = "";
 		desc = "";
 	}

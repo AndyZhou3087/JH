@@ -55,9 +55,6 @@ bool StartScene::init()
 	continuebtn->setEnabled(uid.length() <= 0?false:true);
 	continuebtn->setBright(uid.length() <= 0 ? false : true);
 
-	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
-	shopbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onShop, this));
-
 	cocos2d::ui::Widget* setbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("setbtn");
 	setbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onSet, this));
 
@@ -95,14 +92,6 @@ void StartScene::onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-	}
-}
-
-void StartScene::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
-{
-	if (type == ui::Widget::TouchEventType::ENDED)
-	{
-
 	}
 }
 

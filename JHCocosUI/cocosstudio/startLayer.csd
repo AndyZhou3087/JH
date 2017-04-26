@@ -28,13 +28,13 @@
             <FileData Type="Normal" Path="images/logo.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="newstartbtn" ActionTag="-1952433060" Tag="65" IconVisible="False" LeftMargin="159.0028" RightMargin="158.9972" TopMargin="538.5140" BottomMargin="655.4860" TouchEnable="True" FontSize="50" ButtonText="新的开始" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="newstartbtn" ActionTag="-1952433060" Tag="65" IconVisible="False" LeftMargin="159.0028" RightMargin="158.9972" TopMargin="580.5117" BottomMargin="613.4883" TouchEnable="True" FontSize="50" ButtonText="新的开始" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="402.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0028" Y="698.4860" />
+            <Position X="360.0028" Y="656.4883" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5457" />
+            <PrePosition X="0.5000" Y="0.5129" />
             <PreSize X="0.5583" Y="0.0672" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -44,13 +44,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="savedbtn" ActionTag="-2140033354" Tag="66" IconVisible="False" LeftMargin="159.0051" RightMargin="158.9949" TopMargin="775.3181" BottomMargin="418.6819" TouchEnable="True" FontSize="50" ButtonText="读取存档" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="savedbtn" ActionTag="-2140033354" Tag="66" IconVisible="False" LeftMargin="159.0051" RightMargin="158.9949" TopMargin="843.5861" BottomMargin="350.4139" TouchEnable="True" FontSize="50" ButtonText="读取存档" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="402.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0051" Y="461.6819" />
+            <Position X="360.0051" Y="393.4139" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.3607" />
+            <PrePosition X="0.5000" Y="0.3074" />
             <PreSize X="0.5583" Y="0.0672" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -60,13 +60,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shopbtn" ActionTag="-1019373473" Tag="67" IconVisible="False" LeftMargin="159.0083" RightMargin="158.9917" TopMargin="893.7202" BottomMargin="300.2798" TouchEnable="True" FontSize="50" ButtonText="商       城" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="setbtn" ActionTag="-262018619" Tag="68" IconVisible="False" LeftMargin="159.0111" RightMargin="158.9889" TopMargin="975.1233" BottomMargin="218.8767" TouchEnable="True" FontSize="50" ButtonText="设      置" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="402.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0083" Y="343.2798" />
+            <Position X="360.0111" Y="261.8767" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.2682" />
+            <PrePosition X="0.5000" Y="0.2046" />
             <PreSize X="0.5583" Y="0.0672" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -76,29 +76,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="setbtn" ActionTag="-262018619" Tag="68" IconVisible="False" LeftMargin="159.0110" RightMargin="158.9890" TopMargin="1012.1223" BottomMargin="181.8777" TouchEnable="True" FontSize="50" ButtonText="设      置" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="continuebtn" ActionTag="-239537599" Tag="31" IconVisible="False" LeftMargin="159.0015" RightMargin="158.9985" TopMargin="712.0490" BottomMargin="481.9510" TouchEnable="True" FontSize="50" ButtonText="继续游戏" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="402.0000" Y="86.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0110" Y="224.8777" />
+            <Position X="360.0015" Y="524.9510" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1757" />
-            <PreSize X="0.5583" Y="0.0672" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <TextColor A="255" R="255" G="255" B="255" />
-            <DisabledFileData Type="MarkedSubImage" Path="ui/startbtn.png" Plist="uipacker.plist" />
-            <PressedFileData Type="MarkedSubImage" Path="ui/startbtn.png" Plist="uipacker.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="ui/startbtn.png" Plist="uipacker.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="continuebtn" ActionTag="-239537599" Tag="31" IconVisible="False" LeftMargin="159.0015" RightMargin="158.9985" TopMargin="656.9160" BottomMargin="537.0840" TouchEnable="True" FontSize="50" ButtonText="继续游戏" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="372" Scale9Height="64" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="402.0000" Y="86.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0015" Y="580.0840" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.4532" />
+            <PrePosition X="0.5000" Y="0.4101" />
             <PreSize X="0.5583" Y="0.0672" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />

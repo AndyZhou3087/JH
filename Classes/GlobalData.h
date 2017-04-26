@@ -88,6 +88,7 @@ typedef enum
 	W_GONG,//外功
 	RES_1,
 	TOOLS,
+	RES_2,
 	RES_MAX
 
 }StorageType;

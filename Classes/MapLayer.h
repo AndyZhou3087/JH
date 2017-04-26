@@ -16,6 +16,7 @@ public:
 	void showMoveToDest();
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void Arrive(float dt);
 private:
 	float m_distance;

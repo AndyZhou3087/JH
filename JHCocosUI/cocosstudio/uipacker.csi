@@ -304,6 +304,18 @@
       <FilePathData Path="ui/tophero4.png" />
       <FilePathData Path="ui/shopsepline.png" />
       <FilePathData Path="ui/startbtndis.png" />
+      <FilePathData Path="ui/goodsbg.png" />
+      <FilePathData Path="ui/goodssepline.png" />
+      <FilePathData Path="ui/70.png" />
+      <FilePathData Path="ui/71.png" />
+      <FilePathData Path="ui/72.png" />
+      <FilePathData Path="ui/73.png" />
+      <FilePathData Path="ui/gp1.png" />
+      <FilePathData Path="ui/gp2.png" />
+      <FilePathData Path="ui/gp3.png" />
+      <FilePathData Path="ui/gp4.png" />
+      <FilePathData Path="ui/blank.png" />
+      <FilePathData Path="ui/shopbtn.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

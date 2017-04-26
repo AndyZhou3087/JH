@@ -8,6 +8,7 @@
 #include "GameScene.h"
 #include "CommonFuncs.h"
 #include "GlobalData.h"
+#include "ShopLayer.h"
 
 static Vec2 heroPos;
 
@@ -58,6 +59,10 @@ bool MapLayer::init()
 	m_herohead->setPosition(heroPos);
 
 	mapscroll->addChild(m_herohead);
+
+
+	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
+	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -131,4 +136,13 @@ void MapLayer::Arrive(float dt)
 		g_uiScroll->addEventText(str.c_str());
 	}
 	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, ARRIVE));
+}
+
+void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		ShopLayer* shopLayer = ShopLayer::create();
+		Director::getInstance()->getRunningScene()->addChild(shopLayer);
+	}
 }
