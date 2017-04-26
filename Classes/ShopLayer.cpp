@@ -63,7 +63,7 @@ bool ShopLayer::init()
 		GoodsItem* node = GoodsItem::create(&vec_goods[i]);
 		node->setTag(i);
 		m_scrollview->addChild(node);
-		node->setPosition(Vec2(160 + i % 2 * 330, innerheight - itemheight / 2 - i / 2 * itemheight));
+		node->setPosition(Vec2(165 + i % 2 * 330, innerheight - itemheight / 2 - i / 2 * itemheight));
 	}
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");

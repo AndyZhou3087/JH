@@ -38,6 +38,8 @@ bool GoodsItem::init(GoodsData* gdata)
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("bg");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(GoodsItem::onBuy, this));
 
+	backbtn->setSwallowTouches(false);
+
 	return true;
 }
 
