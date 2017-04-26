@@ -13,7 +13,7 @@ typedef struct
 	std::vector<std::vector<int>> Res;
 	char cname[32];
 }BuidingData;
-class Building :public Goods
+class Building : public Sprite
 {
 public:
 	Building();
