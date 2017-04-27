@@ -3,6 +3,20 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
+typedef struct
+{
+	char icon[20];
+	std::vector<int> res;
+	std::vector<int> ep;
+	int blv;
+	char actext[32];
+	int actime;
+	int extime;
+	int type;
+	int extype;
+	std::string cname;
+	std::string desc;
+}BuildActionData;
 
 typedef struct
 {
@@ -100,6 +114,7 @@ public:
 	~GlobalData();
 
 public:
+	static void loadBuildActionJSon(std::string buildname);
 	static void loadResJsonData();
 	static void saveResData();
 	static void loadResData();
@@ -129,7 +144,7 @@ public:
 	static std::map<int, HeroAtrData> map_heroAtr;
 	static std::map<std::string, WG_NGData> map_wgngs;
 	static std::map<std::string, EquipData> map_equips;
-
+	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;
 private:
 	static bool unlockhero[4];
 	static std::string uid;

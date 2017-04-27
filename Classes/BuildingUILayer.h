@@ -5,20 +5,6 @@
 #include "ui/CocosGUI.h"
 #include "Building.h"
 USING_NS_CC;
-typedef struct
-{
-	char icon[20];
-	std::vector<int> res;
-	std::vector<int> ep;
-	int blv;
-	char actext[32];
-	int actime;
-	int extime;
-	int type;
-	int extype;
-	std::string cname;
-	std::string desc;
-}BuildActionData;
 
 typedef enum
 {
@@ -36,7 +22,6 @@ public:
 
 	static BuildingUILayer* create(Building* build);
 
-	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -53,7 +38,6 @@ private:
 	void updataBuildRes();
 	void loadActionUi();
 	void updataActionRes();
-	void parseBuildActionJSon();
 private:
 	std::vector<Node*> vec_actionItem;
 };

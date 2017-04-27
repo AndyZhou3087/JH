@@ -1657,7 +1657,7 @@
 			<key>ui/m8-1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1959,1542},{100,106}}</string>
+				<string>{{2030,1324},{100,106}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -3457,6 +3457,17 @@
 				<false />
 				<key>sourceSize</key>
 				<string>{118,126}</string>
+			</dict>
+			<key>ui/gp5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1959,1542},{106,106}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,106}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>

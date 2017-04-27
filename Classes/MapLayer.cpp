@@ -15,11 +15,13 @@ static Vec2 heroPos;
 MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
+	ismoving = false;
 }
 
 
 MapLayer::~MapLayer()
 {
+	ismoving = false;
 }
 
 bool MapLayer::init()
@@ -80,6 +82,8 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		if (ismoving)
+			return;
 		Node* node = (Node*)pSender;
 		m_addrname = node->getName();
 		m_destPos = node->getPosition();
@@ -96,11 +100,18 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 
 void MapLayer::showMoveToDest()
 {
+	ismoving = true;
 	float dt = m_distance / HERO_MOVE_SPEED;
 	float permin = dt / (TIMESCALE*4.0f);
 	g_nature->setTimeInterval(permin);
 	this->scheduleOnce(schedule_selector(MapLayer::Arrive), 4.0f);
 	m_herohead->runAction(MoveTo::create(4.0f, m_destPos));
+	this->scheduleOnce(schedule_selector(MapLayer::movefinish), 4.0f);
+}
+
+void MapLayer::movefinish(float dt)
+{
+	ismoving = false;
 }
 
 void MapLayer::Arrive(float dt)

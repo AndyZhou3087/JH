@@ -7,8 +7,7 @@
 #include "Const.h"
 #include "StorageRoom.h"
 #include "HintBox.h"
-
-std::map<std::string, std::vector<BuildActionData>> BuildingUILayer::map_buidACData;
+#include "GlobalData.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -69,7 +68,6 @@ bool BuildingUILayer::init(Building* build)
 
 	updataBuildRes();
 
-	parseBuildActionJSon();
 	loadActionUi();
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -97,7 +95,7 @@ void BuildingUILayer::loadActionUi()
 {
 	std::string name = m_build->data.name;
 
-	int size = map_buidACData[name].size();
+	int size = GlobalData::map_buidACData[name].size();
 
 	int itemheight = 120;
 	int scrollinnerheight = size * itemheight;
@@ -124,14 +122,14 @@ void BuildingUILayer::loadActionUi()
 		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
 		cocos2d::ui::ImageView* icon = (cocos2d::ui::ImageView*)item->getChildByName("box")->getChildByName("icon");
 
-		std::string iconstr = StringUtils::format("ui/%s.png", map_buidACData[name].at(i).icon);
+		std::string iconstr = StringUtils::format("ui/%s.png", GlobalData::map_buidACData[name].at(i).icon);
 		icon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
 		actbtn->setTag(ACTION + i);
-		actbtn->setTitleText(map_buidACData[name].at(i).actext);
+		actbtn->setTitleText(GlobalData::map_buidACData[name].at(i).actext);
 		vec_actionbtn.push_back(actbtn);
 
 		cocos2d::ui::LoadingBar* actloadbar = (cocos2d::ui::LoadingBar*)item->getChildByName("loadingbar");
@@ -139,11 +137,11 @@ void BuildingUILayer::loadActionUi()
 
 		cocos2d::ui::Text* desc = (cocos2d::ui::Text*)item->getChildByName("desc");
 
-		if (m_build->data.level >= map_buidACData[name].at(i).blv)
+		if (m_build->data.level >= GlobalData::map_buidACData[name].at(i).blv)
 		{
-			for (unsigned int m = 0; m < map_buidACData[name].at(i).res.size(); m++)
+			for (unsigned int m = 0; m < GlobalData::map_buidACData[name].at(i).res.size(); m++)
 			{
-				int restypecount = map_buidACData[name].at(i).res.at(m);
+				int restypecount = GlobalData::map_buidACData[name].at(i).res.at(m);
 				if (restypecount > 0)
 				{
 					std::string str = StringUtils::format("res%d", m);
@@ -181,93 +179,6 @@ void BuildingUILayer::loadActionUi()
 	}
 }
 
-void BuildingUILayer::parseBuildActionJSon()
-{
-	map_buidACData[m_build->data.name].clear();
-	std::string jsonfilename = StringUtils::format("data/%s.json", m_build->data.name);
-	rapidjson::Document doc = ReadJsonFile(jsonfilename);
-	rapidjson::Value& bc = doc["bc"];
-	for (unsigned int i = 0; i < bc.Size(); i++)
-	{
-		BuildActionData data;
-		rapidjson::Value& jsonvalue = bc[i];
-		if (jsonvalue.IsObject())
-		{
-			rapidjson::Value& value = jsonvalue["id"];
-			strcpy(data.icon, value.GetString());
-
-			value = jsonvalue["blv"];
-			data.blv = atoi(value.GetString());
-
-			value = jsonvalue["time"];
-			data.actime = atoi(value.GetString());
-
-			if (jsonvalue.HasMember("extime"))
-			{
-				value = jsonvalue["extime"];
-				data.extime = atoi(value.GetString());
-			}
-			else
-				data.extime = 0;
-
-			if (jsonvalue.HasMember("type"))
-			{
-				value = jsonvalue["type"];
-				data.type = atoi(value.GetString());
-			}
-			else
-				data.type = -1;
-
-			value = jsonvalue["actext"];
-			strcpy(data.actext, value.GetString());
-
-			if (jsonvalue.HasMember("ep"))
-			{
-				value = jsonvalue["ep"];
-
-				for (unsigned int m = 0; m < value.Size(); m++)
-				{
-					data.ep.push_back(value[m].GetInt());
-				}
-			}
-
-			if (jsonvalue.HasMember("extype"))
-			{
-				value = jsonvalue["extype"];
-				data.extype = atoi(value.GetString());
-			}
-			else
-				data.extype = 0;
-
-			value = jsonvalue["res"];
-			for (unsigned int i = 0; i < value.Size(); i++)
-			{
-				data.res.push_back(value[i].GetInt());
-			}
-			if (jsonvalue.HasMember("name"))
-			{
-				value = jsonvalue["name"];
-				data.cname = value.GetString();
-			}
-			else
-			{
-				data.cname = "";
-			}
-			if (jsonvalue.HasMember("desc"))
-			{
-				value = jsonvalue["desc"];
-				data.desc = value.GetString();
-			}
-			else
-			{
-				data.desc = "";
-			}
-
-			map_buidACData[m_build->data.name].push_back(data);
-		}
-	}
-}
-
 void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	Node* node = (Node*)pSender;
@@ -294,9 +205,9 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		}
 		else
 		{
-			for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(tag - ACTION).res.size(); m++)
+			for (unsigned int m = 0; m < GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).res.size(); m++)
 			{
-				int restypecount = map_buidACData[m_build->data.name].at(tag - ACTION).res.at(m);
+				int restypecount = GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).res.at(m);
 				std::string strid = StringUtils::format("%d", restypecount / 1000);
 				if (StorageRoom::getCountById(strid) < restypecount % 1000)
 				{
@@ -309,8 +220,8 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
 
-			int actime = map_buidACData[m_build->data.name].at(tag - ACTION).actime;
-			int extime = map_buidACData[m_build->data.name].at(tag - ACTION).extime;
+			int actime = GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).actime;
+			int extime = GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).extime;
 
 			if (actime < TIMESCALE* ACTION_BAR_TIME)
 			{
@@ -349,26 +260,26 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
-		std::string strid = map_buidACData[m_build->data.name].at(type - ACTION).icon;
+		std::string strid = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).icon;
 		if (strid.length() > 0 && strid.compare(0,1, "0") != 0)
 		{
 			PackageData data;
-			data.type = map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
+			data.type = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).type - 1;
 			std::string idstr = StringUtils::format("%s", strid.c_str());
 			data.strid = idstr;
 			data.count = 1;
 			data.lv = 0;
 			data.exp = 0;
 			data.goodvalue = 100;
-			data.extype = map_buidACData[m_build->data.name].at(type - ACTION).extype;
-			data.name = map_buidACData[m_build->data.name].at(type - ACTION).cname;
-			data.desc = map_buidACData[m_build->data.name].at(type - ACTION).desc;
+			data.extype = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).extype;
+			data.name = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).cname;
+			data.desc = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).desc;
 			StorageRoom::add(data);
 		}
 
-		for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(type - ACTION).res.size(); m++)
+		for (unsigned int m = 0; m < GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).res.size(); m++)
 		{
-			int restypecount = map_buidACData[m_build->data.name].at(type - ACTION).res.at(m);
+			int restypecount = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).res.at(m);
 			std::string strid = StringUtils::format("%d", restypecount / 1000);
 			StorageRoom::use(strid, restypecount % 1000);
 		}
@@ -445,16 +356,16 @@ void BuildingUILayer::updataActionRes()
 {
 	std::string name = m_build->data.name;
 
-	int size = map_buidACData[name].size();
+	int size = GlobalData::map_buidACData[name].size();
 
 	for (int i = 0; i < size; i++)
 	{
 		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
-		if (m_build->data.level >= map_buidACData[name].at(i).blv)
+		if (m_build->data.level >= GlobalData::map_buidACData[name].at(i).blv)
 		{
-			for (unsigned int m = 0; m < map_buidACData[m_build->data.name].at(i).res.size(); m++)
+			for (unsigned int m = 0; m < GlobalData::map_buidACData[m_build->data.name].at(i).res.size(); m++)
 			{
-				int restypecount = map_buidACData[m_build->data.name].at(i).res.at(m);
+				int restypecount = GlobalData::map_buidACData[m_build->data.name].at(i).res.at(m);
 				if (restypecount > 0)
 				{
 					std::string str = StringUtils::format("count%d", m);

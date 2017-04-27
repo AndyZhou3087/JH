@@ -119,6 +119,7 @@
           <Image Name="gp2.png" />
           <Image Name="gp3.png" />
           <Image Name="gp4.png" />
+          <Image Name="gp5.png" />
           <Image Name="herohead1.png" />
           <Image Name="herohead2.png" />
           <Image Name="herohead3.png" />
@@ -349,6 +350,7 @@
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
+        <Project Name="goodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
@@ -363,14 +365,13 @@
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
         <Project Name="selectHeroLayer.csd" Type="Layer" />
+        <Project Name="shopLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="goodsNode.csd" Type="Node" />
-        <Project Name="shopLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

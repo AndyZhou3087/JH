@@ -10,6 +10,7 @@ USING_NS_CC;
 std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
 std::string herodesc[] = { "哈哈哈哈哈", "太帅了太帅了太帅了", "厉害了我的哥厉害了我的哥厉害了我的哥", "好厉害的说好厉害的说好厉害的说好厉害的说好厉害的说" };
 int heroprice[] = { 0, 2, 4, 6 };
+SelectHeroScene* g_SelectHeroScene = NULL;
 SelectHeroScene::SelectHeroScene()
 {
 	_lastSelect = 1;
@@ -17,7 +18,7 @@ SelectHeroScene::SelectHeroScene()
 }
 SelectHeroScene::~SelectHeroScene()
 {
-
+	g_SelectHeroScene = NULL;
 }
 
 Scene* SelectHeroScene::createScene()
@@ -26,10 +27,10 @@ Scene* SelectHeroScene::createScene()
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-	SelectHeroScene* startlayer = SelectHeroScene::create();
+	g_SelectHeroScene = SelectHeroScene::create();
 
     // add layer as a child to scene
-	scene->addChild(startlayer);
+	scene->addChild(g_SelectHeroScene);
 
     // return the scene
     return scene;
@@ -100,8 +101,8 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		{
 			std::string imagpath = StringUtils::format("ui/tophero%d.png", tag);
 			Layer* layer = BuyDetailsLayer::create(imagpath, heroname[tag-1], herodesc[tag-1], heroprice[tag-1]);
-			layer->setTag(tag);
-			this->addChild(layer);
+			layer->setTag(tag - 1);
+			this->addChild(layer, 0, "buyherolayer");
 			return;
 		}
 		if (_lastSelect == tag || isMoving)
@@ -172,8 +173,9 @@ void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 void SelectHeroScene::unlockSucc(int index)
 {
-	lock[index - 1]->setVisible(false);
-	GlobalData::setUnlockHero(index - 1, true);
+	this->removeChildByName("buyherolayer");
+	lock[index]->setVisible(false);
+	GlobalData::setUnlockHero(index, true);
 }
 
 void SelectHeroScene::clickMoveFinish(float dt)

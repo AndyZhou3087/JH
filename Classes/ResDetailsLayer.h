@@ -16,8 +16,10 @@ public:
 	void removSelf();
 private:
 	void onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
 	PackageData* m_packageData;
+	cocos2d::ui::Text* uselbl;
 };
 
 #endif

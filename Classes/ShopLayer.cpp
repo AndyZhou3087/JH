@@ -3,6 +3,8 @@
 #include "GlobalData.h"
 #include "BuildingUILayer.h"
 #include "StorageRoom.h"
+#include "GameScene.h"
+#include "SelectHeroScene.h"
 
 #include "json.h"
 
@@ -61,7 +63,7 @@ bool ShopLayer::init()
 	for (int i = 0; i < goodsize; i++)
 	{
 		GoodsItem* node = GoodsItem::create(&vec_goods[i]);
-		node->setTag(i);
+		node->setTag(4 + i);
 		m_scrollview->addChild(node);
 		node->setPosition(Vec2(165 + i % 2 * 330, innerheight - itemheight / 2 - i / 2 * itemheight));
 	}
@@ -135,20 +137,22 @@ void ShopLayer::setMessage(PYARET ret)
 	if (ret == PAY_SUCC)
 	{
 		int shopgoodsszie = vec_goods.size();
-		if (payindex < shopgoodsszie)
+		if (payindex < 4) // 人物解锁
 		{
-			addBuyGoods();
+			if (g_SelectHeroScene != NULL)
+				g_SelectHeroScene->unlockSucc(payindex);
 		}
 		else
 		{
-			//人物解锁
+			addBuyGoods();
 		}
 	}
 }
 
 void ShopLayer::addBuyGoods()
 {
-	std::vector<std::string> payRes = vec_goods[payindex].vec_res;
+	int goodsindex = payindex - 4;
+	std::vector<std::string> payRes = vec_goods[goodsindex].vec_res;
 	for (unsigned int i = 0; i < payRes.size(); i++)
 	{
 		int intRes = atoi(payRes[i].c_str());
@@ -156,9 +160,9 @@ void ShopLayer::addBuyGoods()
 		{
 			bool isfind = false;
 			std::map<std::string, std::vector<BuildActionData>>::iterator it;
-			for (it = BuildingUILayer::map_buidACData.begin(); it != BuildingUILayer::map_buidACData.end(); ++it)
+			for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
 			{
-				std::vector<BuildActionData> vec_bactData = BuildingUILayer::map_buidACData[it->first];
+				std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
 
 				for (unsigned int m = 0; m < vec_bactData.size(); m++)
 				{
@@ -205,7 +209,7 @@ void ShopLayer::addBuyGoods()
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (payRes[i].compare(gfdata.id) == 0)
+				if (payRes[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(payRes[i]))
 				{
 					isfind = true;
 					PackageData pdata;
@@ -231,7 +235,7 @@ void ShopLayer::addBuyGoods()
 				std::map<std::string, EquipData>::iterator ite;
 				for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 				{
-					EquipData edata = GlobalData::map_equips[it->first];
+					EquipData edata = GlobalData::map_equips[ite->first];
 					if (payRes[i].compare(edata.id) == 0)
 					{
 						PackageData pdata;

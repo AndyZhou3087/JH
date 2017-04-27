@@ -5,7 +5,7 @@ int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
 int Hero::MAXSpiritValue = 100.0f;
 
-#define HungerSpeed 5
+#define HungerSpeed 2
 #define InnerinjurySpeed 1
 #define OutinjurySpeed 1
 #define SpiritSpeed 2
@@ -108,9 +108,9 @@ void Hero::setAtrByType(HeroAtrType type, PackageData pData)
 	map_heroAtr[type] = pData;
 }
 
-PackageData Hero::getAtrByType(HeroAtrType type)
+PackageData* Hero::getAtrByType(HeroAtrType type)
 {
-	return map_heroAtr[type];
+	return &map_heroAtr[type];
 }
 void Hero::revive()
 {
@@ -119,4 +119,26 @@ void Hero::revive()
 	setLifeValue(getMaxLifeValue());
 	setHungerValue(MAXHungerValue);
 	setSpiritValue(MAXSpiritValue);
+}
+
+bool Hero::checkifHasGF(std::string gfid)
+{
+	if (getAtrByType(H_WG)->count > 0 || getAtrByType(H_NG)->count > 0)
+		return true;
+	else
+	{
+		for (int i = 0; i < MyPackage::getSize(); i++)
+		{
+			if (MyPackage::vec_packages[i].strid.compare(gfid) == 0)
+				return true;
+		}
+		for (unsigned i = 0; i < StorageRoom::map_storageData[N_GONG].size(); i++)
+		{
+			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfid) == 0)
+				return true;
+			else if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfid) == 0)
+				return true;
+		}
+	}
+	return false;
 }

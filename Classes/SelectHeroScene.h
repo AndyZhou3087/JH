@@ -30,5 +30,5 @@ private:
 
 	void clickMoveFinish(float dt);
 };
-
+extern SelectHeroScene* g_SelectHeroScene;
 #endif

@@ -126,15 +126,15 @@ void FightLayer::updata(float dt)
 {
 	int gfBonusAck = 0;
 	int weaponAck = 0;
-	if (g_hero->getAtrByType(H_WG).count > 0)
+	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
-		std::string gfname = g_hero->getAtrByType(H_WG).strid;
+		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
 		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
-	if (g_hero->getAtrByType(H_WEAPON).count > 0)
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0)
 	{
-		std::string wname = g_hero->getAtrByType(H_WEAPON).strid;
+		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAck = GlobalData::map_equips[wname].atk;
 	}
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
@@ -165,15 +165,15 @@ void FightLayer::updata(float dt)
 
 	int gfBonusDf = 0;
 	int adf = 0;
-	if (g_hero->getAtrByType(H_NG).count > 0)
+	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
-		std::string gfname = g_hero->getAtrByType(H_NG).strid;
+		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
 		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
-	if (g_hero->getAtrByType(H_ARMOR).count > 0)
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0)
 	{
-		std::string aname = g_hero->getAtrByType(H_ARMOR).strid;
+		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
 	}
 

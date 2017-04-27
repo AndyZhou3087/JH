@@ -210,7 +210,7 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			updata();
 
 			std::string desc;
-			if (g_hero->getAtrByType((HeroAtrType)m_actype).count > 0)
+			if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)
 			{
 				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
 			}

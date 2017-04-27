@@ -18,11 +18,13 @@ private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void Arrive(float dt);
+	void movefinish(float dt);
 private:
 	float m_distance;
 	Vec2 m_destPos;
 	std::string m_addrname;
 	Sprite* m_herohead;
+	bool ismoving;
 };
 extern MapLayer* g_maplayer;
 #endif

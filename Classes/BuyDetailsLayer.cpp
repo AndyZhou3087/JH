@@ -1,6 +1,6 @@
 ﻿#include "BuyDetailsLayer.h"
 #include "CommonFuncs.h"
-#include "SelectHeroScene.h"
+#include "ShopLayer.h"
 BuyDetailsLayer::BuyDetailsLayer()
 {
 
@@ -75,9 +75,6 @@ void BuyDetailsLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SelectHeroScene* layer = (SelectHeroScene*)this->getParent();
-		if (layer != NULL)
-			layer->unlockSucc(this->getTag());
-		this->removeFromParentAndCleanup(true);
+		ShopLayer::beginPay(this->getTag());
 	}
 }

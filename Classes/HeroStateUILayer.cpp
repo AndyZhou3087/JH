@@ -108,23 +108,23 @@ void HeroStateUILayer::updateStatus(float dt)
 	}
 	herostatus[3]->setString(CommonFuncs::gbk2utf(spiritInjurydesc1[index].c_str()));
 
-	herostatus[4]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_GATHER).count > 0 ? "快速":"一般"));
-	herostatus[5]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_FELL).count > 0 ? "快速" : "一般"));
-	herostatus[6]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_EXCAVATE).count > 0 ? "快速" : "一般"));
+	herostatus[4]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_GATHER)->count > 0 ? "快速":"一般"));
+	herostatus[5]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_FELL)->count > 0 ? "快速" : "一般"));
+	herostatus[6]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_EXCAVATE)->count > 0 ? "快速" : "一般"));
 	herostatus[7]->setString(CommonFuncs::gbk2utf("一般"));
 	std::string str = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herostatus[8]->setString(str);
 
 	int weaponAtk = 0;
 	int wgAtk = 0;
-	if (g_hero->getAtrByType(H_WEAPON).count > 0)
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0)
 	{
-		std::string strid = g_hero->getAtrByType(H_WEAPON).strid;
+		std::string strid = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAtk = GlobalData::map_equips[strid].atk;
 	}
-	if (g_hero->getAtrByType(H_WG).count > 0)
+	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
-		std::string strid = g_hero->getAtrByType(H_WG).strid;
+		std::string strid = g_hero->getAtrByType(H_WG)->strid;
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[GlobalData::map_wgngs[strid].lv];
 	}
 	str = StringUtils::format("%d", g_hero->getAtkValue() + weaponAtk + wgAtk);
@@ -132,15 +132,15 @@ void HeroStateUILayer::updateStatus(float dt)
 
 	int adf = 0;
 	int ngdf = 0;
-	if (g_hero->getAtrByType(H_NG).count > 0)
+	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
-		std::string gfname = g_hero->getAtrByType(H_NG).strid;
+		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
 		ngdf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
-	if (g_hero->getAtrByType(H_ARMOR).count > 0)
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0)
 	{
-		std::string aname = g_hero->getAtrByType(H_ARMOR).strid;
+		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
 	}
 	str = StringUtils::format("%d", g_hero->getDfValue() + ngdf + adf);

@@ -4,7 +4,10 @@
 #include "CommonFuncs.h"
 #include "json.h"
 
+std::map<std::string, std::vector<BuildActionData>> GlobalData::map_buidACData;
+
 std::vector<ResData> GlobalData::vec_resData;
+
 std::vector<std::string> GlobalData::vec_hillResid;
 
 std::map<std::string, MapData> GlobalData::map_maps;
@@ -30,6 +33,93 @@ GlobalData::GlobalData()
 GlobalData::~GlobalData()
 {
 
+}
+
+void GlobalData::loadBuildActionJSon(std::string buildname)
+{
+	map_buidACData[buildname].clear();
+	std::string jsonfilename = StringUtils::format("data/%s.json", buildname.c_str());
+	rapidjson::Document doc = ReadJsonFile(jsonfilename);
+	rapidjson::Value& bc = doc["bc"];
+	for (unsigned int i = 0; i < bc.Size(); i++)
+	{
+		BuildActionData data;
+		rapidjson::Value& jsonvalue = bc[i];
+		if (jsonvalue.IsObject())
+		{
+			rapidjson::Value& value = jsonvalue["id"];
+			strcpy(data.icon, value.GetString());
+
+			value = jsonvalue["blv"];
+			data.blv = atoi(value.GetString());
+
+			value = jsonvalue["time"];
+			data.actime = atoi(value.GetString());
+
+			if (jsonvalue.HasMember("extime"))
+			{
+				value = jsonvalue["extime"];
+				data.extime = atoi(value.GetString());
+			}
+			else
+				data.extime = 0;
+
+			if (jsonvalue.HasMember("type"))
+			{
+				value = jsonvalue["type"];
+				data.type = atoi(value.GetString());
+			}
+			else
+				data.type = -1;
+
+			value = jsonvalue["actext"];
+			strcpy(data.actext, value.GetString());
+
+			if (jsonvalue.HasMember("ep"))
+			{
+				value = jsonvalue["ep"];
+
+				for (unsigned int m = 0; m < value.Size(); m++)
+				{
+					data.ep.push_back(value[m].GetInt());
+				}
+			}
+
+			if (jsonvalue.HasMember("extype"))
+			{
+				value = jsonvalue["extype"];
+				data.extype = atoi(value.GetString());
+			}
+			else
+				data.extype = 0;
+
+			value = jsonvalue["res"];
+			for (unsigned int i = 0; i < value.Size(); i++)
+			{
+				data.res.push_back(value[i].GetInt());
+			}
+			if (jsonvalue.HasMember("name"))
+			{
+				value = jsonvalue["name"];
+				data.cname = value.GetString();
+			}
+			else
+			{
+				data.cname = "";
+			}
+			if (jsonvalue.HasMember("desc"))
+			{
+				value = jsonvalue["desc"];
+				data.desc = value.GetString();
+			}
+			else
+			{
+				data.desc = "";
+			}
+
+			map_buidACData[buildname].push_back(data);
+		}
+	}
 }
 
 void GlobalData::loadResJsonData()
@@ -334,7 +424,7 @@ void GlobalData::loadEquipJsonData()
 		rapidjson::Value& v = item["id"];
 		data.id = v.GetString();
 		v = item["type"];
-		data.type = atoi(v.GetString()) - 1;
+		data.type = atoi(v.GetString());
 		v = item["atk"];
 		data.atk = atoi(v.GetString());
 		v = item["df"];

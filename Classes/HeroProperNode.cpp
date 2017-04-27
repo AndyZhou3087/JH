@@ -38,15 +38,15 @@ bool HeroProperNode::init()
 		imgbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
 		addCarryData(Atrytpe[i]);
 
-		PackageData hpdata = g_hero->getAtrByType(Atrytpe[i]);
-		if (hpdata.count > 0)
+		PackageData* hpdata = g_hero->getAtrByType(Atrytpe[i]);
+		if (hpdata->count > 0)
 		{
 			for (unsigned int m = 0; m < map_carryData[Atrytpe[i]].size(); m++)
 			{
 				PackageData carrydata = map_carryData[Atrytpe[i]][m];
-				if (carrydata.strid.length() > 0 && carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
+				if (carrydata.strid.length() > 0 && carrydata.strid.compare(hpdata->strid) == 0 && carrydata.goodvalue == hpdata->goodvalue)
 				{
-					str = StringUtils::format("ui/%s.png", hpdata.strid.c_str());
+					str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
 					propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 					propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 				}
@@ -128,9 +128,9 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			else if (index == H_ARMOR && data.type == PROTECT_EQU)
 				map_carryData[index].push_back(data);
 		}
-		if (g_hero->getAtrByType(index).count > 0)
+		if (g_hero->getAtrByType(index)->count > 0)
 		{
-			map_carryData[index].insert(map_carryData[index].begin(), g_hero->getAtrByType(index));
+			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
 		}
 
 	}
@@ -174,9 +174,9 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 				}
 			}
 		}
-		if (g_hero->getAtrByType(index).count > 0)
+		if (g_hero->getAtrByType(index)->count > 0)
 		{
-			map_carryData[index].insert(map_carryData[index].begin(), g_hero->getAtrByType(index));
+			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
 		}
 	}
 }
@@ -223,13 +223,13 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 	m_select->setVisible(false);
 	if (tempsize > 0)
 	{
-		PackageData hpdata = g_hero->getAtrByType(index);
-		if (hpdata.count > 0)
+		PackageData *hpdata = g_hero->getAtrByType(index);
+		if (hpdata->count > 0)
 		{
 			for (int i = 0; i < tempsize; i++)
 			{
 				PackageData carrydata = map_carryData[index][i];
-				if (carrydata.strid.compare(hpdata.strid) == 0 && carrydata.goodvalue == hpdata.goodvalue)
+				if (carrydata.strid.compare(hpdata->strid) == 0 && carrydata.goodvalue == hpdata->goodvalue)
 				{
 					std::string name = StringUtils::format("resitem%d", i);
 					Node* node = m_scrollView->getChildByName(name)->getChildren().at(0);
@@ -279,7 +279,7 @@ void HeroProperNode::onItem(Ref* pSender)
 		}
 		else
 		{
-			MyPackage::add(g_hero->getAtrByType(atrype));
+			MyPackage::add(*g_hero->getAtrByType(atrype));
 			PackageData data;
 			data.count = -1;
 			g_hero->setAtrByType(atrype, data);
@@ -295,7 +295,7 @@ void HeroProperNode::onItem(Ref* pSender)
 		}
 		else
 		{
-			StorageRoom::add(g_hero->getAtrByType(atrype));
+			StorageRoom::add(*g_hero->getAtrByType(atrype));
 			PackageData data;
 			data.count = -1;
 			g_hero->setAtrByType(atrype, data);
@@ -321,9 +321,9 @@ void HeroProperNode::saveData()
 	std::string str;
 	for (int i = H_WEAPON; i < H_MAX; i++)
 	{
-		PackageData sdata =	g_hero->getAtrByType((HeroAtrType)i);
+		PackageData* sdata =	g_hero->getAtrByType((HeroAtrType)i);
 	
-		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue,sdata.name.c_str(), sdata.desc.c_str());
+		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue,sdata->name.c_str(), sdata->desc.c_str());
 		str.append(idstr);
 	}
 	GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));

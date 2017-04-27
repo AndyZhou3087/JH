@@ -2,6 +2,8 @@
 #define _HERO_H_
 #include "cocos2d.h"
 #include "MyPackage.h"
+#include "StorageRoom.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 
@@ -43,10 +45,11 @@ public:
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
 	void setAtrByType(HeroAtrType type, PackageData pData);
-	PackageData getAtrByType(HeroAtrType type);
+	PackageData* getAtrByType(HeroAtrType type);
 	void sleep(int hour);
 	void drinking();
 	void revive();
+	bool checkifHasGF(std::string gfid);
 public:
 	static int MAXInnerinjuryValue;
 	static int MAXOutinjuryValue;
