@@ -180,13 +180,24 @@
           <AbstractNodeData Name="heroselectbg" ActionTag="997868806" VisibleForFrame="False" Tag="69" IconVisible="False" LeftMargin="-321.9998" RightMargin="-322.0002" TopMargin="17.0000" BottomMargin="-583.0000" ctype="SpriteObjectData">
             <Size X="644.0000" Y="566.0000" />
             <Children>
-              <AbstractNodeData Name="syssmalltie_0" ActionTag="-1310471874" Tag="73" IconVisible="False" LeftMargin="126.1813" RightMargin="337.8187" TopMargin="21.5024" BottomMargin="506.4976" ctype="SpriteObjectData">
+              <AbstractNodeData Name="syssmalltie_0" ActionTag="-1310471874" Tag="73" IconVisible="False" LeftMargin="126.1813" RightMargin="337.8187" TopMargin="21.5000" BottomMargin="506.5000" ctype="SpriteObjectData">
                 <Size X="180.0000" Y="38.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="216.1813" Y="525.4976" />
+                <Position X="216.1813" Y="525.5000" />
                 <Scale ScaleX="0.6500" ScaleY="0.6500" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3357" Y="0.9284" />
+                <PreSize X="0.2795" Y="0.0671" />
+                <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="syssmalltie" ActionTag="-1896590188" Tag="71" IconVisible="False" LeftMargin="337.6530" RightMargin="126.3470" TopMargin="21.5000" BottomMargin="506.5000" FlipX="True" ctype="SpriteObjectData">
+                <Size X="180.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="427.6530" Y="525.5000" />
+                <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6641" Y="0.9284" />
                 <PreSize X="0.2795" Y="0.0671" />
                 <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
@@ -202,17 +213,6 @@
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="syssmalltie" ActionTag="-1896590188" Tag="71" IconVisible="False" LeftMargin="337.6530" RightMargin="126.3470" TopMargin="71.4352" BottomMargin="456.5648" FlipX="True" ctype="SpriteObjectData">
-                <Size X="180.0000" Y="38.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="427.6530" Y="475.5648" />
-                <Scale ScaleX="0.6500" ScaleY="0.6500" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6641" Y="0.8402" />
-                <PreSize X="0.2795" Y="0.0671" />
-                <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
-                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="ScrollView" ActionTag="-723096159" Tag="74" IconVisible="False" LeftMargin="20.9583" RightMargin="23.0417" TopMargin="62.2874" BottomMargin="103.7126" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="600.0000" Y="400.0000" />

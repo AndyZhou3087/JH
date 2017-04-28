@@ -54,7 +54,7 @@ int MyPackage::add(PackageData pdata)
 void MyPackage::cutone(std::string strid)
 {
 	int index = 0;
-	for (index = 0; index < MyPackage::getSize(); index++)
+	for (index = MyPackage::getSize() - 1; index >= 0; index--)
 	{
 		if (strid.compare(MyPackage::vec_packages[index].strid) == 0)
 		{

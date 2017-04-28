@@ -99,6 +99,28 @@ void StartScene::onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		showTypeText();
 	}
+}
+
+void StartScene::showTypeText()
+{
+	static std::string content = "aaaabbbbccccddd  eeefff,dossad  ";
+	static int n = 0;
+	static Label * l2 = Label::create();
+	l2->setString("");
+	l2->setAnchorPoint(Vec2(0, 0.5f));
+	l2->setSystemFontSize(20);
+	addChild(l2);
+	l2->setPosition(Vec2(400, 100));
+	l2->schedule([&](float dt){
+		std::string str = content.substr(0, n);
+		//n += 3;//中文加3
+		n += 1;//英文加1
+		l2->setString(str);
+		if (n > content.length())
+		{
+			unschedule("schedule_callback");
+		}
+	}, 0.1f, "schedule_callback");
 }

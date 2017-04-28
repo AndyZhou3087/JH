@@ -24,10 +24,12 @@ private:
 	void doAction();
 	void removeitem();
 	void saveTempData();
+	void loadTempData();
 private:
 	int mrid;
 	std::vector<int> rewardids;
 	std::vector<PackageData> getResData;
+	std::vector<PackageData> tempResData;
 	int mtype;
 	int m_actype;
 };

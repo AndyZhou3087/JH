@@ -134,6 +134,7 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 
 	if (i == tempResData.size())
 	{
+		data.count = 1;
 		tempResData.push_back(data);
 	}
 	saveTempData();

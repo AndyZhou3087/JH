@@ -82,13 +82,13 @@
                 <PreSize X="0.0726" Y="0.3729" />
                 <FileData Type="MarkedSubImage" Path="ui/resbox.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count0" ActionTag="864830858" VisibleForFrame="False" Tag="66" IconVisible="False" LeftMargin="188.3031" RightMargin="399.6969" TopMargin="45.5774" BottomMargin="60.4226" FontSize="12" LabelText="0/3" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="count0" ActionTag="864830858" VisibleForFrame="False" Tag="66" IconVisible="False" LeftMargin="187.3031" RightMargin="400.6969" TopMargin="45.5774" BottomMargin="60.4226" FontSize="12" LabelText="0/3" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="18.0000" Y="12.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="188.3031" Y="66.4226" />
+                <Position X="187.3031" Y="66.4226" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.3107" Y="0.5629" />
+                <PrePosition X="0.3091" Y="0.5629" />
                 <PreSize X="0.0297" Y="0.1017" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

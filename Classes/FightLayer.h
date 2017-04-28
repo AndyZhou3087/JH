@@ -11,9 +11,9 @@ public:
 	FightLayer();
 	~FightLayer();
 
-	bool init(std::string addrname, std::string npcname);
+	bool init(std::string addrname, std::string npcid);
 
-	static FightLayer* create(std::string addrname, std::string npcid);
+	static FightLayer* create(std::string addrid, std::string npcid);
 private:
 	void onEscape (cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
@@ -28,7 +28,7 @@ private:
 	int npcatk;
 	int npcdf;
 	void updata(float dt);
-	std::string m_addrname;
+	std::string m_addrid;
 	std::string m_npcid;
 };
 #endif

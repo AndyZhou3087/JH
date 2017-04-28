@@ -12,8 +12,26 @@
           <FilePathData Path="startLayer.csd" />
           <FilePathData Path="uipacker.csi" />
           <FilePathData Path="resDetailsLayer.csd" />
+          <FilePathData Path="winLayer.csd" />
+          <FilePathData Path="heroAttribNode.csd" />
+          <FilePathData Path="heroStateLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="actionGetLayer.csd" />
+          <FilePathData Path="buyDetailsLayer.csd" />
+          <FilePathData Path="deathLayer.csd" />
+          <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="homeHillLayer.csd" />
+          <FilePathData Path="homeLayer.csd" />
+          <FilePathData Path="outDoorLayer.csd" />
+          <FilePathData Path="reviveLayer.csd" />
+          <FilePathData Path="selectHeroLayer.csd" />
+          <FilePathData Path="sysSmallLayer.csd" />
+          <FilePathData Path="tempStorageLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="resDetailsLayer.csd" />
+        <ActiveDocument Path="actionNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

@@ -245,13 +245,13 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					{
 						if (gfData->exp > vec_gfExp[i])
 						{
-							lv = i;
+							lv = i + 1;
 						}
 					}
-					if (lv != curlv)
+					if (lv > curlv)
 					{
 						gfData->lv = lv;
-						gfData->exp = gfData->exp - vec_gfExp[lv];
+						gfData->exp = gfData->exp - vec_gfExp[lv - 1];
 					}
 				}
 
@@ -291,13 +291,13 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			{
 				if (g_hero->getExpValue() > vec_heroExp[i])
 				{
-					lv = i;
+					lv = i + 1;
 				}
 			}
-			if (lv != curlv)
+			if (lv > curlv)
 			{
 				g_hero->setLVValue(lv);
-				g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv]);
+				g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv - 1]);
 			}
 		}
 		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();

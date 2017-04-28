@@ -229,6 +229,7 @@ void GameScene::updata(float dt)
 void GameScene::timerSaveResData(float dt)
 {
 	GlobalData::saveResData();
+	saveAllData();
 }
 
 void GameScene::checkiflive(float dt)

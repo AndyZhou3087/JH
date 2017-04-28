@@ -22,11 +22,16 @@ private:
 	void onPackageItem(cocos2d::Ref* pSender);
 	void removeitem();
 	void saveTempData();
+	void loadTempData();
 	int static systime();
 	void updataLV();
 private:
 	std::string m_npcid;
+	std::string m_addrid;
 	std::vector<PackageData> getRewardData;
+	std::vector<PackageData> tempResData;
+	cocos2d::ui::Text* explbl;
+	cocos2d::ui::Text* gfexplbl;
 };
 #endif
 

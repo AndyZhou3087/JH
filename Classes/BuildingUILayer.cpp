@@ -223,7 +223,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			int actime = GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).actime;
 			int extime = GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).extime;
 
-			if (actime < TIMESCALE* ACTION_BAR_TIME)
+			if (actime < TIMESCALE * ACTION_BAR_TIME)
 			{
 				m_build->setActionBarTime(actime / TIMESCALE);
 			}
@@ -285,6 +285,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		}
 
 		updataActionRes();
+		updataBuildRes();
 	}
 }
 
@@ -296,6 +297,7 @@ void BuildingUILayer::updataBuildRes()
 
 	if (level > 0)
 	{
+		scrollview->setVisible(true);
 		if (level == m_build->data.maxlevel)
 		{
 			buildbar->setVisible(false);
@@ -305,7 +307,6 @@ void BuildingUILayer::updataBuildRes()
 		}
 		else
 		{
-			scrollview->setVisible(true);
 			buildbtn->setTitleText(CommonFuncs::gbk2utf("升级"));
 		}
 	}

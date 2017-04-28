@@ -168,6 +168,7 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 
 	if (i == getResData.size())
 	{
+		data.count = 1;
 		getResData.push_back(data);
 	}
 	saveTempData();
@@ -253,12 +254,55 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	}
 }
 
+void ActionGetLayer::loadTempData()
+{
+	std::string datastr = GameDataSave::getInstance()->getTempStorage("m1-2");
+	std::vector<std::string> vec_retstr;
+	CommonFuncs::split(datastr, vec_retstr, ";");
+	for (unsigned int i = 0; i < vec_retstr.size(); i++)
+	{
+		std::vector<std::string> tmp;
+		CommonFuncs::split(vec_retstr[i], tmp, "-");
+		PackageData data;
+		data.strid = tmp[0];
+		data.type = atoi(tmp[1].c_str());
+		data.count = atoi(tmp[2].c_str());
+		data.extype = atoi(tmp[3].c_str());
+		data.lv = atoi(tmp[4].c_str());
+		data.exp = atoi(tmp[5].c_str());
+		data.goodvalue = atoi(tmp[6].c_str());
+		data.name = tmp[7];
+		data.desc = tmp[8];
+		tempResData.push_back(data);
+	}
+}
+
 void ActionGetLayer::saveTempData()
 {
-	std::string str;
+	loadTempData();
+	std::vector<PackageData> allResData = tempResData;
+
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", getResData[i].strid.c_str(), getResData[i].type, getResData[i].count, getResData[i].extype, getResData[i].lv, getResData[i].exp, getResData[i].goodvalue, getResData[i].name.c_str(), getResData[i].desc.c_str());
+		int tmpsize = tempResData.size();
+		int j = 0;
+		for (j = 0; j < tmpsize; j++)
+		{
+			if (getResData[i].strid.compare(tempResData[j].strid) == 0)
+			{
+				allResData[j].count += getResData[i].count;
+				break;
+			}
+		}
+		if (j == tmpsize)
+		{
+			allResData.push_back(getResData[i]);
+		}
+	}
+	std::string str;
+	for (unsigned int i = 0; i < allResData.size(); i++)
+	{
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue, allResData[i].name.c_str(), allResData[i].desc.c_str());
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));

@@ -16,10 +16,10 @@ FightLayer::~FightLayer()
 {
 }
 
-FightLayer* FightLayer::create(std::string addrname, std::string npcname)
+FightLayer* FightLayer::create(std::string addrid, std::string npcid)
 {
 	FightLayer *pRet = new FightLayer();
-	if (pRet && pRet->init(addrname, npcname))
+	if (pRet && pRet->init(addrid, npcid))
 	{
 		pRet->autorelease();
 	}
@@ -31,16 +31,16 @@ FightLayer* FightLayer::create(std::string addrname, std::string npcname)
 	return pRet;
 }
 
-bool FightLayer::init(std::string addrname, std::string npcid)
+bool FightLayer::init(std::string addrid, std::string npcid)
 {
 	Node* csbnode = CSLoader::createNode("fightLayer.csb");
 	this->addChild(csbnode);
 
-	m_addrname = addrname;
+	m_addrid = addrid;
 	m_npcid = npcid;
 
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
-	addrnametxt->setString(addrname);
+	addrnametxt->setString(GlobalData::map_maps[m_addrid].cname);
 
 	cocos2d::ui::ImageView* npcicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 
@@ -157,7 +157,7 @@ void FightLayer::updata(float dt)
 	{
 		this->unschedule(schedule_selector(FightLayer::updata));
 
-		Winlayer* layer = Winlayer::create(m_addrname, m_npcid);
+		Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
 		Director::getInstance()->getRunningScene()->addChild(layer);
 		this->removeFromParentAndCleanup(true);
 		return;
