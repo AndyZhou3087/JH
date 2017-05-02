@@ -272,6 +272,15 @@ void GlobalData::loadNpcJsonData()
 				data.exchgneedres.push_back(vec_temp);
 			}
 		}
+		v = item["word"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			std::string str = v[m].GetString();
+			if (str.length() > 1)
+				data.words.push_back(str);
+		}
+
+
 		map_npcs[data.id] = data;
 	}
 }

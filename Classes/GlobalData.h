@@ -58,6 +58,7 @@ typedef struct
 	std::vector<int> winresrnd;
 	std::vector<std::string> exchgres;
 	std::vector<std::vector<std::string>> exchgneedres;
+	std::vector<std::string> words;
 }NpcData;
 
 typedef struct

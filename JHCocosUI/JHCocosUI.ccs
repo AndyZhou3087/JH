@@ -204,6 +204,7 @@
           <Image Name="normalboxgb.png" />
           <Image Name="normalbtn.png" />
           <Image Name="npcicon.png" />
+          <Image Name="npctalkbg.png" />
           <Image Name="resbox.png" />
           <Image Name="room.jpg" />
           <Image Name="sbed.png" />

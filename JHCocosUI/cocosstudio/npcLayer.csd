@@ -53,6 +53,17 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="npctalkbg" ActionTag="1873585694" Tag="62" IconVisible="False" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="531.0000" BottomMargin="481.0000" ctype="SpriteObjectData">
+            <Size X="618.0000" Y="268.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="360.0000" Y="615.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.4805" />
+            <PreSize X="0.8583" Y="0.2094" />
+            <FileData Type="MarkedSubImage" Path="ui/npctalkbg.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

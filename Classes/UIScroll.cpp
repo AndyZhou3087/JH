@@ -55,9 +55,16 @@ void UIScroll::addEventText(std::string text, int fontsize, Color3B color3b)
 	Label* textlbl = Label::createWithTTF(text, "fonts/STXINGKA.TTF", fontsize);
 	textlbl->setWidth(m_width);
 	textlbl->setColor(color3b);
-	textlbl->setAnchorPoint(Vec2(0, 0));
-	textlbl->setPosition(Vec2(0, 0));
-	int curlblheight = textlbl->getContentSize().height;
+	addEventLabel(textlbl);
+
+}
+
+void UIScroll::addEventLabel(Label* label)
+{
+	label->setAnchorPoint(Vec2(0, 0));
+	label->setPosition(Vec2(0, 0));
+
+	int curlblheight = label->getContentSize().height;
 
 	Vector<Node*> vec_tlbl = scrollView->getContainer()->getChildren();
 	int lblcount = vec_tlbl.size();
@@ -85,8 +92,7 @@ void UIScroll::addEventText(std::string text, int fontsize, Color3B color3b)
 	if (contentH > scrollView->getViewSize().height)
 		scrollView->setContentSize(Size(m_width, contentH));
 
-	m_containerLayer->addChild(textlbl);
-
+	m_containerLayer->addChild(label);
 }
 
 void UIScroll::clean()
