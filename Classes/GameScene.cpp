@@ -84,7 +84,7 @@ bool GameScene::init()
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
 	this->addChild(bg, 3);
 
-	g_uiScroll = UIScroll::create(500.0f, 132.0f);
+	g_uiScroll = UIScroll::create(530.0f, 132.0f);
 	g_uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
 	addChild(g_uiScroll, 3);
 

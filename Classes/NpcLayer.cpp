@@ -7,8 +7,8 @@
 NpcLayer::NpcLayer()
 {
 	isShowWord = false;
-	wordstr = "";
 	m_wordcount = 0; 
+	m_wordindex = 0;
 }
 
 
@@ -35,6 +35,9 @@ bool NpcLayer::init(std::string addrid)
 {
 	Node* csbnode = CSLoader::createNode("npcLayer.csb");
 	this->addChild(csbnode);
+
+	m_npctalkbg = (cocos2d::ui::Widget*)csbnode->getChildByName("npctalkbg");
+	m_npctalkbg->setOpacity(0);
 
 	m_addrstr = addrid;
 
@@ -108,26 +111,53 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		NpcData npc = GlobalData::map_npcs[GlobalData::map_maps[m_addrstr].npcs[node->getTag()]];
 
-		if (isShowWord && wordstr.length() > 0)
+		if (isShowWord)
 		{
-			m_wordlbl->unscheduleAllSelectors();
-			m_wordlbl->setString(wordstr);
+			if (vec_wordstr[m_wordindex].length() > 0)
+			{
+				m_wordlbl->unscheduleAllCallbacks();
+				m_wordlbl->setString(vec_wordstr[m_wordindex]);
+				this->unschedule(schedule_selector(NpcLayer::showTypeText));
+				float dt = 0.0f;
+				for (unsigned int i = m_wordindex + 1; i < vec_wordstr.size(); i++)
+				{
+					this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
+					dt += vec_wordstr[i].size() / 3 * 0.05f;
+				}
+
+				return;
+			}
+		}
+		else
+		{
+			m_npctalkbg->runAction(FadeIn::create(0.2f));
 		}
 
 		m_wordcount = 0;
-		wordstr = StringUtils::format("%s%s%s", npc.name,CommonFuncs::gbk2utf("：").c_str(),  npc.words[0].c_str());
+		std::string wordstr = StringUtils::format("%s%s%s", npc.name,CommonFuncs::gbk2utf("：").c_str(),  npc.words[0].c_str());
+
+		vec_wordstr.push_back(wordstr);
 
 		m_wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
 		m_wordlbl->setColor(Color3B::BLACK);
 		std::string npcname = npc.name;
 
-		for (int i = 0; i < npcname.size() / 3; i++)
+		for (unsigned int i = 0; i < wordstr.length() / 3; i++)
 		{
-			//vec_cColorIndex.push_back(i);
+			if (i < 3)
+				vec_cColor.push_back(Color3B::RED);
+			else
+				vec_cColor.push_back(Color3B::BLACK);
 		}
 		m_wordlbl->setVisible(false);
 		m_talkScroll->addEventLabel(m_wordlbl);
-		showTypeText();
+
+		float dt = 0.0f;
+		for (unsigned int i = 0; i < vec_wordstr.size(); i++)
+		{
+			this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
+			dt += vec_wordstr[i].size() / 3 * 0.05f;
+		}
 	}
 }
 
@@ -149,19 +179,27 @@ void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	}
 }
 
-void NpcLayer::showTypeText()
+void NpcLayer::showTypeText(float dt)
 {
 	m_wordlbl->schedule([&](float dt){
 		isShowWord = true;
 		m_wordcount += 3;
-		std::string str = wordstr.substr(0, m_wordcount);
+		std::string str = vec_wordstr[m_wordindex].substr(0, m_wordcount);
 		m_wordlbl->setString(str);
 		m_wordlbl->setVisible(true);
-		
-		if (m_wordcount >= wordstr.length())
+		int letterindex = m_wordcount / 3 - 1;
+		m_wordlbl->getLetter(letterindex)->setColor(vec_cColor[letterindex]);
+		if (m_wordcount >= vec_wordstr[m_wordindex].length())
 		{
+			m_wordindex++;
 			isShowWord = false;
 			m_wordlbl->unschedule("schedule_typecallback");
 		}
-	}, 0.03f, "schedule_typecallback");
+
+	}, 0.05f, "schedule_typecallback");
+}
+
+void NpcLayer::removeNpcWord(float dt)
+{
+	
 }

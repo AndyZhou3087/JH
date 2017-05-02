@@ -19,15 +19,18 @@ private:
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void showTypeText();
+	void showTypeText(float dt);
+	void removeNpcWord(float dt);
 private:
 	std::string m_addrstr;
 	UIScroll* m_talkScroll;
-	std::string wordstr;
 	Label* m_wordlbl;
 	int m_wordcount;
 	bool isShowWord;
 	std::vector<Color3B> vec_cColor;
+	cocos2d::ui::Widget* m_npctalkbg;
+	std::vector<std::string> vec_wordstr;
+	int m_wordindex;
 };
 #endif
 
