@@ -3,6 +3,7 @@
 #include "Const.h"
 #include "GlobalData.h"
 #include "FightLayer.h"
+#include "GameScene.h"
 
 NpcLayer::NpcLayer()
 {
@@ -111,20 +112,35 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		NpcData npc = GlobalData::map_npcs[GlobalData::map_maps[m_addrstr].npcs[node->getTag()]];
 
+		if (vec_wordstr.size() > 0 && m_wordindex >= vec_wordstr.size())
+			return;
+
 		if (isShowWord)
 		{
 			if (vec_wordstr[m_wordindex].length() > 0)
 			{
+				m_wordcount = 0;
+				m_wordindex++;
+
+				if (m_wordindex >= vec_wordstr.size())
+					return;
+
+				this->unscheduleAllCallbacks();
 				m_wordlbl->unscheduleAllCallbacks();
-				m_wordlbl->setString(vec_wordstr[m_wordindex]);
-				this->unschedule(schedule_selector(NpcLayer::showTypeText));
-				float dt = 0.0f;
-				for (unsigned int i = m_wordindex + 1; i < vec_wordstr.size(); i++)
+				int index = 0;
+				while (m_wordlbl->getLetter(index) != NULL)
 				{
-					this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
-					dt += vec_wordstr[i].size() / 3 * 0.05f;
+					m_wordlbl->getLetter(index)->setScale(1);
+					index++;
 				}
 
+				checkWordLblColor(vec_wordstr[m_wordindex]);
+				float dt = 0.0f;
+				for (unsigned int i = m_wordindex; i < vec_wordstr.size(); i++)
+				{
+					this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
+					dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
+				}
 				return;
 			}
 		}
@@ -134,29 +150,59 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		}
 
 		m_wordcount = 0;
-		std::string wordstr = StringUtils::format("%s%s%s", npc.name,CommonFuncs::gbk2utf("：").c_str(),  npc.words[0].c_str());
+		std::string wordstr;
 
-		vec_wordstr.push_back(wordstr);
-
-		m_wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
-		m_wordlbl->setColor(Color3B::BLACK);
-		std::string npcname = npc.name;
-
-		for (unsigned int i = 0; i < wordstr.length() / 3; i++)
+		bool isplotMissioning = false;
+		unsigned int index = 0;
+		for (index = 0; index < GlobalData::vec_PlotMissionData.size(); index++)
 		{
-			if (i < 3)
-				vec_cColor.push_back(Color3B::RED);
+			if (GlobalData::getIsNewChapter())
+			{
+				if (GlobalData::vec_PlotMissionData[index].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[index].status != M_DONE)
+				{
+					isplotMissioning = true;
+					GlobalData::vec_PlotMissionData[index].status = M_DOING;
+					if (GlobalData::vec_PlotMissionData[index].dnpc.length() <= 0)
+						GlobalData::vec_PlotMissionData[index].status = M_DONE;
+					break;
+				}
+			}
 			else
-				vec_cColor.push_back(Color3B::BLACK);
+			{
+				if (GlobalData::vec_PlotMissionData[index].dnpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[index].status != M_DONE)
+				{
+					isplotMissioning = true;
+					break;
+				}
+			}
 		}
-		m_wordlbl->setVisible(false);
-		m_talkScroll->addEventLabel(m_wordlbl);
-
-		float dt = 0.0f;
-		for (unsigned int i = 0; i < vec_wordstr.size(); i++)
+		if (isplotMissioning)
 		{
-			this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
-			dt += vec_wordstr[i].size() / 3 * 0.05f;
+			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[index].words.size(); m++)
+			{
+				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[index].words[m].c_str());
+				vec_wordstr.push_back(wordstr);
+				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[index].mywords[m].c_str());
+				vec_wordstr.push_back(wordstr);
+			}
+			
+		}
+		else
+		{
+			wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), npc.words[0].c_str());
+			vec_wordstr.push_back(wordstr);
+		}
+
+		if (vec_wordstr.size() > 0)
+		{
+			checkWordLblColor(vec_wordstr[0]);
+
+			float dt = 0.0f;
+			for (unsigned int i = 0; i < vec_wordstr.size(); i++)
+			{
+				this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
+				dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
+			}
 		}
 	}
 }
@@ -175,7 +221,6 @@ void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
 	}
 }
 
@@ -184,22 +229,73 @@ void NpcLayer::showTypeText(float dt)
 	m_wordlbl->schedule([&](float dt){
 		isShowWord = true;
 		m_wordcount += 3;
-		std::string str = vec_wordstr[m_wordindex].substr(0, m_wordcount);
-		m_wordlbl->setString(str);
-		m_wordlbl->setVisible(true);
 		int letterindex = m_wordcount / 3 - 1;
-		m_wordlbl->getLetter(letterindex)->setColor(vec_cColor[letterindex]);
-		if (m_wordcount >= vec_wordstr[m_wordindex].length())
+		m_wordlbl->getLetter(letterindex)->setScale(1.0f);
+		if (m_wordcount >= m_wordlbl->getString().length())
 		{
 			m_wordindex++;
+			if (m_wordindex < vec_wordstr.size())
+			{
+				checkWordLblColor(vec_wordstr[m_wordindex]);
+			}
+			else
+			{
+				this->scheduleOnce(schedule_selector(NpcLayer::removeNpcWord), 2.0f);
+			}
+			m_wordcount = 0;
 			isShowWord = false;
 			m_wordlbl->unschedule("schedule_typecallback");
 		}
 
-	}, 0.05f, "schedule_typecallback");
+	}, 0.1f, "schedule_typecallback");
+}
+void NpcLayer::checkWordLblColor(std::string wordstr)
+{
+	m_wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
+	m_wordlbl->setLineBreakWithoutSpace(true);
+	m_wordlbl->setMaxLineWidth(610);
+	int index = 0;
+	while (m_wordlbl->getLetter(index) != NULL)
+	{
+		m_wordlbl->getLetter(index)->setColor(Color3B::BLACK);
+		m_wordlbl->getLetter(index)->setScale(0);
+		index++;
+	}
+
+	std::map<std::string, NpcData>::iterator it;
+	for (it = GlobalData::map_npcs.begin(); it != GlobalData::map_npcs.end(); ++it)
+	{
+		std::string npcname = GlobalData::map_npcs[it->first].name;
+		std::size_t findpos = wordstr.find(npcname);
+		if (findpos != std::string::npos)
+		{
+			int sindex = (findpos + 1) / 3;
+			int len = npcname.size() / 3;
+			for (int i = sindex; i < sindex + len; i++)
+			{
+				m_wordlbl->getLetter(i)->setColor(Color3B::RED);
+			}
+		}
+	}
+	std::size_t findpos = wordstr.find(g_hero->getMyName());
+	if (findpos != std::string::npos)
+	{
+		int sindex = (findpos + 1) / 3;
+		int len = g_hero->getMyName().size() / 3;
+		for (int i = sindex; i < sindex + len; i++)
+		{
+			m_wordlbl->getLetter(i)->setColor(Color3B::GREEN);
+		}
+	}
+
+	m_talkScroll->addEventLabel(m_wordlbl);
 }
 
 void NpcLayer::removeNpcWord(float dt)
 {
-	
+	isShowWord = false;
+	m_wordindex= 0;
+	m_npctalkbg->runAction(FadeOut::create(0.2f));
+	vec_wordstr.clear();
+	m_talkScroll->clean();
 }

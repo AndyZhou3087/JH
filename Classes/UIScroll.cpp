@@ -53,7 +53,8 @@ bool UIScroll::init(float width, float height)
 void UIScroll::addEventText(std::string text, int fontsize, Color3B color3b)
 {
 	Label* textlbl = Label::createWithTTF(text, "fonts/STXINGKA.TTF", fontsize);
-	textlbl->setWidth(m_width);
+	textlbl->setLineBreakWithoutSpace(true);
+	textlbl->setMaxLineWidth(m_width);
 	textlbl->setColor(color3b);
 	addEventLabel(textlbl);
 

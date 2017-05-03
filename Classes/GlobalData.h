@@ -108,6 +108,26 @@ typedef enum
 
 }StorageType;
 
+typedef enum
+{
+	M_NONE = 0,
+	M_DOING,
+	M_DONE
+}MissionStatus;
+
+typedef struct
+{
+	std::string id;
+	std::string snpc;
+	std::string dnpc;
+	std::vector<std::string> words;
+	std::vector<std::string> mywords;
+	std::vector<std::string> bossword;
+	std::vector<std::string> rewords;
+	int unlockchapter;
+	int status;
+}PlotMissionData;
+
 class GlobalData
 {
 public:
@@ -137,6 +157,9 @@ public:
 
 	static std::string getDefaultStorage(int heroindex);
 
+	static void setIsNewChapter(bool val);
+	static bool getIsNewChapter();
+	static void loadPlotMissionJsonData();
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<std::string> vec_hillResid;
@@ -146,6 +169,7 @@ public:
 	static std::map<std::string, WG_NGData> map_wgngs;
 	static std::map<std::string, EquipData> map_equips;
 	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;
+	static std::vector<PlotMissionData> vec_PlotMissionData;
 private:
 	static bool unlockhero[4];
 	static std::string uid;

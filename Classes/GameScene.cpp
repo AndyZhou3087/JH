@@ -55,7 +55,7 @@ bool GameScene::init()
 	GlobalData::loadHeroAtrJsonData();
 	GlobalData::loadWG_NGJsonData();
 	GlobalData::loadEquipJsonData();
-
+	GlobalData::loadPlotMissionJsonData();
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 

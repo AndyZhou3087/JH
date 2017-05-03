@@ -74,6 +74,11 @@ public:
 
 	std::string getUserId();
 	void setUserId(std::string val);
+
+	void setIsNewChapter(bool val);
+
+	bool getIsNewChapter();
+
 private:
 	std::string addUIDString(std::string val);
 private:

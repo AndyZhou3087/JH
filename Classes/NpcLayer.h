@@ -21,13 +21,13 @@ private:
 	void onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void showTypeText(float dt);
 	void removeNpcWord(float dt);
+	void checkWordLblColor(std::string wordstr);
 private:
 	std::string m_addrstr;
 	UIScroll* m_talkScroll;
 	Label* m_wordlbl;
 	int m_wordcount;
 	bool isShowWord;
-	std::vector<Color3B> vec_cColor;
 	cocos2d::ui::Widget* m_npctalkbg;
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;

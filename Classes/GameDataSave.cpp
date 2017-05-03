@@ -241,3 +241,14 @@ std::string GameDataSave::addUIDString(std::string val)
 	return userid + val;
 }
 
+void GameDataSave::setIsNewChapter(bool val)
+{
+	saveIntDataByKey(addUIDString("isnewchapter"), val == true ? 1 : 0);
+}
+
+bool GameDataSave::getIsNewChapter()
+{
+	int ret = loadIntDataByKey(addUIDString("isnewchapter"), 1);
+	return ret == 0 ? false : true;
+}
+

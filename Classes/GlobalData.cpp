@@ -20,6 +20,8 @@ std::map<std::string, WG_NGData> GlobalData::map_wgngs;
 
 std::map<std::string, EquipData> GlobalData::map_equips;
 
+std::vector<PlotMissionData> GlobalData::vec_PlotMissionData;
+
 bool GlobalData::unlockhero[4];
 
 std::string GlobalData::uid = "";
@@ -514,3 +516,68 @@ std::string GlobalData::getDefaultStorage(int heroindex)
 	return "";
 }
 
+void GlobalData::setIsNewChapter(bool val)
+{
+	GameDataSave::getInstance()->setIsNewChapter(val);
+}
+
+bool GlobalData::getIsNewChapter()
+{
+	return GameDataSave::getInstance()->getIsNewChapter();
+}
+
+
+void GlobalData::loadPlotMissionJsonData()
+{
+	rapidjson::Document doc = ReadJsonFile("data/plotmission.json");
+	rapidjson::Value& values = doc["m"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		PlotMissionData data;
+		rapidjson::Value& v = vitem["id"];
+		data.id = v.GetString();
+
+		v = vitem["snpc"];
+		data.snpc = v.GetString();
+
+		v = vitem["dnpc"];
+		data.dnpc = v.GetString();
+
+		v = vitem["unlock"];
+		data.unlockchapter = atoi(v.GetString());
+
+		data.status = M_NONE;
+		v = vitem["word"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.words.push_back(str);
+		}
+
+		v = vitem["myword"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.mywords.push_back(str);
+		}
+
+		v = vitem["bossword"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.bossword.push_back(str);
+		}
+		v = vitem["rwds"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.rewords.push_back(str);
+		}
+		vec_PlotMissionData.push_back(data);
+	}
+}
