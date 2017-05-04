@@ -251,3 +251,14 @@ int GameDataSave::getPlotMissionIndex()
 	return loadIntDataByKey(addUIDString("plot"), 0);
 }
 
+void GameDataSave::setPlotMissionStatus(std::string strval)
+{
+	saveStringDataByKey(addUIDString("plotstatus"), strval);
+}
+
+std::string GameDataSave::getPlotMissionStatus()
+{
+	return loadStringDataByKey(addUIDString("plotstatus"));
+}
+
+

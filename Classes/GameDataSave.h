@@ -79,6 +79,10 @@ public:
 
 	int getPlotMissionIndex();
 
+	void setPlotMissionStatus(std::string strval);
+
+	std::string getPlotMissionStatus();
+
 private:
 	std::string addUIDString(std::string val);
 private:

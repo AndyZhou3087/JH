@@ -123,7 +123,7 @@ void Hero::revive()
 
 bool Hero::checkifHasGF(std::string gfid)
 {
-	if (getAtrByType(H_WG)->count > 0 || getAtrByType(H_NG)->count > 0)
+	if ((getAtrByType(H_WG)->count > 0 && getAtrByType(H_WG)->strid.compare(gfid) == 0) || (getAtrByType(H_NG)->count > 0 && getAtrByType(H_NG)->strid.compare(gfid) == 0))
 		return true;
 	else
 	{

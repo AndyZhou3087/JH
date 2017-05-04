@@ -587,4 +587,32 @@ void GlobalData::loadPlotMissionJsonData()
 		}
 		vec_PlotMissionData.push_back(data);
 	}
+
+	GlobalData::getPlotMissionStatus();
+}
+
+void GlobalData::savePlotMissionStatus()
+{
+	std::string str;
+	for (unsigned int i = 0; i < GlobalData::vec_PlotMissionData.size(); i++)
+	{
+		std::string tmpstr = StringUtils::format("%d-", GlobalData::vec_PlotMissionData[i].status);
+		str.append(tmpstr);
+	}
+	GameDataSave::getInstance()->setPlotMissionStatus(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::getPlotMissionStatus()
+{
+	std::string str = GameDataSave::getInstance()->getPlotMissionStatus();
+	if (str.length() > 0)
+	{
+		std::vector<std::string> tmp;
+		CommonFuncs::split(str, tmp, "-");
+
+		for (unsigned int i = 0; i < tmp.size(); i++)
+		{
+			GlobalData::vec_PlotMissionData[i].status = atoi(tmp[i].c_str());
+		}
+	}
 }

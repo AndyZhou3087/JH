@@ -177,7 +177,7 @@ void FightLayer::updata(float dt)
 		adf = GlobalData::map_equips[aname].df;
 	}
 
-	int curheroHp = 0;
+	int curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
 	int herohurt = npcatk - curheroDf;
 

@@ -59,6 +59,21 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	gfexplbl->setString(lblstr);
 
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
+	int curplot = GlobalData::getPlotMissionIndex();
+	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
+	{
+		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
+		{
+			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+			winres = GlobalData::vec_PlotMissionData[curplot].rewords;
+			for (unsigned int i = 0; i < winres.size(); i++)
+			{
+				GlobalData::map_npcs[npcid].winresrnd[i] = 100;
+			}
+			GlobalData::setPlotMissionIndex(curplot + 1);
+			GlobalData::savePlotMissionStatus();
+		}
+	}
 
 	static int randsed = 60 * 1000;
 	for (unsigned int i = 0; i < winres.size(); i++)
@@ -182,15 +197,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	int curplot = GlobalData::getPlotMissionIndex();
-	if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc.compare(m_npcid) == 0)
-	{
-		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
-		{
-			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
-			GlobalData::setPlotMissionIndex(curplot + 1);
-		}
-	}
 	return true;
 }
 
