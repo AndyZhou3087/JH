@@ -153,41 +153,56 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		std::string wordstr;
 
 		bool isplotMissioning = false;
-		unsigned int index = 0;
-		for (index = 0; index < GlobalData::vec_PlotMissionData.size(); index++)
+
+		int curplot = GlobalData::getPlotMissionIndex();
+		if (GlobalData::vec_PlotMissionData[curplot].isFirstMission)
 		{
-			if (GlobalData::getIsNewChapter())
+			if (GlobalData::vec_PlotMissionData[curplot].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[curplot].status != M_DONE)
 			{
-				if (GlobalData::vec_PlotMissionData[index].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[index].status != M_DONE)
+				isplotMissioning = true;
+				GlobalData::vec_PlotMissionData[curplot].status = M_DOING;
+
+				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].words.size(); m++)
 				{
-					isplotMissioning = true;
-					GlobalData::vec_PlotMissionData[index].status = M_DOING;
-					if (GlobalData::vec_PlotMissionData[index].dnpc.length() <= 0)
-						GlobalData::vec_PlotMissionData[index].status = M_DONE;
-					break;
+					wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].words[m].c_str());
+					vec_wordstr.push_back(wordstr);
+					wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].mywords[m].c_str());
+					vec_wordstr.push_back(wordstr);
 				}
 			}
-			else
-			{
-				if (GlobalData::vec_PlotMissionData[index].dnpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[index].status != M_DONE)
-				{
-					isplotMissioning = true;
-					break;
-				}
-			}
-		}
-		if (isplotMissioning)
-		{
-			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[index].words.size(); m++)
-			{
-				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[index].words[m].c_str());
-				vec_wordstr.push_back(wordstr);
-				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[index].mywords[m].c_str());
-				vec_wordstr.push_back(wordstr);
-			}
-			
 		}
 		else
+		{
+			if (GlobalData::vec_PlotMissionData[curplot].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[curplot].dnpc.compare(npc.id) == 0)
+			{
+				GlobalData::vec_PlotMissionData[curplot].status = M_DOING;
+				if (GlobalData::vec_PlotMissionData[curplot].dnpc.length() <= 0 && GlobalData::vec_PlotMissionData[curplot].type == 0)
+				{
+					GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+					
+				}
+				isplotMissioning = true;
+			}
+		}
+
+		if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(npc.id) == 0)
+		{
+			isplotMissioning = true;
+
+			if (GlobalData::vec_PlotMissionData[curplot].type == 0)
+			{
+				GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+				GlobalData::setPlotMissionIndex(curplot + 1);
+			}
+
+			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)
+			{
+				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].words[m].c_str());
+				vec_wordstr.push_back(wordstr);
+			}
+		}
+		
+		if (!isplotMissioning)
 		{
 			wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), npc.words[0].c_str());
 			vec_wordstr.push_back(wordstr);

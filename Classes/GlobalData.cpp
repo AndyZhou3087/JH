@@ -516,14 +516,14 @@ std::string GlobalData::getDefaultStorage(int heroindex)
 	return "";
 }
 
-void GlobalData::setIsNewChapter(bool val)
+void GlobalData::setPlotMissionIndex(int val)
 {
-	GameDataSave::getInstance()->setIsNewChapter(val);
+	GameDataSave::getInstance()->setPlotMissionIndex(val);
 }
 
-bool GlobalData::getIsNewChapter()
+int GlobalData::getPlotMissionIndex()
 {
-	return GameDataSave::getInstance()->getIsNewChapter();
+	return GameDataSave::getInstance()->getPlotMissionIndex();
 }
 
 
@@ -546,6 +546,13 @@ void GlobalData::loadPlotMissionJsonData()
 
 		v = vitem["unlock"];
 		data.unlockchapter = atoi(v.GetString());
+
+		v = vitem["t"];
+		data.type = atoi(v.GetString());
+
+		v = vitem["f"];
+		int f = atoi(v.GetString());
+		data.isFirstMission = (f ==1?true:false);
 
 		data.status = M_NONE;
 		v = vitem["word"];

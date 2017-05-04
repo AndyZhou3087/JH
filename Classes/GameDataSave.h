@@ -75,9 +75,9 @@ public:
 	std::string getUserId();
 	void setUserId(std::string val);
 
-	void setIsNewChapter(bool val);
+	void setPlotMissionIndex(int val);
 
-	bool getIsNewChapter();
+	int getPlotMissionIndex();
 
 private:
 	std::string addUIDString(std::string val);

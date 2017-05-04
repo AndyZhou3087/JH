@@ -241,14 +241,13 @@ std::string GameDataSave::addUIDString(std::string val)
 	return userid + val;
 }
 
-void GameDataSave::setIsNewChapter(bool val)
+void GameDataSave::setPlotMissionIndex(int val)
 {
-	saveIntDataByKey(addUIDString("isnewchapter"), val == true ? 1 : 0);
+	saveIntDataByKey(addUIDString("plot"), val);
 }
 
-bool GameDataSave::getIsNewChapter()
+int GameDataSave::getPlotMissionIndex()
 {
-	int ret = loadIntDataByKey(addUIDString("isnewchapter"), 1);
-	return ret == 0 ? false : true;
+	return loadIntDataByKey(addUIDString("plot"), 0);
 }
 

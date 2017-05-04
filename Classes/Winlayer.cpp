@@ -182,6 +182,15 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	int curplot = GlobalData::getPlotMissionIndex();
+	if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc.compare(m_npcid) == 0)
+	{
+		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
+		{
+			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+			GlobalData::setPlotMissionIndex(curplot + 1);
+		}
+	}
 	return true;
 }
 

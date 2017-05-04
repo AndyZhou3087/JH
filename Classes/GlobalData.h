@@ -126,6 +126,8 @@ typedef struct
 	std::vector<std::string> rewords;
 	int unlockchapter;
 	int status;
+	bool isFirstMission;
+	int type;//对话0；需要战斗1
 }PlotMissionData;
 
 class GlobalData
@@ -157,8 +159,8 @@ public:
 
 	static std::string getDefaultStorage(int heroindex);
 
-	static void setIsNewChapter(bool val);
-	static bool getIsNewChapter();
+	static void setPlotMissionIndex(int val);
+	static int getPlotMissionIndex();
 	static void loadPlotMissionJsonData();
 public:
 	static std::vector<ResData> vec_resData;
