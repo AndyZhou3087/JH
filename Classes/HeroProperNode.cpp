@@ -219,7 +219,6 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		//reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		//box->addChild(reslbl);
 	}
-
 	m_select->setVisible(false);
 	if (tempsize > 0)
 	{
@@ -252,19 +251,39 @@ void HeroProperNode::onItem(Ref* pSender)
 	
 	std::string str;
 
-	if (m_select->isVisible())
+	if (m_lastSelectedItem == node)
 	{
-		if (udata->type >= TOOLS)
-			str = StringUtils::format("ui/hp%d-%d.png", udata->type+1, udata->extype);
-		else
-			str = StringUtils::format("ui/hp%d.png", udata->type+1);
+		if (m_select->isVisible())
+		{
+			if (udata->type >= TOOLS)
+				str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
+			else
+				str = StringUtils::format("ui/hp%d.png", udata->type + 1);
 
-		m_select->setVisible(false);
+			m_select->setVisible(false);
+		}
+		else
+		{
+			m_select->setVisible(true);
+			str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+		}
 	}
 	else
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+		if (m_lastSelectedItem != NULL)
+		{
+			PackageData* ldata = (PackageData*)m_lastSelectedItem->getUserData();
+			if (isout)
+			{
+				MyPackage::add(*ldata);
+			}
+			else
+			{
+				StorageRoom::add(*ldata);
+			}
+		}
 	}
 
 
