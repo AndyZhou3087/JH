@@ -162,8 +162,12 @@ public:
 	static void setPlotMissionIndex(int val);
 	static int getPlotMissionIndex();
 	static void loadPlotMissionJsonData();
+
 	static void savePlotMissionStatus();
-	static void getPlotMissionStatus();
+	static void updatePlotMissionStatus();
+
+	static int getUnlockChapter();
+	static void setUnlockChapter(int val);
 public:
 	static std::vector<ResData> vec_resData;
 	static std::vector<std::string> vec_hillResid;

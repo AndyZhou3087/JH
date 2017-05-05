@@ -16,6 +16,9 @@ public:
 	static FightLayer* create(std::string addrid, std::string npcid);
 private:
 	void onEscape (cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void delayBossFight(float dt);
+	void showFightWord(int type, int value);//type:0-hero;type:1-boss;
+	void checkWordLblColor(std::string wordstr);
 private:
 	UIScroll* m_fihgtScorll;
 	cocos2d::ui::Button* m_escapebtn;

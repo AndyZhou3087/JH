@@ -318,6 +318,7 @@
       <FilePathData Path="ui/shopbtn.png" />
       <FilePathData Path="ui/gp5.png" />
       <FilePathData Path="ui/npctalkbg.png" />
+      <FilePathData Path="ui/m5-4.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

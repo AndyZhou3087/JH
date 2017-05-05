@@ -178,6 +178,9 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				if (GlobalData::vec_PlotMissionData[curplot].type == 0)
 				{
 					GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+
+					GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
+
 					GlobalData::setPlotMissionIndex(curplot + 1);
 				}
 
@@ -275,7 +278,7 @@ void NpcLayer::checkWordLblColor(std::string wordstr)
 			int len = npcname.size() / 3;
 			for (int i = sindex; i < sindex + len; i++)
 			{
-				m_wordlbl->getLetter(i)->setColor(Color3B::RED);
+				m_wordlbl->getLetter(i)->setColor(Color3B(230, 35, 35));
 			}
 		}
 	}
@@ -286,7 +289,7 @@ void NpcLayer::checkWordLblColor(std::string wordstr)
 		int len = g_hero->getMyName().size() / 3;
 		for (int i = sindex; i < sindex + len; i++)
 		{
-			m_wordlbl->getLetter(i)->setColor(Color3B::GREEN);
+			m_wordlbl->getLetter(i)->setColor(Color3B(27, 141, 0));
 		}
 	}
 

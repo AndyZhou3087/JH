@@ -85,11 +85,11 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_escapebtn->addTouchEventListener(CC_CALLBACK_2(FightLayer::onEscape, this));
 	m_escapebtn->setTag(0);
 
-	m_fihgtScorll = UIScroll::create(650.0f, 450.0f);
-	m_fihgtScorll->setPosition(Vec2(37, 128));
+	m_fihgtScorll = UIScroll::create(610.0f, 400.0f);
+	m_fihgtScorll->setPosition(Vec2(360, 370));
 	csbnode->addChild(m_fihgtScorll);
 
-	this->schedule(schedule_selector(FightLayer::updata), 1.0f);
+	this->schedule(schedule_selector(FightLayer::updata), 1.6f);
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -140,9 +140,9 @@ void FightLayer::updata(float dt)
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
 	int npchurt = heroCurAck - npcdf;
 	if (npchurt < heroCurAck * 10 / 100)
-		npchp -= heroCurAck * 10 / 100;
-	else
-		npchp -= npchurt;
+		npchurt = heroCurAck * 10 / 100;
+
+	npchp -= npchurt;
 
 	if (npchp < 0)
 		npchp = 0;
@@ -152,6 +152,7 @@ void FightLayer::updata(float dt)
 	npchpvaluetext->setString(hpstr);
 	int npchppercent = 100 * npchp / npcmaxhp;
 	npchpbar->setPercent(npchppercent);
+	showFightWord(0, npchurt);
 
 	if (npchp <= 0)
 	{
@@ -162,7 +163,11 @@ void FightLayer::updata(float dt)
 		this->removeFromParentAndCleanup(true);
 		return;
 	}
+	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.0f);
+}
 
+void FightLayer::delayBossFight(float dt)
+{
 	int gfBonusDf = 0;
 	int adf = 0;
 	if (g_hero->getAtrByType(H_NG)->count > 0)
@@ -182,22 +187,163 @@ void FightLayer::updata(float dt)
 	int herohurt = npcatk - curheroDf;
 
 	if (herohurt < npcatk * 10 / 100)
-		curheroHp = g_hero->getLifeValue() - npcatk * 10 / 100;
-	else
-		curheroHp -= herohurt;
+		herohurt  = npcatk * 10 / 100;
+	curheroHp -= herohurt;
 
 	if (curheroHp < 0)
 		curheroHp = 0;
 	g_hero->setLifeValue(curheroHp);
 
-	hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herohpvaluetext->setString(hpstr);
 	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
 	herohpbar->setPercent(herohppercent);
-
+	showFightWord(1, herohurt);
 	if (g_hero->getLifeValue() <= 0)
 	{
 		this->unschedule(schedule_selector(FightLayer::updata));
 	}
+}
 
+void FightLayer::showFightWord(int type, int value)
+{
+	std::string wordstr;
+
+	int syssec = GlobalData::getSysSecTime();
+	int static randNum = 0;
+	randNum += 60 * 60 * 1000;
+	syssec += randNum;
+	srand(syssec);
+
+	int size = 0;
+	int r = 0;
+
+	if (type == 0)
+	{
+		std::string herowordstr;
+		if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+		{
+			size = sizeof(herofightdesc1) / sizeof(herofightdesc1[0]);
+			r = rand() % size;
+			wordstr = herofightdesc1[r];
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
+		}
+		else
+		{
+			size = sizeof(herofightdesc) / sizeof(herofightdesc[0]);
+			r = rand() % size;
+			wordstr = herofightdesc[r];
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name);
+		}
+		
+		checkWordLblColor(herowordstr);
+
+		size = sizeof(herofightdesc2) / sizeof(herofightdesc2[0]);
+		r = rand() % size;
+		wordstr = herofightdesc2[r];
+		herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+		checkWordLblColor(herowordstr);
+	}
+	else
+	{
+		std::string bosswordstr;
+		if (g_hero->getAtrByType(H_ARMOR)->count > 0)
+		{
+			size = sizeof(bossfight1) / sizeof(bossfight1[0]);
+			r = rand() % size;
+			wordstr = bossfight1[r];
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), value);
+		}
+		else
+		{
+			size = sizeof(bossfight) / sizeof(bossfight[0]);
+			r = rand() % size;
+			wordstr = bossfight[r];
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
+		}
+
+		checkWordLblColor(bosswordstr);
+	}
+}
+
+void FightLayer::checkWordLblColor(std::string wordstr)
+{
+	Label* wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
+	wordlbl->setLineBreakWithoutSpace(true);
+	wordlbl->setMaxLineWidth(610);
+	int index = 0;
+	while (wordlbl->getLetter(index) != NULL)
+	{
+		wordlbl->getLetter(index)->setColor(Color3B::BLACK);
+		index++;
+	}
+
+	std::map<std::string, NpcData>::iterator it;
+	for (it = GlobalData::map_npcs.begin(); it != GlobalData::map_npcs.end(); ++it)
+	{
+		std::string npcname = GlobalData::map_npcs[it->first].name;
+		std::size_t findpos = wordstr.find(npcname);
+		if (findpos != std::string::npos)
+		{
+			int sindex = (findpos + 1) / 3;
+			int len = npcname.size() / 3;
+			for (int i = sindex; i < sindex + len; i++)
+			{
+				wordlbl->getLetter(i)->setColor(Color3B(230,35,35));
+			}
+		}
+	}
+	std::size_t findpos = wordstr.find(g_hero->getMyName());
+	if (findpos != std::string::npos)
+	{
+		int sindex = (findpos + 1) / 3;
+		int len = g_hero->getMyName().size() / 3;
+		for (int i = sindex; i < sindex + len; i++)
+		{
+			wordlbl->getLetter(i)->setColor(Color3B(27, 141, 0));
+		}
+	}
+
+	std::map<std::string, EquipData>::iterator ite;
+	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+	{
+		std::string ename = GlobalData::map_equips[ite->first].cname;
+		std::size_t findpos = wordstr.find(ename);
+		if (findpos != std::string::npos)
+		{
+			int sindex = (findpos + 1) / 3;
+			int len = ename.size() / 3;
+			for (int i = sindex; i < sindex + len; i++)
+			{
+				wordlbl->getLetter(i)->setColor(Color3B(171, 34, 210));
+			}
+		}
+	}
+
+	int sindex = 0;
+	findpos = 0;
+	std::string numstr = { "0123456789" };
+	for (unsigned int i = 0; i < numstr.length(); i++)
+	{
+		findpos = wordstr.find(numstr.substr(i, 1));
+		if (findpos != std::string::npos)
+		{
+			sindex = (findpos + 1) / 3;
+	
+			wordlbl->getLetter(sindex)->setColor(Color3B(230, 35, 35));
+			break;
+		}
+	}
+
+	
+	for (int i = 1; i <= 4; i++)
+	{
+		char a = wordstr[findpos + i];
+		if (wordstr[findpos + i] >= '0' && wordstr[findpos + i] <= '9')
+		{
+			wordlbl->getLetter(sindex + i)->setColor(Color3B(230, 35, 35));
+		}
+	}
+
+	m_fihgtScorll->addEventLabel(wordlbl);
 }

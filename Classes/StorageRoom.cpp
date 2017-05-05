@@ -94,17 +94,18 @@ void StorageRoom::add(PackageData data)
 
 void StorageRoom::use(std::string strid, int count)
 {
-	for (unsigned int type = 0; type < map_storageData.size(); type++)
+	std::map<int, std::vector<PackageData>>::iterator it;
+	for (it = map_storageData.begin(); it != map_storageData.end(); ++it)
 	{
-		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
+		for (unsigned int i = 0; i < map_storageData[it->first].size(); i++)
 		{
-			PackageData *sdata = &map_storageData[type][i];
+			PackageData *sdata = &map_storageData[it->first][i];
 			if (strid.compare(sdata->strid) == 0)
 			{
 				sdata->count -= count;
 				if (sdata->count <= 0)
 				{
-					map_storageData[type].erase(map_storageData[type].begin() + i);
+					map_storageData[it->first].erase(map_storageData[it->first].begin() + i);
 				}
 				break;
 			}
@@ -115,11 +116,12 @@ void StorageRoom::use(std::string strid, int count)
 
 int StorageRoom::getCountById(std::string strid)
 {
-	for (unsigned int type = 0; type < map_storageData.size(); type++)
+	std::map<int, std::vector<PackageData>>::iterator it;
+	for (it = map_storageData.begin(); it != map_storageData.end(); ++it)
 	{
-		for (unsigned int i = 0; i < map_storageData[type].size(); i++)
+		for (unsigned int i = 0; i < map_storageData[it->first].size(); i++)
 		{
-			PackageData *sdata = &map_storageData[type][i];
+			PackageData *sdata = &map_storageData[it->first][i];
 			if (strid.compare(sdata->strid) == 0)
 			{
 				return sdata->count;

@@ -65,6 +65,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
 		{
 			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+			GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
 			winres = GlobalData::vec_PlotMissionData[curplot].rewords;
 			for (unsigned int i = 0; i < winres.size(); i++)
 			{

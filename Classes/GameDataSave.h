@@ -83,6 +83,10 @@ public:
 
 	std::string getPlotMissionStatus();
 
+	void setPlotUnlockChapter(int val);
+
+	int getPlotUnlockChapter();
+
 private:
 	std::string addUIDString(std::string val);
 private:

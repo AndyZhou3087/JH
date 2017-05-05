@@ -261,4 +261,13 @@ std::string GameDataSave::getPlotMissionStatus()
 	return loadStringDataByKey(addUIDString("plotstatus"));
 }
 
+void GameDataSave::setPlotUnlockChapter(int val)
+{
+	saveIntDataByKey(addUIDString("unlockchapter"), val);
+}
+
+int GameDataSave::getPlotUnlockChapter()
+{
+	return loadIntDataByKey(addUIDString("unlockchapter"), 1);
+}
 

@@ -37,7 +37,7 @@ bool MapLayer::init()
 	{
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
-
+		mapname->setVisible(false);
 	}
 	float offsetx = 0.0f;
 	float offsety = 0.0f;
@@ -62,6 +62,22 @@ bool MapLayer::init()
 
 	mapscroll->addChild(m_herohead);
 
+	std::map<std::string, MapData>::iterator it;
+
+	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	{
+		std::string mapid = GlobalData::map_maps[it->first].strid;
+		cocos2d::ui::Widget* mapNamImage = (cocos2d::ui::Widget*)mapbg->getChildByName(mapid);
+
+		std::vector<std::string> tmp;
+
+		CommonFuncs::split(mapid, tmp, "-");
+		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
+		if (mapchapter <= GlobalData::getUnlockChapter())
+		{
+			mapNamImage->setVisible(true);
+		}
+	}
 
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));

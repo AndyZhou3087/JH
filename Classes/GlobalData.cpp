@@ -588,7 +588,7 @@ void GlobalData::loadPlotMissionJsonData()
 		vec_PlotMissionData.push_back(data);
 	}
 
-	GlobalData::getPlotMissionStatus();
+	GlobalData::updatePlotMissionStatus();
 }
 
 void GlobalData::savePlotMissionStatus()
@@ -602,7 +602,7 @@ void GlobalData::savePlotMissionStatus()
 	GameDataSave::getInstance()->setPlotMissionStatus(str.substr(0, str.length() - 1));
 }
 
-void GlobalData::getPlotMissionStatus()
+void GlobalData::updatePlotMissionStatus()
 {
 	std::string str = GameDataSave::getInstance()->getPlotMissionStatus();
 	if (str.length() > 0)
@@ -615,4 +615,16 @@ void GlobalData::getPlotMissionStatus()
 			GlobalData::vec_PlotMissionData[i].status = atoi(tmp[i].c_str());
 		}
 	}
+}
+
+int GlobalData::getUnlockChapter()
+{
+	return GameDataSave::getInstance()->getPlotUnlockChapter();
+}
+void GlobalData::setUnlockChapter(int val)
+{
+	int lastChapter = GlobalData::getUnlockChapter();
+
+	if (val > lastChapter)
+		GameDataSave::getInstance()->setPlotUnlockChapter(val);
 }
