@@ -110,7 +110,7 @@ void GameDataSave::setNatureTemperature(int val)
 
 std::string GameDataSave::getStorageData()
 {
-	return loadStringDataByKey(addUIDString("storage"), GlobalData::getDefaultStorage(getHeroId()));
+	return loadStringDataByKey(addUIDString("storage"), "");
 }
 void GameDataSave::setStorageData(std::string valstr)
 {

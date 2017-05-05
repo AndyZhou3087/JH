@@ -219,6 +219,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		//reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		//box->addChild(reslbl);
 	}
+	m_lastSelectedItem = NULL;
 	m_select->setVisible(false);
 	if (tempsize > 0)
 	{
@@ -251,37 +252,37 @@ void HeroProperNode::onItem(Ref* pSender)
 	
 	std::string str;
 
-	if (m_lastSelectedItem == node)
+	if (m_select->isVisible())
 	{
-		if (m_select->isVisible())
-		{
-			if (udata->type >= TOOLS)
-				str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
-			else
-				str = StringUtils::format("ui/hp%d.png", udata->type + 1);
-
-			m_select->setVisible(false);
-		}
+		if (udata->type >= TOOLS)
+			str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
 		else
-		{
-			m_select->setVisible(true);
-			str = StringUtils::format("ui/%s.png", udata->strid.c_str());
-		}
+			str = StringUtils::format("ui/hp%d.png", udata->type + 1);
+
+		m_select->setVisible(false);
 	}
 	else
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+	}
+	
+	if (m_lastSelectedItem != node)
+	{
 		if (m_lastSelectedItem != NULL)
 		{
 			PackageData* ldata = (PackageData*)m_lastSelectedItem->getUserData();
-			if (isout)
+
+			if (ldata->type == udata->type && ldata->extype == udata->extype)
 			{
-				MyPackage::add(*ldata);
-			}
-			else
-			{
-				StorageRoom::add(*ldata);
+				if (isout)
+				{
+					MyPackage::add(*ldata);
+				}
+				else
+				{
+					StorageRoom::add(*ldata);
+				}
 			}
 		}
 	}
@@ -340,7 +341,7 @@ void HeroProperNode::saveData()
 	std::string str;
 	for (int i = H_WEAPON; i < H_MAX; i++)
 	{
-		PackageData* sdata =	g_hero->getAtrByType((HeroAtrType)i);
+		PackageData* sdata = g_hero->getAtrByType((HeroAtrType)i);
 	
 		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue,sdata->name.c_str(), sdata->desc.c_str());
 		str.append(idstr);

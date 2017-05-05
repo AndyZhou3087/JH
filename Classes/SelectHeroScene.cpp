@@ -166,6 +166,10 @@ void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		std::string uidstr = StringUtils::format("%d", systime);
 		GlobalData::setUId(uidstr);
 		GameDataSave::getInstance()->setHeroId(_lastSelect);
+
+		std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
+		GameDataSave::getInstance()->setStorageData(defaultStorageStr);
+
 		Scene* scene = GameScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
