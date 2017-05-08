@@ -6,8 +6,14 @@
           <FilePathData Path="mapLayer.csd" />
           <FilePathData Path="uipacker.csi" />
           <FilePathData Path="fightLayer.csd" />
+          <FilePathData Path="settingLayer.csd" />
+          <FilePathData Path="winLayer.csd" />
+          <FilePathData Path="sysSmallLayer.csd" />
+          <FilePathData Path="outDoorLayer.csd" />
+          <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="goWhereLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="fightLayer.csd" />
+        <ActiveDocument Path="settingLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

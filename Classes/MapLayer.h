@@ -14,6 +14,7 @@ public:
 
 	CREATE_FUNC(MapLayer);
 	void showMoveToDest();
+	void updateUnlockChapter();
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -25,6 +26,7 @@ private:
 	std::string m_addrname;
 	Sprite* m_herohead;
 	bool ismoving;
+	cocos2d::ui::Widget* m_mapbg;
 };
 extern MapLayer* g_maplayer;
 #endif

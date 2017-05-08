@@ -35,7 +35,7 @@ private:
 	bool isout;
 	std::map<HeroAtrType, std::vector<PackageData>> map_carryData;
 	Sprite* m_select;
-	Node* m_lastSelectedItem;
+	PackageData* m_lastSelectedData;
 };
 #endif
 

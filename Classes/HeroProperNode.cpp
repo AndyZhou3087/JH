@@ -14,7 +14,7 @@ const HeroAtrType Atrytpe[] = { H_WG, H_NG, H_WEAPON, H_ARMOR, H_GATHER, H_FELL,
 HeroProperNode::HeroProperNode()
 {
 	lastclickindex = -1;
-	m_lastSelectedItem = NULL;
+	m_lastSelectedData = NULL;
 }
 
 
@@ -219,7 +219,6 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		//reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		//box->addChild(reslbl);
 	}
-	m_lastSelectedItem = NULL;
 	m_select->setVisible(false);
 	if (tempsize > 0)
 	{
@@ -238,6 +237,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 					break;
 				}
 			}
+			m_lastSelectedData = hpdata;
 		}
 	}
 }
@@ -250,6 +250,26 @@ void HeroProperNode::onItem(Ref* pSender)
 	PackageData* udata = (PackageData*)node->getUserData();
 	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));
 	
+
+	if (m_lastSelectedData != (PackageData*)node->getUserData())
+	{
+		if (m_lastSelectedData != NULL)
+		{
+			if (m_lastSelectedData->type == udata->type && m_lastSelectedData->extype == udata->extype)
+			{
+				if (isout)
+				{
+					MyPackage::add(*m_lastSelectedData);
+				}
+				else
+				{
+					StorageRoom::add(*m_lastSelectedData);
+				}
+				m_select->setVisible(false);
+			}
+		}
+	}
+
 	std::string str;
 
 	if (m_select->isVisible())
@@ -265,26 +285,6 @@ void HeroProperNode::onItem(Ref* pSender)
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
-	}
-	
-	if (m_lastSelectedItem != node)
-	{
-		if (m_lastSelectedItem != NULL)
-		{
-			PackageData* ldata = (PackageData*)m_lastSelectedItem->getUserData();
-
-			if (ldata->type == udata->type && ldata->extype == udata->extype)
-			{
-				if (isout)
-				{
-					MyPackage::add(*ldata);
-				}
-				else
-				{
-					StorageRoom::add(*ldata);
-				}
-			}
-		}
 	}
 
 
@@ -321,7 +321,7 @@ void HeroProperNode::onItem(Ref* pSender)
 			g_hero->setAtrByType(atrype, data);
 		}
 	}
-	m_lastSelectedItem = node;
+	m_lastSelectedData = (PackageData*)node->getUserData();
 }
 
 void HeroProperNode::removeitem()

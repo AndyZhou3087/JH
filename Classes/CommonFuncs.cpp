@@ -38,19 +38,6 @@ int CommonFuncs::split(const std::string& str, std::vector<std::string>& ret_, s
 	return 0;
 }
 
-void CommonFuncs::StringReplace(std::string &strBase, std::string strSrc, std::string strDes)
-{
-	std::string::size_type pos = 0;
-	std::string::size_type srcLen = strSrc.size();
-	std::string::size_type desLen = strDes.size();
-	pos = strBase.find(strSrc, pos);
-	while ((pos != std::string::npos))
-	{
-		strBase.replace(pos, srcLen, strDes);
-		pos = strBase.find(strSrc, (pos + desLen));
-	}
-}
-
 int CommonFuncs::code_convert(const char *from_charset, const char *to_charset, const char *inbuf, size_t inlen, char *outbuf, size_t outlen)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)

@@ -319,6 +319,8 @@
       <FilePathData Path="ui/gp5.png" />
       <FilePathData Path="ui/npctalkbg.png" />
       <FilePathData Path="ui/m5-4.png" />
+      <FilePathData Path="ui/settingselect.png" />
+      <FilePathData Path="ui/settingselectbox.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

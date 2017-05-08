@@ -211,6 +211,8 @@
           <Image Name="sbed.png" />
           <Image Name="scooktable.png" />
           <Image Name="select.png" />
+          <Image Name="settingselect.png" />
+          <Image Name="settingselectbox.png" />
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
           <Image Name="shopbtn.png" />
@@ -374,6 +376,7 @@
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="settingLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

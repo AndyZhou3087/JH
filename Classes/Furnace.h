@@ -16,16 +16,30 @@ public:
 	~Furnace();
 
 public:
+	/****************************
+	制暖操作
+	@param minute （进度条时间）
+	@param exminute 消耗游戏时间
+	*****************************/
 	virtual void action(int minute, int exminute);
 	virtual bool init();
-
-
 
 	CREATE_FUNC(Furnace);
 
 private:
 	int extime;
+	/****************************
+	制暖
+	@param
+	定时器执行
+	*****************************/
 	void warm(float dt);
+
+	/****************************
+	制暖
+	@param
+	制暖完了
+	*****************************/
 	void warmover(float dt);
 };
 #endif

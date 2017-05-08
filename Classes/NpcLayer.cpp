@@ -4,6 +4,7 @@
 #include "GlobalData.h"
 #include "FightLayer.h"
 #include "GameScene.h"
+#include "MapLayer.h"
 
 NpcLayer::NpcLayer()
 {
@@ -182,6 +183,8 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 					GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
 
 					GlobalData::setPlotMissionIndex(curplot + 1);
+					if (g_maplayer != NULL)
+						g_maplayer->updateUnlockChapter();
 				}
 
 				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)

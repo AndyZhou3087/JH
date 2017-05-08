@@ -6,6 +6,7 @@
 #include "GameDataSave.h"
 #include "GameScene.h"
 #include "StorageRoom.h"
+#include "MapLayer.h"
 
 Winlayer::Winlayer()
 {
@@ -73,6 +74,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			}
 			GlobalData::setPlotMissionIndex(curplot + 1);
 			GlobalData::savePlotMissionStatus();
+			if (g_maplayer != NULL)
+				g_maplayer->updateUnlockChapter();
 		}
 	}
 

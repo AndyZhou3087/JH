@@ -21,6 +21,7 @@ bool DeathLayer::init()
 
 	csbnode->runAction(CCFadeIn::create(3.0f));
 
+	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{

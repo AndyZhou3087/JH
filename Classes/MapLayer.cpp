@@ -31,18 +31,18 @@ bool MapLayer::init()
 
 	cocos2d::ui::ScrollView* mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
 
-	cocos2d::ui::Widget* mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
-	int mapnamecount = mapbg->getChildrenCount();
+	m_mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
+	int mapnamecount = m_mapbg->getChildrenCount();
 	for (int i = 0; i < mapnamecount; i++)
 	{
-		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)mapbg->getChildren().at(i);
+		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setVisible(false);
 	}
 	float offsetx = 0.0f;
 	float offsety = 0.0f;
 	Size scollviewsize = mapscroll->getContentSize();
-	Vec2 pos = mapbg->getChildren().at(0)->getPosition();
+	Vec2 pos = m_mapbg->getChildren().at(0)->getPosition();
 
 	if (pos.x > scollviewsize.width / 2)
 		offsetx = pos.x - scollviewsize.width / 2;
@@ -53,7 +53,7 @@ bool MapLayer::init()
 
 	m_distance = 0.0f;
 	std::string addr = GameDataSave::getInstance()->getHeroAddr();
-	heroPos = mapbg->getChildByName(addr)->getPosition();
+	heroPos = m_mapbg->getChildByName(addr)->getPosition();
 
 	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getHeadID());
 	m_herohead = Sprite::createWithSpriteFrameName(heroidstr);
@@ -62,22 +62,7 @@ bool MapLayer::init()
 
 	mapscroll->addChild(m_herohead);
 
-	std::map<std::string, MapData>::iterator it;
-
-	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
-	{
-		std::string mapid = GlobalData::map_maps[it->first].strid;
-		cocos2d::ui::Widget* mapNamImage = (cocos2d::ui::Widget*)mapbg->getChildByName(mapid);
-
-		std::vector<std::string> tmp;
-
-		CommonFuncs::split(mapid, tmp, "-");
-		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
-		if (mapchapter <= GlobalData::getUnlockChapter())
-		{
-			mapNamImage->setVisible(true);
-		}
-	}
+	updateUnlockChapter();
 
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
@@ -171,5 +156,25 @@ void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	{
 		ShopLayer* shopLayer = ShopLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(shopLayer);
+	}
+}
+
+void MapLayer::updateUnlockChapter()
+{
+	std::map<std::string, MapData>::iterator it;
+
+	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	{
+		std::string mapid = GlobalData::map_maps[it->first].strid;
+		cocos2d::ui::Widget* mapNamImage = (cocos2d::ui::Widget*)m_mapbg->getChildByName(mapid);
+
+		std::vector<std::string> tmp;
+
+		CommonFuncs::split(mapid, tmp, "-");
+		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
+		if (mapchapter <= GlobalData::getUnlockChapter())
+		{
+			mapNamImage->setVisible(true);
+		}
 	}
 }

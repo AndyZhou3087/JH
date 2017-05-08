@@ -16,6 +16,11 @@ public:
 	~WineMaker();
 
 public:
+	/****************************
+	酿酒操作
+	@param minute （进度条时间）
+	@param exminute 消耗游戏时间
+	*****************************/
 	virtual void action(int minute, int exminute);
 
 	virtual bool init();

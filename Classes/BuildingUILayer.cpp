@@ -38,38 +38,47 @@ BuildingUILayer* BuildingUILayer::create(Building* build)
 bool BuildingUILayer::init(Building* build)
 {
 	m_build = build;
+
+	// ui
 	m_csbnode = CSLoader::createNode("buidingUiLayer.csb");
 	m_csbnode->setPosition(Vec2(0, -90));
 	this->addChild(m_csbnode);
 
+	//建筑物名称
 	cocos2d::ui::Text* title = (cocos2d::ui::Text*)m_csbnode->getChildByName("title");
 	title->setString(m_build->data.cname);
 
+	//返回按钮
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBack, this));
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 	if (m_build->data.level <= 0)
 		scrollview->setVisible(false);
 
+	//建筑物每个操作 node
 	buildnode = CSLoader::createNode("actionNode.csb");
 	buildnode->setPosition(Vec2(360, 860));
 	m_csbnode->addChild(buildnode);
 
+	//建造按钮
 	buildbtn = (cocos2d::ui::Button*)buildnode->getChildByName("item")->getChildByName("actionbtn");
 	buildbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
 	buildbtn->setTag(BUILD);
 
+	//建筑物图标
 	cocos2d::ui::ImageView* buildicon = (cocos2d::ui::ImageView*)buildnode->getChildByName("item")->getChildByName("box")->getChildByName("icon");
 	std::string iconstr = StringUtils::format("ui/s%s.png", m_build->data.name);
 	buildicon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 	buildicon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 
+	//建筑升级进度条
 	buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
 
 	updataBuildRes();
 
 	loadActionUi();
 
+	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -148,7 +157,7 @@ void BuildingUILayer::loadActionUi()
 					cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
 					resitem->setVisible(true);
 
-					str = StringUtils::format("ui/%d.png", restypecount / 1000);
+					str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
 					Sprite* res = Sprite::createWithSpriteFrameName(str);
 					res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
 					res->setScale(0.38f);
@@ -161,7 +170,7 @@ void BuildingUILayer::loadActionUi()
 					std::string strid = StringUtils::format("%d", restypecount / 1000);
 					int hascount = StorageRoom::getCountById(strid);
 					int needcount = restypecount % 1000;
-					str = StringUtils::format("%d/%d", hascount, needcount);
+					str = StringUtils::format("%d/%d", hascount, needcount);//拥有的资源个数/需要资源个数
 					rescount->setString(str);
 					if (hascount < needcount)
 						rescount->setTextColor(Color4B::RED);
@@ -185,7 +194,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	int tag = node->getTag();
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (tag == BUILD)
+		if (tag == BUILD)//建造或者升级
 		{
 			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
 			{
@@ -203,7 +212,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			buildbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
 			m_build->build();
 		}
-		else
+		else//操作
 		{
 			for (unsigned int m = 0; m < GlobalData::map_buidACData[m_build->data.name].at(tag - ACTION).res.size(); m++)
 			{

@@ -39,11 +39,14 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_addrid = addrid;
 	m_npcid = npcid;
 
+	//地点名称
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrnametxt->setString(GlobalData::map_maps[m_addrid].cname);
 
+	// NPC 图标
 	cocos2d::ui::ImageView* npcicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 
+	//兔子和狼换一下
 	std::string str = StringUtils::format("ui/%s.png", npcid.c_str());
 	SpriteFrame* sf = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
 	if (sf != NULL)
@@ -52,16 +55,21 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 		npcicon->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	}
 
+	//NPC名称
 	cocos2d::ui::Text* npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcnametxt->setString(GlobalData::map_npcs[npcid].name);
 	
+	//角色名
 	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
 	heronametxt->setString(g_hero->getMyName());
 
+	//角色血量显示
 	herohpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("herohpvaluetext");
 	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herohpvaluetext->setString(hpstr);
 
+
+	//角色血量进度
 	int herohppercent = 100 *  g_hero->getLifeValue() / g_hero->getMaxLifeValue();
 
 	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
@@ -73,23 +81,29 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	npcatk = GlobalData::map_npcs[npcid].atk;
 	npcdf = GlobalData::map_npcs[npcid].df;
 
+	//NPC血量显示
 	npchpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("npchpvaluetext");
 	hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
 	npchpvaluetext->setString(hpstr);
 
+	//NCP血量进度
 	int npchppercent = 100 * npchp / npcmaxhp;
 	npchpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("npchpbar");
 	npchpbar->setPercent(npchppercent);
 
+	//逃跑按钮
 	m_escapebtn = (cocos2d::ui::Button*)csbnode->getChildByName("escapebtn");
 	m_escapebtn->addTouchEventListener(CC_CALLBACK_2(FightLayer::onEscape, this));
 	m_escapebtn->setTag(0);
 
+	// 滚动文字
 	m_fihgtScorll = UIScroll::create(610.0f, 400.0f);
 	m_fihgtScorll->setPosition(Vec2(360, 370));
 	csbnode->addChild(m_fihgtScorll);
 
-	this->schedule(schedule_selector(FightLayer::updata), 1.6f);
+	this->schedule(schedule_selector(FightLayer::updata), 1.6f);//1.6f更新一轮，hero->npc,0.8s: npc->hero
+
+	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -126,13 +140,13 @@ void FightLayer::updata(float dt)
 {
 	int gfBonusAck = 0;
 	int weaponAck = 0;
-	if (g_hero->getAtrByType(H_WG)->count > 0)
+	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
 	{
 		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
 		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
-	if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器--加攻
 	{
 		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAck = GlobalData::map_equips[wname].atk;
@@ -154,7 +168,7 @@ void FightLayer::updata(float dt)
 	npchpbar->setPercent(npchppercent);
 	showFightWord(0, npchurt);
 
-	if (npchp <= 0)
+	if (npchp <= 0)// NPC dead 胜利
 	{
 		this->unschedule(schedule_selector(FightLayer::updata));
 
@@ -163,20 +177,20 @@ void FightLayer::updata(float dt)
 		this->removeFromParentAndCleanup(true);
 		return;
 	}
-	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.0f);
+	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.0f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
 }
 
 void FightLayer::delayBossFight(float dt)
 {
 	int gfBonusDf = 0;
 	int adf = 0;
-	if (g_hero->getAtrByType(H_NG)->count > 0)
+	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
 		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
 	}
 
-	if (g_hero->getAtrByType(H_ARMOR)->count > 0)
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0)////是否有防具--加防
 	{
 		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
@@ -218,17 +232,17 @@ void FightLayer::showFightWord(int type, int value)
 	int size = 0;
 	int r = 0;
 
-	if (type == 0)
+	if (type == 0)//type:需要对话
 	{
 		std::string herowordstr;
-		if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+		if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器
 		{
 			size = sizeof(herofightdesc1) / sizeof(herofightdesc1[0]);
 			r = rand() % size;
 			wordstr = herofightdesc1[r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
 		}
-		else
+		else//没有武器
 		{
 			size = sizeof(herofightdesc) / sizeof(herofightdesc[0]);
 			r = rand() % size;
@@ -244,17 +258,17 @@ void FightLayer::showFightWord(int type, int value)
 		herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		checkWordLblColor(herowordstr);
 	}
-	else
+	else//需要战斗
 	{
 		std::string bosswordstr;
-		if (g_hero->getAtrByType(H_ARMOR)->count > 0)
+		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
 		{
 			size = sizeof(bossfight1) / sizeof(bossfight1[0]);
 			r = rand() % size;
 			wordstr = bossfight1[r];
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), value);
 		}
-		else
+		else//没有防具
 		{
 			size = sizeof(bossfight) / sizeof(bossfight[0]);
 			r = rand() % size;
@@ -272,12 +286,15 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 	wordlbl->setLineBreakWithoutSpace(true);
 	wordlbl->setMaxLineWidth(610);
 	int index = 0;
+	//getletter --是每个字，中文，英文都算一个字
+	//UFT8 中文是3个字符所以除以3转换下
 	while (wordlbl->getLetter(index) != NULL)
 	{
 		wordlbl->getLetter(index)->setColor(Color3B::BLACK);
 		index++;
 	}
 
+	//NPC名称颜色 红色
 	std::map<std::string, NpcData>::iterator it;
 	for (it = GlobalData::map_npcs.begin(); it != GlobalData::map_npcs.end(); ++it)
 	{
@@ -293,6 +310,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 			}
 		}
 	}
+	//角色名称颜色 绿色
 	std::size_t findpos = wordstr.find(g_hero->getMyName());
 	if (findpos != std::string::npos)
 	{
@@ -303,7 +321,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 			wordlbl->getLetter(i)->setColor(Color3B(27, 141, 0));
 		}
 	}
-
+	//武器，功法名称颜色 紫色
 	std::map<std::string, EquipData>::iterator ite;
 	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 	{
@@ -320,6 +338,8 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 		}
 	}
 
+	//数字颜色 红色
+	//目前只实现了一段中只能改变一组数字的颜色，并且数字要在上面 关键字的后面
 	int sindex = 0;
 	findpos = 0;
 	std::string numstr = { "0123456789" };
@@ -335,7 +355,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 		}
 	}
 
-	
+	//找到地一个数字后，往后再找4位
 	for (int i = 1; i <= 4; i++)
 	{
 		char a = wordstr[findpos + i];

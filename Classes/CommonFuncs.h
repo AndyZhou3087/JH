@@ -6,10 +6,32 @@
 class CommonFuncs
 {
 public:
+	/****************************
+	字符串分割
+	@param str 字符串
+	@param ret_ 分割后的字符串vector
+	@param sep 分割的符号
+	****************************/
 	static int split(const std::string& str, std::vector<std::string>& ret_, std::string sep = ",");
-	static void StringReplace(std::string &strBase, std::string strSrc, std::string strDes);
+
+	/****************************
+	字符串转换UTF8
+	@param inbuf 字符串
+	@return 转换后的字符串
+	****************************/
 	static std::string gbk2utf(const char *inbuf);
 private:
+
+	/****************************
+	字符串转换
+	@param from_charset 转换前字符编码
+	@param to_charset 转换后字符编码
+	@param inbuf 需要转换的字符串
+
+	@param inbuf 需要转换的字符串的长度
+	@param outbuf 转换后的字符串
+	@param outlen 转换后的字符长度
+	****************************/
 	static int code_convert(const char *from_charset, const char *to_charset, const char *inbuf, size_t inlen, char *outbuf, size_t outlen);
 };
 

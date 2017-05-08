@@ -1,5 +1,8 @@
-﻿#ifndef _BEDUI_LAYER_H_
-#define _BEDUI_LAYER_H_
+﻿/********************************************************************
+* 建筑物UI界面
+*********************************************************************/
+#ifndef _BUIDINGUI_LAYER_H_
+#define _BUIDINGUI_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -8,8 +11,8 @@ USING_NS_CC;
 
 typedef enum
 {
-	BUILD,
-	ACTION
+	BUILD,//建造或者升级
+	ACTION//每个建筑物自己的操作，eg:床：睡觉；药箱：制药...
 }BACTIONTYPE;
 
 class BuildingUILayer :public Layer
@@ -23,23 +26,43 @@ public:
 	static BuildingUILayer* create(Building* build);
 
 private:
+
+	/****************************
+	点击返回按钮回调
+	*****************************/
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	点击建筑物自己的操作按钮回调
+	*****************************/
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Building* m_build;
-	Node* buildnode;
-	Node* m_csbnode;
-	cocos2d::ui::LoadingBar* buildbar;
-	cocos2d::ui::Button* buildbtn;
-	cocos2d::ui::ScrollView* scrollview;
+	Node* buildnode;//每个ITEM NODE
+	Node* m_csbnode;//UI NODE
+	cocos2d::ui::LoadingBar* buildbar;//建造进度条控件
+	cocos2d::ui::Button* buildbtn;//建造按钮控件
+	cocos2d::ui::ScrollView* scrollview;//操作滚动列表控件
 
-	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;
-	std::vector<cocos2d::ui::Button*> vec_actionbtn;
-	void onfinish(Ref* pSender, BACTIONTYPE type);
+	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;//建筑物自己的操作 进度条控件
+	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
+	void onfinish(Ref* pSender, BACTIONTYPE type);//建造，建筑物自己的操作 完成
+
+	/****************************
+	更新建筑物等级资源UI
+	****************************/
 	void updataBuildRes();
+
+	/****************************
+	加载建筑物自己操作的UI
+	****************************/
 	void loadActionUi();
+
+	/****************************
+	更新建筑物自己操作的UI
+	****************************/
 	void updataActionRes();
 private:
-	std::vector<Node*> vec_actionItem;
+	std::vector<Node*> vec_actionItem;//建筑物自己操作 item node
 };
 #endif
 

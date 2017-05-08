@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
+#include "SettingLayer.h"
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -101,5 +102,7 @@ void StartScene::onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SettingLayer* layer = SettingLayer::create();
+		addChild(layer);
 	}
 }
