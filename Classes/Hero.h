@@ -35,14 +35,17 @@ public:
 	CC_SYNTHESIZE(int, m_hunger, HungerValue);
 	CC_SYNTHESIZE(float, m_spirit, SpiritValue);
 	CC_SYNTHESIZE(int, m_life, LifeValue);
-	CC_SYNTHESIZE(int, m_maxlife, MaxLifeValue);
-	CC_SYNTHESIZE(int, m_atk, AtkValue);
-	CC_SYNTHESIZE(int, m_df, DfValue);
+
 	CC_SYNTHESIZE(int, m_exp, ExpValue);
 	CC_SYNTHESIZE(int, m_lv, LVValue);
 	CC_SYNTHESIZE(std::string, m_name, MyName);
 	CC_SYNTHESIZE(int, m_hid, HeadID);
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
+
+	int getAtkValue();
+	int getDfValue();
+
+	int getMaxLifeValue();
 
 	void setAtrByType(HeroAtrType type, PackageData pData);
 	PackageData* getAtrByType(HeroAtrType type);

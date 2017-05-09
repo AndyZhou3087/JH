@@ -1,6 +1,7 @@
 ﻿#include "BuyDetailsLayer.h"
 #include "CommonFuncs.h"
 #include "ShopLayer.h"
+#include "SoundManager.h"
 BuyDetailsLayer::BuyDetailsLayer()
 {
 
@@ -68,6 +69,7 @@ void BuyDetailsLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -75,6 +77,7 @@ void BuyDetailsLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer::beginPay(this->getTag());
 	}
 }

@@ -6,6 +6,7 @@
 #include "Const.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "SoundManager.h"
 
 TempStorageLayer::TempStorageLayer()
 {
@@ -63,6 +64,7 @@ bool TempStorageLayer::init(std::string addrname)
 
 void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
@@ -118,6 +120,7 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 
 void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
@@ -162,6 +165,7 @@ void TempStorageLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -205,6 +209,7 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removeitem();
 
 		for (unsigned int i = 0; i < tempResData.size(); i++)

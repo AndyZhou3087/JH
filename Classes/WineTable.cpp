@@ -4,7 +4,7 @@
 extern Hero* g_hero;
 WineTable::WineTable()
 {
-	goodvaule = 100;
+
 }
 
 

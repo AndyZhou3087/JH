@@ -3,7 +3,7 @@
 
 WineMaker::WineMaker()
 {
-	goodvaule = 100;
+
 }
 
 

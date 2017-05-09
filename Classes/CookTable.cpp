@@ -4,7 +4,7 @@
 extern Nature* g_nature;
 CookTable::CookTable()
 {
-	goodvaule = 100;
+
 }
 
 

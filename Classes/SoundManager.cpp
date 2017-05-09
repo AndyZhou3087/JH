@@ -28,27 +28,25 @@ Ref* SoundManager::init()
 void SoundManager::loadSounds()
 {
     // TODO :插入soundid列表
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_START, "sound/button1.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_HOME, "sound/home.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_MAP, "sound/map.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUDN_ID_ENTER_MAPADDR, "sound/entermapaddr.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_FIGHT, "sound/fight.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_DEATH, "sound/death.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_BUTTON, "sound/button.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_BUTTON, "sounds/button.mp3"));
+
+	//插入背景音乐列表
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_START, "sounds/start.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_HOME, "sounds/home.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_MAP, "sounds/map.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_ENTER_MAPADDR, "sounds/entermapaddr.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT, "sounds/fight.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_DEATH, "sounds/death.mp3"));
+
 
 	//预加载音效
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/start.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/home.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/map.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/entermapaddr.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/death.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/button1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("sound/button.mp3");
 }
 
 void SoundManager::unloadSounds()
 {
 	_soundIds.clear();
+	_musicIds.clear();
 }
 
 int SoundManager::playSound(int soundId, bool isloop)
@@ -87,6 +85,22 @@ void SoundManager::playBackMusic(const char * filename)
 		_isMusicPlayed = true;
         SimpleAudioEngine::getInstance()->playBackgroundMusic(filename,true);
     }
+}
+
+void SoundManager::playBackMusic(int musicid)
+{
+	if (_isMusicOn)
+	{
+		MusicIdMapType::iterator it = _musicIds.find(musicid);
+		if (it == _musicIds.end()) {
+			return;
+		}
+
+		_isMusicPlayed = true;
+
+		std::string musciName = it->second;
+		SimpleAudioEngine::getInstance()->playBackgroundMusic(musciName.c_str(), true);
+	}
 }
 
 void SoundManager::stopBackMusic()

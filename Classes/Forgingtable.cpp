@@ -6,7 +6,6 @@ extern Nature* g_nature;
 
 Forgingtable::Forgingtable()
 {
-	goodvaule = 100;
 }
 
 

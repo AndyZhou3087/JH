@@ -6,6 +6,7 @@
 #include "GlobalData.h"
 #include "StorageRoom.h"
 #include "GameDataSave.h"
+#include "SoundManager.h"
 
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
 
@@ -79,6 +80,7 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
 	}
@@ -88,6 +90,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 
@@ -244,6 +247,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 
 void HeroProperNode::onItem(Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 
 	HeroAtrType atrype = (HeroAtrType)node->getTag();
@@ -266,6 +270,10 @@ void HeroProperNode::onItem(Ref* pSender)
 					StorageRoom::add(*m_lastSelectedData);
 				}
 				m_select->setVisible(false);
+			}
+			else
+			{
+				m_select->setVisible(true);
 			}
 		}
 	}

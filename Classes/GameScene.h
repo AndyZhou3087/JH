@@ -16,7 +16,7 @@ public:
 
 	virtual void onExit();
     virtual bool init();
-    
+	virtual void onEnterTransitionDidFinish();
 	CREATE_FUNC(GameScene);
 	void heroRevive();
 private:
@@ -26,10 +26,12 @@ private:
 private:
 	void loadSaveData();
 	void loadSavedHeroPropData();
+	void addTopTextScroll(float dt);
 	void saveAllData();
 	void updata(float dt);
 	void timerSaveResData(float dt);
 	void checkiflive(float dt);
+
 
 };
 extern Nature* g_nature;

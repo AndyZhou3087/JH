@@ -1,6 +1,7 @@
 ﻿#include "HintBox.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
+#include "SoundManager.h"
 bool HintBox::init(std::string text)
 {
 	
@@ -51,6 +52,7 @@ void HintBox::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType ty
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removSelf();
 	}
 }

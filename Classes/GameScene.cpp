@@ -85,13 +85,12 @@ bool GameScene::init()
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
 	this->addChild(bg, 3);
 
-	g_uiScroll = UIScroll::create(530.0f, 132.0f);
+	g_uiScroll = UIScroll::create(560.0f, 132.0f);
 	g_uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
 	addChild(g_uiScroll, 3);
 
 	topBar = TopBar::create();
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
-	topBar->setScrollContainer(g_uiScroll);
 	addChild(topBar, 2);
 	
 	this->schedule(schedule_selector(GameScene::updata), 0.2f);
@@ -121,10 +120,6 @@ void GameScene::loadSaveData()
 	int exp = GameDataSave::getInstance()->getHeroExp();
 	g_hero->setExpValue(exp);
 	g_hero->setIsOut(GameDataSave::getInstance()->getHeroIsOut());
-
-	g_hero->setAtkValue(GlobalData::map_heroAtr[heroid].vec_atk[lv]);
-	g_hero->setDfValue(GlobalData::map_heroAtr[heroid].vec_df[lv]);
-	g_hero->setMaxLifeValue(GlobalData::map_heroAtr[heroid].vec_maxhp[lv]);
 	
 	int hlife = GameDataSave::getInstance()->getHeroLife();
 	if (hlife > -1)

@@ -3,7 +3,6 @@
 
 Fence::Fence()
 {
-	goodvaule = 100;
 }
 
 

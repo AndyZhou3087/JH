@@ -1,6 +1,7 @@
 ﻿#include "SysSmallBox.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
+
 SysSmallBox::SysSmallBox()
 {
 	lastvalue = -1;

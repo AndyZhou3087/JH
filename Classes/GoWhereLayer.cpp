@@ -8,6 +8,7 @@
 #include "GameScene.h"
 #include "TempStorageLayer.h"
 #include "NpcLayer.h"
+#include "SoundManager.h"
 
 GoWhereLayer::GoWhereLayer()
 {
@@ -126,6 +127,7 @@ void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -134,6 +136,7 @@ void GoWhereLayer::onGO(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 		if (g_maplayer != NULL)
 			g_maplayer->showMoveToDest();
@@ -144,6 +147,7 @@ void GoWhereLayer::onST(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		TempStorageLayer* layer = TempStorageLayer::create(m_addrstr);
 		Director::getInstance()->getRunningScene()->addChild(layer);
 	}
@@ -153,6 +157,7 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (m_addrstr.compare("m1-1") == 0)
 		{
 			g_gameLayer->addChild(HomeLayer::create(), 1, "homelayer");

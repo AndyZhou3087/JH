@@ -19,16 +19,24 @@ class SoundManager : public Ref
 	//音效ID列表
     typedef std::map<int, std::string> SoundIdMapType;
     
+	//背景音乐ID列表
+	typedef std::map<int, std::string> MusicIdMapType;
 public:
+	//音效ID
 	enum SoundId
 	{
-		SOUND_ID_START,//开始界面
-		SOUND_ID_HOME,//家
-		SOUND_ID_MAP,//地图界面
-		SOUDN_ID_ENTER_MAPADDR,//进入地图地点（家以外）
-		SOUND_ID_FIGHT,//战斗
-		SOUND_ID_DEATH,//死亡界面
 		SOUND_ID_BUTTON,//按钮点击
+	};
+
+	//背景音乐
+	enum MusicId
+	{
+		MUSIC_ID_START,//开始界面
+		MUSIC_ID_HOME,//家
+		MUSIC_ID_MAP,//地图界面
+		MUSIC_ID_ENTER_MAPADDR,//进入地图地点（家以外）
+		MUSIC_ID_FIGHT,//战斗
+		MUSIC_ID_DEATH,//死亡界面
 	};
 	
 	//soundmanage 实例
@@ -47,6 +55,12 @@ public:
 	@param filename 背景音乐文件名，Resources目录下(eg:sounds/bg.mp3)
 	****************************/
 	void playBackMusic(const char * filename);
+
+	/****************************
+	播放背景音乐
+	@param musicid 背景音乐id，MusicId
+	****************************/
+	void playBackMusic(int musicid);
 
 	/****************************
 	停止播放背景音乐
@@ -130,6 +144,7 @@ private:
 	bool				_isMusicOn;//背景音乐开关
 	bool				_isMusicPlayed;//背景音乐是否正在播放
     SoundIdMapType      _soundIds;//音效ID
+	MusicIdMapType		_musicIds;//背景音乐ID
 };
 
 #endif

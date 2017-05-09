@@ -659,7 +659,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="1.0000" Y="1.0000" />
-                <FileData Type="Normal" Path="ui/mapbg.jpg" Plist="" />
+                <FileData Type="Normal" Path="images/mapbg.jpg" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>

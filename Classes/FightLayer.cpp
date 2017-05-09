@@ -6,6 +6,7 @@
 #include "HintBox.h"
 #include "GameScene.h"
 #include "Winlayer.h"
+#include "SoundManager.h"
 
 FightLayer::FightLayer()
 {
@@ -112,7 +113,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_FIGHT);
 	return true;
 }
 
@@ -120,6 +121,7 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		if (node->getTag() == 0)
 		{

@@ -11,3 +11,4 @@ proj.android/obj/
 JHCocosUI/Resources/res/
 .cocos-project.json
 CMakeLists.txt
+packerui/

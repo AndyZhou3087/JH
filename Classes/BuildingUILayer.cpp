@@ -8,6 +8,7 @@
 #include "StorageRoom.h"
 #include "HintBox.h"
 #include "GlobalData.h"
+#include "SoundManager.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -96,6 +97,7 @@ void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -174,6 +176,8 @@ void BuildingUILayer::loadActionUi()
 					rescount->setString(str);
 					if (hascount < needcount)
 						rescount->setTextColor(Color4B::RED);
+					else
+						rescount->setTextColor(Color4B::BLACK);
 				}
 			}
 			actbtn->setEnabled(true);
@@ -194,6 +198,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	int tag = node->getTag();
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (tag == BUILD)//建造或者升级
 		{
 			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
@@ -251,7 +256,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 {
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
-	if (type == BUILD)
+	if (type == BUILD)//建造或升级完成
 	{
 		for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level - 1].size(); i++)
 		{
@@ -264,12 +269,13 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		buildbar->setPercent(0);
 		loadActionUi();
 	}
-	else
+	else//操作完成
 	{
 		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
 		vec_actionbar[type - ACTION]->setPercent(0);
 		std::string strid = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).icon;
+		//是否是产出新的物品，（睡觉和暖炉不会产出新的物品 icon以“0-”开头，其他建筑物的操作或产出新的物品，eg:制作烤肉）
 		if (strid.length() > 0 && strid.compare(0,1, "0") != 0)
 		{
 			PackageData data;
@@ -323,42 +329,55 @@ void BuildingUILayer::updataBuildRes()
 	if (level >= m_build->data.maxlevel)
 		level = m_build->data.maxlevel - 1;
 
-	for (unsigned int i = 0; i < m_build->data.Res[level].size(); i++)
+	int ressize = m_build->data.Res[level].size();
+
+	if (ressize > 0)
 	{
-		std::string str = StringUtils::format("res%d", i);
-		cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
-
-		str = StringUtils::format("count%d", i);
-		cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
-
-		if (m_build->data.level < m_build->data.maxlevel)
+		//更新升级需要的资源
+		for (unsigned int i = 0; i < m_build->data.Res[level].size(); i++)
 		{
-			int restypecount = m_build->data.Res[level].at(i);
-			if (restypecount > 0)
+			std::string str = StringUtils::format("res%d", i);
+			cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
+
+			str = StringUtils::format("count%d", i);
+			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
+
+			if (m_build->data.level < m_build->data.maxlevel)
 			{
-				resitem->setVisible(true);
+				int restypecount = m_build->data.Res[level].at(i);
+				if (restypecount > 0)
+				{
+					resitem->setVisible(true);
 
-				str = StringUtils::format("ui/%d.png", restypecount / 1000);
-				Sprite* res = Sprite::createWithSpriteFrameName(str);
-				res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
-				res->setScale(0.38f);
-				resitem->addChild(res);
-				std::string strid = StringUtils::format("%d", restypecount / 1000);
-				int hascount = StorageRoom::getCountById(strid);
-				int needcount = restypecount % 1000;
-				str = StringUtils::format("%d/%d", hascount, needcount);
-				rescount->setVisible(true);
-				rescount->setString(str);
-				if (hascount < needcount)
-					rescount->setTextColor(Color4B::RED);
+					str = StringUtils::format("ui/%d.png", restypecount / 1000);
+					Sprite* res = Sprite::createWithSpriteFrameName(str);
+					res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
+					res->setScale(0.38f);
+					resitem->addChild(res);
+					std::string strid = StringUtils::format("%d", restypecount / 1000);
+					int hascount = StorageRoom::getCountById(strid);
+					int needcount = restypecount % 1000;
+					str = StringUtils::format("%d/%d", hascount, needcount);
+					rescount->setVisible(true);
+					rescount->setString(str);
+					if (hascount < needcount)
+						rescount->setTextColor(Color4B::RED);
+					else
+						rescount->setTextColor(Color4B::BLACK);
+				}
+				buildbtn->setEnabled(true);
 			}
-			buildbtn->setEnabled(true);
+			else
+			{
+				resitem->setVisible(false);
+				rescount->setVisible(false);
+			}
 		}
-		else
-		{
-			resitem->setVisible(false);
-			rescount->setVisible(false);
-		}
+	}
+	else
+	{
+		cocos2d::ui::Text* desc = (cocos2d::ui::Text*)mainitem->getChildByName("desc");
+		desc->setString(m_build->data.cname);
 	}
 }
 
@@ -368,6 +387,7 @@ void BuildingUILayer::updataActionRes()
 
 	int size = GlobalData::map_buidACData[name].size();
 
+	//更新操作需要的资源
 	for (int i = 0; i < size; i++)
 	{
 		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[i]->getChildByName("item");
@@ -389,6 +409,8 @@ void BuildingUILayer::updataActionRes()
 					rescount->setString(str);
 					if (hascount < needcount)
 						rescount->setTextColor(Color4B::RED);
+					else
+						rescount->setTextColor(Color4B::BLACK);
 				}
 			}
 		}

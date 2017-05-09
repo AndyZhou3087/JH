@@ -7,7 +7,7 @@
 #include "GameScene.h"
 #include "CommonFuncs.h"
 #include "FightLayer.h"
-
+#include "SoundManager.h"
 
 HomeHill::HomeHill()
 {
@@ -109,12 +109,15 @@ bool HomeHill::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
+
 	return true;
 }
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -123,6 +126,7 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		unsigned int i = 0;
 		ResData* data = NULL;
@@ -151,6 +155,9 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				{
 					desc = CommonFuncs::gbk2utf(acdesc[data->actype].c_str());
 				}
+				if (atoi(data->strid.c_str()) == 69)//打水
+					desc = CommonFuncs::gbk2utf("你废三下五除从水井里打出");
+					
 				desc.append(data->unitname);
 				g_uiScroll->addEventText(desc);
 			}

@@ -9,6 +9,7 @@
 #include "CommonFuncs.h"
 #include "GlobalData.h"
 #include "ShopLayer.h"
+#include "SoundManager.h"
 
 static Vec2 heroPos;
 
@@ -76,6 +77,8 @@ bool MapLayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
+
 	return true;
 }
 
@@ -83,6 +86,7 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (ismoving)
 			return;
 		Node* node = (Node*)pSender;
@@ -154,6 +158,7 @@ void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer* shopLayer = ShopLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(shopLayer);
 	}

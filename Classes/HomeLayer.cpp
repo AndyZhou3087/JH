@@ -13,6 +13,7 @@
 #include "StorageUILayer.h"
 #include "OutDoor.h"
 #include "GameScene.h"
+#include "SoundManager.h"
 
 HomeLayer::HomeLayer()
 {
@@ -155,11 +156,13 @@ bool HomeLayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_HOME);
 	return true;
 }
 
 void HomeLayer::onclick(Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	std::string nodename = node->getName();
 	int nodetag = node->getTag();
@@ -183,12 +186,14 @@ void HomeLayer::loadJsonData()
 
 void HomeLayer::onStorageRoom(Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Layer* layer = StorageUILayer::create();
 	Director::getInstance()->getRunningScene()->addChild(layer);
 }
 
 void HomeLayer::onFence(Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Layer* layer = OutDoor::create();
 	Director::getInstance()->getRunningScene()->addChild(layer);
 }

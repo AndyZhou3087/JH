@@ -6,6 +6,7 @@
 #include "StorageRoom.h"
 #include "GameScene.h"
 #include "GlobalData.h"
+#include "SoundManager.h"
 
 OutDoor::OutDoor()
 {
@@ -58,6 +59,7 @@ void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
 			StorageRoom::add(MyPackage::vec_packages[i]);
@@ -71,6 +73,7 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		g_hero->setIsOut(true);
 		g_maplayer = MapLayer::create();
 		g_gameLayer->addChild(g_maplayer, 1, "maplayer");
@@ -165,6 +168,7 @@ void OutDoor::updata()
 
 void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
@@ -220,6 +224,7 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 
 void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();

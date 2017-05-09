@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "StorageRoom.h"
 #include "MapLayer.h"
+#include "SoundManager.h"
 
 Winlayer::Winlayer()
 {
@@ -55,9 +56,19 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	std::string lblstr = StringUtils::format("+%d", winexp);
 	explbl->setString(lblstr);
 
-	gfexplbl = (cocos2d::ui::Text*)csbnode->getChildByName("gfexplbl");
-	lblstr = StringUtils::format("+%d", winexp * 3 / 2);
-	gfexplbl->setString(lblstr);
+	if (g_hero->getAtrByType(H_WG)->count > 0 || g_hero->getAtrByType(H_NG)->count > 0)
+	{
+		gfexplbl = (cocos2d::ui::Text*)csbnode->getChildByName("gfexplbl");
+		lblstr = StringUtils::format("+%d", winexp * 3 / 2);
+		gfexplbl->setString(lblstr);
+	}
+	else
+	{
+		gfexplbl->setVisible(false);
+		csbnode->getChildByName("gftext")->setVisible(false);
+	}
+
+	
 
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
 	int curplot = GlobalData::getPlotMissionIndex();
@@ -223,6 +234,7 @@ void Winlayer::updataLV()
 	{
 		g_hero->setLVValue(lv);
 		g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv - 1]);
+		g_hero->setLifeValue(g_hero->getMaxLifeValue());
 	}
 
 	for (int m = H_WG; m <= H_NG; m++)
@@ -254,6 +266,7 @@ void Winlayer::updataLV()
 
 void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
@@ -309,6 +322,7 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 
 void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
@@ -337,6 +351,7 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -345,6 +360,7 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removeitem();
 
 		for (unsigned int i = 0; i < getRewardData.size(); i++)

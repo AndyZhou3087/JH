@@ -8,7 +8,6 @@ extern Hero* g_hero;
 
 Bed::Bed()
 {
-	goodvaule = 100;
 }
 
 

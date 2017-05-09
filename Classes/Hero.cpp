@@ -36,19 +36,19 @@ void Hero::updateData(float dt)
 {
 	if (m_outinjury < SeriousOutinjury)
 	{
-		m_life -= LifeLostSpeed * m_maxlife / 100;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 		m_innerinjury -= InnerinjurySpeed * 3;
 	}
 	if (m_hunger < SeriousHunger)
 	{
-		m_life -= LifeLostSpeed * m_maxlife / 100;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 		m_outinjury -= OutinjurySpeed * 2;
 		m_innerinjury -= InnerinjurySpeed * 2;
 		m_spirit -= SpiritSpeed;
 	}
 	if (m_innerinjury < SeriousInnerinjury)
 	{
-		m_life -= LifeLostSpeed * m_maxlife / 100;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 		m_outinjury -= OutinjurySpeed * 3;
 	}
 
@@ -80,10 +80,10 @@ void Hero::sleep(int hour)
 
 void Hero::sleepbystep(float dt)
 {
-	m_life += m_maxlife * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
-	if (m_life > m_maxlife)
+	m_life += getMaxLifeValue() * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
+	if (m_life > getMaxLifeValue())
 	{
-		m_life = m_maxlife;
+		m_life = getMaxLifeValue();
 		this->unschedule(schedule_selector(Hero::sleepbystep));
 	}
 }
@@ -101,6 +101,21 @@ void Hero::drinkbystep(float dt)
 		m_spirit = MAXSpiritValue;
 		this->unschedule(schedule_selector(Hero::drinkbystep));
 	}
+}
+
+int Hero::getAtkValue()
+{
+	return GlobalData::map_heroAtr[getHeadID()].vec_atk[getLVValue()];
+}
+
+int Hero::getDfValue()
+{
+	return GlobalData::map_heroAtr[getHeadID()].vec_df[getLVValue()];
+}
+
+int Hero::getMaxLifeValue()
+{
+	return GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
 }
 
 void Hero::setAtrByType(HeroAtrType type, PackageData pData)

@@ -12,8 +12,15 @@
           <FilePathData Path="outDoorLayer.csd" />
           <FilePathData Path="hintLayer.csd" />
           <FilePathData Path="goWhereLayer.csd" />
+          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="selectHeroLayer.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="resDetailsLayer.csd" />
+          <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="actionGetLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="settingLayer.csd" />
+        <ActiveDocument Path="topBarNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

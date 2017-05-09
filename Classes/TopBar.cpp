@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "SysSmallBox.h"
 #include "HeroStateUILayer.h"
+#include "SoundManager.h"
 
 TopBar::TopBar()
 {
@@ -148,15 +149,11 @@ bool TopBar::init()
 	return true;
 }
 
-void TopBar::setScrollContainer(UIScroll* uiscroll)
-{
-	m_uiscroll = uiscroll;
-}
-
 void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* cnode = (Node*)pSender;
 		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)

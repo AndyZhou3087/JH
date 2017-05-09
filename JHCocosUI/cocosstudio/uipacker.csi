@@ -321,6 +321,7 @@
       <FilePathData Path="ui/m5-4.png" />
       <FilePathData Path="ui/settingselect.png" />
       <FilePathData Path="ui/settingselectbox.png" />
+      <FilePathData Path="ui/herolvuptext.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

@@ -11,6 +11,7 @@
           <Image Name="dead.jpg" />
           <Image Name="gameovertext.png" />
           <Image Name="logo.png" />
+          <Image Name="mapbg.jpg" />
           <Image Name="selectherobg.jpg" />
           <Image Name="shero1.jpg" />
           <Image Name="shero1_s.jpg" />
@@ -124,6 +125,7 @@
           <Image Name="herohead2.png" />
           <Image Name="herohead3.png" />
           <Image Name="herohead4.png" />
+          <Image Name="herolvuptext.png" />
           <Image Name="heroppoint.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="hp3.png" />
@@ -198,7 +200,6 @@
           <Image Name="m9-4.png" />
           <Image Name="m9-5.png" />
           <Image Name="m9-6.png" />
-          <Image Name="mapbg.jpg" />
           <Image Name="medicinekit.png" />
           <Image Name="n002.png" />
           <Image Name="n003.png" />
@@ -369,6 +370,7 @@
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
         <Project Name="selectHeroLayer.csd" Type="Layer" />
+        <Project Name="settingLayer.csd" Type="Layer" />
         <Project Name="shopLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
@@ -376,7 +378,6 @@
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="settingLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

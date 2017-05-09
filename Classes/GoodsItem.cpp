@@ -1,7 +1,7 @@
 ﻿#include "GoodsItem.h"
 #include "CommonFuncs.h"
 #include "ShopLayer.h"
-
+#include "SoundManager.h"
 GoodsItem::GoodsItem()
 {
 
@@ -61,6 +61,7 @@ void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer::beginPay(this->getTag());
 	}
 }

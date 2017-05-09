@@ -5,6 +5,7 @@
 #include "StorageRoom.h"
 #include "GameScene.h"
 #include "SelectHeroScene.h"
+#include "SoundManager.h"
 
 #include "json.h"
 
@@ -87,6 +88,7 @@ void ShopLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }

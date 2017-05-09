@@ -2,6 +2,8 @@
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "DeathLayer.h"
+#include "SoundManager.h"
+
 ReviveLayer::ReviveLayer()
 {
 
@@ -57,6 +59,7 @@ void ReviveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 		Director::getInstance()->getRunningScene()->removeChildByName("fightlayer");
 		Director::getInstance()->resume();
@@ -68,6 +71,7 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 		Director::getInstance()->getRunningScene()->removeChildByName("fightlayer");
 		Director::getInstance()->resume();

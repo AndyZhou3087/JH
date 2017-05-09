@@ -5,6 +5,8 @@
 #include "GameDataSave.h"
 #include "GameScene.h"
 #include "BuyDetailsLayer.h"
+#include "SoundManager.h"
+
 USING_NS_CC;
 
 std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
@@ -94,6 +96,7 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* btnnode = (Node*)pSender;
 		int tag = btnnode->getTag();
 
@@ -162,6 +165,7 @@ void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		int systime = GlobalData::getSysSecTime();
 		std::string uidstr = StringUtils::format("%d", systime);
 		GlobalData::setUId(uidstr);

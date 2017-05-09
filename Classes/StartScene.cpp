@@ -4,6 +4,7 @@
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "SettingLayer.h"
+#include "SoundManager.h"
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -61,6 +62,7 @@ bool StartScene::init()
 	cocos2d::ui::Widget* setbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("setbtn");
 	setbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onSet, this));
 
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);
     return true;
 }
 
@@ -73,6 +75,7 @@ void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Scene* scene = SelectHeroScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
@@ -82,6 +85,7 @@ void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		std::string uid = GlobalData::getUId();
 		GlobalData::setUId(uid);
 
@@ -95,6 +99,7 @@ void StartScene::onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	}
 }
 
@@ -102,6 +107,7 @@ void StartScene::onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		SettingLayer* layer = SettingLayer::create();
 		addChild(layer);
 	}

@@ -5,6 +5,7 @@
 #include "GameScene.h"
 #include "Hero.h"
 #include "StorageUILayer.h"
+#include "SoundManager.h"
 bool ResDetailsLayer::init(PackageData* pdata)
 {
 	
@@ -104,6 +105,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (m_packageData->type == FOOD)
 		{
 			bool isInres = false;
@@ -207,6 +209,7 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (m_packageData->type == N_GONG || m_packageData->type == W_GONG)
 		{
 			if (StorageRoom::getCountById("71") > 0)

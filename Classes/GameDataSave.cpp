@@ -100,6 +100,7 @@ void GameDataSave::setNatureReason(int val)
 
 int GameDataSave::getNatureTemperature()
 {
+	//默认温度取随机
 	int r = tempeRange[getNatureReason()][0] + rand() % (tempeRange[getNatureReason()][1] - tempeRange[getNatureReason()][0] + 1);
 	return loadIntDataByKey(addUIDString("ntempe"), r);
 }

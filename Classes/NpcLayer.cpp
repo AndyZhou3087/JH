@@ -5,6 +5,7 @@
 #include "FightLayer.h"
 #include "GameScene.h"
 #include "MapLayer.h"
+#include "SoundManager.h"
 
 NpcLayer::NpcLayer()
 {
@@ -94,7 +95,7 @@ bool NpcLayer::init(std::string addrid)
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
 	return true;
 }
 
@@ -102,6 +103,7 @@ void NpcLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -110,10 +112,13 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		NpcData npc = GlobalData::map_npcs[GlobalData::map_maps[m_addrstr].npcs[node->getTag()]];
 
-		if (vec_wordstr.size() > 0 && m_wordindex >= vec_wordstr.size())
+		int size = vec_wordstr.size();
+
+		if (size > 0 && m_wordindex >= size)
 			return;
 
 		if (isShowWord)
@@ -123,7 +128,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				m_wordcount = 0;
 				m_wordindex++;
 
-				if (m_wordindex >= vec_wordstr.size())
+				if (m_wordindex >= size)
 					return;
 
 				this->unscheduleAllCallbacks();
@@ -219,6 +224,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
 		Director::getInstance()->getRunningScene()->addChild(FightLayer::create(m_addrstr, npcid), 1, "fightlayer");
@@ -239,10 +245,12 @@ void NpcLayer::showTypeText(float dt)
 		m_wordcount += 3;
 		int letterindex = m_wordcount / 3 - 1;
 		m_wordlbl->getLetter(letterindex)->setScale(1.0f);
-		if (m_wordcount >= m_wordlbl->getString().length())
+		int len = m_wordlbl->getString().length();
+		if (m_wordcount >= len)
 		{
 			m_wordindex++;
-			if (m_wordindex < vec_wordstr.size())
+			int size = vec_wordstr.size();
+			if (m_wordindex < size)
 			{
 				checkWordLblColor(vec_wordstr[m_wordindex]);
 			}

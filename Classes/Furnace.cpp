@@ -5,7 +5,6 @@ extern Nature* g_nature;
 
 Furnace::Furnace()
 {
-	goodvaule = 100;
 }
 
 

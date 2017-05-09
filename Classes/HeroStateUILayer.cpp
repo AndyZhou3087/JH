@@ -5,6 +5,7 @@
 #include "GameScene.h"
 #include "Hero.h"
 #include "GlobalData.h"
+#include "SoundManager.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源1", "资源2"};
 
@@ -56,6 +57,7 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }

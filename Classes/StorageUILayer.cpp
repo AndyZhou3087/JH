@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "Const.h"
 #include "ResDetailsLayer.h"
+#include "SoundManager.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源", "工具", "其他"};
 
@@ -142,12 +143,14 @@ void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
 
 void StorageUILayer::onclick(Ref* pSender)
 {
+	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 	ResDetailsLayer* layer = ResDetailsLayer::create(data);

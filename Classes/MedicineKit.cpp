@@ -3,7 +3,7 @@
 
 MedicineKit::MedicineKit()
 {
-	goodvaule = 100;
+
 }
 
 

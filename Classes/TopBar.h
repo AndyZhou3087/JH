@@ -16,7 +16,6 @@ public:
 
 	CREATE_FUNC(TopBar);
 
-	void setScrollContainer(UIScroll* uiscroll);
 private:
 	cocos2d::ui::ImageView* heroimg;
 	cocos2d::ui::ImageView* reason;
@@ -32,7 +31,6 @@ private:
 	ProgressTimer* lifeBar;
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	UIScroll* m_uiscroll;
 	void updataUI(float dt);
 };
 #endif

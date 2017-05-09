@@ -1,6 +1,7 @@
 ﻿#include "DeathLayer.h"
 #include "CommonFuncs.h"
 #include "StartScene.h"
+#include "SoundManager.h"
 DeathLayer::DeathLayer()
 {
 
@@ -35,6 +36,8 @@ bool DeathLayer::init()
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_DEATH);
 
 	return true;
 }
