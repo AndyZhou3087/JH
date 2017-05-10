@@ -8,8 +8,10 @@
 #include "GameDataSave.h"
 #include "SoundManager.h"
 
+//装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
 
+//装备栏的类型
 const HeroAtrType Atrytpe[] = { H_WG, H_NG, H_WEAPON, H_ARMOR, H_GATHER, H_FELL, H_EXCAVATE, H_MOUNT };
 
 HeroProperNode::HeroProperNode()
@@ -39,6 +41,7 @@ bool HeroProperNode::init()
 		imgbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
 		addCarryData(Atrytpe[i]);
 
+		//获取每个装备栏装备的数据，如果没有hpdata->count = 0
 		PackageData* hpdata = g_hero->getAtrByType(Atrytpe[i]);
 		if (hpdata->count > 0)
 		{
@@ -93,7 +96,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
-
+		//点击相同的一个不做操作
 		if (lastclickindex == tag && heroselectbg->isVisible())
 			return;
 		removeitem();
@@ -111,55 +114,55 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 
 void HeroProperNode::addCarryData(HeroAtrType index)
 {
-	if (g_hero->getIsOut())
+	if (g_hero->getIsOut())//在家以外，取背包数据
 	{
 		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
 			PackageData data = MyPackage::vec_packages[i];
-			if (index == H_WEAPON && data.type == WEAPON)
+			if (index == H_WEAPON && data.type == WEAPON)//武器
 				map_carryData[index].push_back(data);
-			else if (index == H_GATHER && data.extype == 1)
+			else if (index == H_GATHER && data.extype == 1)//采集工具
 				map_carryData[index].push_back(data);
-			else if (index == H_FELL && data.extype == 2)
+			else if (index == H_FELL && data.extype == 2)//砍伐工具
 				map_carryData[index].push_back(data);
-			else if (index == H_EXCAVATE && data.extype == 3)
+			else if (index == H_EXCAVATE && data.extype == 3)//挖掘工具
 				map_carryData[index].push_back(data);
-			else if (index == H_WG && data.type == W_GONG)
+			else if (index == H_WG && data.type == W_GONG)//外功
 				map_carryData[index].push_back(data);
-			else if (index == H_NG && data.type == N_GONG)
+			else if (index == H_NG && data.type == N_GONG)//内功
 				map_carryData[index].push_back(data);
-			else if (index == H_ARMOR && data.type == PROTECT_EQU)
+			else if (index == H_ARMOR && data.type == PROTECT_EQU)//防具
 				map_carryData[index].push_back(data);
 		}
-		if (g_hero->getAtrByType(index)->count > 0)
+		if (g_hero->getAtrByType(index)->count > 0)//已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
 			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
 		}
 
 	}
-	else
+	else//在家取仓库数据
 	{
-		if (index == H_WEAPON)
+		if (index == H_WEAPON)//武器
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[WEAPON].size(); m++)
 				map_carryData[index].push_back(StorageRoom::map_storageData[WEAPON][m]);
 		}
-		else if (index == H_WG)
+		else if (index == H_WG)//外功
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[W_GONG].size(); m++)
 				map_carryData[index].push_back(StorageRoom::map_storageData[W_GONG][m]);
 		}
-		else if (index == H_NG)
+		else if (index == H_NG)//内功
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[N_GONG].size(); m++)
 				map_carryData[index].push_back(StorageRoom::map_storageData[N_GONG][m]);
 		}
-		else if (index == H_ARMOR)
+		else if (index == H_ARMOR)//防具
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[PROTECT_EQU].size(); m++)
 				map_carryData[index].push_back(StorageRoom::map_storageData[PROTECT_EQU][m]);
 		}
-		else
+		else//工具
 		{
 			int toolsize = StorageRoom::map_storageData[TOOLS].size();
 
@@ -168,16 +171,16 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 
 				for (unsigned int m = 0; m < StorageRoom::map_storageData[TOOLS].size(); m++)
 				{
-					if (StorageRoom::map_storageData[TOOLS][m].extype == 1 && index == H_GATHER)
+					if (StorageRoom::map_storageData[TOOLS][m].extype == 1 && index == H_GATHER)//采集
 						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
-					else if (StorageRoom::map_storageData[TOOLS][m].extype == 2 && index == H_FELL)
+					else if (StorageRoom::map_storageData[TOOLS][m].extype == 2 && index == H_FELL)//砍伐
 						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
-					else if (StorageRoom::map_storageData[TOOLS][m].extype == 3 && index == H_EXCAVATE)
+					else if (StorageRoom::map_storageData[TOOLS][m].extype == 3 && index == H_EXCAVATE)//挖掘
 						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
 				}
 			}
 		}
-		if (g_hero->getAtrByType(index)->count > 0)
+		if (g_hero->getAtrByType(index)->count > 0) // 已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
 			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
 		}
@@ -226,7 +229,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 	if (tempsize > 0)
 	{
 		PackageData *hpdata = g_hero->getAtrByType(index);
-		if (hpdata->count > 0)
+		if (hpdata->count > 0)//是否装备了hpdata->count ==-1没有装备
 		{
 			for (int i = 0; i < tempsize; i++)
 			{
@@ -255,10 +258,11 @@ void HeroProperNode::onItem(Ref* pSender)
 	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));
 	
 
-	if (m_lastSelectedData != (PackageData*)node->getUserData())
+	if (m_lastSelectedData != (PackageData*)node->getUserData())//是否再次点击
 	{
 		if (m_lastSelectedData != NULL)
 		{
+			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
 			if (m_lastSelectedData->type == udata->type && m_lastSelectedData->extype == udata->extype)
 			{
 				if (isout)
@@ -280,7 +284,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	std::string str;
 
-	if (m_select->isVisible())
+	if (m_select->isVisible())//之前是选中m_select可见，现在点了就是没选中
 	{
 		if (udata->type >= TOOLS)
 			str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
@@ -289,7 +293,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 		m_select->setVisible(false);
 	}
-	else
+	else//选中
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
@@ -305,7 +309,7 @@ void HeroProperNode::onItem(Ref* pSender)
 			MyPackage::cutone(udata->strid);
 			g_hero->setAtrByType(atrype, *udata);
 		}
-		else
+		else//卸掉装备 设置count = -1
 		{
 			MyPackage::add(*g_hero->getAtrByType(atrype));
 			PackageData data;
@@ -346,6 +350,7 @@ void HeroProperNode::removeitem()
 
 void HeroProperNode::saveData()
 {
+	//保存装备栏数据
 	std::string str;
 	for (int i = H_WEAPON; i < H_MAX; i++)
 	{

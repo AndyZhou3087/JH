@@ -7,8 +7,6 @@
 #include "GlobalData.h"
 #include "SoundManager.h"
 
-const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源1", "资源2"};
-
 HeroStateUILayer::HeroStateUILayer()
 {
 
@@ -39,13 +37,14 @@ bool HeroStateUILayer::init()
 		herostatus[i] = (cocos2d::ui::Text*)m_csbnode->getChildByName(str);
 	}
 	updateStatus(0);
+	//////layer 点击事件，屏蔽下层事件
 	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		return true;
 	};
-
+	
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
@@ -74,6 +73,7 @@ void HeroStateUILayer::updateStatus(float dt)
 			break;
 		}
 	}
+	//饥饿属性
 	herostatus[0]->setString(CommonFuncs::gbk2utf(hungerdesc1[index].c_str()));
 
 	index = 0;
@@ -85,6 +85,7 @@ void HeroStateUILayer::updateStatus(float dt)
 			break;
 		}
 	}
+	//内伤属性
 	herostatus[1]->setString(CommonFuncs::gbk2utf(innerInjurydesc1[index].c_str()));
 
 	index = 0;
@@ -96,7 +97,7 @@ void HeroStateUILayer::updateStatus(float dt)
 			break;
 		}
 	}
-
+	//外伤属性
 	herostatus[2]->setString(CommonFuncs::gbk2utf(outInjurydesc1[index].c_str()));
 
 	index = 0;
@@ -108,12 +109,18 @@ void HeroStateUILayer::updateStatus(float dt)
 			break;
 		}
 	}
+	//精神属性
 	herostatus[3]->setString(CommonFuncs::gbk2utf(spiritInjurydesc1[index].c_str()));
-
+	//采集速度
 	herostatus[4]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_GATHER)->count > 0 ? "快速":"一般"));
+	//砍伐速度
 	herostatus[5]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_FELL)->count > 0 ? "快速" : "一般"));
+	//挖掘速度
 	herostatus[6]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_EXCAVATE)->count > 0 ? "快速" : "一般"));
+
 	herostatus[7]->setString(CommonFuncs::gbk2utf("一般"));
+
+	//生命值属性
 	std::string str = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herostatus[8]->setString(str);
 
@@ -129,6 +136,7 @@ void HeroStateUILayer::updateStatus(float dt)
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[GlobalData::map_wgngs[strid].lv];
 	}
+	//攻击属性
 	str = StringUtils::format("%d", g_hero->getAtkValue() + weaponAtk + wgAtk);
 	herostatus[9]->setString(str);
 
@@ -145,11 +153,14 @@ void HeroStateUILayer::updateStatus(float dt)
 		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
 	}
+	//防御属性
 	str = StringUtils::format("%d", g_hero->getDfValue() + ngdf + adf);
 	herostatus[10]->setString(str);
 
+	//经验值属性
 	str = StringUtils::format("%d", g_hero->getExpValue());
 	herostatus[11]->setString(str);
+	//等级属性
 	str = StringUtils::format("%d", g_hero->getLVValue() + 1);
 	herostatus[12]->setString(str);
 }

@@ -18,12 +18,13 @@ bool HintBox::init(std::string text)
 
 	cocos2d::ui::Text* content = (cocos2d::ui::Text*)csbnode->getChildByName("content");
 	content->setString(text);
-
+	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		return true;
 	};
+	//点击任何位置移除掉
 	listener->onTouchEnded = [=](Touch *touch, Event *event)
 	{
 		removSelf();

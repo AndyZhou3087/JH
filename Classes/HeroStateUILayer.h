@@ -1,4 +1,7 @@
-﻿#ifndef _HEROSTATEUI_LAYER_H_
+﻿/********************************************************************
+*角色装备属性层
+*********************************************************************/
+#ifndef _HEROSTATEUI_LAYER_H_
 #define _HEROSTATEUI_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
@@ -15,10 +18,17 @@ public:
 	virtual bool init();
 	CREATE_FUNC(HeroStateUILayer);
 private:
+	/****************************
+	点击“返回”按钮回调
+	*****************************/
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;
+	//13个属性值显示控件
 	cocos2d::ui::Text* herostatus[13];
 private:
+	/****************************
+	定时更新13个属性值
+	*****************************/
 	void updateStatus(float dt);
 };
 #endif
