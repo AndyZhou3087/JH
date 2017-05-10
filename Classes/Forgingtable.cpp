@@ -27,5 +27,6 @@ bool Forgingtable::init()
 
 void Forgingtable::action(int minute, int exminute)
 {
+	//锻造
 	g_nature->setTimeInterval(minute / (TIMESCALE* getActionBarTime()));
 }

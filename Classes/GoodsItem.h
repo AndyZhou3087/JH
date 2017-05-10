@@ -1,18 +1,26 @@
-﻿#ifndef _GOODSITIME_H_
+﻿
+/****************************************************************
+商城物品类
+
+****************************************************************/
+#ifndef _GOODSITIME_H_
 #define _GOODSITIME_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 
+/****************************
+商城物品数据结构
+*****************************/
 typedef struct
 {
-	std::string icon;
-	std::string name;
-	int count;
-	int price;
-	std::string desc;
-	std::vector<std::string> vec_res;
+	std::string icon;//显示ICON
+	std::string name;//显示名称
+	int count;//出售个数
+	int price;//价格
+	std::string desc;//描述
+	std::vector<std::string> vec_res;//购买成功后获得的物品（礼包类）
 }GoodsData;
 
 class GoodsItem :public Sprite
@@ -30,6 +38,10 @@ private:
 	cocos2d::ui::Text* priceTxt;
 
 private:
+
+	/****************************
+	点击购买按钮回调
+	*****************************/
 	void onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };
 #endif

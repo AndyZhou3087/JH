@@ -1,4 +1,5 @@
-﻿#ifndef _HEROPROPER_H_
+﻿
+#ifndef _HEROPROPER_H_
 #define _HEROPROPER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"

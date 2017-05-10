@@ -5,15 +5,15 @@ int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
 int Hero::MAXSpiritValue = 100.0f;
 
-#define HungerSpeed 2
-#define InnerinjurySpeed 1
-#define OutinjurySpeed 1
-#define SpiritSpeed 2
-#define LifeLostSpeed 2//百分比
+#define HungerSpeed 2//饱食度下降速度
+#define InnerinjurySpeed 1//内伤下降速度
+#define OutinjurySpeed 1//外伤下降速度
+#define SpiritSpeed 2//精神下降速度
+#define LifeLostSpeed 2//生命下降速度（按百分比）
 
-#define SeriousInnerinjury 40
-#define SeriousOutinjury 40
-#define SeriousHunger 40
+#define SeriousInnerinjury 40//严重内伤界限
+#define SeriousOutinjury 40//严重外伤界限
+#define SeriousHunger 40//严重饥饿界限
 
 Hero::Hero()
 {
@@ -28,36 +28,33 @@ Hero::~Hero()
 
 bool Hero::init()
 {
+	//12s，（游戏时间1小时更新一次）
 	this->schedule(schedule_selector(Hero::updateData), 60.0f / TIMESCALE);
 	return true;
 }
 
 void Hero::updateData(float dt)
 {
-	if (m_outinjury < SeriousOutinjury)
+	if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 	{
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
-		m_innerinjury -= InnerinjurySpeed * 3;
-	}
-	if (m_hunger < SeriousHunger)
-	{
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
-		m_outinjury -= OutinjurySpeed * 2;
 		m_innerinjury -= InnerinjurySpeed * 2;
-		m_spirit -= SpiritSpeed;
 	}
-	if (m_innerinjury < SeriousInnerinjury)
+	if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
 	{
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
-		m_outinjury -= OutinjurySpeed * 3;
+		m_outinjury -= OutinjurySpeed * 1;
+		m_innerinjury -= InnerinjurySpeed * 1;
+	}
+	if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
+	{
+		m_outinjury -= OutinjurySpeed * 2;
 	}
 
+	//接上严重界限的消耗
 	m_hunger -= HungerSpeed;
-
-	if (m_innerinjury < MAXInnerinjuryValue)
-		m_innerinjury -= InnerinjurySpeed;
-	if (m_outinjury < MAXOutinjuryValue)
-		m_outinjury -= OutinjurySpeed;
+	m_innerinjury -= InnerinjurySpeed;
+	m_outinjury -= OutinjurySpeed;
+	m_spirit -= SpiritSpeed;
+	m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 
 	if (m_innerinjury < 0)
 		m_innerinjury = 0;
@@ -74,12 +71,14 @@ void Hero::updateData(float dt)
 
 void Hero::sleep(int hour)
 {
+	//按次恢复生命
 	sleephour = hour;
 	this->schedule(schedule_selector(Hero::sleepbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::sleepbystep(float dt)
 {
+	//每次恢复的生命值
 	m_life += getMaxLifeValue() * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
 	if (m_life > getMaxLifeValue())
 	{
@@ -90,11 +89,13 @@ void Hero::sleepbystep(float dt)
 
 void Hero::drinking()
 {
+	//按此恢复精神值
 	this->schedule(schedule_selector(Hero::drinkbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::drinkbystep(float dt)
 {
+	//每次恢复精神值
 	m_spirit += 0.5f;
 	if (m_spirit > MAXSpiritValue)
 	{
@@ -129,6 +130,7 @@ PackageData* Hero::getAtrByType(HeroAtrType type)
 }
 void Hero::revive()
 {
+	//复活-满状态复活
 	setOutinjuryValue(MAXOutinjuryValue);
 	setInnerinjuryValue(MAXInnerinjuryValue);
 	setLifeValue(getMaxLifeValue());
@@ -136,17 +138,21 @@ void Hero::revive()
 	setSpiritValue(MAXSpiritValue);
 }
 
+//功法每种只能有一本，不能重复
 bool Hero::checkifHasGF(std::string gfid)
 {
+	//装备栏是否有
 	if ((getAtrByType(H_WG)->count > 0 && getAtrByType(H_WG)->strid.compare(gfid) == 0) || (getAtrByType(H_NG)->count > 0 && getAtrByType(H_NG)->strid.compare(gfid) == 0))
 		return true;
 	else
 	{
+		//背包中是否有
 		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
 			if (MyPackage::vec_packages[i].strid.compare(gfid) == 0)
 				return true;
 		}
+		//仓库中是否有
 		for (unsigned i = 0; i < StorageRoom::map_storageData[N_GONG].size(); i++)
 		{
 			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfid) == 0)

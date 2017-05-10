@@ -43,7 +43,7 @@ void GlobalData::loadBuildActionJSon(std::string buildname)
 	std::string jsonfilename = StringUtils::format("data/%s.json", buildname.c_str());
 	rapidjson::Document doc = ReadJsonFile(jsonfilename);
 	rapidjson::Value& bc = doc["bc"];
-	for (unsigned int i = 0; i < bc.Size(); i++)
+	for (unsigned int i = 0; i < bc.Size(); i++)//建筑物数组
 	{
 		BuildActionData data;
 		rapidjson::Value& jsonvalue = bc[i];
@@ -129,7 +129,7 @@ void GlobalData::loadResJsonData()
 	vec_resData.clear();
 	rapidjson::Document doc = ReadJsonFile("data/res.json");
 	rapidjson::Value& values = doc["r"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//一级资源数组
 	{
 		ResData data;
 		rapidjson::Value& item = values[i];
@@ -175,7 +175,7 @@ void GlobalData::loadHillResJsonData()
 	vec_hillResid.clear();
 	rapidjson::Document doc = ReadJsonFile("data/homehill.json");
 	rapidjson::Value& values = doc["sh"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//后山显示的资源列表
 	{
 		vec_hillResid.push_back(values[i].GetString());
 	}
@@ -185,7 +185,7 @@ void GlobalData::loadMapJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/map.json");
 	rapidjson::Value& values = doc["m"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//地图地点数组
 	{
 		MapData data;
 		rapidjson::Value& item = values[i];
@@ -218,7 +218,7 @@ void GlobalData::loadNpcJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/npc.json");
 	rapidjson::Value& values = doc["n"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//npc数组
 	{
 		NpcData data;
 		rapidjson::Value& item = values[i];
@@ -289,6 +289,7 @@ void GlobalData::loadNpcJsonData()
 
 void GlobalData::saveResData()
 {
+	//保存资源数据每项分号（;）分割
 	std::string str;
 	for (unsigned int i = 0; i < vec_resData.size(); i++)
 	{
@@ -300,6 +301,7 @@ void GlobalData::saveResData()
 
 void GlobalData::loadResData()
 {
+	//解析保存的资源数据
 	std::string datastr = GameDataSave::getInstance()->getResData();
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");
@@ -317,7 +319,7 @@ void GlobalData::loadHeroAtrJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/heroatr.json");
 	rapidjson::Value& values = doc["h"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//角色数组4个角色
 	{
 		rapidjson::Value& vitem = values[i];
 		HeroAtrData data;
@@ -358,7 +360,7 @@ void GlobalData::loadWG_NGJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/wg.json");
 	rapidjson::Value& values = doc["w"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//外功数组
 	{
 		rapidjson::Value& vitem = values[i];
 		WG_NGData data;
@@ -392,7 +394,7 @@ void GlobalData::loadWG_NGJsonData()
 	doc = ReadJsonFile("data/ng.json");
 	rapidjson::Value& nvalues = doc["n"];
 	int a = nvalues.Size();
-	for (unsigned int i = 0; i < nvalues.Size(); i++)
+	for (unsigned int i = 0; i < nvalues.Size(); i++)//内功数组
 	{
 		rapidjson::Value& vitem = nvalues[i];
 		WG_NGData data;
@@ -428,7 +430,7 @@ void GlobalData::loadEquipJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/equip.json");
 	rapidjson::Value& values = doc["ae"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//武器防具数组
 	{
 		EquipData data;
 		rapidjson::Value& item = values[i];
@@ -450,6 +452,7 @@ void GlobalData::loadEquipJsonData()
 
 void GlobalData::loadUnlockHeroData()
 {
+	//解析角色是否解锁"-"分割
 	std::string str = GameDataSave::getInstance()->getHeroUnlockData();
 	std::vector<std::string> tmp;
 	CommonFuncs::split(str, tmp, "-");
@@ -462,6 +465,7 @@ void GlobalData::loadUnlockHeroData()
 
 void GlobalData::setUnlockHero(int index, bool val)
 {
+	//保存角色是否解锁"-"分割
 	unlockhero[index] = val;
 	std::string str;
 	for (int i = 0; i < 4; i++)
@@ -503,6 +507,7 @@ void GlobalData::setUId(std::string struid)
 
 std::string GlobalData::getDefaultStorage(int heroindex)
 {
+	//默认仓库的数据
 	rapidjson::Document doc = ReadJsonFile("data/defaultstorage.json");
 	rapidjson::Value& values = doc["ds"];
 
@@ -531,7 +536,7 @@ void GlobalData::loadPlotMissionJsonData()
 {
 	rapidjson::Document doc = ReadJsonFile("data/plotmission.json");
 	rapidjson::Value& values = doc["m"];
-	for (unsigned int i = 0; i < values.Size(); i++)
+	for (unsigned int i = 0; i < values.Size(); i++)//剧情数组
 	{
 		rapidjson::Value& vitem = values[i];
 		PlotMissionData data;
@@ -549,10 +554,6 @@ void GlobalData::loadPlotMissionJsonData()
 
 		v = vitem["t"];
 		data.type = atoi(v.GetString());
-
-		v = vitem["f"];
-		int f = atoi(v.GetString());
-		data.isFirstMission = (f ==1?true:false);
 
 		data.status = M_NONE;
 		v = vitem["word"];
@@ -593,6 +594,7 @@ void GlobalData::loadPlotMissionJsonData()
 
 void GlobalData::savePlotMissionStatus()
 {
+	//保存剧情状态"-"分割
 	std::string str;
 	for (unsigned int i = 0; i < GlobalData::vec_PlotMissionData.size(); i++)
 	{
@@ -604,6 +606,7 @@ void GlobalData::savePlotMissionStatus()
 
 void GlobalData::updatePlotMissionStatus()
 {
+	//解析剧情状态"-"分割
 	std::string str = GameDataSave::getInstance()->getPlotMissionStatus();
 	if (str.length() > 0)
 	{

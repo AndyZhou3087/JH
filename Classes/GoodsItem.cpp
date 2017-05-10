@@ -17,7 +17,7 @@ bool GoodsItem::init(GoodsData* gdata)
 	if (!Sprite::initWithSpriteFrameName("ui/blank.png"))
 		return false;
 
-	Node* csbnode = CSLoader::createNode("goodsNode.csb");
+	Node* csbnode = CSLoader::createNode("goodsNode.csb");//物品节点
 	csbnode->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 	this->addChild(csbnode);
 
@@ -26,6 +26,7 @@ bool GoodsItem::init(GoodsData* gdata)
 	descTxt = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
 	priceTxt = (cocos2d::ui::Text*) csbnode->getChildByName("price");
 
+	//图标
 	std::string imagepath = StringUtils::format("ui/%s.png", gdata->icon.c_str());
 	icon->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	icon->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
@@ -35,7 +36,7 @@ bool GoodsItem::init(GoodsData* gdata)
 	std::string pricestr = StringUtils::format("%d.00", gdata->price);
 	priceTxt->setString(pricestr);
 
-	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("bg");
+	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("bg");//整块节点击
 	backbtn->addTouchEventListener(CC_CALLBACK_2(GoodsItem::onBuy, this));
 
 	backbtn->setSwallowTouches(false);
@@ -62,6 +63,7 @@ void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		//购买
 		ShopLayer::beginPay(this->getTag());
 	}
 }

@@ -1,4 +1,8 @@
-﻿#ifndef _HERO_H_
+﻿
+/********************************************************************
+*角色
+*********************************************************************/
+#ifndef _HERO_H_
 #define _HERO_H_
 #include "cocos2d.h"
 #include "MyPackage.h"
@@ -6,17 +10,19 @@
 #include "GlobalData.h"
 USING_NS_CC;
 
-
+/****************************
+角色属性（装备栏）类型，
+*****************************/
 typedef enum
 {
-	H_WEAPON = 0,
-	H_GATHER,
-	H_FELL,
-	H_EXCAVATE,
-	H_WG,
-	H_NG,
-	H_ARMOR,
-	H_MOUNT,
+	H_WEAPON = 0,//武器框
+	H_GATHER,//采取框
+	H_FELL,//砍伐框
+	H_EXCAVATE,//挖掘框
+	H_WG,//外功框
+	H_NG,//内功框
+	H_ARMOR,//防具框
+	H_MOUNT,//坐骑框
 	H_MAX
 }HeroAtrType;
 
@@ -29,42 +35,123 @@ public:
 
 	CREATE_FUNC(Hero);
 
+	/****************************
+	角色头像设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_pic, HeadImg);
+
+	/****************************
+	角色内伤设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_innerinjury, InnerinjuryValue);
+	/****************************
+	角色外伤设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_outinjury, OutinjuryValue);
+
+	/****************************
+	角色饱食度设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_hunger, HungerValue);
+
+	/****************************
+	角色精神值设置
+	*****************************/
 	CC_SYNTHESIZE(float, m_spirit, SpiritValue);
+
+	/****************************
+	角色生命值设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_life, LifeValue);
 
+	/****************************
+	角色经验值设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_exp, ExpValue);
+
+	/****************************
+	角色等级设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_lv, LVValue);
+
+	/****************************
+	角色名称设置
+	*****************************/
 	CC_SYNTHESIZE(std::string, m_name, MyName);
+
+	/****************************
+	角色头像设置
+	*****************************/
 	CC_SYNTHESIZE(int, m_hid, HeadID);
+
+	/****************************
+	角色是否在家
+	*****************************/
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
 
+	/****************************
+	获取角色攻击
+	*****************************/
 	int getAtkValue();
+
+	/****************************
+	获取角色防护
+	*****************************/
 	int getDfValue();
 
+	/****************************
+	获取角色最大生命值
+	*****************************/
 	int getMaxLifeValue();
 
+	/****************************
+	设置角色装备
+	@param （装备栏）类型
+	@param 装备
+	*****************************/
 	void setAtrByType(HeroAtrType type, PackageData pData);
+
+	/****************************
+	获取角色装备
+	@param （装备栏）类型
+	@return 装备
+	*****************************/
 	PackageData* getAtrByType(HeroAtrType type);
+
+	/****************************
+	睡觉
+	@param 睡觉时间 （小时）
+	*****************************/
 	void sleep(int hour);
+
+	/****************************
+	喝酒
+	*****************************/
 	void drinking();
+
+	/****************************
+	复活
+	*****************************/
 	void revive();
+
+	/****************************
+	是否有功法，功法有了不重复
+	根据功法ID查找是否已经拥有
+	@param 功法ID
+	*****************************/
 	bool checkifHasGF(std::string gfid);
 public:
-	static int MAXInnerinjuryValue;
-	static int MAXOutinjuryValue;
-	static int MAXHungerValue;
-	static int MAXSpiritValue;
-	std::map<HeroAtrType, PackageData> map_heroAtr;
+	static int MAXInnerinjuryValue;//最大内伤值
+	static int MAXOutinjuryValue;//最大外伤值
+	static int MAXHungerValue;//最大饱食度
+	static int MAXSpiritValue;//最大精神值
+	std::map<HeroAtrType, PackageData> map_heroAtr;//角色装备栏数据
 private:
-	void updateData(float dt);
-	void sleepbystep(float dt);
-	void drinkbystep(float dt);
+	void updateData(float dt);//定时更新数据
+	void sleepbystep(float dt);//睡觉--恢复值一点点恢复
+	void drinkbystep(float dt);//喝酒--恢复值一点点恢复
 private:
-	int sleephour;
+	int sleephour;//睡觉时间
 
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
