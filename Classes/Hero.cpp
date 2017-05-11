@@ -38,15 +38,18 @@ void Hero::updateData(float dt)
 	if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 	{
 		m_innerinjury -= InnerinjurySpeed * 2;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 	}
 	if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
 	{
 		m_outinjury -= OutinjurySpeed * 1;
 		m_innerinjury -= InnerinjurySpeed * 1;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 	}
 	if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
 	{
 		m_outinjury -= OutinjurySpeed * 2;
+		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 	}
 
 	//接上严重界限的消耗
@@ -54,7 +57,6 @@ void Hero::updateData(float dt)
 	m_innerinjury -= InnerinjurySpeed;
 	m_outinjury -= OutinjurySpeed;
 	m_spirit -= SpiritSpeed;
-	m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
 
 	if (m_innerinjury < 0)
 		m_innerinjury = 0;

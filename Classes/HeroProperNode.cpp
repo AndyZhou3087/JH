@@ -275,10 +275,10 @@ void HeroProperNode::onItem(Ref* pSender)
 				}
 				m_select->setVisible(false);
 			}
-			else
-			{
-				m_select->setVisible(true);
-			}
+			//else
+			//{
+			//	m_select->setVisible(true);
+			//}
 		}
 	}
 

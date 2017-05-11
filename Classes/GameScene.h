@@ -20,7 +20,6 @@ public:
 
 	virtual void onExit();
     virtual bool init();
-	virtual void onEnterTransitionDidFinish();
 	CREATE_FUNC(GameScene);
 	/****************************
 	角色复活更新UI
