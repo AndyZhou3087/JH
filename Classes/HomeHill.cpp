@@ -58,7 +58,7 @@ bool HomeHill::init()
 			ResData data = GlobalData::vec_resData[m];
 			if (GlobalData::vec_hillResid[i].compare(data.strid) == 0)
 			{
-				actionbtn->setName(data.strid);
+				actionbtn->setUserData((void*)GlobalData::vec_resData[m].strid.c_str());
 				std::string str = StringUtils::format("ui/%s.png", data.strid.c_str());
 				iconimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 				iconimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
@@ -133,7 +133,8 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		for (i = 0; i<GlobalData::vec_resData.size(); i++)
 		{
 			data = &GlobalData::vec_resData[i];
-			if (data->strid.compare(node->getName()) == 0)
+			std::string strid = (char*)node->getUserData();
+			if (data->strid.compare(strid) == 0)
 				break;
 		}
 
@@ -182,6 +183,7 @@ void HomeHill::updateUI(float dt)
 		cocos2d::ui::Text* speed = (cocos2d::ui::Text*)resnode->getChildByName("speed");
 		cocos2d::ui::Text* waittime = (cocos2d::ui::Text*)resnode->getChildByName("waittime");
 		cocos2d::ui::Text* waittext = (cocos2d::ui::Text*)resnode->getChildByName("waittext");
+		cocos2d::ui::Button* actionbtn = (cocos2d::ui::Button*)resnode->getChildByName("actionbtn");
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData* data = &GlobalData::vec_resData[m];
@@ -200,12 +202,16 @@ void HomeHill::updateUI(float dt)
 					waittext->setVisible(true);
 					waittime->setVisible(true);
 					count->setColor(Color3B::RED);
+					actionbtn->setEnabled(false);
+					actionbtn->setBright(false);
 				}
 				else
 				{
 					waittext->setVisible(false);
 					waittime->setVisible(false);
 					count->setColor(Color3B::BLACK);
+					actionbtn->setEnabled(true);
+					actionbtn->setBright(true);
 				}
 			}
 		}

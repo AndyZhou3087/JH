@@ -29,6 +29,12 @@ private:
 	void onEscape (cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	角色攻击
+	定时器执行
+	****************************/
+	void delayHeroFight(float dt);
+
+	/****************************
 	NPC 回击
 	定时器执行
 	****************************/
@@ -46,6 +52,12 @@ private:
 	@param wordstr 文字
 	****************************/
 	void checkWordLblColor(std::string wordstr);
+
+	/****************************
+	延迟显示胜利界面
+	定时器执行
+	****************************/
+	void delayShowWinLayer(float dt);
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件
@@ -57,14 +69,9 @@ private:
 	int npcmaxhp;// NPC 最大血量
 	int npcatk;//NPC 攻击值
 	int npcdf;//NPC 防御值
-
-	/****************************
-	定时更新UI
-	****************************/
-	void updata(float dt);
-
 	std::string m_addrid;//地点ID
 	std::string m_npcid;//NPC ID
+	bool isecapeok;//是否逃跑成功
 };
 #endif
 

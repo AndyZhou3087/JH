@@ -94,7 +94,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	for (unsigned int i = 0; i < winres.size(); i++)
 	{
 		int res = atoi(winres[i].c_str());
-		randsed += systime();
+		randsed += GlobalData::getSysSecTime();
 		srand(randsed);
 		int r = rand() % 100 + 1;
 		if (r <= GlobalData::map_npcs[npcid].winresrnd[i])
@@ -235,6 +235,8 @@ void Winlayer::updataLV()
 		g_hero->setLVValue(lv);
 		g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv - 1]);
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
+
+		showLvUpText();
 	}
 
 	for (int m = H_WG; m <= H_NG; m++)
@@ -522,15 +524,10 @@ void Winlayer::onExit()
 	Layer::onExit();
 }
 
-int Winlayer::systime()
+void Winlayer::showLvUpText()
 {
-	time_t timep;
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	time(&timep);
-#else
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	timep = tv.tv_sec;
-#endif
-	return timep;
+	Sprite* lvUpSprite = Sprite::createWithSpriteFrameName("ui/herolvuptext.png");
+	lvUpSprite->setPosition(Vec2(360, 400));
+	this->addChild(lvUpSprite);
+	lvUpSprite->runAction(Spawn::create(MoveTo::create(3.0f, Vec2(360, 700)), FadeOut::create(3.0f), NULL));
 }

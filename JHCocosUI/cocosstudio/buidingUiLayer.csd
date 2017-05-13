@@ -66,19 +66,34 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="-842860513" Tag="52" IconVisible="False" LeftMargin="37.9994" RightMargin="32.0006" TopMargin="492.0000" BottomMargin="208.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="650.0000" Y="580.0000" />
+          <AbstractNodeData Name="ScrollView" ActionTag="-842860513" Tag="52" IconVisible="False" LeftMargin="37.9994" RightMargin="12.0006" TopMargin="492.0000" BottomMargin="208.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="670.0000" Y="580.0000" />
             <AnchorPoint />
             <Position X="37.9994" Y="208.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0528" Y="0.1625" />
-            <PreSize X="0.9028" Y="0.4531" />
+            <PreSize X="0.9306" Y="0.4531" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="650" Height="700" />
+            <InnerNodeSize Width="680" Height="700" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="shopbtn" ActionTag="-480739763" VisibleForFrame="False" Tag="716" IconVisible="False" LeftMargin="78.0000" RightMargin="568.0000" TopMargin="194.0000" BottomMargin="1014.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="44" Scale9Height="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="74.0000" Y="72.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="115.0000" Y="1050.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1597" Y="0.8203" />
+            <PreSize X="0.1028" Y="0.0562" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

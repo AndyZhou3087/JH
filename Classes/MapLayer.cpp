@@ -10,6 +10,7 @@
 #include "GlobalData.h"
 #include "ShopLayer.h"
 #include "SoundManager.h"
+#include "UnlockLayer.h"
 
 static Vec2 heroPos;
 
@@ -182,4 +183,10 @@ void MapLayer::updateUnlockChapter()
 			mapNamImage->setVisible(true);
 		}
 	}
+}
+
+void MapLayer::showUnlockLayer(float dt)
+{
+	Director::getInstance()->getRunningScene()->addChild(UnlockLayer::create(), 10);
+	updateUnlockChapter();
 }

@@ -42,6 +42,9 @@ ShopLayer* ShopLayer::create()
 
 bool ShopLayer::init()
 {
+	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 150));
+	this->addChild(color);
+
 	Node* csbnode = CSLoader::createNode("shopLayer.csb");
 	this->addChild(csbnode);
 	

@@ -11,9 +11,14 @@ USING_NS_CC;
 class ResDetailsLayer : public Layer
 {
 public:
+	ResDetailsLayer();
+	~ResDetailsLayer();
 	bool init(PackageData* pdata);
 	static ResDetailsLayer* create(PackageData* pdata);
+	static ResDetailsLayer* createByResId(std::string resid);
 	void removSelf();
+
+	static int whereClick;
 private:
 	void onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

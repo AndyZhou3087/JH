@@ -91,14 +91,14 @@ void Hero::sleepbystep(float dt)
 
 void Hero::drinking()
 {
-	//按此恢复精神值
+	//按次恢复精神值
 	this->schedule(schedule_selector(Hero::drinkbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
 }
 
 void Hero::drinkbystep(float dt)
 {
 	//每次恢复精神值
-	m_spirit += 0.5f;
+	m_spirit += 2.0f;
 	if (m_spirit > MAXSpiritValue)
 	{
 		m_spirit = MAXSpiritValue;

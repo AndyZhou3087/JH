@@ -88,10 +88,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="actionbtn" ActionTag="1305172232" Tag="51" IconVisible="False" LeftMargin="163.8374" RightMargin="-284.8374" TopMargin="-37.5246" BottomMargin="-16.4754" TouchEnable="True" FontSize="36" ButtonText="砍伐" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="actionbtn" ActionTag="1305172232" Tag="51" IconVisible="False" LeftMargin="179.5000" RightMargin="-300.5000" TopMargin="-37.5246" BottomMargin="-16.4754" TouchEnable="True" FontSize="36" ButtonText="砍伐" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="121.0000" Y="54.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="224.3374" Y="10.5246" />
+            <Position X="240.0000" Y="10.5246" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

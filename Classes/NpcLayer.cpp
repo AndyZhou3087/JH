@@ -189,7 +189,9 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 					GlobalData::setPlotMissionIndex(curplot + 1);
 					if (g_maplayer != NULL)
-						g_maplayer->updateUnlockChapter();
+					{
+						g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+					}
 				}
 
 				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)
@@ -285,7 +287,7 @@ void NpcLayer::checkWordLblColor(std::string wordstr)
 		std::size_t findpos = wordstr.find(npcname);
 		if (findpos != std::string::npos)
 		{
-			int sindex = (findpos + 1) / 3;
+			int sindex = findpos / 3;
 			int len = npcname.size() / 3;
 			for (int i = sindex; i < sindex + len; i++)
 			{
@@ -296,7 +298,7 @@ void NpcLayer::checkWordLblColor(std::string wordstr)
 	std::size_t findpos = wordstr.find(g_hero->getMyName());
 	if (findpos != std::string::npos)
 	{
-		int sindex = (findpos + 1) / 3;
+		int sindex = findpos / 3;
 		int len = g_hero->getMyName().size() / 3;
 		for (int i = sindex; i < sindex + len; i++)
 		{

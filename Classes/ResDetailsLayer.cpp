@@ -6,6 +6,21 @@
 #include "Hero.h"
 #include "StorageUILayer.h"
 #include "SoundManager.h"
+
+#define WINESTRID "23"
+
+int ResDetailsLayer::whereClick = 0;//0--仓库，1其他
+
+ResDetailsLayer::ResDetailsLayer()
+{
+
+}
+
+ResDetailsLayer::~ResDetailsLayer()
+{
+	whereClick = 0;
+}
+
 bool ResDetailsLayer::init(PackageData* pdata)
 {
 	
@@ -26,7 +41,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	uselbl = (cocos2d::ui::Text*)usebtn->getChildByName("valuelbl");
 
-	if (pdata->type == FOOD || pdata->type == MEDICINAL)
+	if ((pdata->type == FOOD || (pdata->type == MEDICINAL && pdata->strid.compare(WINESTRID) != 0)) && whereClick == 0)
 		okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall")->getChildByName("Image");
 
@@ -101,39 +116,66 @@ ResDetailsLayer* ResDetailsLayer::create(PackageData* pdata)
 	return pRet;
 }
 
+ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
+{
+	PackageData sdata;
+	bool isInRes = false;
+	for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+	{
+		if (resid.compare(GlobalData::vec_resData[i].strid) == 0)
+		{
+			isInRes = true;
+			sdata.desc = GlobalData::vec_resData[i].desc;
+			sdata.name = GlobalData::vec_resData[i].cname;
+			sdata.strid = resid;
+			sdata.type = GlobalData::vec_resData[i].type - 1;
+			break;
+		}
+	}
+	if (!isInRes)
+	{
+		std::map<std::string, std::vector<BuildActionData>>::iterator it;
+		for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+		{
+			for (unsigned int i = 0; i < GlobalData::map_buidACData[it->first].size(); i++)
+			{
+				if (resid.compare(GlobalData::map_buidACData[it->first][i].icon))
+				{
+					isInRes = true;
+					sdata.desc = GlobalData::map_buidACData[it->first][i].desc;
+					sdata.name = GlobalData::map_buidACData[it->first][i].cname;
+					sdata.strid = resid;
+					sdata.type = GlobalData::map_buidACData[it->first][i].type - 1;
+					break;
+				}
+			}
+		}
+	}
+
+	if (isInRes)
+	{
+		return create(&sdata);
+	}
+	return NULL;
+}
+
 void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		if (m_packageData->type == FOOD)
+
+		if (whereClick == 0)
 		{
-			bool isInres = false;
-			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			if (m_packageData->type == FOOD)
 			{
-				if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
+				bool isInres = false;
+				for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
 				{
-					isInres = true;
-					int addvalue = GlobalData::vec_resData[i].ep[0];
-					int hungervale = g_hero->getHungerValue();
-					if (addvalue + hungervale > Hero::MAXHungerValue)
-						g_hero->setHungerValue(Hero::MAXHungerValue);
-					else
-						g_hero->setHungerValue(addvalue + hungervale);
-
-					StorageRoom::use(m_packageData->strid);
-					break;
-				}
-			}
-
-			if (!isInres)
-			{
-				for (unsigned int i = 0; i < GlobalData::map_buidACData["cooktable"].size(); i++)
-				{
-					if (m_packageData->strid.compare(GlobalData::map_buidACData["cooktable"][i].icon) == 0)
+					if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
 					{
-						int addvalue = GlobalData::map_buidACData["cooktable"][i].ep[0];
-
+						isInres = true;
+						int addvalue = GlobalData::vec_resData[i].ep[0];
 						int hungervale = g_hero->getHungerValue();
 						if (addvalue + hungervale > Hero::MAXHungerValue)
 							g_hero->setHungerValue(Hero::MAXHungerValue);
@@ -144,40 +186,37 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						break;
 					}
 				}
-			}
-		}
-		else if (m_packageData->type == MEDICINAL)
-		{
-			bool isInRes = false;
-			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
-			{
-				if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
+
+				if (!isInres)
 				{
-					isInRes = true;
-					int wvalue = GlobalData::vec_resData[i].ep[0];
-					int nvalue = GlobalData::vec_resData[i].ep[1];
-					int outvalue = g_hero->getOutinjuryValue();
-					if (wvalue + outvalue > Hero::MAXOutinjuryValue)
-						g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
-					else
-						g_hero->setOutinjuryValue(wvalue + outvalue);
-					int invalue = g_hero->getInnerinjuryValue();
-					if (invalue + nvalue > Hero::MAXInnerinjuryValue)
-						g_hero->setInnerinjuryValue(Hero::MAXInnerinjuryValue);
-					else
-						g_hero->setInnerinjuryValue(invalue + nvalue);
-					StorageRoom::use(m_packageData->strid);
-					break;
+					for (unsigned int i = 0; i < GlobalData::map_buidACData["cooktable"].size(); i++)
+					{
+						if (m_packageData->strid.compare(GlobalData::map_buidACData["cooktable"][i].icon) == 0)
+						{
+							int addvalue = GlobalData::map_buidACData["cooktable"][i].ep[0];
+
+							int hungervale = g_hero->getHungerValue();
+							if (addvalue + hungervale > Hero::MAXHungerValue)
+								g_hero->setHungerValue(Hero::MAXHungerValue);
+							else
+								g_hero->setHungerValue(addvalue + hungervale);
+
+							StorageRoom::use(m_packageData->strid);
+							break;
+						}
+					}
 				}
 			}
-			if (!isInRes)
+			else if (m_packageData->type == MEDICINAL)
 			{
-				for (unsigned int i = 0; i < GlobalData::map_buidACData["medicinekit"].size(); i++)
+				bool isInRes = false;
+				for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
 				{
-					if (m_packageData->strid.compare(GlobalData::map_buidACData["medicinekit"][i].icon) == 0)
+					if (m_packageData->strid.compare(GlobalData::vec_resData[i].strid) == 0)
 					{
-						int wvalue = GlobalData::map_buidACData["medicinekit"][i].ep[0];
-						int nvalue = GlobalData::map_buidACData["medicinekit"][i].ep[1];
+						isInRes = true;
+						int wvalue = GlobalData::vec_resData[i].ep[0];
+						int nvalue = GlobalData::vec_resData[i].ep[1];
 						int outvalue = g_hero->getOutinjuryValue();
 						if (wvalue + outvalue > Hero::MAXOutinjuryValue)
 							g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
@@ -192,14 +231,37 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						break;
 					}
 				}
+				if (!isInRes)
+				{
+					for (unsigned int i = 0; i < GlobalData::map_buidACData["medicinekit"].size(); i++)
+					{
+						if (m_packageData->strid.compare(GlobalData::map_buidACData["medicinekit"][i].icon) == 0)
+						{
+							int wvalue = GlobalData::map_buidACData["medicinekit"][i].ep[0];
+							int nvalue = GlobalData::map_buidACData["medicinekit"][i].ep[1];
+							int outvalue = g_hero->getOutinjuryValue();
+							if (wvalue + outvalue > Hero::MAXOutinjuryValue)
+								g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
+							else
+								g_hero->setOutinjuryValue(wvalue + outvalue);
+							int invalue = g_hero->getInnerinjuryValue();
+							if (invalue + nvalue > Hero::MAXInnerinjuryValue)
+								g_hero->setInnerinjuryValue(Hero::MAXInnerinjuryValue);
+							else
+								g_hero->setInnerinjuryValue(invalue + nvalue);
+							StorageRoom::use(m_packageData->strid);
+							break;
+						}
+					}
+				}
+
 			}
 
-		}
-
-		if (m_packageData->type == FOOD || m_packageData->type == MEDICINAL)
-		{
-			StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
-			storageUI->updateResContent();
+			if (m_packageData->type == FOOD || m_packageData->type == MEDICINAL)
+			{
+				StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
+				storageUI->updateResContent();
+			}
 		}
 		removSelf();
 	}

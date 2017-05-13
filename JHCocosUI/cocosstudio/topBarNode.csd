@@ -48,6 +48,30 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topoutinjurybg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="topoutinjuryred" ActionTag="1566437249" VisibleForFrame="False" Tag="48" IconVisible="False" LeftMargin="-178.8100" RightMargin="115.8100" TopMargin="-107.3500" BottomMargin="20.3500" ctype="SpriteObjectData">
+            <Size X="63.0000" Y="87.0000" />
+            <Children>
+              <AbstractNodeData Name="topdown" ActionTag="984314101" Tag="49" IconVisible="False" LeftMargin="6.4897" RightMargin="34.5103" TopMargin="31.2066" BottomMargin="23.7934" ctype="SpriteObjectData">
+                <Size X="22.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="17.4897" Y="39.7934" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2776" Y="0.4574" />
+                <PreSize X="0.3056" Y="0.3855" />
+                <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-147.3100" Y="63.8500" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/topoutinjuryred.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
           <AbstractNodeData Name="topinnerinjurybg" ActionTag="628565220" Tag="19" IconVisible="False" LeftMargin="-75.6900" RightMargin="-3.3100" TopMargin="-100.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="28" ctype="ImageViewObjectData">
             <Size X="79.0000" Y="80.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -57,6 +81,30 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topinnerinjurybg.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="topinnerinjuryred" ActionTag="993256582" VisibleForFrame="False" Tag="46" IconVisible="False" LeftMargin="-75.6900" RightMargin="-3.3100" TopMargin="-100.3500" BottomMargin="20.3500" ctype="SpriteObjectData">
+            <Size X="79.0000" Y="80.0000" />
+            <Children>
+              <AbstractNodeData Name="topdown" ActionTag="1537039459" Tag="47" IconVisible="False" LeftMargin="27.4893" RightMargin="29.5107" TopMargin="23.2070" BottomMargin="24.7930" ctype="SpriteObjectData">
+                <Size X="22.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="38.4893" Y="40.7930" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4872" Y="0.5099" />
+                <PreSize X="0.3056" Y="0.3855" />
+                <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-36.1900" Y="60.3500" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/topinnerinjuryred.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="tophungerbg" ActionTag="-1543547275" Tag="20" IconVisible="False" LeftMargin="43.4200" RightMargin="-115.4200" TopMargin="-103.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="23" RightEage="23" TopEage="27" BottomEage="27" Scale9OriginX="23" Scale9OriginY="27" Scale9Width="26" Scale9Height="29" ctype="ImageViewObjectData">
             <Size X="72.0000" Y="83.0000" />
@@ -68,6 +116,30 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/tophungerbg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="tophungerred" ActionTag="555057074" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="43.4200" RightMargin="-115.4200" TopMargin="-103.3500" BottomMargin="20.3500" ctype="SpriteObjectData">
+            <Size X="72.0000" Y="83.0000" />
+            <Children>
+              <AbstractNodeData Name="topdown" ActionTag="2025306406" Tag="45" IconVisible="False" LeftMargin="34.4896" RightMargin="15.5104" TopMargin="22.2066" BottomMargin="28.7934" ctype="SpriteObjectData">
+                <Size X="22.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="45.4896" Y="44.7934" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6318" Y="0.5397" />
+                <PreSize X="0.3056" Y="0.3855" />
+                <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="79.4200" Y="61.8500" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/tophungerred.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
           <AbstractNodeData Name="topspiritbg" ActionTag="-1453310125" Tag="21" IconVisible="False" LeftMargin="155.5400" RightMargin="-228.5400" TopMargin="-109.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="24" RightEage="24" TopEage="29" BottomEage="29" Scale9OriginX="24" Scale9OriginY="29" Scale9Width="25" Scale9Height="31" ctype="ImageViewObjectData">
             <Size X="73.0000" Y="89.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -78,6 +150,30 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/topspiritbg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="topspiritred" ActionTag="-645425465" VisibleForFrame="False" Tag="50" IconVisible="False" LeftMargin="155.5400" RightMargin="-228.5400" TopMargin="-109.3500" BottomMargin="20.3500" ctype="SpriteObjectData">
+            <Size X="73.0000" Y="89.0000" />
+            <Children>
+              <AbstractNodeData Name="topdown" ActionTag="-111337924" Tag="51" IconVisible="False" LeftMargin="26.4888" RightMargin="24.5112" TopMargin="22.2068" BottomMargin="34.7932" ctype="SpriteObjectData">
+                <Size X="22.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="37.4888" Y="50.7932" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5135" Y="0.5707" />
+                <PreSize X="0.3056" Y="0.3855" />
+                <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="192.0400" Y="64.8500" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/topspiritred.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
           <AbstractNodeData Name="toplifebg" ActionTag="648671161" Tag="22" IconVisible="False" LeftMargin="268.6600" RightMargin="-347.6600" TopMargin="-101.3500" BottomMargin="20.3500" TouchEnable="True" LeftEage="26" RightEage="26" TopEage="26" BottomEage="26" Scale9OriginX="26" Scale9OriginY="26" Scale9Width="27" Scale9Height="29" ctype="ImageViewObjectData">
             <Size X="79.0000" Y="81.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -87,6 +183,30 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/toplifebg.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="toplifered" ActionTag="-655427340" VisibleForFrame="False" Tag="52" IconVisible="False" LeftMargin="268.6600" RightMargin="-347.6600" TopMargin="-101.3500" BottomMargin="20.3500" ctype="SpriteObjectData">
+            <Size X="79.0000" Y="81.0000" />
+            <Children>
+              <AbstractNodeData Name="topdown" ActionTag="1840166834" Tag="53" IconVisible="False" LeftMargin="28.4879" RightMargin="28.5121" TopMargin="22.2067" BottomMargin="26.7933" ctype="SpriteObjectData">
+                <Size X="22.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="39.4879" Y="42.7933" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4998" Y="0.5283" />
+                <PreSize X="0.3056" Y="0.3855" />
+                <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="308.1600" Y="60.8500" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/toplifered.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="reason" ActionTag="-2107257345" Tag="23" IconVisible="False" LeftMargin="-195.7670" RightMargin="137.7670" TopMargin="-179.2546" BottomMargin="137.2546" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="13" BottomEage="13" Scale9OriginX="19" Scale9OriginY="13" Scale9Width="20" Scale9Height="16" ctype="ImageViewObjectData">
             <Size X="58.0000" Y="42.0000" />

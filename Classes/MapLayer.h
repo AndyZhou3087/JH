@@ -15,6 +15,8 @@ public:
 	CREATE_FUNC(MapLayer);
 	void showMoveToDest();
 	void updateUnlockChapter();
+
+	void showUnlockLayer(float dt);
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

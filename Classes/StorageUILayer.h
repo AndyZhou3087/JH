@@ -20,6 +20,7 @@ public:
 	void updateResContent();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;
 	void onclick(Ref* pSender);
 	cocos2d::ui::ScrollView* scrollview;

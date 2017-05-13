@@ -79,8 +79,9 @@ private:
 	std::vector<int> rewardids;//1："采集", 2："砍伐", 3："挖掘"产出的ID
 	std::vector<PackageData> getResData;//操作（1："采集", 2："砍伐", 3："挖掘"）获取的资源数据（奖励栏中的资源数据）
 	std::vector<PackageData> tempResData;//临时存放的资源数据
-	int mtype;
-	int m_actype;
+	int mtype;//类型
+	int m_actype;//工具类型 1："采集", 2："砍伐", 3："挖掘"
+	cocos2d::ui::Button* m_getbtn;//继续操作按钮
 };
 #endif
 

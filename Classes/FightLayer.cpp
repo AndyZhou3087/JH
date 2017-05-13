@@ -10,6 +10,7 @@
 
 FightLayer::FightLayer()
 {
+	isecapeok = false;
 }
 
 
@@ -102,7 +103,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_fihgtScorll->setPosition(Vec2(360, 370));
 	csbnode->addChild(m_fihgtScorll);
 
-	this->schedule(schedule_selector(FightLayer::updata), 1.6f);//1.6f更新一轮，hero->npc,0.8s: npc->hero
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
 
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -129,7 +130,7 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			addChild(hbox);
 			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
 			m_escapebtn->setTag(1);
-			this->unschedule(schedule_selector(FightLayer::updata));
+			isecapeok = true;
 		}
 		else
 		{
@@ -138,8 +139,11 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	}
 }
 
-void FightLayer::updata(float dt)
+void FightLayer::delayHeroFight(float dt)
 {
+	if (isecapeok)//逃跑成功
+		return;
+
 	int gfBonusAck = 0;
 	int weaponAck = 0;
 	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
@@ -172,18 +176,17 @@ void FightLayer::updata(float dt)
 
 	if (npchp <= 0)// NPC dead 胜利
 	{
-		this->unschedule(schedule_selector(FightLayer::updata));
-
-		Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
-		Director::getInstance()->getRunningScene()->addChild(layer);
-		this->removeFromParentAndCleanup(true);
+		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
 		return;
 	}
-	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.0f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
+	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
 }
 
 void FightLayer::delayBossFight(float dt)
 {
+	if (isecapeok)//逃跑成功
+		return;
+
 	int gfBonusDf = 0;
 	int adf = 0;
 	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
@@ -215,10 +218,20 @@ void FightLayer::delayBossFight(float dt)
 	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
 	herohpbar->setPercent(herohppercent);
 	showFightWord(1, herohurt);
-	if (g_hero->getLifeValue() <= 0)
+
+	if (g_hero->getLifeValue() > 0)
 	{
-		this->unschedule(schedule_selector(FightLayer::updata));
+		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);//2.0s，hero->npc
 	}
+
+	
+}
+
+void FightLayer::delayShowWinLayer(float dt)
+{
+	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
+	Director::getInstance()->getRunningScene()->addChild(layer);
+	this->removeFromParentAndCleanup(true);
 }
 
 void FightLayer::showFightWord(int type, int value)
@@ -234,7 +247,7 @@ void FightLayer::showFightWord(int type, int value)
 	int size = 0;
 	int r = 0;
 
-	if (type == 0)//type:需要对话
+	if (type == 0)//
 	{
 		std::string herowordstr;
 		if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器
@@ -304,7 +317,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 		std::size_t findpos = wordstr.find(npcname);
 		if (findpos != std::string::npos)
 		{
-			int sindex = (findpos + 1) / 3;
+			int sindex = findpos / 3;
 			int len = npcname.size() / 3;
 			for (int i = sindex; i < sindex + len; i++)
 			{
@@ -316,7 +329,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 	std::size_t findpos = wordstr.find(g_hero->getMyName());
 	if (findpos != std::string::npos)
 	{
-		int sindex = (findpos + 1) / 3;
+		int sindex = findpos / 3;
 		int len = g_hero->getMyName().size() / 3;
 		for (int i = sindex; i < sindex + len; i++)
 		{
@@ -331,7 +344,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 		std::size_t findpos = wordstr.find(ename);
 		if (findpos != std::string::npos)
 		{
-			int sindex = (findpos + 1) / 3;
+			int sindex = findpos / 3;
 			int len = ename.size() / 3;
 			for (int i = sindex; i < sindex + len; i++)
 			{
@@ -342,28 +355,30 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 
 	//数字颜色 红色
 	//目前只实现了一段中只能改变一组数字的颜色，并且数字要在上面 关键字的后面
-	int sindex = 0;
+	int sindex = -1;
 	findpos = 0;
-	std::string numstr = { "0123456789" };
-	for (unsigned int i = 0; i < numstr.length(); i++)
+	for (unsigned int i = 0; i < wordstr.length(); i++)
 	{
-		findpos = wordstr.find(numstr.substr(i, 1));
-		if (findpos != std::string::npos)
+		char a = wordstr[i];
+		if (wordstr[i] >= '0' && wordstr[i] <= '9')
 		{
-			sindex = (findpos + 1) / 3;
-	
+			sindex = i / 3;
+			findpos = i;
 			wordlbl->getLetter(sindex)->setColor(Color3B(230, 35, 35));
 			break;
 		}
 	}
 
-	//找到地一个数字后，往后再找4位
-	for (int i = 1; i <= 4; i++)
+	if (sindex > 0)
 	{
-		char a = wordstr[findpos + i];
-		if (wordstr[findpos + i] >= '0' && wordstr[findpos + i] <= '9')
+		//找到地一个数字后，往后再找4位
+		for (int i = 1; i <= 4; i++)
 		{
-			wordlbl->getLetter(sindex + i)->setColor(Color3B(230, 35, 35));
+			char a = wordstr[findpos + i];
+			if (wordstr[findpos + i] >= '0' && wordstr[findpos + i] <= '9')
+			{
+				wordlbl->getLetter(sindex + i)->setColor(Color3B(230, 35, 35));
+			}
 		}
 	}
 

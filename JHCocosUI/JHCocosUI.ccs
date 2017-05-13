@@ -26,6 +26,8 @@
           <Image Name="shero4_s.jpg" />
           <Image Name="shero4name.png" />
           <Image Name="startbg.jpg" />
+          <Image Name="unlockbg.png" />
+          <Image Name="unlocktitle.png" />
         </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
@@ -221,6 +223,7 @@
           <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
           <Image Name="ssepline.jpg" />
+          <Image Name="sshopbtn.png" />
           <Image Name="sstartbtn.png" />
           <Image Name="startbtn.png" />
           <Image Name="startbtndis.png" />
@@ -254,6 +257,7 @@
           <Image Name="topbg.png" />
           <Image Name="topbox.png" />
           <Image Name="topdegree.png" />
+          <Image Name="topdown.png" />
           <Image Name="topeventwordbox.png" />
           <Image Name="tophero1.png" />
           <Image Name="tophero2.png" />
@@ -261,15 +265,20 @@
           <Image Name="tophero4.png" />
           <Image Name="tophungerbar.png" />
           <Image Name="tophungerbg.png" />
+          <Image Name="tophungerred.png" />
           <Image Name="topinnerinjurybar.png" />
           <Image Name="topinnerinjurybg.png" />
+          <Image Name="topinnerinjuryred.png" />
           <Image Name="toplifebar.png" />
           <Image Name="toplifebg.png" />
+          <Image Name="toplifered.png" />
           <Image Name="toplivedaysicon.png" />
           <Image Name="topoutinjurybar.png" />
           <Image Name="topoutinjurybg.png" />
+          <Image Name="topoutinjuryred.png" />
           <Image Name="topspiritbar.png" />
           <Image Name="topspiritbg.png" />
+          <Image Name="topspiritred.png" />
           <Image Name="toptemperature.png" />
           <Image Name="toptimeicon.png" />
           <Image Name="unselect.png" />
@@ -377,7 +386,9 @@
         <Project Name="tempStorageLayer.csd" Type="Scene" />
         <Project Name="topBarNode.csd" Type="Node" />
         <PlistInfo Name="uipacker.csi" Type="Plist" />
+        <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="activityLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

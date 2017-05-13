@@ -220,10 +220,10 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 
-		//str = StringUtils::format("%d", tempResData[i].count);
-		//Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		//reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		//box->addChild(reslbl);
+		str = StringUtils::format("%s", map_carryData[index][i].name.c_str());
+		Label * namelbl = Label::createWithSystemFont(str, "", 20);
+		namelbl->setPosition(Vec2(box->getContentSize().width / 2, namelbl->getContentSize().height / 2 + 5));
+		box->addChild(namelbl);
 	}
 	m_select->setVisible(false);
 	if (tempsize > 0)

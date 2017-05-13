@@ -9,6 +9,7 @@
 #include "HintBox.h"
 #include "GlobalData.h"
 #include "SoundManager.h"
+#include "ResDetailsLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -75,6 +76,11 @@ bool BuildingUILayer::init(Building* build)
 	//建筑升级进度条
 	buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
 
+	//建筑物名称
+	cocos2d::ui::Text* buildcnname = (cocos2d::ui::Text*)buildnode->getChildByName("item")->getChildByName("nametext");
+	std::string namestr = StringUtils::format("%s", m_build->data.cname);
+	buildcnname->setString(namestr);
+
 	updataBuildRes();
 
 	loadActionUi();
@@ -121,7 +127,12 @@ void BuildingUILayer::loadActionUi()
 		for (int i = 0; i < size; i++)
 		{
 			Node *acnode = CSLoader::createNode("actionNode.csb");
-			acnode->setPosition(Vec2(scrollview->getContentSize().width / 2, scrollinnerheight - itemheight / 2 - i * itemheight));
+			acnode->setPosition(Vec2(scrollview->getContentSize().width / 2 - 13, scrollinnerheight - itemheight / 2 - i * itemheight));
+
+			cocos2d::ui::Text* nametext = (cocos2d::ui::Text*)acnode->getChildByName("item")->getChildByName("nametext");
+			std::string namestr = StringUtils::format("%s", GlobalData::map_buidACData[name][i].cname.c_str());
+			nametext->setString(namestr);
+
 			scrollview->addChild(acnode);
 			vec_actionItem.push_back(acnode);
 		}
@@ -157,6 +168,8 @@ void BuildingUILayer::loadActionUi()
 				{
 					std::string str = StringUtils::format("res%d", m);
 					cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
+					resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onDetails, this));
+					resitem->setTag((i +1)* 100 + m);
 					resitem->setVisible(true);
 
 					str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
@@ -268,6 +281,12 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		updataBuildRes();
 		buildbar->setPercent(0);
 		loadActionUi();
+		std::string text = "建造成功!";
+		if (m_build->data.level > 1)
+			text = "升级完成";
+		HintBox* layer = HintBox::create(CommonFuncs::gbk2utf(text.c_str()));
+		this->addChild(layer);
+		
 	}
 	else//操作完成
 	{
@@ -301,6 +320,9 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 
 		updataActionRes();
 		updataBuildRes();
+
+		HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
+		this->addChild(layer);
 	}
 }
 
@@ -338,6 +360,9 @@ void BuildingUILayer::updataBuildRes()
 		{
 			std::string str = StringUtils::format("res%d", i);
 			cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
+
+			resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onDetails, this));
+			resitem->setTag(i);
 
 			str = StringUtils::format("count%d", i);
 			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
@@ -414,5 +439,27 @@ void BuildingUILayer::updataActionRes()
 				}
 			}
 		}
+	}
+}
+
+void BuildingUILayer::onDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		Node* node = (Node*)pSender;
+		int tag = node->getTag();
+		int intresid = 0;
+		if (tag >= 100)//需要合成的
+		{
+			intresid = GlobalData::map_buidACData[m_build->data.name][tag / 100 - 1].res[tag % 100];
+	
+		}
+		else//建筑物的
+		{
+			intresid = m_build->data.Res[m_build->data.level][tag];
+		}
+		std::string strid = StringUtils::format("%d", intresid / 1000);
+		ResDetailsLayer::whereClick = 1;
+		this->addChild(ResDetailsLayer::createByResId(strid));
 	}
 }

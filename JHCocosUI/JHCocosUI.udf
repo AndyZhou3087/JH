@@ -3,22 +3,12 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="mapLayer.csd" />
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="fightLayer.csd" />
-          <FilePathData Path="settingLayer.csd" />
-          <FilePathData Path="winLayer.csd" />
-          <FilePathData Path="sysSmallLayer.csd" />
-          <FilePathData Path="outDoorLayer.csd" />
-          <FilePathData Path="hintLayer.csd" />
-          <FilePathData Path="goWhereLayer.csd" />
-          <FilePathData Path="resNode.csd" />
-          <FilePathData Path="selectHeroLayer.csd" />
-          <FilePathData Path="buidingUiLayer.csd" />
-          <FilePathData Path="actionNode.csd" />
-          <FilePathData Path="resDetailsLayer.csd" />
-          <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="unlockLayer.csd" />
+          <FilePathData Path="deathLayer.csd" />
           <FilePathData Path="actionGetLayer.csd" />
+          <FilePathData Path="activityLayer.csd" />
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="topBarNode.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="topBarNode.csd" />
       </Value>

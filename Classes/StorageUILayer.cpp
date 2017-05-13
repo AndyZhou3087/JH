@@ -5,6 +5,7 @@
 #include "Const.h"
 #include "ResDetailsLayer.h"
 #include "SoundManager.h"
+#include "ShopLayer.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源", "工具", "其他"};
 
@@ -30,6 +31,11 @@ bool StorageUILayer::init()
 
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(StorageUILayer::onBack, this));
+
+	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("shopbtn");
+	shopbtn->setVisible(true);
+	shopbtn->addTouchEventListener(CC_CALLBACK_2(StorageUILayer::onShop, this));
+
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 	scrollview->setContentSize(Size(650, 750));
 	scrollview->setPositionY(200);
@@ -163,4 +169,13 @@ int StorageUILayer::getCountByType(int type)
 	//int test[] = { 5, 0, 6, 2, 0, 0, 7, 3 };
 	//return test[type];
 	return StorageRoom::map_storageData[type].size();
+}
+
+void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		this->addChild(ShopLayer::create());
+	}
 }

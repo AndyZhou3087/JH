@@ -35,10 +35,10 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onBack, this));
 
 	//1："继续采集", 2："继续砍伐", 3："继续挖掘"按钮
-	cocos2d::ui::Button* getbtn = (cocos2d::ui::Button*)csbnode->getChildByName("getbtn");
-	getbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onGet, this));
+	m_getbtn = (cocos2d::ui::Button*)csbnode->getChildByName("getbtn");
+	m_getbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onGet, this));
 	std::string str = StringUtils::format("继续%s", acname[actype].c_str());
-	getbtn->setTitleText(CommonFuncs::gbk2utf(str.c_str()));
+	m_getbtn->setTitleText(CommonFuncs::gbk2utf(str.c_str()));
 
 	//全部拾取按钮
 	cocos2d::ui::Button* getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
@@ -248,6 +248,12 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			}
 			desc.append(GlobalData::vec_resData[mrid].unitname);
 			g_uiScroll->addEventText(desc);
+		}
+
+		if (GlobalData::vec_resData[mrid].count <= 0)
+		{
+			m_getbtn->setEnabled(false);
+			m_getbtn->setBright(false);
 		}
 	}
 }

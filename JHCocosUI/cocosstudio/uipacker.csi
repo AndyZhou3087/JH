@@ -322,6 +322,13 @@
       <FilePathData Path="ui/settingselect.png" />
       <FilePathData Path="ui/settingselectbox.png" />
       <FilePathData Path="ui/herolvuptext.png" />
+      <FilePathData Path="ui/sshopbtn.png" />
+      <FilePathData Path="ui/topdown.png" />
+      <FilePathData Path="ui/topinnerinjuryred.png" />
+      <FilePathData Path="ui/tophungerred.png" />
+      <FilePathData Path="ui/toplifered.png" />
+      <FilePathData Path="ui/topoutinjuryred.png" />
+      <FilePathData Path="ui/topspiritred.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

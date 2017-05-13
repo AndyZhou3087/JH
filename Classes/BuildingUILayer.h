@@ -36,16 +36,11 @@ private:
 	点击建筑物自己的操作按钮回调
 	*****************************/
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	Building* m_build;
-	Node* buildnode;//每个ITEM NODE
-	Node* m_csbnode;//UI NODE
-	cocos2d::ui::LoadingBar* buildbar;//建造进度条控件
-	cocos2d::ui::Button* buildbtn;//建造按钮控件
-	cocos2d::ui::ScrollView* scrollview;//操作滚动列表控件
 
-	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;//建筑物自己的操作 进度条控件
-	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
-	void onfinish(Ref* pSender, BACTIONTYPE type);//建造，建筑物自己的操作 完成
+	/****************************
+	点击资源回调，显示详细信息
+	*****************************/
+	void onDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
 	更新建筑物等级资源UI
@@ -62,6 +57,17 @@ private:
 	****************************/
 	void updataActionRes();
 private:
+	Building* m_build;
+	Node* buildnode;//每个ITEM NODE
+	Node* m_csbnode;//UI NODE
+	cocos2d::ui::LoadingBar* buildbar;//建造进度条控件
+	cocos2d::ui::Button* buildbtn;//建造按钮控件
+	cocos2d::ui::ScrollView* scrollview;//操作滚动列表控件
+
+	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;//建筑物自己的操作 进度条控件
+	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
+	void onfinish(Ref* pSender, BACTIONTYPE type);//建造，建筑物自己的操作 完成
+
 	std::vector<Node*> vec_actionItem;//建筑物自己操作 item node
 };
 #endif

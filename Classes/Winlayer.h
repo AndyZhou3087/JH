@@ -25,6 +25,7 @@ private:
 	void loadTempData();
 	int static systime();
 	void updataLV();
+	void showLvUpText();
 private:
 	std::string m_npcid;
 	std::string m_addrid;
