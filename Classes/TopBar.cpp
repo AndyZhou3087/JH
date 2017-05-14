@@ -5,6 +5,7 @@
 #include "SysSmallBox.h"
 #include "HeroStateUILayer.h"
 #include "SoundManager.h"
+#include "Const.h"
 
 TopBar::TopBar()
 {
@@ -107,7 +108,7 @@ bool TopBar::init()
 	outinjuryBar->setMidpoint(Vec2(0, 0));
 	outinjuryBar->setPercentage(g_hero->getOutinjuryValue());
 	outinjuryBar->setPosition(outinjury->getPosition());
-	this->addChild(outinjuryBar);
+	csbnode->addChild(outinjuryBar);
 
 	Sprite* sprite1 = Sprite::createWithSpriteFrameName("ui/topinnerinjurybar.png");
 	innerinjuryBar = ProgressTimer::create(sprite1);
@@ -116,7 +117,7 @@ bool TopBar::init()
 	innerinjuryBar->setMidpoint(Vec2(0, 0));
 	innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
 	innerinjuryBar->setPosition(innerinjury->getPosition());
-	this->addChild(innerinjuryBar);
+	csbnode->addChild(innerinjuryBar);
 
 	Sprite* sprite2 = Sprite::createWithSpriteFrameName("ui/tophungerbar.png");
 	hungerBar = ProgressTimer::create(sprite2);
@@ -125,7 +126,7 @@ bool TopBar::init()
 	hungerBar->setMidpoint(Vec2(0, 0));
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	hungerBar->setPosition(hunger->getPosition());
-	this->addChild(hungerBar);
+	csbnode->addChild(hungerBar);
 
 	Sprite* sprite3 = Sprite::createWithSpriteFrameName("ui/topspiritbar.png");
 	spiritBar = ProgressTimer::create(sprite3);
@@ -134,7 +135,7 @@ bool TopBar::init()
 	spiritBar->setMidpoint(Vec2(0, 0));
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	spiritBar->setPosition(spirit->getPosition());
-	this->addChild(spiritBar);
+	csbnode->addChild(spiritBar);
 
 	Sprite* sprite4 = Sprite::createWithSpriteFrameName("ui/toplifebar.png");
 	lifeBar = ProgressTimer::create(sprite4);
@@ -143,9 +144,25 @@ bool TopBar::init()
 	lifeBar->setMidpoint(Vec2(0, 0));
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
 	lifeBar->setPosition(life->getPosition());
-	this->addChild(lifeBar);
+	csbnode->addChild(lifeBar);
+	outinjuryRed = (cocos2d::ui::Widget*)csbnode->getChildByName("topoutinjuryred");
+	outinjuryRed->setLocalZOrder(1);
+	innerinjuryRed = (cocos2d::ui::Widget*)csbnode->getChildByName("topinnerinjuryred");
+	innerinjuryRed->setLocalZOrder(1);
+	hungerRed = (cocos2d::ui::Widget*)csbnode->getChildByName("tophungerred");
+	hungerRed->setLocalZOrder(1);
+	spiritRed = (cocos2d::ui::Widget*)csbnode->getChildByName("topspiritred");
+	spiritRed->setLocalZOrder(1);
+	lifeRed = (cocos2d::ui::Widget*)csbnode->getChildByName("toplifered");
+	lifeRed->setLocalZOrder(1);
 
-	schedule(schedule_selector(TopBar::updataUI), 0.2f);
+	m_lastinnerinjury = g_hero->getInnerinjuryValue();
+	m_lastoutinjury = g_hero->getOutinjuryValue();
+	m_lasthunger = g_hero->getHungerValue();
+	m_lastspirit = g_hero->getSpiritValue();
+	m_lastlife = g_hero->getLifeValue();
+
+	schedule(schedule_selector(TopBar::updataUI), NORMAL_TIMEINTERVAL * 1.0f/TIMESCALE);
 	return true;
 }
 
@@ -307,4 +324,30 @@ void TopBar::updataUI(float dt)
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
+
+	if (m_lastinnerinjury > g_hero->getInnerinjuryValue())
+	{
+		innerinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+	}
+	if (m_lastoutinjury > g_hero->getOutinjuryValue())
+	{
+		outinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+	}
+	if (m_lasthunger > g_hero->getHungerValue())
+	{
+		hungerRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+	}
+	if (m_lastspirit > g_hero->getSpiritValue())
+	{
+		spiritRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+	}
+	if (m_lastlife > g_hero->getLifeValue())
+	{
+		lifeRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+	}
+	m_lastinnerinjury = g_hero->getInnerinjuryValue();
+	m_lastoutinjury = g_hero->getOutinjuryValue();
+	m_lasthunger = g_hero->getHungerValue();
+	m_lastspirit = g_hero->getSpiritValue();
+	m_lastlife = g_hero->getLifeValue();
 }

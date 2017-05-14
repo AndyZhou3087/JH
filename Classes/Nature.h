@@ -2,7 +2,7 @@
 #define _NATURE_H_
 #include "cocos2d.h"
 USING_NS_CC;
-#define NORMAL_TIMEINTERVAL 1.0f
+#define NORMAL_TIMEINTERVAL 5.0f//每次更新时间数
 typedef enum
 {
 	Spring = 0,

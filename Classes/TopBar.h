@@ -29,9 +29,20 @@ private:
 	ProgressTimer* hungerBar;
 	ProgressTimer* spiritBar;
 	ProgressTimer* lifeBar;
+
+	cocos2d::ui::Widget* outinjuryRed;
+	cocos2d::ui::Widget* innerinjuryRed;
+	cocos2d::ui::Widget* hungerRed;
+	cocos2d::ui::Widget* spiritRed;
+	cocos2d::ui::Widget* lifeRed;
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updataUI(float dt);
+	int m_lastinnerinjury;
+	int m_lastoutinjury;
+	int m_lasthunger;
+	float m_lastspirit;
+	int m_lastlife;
 };
 #endif
 
