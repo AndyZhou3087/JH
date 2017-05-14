@@ -78,7 +78,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	SoundManager::getInstance()->loadSounds();
     // create a scene. it's an autorelease object
 	auto scene = StartScene::createScene();
-
     // run
     director->runWithScene(scene);
 

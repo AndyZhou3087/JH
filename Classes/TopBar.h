@@ -43,6 +43,7 @@ private:
 	int m_lasthunger;
 	float m_lastspirit;
 	int m_lastlife;
+	EWeather m_lastweather;
 };
 #endif
 

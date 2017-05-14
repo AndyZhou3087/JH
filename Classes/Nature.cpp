@@ -25,15 +25,15 @@ bool Nature::init()
 
 int Nature::systime()
 {
-	time_t timep;
+time_t timep;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	time(&timep);
+time(&timep);
 #else
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	timep = tv.tv_sec;
+struct timeval tv;
+gettimeofday(&tv, NULL);
+timep = tv.tv_sec;
 #endif
-	return timep;
+return timep;
 }
 void Nature::ChangeWeather()
 {
@@ -99,7 +99,7 @@ void Nature::ChangeDayNight()
 			setTemperature(m_temperature - 5);
 			g_uiScroll->addEventText(CommonFuncs::gbk2utf(dayEventText[1].c_str()));
 		}
-		
+
 	}
 	else
 	{
@@ -121,6 +121,11 @@ void Nature::updateData(float dt)
 		m_pastdays++;
 
 		ChangeReason();
+	}
+	//9小时变化一次天气，每天变化两次
+	int inttime = (int)m_time;
+	if (inttime % (9 * 60) == 1)
+	{
 		ChangeWeather();
 	}
 	ChangeDayNight();

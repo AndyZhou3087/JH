@@ -162,6 +162,8 @@ bool TopBar::init()
 	m_lastspirit = g_hero->getSpiritValue();
 	m_lastlife = g_hero->getLifeValue();
 
+	m_lastweather = g_nature->getWeather();
+
 	schedule(schedule_selector(TopBar::updataUI), NORMAL_TIMEINTERVAL * 1.0f/TIMESCALE);
 	return true;
 }
@@ -300,17 +302,22 @@ void TopBar::updataUI(float dt)
 		reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
-		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
-		weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-		weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-
 		GameDataSave::getInstance()->setLiveDays(livedays);
 		GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
 		GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
 	}
-
+	//9小时变化一次天气，每天变化两次
+	int inttime = (int)pastmin;
+	if (inttime % (9 * 60) == 1)
+	{
+		if (m_lastweather != g_nature->getWeather())
+		{
+			str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
+			weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+			weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+		}
+	}
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
-
 	int hour = pastmin / 60;
 	int minute = (int)pastmin % 60;
 
