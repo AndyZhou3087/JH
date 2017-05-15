@@ -10,6 +10,7 @@
 
 ActionGetLayer::ActionGetLayer()
 {
+	repeatCount = 0;
 }
 
 
@@ -65,6 +66,7 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 
 void ActionGetLayer::doAction()
 {
+	bool isget = false;
 	for (unsigned int i = 0; i < rewardids.size(); i++)
 	{
 		unsigned int m = 0;
@@ -74,6 +76,7 @@ void ActionGetLayer::doAction()
 			if (rewardids[i] == atoi(getResData[m].strid.c_str()))
 			{
 				getResData[m].count++;
+				isget = true;
 				break;
 			}
 		}
@@ -100,8 +103,14 @@ void ActionGetLayer::doAction()
 				}
 			}
 			getResData.push_back(data);
+			isget = true;
 		}
 	}
+	if (isget)
+		repeatCount++;
+
+	if (repeatCount > 2)
+		g_hero->setSpiritValue(g_hero->getSpiritValue() - 1);
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)

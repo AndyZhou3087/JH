@@ -145,7 +145,8 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 			if (atoi(data->strid.c_str()) != 0)//资源采集挖掘
 			{
 				ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
-				this->addChild(layer);
+				if (g_gameLayer != NULL)
+					g_gameLayer->addChild(layer, 2);
 
 				std::string desc;
 				if (g_hero->getAtrByType((HeroAtrType)data->actype)->count > 0)
@@ -165,7 +166,9 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 			else//兔子，狼战斗界面
 			{
 				FightLayer* layer = FightLayer::create("m1-2", data->strid);
-				Director::getInstance()->getRunningScene()->addChild(layer, 1, "fightlayer");
+
+				if (g_gameLayer != NULL)
+					g_gameLayer->addChild(layer, 2);
 			}
 
 		}

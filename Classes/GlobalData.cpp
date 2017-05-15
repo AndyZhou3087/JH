@@ -631,3 +631,14 @@ void GlobalData::setUnlockChapter(int val)
 	if (val > lastChapter)
 		GameDataSave::getInstance()->setPlotUnlockChapter(val);
 }
+
+int GlobalData::createRandomNum(int val)
+{
+	int syssec = GlobalData::getSysSecTime();
+	int static randNum = 0;
+	randNum += 60 * 60 * 1000;
+	syssec += randNum;
+	srand(syssec);
+	int r = rand() % val;
+	return r;
+}

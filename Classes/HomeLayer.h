@@ -20,6 +20,7 @@ private:
 	void onFence(Ref* pSender);
 	
 	void loadJsonData();
+
 private:
 	Building* m_storageroom;
 	std::vector<Building*> Vec_Buildings;

@@ -38,7 +38,14 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::LOCAL);
 	cocos2d::ui::Text* text = (cocos2d::ui::Text*)csbnode->getChildByName("text");
 	text->setString(content);
+	if (imagepath.compare("images/cday.jpg") == 0 && content.compare(CommonFuncs::gbk2utf("黑夜降临...")) == 0)
+	{
+		Sprite* night = Sprite::create("images/cdaynight.png");
+		night->setPosition(image->getPosition());
+		this->addChild(night);
+	}
 
+	this->scheduleOnce(schedule_selector(ActivitScene::popself), 4.0f);
 	return true;
 }
 
@@ -55,4 +62,9 @@ ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
 		pRet = NULL;
 	}
 	return pRet;
+}
+
+void ActivitScene::popself(float dt)
+{
+	Director::getInstance()->popScene();
 }

@@ -99,7 +99,9 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 			type = ARRIVE;
 		else
 			type = GOWHERE;
-		Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, type, m_distance));
+
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(GoWhereLayer::create(m_addrname, type, m_distance), 2);
 
 	}
 }
@@ -152,7 +154,8 @@ void MapLayer::Arrive(float dt)
 		str.append(npcnames);
 		g_uiScroll->addEventText(str.c_str());
 	}
-	Director::getInstance()->getRunningScene()->addChild(GoWhereLayer::create(m_addrname, ARRIVE));
+	if (g_gameLayer != NULL)
+		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2);
 }
 
 void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

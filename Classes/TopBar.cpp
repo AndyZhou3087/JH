@@ -6,6 +6,7 @@
 #include "HeroStateUILayer.h"
 #include "SoundManager.h"
 #include "Const.h"
+#include "ActivitScene.h"
 
 TopBar::TopBar()
 {
@@ -164,6 +165,8 @@ bool TopBar::init()
 
 	m_lastweather = g_nature->getWeather();
 
+	m_lastDayOrNigth = g_nature->getDayOrNight();
+
 	schedule(schedule_selector(TopBar::updataUI), NORMAL_TIMEINTERVAL * 1.0f/TIMESCALE);
 	return true;
 }
@@ -304,19 +307,42 @@ void TopBar::updataUI(float dt)
 
 		GameDataSave::getInstance()->setLiveDays(livedays);
 		GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
-		GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
 	}
-	//9小时变化一次天气，每天变化两次
-	int inttime = (int)pastmin;
-	if (inttime % (9 * 60) == 1)
+
+	if (m_lastweather != g_nature->getWeather())
 	{
-		if (m_lastweather != g_nature->getWeather())
+		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
+		weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+		if (g_nature->getWeather() == Rainy)
 		{
-			str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
-			weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-			weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了...")));
+			Director::getInstance()->pushScene(transition);
 		}
+		else if (g_nature->getWeather() == Snowy)
+		{
+			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了...")));
+			Director::getInstance()->pushScene(transition);
+		}
+		m_lastweather = g_nature->getWeather();
 	}
+
+	if (m_lastDayOrNigth != g_nature->getDayOrNight())
+	{
+		if (g_nature->getDayOrNight() == Day)
+		{
+			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
+			Director::getInstance()->pushScene(transition);
+		}
+		else
+		{
+			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
+			Director::getInstance()->pushScene(transition);
+		}
+		m_lastDayOrNigth = g_nature->getDayOrNight();
+	}
+
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
 	int hour = pastmin / 60;
 	int minute = (int)pastmin % 60;
@@ -334,27 +360,27 @@ void TopBar::updataUI(float dt)
 
 	if (m_lastinnerinjury > g_hero->getInnerinjuryValue())
 	{
-		innerinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		innerinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		m_lastinnerinjury = g_hero->getInnerinjuryValue();
 	}
 	if (m_lastoutinjury > g_hero->getOutinjuryValue())
 	{
-		outinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		outinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		m_lastoutinjury = g_hero->getOutinjuryValue();
 	}
 	if (m_lasthunger > g_hero->getHungerValue())
 	{
-		hungerRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		hungerRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		m_lasthunger = g_hero->getHungerValue();
 	}
 	if (m_lastspirit > g_hero->getSpiritValue())
 	{
-		spiritRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		spiritRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		m_lastspirit = g_hero->getSpiritValue();
 	}
 	if (m_lastlife > g_hero->getLifeValue())
 	{
-		lifeRed->runAction(Sequence::create(Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		m_lastlife = g_hero->getLifeValue();
 	}
-	m_lastinnerinjury = g_hero->getInnerinjuryValue();
-	m_lastoutinjury = g_hero->getOutinjuryValue();
-	m_lasthunger = g_hero->getHungerValue();
-	m_lastspirit = g_hero->getSpiritValue();
-	m_lastlife = g_hero->getLifeValue();
 }

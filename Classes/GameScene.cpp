@@ -102,17 +102,17 @@ bool GameScene::init()
 	//滚动文字的背景
 	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
-	this->addChild(bg, 3);
+	this->addChild(bg, 4);
 
 	//滚动文字
 	g_uiScroll = UIScroll::create(560.0f, 132.0f);
 	g_uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
-	addChild(g_uiScroll, 3);
+	addChild(g_uiScroll, 4);
 
 	//任务属性和天气
 	topBar = TopBar::create();
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
-	addChild(topBar, 2);
+	addChild(topBar, 3);
 	
 	this->schedule(schedule_selector(GameScene::updata), 0.2f);
 	this->schedule(schedule_selector(GameScene::timerSaveResData), 3.0f);
@@ -126,6 +126,14 @@ void GameScene::loadSaveData()
 	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
 	//设置保存的天气
 	g_nature->setWeather((EWeather)GameDataSave::getInstance()->getNatureWeather());
+	
+	int cdata = GameDataSave::getInstance()->getNatureWeatherChangeCount();
+	//设置保存的天气改变的次数
+	g_nature->changeWeatherCount = cdata / 10000;
+	
+	//设置天气改变的随机小时数
+	g_nature->changeWeatherRandow = cdata % 10000;
+
 	//设置保存的时间
 	g_nature->setTime(GameDataSave::getInstance()->getNatureTime());
 	//温度
@@ -162,6 +170,17 @@ void GameScene::loadSaveData()
 	else
 	{
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
+	}
+
+	//设置黑夜或白天
+
+	if (g_nature->getTime() < 60 * 6 - 1 || g_nature->getTime() >= 18 * 60)
+	{
+		g_nature->setDayOrNight(Night);
+	}
+	else
+	{
+		g_nature->setDayOrNight(Day);
 	}
 
 	//读取保存的仓库数据
@@ -214,6 +233,7 @@ void GameScene::saveAllData()
 	
 	GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
 	GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
+	GameDataSave::getInstance()->setNatureWeatherChangeCount(g_nature->changeWeatherCount * 10000 + g_nature->changeWeatherRandow);
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
 	GameDataSave::getInstance()->setNatureTime(g_nature->getTime());
 	GameDataSave::getInstance()->setLiveDays(g_nature->getPastDays());

@@ -8,8 +8,7 @@ int Nature::ReasonCDays = 90;
 Nature::Nature()
 {
 	m_timeinterval = NORMAL_TIMEINTERVAL;
-
-	srand(systime());
+	m_daynight = Night;
 }
 
 Nature::~Nature()
@@ -19,26 +18,14 @@ Nature::~Nature()
 
 bool Nature::init()
 {
-	this->schedule(schedule_selector(Nature::updateData), 0.2f);
+	this->schedule(schedule_selector(Nature::updateData), NORMAL_TIMEINTERVAL * 1.0f / TIMESCALE);
 	return true;
 }
 
-int Nature::systime()
-{
-time_t timep;
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-time(&timep);
-#else
-struct timeval tv;
-gettimeofday(&tv, NULL);
-timep = tv.tv_sec;
-#endif
-return timep;
-}
+
 void Nature::ChangeWeather()
 {
-	srand(systime());
-	int r = rand() % 100;
+	int r = GlobalData::createRandomNum(100);
 	int i = 0;
 	for (i = 0; i < 4; i++)
 	{
@@ -82,8 +69,8 @@ void Nature::ChangeReason()
 	if (r != m_reason)
 	{
 		setReason(r);
-		srand(systime());
-		int  t = tempeRange[m_reason][0] + rand() % (tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1);
+		int maxr = tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1;
+		int  t = tempeRange[m_reason][0] + GlobalData::createRandomNum(maxr);
 		setTemperature(t);
 		g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[r].c_str()));
 	}
@@ -119,14 +106,22 @@ void Nature::updateData(float dt)
 	{
 		m_time = 0.0f;
 		m_pastdays++;
-
+		changeWeatherCount = 0;
+		changeWeatherRandow = GlobalData::createRandomNum(24) + 1;
 		ChangeReason();
 	}
-	//9小时变化一次天气，每天变化两次
+	//产生随机数
 	int inttime = (int)m_time;
-	if (inttime % (9 * 60) == 1)
+	if (changeWeatherRandow <= 0)
+		changeWeatherRandow = GlobalData::createRandomNum(23) + 1;
+	if (changeWeatherRandow == inttime / 60)
 	{
-		ChangeWeather();
+		changeWeatherCount++;
+		if (changeWeatherCount <= 1)//每天变化一次
+		{
+			ChangeWeather();
+		}
 	}
+
 	ChangeDayNight();
 }

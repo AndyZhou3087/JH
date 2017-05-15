@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
 #include "UIScroll.h"
+#include "Nature.h"
 USING_NS_CC;
 
 class TopBar:public Node
@@ -44,6 +45,7 @@ private:
 	float m_lastspirit;
 	int m_lastlife;
 	EWeather m_lastweather;
+	EDAYNIGTH m_lastDayOrNigth;
 };
 #endif
 

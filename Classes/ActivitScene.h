@@ -19,7 +19,7 @@ public:
 	
 private:
 	static ActivitScene* create(std::string imagepath, std::string content);
-
+	void popself(float dt);
 private:
 
 };

@@ -82,6 +82,7 @@ private:
 	int mtype;//类型
 	int m_actype;//工具类型 1："采集", 2："砍伐", 3："挖掘"
 	cocos2d::ui::Button* m_getbtn;//继续操作按钮
+	int repeatCount;//重复操作次数
 };
 #endif
 

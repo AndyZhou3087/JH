@@ -229,7 +229,9 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
-		Director::getInstance()->getRunningScene()->addChild(FightLayer::create(m_addrstr, npcid), 1, "fightlayer");
+
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 2, "fightlayer");
 	}
 }
 

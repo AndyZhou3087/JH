@@ -292,6 +292,12 @@ public:
 	@param 解锁的章节
 	*****************************/
 	static void setUnlockChapter(int val);
+
+	/****************************
+	产生一个随机数
+	@param 随机数范围，从0开始
+	*****************************/
+	static int createRandomNum(int val);
 public:
 	static std::vector<ResData> vec_resData;//一级资源vector
 	static std::vector<std::string> vec_hillResid;//后山资源列表vector

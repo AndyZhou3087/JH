@@ -257,29 +257,28 @@ void HeroProperNode::onItem(Ref* pSender)
 	PackageData* udata = (PackageData*)node->getUserData();
 	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));
 	
-
-	if (m_lastSelectedData != (PackageData*)node->getUserData())//是否再次点击
+	if (m_lastSelectedData != NULL)
 	{
-		if (m_lastSelectedData != NULL)
+		if (m_lastSelectedData->strid.compare(udata->strid) != 0)//是否再次点击
 		{
+
 			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
 			if (m_lastSelectedData->type == udata->type && m_lastSelectedData->extype == udata->extype)
 			{
 				if (isout)
 				{
-					MyPackage::add(*m_lastSelectedData);
+					if (m_select->isVisible())
+						MyPackage::add(*m_lastSelectedData);
 				}
 				else
 				{
-					StorageRoom::add(*m_lastSelectedData);
+					if (m_select->isVisible())
+						StorageRoom::add(*m_lastSelectedData);
 				}
 				m_select->setVisible(false);
 			}
-			//else
-			//{
-			//	m_select->setVisible(true);
-			//}
 		}
+
 	}
 
 	std::string str;

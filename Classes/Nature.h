@@ -47,8 +47,9 @@ public:
 
 public:
 	int static ReasonCDays;//季节切换天数
+	int changeWeatherCount;//每天天气变化次数，最多1次
+	int changeWeatherRandow;//生成的天气变化的小时
 private:
-	int static systime();
 	void updateData(float dt);
 };
 static int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };

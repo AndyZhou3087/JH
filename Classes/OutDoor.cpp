@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "GlobalData.h"
 #include "SoundManager.h"
+#include "ActivitScene.h"
 
 OutDoor::OutDoor()
 {
@@ -70,14 +71,22 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		g_hero->setIsOut(true);
-		g_maplayer = MapLayer::create();
-		g_gameLayer->addChild(g_maplayer, 1, "maplayer");
-		g_gameLayer->removeChildByName("homelayer");
 
-		this->removeFromParentAndCleanup(true);
-
+		this->setVisible(false);
+		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
+		auto transition = TransitionCrossFade::create(1.0f, scene);
+		Director::getInstance()->pushScene(transition);
+		this->scheduleOnce(schedule_selector(OutDoor::delayShowGOOut), 0.05f);
 	}
+}
+
+void OutDoor::delayShowGOOut(float dt)
+{
+	g_hero->setIsOut(true);
+	g_maplayer = MapLayer::create();
+	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
+	g_gameLayer->removeChildByName("homelayer");
+	this->removeFromParentAndCleanup(true);
 }
 
 void OutDoor::updata()

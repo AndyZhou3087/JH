@@ -90,13 +90,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 	}
 
-	static int randsed = 60 * 1000;
 	for (unsigned int i = 0; i < winres.size(); i++)
 	{
 		int res = atoi(winres[i].c_str());
-		randsed += GlobalData::getSysSecTime();
-		srand(randsed);
-		int r = rand() % 100 + 1;
+
+		int r = GlobalData::createRandomNum(100)+ 1;
 		if (r <= GlobalData::map_npcs[npcid].winresrnd[i])
 		{
 			

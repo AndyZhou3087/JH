@@ -6,13 +6,13 @@
       <ObjectData Name="Layer" Tag="56" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="1016169031" Tag="27" IconVisible="False" TopMargin="393.9950" BottomMargin="0.0050" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="normalboxgb" ActionTag="1016169031" Tag="27" IconVisible="False" LeftMargin="0.0002" RightMargin="-0.0002" TopMargin="404.9948" BottomMargin="-10.9948" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="886.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="443.0050" />
+            <Position X="360.0002" Y="432.0052" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.3461" />
+            <PrePosition X="0.5000" Y="0.3375" />
             <PreSize X="1.0000" Y="0.6922" />
             <FileData Type="MarkedSubImage" Path="ui/normalboxgb.png" Plist="uipacker.plist" />
           </AbstractNodeData>
@@ -50,13 +50,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="-1932802189" Tag="74" IconVisible="False" LeftMargin="554.0000" RightMargin="44.0000" TopMargin="478.4808" BottomMargin="738.5192" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="-1932802189" Tag="74" IconVisible="False" LeftMargin="554.0000" RightMargin="44.0000" TopMargin="484.4805" BottomMargin="732.5195" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="122.0000" Y="63.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="615.0000" Y="770.0192" />
+            <Position X="615.0000" Y="764.0195" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8542" Y="0.6016" />
+            <PrePosition X="0.8542" Y="0.5969" />
             <PreSize X="0.1694" Y="0.0492" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />

@@ -49,6 +49,16 @@ public:
 	void setNatureWeather(int val);
 
 	/****************************
+	获取保存的天气改变次数
+	****************************/
+	int getNatureWeatherChangeCount();
+
+	/****************************
+	保存天气改变次数
+	****************************/
+	void setNatureWeatherChangeCount(int val);
+
+	/****************************
 	获取保存的季节
 	****************************/
 	int getNatureReason();

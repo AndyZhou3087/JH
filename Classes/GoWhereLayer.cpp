@@ -154,7 +154,9 @@ void GoWhereLayer::onST(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		TempStorageLayer* layer = TempStorageLayer::create(m_addrstr);
-		Director::getInstance()->getRunningScene()->addChild(layer);
+
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(layer, 2);
 	}
 }
 
@@ -170,11 +172,13 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		}
 		else if (m_addrstr.compare("m1-2") == 0)//进入后山
 		{
-			Director::getInstance()->getRunningScene()->addChild(HomeHill::create());
+			if (g_gameLayer != NULL)
+				g_gameLayer->addChild(HomeHill::create(), 2);
 		}
 		else//进入NPC
 		{
-			Director::getInstance()->getRunningScene()->addChild(NpcLayer::create(m_addrstr));
+			if (g_gameLayer != NULL)
+				g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2);
 		}
 		this->removeFromParentAndCleanup(true);
 	}

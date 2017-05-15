@@ -237,13 +237,6 @@ void FightLayer::delayShowWinLayer(float dt)
 void FightLayer::showFightWord(int type, int value)
 {
 	std::string wordstr;
-
-	int syssec = GlobalData::getSysSecTime();
-	int static randNum = 0;
-	randNum += 60 * 60 * 1000;
-	syssec += randNum;
-	srand(syssec);
-
 	int size = 0;
 	int r = 0;
 
@@ -253,14 +246,14 @@ void FightLayer::showFightWord(int type, int value)
 		if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器
 		{
 			size = sizeof(herofightdesc1) / sizeof(herofightdesc1[0]);
-			r = rand() % size;
+			r = GlobalData::createRandomNum(size);
 			wordstr = herofightdesc1[r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
 		}
 		else//没有武器
 		{
 			size = sizeof(herofightdesc) / sizeof(herofightdesc[0]);
-			r = rand() % size;
+			r = GlobalData::createRandomNum(size);
 			wordstr = herofightdesc[r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name);
 		}
@@ -268,7 +261,7 @@ void FightLayer::showFightWord(int type, int value)
 		checkWordLblColor(herowordstr);
 
 		size = sizeof(herofightdesc2) / sizeof(herofightdesc2[0]);
-		r = rand() % size;
+		r = GlobalData::createRandomNum(size);
 		wordstr = herofightdesc2[r];
 		herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		checkWordLblColor(herowordstr);
@@ -279,14 +272,14 @@ void FightLayer::showFightWord(int type, int value)
 		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
 		{
 			size = sizeof(bossfight1) / sizeof(bossfight1[0]);
-			r = rand() % size;
+			r = GlobalData::createRandomNum(size);
 			wordstr = bossfight1[r];
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), value);
 		}
 		else//没有防具
 		{
 			size = sizeof(bossfight) / sizeof(bossfight[0]);
-			r = rand() % size;
+			r = GlobalData::createRandomNum(size);
 			wordstr = bossfight[r];
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		}

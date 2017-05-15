@@ -89,6 +89,17 @@ void GameDataSave::setNatureWeather(int val)
 {
 	saveIntDataByKey(addUIDString("nwhather"), val);
 }
+
+int GameDataSave::getNatureWeatherChangeCount()
+{
+	return loadIntDataByKey(addUIDString("nwhatherchgcount"), 0);
+}
+
+void GameDataSave::setNatureWeatherChangeCount(int val)
+{
+	saveIntDataByKey(addUIDString("nwhatherchgcount"), val);
+}
+
 int GameDataSave::getNatureReason()
 {
 	return loadIntDataByKey(addUIDString("nreason"), EReason::Spring);
@@ -101,7 +112,8 @@ void GameDataSave::setNatureReason(int val)
 int GameDataSave::getNatureTemperature()
 {
 	//默认温度取随机
-	int r = tempeRange[getNatureReason()][0] + rand() % (tempeRange[getNatureReason()][1] - tempeRange[getNatureReason()][0] + 1);
+	int maxr = tempeRange[getNatureReason()][1] - tempeRange[getNatureReason()][0] + 1;
+	int r = tempeRange[getNatureReason()][0] + GlobalData::createRandomNum(maxr);
 	return loadIntDataByKey(addUIDString("ntempe"), r);
 }
 void GameDataSave::setNatureTemperature(int val)

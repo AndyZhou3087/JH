@@ -194,6 +194,7 @@ void HomeLayer::onStorageRoom(Ref* pSender)
 void HomeLayer::onFence(Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
 	Layer* layer = OutDoor::create();
 	Director::getInstance()->getRunningScene()->addChild(layer);
 }
