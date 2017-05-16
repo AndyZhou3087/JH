@@ -329,6 +329,8 @@
       <FilePathData Path="ui/toplifered.png" />
       <FilePathData Path="ui/topoutinjuryred.png" />
       <FilePathData Path="ui/topspiritred.png" />
+      <FilePathData Path="ui/mapmission0.png" />
+      <FilePathData Path="ui/mapmission1.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

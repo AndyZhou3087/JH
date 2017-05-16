@@ -1,6 +1,7 @@
 ﻿#include "AppDelegate.h"
 #include "StartScene.h"
 #include "SoundManager.h"
+#include "StoryScene.h"
 
 USING_NS_CC;
 
@@ -78,6 +79,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	SoundManager::getInstance()->loadSounds();
     // create a scene. it's an autorelease object
 	auto scene = StartScene::createScene();
+	if (UserDefault::getInstance()->getBoolForKey("firstinstall", true))
+	{
+		UserDefault::getInstance()->setBoolForKey("firstinstall", false);
+		scene = StoryScene::createScene();
+	}
     // run
     director->runWithScene(scene);
 

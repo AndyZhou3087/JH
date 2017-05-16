@@ -14,7 +14,7 @@ public:
 	ActivitScene();
 	~ActivitScene();
 
-	virtual bool init(std::string imagepath, std::string content);
+	bool init(std::string imagepath, std::string content);
 	static cocos2d::Scene* createScene(std::string imagepath, std::string content);
 	
 private:

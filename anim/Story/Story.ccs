@@ -1,0 +1,44 @@
+<Solution>
+  <PropertyGroup Name="Story" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="story1">
+          <Image Name="juqingmanhua01.png" />
+          <Image Name="juqingmanhua02.png" />
+          <Image Name="juqingmanhua03.png" />
+          <Image Name="juqingmanhua04.png" />
+          <Image Name="juqingmanhua05.png" />
+          <Image Name="juqingmanhua06.png" />
+          <Image Name="wenzi01.png" />
+          <Image Name="wenzi02.png" />
+          <Image Name="wenzi03.png" />
+          <Image Name="wenzi04.png" />
+          <Image Name="wenzi05.png" />
+          <Image Name="wenzi06.png" />
+          <Image Name="wenzi07.png" />
+          <Image Name="wenzi08.png" />
+          <Image Name="wenzi09.png" />
+          <Image Name="wenzi10.png" />
+        </Folder>
+        <Project Name="story1.csd" Type="Skeleton" />
+        <Project Name="story2.csd" Type="Skeleton" />
+        <Folder Name="story2">
+          <Image Name="juqingmanhua07.png" />
+          <Image Name="juqingmanhua08.png" />
+          <Image Name="juqingmanhua09.png" />
+          <Image Name="juqingmanhua10.png" />
+          <Image Name="juqingmanhua11.png" />
+          <Image Name="juqingmanhua12.png" />
+          <Image Name="wenzi11.png" />
+          <Image Name="wenzi12.png" />
+          <Image Name="wenzi13.png" />
+          <Image Name="wenzi14.png" />
+          <Image Name="wenzi15.png" />
+          <Image Name="wenzi16.png" />
+          <Image Name="wenzi17.png" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

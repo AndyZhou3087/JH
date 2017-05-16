@@ -66,6 +66,18 @@ bool MapLayer::init()
 
 	updateUnlockChapter();
 
+	m_smissionIcon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
+	m_smissionIcon->setAnchorPoint(Vec2(0.5, 0));
+	m_smissionIcon->setVisible(false);
+	m_mapbg->addChild(m_smissionIcon);
+
+	m_dmissionIcon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
+	m_dmissionIcon->setAnchorPoint(Vec2(0.5, 0));
+	m_dmissionIcon->setVisible(false);
+	m_mapbg->addChild(m_dmissionIcon);
+
+	updataPlotMissionIcon();
+
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
 
@@ -192,4 +204,33 @@ void MapLayer::showUnlockLayer(float dt)
 {
 	Director::getInstance()->getRunningScene()->addChild(UnlockLayer::create(), 10);
 	updateUnlockChapter();
+	updataPlotMissionIcon();
+}
+
+void MapLayer::updataPlotMissionIcon()
+{
+	
+	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
+	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
+	int mapnamecount = m_mapbg->getChildrenCount();
+	m_smissionIcon->setVisible(false);
+	m_smissionIcon->setVisible(false);
+
+	for (int i = 0; i < mapnamecount; i++)
+	{
+		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+		for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+		{
+			if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+			{
+				m_smissionIcon->setVisible(true);
+				m_smissionIcon->setPosition(mapname->getPosition());
+			}
+			if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+			{
+				m_dmissionIcon->setVisible(true);
+				m_dmissionIcon->setPosition(mapname->getPosition());
+			}
+		}
+	}
 }

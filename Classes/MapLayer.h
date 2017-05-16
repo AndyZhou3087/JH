@@ -22,6 +22,7 @@ private:
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void Arrive(float dt);
 	void movefinish(float dt);
+	void updataPlotMissionIcon();
 private:
 	float m_distance;
 	Vec2 m_destPos;
@@ -29,6 +30,8 @@ private:
 	Sprite* m_herohead;
 	bool ismoving;
 	cocos2d::ui::Widget* m_mapbg;
+	Sprite* m_smissionIcon;
+	Sprite* m_dmissionIcon;
 };
 extern MapLayer* g_maplayer;
 #endif

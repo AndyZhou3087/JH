@@ -68,3 +68,4 @@ void ActivitScene::popself(float dt)
 {
 	Director::getInstance()->popScene();
 }
+
