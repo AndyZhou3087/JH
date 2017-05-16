@@ -17,7 +17,9 @@ int Hero::MAXSpiritValue = 100.0f;
 
 Hero::Hero()
 {
-
+	maxlifepercent = 1.0f;
+	m_atkpercent = 1.0f;
+	m_dfpercent = 1.0f;
 }
 
 
@@ -30,6 +32,7 @@ bool Hero::init()
 {
 	//12s，（游戏时间1小时更新一次）
 	this->schedule(schedule_selector(Hero::updateData), 60.0f / TIMESCALE);
+	this->schedule(schedule_selector(Hero::checkMaxVaule), 1.0f);
 	return true;
 }
 
@@ -38,18 +41,18 @@ void Hero::updateData(float dt)
 	if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 	{
 		m_innerinjury -= InnerinjurySpeed * 2;
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
 	}
 	if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
 	{
 		m_outinjury -= OutinjurySpeed * 1;
 		m_innerinjury -= InnerinjurySpeed * 1;
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
 	}
 	if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
 	{
 		m_outinjury -= OutinjurySpeed * 2;
-		m_life -= LifeLostSpeed * getMaxLifeValue() / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
 	}
 
 	//接上严重界限的消耗
@@ -81,7 +84,7 @@ void Hero::sleep(int hour)
 void Hero::sleepbystep(float dt)
 {
 	//每次恢复的生命值
-	m_life += getMaxLifeValue() * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
+	m_life += GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
 	if (m_life > getMaxLifeValue())
 	{
 		m_life = getMaxLifeValue();
@@ -99,9 +102,9 @@ void Hero::drinkbystep(float dt)
 {
 	//每次恢复精神值
 	m_spirit += 2.0f;
-	if (m_spirit > MAXSpiritValue)
+	if (m_spirit > getMaxSpiritValue())
 	{
-		m_spirit = MAXSpiritValue;
+		m_spirit = getMaxSpiritValue();
 		this->unschedule(schedule_selector(Hero::drinkbystep));
 	}
 }
@@ -118,7 +121,8 @@ int Hero::getDfValue()
 
 int Hero::getMaxLifeValue()
 {
-	return GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
+	float flife = maxlifepercent * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
+	return (int)flife;
 }
 
 void Hero::setAtrByType(HeroAtrType type, PackageData pData)
@@ -134,10 +138,18 @@ void Hero::revive()
 {
 	//复活-满状态复活
 	setOutinjuryValue(MAXOutinjuryValue);
+	setMaxOutinjuryValue(MAXOutinjuryValue);
+
 	setInnerinjuryValue(MAXInnerinjuryValue);
+	setMaxInnerinjuryValue(MAXInnerinjuryValue);
+
 	setLifeValue(getMaxLifeValue());
+	
 	setHungerValue(MAXHungerValue);
+	setMaxHungerValue(MAXHungerValue);
+
 	setSpiritValue(MAXSpiritValue);
+	setMaxSpiritValue(MAXSpiritValue);
 }
 
 //功法每种只能有一本，不能重复
@@ -164,4 +176,145 @@ bool Hero::checkifHasGF(std::string gfid)
 		}
 	}
 	return false;
+}
+
+void Hero::checkMaxVaule(float dt)
+{
+	float mlife = 1.0f;
+	int mhvalue = MAXHungerValue;
+	int mivalue = MAXInnerinjuryValue;
+	int movalue = MAXOutinjuryValue;
+	float matk = 1.0f;
+	float mdf = 1.0f;
+	if (m_spirit <= 10)
+	{
+		mlife = 0.3f;
+		mhvalue = 30;
+		mivalue = 30;
+		movalue = 30;
+		matk = 0.7f;
+		mdf = 0.7f;
+	}
+	else if (m_spirit <= 20)
+	{
+		mlife = 0.4f;
+		mhvalue = 40;
+		mivalue = 40;
+		movalue = 40;
+		matk = 0.9f;
+		mdf = 0.9f;
+	}
+
+	else if (m_spirit <= 30)
+	{
+		mlife = 0.7f;
+		mhvalue = 70;
+		mivalue = 70;
+		movalue = 70;
+		matk =  1.0f;
+		mdf = 1.0f;
+	}
+
+	else if (m_spirit <= 40)
+	{
+		mlife = 0.9f;
+		mhvalue = 90;
+		mivalue = 90;
+		movalue = 90;
+		matk = 1.0f;
+		mdf = 1.0f;
+	}
+	else
+	{
+		mlife = 1.0f;
+		mhvalue = MAXHungerValue;
+		mivalue = MAXInnerinjuryValue;
+		movalue = MAXOutinjuryValue;
+		matk = 1.0f;
+		mdf = 1.0f;
+	}
+
+	if (m_hunger <= 10)
+	{
+		mlife = MIN(mlife, 0.3f);
+		matk = MIN(matk, 0.3f);
+		mdf = MIN(mdf, 0.3);
+	}
+	else if (m_hunger <= 20)
+	{
+		mlife = MIN(mlife, 0.4f);
+		matk = MIN(matk, 0.4f);
+		mdf = MIN(mdf, 0.4);
+	}
+	else if (m_hunger <= 30)
+	{
+		mlife = MIN(mlife, 1.0f);
+		matk = MIN(matk, 0.7f);
+		mdf = MIN(mdf, 0.7);
+	}
+	else if (m_hunger <= 40)
+	{
+		mlife = MIN(mlife, 1.0f);
+		matk = MIN(matk, 0.9f);
+		mdf = MIN(mdf, 0.9);
+	}
+	else
+	{
+		mlife = MIN(mlife, 1.0f);
+		matk = MIN(matk, 1.0f);
+		mdf = MIN(mdf, 1.0);
+	}
+
+	if (m_innerinjury <= 10)
+	{
+		mlife = MIN(mlife, 0.3f);
+	}
+	else if (m_innerinjury <= 20)
+	{
+		mlife = MIN(mlife, 0.4f);
+	}
+	else if (m_innerinjury <= 30)
+	{
+		mlife = MIN(mlife, 0.7f);
+	}
+	else if (m_innerinjury <= 40)
+	{
+		mlife = MIN(mlife, 0.9f);
+	}
+	else
+	{
+		mlife = MIN(mlife, 1.0f);
+	}
+
+	if (m_outinjury <= 10)
+	{
+		mlife = MIN(mlife, 0.3f);
+	}
+	else if (m_outinjury <= 20)
+	{
+		mlife = MIN(mlife, 0.4f);
+	}
+	else if (m_outinjury <= 30)
+	{
+		mlife = MIN(mlife, 0.7f);
+	}
+	else if (m_outinjury <= 40)
+	{
+		mlife = MIN(mlife, 0.9f);
+	}
+	else
+	{
+		mlife = MIN(mlife, 1.0f);
+	}
+
+	maxlifepercent = mlife;
+
+	setMaxHungerValue(mhvalue);
+
+	setMaxInnerinjuryValue(mivalue);
+
+	setMaxOutinjuryValue(movalue);
+
+	setAtkPercent(matk);
+	setDfPercent(mdf);
 }

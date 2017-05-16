@@ -60,6 +60,25 @@ public:
 	CC_SYNTHESIZE(float, m_spirit, SpiritValue);
 
 	/****************************
+	角色最大内伤设置
+	*****************************/
+	CC_SYNTHESIZE(int, m_maxInnerinjury, MaxInnerinjuryValue);
+	/****************************
+	角色最大外伤设置
+	*****************************/
+	CC_SYNTHESIZE(int, m_maxOutinjury, MaxOutinjuryValue);
+
+	/****************************
+	角色最大饱食度设置
+	*****************************/
+	CC_SYNTHESIZE(int, m_maxHunger, MaxHungerValue);
+
+	/****************************
+	角色最大精神值设置
+	*****************************/
+	CC_SYNTHESIZE(float, m_maxSpirit, MaxSpiritValue);
+
+	/****************************
 	角色生命值设置
 	*****************************/
 	CC_SYNTHESIZE(int, m_life, LifeValue);
@@ -88,6 +107,16 @@ public:
 	角色是否在家
 	*****************************/
 	CC_SYNTHESIZE(bool, m_isout, IsOut);
+
+	/****************************
+	角色攻击百分比
+	*****************************/
+	CC_SYNTHESIZE(float, m_atkpercent, AtkPercent);
+
+	/****************************
+	角色防御百分比
+	*****************************/
+	CC_SYNTHESIZE(float, m_dfpercent, DfPercent);
 
 	/****************************
 	获取角色攻击
@@ -140,6 +169,11 @@ public:
 	@param 功法ID
 	*****************************/
 	bool checkifHasGF(std::string gfid);
+
+	/****************************
+	检查最大值属性
+	*****************************/
+	void checkMaxVaule(float dt);
 public:
 	static int MAXInnerinjuryValue;//最大内伤值
 	static int MAXOutinjuryValue;//最大外伤值
@@ -152,6 +186,7 @@ private:
 	void drinkbystep(float dt);//喝酒--恢复值一点点恢复
 private:
 	int sleephour;//睡觉时间
+	float maxlifepercent;//最大生命百分比
 
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };

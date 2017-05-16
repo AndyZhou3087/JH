@@ -137,7 +137,8 @@ void HeroStateUILayer::updateStatus(float dt)
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[GlobalData::map_wgngs[strid].lv];
 	}
 	//攻击属性
-	str = StringUtils::format("%d", g_hero->getAtkValue() + weaponAtk + wgAtk);
+	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
+	str = StringUtils::format("%d", (int)fack);
 	herostatus[9]->setString(str);
 
 	int adf = 0;
@@ -154,7 +155,8 @@ void HeroStateUILayer::updateStatus(float dt)
 		adf = GlobalData::map_equips[aname].df;
 	}
 	//防御属性
-	str = StringUtils::format("%d", g_hero->getDfValue() + ngdf + adf);
+	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
+	str = StringUtils::format("%d", (int)fdf);
 	herostatus[10]->setString(str);
 
 	//经验值属性

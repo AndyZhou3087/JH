@@ -176,11 +176,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 					{
 						isInres = true;
 						int addvalue = GlobalData::vec_resData[i].ep[0];
-						int hungervale = g_hero->getHungerValue();
-						if (addvalue + hungervale > Hero::MAXHungerValue)
-							g_hero->setHungerValue(Hero::MAXHungerValue);
-						else
-							g_hero->setHungerValue(addvalue + hungervale);
+						recoveHungerValue(addvalue);
 
 						StorageRoom::use(m_packageData->strid);
 						break;
@@ -194,12 +190,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						if (m_packageData->strid.compare(GlobalData::map_buidACData["cooktable"][i].icon) == 0)
 						{
 							int addvalue = GlobalData::map_buidACData["cooktable"][i].ep[0];
-
-							int hungervale = g_hero->getHungerValue();
-							if (addvalue + hungervale > Hero::MAXHungerValue)
-								g_hero->setHungerValue(Hero::MAXHungerValue);
-							else
-								g_hero->setHungerValue(addvalue + hungervale);
+							recoveHungerValue(addvalue);
 
 							StorageRoom::use(m_packageData->strid);
 							break;
@@ -217,16 +208,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						isInRes = true;
 						int wvalue = GlobalData::vec_resData[i].ep[0];
 						int nvalue = GlobalData::vec_resData[i].ep[1];
-						int outvalue = g_hero->getOutinjuryValue();
-						if (wvalue + outvalue > Hero::MAXOutinjuryValue)
-							g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
-						else
-							g_hero->setOutinjuryValue(wvalue + outvalue);
-						int invalue = g_hero->getInnerinjuryValue();
-						if (invalue + nvalue > Hero::MAXInnerinjuryValue)
-							g_hero->setInnerinjuryValue(Hero::MAXInnerinjuryValue);
-						else
-							g_hero->setInnerinjuryValue(invalue + nvalue);
+						recoveInjuryValue(wvalue, nvalue);
 						StorageRoom::use(m_packageData->strid);
 						break;
 					}
@@ -239,16 +221,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						{
 							int wvalue = GlobalData::map_buidACData["medicinekit"][i].ep[0];
 							int nvalue = GlobalData::map_buidACData["medicinekit"][i].ep[1];
-							int outvalue = g_hero->getOutinjuryValue();
-							if (wvalue + outvalue > Hero::MAXOutinjuryValue)
-								g_hero->setOutinjuryValue(Hero::MAXOutinjuryValue);
-							else
-								g_hero->setOutinjuryValue(wvalue + outvalue);
-							int invalue = g_hero->getInnerinjuryValue();
-							if (invalue + nvalue > Hero::MAXInnerinjuryValue)
-								g_hero->setInnerinjuryValue(Hero::MAXInnerinjuryValue);
-							else
-								g_hero->setInnerinjuryValue(invalue + nvalue);
+							recoveInjuryValue(wvalue, nvalue);
 							StorageRoom::use(m_packageData->strid);
 							break;
 						}
@@ -369,6 +342,28 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		storageUI->updateResContent();
 		removSelf();
 	}
+}
+void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)
+{
+	int outvalue = g_hero->getOutinjuryValue();
+	if (addwvalue + outvalue > g_hero->getMaxOutinjuryValue())
+		g_hero->setOutinjuryValue(g_hero->getMaxOutinjuryValue());
+	else
+		g_hero->setOutinjuryValue(addwvalue + outvalue);
+	int invalue = g_hero->getInnerinjuryValue();
+	if (invalue + addnvalue > g_hero->getMaxInnerinjuryValue())
+		g_hero->setInnerinjuryValue(g_hero->getMaxInnerinjuryValue());
+	else
+		g_hero->setInnerinjuryValue(invalue + addnvalue);
+}
+
+void ResDetailsLayer::recoveHungerValue(int addvalue)
+{
+	int hungervale = g_hero->getHungerValue();
+	if (addvalue + hungervale > g_hero->getMaxHungerValue())
+		g_hero->setHungerValue(g_hero->getMaxHungerValue());
+	else
+		g_hero->setHungerValue(addvalue + hungervale);
 }
 
 void ResDetailsLayer::removSelf()

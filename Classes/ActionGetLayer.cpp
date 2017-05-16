@@ -111,6 +111,8 @@ void ActionGetLayer::doAction()
 
 	if (repeatCount > 2)
 		g_hero->setSpiritValue(g_hero->getSpiritValue() - 1);
+	if (g_hero->getSpiritValue() < 0)
+		g_hero->setSpiritValue(0);
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)

@@ -158,9 +158,14 @@ void FightLayer::delayHeroFight(float dt)
 		weaponAck = GlobalData::map_equips[wname].atk;
 	}
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
+	float fack = g_hero->getAtkPercent() * heroCurAck;
+	heroCurAck = (int)fack;
+
 	int npchurt = heroCurAck - npcdf;
-	if (npchurt < heroCurAck * 10 / 100)
-		npchurt = heroCurAck * 10 / 100;
+	float fminack = 0.1f * heroCurAck;
+	int intminack = (int)fminack;
+	if (npchurt < intminack)
+		npchurt = intminack;
 
 	npchp -= npchurt;
 
@@ -203,10 +208,15 @@ void FightLayer::delayBossFight(float dt)
 
 	int curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
+	float fdf = g_hero->getDfPercent() * curheroDf;
+	curheroDf = (int)fdf;
 	int herohurt = npcatk - curheroDf;
 
-	if (herohurt < npcatk * 10 / 100)
-		herohurt  = npcatk * 10 / 100;
+	float fminack = 0.1f * npcatk;
+	int intminack = (int)fminack;
+
+	if (herohurt < intminack)
+		herohurt = intminack;
 	curheroHp -= herohurt;
 
 	if (curheroHp < 0)
@@ -221,7 +231,28 @@ void FightLayer::delayBossFight(float dt)
 
 	if (g_hero->getLifeValue() > 0)
 	{
-		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);//2.0s，hero->npc
+		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+
+		float f1maxlife = g_hero->getMaxLifeValue() * 0.1f;
+		if (herohurt >= (int)f1maxlife)
+		{
+			int r = GlobalData::createRandomNum(100);
+			if (r < 30)
+			{
+				int curvalue = g_hero->getInnerinjuryValue() - 5;
+				if (curvalue < 0)
+					curvalue = 0;
+				g_hero->setInnerinjuryValue(curvalue);
+
+			}
+			else
+			{
+				int curvalue = g_hero->getOutinjuryValue() - 5;
+				if (curvalue < 0)
+					curvalue = 0;
+				g_hero->setOutinjuryValue(curvalue);
+			}
+		}
 	}
 
 	

@@ -360,6 +360,7 @@
         </Folder>
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
+        <Project Name="activityLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
@@ -388,7 +389,6 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="activityLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
