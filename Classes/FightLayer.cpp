@@ -159,11 +159,11 @@ void FightLayer::delayHeroFight(float dt)
 	}
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
 	float fack = g_hero->getAtkPercent() * heroCurAck;
-	heroCurAck = (int)fack;
+	heroCurAck = ceil(fack);
 
 	int npchurt = heroCurAck - npcdf;
 	float fminack = 0.1f * heroCurAck;
-	int intminack = (int)fminack;
+	int intminack = ceil(fminack);
 	if (npchurt < intminack)
 		npchurt = intminack;
 
@@ -209,11 +209,11 @@ void FightLayer::delayBossFight(float dt)
 	int curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
 	float fdf = g_hero->getDfPercent() * curheroDf;
-	curheroDf = (int)fdf;
+	curheroDf = ceil(fdf);
 	int herohurt = npcatk - curheroDf;
 
 	float fminack = 0.1f * npcatk;
-	int intminack = (int)fminack;
+	int intminack = ceil(fminack);
 
 	if (herohurt < intminack)
 		herohurt = intminack;

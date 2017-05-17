@@ -47,6 +47,9 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 			}
 			data.Res.push_back(res);
 		}
+
+		value = jsonvalue["desc"];
+		data.desc = value.GetString();
 	}
 
 }

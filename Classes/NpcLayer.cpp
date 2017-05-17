@@ -249,7 +249,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		std::string npcid = node->getParent()->getName();
 
 		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 2, "fightlayer");
+			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
 	}
 }
 

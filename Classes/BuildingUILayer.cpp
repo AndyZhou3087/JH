@@ -10,6 +10,7 @@
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "ResDetailsLayer.h"
+#include "BuildingDetailsLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -72,14 +73,11 @@ bool BuildingUILayer::init(Building* build)
 	std::string iconstr = StringUtils::format("ui/s%s.png", m_build->data.name);
 	buildicon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 	buildicon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
+	buildicon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBuidingDetails, this));
+
 
 	//建筑升级进度条
 	buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
-
-	//建筑物名称
-	cocos2d::ui::Text* buildcnname = (cocos2d::ui::Text*)buildnode->getChildByName("item")->getChildByName("nametext");
-	std::string namestr = StringUtils::format("%s", m_build->data.cname);
-	buildcnname->setString(namestr);
 
 	updataBuildRes();
 
@@ -129,10 +127,6 @@ void BuildingUILayer::loadActionUi()
 			Node *acnode = CSLoader::createNode("actionNode.csb");
 			acnode->setPosition(Vec2(scrollview->getContentSize().width / 2 - 13, scrollinnerheight - itemheight / 2 - i * itemheight));
 
-			cocos2d::ui::Text* nametext = (cocos2d::ui::Text*)acnode->getChildByName("item")->getChildByName("nametext");
-			std::string namestr = StringUtils::format("%s", GlobalData::map_buidACData[name][i].cname.c_str());
-			nametext->setString(namestr);
-
 			scrollview->addChild(acnode);
 			vec_actionItem.push_back(acnode);
 		}
@@ -168,7 +162,7 @@ void BuildingUILayer::loadActionUi()
 				{
 					std::string str = StringUtils::format("res%d", m);
 					cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
-					resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onDetails, this));
+					resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
 					resitem->setTag((i +1)* 100 + m);
 					resitem->setVisible(true);
 
@@ -361,7 +355,7 @@ void BuildingUILayer::updataBuildRes()
 			std::string str = StringUtils::format("res%d", i);
 			cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
 
-			resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onDetails, this));
+			resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
 			resitem->setTag(i);
 
 			str = StringUtils::format("count%d", i);
@@ -442,7 +436,7 @@ void BuildingUILayer::updataActionRes()
 	}
 }
 
-void BuildingUILayer::onDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
@@ -461,5 +455,13 @@ void BuildingUILayer::onDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 		std::string strid = StringUtils::format("%d", intresid / 1000);
 		ResDetailsLayer::whereClick = 1;
 		this->addChild(ResDetailsLayer::createByResId(strid));
+	}
+}
+
+void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		this->addChild(BuildingDetailsLayer::create(m_build));
 	}
 }

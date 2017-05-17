@@ -189,7 +189,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 void HeroProperNode::showSelectFrame(HeroAtrType index)
 {
 	int tempsize = map_carryData[index].size();
-	int itemheight = 135;
+	int itemheight = 150;
 	int row = tempsize % 4 == 0 ? tempsize / 4 : (tempsize / 4 + 1);
 	int innerheight = itemheight * row;
 	int contentheight = m_scrollView->getContentSize().height;
@@ -221,8 +221,9 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		box->addChild(res);
 
 		str = StringUtils::format("%s", map_carryData[index][i].name.c_str());
-		Label * namelbl = Label::createWithSystemFont(str, "", 20);
-		namelbl->setPosition(Vec2(box->getContentSize().width / 2, namelbl->getContentSize().height / 2 + 5));
+		Label * namelbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 24);
+		namelbl->setColor(Color3B(0, 0, 0));
+		namelbl->setPosition(Vec2(box->getContentSize().width / 2, - 10));
 		box->addChild(namelbl);
 	}
 	m_select->setVisible(false);

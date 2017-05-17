@@ -195,7 +195,8 @@ void MapLayer::updateUnlockChapter()
 		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
 		if (mapchapter <= GlobalData::getUnlockChapter())
 		{
-			mapNamImage->setVisible(true);
+			if (mapNamImage != NULL)
+				mapNamImage->setVisible(true);
 		}
 	}
 }

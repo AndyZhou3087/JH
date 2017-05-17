@@ -18,6 +18,7 @@ typedef struct
 	std::vector<int> needtime;//建筑物build时间
 	std::vector<std::vector<int>> Res;//建筑物消耗的资源
 	char cname[32];//建筑物中文名称
+	std::string desc;//建筑物描述
 }BuidingData;
 
 class Building : public Sprite

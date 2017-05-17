@@ -168,7 +168,7 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				FightLayer* layer = FightLayer::create("m1-2", data->strid);
 
 				if (g_gameLayer != NULL)
-					g_gameLayer->addChild(layer, 2);
+					g_gameLayer->addChild(layer, 4);
 			}
 
 		}

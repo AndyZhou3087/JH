@@ -138,7 +138,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	}
 	//攻击属性
 	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
-	str = StringUtils::format("%d", (int)fack);
+	str = StringUtils::format("%d", ceil(fack));
 	herostatus[9]->setString(str);
 
 	int adf = 0;
@@ -156,7 +156,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	}
 	//防御属性
 	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
-	str = StringUtils::format("%d", (int)fdf);
+	str = StringUtils::format("%d", ceil(fdf));
 	herostatus[10]->setString(str);
 
 	//经验值属性

@@ -38,9 +38,14 @@ private:
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	点击建筑物图标回调，显示详细信息
+	*****************************/
+	void onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	点击资源回调，显示详细信息
 	*****************************/
-	void onDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
 	更新建筑物等级资源UI
