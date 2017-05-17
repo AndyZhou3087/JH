@@ -83,14 +83,14 @@ bool NpcLayer::init(std::string addrid)
 		if (GlobalData::map_npcs[mdata.npcs[i]].exchgres.size() <= 0)
 			onExchange->setVisible(false);
 
-		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DONE)
 		{
 			Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
 			micon->setScale(0.6f);
 			micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height-10));
 			talkbtn->addChild(micon);
 		}
-		if (dnpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+		if (dnpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
 		{
 			Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
 			dicon->setScale(0.6f);
@@ -191,6 +191,8 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].mywords[m].c_str());
 				vec_wordstr.push_back(wordstr);
 			}
+			if (g_maplayer != NULL)
+				g_maplayer->updataPlotMissionIcon();
 		}
 
 		if (GlobalData::vec_PlotMissionData[curplot].status == M_DOING)

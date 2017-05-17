@@ -121,12 +121,12 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 void MapLayer::showMoveToDest()
 {
 	ismoving = true;
-	float dt = m_distance / HERO_MOVE_SPEED;
-	float permin = dt / (TIMESCALE*4.0f);
-	g_nature->setTimeInterval(permin);
-	this->scheduleOnce(schedule_selector(MapLayer::Arrive), 4.0f);
-	m_herohead->runAction(MoveTo::create(4.0f, m_destPos));
-	this->scheduleOnce(schedule_selector(MapLayer::movefinish), 4.0f);
+	float dt = m_distance * HERO_MOVE_SPEED;
+	
+	g_nature->setTimeInterval(TIMESCALE * 8);
+	this->scheduleOnce(schedule_selector(MapLayer::Arrive), dt / (TIMESCALE * 8.0f));
+	m_herohead->runAction(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos));
+	this->scheduleOnce(schedule_selector(MapLayer::movefinish), dt / (TIMESCALE * 8.0f));
 }
 
 void MapLayer::movefinish(float dt)
@@ -136,7 +136,7 @@ void MapLayer::movefinish(float dt)
 
 void MapLayer::Arrive(float dt)
 {
-	g_nature->setTimeInterval(1);
+	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	heroPos = m_destPos;
 	GameDataSave::getInstance()->setHeroAddr(m_addrname);
 
@@ -222,15 +222,33 @@ void MapLayer::updataPlotMissionIcon()
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
 		{
-			if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+			if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 			{
-				m_smissionIcon->setVisible(true);
-				m_smissionIcon->setPosition(mapname->getPosition());
+				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
+				{
+					m_smissionIcon->setVisible(true);
+					m_smissionIcon->runAction(RepeatForever::create(Blink::create(2, 3)));
+					m_smissionIcon->setPosition(mapname->getPosition());
+				}
+				else
+				{
+					m_smissionIcon->stopAllActions();
+					m_smissionIcon->setVisible(false);
+				}
 			}
-			if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status != M_DONE)
+			if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 			{
-				m_dmissionIcon->setVisible(true);
-				m_dmissionIcon->setPosition(mapname->getPosition());
+				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
+				{
+					m_dmissionIcon->setVisible(true);
+					m_dmissionIcon->runAction(RepeatForever::create(Blink::create(2, 3)));
+					m_dmissionIcon->setPosition(mapname->getPosition());
+				}
+				else
+				{
+					m_dmissionIcon->stopAllActions();
+					m_dmissionIcon->setVisible(false);
+				}
 			}
 		}
 	}

@@ -56,7 +56,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	//距离 ，换算成时间
 	cocos2d::ui::Text* fast = (cocos2d::ui::Text*)csbnode->getChildByName("fast");
 
-	float fmin = distance / (HERO_MOVE_SPEED);
+	float fmin = distance * HERO_MOVE_SPEED;
 
 	int minute = (int)fmin;
 	std::string faststr;
