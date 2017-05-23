@@ -34,7 +34,7 @@ bool MapLayer::init()
 	cocos2d::ui::ScrollView* mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
 
 	m_mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
-	int mapnamecount = m_mapbg->getChildrenCount();
+	int mapnamecount = GlobalData::map_maps.size();
 	for (int i = 0; i < mapnamecount; i++)
 	{
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
@@ -213,7 +213,7 @@ void MapLayer::updataPlotMissionIcon()
 	
 	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
 	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
-	int mapnamecount = m_mapbg->getChildrenCount();
+	int mapnamecount = GlobalData::map_maps.size();
 	m_smissionIcon->setVisible(false);
 	m_smissionIcon->setVisible(false);
 

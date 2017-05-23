@@ -86,7 +86,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			GlobalData::setPlotMissionIndex(curplot + 1);
 			GlobalData::savePlotMissionStatus();
 			if (g_maplayer != NULL)
-				g_maplayer->updateUnlockChapter();
+				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 		}
 	}
 
@@ -191,6 +191,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 							data.desc = edata.desc;
 							data.name = edata.cname;
 							data.type = edata.type - 1;
+							data.goodvalue = 100;
 							getRewardData.push_back(data);
 							break;
 						}
@@ -471,6 +472,17 @@ void Winlayer::updata()
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
+	//更新背包栏
+	updataMyPackageUI();
+}
+
+void Winlayer::updataMyPackageUI()
+{
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		std::string name = StringUtils::format("pitem%d", i);
+		this->removeChildByName(name);
+	}
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
@@ -500,18 +512,11 @@ void Winlayer::updata()
 	}
 }
 
-
 void Winlayer::removeitem()
 {
 	for (unsigned int i = 0; i < getRewardData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
-
-	for (int i = 0; i < MyPackage::getSize(); i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
 	}
 }

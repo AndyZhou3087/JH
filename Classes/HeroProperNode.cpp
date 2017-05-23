@@ -7,6 +7,10 @@
 #include "StorageRoom.h"
 #include "GameDataSave.h"
 #include "SoundManager.h"
+#include "ActionGetLayer.h"
+#include "TempStorageLayer.h"
+#include "Winlayer.h"
+#include "OutDoor.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -334,6 +338,8 @@ void HeroProperNode::onItem(Ref* pSender)
 		}
 	}
 	m_lastSelectedData = (PackageData*)node->getUserData();
+
+	updataMyPackageUI();
 }
 
 void HeroProperNode::removeitem()
@@ -366,4 +372,25 @@ void HeroProperNode::onExit()
 {
 	saveData();
 	Node::onExit();
+}
+
+void HeroProperNode::updataMyPackageUI()
+{
+	if (g_gameLayer != NULL)
+	{
+		ActionGetLayer * Alayer = (ActionGetLayer*)g_gameLayer->getChildByName("ActionGetLayer");
+		if (Alayer != NULL)
+			Alayer->updataMyPackageUI();
+		TempStorageLayer* Tlayer = (TempStorageLayer*)g_gameLayer->getChildByName("TempStorageLayer");
+		if (Tlayer != NULL)
+			Tlayer->updataMyPackageUI();
+
+		Winlayer* Wlayer = (Winlayer*)g_gameLayer->getChildByName("Winlayer");
+		if (Wlayer != NULL)
+			Wlayer->updataMyPackageUI();
+
+		OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
+		if (Olayer != NULL)
+			Olayer->updataMyPackageUI();
+	}
 }

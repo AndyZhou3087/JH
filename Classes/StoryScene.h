@@ -27,6 +27,7 @@ private:
 	Label* m_wordlbl;
 	int clickcount;
 	bool isCanClick;
+	cocostudio::timeline::ActionTimeline* m_action;
 };
 #endif
 

@@ -15,6 +15,7 @@ public:
 
 	virtual bool init();
 	CREATE_FUNC(OutDoor);
+	void updataMyPackageUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

@@ -317,12 +317,12 @@ void TopBar::updataUI(float dt)
 
 		if (g_nature->getWeather() == Rainy)
 		{
-			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了...")));
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了...")));
 			Director::getInstance()->pushScene(transition);
 		}
 		else if (g_nature->getWeather() == Snowy)
 		{
-			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了...")));
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了...")));
 			Director::getInstance()->pushScene(transition);
 		}
 		m_lastweather = g_nature->getWeather();
@@ -332,12 +332,12 @@ void TopBar::updataUI(float dt)
 	{
 		if (g_nature->getDayOrNight() == Day)
 		{
-			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
 			Director::getInstance()->pushScene(transition);
 		}
 		else
 		{
-			auto transition = TransitionCrossFade::create(1.0f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
 			Director::getInstance()->pushScene(transition);
 		}
 		m_lastDayOrNigth = g_nature->getDayOrNight();

@@ -83,7 +83,7 @@ bool NpcLayer::init(std::string addrid)
 		if (GlobalData::map_npcs[mdata.npcs[i]].exchgres.size() <= 0)
 			onExchange->setVisible(false);
 
-		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DONE)
+		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
 		{
 			Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
 			micon->setScale(0.6f);

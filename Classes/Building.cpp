@@ -57,7 +57,7 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 void Building::build()
 {
 	//设置建造时间间隔 eg: 4s 走完进度条，游戏时间走40min
-	float time = data.needtime[data.level] / (ACTION_BAR_TIME * TIMESCALE);
+	float time = data.needtime[data.level] * NORMAL_TIMEINTERVAL * 1.0f / (ACTION_BAR_TIME * TIMESCALE);
 	g_nature->setTimeInterval(time);
 	//完成后，等级+1
 	data.level++;

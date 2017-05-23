@@ -22,6 +22,7 @@ private:
 	void showTypeText(float dt);
 	void removeNpcWord(float dt);
 	void checkWordLblColor(std::string wordstr);
+
 private:
 	std::string m_addrstr;
 	UIScroll* m_talkScroll;

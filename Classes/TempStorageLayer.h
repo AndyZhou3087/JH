@@ -12,8 +12,9 @@ public:
 	~TempStorageLayer();
 
 	bool init(std::string addrname);
-
+	virtual void onExit();
 	static TempStorageLayer* create(std::string addrname);
+	void updataMyPackageUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

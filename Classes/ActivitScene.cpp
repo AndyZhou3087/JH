@@ -44,8 +44,10 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		night->setPosition(image->getPosition());
 		this->addChild(night);
 	}
+	cocos2d::ui::Text* tips = (cocos2d::ui::Text*)csbnode->getChildByName("tips");
+	tips->setString("tips:");
 
-	this->scheduleOnce(schedule_selector(ActivitScene::popself), 4.0f);
+	this->scheduleOnce(schedule_selector(ActivitScene::popself), 3.0f);
 	return true;
 }
 

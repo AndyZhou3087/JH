@@ -1,5 +1,6 @@
 ﻿#include "SelectHeroScene.h"
 #include "GlobalData.h"
+#include "Const.h"
 #include "HintBox.h"
 #include "CommonFuncs.h"
 #include "GameDataSave.h"
@@ -9,9 +10,6 @@
 
 USING_NS_CC;
 
-std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
-std::string herodesc[] = { "哈哈哈哈哈", "太帅了太帅了太帅了", "厉害了我的哥厉害了我的哥厉害了我的哥", "好厉害的说好厉害的说好厉害的说好厉害的说好厉害的说" };
-int heroprice[] = { 0, 2, 4, 6 };
 SelectHeroScene* g_SelectHeroScene = NULL;
 SelectHeroScene::SelectHeroScene()
 {

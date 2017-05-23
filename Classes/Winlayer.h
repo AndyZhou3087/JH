@@ -14,6 +14,7 @@ public:
 	bool init(std::string addr, std::string npcid);
 	virtual void onExit();
 	static Winlayer* create(std::string addr, std::string npcid);
+	void updataMyPackageUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

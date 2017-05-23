@@ -26,7 +26,7 @@ bool OutDoor::init()
 
 	Node* heroproper = HeroProperNode::create();
 	heroproper->setPosition(Vec2(360, 790));
-	m_csbnode->addChild(heroproper);
+	m_csbnode->addChild(heroproper, 1);
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 
@@ -74,7 +74,7 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 
 		this->setVisible(false);
 		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
-		auto transition = TransitionCrossFade::create(1.0f, scene);
+		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
 		this->scheduleOnce(schedule_selector(OutDoor::delayShowGOOut), 0.05f);
 	}
@@ -142,6 +142,17 @@ void OutDoor::updata()
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
+	//更新背包栏
+	updataMyPackageUI();
+}
+
+void OutDoor::updataMyPackageUI()
+{
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		std::string name = StringUtils::format("pitem%d", i);
+		this->removeChildByName(name);
+	}
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
@@ -158,7 +169,7 @@ void OutDoor::updata()
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("pitem%d", i);
-		this->addChild(menu, 0, name);
+		m_csbnode->addChild(menu, 0, name);
 
 		std::string str = StringUtils::format("ui/%s.png", MyPackage::vec_packages[i].strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
@@ -238,7 +249,6 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 	StorageRoom::add(data);
 	MyPackage::cutone(data.strid);
 	updata();
-	
 }
 
 void OutDoor::removeitem()
@@ -247,11 +257,5 @@ void OutDoor::removeitem()
 	{
 		std::string name = StringUtils::format("resitem%d", i);
 		scrollview->removeChildByName(name);
-	}
-
-	for (int i = 0; i < MyPackage::getSize(); i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
-		this->removeChildByName(name);
 	}
 }

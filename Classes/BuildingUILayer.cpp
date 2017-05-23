@@ -155,40 +155,50 @@ void BuildingUILayer::loadActionUi()
 
 		if (m_build->data.level >= GlobalData::map_buidACData[name].at(i).blv)
 		{
-			for (unsigned int m = 0; m < GlobalData::map_buidACData[name].at(i).res.size(); m++)
+			int ressize = GlobalData::map_buidACData[name].at(i).res.size();
+			if (ressize > 0)
 			{
-				int restypecount = GlobalData::map_buidACData[name].at(i).res.at(m);
-				if (restypecount > 0)
+				for (unsigned int m = 0; m < GlobalData::map_buidACData[name].at(i).res.size(); m++)
 				{
-					std::string str = StringUtils::format("res%d", m);
-					cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
-					resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-					resitem->setTag((i +1)* 100 + m);
-					resitem->setVisible(true);
+					int restypecount = GlobalData::map_buidACData[name].at(i).res.at(m);
+					if (restypecount > 0)
+					{
+						std::string str = StringUtils::format("res%d", m);
+						cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
+						resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
+						resitem->setTag((i + 1) * 100 + m);
+						resitem->setVisible(true);
 
-					str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
-					Sprite* res = Sprite::createWithSpriteFrameName(str);
-					res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
-					res->setScale(0.38f);
-					resitem->addChild(res);
+						str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
+						Sprite* res = Sprite::createWithSpriteFrameName(str);
+						res->setPosition(Vec2(resitem->getContentSize().width / 2, resitem->getContentSize().height / 2));
+						res->setScale(0.38f);
+						resitem->addChild(res);
 
-					str = StringUtils::format("count%d", m);
-					cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
-					rescount->setVisible(true);
+						str = StringUtils::format("count%d", m);
+						cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)item->getChildByName(str);
+						rescount->setVisible(true);
 
-					std::string strid = StringUtils::format("%d", restypecount / 1000);
-					int hascount = StorageRoom::getCountById(strid);
-					int needcount = restypecount % 1000;
-					str = StringUtils::format("%d/%d", hascount, needcount);//拥有的资源个数/需要资源个数
-					rescount->setString(str);
-					if (hascount < needcount)
-						rescount->setTextColor(Color4B::RED);
-					else
-						rescount->setTextColor(Color4B::BLACK);
+						std::string strid = StringUtils::format("%d", restypecount / 1000);
+						int hascount = StorageRoom::getCountById(strid);
+						int needcount = restypecount % 1000;
+						str = StringUtils::format("%d/%d", hascount, needcount);//拥有的资源个数/需要资源个数
+						rescount->setString(str);
+						if (hascount < needcount)
+							rescount->setTextColor(Color4B::RED);
+						else
+							rescount->setTextColor(Color4B::BLACK);
+					}
 				}
+				actbtn->setEnabled(true);
+				desc->setVisible(false);
 			}
-			actbtn->setEnabled(true);
-			desc->setVisible(false);
+			else
+			{
+				desc->setString(GlobalData::map_buidACData[name].at(i).desc);
+				desc->setVisible(true);
+			}
+
 		}
 		else
 		{
@@ -275,12 +285,17 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		updataBuildRes();
 		buildbar->setPercent(0);
 		loadActionUi();
-		std::string text = "建造成功!";
+		//std::string text = "建造成功!";
+		//if (m_build->data.level > 1)
+		//	text = "升级完成";
+		//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf(text.c_str()));
+		//this->addChild(layer);
+		std::string franmename = "ui/buildtext0.png";
 		if (m_build->data.level > 1)
-			text = "升级完成";
-		HintBox* layer = HintBox::create(CommonFuncs::gbk2utf(text.c_str()));
-		this->addChild(layer);
-		
+		{
+			franmename = "ui/buildtext1.png";
+		}
+		showFinishHintText(franmename);
 	}
 	else//操作完成
 	{
@@ -303,6 +318,9 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			data.name = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).cname;
 			data.desc = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).desc;
 			StorageRoom::add(data);
+			//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
+			//this->addChild(layer);
+			showFinishHintText("ui/buildtext2.png");
 		}
 
 		for (unsigned int m = 0; m < GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).res.size(); m++)
@@ -314,9 +332,6 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 
 		updataActionRes();
 		updataBuildRes();
-
-		HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
-		this->addChild(layer);
 	}
 }
 
@@ -393,11 +408,6 @@ void BuildingUILayer::updataBuildRes()
 			}
 		}
 	}
-	else
-	{
-		cocos2d::ui::Text* desc = (cocos2d::ui::Text*)mainitem->getChildByName("desc");
-		desc->setString(m_build->data.cname);
-	}
 }
 
 void BuildingUILayer::updataActionRes()
@@ -464,4 +474,18 @@ void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widge
 	{
 		this->addChild(BuildingDetailsLayer::create(m_build));
 	}
+}
+
+
+void BuildingUILayer::showFinishHintText(std::string path)
+{
+	Sprite* bsprite = Sprite::createWithSpriteFrameName(path);
+	bsprite->runAction(Sequence::create(Spawn::create(MoveTo::create(3.0f, Vec2(360, 900)), FadeOut::create(3.0f), NULL), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));
+	bsprite->setPosition(Vec2(360, 600));
+	this->addChild(bsprite);
+}
+
+void BuildingUILayer::finishAnim(Ref* pSender, Node* node)
+{
+	node->removeFromParentAndCleanup(true);
 }

@@ -178,7 +178,7 @@ public:
 	static int MAXInnerinjuryValue;//最大内伤值
 	static int MAXOutinjuryValue;//最大外伤值
 	static int MAXHungerValue;//最大饱食度
-	static int MAXSpiritValue;//最大精神值
+	static float MAXSpiritValue;//最大精神值
 	std::map<HeroAtrType, PackageData> map_heroAtr;//角色装备栏数据
 private:
 	void updateData(float dt);//定时更新数据

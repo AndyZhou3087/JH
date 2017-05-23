@@ -53,10 +53,16 @@ private:
 	点击“进入”按钮回调
 	*****************************/
 	void onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	临时存放点按钮红点提示，定时刷新
+	*****************************/
+	void checkRedPoint(float dt);
 private:
 	std::string m_addrstr;//地点ID
 	WHERELAYER_TYPE m_type;
 	static float m_distance;
+	cocos2d::ui::Widget* m_stredpoint;//临时物品红点
 };
 #endif
 

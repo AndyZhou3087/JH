@@ -96,6 +96,9 @@
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
           <Image Name="buildsmall.png" />
+          <Image Name="buildtext0.png" />
+          <Image Name="buildtext1.png" />
+          <Image Name="buildtext2.png" />
           <Image Name="bwine.png" />
           <Image Name="cooktable.png" />
           <Image Name="disbtn.png" />
@@ -211,8 +214,10 @@
           <Image Name="normalbtn.png" />
           <Image Name="npcicon.png" />
           <Image Name="npctalkbg.png" />
+          <Image Name="redpoint.png" />
           <Image Name="resbox.png" />
           <Image Name="room.jpg" />
+          <Image Name="saveitembg.png" />
           <Image Name="sbed.png" />
           <Image Name="scooktable.png" />
           <Image Name="select.png" />
@@ -364,6 +369,7 @@
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="activityLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
+        <Project Name="buildingDetailsLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
@@ -391,7 +397,10 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="buildingDetailsLayer.csd" Type="Layer" />
+        <Project Name="comfirmSaveLayer.csd" Type="Layer" />
+        <Project Name="selectSavedLayer.csd" Type="Layer" />
+        <Project Name="savedNode.csd" Type="Node" />
+        <Project Name="selectSaveComfirmLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

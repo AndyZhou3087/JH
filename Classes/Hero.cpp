@@ -1,9 +1,10 @@
 ﻿#include "Hero.h"
 #include "Const.h"
+#include "Nature.h"
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
-int Hero::MAXSpiritValue = 100.0f;
+float Hero::MAXSpiritValue = 100.0f;
 
 #define HungerSpeed 2//饱食度下降速度
 #define InnerinjurySpeed 1//内伤下降速度
@@ -20,6 +21,10 @@ Hero::Hero()
 	maxlifepercent = 1.0f;
 	m_atkpercent = 1.0f;
 	m_dfpercent = 1.0f;
+	m_maxHunger = MAXHungerValue;
+	m_maxInnerinjury = MAXInnerinjuryValue;
+	m_outinjury = MAXOutinjuryValue;
+	m_maxSpirit = MAXSpiritValue;
 }
 
 
@@ -57,8 +62,11 @@ void Hero::updateData(float dt)
 
 	//接上严重界限的消耗
 	m_hunger -= HungerSpeed;
-	m_innerinjury -= InnerinjurySpeed;
-	m_outinjury -= OutinjurySpeed;
+	
+	if (m_innerinjury < MAXInnerinjuryValue)
+		m_innerinjury -= InnerinjurySpeed;
+	if (m_outinjury < MAXOutinjuryValue)
+		m_outinjury -= OutinjurySpeed;
 	m_spirit -= SpiritSpeed;
 
 	if (m_innerinjury < 0)
@@ -137,6 +145,11 @@ PackageData* Hero::getAtrByType(HeroAtrType type)
 void Hero::revive()
 {
 	//复活-满状态复活
+
+	maxlifepercent = 1.0f;
+	m_atkpercent = 1.0f;
+	m_dfpercent = 1.0f;
+
 	setOutinjuryValue(MAXOutinjuryValue);
 	setMaxOutinjuryValue(MAXOutinjuryValue);
 
@@ -171,7 +184,11 @@ bool Hero::checkifHasGF(std::string gfid)
 		{
 			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfid) == 0)
 				return true;
-			else if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfid) == 0)
+		}
+
+		for (unsigned i = 0; i < StorageRoom::map_storageData[W_GONG].size(); i++)
+		{
+			if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfid) == 0)
 				return true;
 		}
 	}
@@ -310,10 +327,17 @@ void Hero::checkMaxVaule(float dt)
 	maxlifepercent = mlife;
 
 	setMaxHungerValue(mhvalue);
+	if (m_life > getMaxLifeValue())
+		setLifeValue(getMaxLifeValue());
 
 	setMaxInnerinjuryValue(mivalue);
+	if (m_innerinjury > getMaxInnerinjuryValue())
+		m_innerinjury = getMaxInnerinjuryValue();
 
 	setMaxOutinjuryValue(movalue);
+
+	if (m_outinjury > getMaxOutinjuryValue())
+		setMaxOutinjuryValue(getMaxOutinjuryValue());
 
 	setAtkPercent(matk);
 	setDfPercent(mdf);

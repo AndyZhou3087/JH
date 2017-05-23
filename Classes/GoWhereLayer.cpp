@@ -9,6 +9,7 @@
 #include "TempStorageLayer.h"
 #include "NpcLayer.h"
 #include "SoundManager.h"
+#include "GameDataSave.h"
 
 GoWhereLayer::GoWhereLayer()
 {
@@ -85,6 +86,9 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	cocos2d::ui::Button* stbtn = (cocos2d::ui::Button*)csbnode->getChildByName("stbtn");
 	stbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onST, this));
 
+	m_stredpoint = (cocos2d::ui::Widget*)stbtn->getChildByName("redpoint");
+	checkRedPoint(0);
+
 	cocos2d::ui::Button* enterbtn = (cocos2d::ui::Button*)csbnode->getChildByName("enterbtn");
 	enterbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onComeIn, this));
 
@@ -124,7 +128,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-
+	this->schedule(schedule_selector(GoWhereLayer::checkRedPoint), 1.0f);
 	return true;
 }
 
@@ -156,7 +160,7 @@ void GoWhereLayer::onST(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 		TempStorageLayer* layer = TempStorageLayer::create(m_addrstr);
 
 		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(layer, 2);
+			g_gameLayer->addChild(layer, 2, "TempStorageLayer");
 	}
 }
 
@@ -182,4 +186,14 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		}
 		this->removeFromParentAndCleanup(true);
 	}
+}
+
+
+
+void GoWhereLayer::checkRedPoint(float dt)
+{
+	if (GameDataSave::getInstance()->getTempStorage(m_addrstr).length() > 0)
+		m_stredpoint->setVisible(true);
+	else
+		m_stredpoint->setVisible(false);
 }

@@ -26,6 +26,8 @@ bool GlobalData::unlockhero[4];
 
 std::string GlobalData::uid = "";
 
+std::vector<std::string> GlobalData::vec_saveids;
+
 GlobalData::GlobalData()
 {
 
@@ -98,7 +100,9 @@ void GlobalData::loadBuildActionJSon(std::string buildname)
 			value = jsonvalue["res"];
 			for (unsigned int i = 0; i < value.Size(); i++)
 			{
-				data.res.push_back(value[i].GetInt());
+				int tmp = value[i].GetInt();
+				if (tmp > 0)
+					data.res.push_back(value[i].GetInt());
 			}
 			if (jsonvalue.HasMember("name"))
 			{
@@ -641,4 +645,31 @@ int GlobalData::createRandomNum(int val)
 	srand(syssec);
 	int r = rand() % val;
 	return r;
+}
+
+std::vector<std::string> GlobalData::getSaveListId()
+{
+	std::string str = GameDataSave::getInstance()->getSaveListId();
+
+	std::vector<std::string> tmp;
+	CommonFuncs::split(str, tmp, ";");
+
+	for (unsigned int i = 0; i < tmp.size(); i++)
+	{
+		vec_saveids.push_back(tmp[i]);
+	}
+
+	return vec_saveids;
+}
+
+void GlobalData::setSaveListId(std::vector<std::string> vec_val)
+{
+	std::string str;
+	for (unsigned int i = 0; i < vec_val.size(); i++)
+	{
+		str.append(vec_val[i]);
+		str.append(";");
+	}
+
+	GameDataSave::getInstance()->setSaveListId(str.substr(0, str.length() - 1));
 }

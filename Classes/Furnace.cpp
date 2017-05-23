@@ -27,7 +27,7 @@ void Furnace::action(int minute, int exminute)
 {
 	//生火
 	extime = exminute;
-	g_nature->setTimeInterval(minute / (TIMESCALE* getActionBarTime()));
+	g_nature->setTimeInterval(minute * NORMAL_TIMEINTERVAL * 1.0f / (TIMESCALE* getActionBarTime()));
 
 	this->scheduleOnce(schedule_selector(Furnace::warm), getActionBarTime());
 }

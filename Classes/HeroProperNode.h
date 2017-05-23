@@ -61,6 +61,11 @@ private:
 	保存数据
 	*****************************/
 	void saveData();
+
+	/****************************
+	更新背包栏数据
+	*****************************/
+	void updataMyPackageUI();
 private:
 	Node* csbroot;
 	cocos2d::ui::ImageView* propeImages[8];//8种装备类型

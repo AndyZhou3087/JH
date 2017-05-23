@@ -44,7 +44,7 @@ bool UnlockLayer::init()
 
 		CommonFuncs::split(mapid, tmp, "-");
 		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
-		if (mapchapter <= GlobalData::getUnlockChapter())
+		if (mapchapter == GlobalData::getUnlockChapter())
 		{
 			addrnamestr.append(GlobalData::map_maps[mapid].cname);
 			addrnamestr.append(CommonFuncs::gbk2utf("，"));

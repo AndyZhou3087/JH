@@ -16,6 +16,7 @@ public:
 	~HeroStateUILayer();
 
 	virtual bool init();
+	virtual void onExit();
 	CREATE_FUNC(HeroStateUILayer);
 private:
 	/****************************

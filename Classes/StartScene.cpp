@@ -5,6 +5,10 @@
 #include "CommonFuncs.h"
 #include "SettingLayer.h"
 #include "SoundManager.h"
+#include "StoryScene.h"
+#include "ComfirmSaveLayer.h"
+#include "SelectSaveLayer.h"
+
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -76,8 +80,18 @@ void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		Scene* scene = SelectHeroScene::createScene();
-		Director::getInstance()->replaceScene(scene);
+		
+		std::string uid = GlobalData::getUId();
+		if (uid.size() <= 0)
+		{
+			Scene* scene = StoryScene::createScene();
+			Director::getInstance()->replaceScene(scene);
+		}
+		else
+		{
+			ComfirmSaveLayer* layer = ComfirmSaveLayer::create();
+			this->addChild(layer);
+		}
 	}
 }
 
@@ -100,6 +114,8 @@ void StartScene::onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+		this->addChild(SelectSaveLayer::create());
 	}
 }
 

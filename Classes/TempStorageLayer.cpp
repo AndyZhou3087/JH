@@ -153,12 +153,6 @@ void TempStorageLayer::removeitem()
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->removeChildByName(name);
 	}
-
-	for (int i = 0; i < MyPackage::getSize(); i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
-		this->removeChildByName(name);
-	}
 }
 
 void TempStorageLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -212,20 +206,38 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removeitem();
 
-		for (unsigned int i = 0; i < tempResData.size(); i++)
+		std::vector<PackageData>::iterator it;
+
+		bool isfull = false;
+		for (it = tempResData.begin(); it != tempResData.end();)
 		{
-			PackageData data = tempResData[i];
-			data.count = 1;
-			if (MyPackage::add(data) == 0)
+			bool isOver = false;
+			int count = it->count;
+			for (int m = 0; m < count; m++)
 			{
-				if (--tempResData[i].count <= 0)
+				PackageData data = *it;
+				data.count = 1;
+				if (MyPackage::add(data) == 0)
 				{
-					tempResData.erase(tempResData.begin() + i);
+					if (--it->count <= 0)
+					{
+						it = tempResData.erase(it);
+						isOver = true;
+						break;
+					}
+				}
+				else
+				{
+					isfull = true;
 					break;
 				}
 			}
+			if (!isOver)
+				it++;
+			if (isfull)
+				break;
 		}
-
+		saveTempData();
 		updata();
 	}
 }
@@ -269,10 +281,22 @@ void TempStorageLayer::updata()
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
+	//更新背包栏
+	updataMyPackageUI();
+
+}
+
+void TempStorageLayer::updataMyPackageUI()
+{
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
+		std::string name = StringUtils::format("pitem%d", i);
+		this->removeChildByName(name);
+	}
 
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
@@ -297,4 +321,10 @@ void TempStorageLayer::updata()
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
+}
+
+void TempStorageLayer::onExit()
+{
+	saveTempData();
+	Layer::onExit();
 }

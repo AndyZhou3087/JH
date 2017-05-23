@@ -6,7 +6,7 @@
 #define ACTION_BAR_TIME 4.0f//建筑物中进度条秒数
 #define HERO_MOVE_SPEED 0.6f//地图中移动速度，min/px
 
-static std::string acname[] = { "战斗", "采集", "砍伐", "挖掘" };
+static std::string acname[] = { "打猎", "采集", "砍伐", "挖掘" };
 static std::string acdesc[] = {"","你徒手采集，废了好大力才获得了", "你徒手劈树，手掌都快劈兰了才获得了", "你徒手采矿，双手都磨破了才扣下来一块"};
 static std::string acdesc1[] = {"", "你使用镰刀收割，毫不费力的获得", "你使用斧子劈树，毫不费力的获得", "你挥舞十字镐采矿，毫不费力的获得一块" };
 
@@ -16,4 +16,9 @@ static std::string herofightdesc2[] = {"%s哇哇吐出一堆鲜血。受到了%d
 
 static std::string bossfight[] = {"%s雷鸣闪电样迅速击中%s，硬生生的接住这一掌，受到%d点伤害。"};
 static std::string bossfight1[] = { "%s雷鸣闪电样迅速击中%s，幸亏有%s挡了一下，虽然没有大碍，但还是受到%d点伤害。" };
+
+
+static std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
+static std::string herodesc[] = { "哈哈哈哈哈", "太帅了太帅了太帅了", "厉害了我的哥厉害了我的哥厉害了我的哥", "好厉害的说好厉害的说好厉害的说好厉害的说好厉害的说" };
+static int heroprice[] = { 0, 2, 4, 6 };
 #endif // _H_CONST_H_

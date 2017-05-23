@@ -133,7 +133,7 @@
             <FileData Type="MarkedSubImage" Path="ui/storagesepline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="actiontext_0_0" ActionTag="1613324402" Tag="106" IconVisible="False" LeftMargin="123.9008" RightMargin="527.0992" TopMargin="847.0587" BottomMargin="394.9413" FontSize="35" LabelText="背包" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="actiontext_1" ActionTag="1613324402" Tag="106" IconVisible="False" LeftMargin="123.9008" RightMargin="527.0992" TopMargin="847.0587" BottomMargin="394.9413" FontSize="35" LabelText="背包" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="69.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="158.4008" Y="413.9413" />

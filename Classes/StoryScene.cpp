@@ -1,6 +1,6 @@
 ﻿#include "StoryScene.h"
 #include "CommonFuncs.h"
-#include "StartScene.h"
+#include "SelectHeroScene.h"
 StoryScene::StoryScene()
 {
 	m_wordlbl = NULL;
@@ -34,9 +34,9 @@ bool StoryScene::init()
 	m_csbnode->setPosition(Vec2(360, 640));
 	this->addChild(m_csbnode);
 
-	auto action = CSLoader::createTimeline("story1.csb");
-	m_csbnode->runAction(action);
-	action->gotoFrameAndPlay(0, 105, false);
+	m_action = CSLoader::createTimeline("story1.csb");
+	m_csbnode->runAction(m_action);
+	m_action->gotoFrameAndPlay(0, 105, false);
 
 	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.5f);
 
@@ -45,7 +45,12 @@ bool StoryScene::init()
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		if (!isCanClick)
+		{
+			this->unschedule(schedule_selector(StoryScene::showClickText));
+			showClickText(0);
+			m_action->gotoFrameAndPlay(m_action->getEndFrame(), false);
 			return true;
+		}
 		if (clickcount == 1)
 		{
 			isCanClick = false;
@@ -89,9 +94,9 @@ void StoryScene::delayShowNextStory(float dt)
 	m_csbnode->setPosition(Vec2(360, 640));
 	this->addChild(m_csbnode);
 
-	auto action = CSLoader::createTimeline("story2.csb");
-	m_csbnode->runAction(action);
-	action->gotoFrameAndPlay(0, 90, false);
+	m_action = CSLoader::createTimeline("story2.csb");
+	m_csbnode->runAction(m_action);
+	m_action->gotoFrameAndPlay(0, 90, false);
 	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.0f);
 }
 
@@ -106,6 +111,6 @@ void StoryScene::showClickText(float dt)
 }
 void StoryScene::showNextScene(float dt)
 {
-	auto transition = TransitionPageTurn::create(1.0f, StartScene::createScene(), false);
+	auto transition = TransitionCrossFade::create(0.5f, SelectHeroScene::createScene());
 	Director::getInstance()->replaceScene(transition);
 }

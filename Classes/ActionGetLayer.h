@@ -24,6 +24,11 @@ public:
 	bool init(int rid, std::vector<int> res_ids, int type, int actype);
 	virtual void onExit();
 	static ActionGetLayer* create(int rid, std::vector<int> res_ids, int type, int actype);
+
+	/****************************
+	更新背包栏资源
+	*****************************/
+	void updataMyPackageUI();
 private:
 	/****************************
 	点击1："继续采集", 2："继续砍伐", 3："继续挖掘"按钮回调

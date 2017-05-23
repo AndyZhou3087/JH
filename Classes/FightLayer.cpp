@@ -159,11 +159,11 @@ void FightLayer::delayHeroFight(float dt)
 	}
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
 	float fack = g_hero->getAtkPercent() * heroCurAck;
-	heroCurAck = ceil(fack);
+	heroCurAck = int(fack + 1.0f);
 
 	int npchurt = heroCurAck - npcdf;
 	float fminack = 0.1f * heroCurAck;
-	int intminack = ceil(fminack);
+	int intminack = int(fminack + 1.0f);
 	if (npchurt < intminack)
 		npchurt = intminack;
 
@@ -209,11 +209,11 @@ void FightLayer::delayBossFight(float dt)
 	int curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
 	float fdf = g_hero->getDfPercent() * curheroDf;
-	curheroDf = ceil(fdf);
+	curheroDf = int(fdf + 1.0f);
 	int herohurt = npcatk - curheroDf;
 
 	float fminack = 0.1f * npcatk;
-	int intminack = ceil(fminack);
+	int intminack = int(fminack + 1.0f);
 
 	if (herohurt < intminack)
 		herohurt = intminack;
@@ -234,10 +234,10 @@ void FightLayer::delayBossFight(float dt)
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
 
 		float f1maxlife = g_hero->getMaxLifeValue() * 0.1f;
-		if (herohurt >= (int)f1maxlife)
+		if (herohurt >= (int)f1maxlife)//收到大于10%伤害
 		{
 			int r = GlobalData::createRandomNum(100);
-			if (r < 30)
+			if (r < 30)//30%概率收内伤
 			{
 				int curvalue = g_hero->getInnerinjuryValue() - 5;
 				if (curvalue < 0)
@@ -245,7 +245,7 @@ void FightLayer::delayBossFight(float dt)
 				g_hero->setInnerinjuryValue(curvalue);
 
 			}
-			else
+			else//70%概率收外伤
 			{
 				int curvalue = g_hero->getOutinjuryValue() - 5;
 				if (curvalue < 0)
@@ -260,9 +260,10 @@ void FightLayer::delayBossFight(float dt)
 
 void FightLayer::delayShowWinLayer(float dt)
 {
-	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
-	Director::getInstance()->getRunningScene()->addChild(layer);
 	this->removeFromParentAndCleanup(true);
+	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
+	if (g_gameLayer != NULL)
+		g_gameLayer->addChild(layer, 10, "Winlayer");
 }
 
 void FightLayer::showFightWord(int type, int value)

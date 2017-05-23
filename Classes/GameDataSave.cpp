@@ -54,13 +54,19 @@ void GameDataSave::setHeroHunger(int val)
 	saveIntDataByKey(addUIDString("hunger"), val);
 }
 
-int GameDataSave::getHeroSpirit()
+float GameDataSave::getHeroSpirit()
 {
-	return loadIntDataByKey(addUIDString("spirit"), Hero::MAXSpiritValue);
+	std::string str = loadStringDataByKey(addUIDString("spirit"), "");
+	if (str.length() <= 0)
+		return Hero::MAXSpiritValue;
+	else 
+		return atof(str.c_str());
+
 }
-void GameDataSave::setHeroSpirit(int val)
+void GameDataSave::setHeroSpirit(float val)
 {
-	saveIntDataByKey(addUIDString("spirit"), val);
+	std::string str = StringUtils::format("%.2f", val);
+	saveStringDataByKey(addUIDString("spirit"), str);
 }
 
 int GameDataSave::getHeroLife()
@@ -282,5 +288,15 @@ void GameDataSave::setPlotUnlockChapter(int val)
 int GameDataSave::getPlotUnlockChapter()
 {
 	return loadIntDataByKey(addUIDString("unlockchapter"), 1);
+}
+
+std::string GameDataSave::getSaveListId()
+{
+	return loadStringDataByKey("savelistid", ";;;");
+}
+
+void GameDataSave::setSaveListId(std::string val)
+{
+	saveStringDataByKey("savelistid", val);
 }
 

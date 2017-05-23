@@ -307,5 +307,6 @@ void GameScene::heroRevive()
 {
 	//复活成功
 	g_hero->revive();
+	g_gameLayer->resume();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
 }

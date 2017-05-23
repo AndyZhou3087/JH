@@ -277,25 +277,38 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removeitem();
 
-		for (unsigned int i = 0; i < getResData.size(); i++)
+		std::vector<PackageData>::iterator it;
+
+		bool isfull = false;
+		for (it = getResData.begin(); it != getResData.end();)
 		{
-			int count = getResData[i].count;
+			bool isOver = false;
+			int count = it->count;
 			for (int m = 0; m < count; m++)
 			{
-				PackageData data = getResData[i];
+				PackageData data = *it;
 				data.count = 1;
 				if (MyPackage::add(data) == 0)
 				{
-					if (--getResData[i].count <= 0)
+					if (--it->count <= 0)
 					{
-						getResData.erase(getResData.begin() + i);
+						it = getResData.erase(it);
+						isOver = true;
 						break;
 					}
 				}
+				else
+				{
+					isfull = true;
+					break;
+				}
 			}
-
+			if (!isOver)
+				it++;
+			if (isfull)
+				break;
 		}
-
+		saveTempData();
 		updata();
 	}
 }
@@ -389,6 +402,17 @@ void ActionGetLayer::updata()
 	}
 
 	//背包栏资源UI更新
+	updataMyPackageUI();
+}
+
+void ActionGetLayer::updataMyPackageUI()
+{
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		std::string name = StringUtils::format("pitem%d", i);
+		this->removeChildByName(name);
+	}
+
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
@@ -423,12 +447,6 @@ void ActionGetLayer::removeitem()
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
-
-	for (int i = 0; i < MyPackage::getSize(); i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
 	}
 }

@@ -74,6 +74,19 @@
           </AbstractNodeData>
           <AbstractNodeData Name="stbtn" ActionTag="-307291336" Tag="61" IconVisible="False" LeftMargin="179.5000" RightMargin="419.5000" TopMargin="1083.0000" BottomMargin="143.0000" TouchEnable="True" FontSize="28" ButtonText="物品存放" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="121.0000" Y="54.0000" />
+            <Children>
+              <AbstractNodeData Name="redpoint" ActionTag="-1382832304" Tag="359" IconVisible="False" LeftMargin="-20.2083" RightMargin="103.2083" TopMargin="-8.9734" BottomMargin="24.9734" ctype="SpriteObjectData">
+                <Size X="38.0000" Y="38.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-1.2083" Y="43.9734" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="-0.0100" Y="0.8143" />
+                <PreSize X="0.3140" Y="0.7037" />
+                <FileData Type="MarkedSubImage" Path="ui/redpoint.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="240.0000" Y="170.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />

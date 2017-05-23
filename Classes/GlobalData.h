@@ -298,6 +298,18 @@ public:
 	@param 随机数范围，从0开始
 	*****************************/
 	static int createRandomNum(int val);
+
+	/****************************
+	获取存档的ID
+	*****************************/
+	static std::vector<std::string> getSaveListId();
+
+	/****************************
+	保存存档的ID
+	@param 保存的id vector
+	*****************************/
+	static void setSaveListId(std::vector<std::string> vec_val);
+
 public:
 	static std::vector<ResData> vec_resData;//一级资源vector
 	static std::vector<std::string> vec_hillResid;//后山资源列表vector
@@ -311,6 +323,8 @@ public:
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
+
+	static std::vector<std::string> vec_saveids;//存档的id
 };
 #endif
 

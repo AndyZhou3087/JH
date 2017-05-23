@@ -249,6 +249,7 @@ void ShopLayer::addBuyGoods()
 						pdata.desc = edata.desc;
 						pdata.name = edata.cname;
 						pdata.type = edata.type - 1;
+						pdata.goodvalue = 100;
 						StorageRoom::add(pdata);
 						break;
 					}

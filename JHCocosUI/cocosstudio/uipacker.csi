@@ -331,6 +331,11 @@
       <FilePathData Path="ui/topspiritred.png" />
       <FilePathData Path="ui/mapmission0.png" />
       <FilePathData Path="ui/mapmission1.png" />
+      <FilePathData Path="ui/buildtext0.png" />
+      <FilePathData Path="ui/buildtext1.png" />
+      <FilePathData Path="ui/buildtext2.png" />
+      <FilePathData Path="ui/redpoint.png" />
+      <FilePathData Path="ui/saveitembg.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

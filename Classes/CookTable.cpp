@@ -25,5 +25,5 @@ bool CookTable::init()
 
 void CookTable::action(int minute, int exminute)
 {
-	g_nature->setTimeInterval(minute / (TIMESCALE* getActionBarTime()));
+	g_nature->setTimeInterval(minute * NORMAL_TIMEINTERVAL * 1.0f / (TIMESCALE* getActionBarTime()));
 }
