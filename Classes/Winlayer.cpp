@@ -8,6 +8,7 @@
 #include "StorageRoom.h"
 #include "MapLayer.h"
 #include "SoundManager.h"
+#include "NpcLayer.h"
 
 Winlayer::Winlayer()
 {
@@ -85,6 +86,14 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			}
 			GlobalData::setPlotMissionIndex(curplot + 1);
 			GlobalData::savePlotMissionStatus();
+
+			if (g_gameLayer != NULL)
+			{
+				NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
+				if (npclayer != NULL)
+					npclayer->updatePlotUI();
+			}
+
 			if (g_maplayer != NULL)
 				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 		}
@@ -270,7 +279,11 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
-
+	for (unsigned int i = 0; i < getRewardData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
 	int count = data->count - 1;
 	if (count <= 0)
 	{
@@ -359,7 +372,11 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
+		for (unsigned int i = 0; i < getRewardData.size(); i++)
+		{
+			std::string name = StringUtils::format("resitem%d", i);
+			this->removeChildByName(name);
+		}
 		std::vector<PackageData>::iterator it;
 		bool isfull = false;
 		for (it = getRewardData.begin(); it != getRewardData.end();)
@@ -496,12 +513,6 @@ void Winlayer::updataMyPackageUI()
 
 void Winlayer::updataRewardUI()
 {
-	for (unsigned int i = 0; i < getRewardData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
-
 	for (unsigned int i = 0; i < getRewardData.size(); i++)
 	{
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");

@@ -40,7 +40,7 @@ void SoundManager::loadSounds()
 
 
 	//Ô¤¼ÓÔØÒôÐ§
-	SimpleAudioEngine::getInstance()->preloadEffect("sound/button.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/button.mp3");
 }
 
 void SoundManager::unloadSounds()

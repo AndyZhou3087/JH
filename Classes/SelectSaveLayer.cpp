@@ -4,7 +4,7 @@
 #include "GameDataSave.h"
 #include "Utility.h"
 #include "Const.h"
-#include "SelectSaveComfirmLayer .h"
+#include "SelectSaveComfirmLayer.h"
 bool SelectSaveLayer::init()
 {
 	
@@ -50,13 +50,13 @@ bool SelectSaveLayer::init()
 			cocos2d::ui::Text* nametxt = (cocos2d::ui::Text*)textnode->getChildByName("name");
 			nametxt->setString(heroname[i]);
 
-			std::string str = StringUtils::format("%sherolv", saveids[i]);
+			std::string str = StringUtils::format("%sherolv", saveids[i].c_str());
 			int lv = loadIntDataByKey(str, 0);
 			str = StringUtils::format("%d", lv);
 			cocos2d::ui::Text* lvtxt = (cocos2d::ui::Text*)textnode->getChildByName("lv");
 			lvtxt->setString(str);
 
-			str = StringUtils::format("%slivedays", saveids[i]);
+			str = StringUtils::format("%slivedays", saveids[i].c_str());
 			int daycount = loadIntDataByKey(str, 0);
 			str = StringUtils::format("%d", daycount);
 			cocos2d::ui::Text* daytxt = (cocos2d::ui::Text*)textnode->getChildByName("day");

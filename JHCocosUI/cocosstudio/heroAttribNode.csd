@@ -96,6 +96,17 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp6.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_0" ActionTag="-1241441050" Tag="53" IconVisible="False" LeftMargin="-218.0002" RightMargin="178.0002" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="-178.0002" Y="10.9999" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Image_1" ActionTag="-1241809577" Tag="95" IconVisible="False" LeftMargin="-128.3270" RightMargin="22.3270" TopMargin="-118.3741" BottomMargin="12.3741" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -105,6 +116,17 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp5.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_1" ActionTag="924542818" Tag="54" IconVisible="False" LeftMargin="-64.0449" RightMargin="24.0449" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="-24.0449" Y="10.9999" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="Image_2" ActionTag="-293081859" Tag="96" IconVisible="False" LeftMargin="24.4858" RightMargin="-130.4858" TopMargin="-118.3741" BottomMargin="12.3741" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
@@ -116,6 +138,17 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp3.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_2" ActionTag="-2103265923" Tag="55" IconVisible="False" LeftMargin="88.6042" RightMargin="-128.6042" TopMargin="-26.0000" BottomMargin="11.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="128.6042" Y="11.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Image_3" ActionTag="-773569625" Tag="97" IconVisible="False" LeftMargin="178.3450" RightMargin="-284.3450" TopMargin="-118.3741" BottomMargin="12.3741" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -125,6 +158,17 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp4.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_3" ActionTag="993704952" Tag="56" IconVisible="False" LeftMargin="242.3758" RightMargin="-282.3758" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="282.3758" Y="10.9999" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="Image_4" ActionTag="233794658" Tag="98" IconVisible="False" LeftMargin="-281.7916" RightMargin="175.7916" TopMargin="13.7852" BottomMargin="-119.7852" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
@@ -136,6 +180,17 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_4" ActionTag="53910579" Tag="57" IconVisible="False" LeftMargin="-247.2494" RightMargin="178.2494" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="耐久度100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="69.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="-178.2494" Y="-120.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Image_5" ActionTag="2127404190" Tag="99" IconVisible="False" LeftMargin="-128.9307" RightMargin="22.9307" TopMargin="13.7851" BottomMargin="-119.7851" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -145,6 +200,17 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-2.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_5" ActionTag="1812029841" Tag="58" IconVisible="False" LeftMargin="-64.2694" RightMargin="24.2694" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="-24.2694" Y="-120.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="Image_6" ActionTag="-1305005985" Tag="100" IconVisible="False" LeftMargin="24.8479" RightMargin="-130.8479" TopMargin="13.9165" BottomMargin="-119.9165" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
@@ -156,6 +222,17 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-3.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_6" ActionTag="-894041941" Tag="59" IconVisible="False" LeftMargin="88.1640" RightMargin="-128.1640" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="128.1640" Y="-120.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Image_7" ActionTag="1455612186" Tag="101" IconVisible="False" LeftMargin="177.6432" RightMargin="-283.6432" TopMargin="13.7852" BottomMargin="-119.7852" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -165,6 +242,17 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-4.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvtext_7" ActionTag="978784068" Tag="60" IconVisible="False" LeftMargin="242.7701" RightMargin="-282.7701" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="15.0000" />
+            <AnchorPoint ScaleX="1.0000" />
+            <Position X="282.7701" Y="-120.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="heroppoint" ActionTag="1069477996" VisibleForFrame="False" Tag="70" IconVisible="False" LeftMargin="-261.3326" RightMargin="200.3326" TopMargin="-6.4273" BottomMargin="-20.5727" ctype="SpriteObjectData">
             <Size X="61.0000" Y="27.0000" />
@@ -214,10 +302,10 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ScrollView" ActionTag="-723096159" Tag="74" IconVisible="False" LeftMargin="20.9583" RightMargin="23.0417" TopMargin="62.2874" BottomMargin="103.7126" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="ScrollView" ActionTag="-723096159" Tag="74" IconVisible="False" LeftMargin="20.9583" RightMargin="23.0417" TopMargin="62.2900" BottomMargin="103.7100" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="600.0000" Y="400.0000" />
                 <AnchorPoint />
-                <Position X="20.9583" Y="103.7126" />
+                <Position X="20.9583" Y="103.7100" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0325" Y="0.1832" />

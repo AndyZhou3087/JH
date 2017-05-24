@@ -47,9 +47,12 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 
 	rewardids = res_ids;
 
+	updataMyPackageUI();
 	//点击后山列表中的操作获取一次资源
-	doAction();
-	updata();
+	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)
+		doAction(0);
+	else
+		this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
 
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -64,7 +67,7 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	return true;
 }
 
-void ActionGetLayer::doAction()
+void ActionGetLayer::doAction(float dt)
 {
 	bool isget = false;
 	for (unsigned int i = 0; i < rewardids.size(); i++)
@@ -117,6 +120,8 @@ void ActionGetLayer::doAction()
 	}
 	if (g_hero->getSpiritValue() < 0)
 		g_hero->setSpiritValue(0);
+
+	updataRewardUI();
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
@@ -125,6 +130,12 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 	//点击奖励栏的资源
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
+
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
 
 	int count = data->count - 1;
 	if (count <= 0)//数量为0，全部加到背包中了，移除掉
@@ -242,20 +253,28 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		//更新后山资源列表中的数据，为0，就不出产出资源了，需等待资源恢复
+
+		for (unsigned int i = 0; i < getResData.size(); i++)
+		{
+			std::string name = StringUtils::format("resitem%d", i);
+			this->removeChildByName(name);
+		}
+
 		if (GlobalData::vec_resData[mrid].count > 0)
 		{
+			updataMyPackageUI();
 			GlobalData::vec_resData[mrid].count--;
-			doAction();
-			updata();
-
 			std::string desc;
 			if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
 			{
 				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
+
+				doAction(0);
 			}
 			else
 			{
 				desc = CommonFuncs::gbk2utf(acdesc[m_actype].c_str());
+				this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
 			}
 			desc.append(GlobalData::vec_resData[mrid].unitname);
 			g_uiScroll->addEventText(desc);
@@ -275,6 +294,13 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+
+		for (unsigned int i = 0; i < getResData.size(); i++)
+		{
+			std::string name = StringUtils::format("resitem%d", i);
+			this->removeChildByName(name);
+		}
 
 		std::vector<PackageData>::iterator it;
 
@@ -314,6 +340,7 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 void ActionGetLayer::loadTempData()
 {
+	tempResData.clear();
 	//临时存放的数据，保存在本地文件中，解析
 	std::string datastr = GameDataSave::getInstance()->getTempStorage("m1-2");
 	std::vector<std::string> vec_retstr;
@@ -416,12 +443,6 @@ void ActionGetLayer::updataMyPackageUI()
 
 void ActionGetLayer::updataRewardUI()
 {
-	for (unsigned int i = 0; i < getResData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
-
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");

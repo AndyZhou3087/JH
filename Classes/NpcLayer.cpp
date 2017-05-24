@@ -36,25 +36,25 @@ NpcLayer* NpcLayer::create(std::string addrname)
 
 bool NpcLayer::init(std::string addrid)
 {
-	Node* csbnode = CSLoader::createNode("npcLayer.csb");
-	this->addChild(csbnode);
+	m_csbnode = CSLoader::createNode("npcLayer.csb");
+	this->addChild(m_csbnode);
 
-	m_npctalkbg = (cocos2d::ui::Widget*)csbnode->getChildByName("npctalkbg");
+	m_npctalkbg = (cocos2d::ui::Widget*)m_csbnode->getChildByName("npctalkbg");
 	m_npctalkbg->setOpacity(0);
 
 	m_addrstr = addrid;
 
 	MapData mdata = GlobalData::map_maps[addrid];
 
-	cocos2d::ui::Text* title = (cocos2d::ui::Text*)csbnode->getChildByName("title");
+	cocos2d::ui::Text* title = (cocos2d::ui::Text*)m_csbnode->getChildByName("title");
 	title->setString(mdata.cname);
 
-	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("typepng");
+	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("typepng");
 	std::string str = StringUtils::format("ui/%s.jpg", mdata.tpngname);
 	typeimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	typeimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	
-	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
+	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onBack, this));
 
 	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
@@ -66,7 +66,7 @@ bool NpcLayer::init(std::string addrid)
 		Node* npcitem = CSLoader::createNode("npcNode.csb");
 		npcitem->setName(mdata.npcs[i]);
 		npcitem->setPosition(Vec2(360, 415 - 155 * i));
-		csbnode->addChild(npcitem);
+		m_csbnode->addChild(npcitem);
 
 		cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
 		npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
@@ -95,7 +95,7 @@ bool NpcLayer::init(std::string addrid)
 			Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
 			dicon->setScale(0.6f);
 			dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height-10));
-			onFight->addChild(dicon);
+			onFight->addChild(dicon,0, "m1");
 		}
 	}
 
@@ -183,9 +183,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		{
 			isplotMissioning = true;
 			GlobalData::vec_PlotMissionData[curplot].status = M_DOING;
-			Node* m0 = node->getChildByName("m0");
-			if (m0 != NULL)
-				m0->setVisible(false);
+			updatePlotUI();
 			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].words.size(); m++)
 			{
 				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].words[m].c_str());
@@ -340,4 +338,40 @@ void NpcLayer::removeNpcWord(float dt)
 	m_npctalkbg->runAction(FadeOut::create(0.2f));
 	vec_wordstr.clear();
 	m_talkScroll->clean();
+}
+
+void NpcLayer::updatePlotUI()
+{
+	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
+	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
+	int ncpsize = GlobalData::map_maps[m_addrstr].npcs.size();
+	for (int i = 0; i < ncpsize; i++)
+	{
+		Node* npcitem = m_csbnode->getChildByName(GlobalData::map_maps[m_addrstr].npcs[i]);
+		cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
+		cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
+
+		talkbtn->removeChildByName("m0");
+		if (snpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
+		{
+			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
+			{
+				Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
+				micon->setScale(0.6f);
+				micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
+				talkbtn->addChild(micon, 0, "m0");
+			}
+		}
+		onFight->removeChildByName("m1");
+		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
+		{
+			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
+			{
+				Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
+				dicon->setScale(0.6f);
+				dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
+				onFight->addChild(dicon);
+			}
+		}
+	}
 }

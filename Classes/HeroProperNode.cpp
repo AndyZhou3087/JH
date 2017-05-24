@@ -38,8 +38,11 @@ bool HeroProperNode::init()
 	{
 		std::string str = StringUtils::format("Image_%d", i);
 		propeImages[i] = (cocos2d::ui::ImageView*)csbroot->getChildByName(str);
-		str = StringUtils::format("box_%d", i);
 
+		str = StringUtils::format("lvtext_%d", i);
+		lvtext[i] = (cocos2d::ui::Text*)csbroot->getChildByName(str);
+
+		str = StringUtils::format("box_%d", i);
 		cocos2d::ui::Button* imgbtn = (cocos2d::ui::Button*)csbroot->getChildByName(str);
 		imgbtn->setTag(i);
 		imgbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
@@ -52,6 +55,25 @@ bool HeroProperNode::init()
 			str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
 			propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 			propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+			 
+			if (Atrytpe[i] == H_WEAPON || Atrytpe[i] == H_WG || Atrytpe[i] == H_NG || Atrytpe[i] == H_ARMOR)
+			{
+				str = StringUtils::format("Lv.%d", hpdata->lv + 1);
+			}
+			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE)
+			{
+				str = StringUtils::format("耐久度%d", hpdata->goodvalue);
+			}
+			else
+			{
+				str = "";
+			}
+			lvtext[i]->setString(str);
+		}
+		else
+		{
+			lvtext[i]->setString("");
 		}
 	}
 
@@ -222,6 +244,24 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		namelbl->setColor(Color3B(0, 0, 0));
 		namelbl->setPosition(Vec2(box->getContentSize().width / 2, - 10));
 		box->addChild(namelbl);
+
+		if (index == H_WEAPON || index == H_WG || index == H_NG || index == H_ARMOR)
+		{
+			str = StringUtils::format("Lv.%d", map_carryData[index][i].lv + 1);
+		}
+		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE)
+		{
+			str = StringUtils::format("耐久度%d", map_carryData[index][i].goodvalue);
+		}
+		else
+		{
+			str = "";
+		}
+		Label * lvlbl = Label::createWithSystemFont(CommonFuncs::gbk2utf(str.c_str()), "", 15);
+		lvlbl->setColor(Color3B(255, 255, 255));
+		lvlbl->setAnchorPoint(Vec2(1, 0));
+		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
+		box->addChild(lvlbl);
 	}
 	m_select->setVisible(false);
 	if (tempsize > 0)
@@ -305,6 +345,21 @@ void HeroProperNode::onItem(Ref* pSender)
 		{
 			MyPackage::cutone(udata->strid);
 			g_hero->setAtrByType(atrype, *udata);
+
+			if (Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG || Atrytpe[lastclickindex] == H_ARMOR)
+			{
+				str = StringUtils::format("Lv.%d", udata->lv + 1);
+			}
+			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE)
+			{
+				str = StringUtils::format("耐久度%d", udata->goodvalue);
+			}
+			else
+			{
+				str = "";
+			}
+
+			lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 		else//卸掉装备 设置count = -1
 		{
@@ -312,6 +367,7 @@ void HeroProperNode::onItem(Ref* pSender)
 			PackageData data;
 			data.count = -1;
 			g_hero->setAtrByType(atrype, data);
+			lvtext[lastclickindex]->setString("");
 		}
 		
 	}
@@ -321,6 +377,20 @@ void HeroProperNode::onItem(Ref* pSender)
 		{
 			StorageRoom::use(udata->strid);
 			g_hero->setAtrByType(atrype, *udata);
+			if (Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG || Atrytpe[lastclickindex] == H_ARMOR)
+			{
+				str = StringUtils::format("Lv.%d", udata->lv + 1);
+			}
+			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE)
+			{
+				str = StringUtils::format("耐久度%d", udata->goodvalue);
+			}
+			else
+			{
+				str = "";
+			}
+
+			lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 		else
 		{
@@ -328,6 +398,7 @@ void HeroProperNode::onItem(Ref* pSender)
 			PackageData data;
 			data.count = -1;
 			g_hero->setAtrByType(atrype, data);
+			lvtext[lastclickindex]->setString("");
 		}
 	}
 	m_lastSelectedData = (PackageData*)node->getUserData();

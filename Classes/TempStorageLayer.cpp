@@ -68,6 +68,12 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
+	for (unsigned int i = 0; i < tempResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		m_scrollView->removeChildByName(name);
+	}
+
 	int count = data->count - 1;
 	if (count <= 0)
 	{
@@ -145,12 +151,6 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 
 void TempStorageLayer::updataTempUI()
 {
-	for (unsigned int i = 0; i < tempResData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		m_scrollView->removeChildByName(name);
-	}
-
 	int tempsize = tempResData.size();
 	int itemheight = 135;
 	int row = tempsize % 5 == 0 ? tempsize / 5 : (tempsize / 5 + 1);
@@ -239,6 +239,12 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+		for (unsigned int i = 0; i < tempResData.size(); i++)
+		{
+			std::string name = StringUtils::format("resitem%d", i);
+			m_scrollView->removeChildByName(name);
+		}
 
 		std::vector<PackageData>::iterator it;
 

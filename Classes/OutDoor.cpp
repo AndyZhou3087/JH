@@ -134,11 +134,7 @@ void OutDoor::updataMyPackageUI()
 
 void OutDoor::updataStorageUI()
 {
-	for (unsigned int i = 0; i < allStorageData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->removeChildByName(name);
-	}
+
 
 	int typecount = 0;
 	for (int i = 0; i < RES_MAX; i++)
@@ -162,6 +158,13 @@ void OutDoor::updataStorageUI()
 			allStorageData.push_back(&StorageRoom::map_storageData[i][m]);
 		}
 	}
+
+	for (unsigned int i = 0; i < allStorageData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		scrollview->removeChildByName(name);
+	}
+
 	for (unsigned int i = 0; i < allStorageData.size(); i++)
 	{
 		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");

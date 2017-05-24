@@ -182,7 +182,7 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		else//进入NPC
 		{
 			if (g_gameLayer != NULL)
-				g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2);
+				g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2, "npclayer");
 		}
 		this->removeFromParentAndCleanup(true);
 	}

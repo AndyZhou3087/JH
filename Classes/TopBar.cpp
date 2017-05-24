@@ -143,7 +143,7 @@ bool TopBar::init()
 	lifeBar->setType(ProgressTimer::Type::BAR);
 	lifeBar->setBarChangeRate(Vec2(0, 1));
 	lifeBar->setMidpoint(Vec2(0, 0));
-	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
+	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 	lifeBar->setPosition(life->getPosition());
 	csbnode->addChild(lifeBar);
 	outinjuryRed = (cocos2d::ui::Widget*)csbnode->getChildByName("topoutinjuryred");
@@ -282,7 +282,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		else if (cnode->getName().compare("life") == 0)
 		{
 			std::string str = "生命";
-			std::string livevaluestr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+			std::string livevaluestr = StringUtils::format("%d/%d", g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, livevaluestr, lifedesc);
 		}
 		if (sbox != NULL)
@@ -356,7 +356,7 @@ void TopBar::updataUI(float dt)
 	innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	spiritBar->setPercentage(g_hero->getSpiritValue());
-	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
+	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 
 	if (m_lastinnerinjury > g_hero->getInnerinjuryValue())
 	{

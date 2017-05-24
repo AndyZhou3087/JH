@@ -65,14 +65,15 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
 	heronametxt->setString(g_hero->getMyName());
 
+	int maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	//角色血量显示
 	herohpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("herohpvaluetext");
-	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), maxlife);
 	herohpvaluetext->setString(hpstr);
 
 
 	//角色血量进度
-	int herohppercent = 100 *  g_hero->getLifeValue() / g_hero->getMaxLifeValue();
+	int herohppercent = 100 * g_hero->getLifeValue() / maxlife;
 
 	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
 	herohpbar->setPercent(herohppercent);
@@ -223,9 +224,9 @@ void FightLayer::delayBossFight(float dt)
 		curheroHp = 0;
 	g_hero->setLifeValue(curheroHp);
 
-	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 	herohpvaluetext->setString(hpstr);
-	int herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
+	int herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	herohpbar->setPercent(herohppercent);
 	showFightWord(1, herohurt);
 
@@ -233,8 +234,8 @@ void FightLayer::delayBossFight(float dt)
 	{
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
 
-		float f1maxlife = g_hero->getMaxLifeValue() * 0.1f;
-		if (herohurt >= (int)f1maxlife)//收到大于10%伤害
+		float f1maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()] * 0.1f;
+		if (herohurt >= (int)f1maxlife)//受到大于10%伤害
 		{
 			int r = GlobalData::createRandomNum(100);
 			if (r < 30)//30%概率收内伤
@@ -260,10 +261,10 @@ void FightLayer::delayBossFight(float dt)
 
 void FightLayer::delayShowWinLayer(float dt)
 {
-	this->removeFromParentAndCleanup(true);
 	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(layer, 10, "Winlayer");
+	this->removeFromParentAndCleanup(true);
 }
 
 void FightLayer::showFightWord(int type, int value)

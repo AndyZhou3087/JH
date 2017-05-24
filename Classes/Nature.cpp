@@ -101,7 +101,7 @@ void Nature::ChangeDayNight()
 
 void Nature::updateData(float dt)
 {
-	m_time += NORMAL_TIMEINTERVAL;
+	m_time += getTimeInterval();
 	if (m_time >= 1440.0f)
 	{
 		m_time = 0.0f;

@@ -14,6 +14,7 @@ public:
 
 	bool init(std::string addrid);
 	static NpcLayer* create(std::string addrid);
+	void updatePlotUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -24,6 +25,7 @@ private:
 	void checkWordLblColor(std::string wordstr);
 
 private:
+	Node* m_csbnode;
 	std::string m_addrstr;
 	UIScroll* m_talkScroll;
 	Label* m_wordlbl;
@@ -33,6 +35,7 @@ private:
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;
 	int m_plotindex;
+
 };
 #endif
 
