@@ -88,7 +88,7 @@ bool NpcLayer::init(std::string addrid)
 			Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
 			micon->setScale(0.6f);
 			micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height-10));
-			talkbtn->addChild(micon);
+			talkbtn->addChild(micon, 0, "m0");
 		}
 		if (dnpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
 		{
@@ -183,7 +183,9 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		{
 			isplotMissioning = true;
 			GlobalData::vec_PlotMissionData[curplot].status = M_DOING;
-
+			Node* m0 = node->getChildByName("m0");
+			if (m0 != NULL)
+				m0->setVisible(false);
 			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].words.size(); m++)
 			{
 				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].words[m].c_str());

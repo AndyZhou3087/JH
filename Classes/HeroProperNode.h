@@ -19,6 +19,11 @@ public:
 	virtual bool init();
 	virtual void onExit();
 	CREATE_FUNC(HeroProperNode);
+
+	/****************************
+	刷新map_carryData 列表
+	*****************************/
+	void refreshCarryData();
 private:
 
 	/****************************

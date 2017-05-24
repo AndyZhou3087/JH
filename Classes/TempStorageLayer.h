@@ -15,6 +15,7 @@ public:
 	virtual void onExit();
 	static TempStorageLayer* create(std::string addrname);
 	void updataMyPackageUI();
+	void updataTempUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -23,7 +24,6 @@ private:
 	void onPackageItem(cocos2d::Ref* pSender);
 	void loadTempData();
 	void saveTempData();
-	void removeitem();
 private:
 	std::vector<PackageData> tempResData;
 	std::string m_addrname;

@@ -21,4 +21,5 @@ static std::string bossfight1[] = { "%s雷鸣闪电样迅速击中%s，幸亏有
 static std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
 static std::string herodesc[] = { "哈哈哈哈哈", "太帅了太帅了太帅了", "厉害了我的哥厉害了我的哥厉害了我的哥", "好厉害的说好厉害的说好厉害的说好厉害的说好厉害的说" };
 static int heroprice[] = { 0, 2, 4, 6 };
+
 #endif // _H_CONST_H_

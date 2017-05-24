@@ -2,7 +2,6 @@
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "MapLayer.h"
-#include "HeroProperNode.h"
 #include "StorageRoom.h"
 #include "GameScene.h"
 #include "GlobalData.h"
@@ -24,9 +23,9 @@ bool OutDoor::init()
 	m_csbnode = CSLoader::createNode("outDoorLayer.csb");
 	this->addChild(m_csbnode);
 
-	Node* heroproper = HeroProperNode::create();
-	heroproper->setPosition(Vec2(360, 790));
-	m_csbnode->addChild(heroproper, 1);
+	m_heroproper = HeroProperNode::create();
+	m_heroproper->setPosition(Vec2(360, 790));
+	m_csbnode->addChild(m_heroproper, 1);
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 
@@ -91,67 +90,18 @@ void OutDoor::delayShowGOOut(float dt)
 
 void OutDoor::updata()
 {
-	int typecount = 0;
-	for (int i = 0; i < RES_MAX; i++)
-	{
-		typecount += StorageRoom::map_storageData[i].size();
-	}
-
-	int row = typecount % 5 == 0 ? typecount / 5 : (typecount / 5 + 1);
-
-	int innerheight = row * 130;
-	int contentheight = scrollview->getContentSize().height;
-	if (innerheight < contentheight)
-		innerheight = contentheight;
-	scrollview->setInnerContainerSize(Size(650, innerheight));
-
-	allStorageData.clear();
-	for (int i = 0; i < RES_MAX; i++)
-	{
-		for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
-		{
-			allStorageData.push_back(&StorageRoom::map_storageData[i][m]);
-		}
-	}
-	for (unsigned int i = 0; i < allStorageData.size();i++)
-	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-		//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
-		//scrollview->addChild(box);
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(OutDoor::onStorageItem, this));
-		boxItem->setUserData(allStorageData[i]);
-		boxItem->setPosition(Vec2(boxItem->getContentSize().width/2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
-		Menu* menu = Menu::create();
-		menu->addChild(boxItem);
-		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->addChild(menu, 0, name);
-
-		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
-
-		str = StringUtils::format("%d", allStorageData[i]->count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
-	}
+	//更新仓库栏
+	updataStorageUI();
 	//更新背包栏
 	updataMyPackageUI();
 }
 
 void OutDoor::updataMyPackageUI()
 {
-	for (int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getMax(); i++)
 	{
 		std::string name = StringUtils::format("pitem%d", i);
-		this->removeChildByName(name);
+		m_csbnode->removeChildByName(name);
 	}
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
@@ -182,19 +132,77 @@ void OutDoor::updataMyPackageUI()
 	}
 }
 
+void OutDoor::updataStorageUI()
+{
+	for (unsigned int i = 0; i < allStorageData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		scrollview->removeChildByName(name);
+	}
+
+	int typecount = 0;
+	for (int i = 0; i < RES_MAX; i++)
+	{
+		typecount += StorageRoom::map_storageData[i].size();
+	}
+
+	int row = typecount % 5 == 0 ? typecount / 5 : (typecount / 5 + 1);
+
+	int innerheight = row * 130;
+	int contentheight = scrollview->getContentSize().height;
+	if (innerheight < contentheight)
+		innerheight = contentheight;
+	scrollview->setInnerContainerSize(Size(650, innerheight));
+
+	allStorageData.clear();
+	for (int i = 0; i < RES_MAX; i++)
+	{
+		for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
+		{
+			allStorageData.push_back(&StorageRoom::map_storageData[i][m]);
+		}
+	}
+	for (unsigned int i = 0; i < allStorageData.size(); i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
+		//scrollview->addChild(box);
+
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(OutDoor::onStorageItem, this));
+		boxItem->setUserData(allStorageData[i]);
+		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("resitem%d", i);
+		scrollview->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+
+		str = StringUtils::format("%d", allStorageData[i]->count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
+	}
+}
 void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
-	removeitem();
-
 	int count = data->count - 1;
 	if (count <= 0)
 	{
 		std::vector<PackageData>::iterator it;
-		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end(); ++it)
+		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end();)
 		{
 			if (it->strid.compare(data->strid) == 0)
 			{
@@ -234,28 +242,19 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 			data->count--;
 		}
 	}
-
+	m_heroproper->refreshCarryData();
 	updata();
 }
 
 void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
 	PackageData data = MyPackage::vec_packages[index];
 	data.count = 1;
 	StorageRoom::add(data);
 	MyPackage::cutone(data.strid);
+	m_heroproper->refreshCarryData();
 	updata();
-}
-
-void OutDoor::removeitem()
-{
-	for (unsigned int i = 0; i < allStorageData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->removeChildByName(name);
-	}
 }

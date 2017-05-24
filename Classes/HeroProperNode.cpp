@@ -49,16 +49,9 @@ bool HeroProperNode::init()
 		PackageData* hpdata = g_hero->getAtrByType(Atrytpe[i]);
 		if (hpdata->count > 0)
 		{
-			for (unsigned int m = 0; m < map_carryData[Atrytpe[i]].size(); m++)
-			{
-				PackageData carrydata = map_carryData[Atrytpe[i]][m];
-				if (carrydata.strid.length() > 0 && carrydata.strid.compare(hpdata->strid) == 0 && carrydata.goodvalue == hpdata->goodvalue)
-				{
-					str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
-					propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-					propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-				}
-			}
+			str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
+			propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+			propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 		}
 	}
 
@@ -374,6 +367,13 @@ void HeroProperNode::onExit()
 	Node::onExit();
 }
 
+void HeroProperNode::refreshCarryData()
+{
+	map_carryData.clear();
+	for (int i = 0; i < 8; i++)
+		addCarryData(Atrytpe[i]);
+}
+
 void HeroProperNode::updataMyPackageUI()
 {
 	if (g_gameLayer != NULL)
@@ -391,6 +391,8 @@ void HeroProperNode::updataMyPackageUI()
 
 		OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
 		if (Olayer != NULL)
-			Olayer->updataMyPackageUI();
+		{
+			Olayer->updata();
+		}
 	}
 }

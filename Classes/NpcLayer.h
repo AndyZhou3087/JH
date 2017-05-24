@@ -32,6 +32,7 @@ private:
 	cocos2d::ui::Widget* m_npctalkbg;
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;
+	int m_plotindex;
 };
 #endif
 

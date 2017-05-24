@@ -110,7 +110,11 @@ void ActionGetLayer::doAction()
 		repeatCount++;
 
 	if (repeatCount > 2)
-		g_hero->setSpiritValue(g_hero->getSpiritValue() - 1);
+	{
+		int r = GlobalData::createRandomNum(100);
+		if (r < 50)
+			g_hero->setSpiritValue(g_hero->getSpiritValue() - 0.5f);
+	}
 	if (g_hero->getSpiritValue() < 0)
 		g_hero->setSpiritValue(0);
 }
@@ -121,8 +125,6 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 	//点击奖励栏的资源
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
-
-	removeitem();
 
 	int count = data->count - 1;
 	if (count <= 0)//数量为0，全部加到背包中了，移除掉
@@ -179,7 +181,6 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	//点击背包栏
-	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
 	PackageData data = MyPackage::vec_packages[index];
@@ -244,7 +245,6 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		if (GlobalData::vec_resData[mrid].count > 0)
 		{
 			GlobalData::vec_resData[mrid].count--;
-			removeitem();
 			doAction();
 			updata();
 
@@ -275,7 +275,6 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		removeitem();
 
 		std::vector<PackageData>::iterator it;
 
@@ -372,34 +371,7 @@ void ActionGetLayer::saveTempData()
 void ActionGetLayer::updata()
 {
 	//奖励栏资源UI更新
-	for (unsigned int i = 0; i < getResData.size(); i++)
-	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(ActionGetLayer::onRewardItem, this));
-		boxItem->setTag(i);
-		boxItem->setUserData(&getResData[i]);
-		boxItem->setPosition(Vec2(150 + i * 135, 512));
-		Menu* menu = Menu::create();
-		menu->addChild(boxItem);
-		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("resitem%d", i);
-		this->addChild(menu, 0, name);
-
-		std::string str = StringUtils::format("ui/%s.png", getResData[i].strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
-
-		str = StringUtils::format("%d", getResData[i].count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
-	}
+	updataRewardUI();
 
 	//背包栏资源UI更新
 	updataMyPackageUI();
@@ -407,7 +379,7 @@ void ActionGetLayer::updata()
 
 void ActionGetLayer::updataMyPackageUI()
 {
-	for (int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getMax(); i++)
 	{
 		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
@@ -442,12 +414,41 @@ void ActionGetLayer::updataMyPackageUI()
 }
 
 
-void ActionGetLayer::removeitem()
+void ActionGetLayer::updataRewardUI()
 {
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
 		this->removeChildByName(name);
+	}
+
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(ActionGetLayer::onRewardItem, this));
+		boxItem->setTag(i);
+		boxItem->setUserData(&getResData[i]);
+		boxItem->setPosition(Vec2(150 + i * 135, 512));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("resitem%d", i);
+		this->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%s.png", getResData[i].strid.c_str());
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+
+		str = StringUtils::format("%d", getResData[i].count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
 	}
 }
 

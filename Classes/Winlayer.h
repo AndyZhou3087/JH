@@ -15,16 +15,15 @@ public:
 	virtual void onExit();
 	static Winlayer* create(std::string addr, std::string npcid);
 	void updataMyPackageUI();
+	void updataRewardUI();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updata();
 	void onRewardItem(cocos2d::Ref* pSender);
 	void onPackageItem(cocos2d::Ref* pSender);
-	void removeitem();
 	void saveTempData();
 	void loadTempData();
-	int static systime();
 	void updataLV();
 	void showLvUpText();
 private:

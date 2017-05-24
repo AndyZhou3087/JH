@@ -271,8 +271,6 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
-	removeitem();
-
 	int count = data->count - 1;
 	if (count <= 0)
 	{
@@ -324,7 +322,6 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
 	PackageData data = MyPackage::vec_packages[index];
@@ -362,27 +359,38 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		removeitem();
 
-		for (unsigned int i = 0; i < getRewardData.size(); i++)
+		std::vector<PackageData>::iterator it;
+		bool isfull = false;
+		for (it = getRewardData.begin(); it != getRewardData.end();)
 		{
-			int count = getRewardData[i].count;
+			bool isOver = false;
+			int count = it->count;
 			for (int m = 0; m < count; m++)
 			{
-				PackageData data = getRewardData[i];
+				PackageData data = *it;
 				data.count = 1;
 				if (MyPackage::add(data) == 0)
 				{
-					if (--getRewardData[i].count <= 0)
+					if (--it->count <= 0)
 					{
-						getRewardData.erase(getRewardData.begin() + i);
+						it = getRewardData.erase(it);
+						isOver = true;
 						break;
 					}
 				}
+				else
+				{
+					isfull = true;
+					break;
+				}
 			}
-
+			if (!isOver)
+				it++;
+			if (isfull)
+				break;
 		}
-
+		saveTempData();
 		updata();
 	}
 }
@@ -444,41 +452,15 @@ void Winlayer::saveTempData()
 
 void Winlayer::updata()
 {
-	for (unsigned int i = 0; i < getRewardData.size(); i++)
-	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(Winlayer::onRewardItem, this));
-		boxItem->setTag(i);
-		boxItem->setUserData(&getRewardData[i]);
-		boxItem->setPosition(Vec2(150 + i * 135, 420));
-		Menu* menu = Menu::create();
-		menu->addChild(boxItem);
-		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("resitem%d", i);
-		this->addChild(menu, 0, name);
-
-		std::string str = StringUtils::format("ui/%s.png", getRewardData[i].strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
-
-		str = StringUtils::format("%d", getRewardData[i].count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
-	}
+	//更新奖励栏
+	updataRewardUI();
 	//更新背包栏
 	updataMyPackageUI();
 }
 
 void Winlayer::updataMyPackageUI()
 {
-	for (int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getMax(); i++)
 	{
 		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
@@ -512,12 +494,41 @@ void Winlayer::updataMyPackageUI()
 	}
 }
 
-void Winlayer::removeitem()
+void Winlayer::updataRewardUI()
 {
 	for (unsigned int i = 0; i < getRewardData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
 		this->removeChildByName(name);
+	}
+
+	for (unsigned int i = 0; i < getRewardData.size(); i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(Winlayer::onRewardItem, this));
+		boxItem->setTag(i);
+		boxItem->setUserData(&getRewardData[i]);
+		boxItem->setPosition(Vec2(150 + i * 135, 420));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("resitem%d", i);
+		this->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%s.png", getRewardData[i].strid.c_str());
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+
+		str = StringUtils::format("%d", getRewardData[i].count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
 	}
 }
 

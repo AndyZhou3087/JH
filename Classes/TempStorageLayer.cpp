@@ -68,8 +68,6 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
-	removeitem();
-
 	int count = data->count - 1;
 	if (count <= 0)
 	{
@@ -121,7 +119,6 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-	removeitem();
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
 	PackageData data = MyPackage::vec_packages[index];
@@ -146,12 +143,50 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 }
 
 
-void TempStorageLayer::removeitem()
+void TempStorageLayer::updataTempUI()
 {
 	for (unsigned int i = 0; i < tempResData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->removeChildByName(name);
+	}
+
+	int tempsize = tempResData.size();
+	int itemheight = 135;
+	int row = tempsize % 5 == 0 ? tempsize / 5 : (tempsize / 5 + 1);
+	int innerheight = itemheight * row;
+	int contentheight = m_scrollView->getContentSize().height;
+	if (innerheight < contentheight)
+		innerheight = contentheight;
+	m_scrollView->setInnerContainerSize(Size(650, innerheight));
+
+	for (int i = 0; i < tempsize; i++)
+	{
+		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+
+		MenuItemSprite* boxItem = MenuItemSprite::create(
+			box,
+			box,
+			box,
+			CC_CALLBACK_1(TempStorageLayer::onRewardItem, this));
+		boxItem->setTag(i);
+		boxItem->setUserData(&tempResData[i]);
+		boxItem->setPosition(Vec2(70 + i % 5 * 135, innerheight - i / 5 * itemheight - itemheight / 2));
+		Menu* menu = Menu::create();
+		menu->addChild(boxItem);
+		menu->setPosition(Vec2(0, 0));
+		std::string name = StringUtils::format("resitem%d", i);
+		m_scrollView->addChild(menu, 0, name);
+
+		std::string str = StringUtils::format("ui/%s.png", tempResData[i].strid.c_str());
+		Sprite * res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
+		box->addChild(res);
+
+		str = StringUtils::format("%d", tempResData[i].count);
+		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+		box->addChild(reslbl);
 	}
 }
 
@@ -204,7 +239,6 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		removeitem();
 
 		std::vector<PackageData>::iterator it;
 
@@ -244,43 +278,8 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 
 void TempStorageLayer::updata()
 {
-	int tempsize = tempResData.size();
-	int itemheight = 135;
-	int row = tempsize % 5 == 0 ? tempsize / 5 : (tempsize / 5 + 1);
-	int innerheight = itemheight * row;
-	int contentheight = m_scrollView->getContentSize().height;
-	if (innerheight < contentheight)
-		innerheight = contentheight;
-	m_scrollView->setInnerContainerSize(Size(650, innerheight));
-
-	for (int i = 0; i < tempsize; i++)
-	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(TempStorageLayer::onRewardItem, this));
-		boxItem->setTag(i);
-		boxItem->setUserData(&tempResData[i]);
-		boxItem->setPosition(Vec2(70 + i % 5 * 135, innerheight - i/5 * itemheight - itemheight / 2));
-		Menu* menu = Menu::create();
-		menu->addChild(boxItem);
-		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("resitem%d", i);
-		m_scrollView->addChild(menu, 0, name);
-
-		std::string str = StringUtils::format("ui/%s.png", tempResData[i].strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
-
-		str = StringUtils::format("%d", tempResData[i].count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
-	}
+	//更新临时资源栏
+	updataTempUI();
 	//更新背包栏
 	updataMyPackageUI();
 
@@ -288,8 +287,7 @@ void TempStorageLayer::updata()
 
 void TempStorageLayer::updataMyPackageUI()
 {
-
-	for (int i = 0; i < MyPackage::getSize(); i++)
+	for (int i = 0; i < MyPackage::getMax(); i++)
 	{
 		std::string name = StringUtils::format("pitem%d", i);
 		this->removeChildByName(name);
