@@ -147,21 +147,6 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
 				if (g_gameLayer != NULL)
 					g_gameLayer->addChild(layer, 2, "ActionGetLayer");
-
-				std::string desc;
-				if (g_hero->getAtrByType((HeroAtrType)data->actype)->count > 0)
-				{
-					desc = CommonFuncs::gbk2utf(acdesc1[data->actype].c_str());
-				}
-				else
-				{
-					desc = CommonFuncs::gbk2utf(acdesc[data->actype].c_str());
-				}
-				if (atoi(data->strid.c_str()) == 69)//打水
-					desc = CommonFuncs::gbk2utf("你废三下五除从水井里打出");
-					
-				desc.append(data->unitname);
-				g_uiScroll->addEventText(desc);
 			}
 			else//兔子，狼战斗界面
 			{

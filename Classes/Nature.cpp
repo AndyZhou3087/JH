@@ -94,7 +94,7 @@ void Nature::ChangeDayNight()
 		{
 			setDayOrNight(Day);
 			setTemperature(m_temperature + 5);
-			g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[0].c_str()));
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf(dayEventText[0].c_str()));
 		}
 	}
 }

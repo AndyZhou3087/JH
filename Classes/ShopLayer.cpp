@@ -134,7 +134,7 @@ void ShopLayer::beginPay(int index)
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-
+	//payCode
 #endif
 }
 void ShopLayer::setMessage(PYARET ret)

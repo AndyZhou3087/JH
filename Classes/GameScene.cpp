@@ -297,7 +297,7 @@ void GameScene::checkiflive(float dt)
 	if (g_hero->getLifeValue() <= 0)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
-		g_gameLayer->pause();
+		Director::getInstance()->pause();
 		ReviveLayer* layer = ReviveLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(layer, 10);
 	}
@@ -307,6 +307,6 @@ void GameScene::heroRevive()
 {
 	//复活成功
 	g_hero->revive();
-	g_gameLayer->resume();
+	Director::getInstance()->resume();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
 }

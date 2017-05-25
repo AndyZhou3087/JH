@@ -35,8 +35,8 @@ bool OutDoor::init()
 	backbtn->addTouchEventListener(CC_CALLBACK_2(OutDoor::onBack, this));
 
 
-	cocos2d::ui::Button* outbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("outbtn");
-	outbtn->addTouchEventListener(CC_CALLBACK_2(OutDoor::onOut, this));
+	m_outbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("outbtn");
+	m_outbtn->addTouchEventListener(CC_CALLBACK_2(OutDoor::onOut, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -70,8 +70,8 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		m_outbtn->setEnabled(false);
 
-		this->setVisible(false);
 		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
 		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
@@ -135,6 +135,11 @@ void OutDoor::updataMyPackageUI()
 void OutDoor::updataStorageUI()
 {
 
+	for (unsigned int i = 0; i < allStorageData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		scrollview->removeChildByName(name);
+	}
 
 	int typecount = 0;
 	for (int i = 0; i < RES_MAX; i++)
@@ -157,12 +162,6 @@ void OutDoor::updataStorageUI()
 		{
 			allStorageData.push_back(&StorageRoom::map_storageData[i][m]);
 		}
-	}
-
-	for (unsigned int i = 0; i < allStorageData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->removeChildByName(name);
 	}
 
 	for (unsigned int i = 0; i < allStorageData.size(); i++)

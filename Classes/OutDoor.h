@@ -31,6 +31,7 @@ private:
 private:
 	std::vector<PackageData*> allStorageData;
 	HeroProperNode* m_heroproper;
+	cocos2d::ui::Button* m_outbtn;
 };
 #endif
 

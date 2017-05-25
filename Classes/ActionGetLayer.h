@@ -79,6 +79,28 @@ private:
 	加载临时存放地点的数据
 	*****************************/
 	void loadTempData();
+
+	/****************************
+	设置按钮状态
+	@param 是否可点击
+	*****************************/
+	void setBtnStatus(bool enable);
+
+	/****************************
+	显示操作文字
+	*****************************/
+	void addEventText();
+
+	/****************************
+	显示.....(没有工具是操作要延迟一会)
+	*****************************/
+	void showDotDot(float dt);
+
+	/****************************
+	显示操作文字2
+	*****************************/
+	void addEventText2(float dt);
+
 private:
 	int mrid;//后山资源列表中的ID
 	std::vector<int> rewardids;//1："采集", 2："砍伐", 3："挖掘"产出的ID
@@ -87,6 +109,8 @@ private:
 	int mtype;//类型
 	int m_actype;//工具类型 1："采集", 2："砍伐", 3："挖掘"
 	cocos2d::ui::Button* m_getbtn;//继续操作按钮
+	cocos2d::ui::Button* m_getallbtn;//全部拾取按钮
+	cocos2d::ui::Widget* m_backbtn;//返回按钮
 	int repeatCount;//重复操作次数
 };
 #endif

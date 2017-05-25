@@ -355,6 +355,13 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 	}
 	saveTempData();
 	MyPackage::cutone(data.strid);
+
+	for (unsigned int i = 0; i < getRewardData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
+
 	updata();
 }
 

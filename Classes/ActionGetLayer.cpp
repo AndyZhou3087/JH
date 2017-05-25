@@ -32,8 +32,8 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	actiontext->setString(acname[actype]);
 
 	//返回按钮
-	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
-	backbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onBack, this));
+	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onBack, this));
 
 	//1："继续采集", 2："继续砍伐", 3："继续挖掘"按钮
 	m_getbtn = (cocos2d::ui::Button*)csbnode->getChildByName("getbtn");
@@ -42,12 +42,22 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	m_getbtn->setTitleText(CommonFuncs::gbk2utf(str.c_str()));
 
 	//全部拾取按钮
-	cocos2d::ui::Button* getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
-	getallbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onAllGet, this));
+	m_getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
+	m_getallbtn->addTouchEventListener(CC_CALLBACK_2(ActionGetLayer::onAllGet, this));
+
+	setBtnStatus(false);
 
 	rewardids = res_ids;
 
+	//临时存放数据保持到本地文件
+	loadTempData();
+
+	//加载背包数据
 	updataMyPackageUI();
+
+	//显示操作文字说明
+	addEventText();
+
 	//点击后山列表中的操作获取一次资源
 	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)
 		doAction(0);
@@ -69,6 +79,12 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 
 void ActionGetLayer::doAction(float dt)
 {
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
+
 	bool isget = false;
 	for (unsigned int i = 0; i < rewardids.size(); i++)
 	{
@@ -122,6 +138,8 @@ void ActionGetLayer::doAction(float dt)
 		g_hero->setSpiritValue(0);
 
 	updataRewardUI();
+
+	setBtnStatus(true);
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
@@ -218,6 +236,13 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 
 	//背包 - 1,<0,会从背包中移除掉
 	MyPackage::cutone(data.strid);
+
+	//先移除奖励栏的物品在更新加载
+	for (unsigned int i = 0; i < getResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
+	}
 	//更新UI
 	updata();
 }
@@ -252,32 +277,23 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+		setBtnStatus(false);
+
 		//更新后山资源列表中的数据，为0，就不出产出资源了，需等待资源恢复
-
-		for (unsigned int i = 0; i < getResData.size(); i++)
-		{
-			std::string name = StringUtils::format("resitem%d", i);
-			this->removeChildByName(name);
-		}
-
 		if (GlobalData::vec_resData[mrid].count > 0)
 		{
-			updataMyPackageUI();
 			GlobalData::vec_resData[mrid].count--;
 			std::string desc;
 			if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
 			{
-				desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
-
 				doAction(0);
 			}
 			else
 			{
-				desc = CommonFuncs::gbk2utf(acdesc[m_actype].c_str());
 				this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
 			}
-			desc.append(GlobalData::vec_resData[mrid].unitname);
-			g_uiScroll->addEventText(desc);
+			addEventText();
 		}
 
 		if (GlobalData::vec_resData[mrid].count <= 0)
@@ -294,7 +310,6 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 
 		for (unsigned int i = 0; i < getResData.size(); i++)
 		{
@@ -365,8 +380,6 @@ void ActionGetLayer::loadTempData()
 
 void ActionGetLayer::saveTempData()
 {
-	//临时存放数据保持到本地文件
-	loadTempData();
 	std::vector<PackageData> allResData = tempResData;
 
 	for (unsigned int i = 0; i < getResData.size(); i++)
@@ -478,4 +491,53 @@ void ActionGetLayer::onExit()
 {
 	saveTempData();
 	Layer::onExit();
+}
+
+void ActionGetLayer::setBtnStatus(bool enable)
+{
+	m_getbtn->setEnabled(enable);
+	m_getbtn->setBright(enable);
+	m_getallbtn->setEnabled(enable);
+	m_getallbtn->setBright(enable);
+	m_backbtn->setEnabled(enable);
+	m_backbtn->setBright(enable);
+}
+
+void ActionGetLayer::addEventText()
+{
+	int resrid = atoi(GlobalData::vec_resData[mrid].strid.c_str());
+	std::string desc;
+	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)
+	{
+		desc = CommonFuncs::gbk2utf(acdesc1[m_actype].c_str());
+		desc.append(GlobalData::vec_resData[mrid].unitname);
+		g_uiScroll->addEventText(desc);
+	}
+	else
+	{
+		desc = CommonFuncs::gbk2utf(acdesc[m_actype].c_str());
+		if (resrid != 69)
+			this->scheduleOnce(schedule_selector(ActionGetLayer::showDotDot), 0.2f);
+		g_uiScroll->addEventText(desc);
+	}
+	if (resrid == 69)//打水
+	{
+		desc = CommonFuncs::gbk2utf("你三下五除从水井里打出");
+		desc.append(GlobalData::vec_resData[mrid].unitname);
+		g_uiScroll->addEventText(desc);
+	}
+}
+
+void ActionGetLayer::showDotDot(float dt)
+{
+	g_uiScroll->addEventText("..........");
+	this->scheduleOnce(schedule_selector(ActionGetLayer::addEventText2), 1.0f);
+}
+
+void ActionGetLayer::addEventText2(float dt)
+{
+	std::string desc;
+	desc = CommonFuncs::gbk2utf(acdesc2[m_actype].c_str());
+	desc.append(GlobalData::vec_resData[mrid].unitname);
+	g_uiScroll->addEventText(desc);
 }

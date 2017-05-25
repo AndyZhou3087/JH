@@ -70,12 +70,15 @@ void SettingLayer::soundCheckBoxCallback(cocos2d::Ref* pSender, cocos2d::ui::Che
 		case cocos2d::ui::CheckBox::EventType::SELECTED://选中
 			SoundManager::getInstance()->setIsSoundOn(true);
 			SoundManager::getInstance()->setIsMusicOn(true);
-			updateSoundStatus();
+			SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);
+			//updateSoundStatus();
 			break;
 		case cocos2d::ui::CheckBox::EventType::UNSELECTED://不选中
+			SoundManager::getInstance()->stopAllEffectSound();
+			SoundManager::getInstance()->stopBackMusic();
 			SoundManager::getInstance()->setIsSoundOn(false);
 			SoundManager::getInstance()->setIsMusicOn(false);
-			updateSoundStatus();
+			//updateSoundStatus();
 			break;
 		default:
 			break;

@@ -7,7 +7,8 @@
 #define HERO_MOVE_SPEED 0.6f//地图中移动速度，min/px
 
 static std::string acname[] = { "打猎", "采集", "砍伐", "挖掘" };
-static std::string acdesc[] = {"","你徒手采集，废了好大力才获得了", "你徒手劈树，手掌都快劈兰了才获得了", "你徒手采矿，双手都磨破了才扣下来一块"};
+static std::string acdesc[] = {"","你徒手采集", "你徒手劈树", "你徒手采矿"};
+static std::string acdesc2[] = { "", "废了好大力才获得了", "手掌都快劈兰了才获得了", "双手都磨破了才扣下来一块" };
 static std::string acdesc1[] = {"", "你使用镰刀收割，毫不费力的获得", "你使用斧子劈树，毫不费力的获得", "你挥舞十字镐采矿，毫不费力的获得一块" };
 
 static std::string herofightdesc[] = { "%s猛地跑上前去，赤手空拳对%s使出一掌" };
@@ -21,5 +22,7 @@ static std::string bossfight1[] = { "%s雷鸣闪电样迅速击中%s，幸亏有
 static std::string heroname[] = { "小虾米", "项少龙", "小鱼儿", "阿青" };
 static std::string herodesc[] = { "哈哈哈哈哈", "太帅了太帅了太帅了", "厉害了我的哥厉害了我的哥厉害了我的哥", "好厉害的说好厉害的说好厉害的说好厉害的说好厉害的说" };
 static int heroprice[] = { 0, 2, 4, 6 };
+
+static std::string payCode[] = { "001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013"};
 
 #endif // _H_CONST_H_

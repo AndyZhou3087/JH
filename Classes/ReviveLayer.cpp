@@ -63,7 +63,7 @@ void ReviveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		this->removeFromParentAndCleanup(true);
 		if (g_gameLayer != NULL)
 			g_gameLayer->removeChildByName("fightlayer");
-		g_gameLayer->resume();
+		Director::getInstance()->resume();
 		DeathLayer* layer = DeathLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(layer);
 	}

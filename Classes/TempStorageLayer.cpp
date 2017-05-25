@@ -145,6 +145,13 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 	}
 	saveTempData();
 	MyPackage::cutone(data.strid);
+
+	for (unsigned int i = 0; i < tempResData.size(); i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		m_scrollView->removeChildByName(name);
+	}
+
 	updata();
 }
 
@@ -245,7 +252,6 @@ void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 			std::string name = StringUtils::format("resitem%d", i);
 			m_scrollView->removeChildByName(name);
 		}
-
 		std::vector<PackageData>::iterator it;
 
 		bool isfull = false;

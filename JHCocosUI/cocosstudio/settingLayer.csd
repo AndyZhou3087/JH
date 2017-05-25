@@ -78,7 +78,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="soundcheck" ActionTag="-1739648806" Tag="152" IconVisible="False" LeftMargin="368.8477" RightMargin="306.1523" TopMargin="598.8584" BottomMargin="637.1416" TouchEnable="True" CheckedState="True" ctype="CheckBoxObjectData">
+          <AbstractNodeData Name="soundcheck" ActionTag="-1739648806" Tag="152" IconVisible="False" LeftMargin="368.8477" RightMargin="306.1523" TopMargin="598.8584" BottomMargin="637.1416" TouchEnable="True" ctype="CheckBoxObjectData">
             <Size X="45.0000" Y="44.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="391.3477" Y="659.1416" />
