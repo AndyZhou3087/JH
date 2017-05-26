@@ -7,6 +7,7 @@
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "ActivitScene.h"
+#include "MyMenu.h"
 
 OutDoor::OutDoor()
 {
@@ -177,7 +178,7 @@ void OutDoor::updataStorageUI()
 			CC_CALLBACK_1(OutDoor::onStorageItem, this));
 		boxItem->setUserData(allStorageData[i]);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
-		Menu* menu = Menu::create();
+		MyMenu* menu = MyMenu::create();
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("resitem%d", i);
@@ -204,7 +205,7 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 	if (count <= 0)
 	{
 		std::vector<PackageData>::iterator it;
-		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end();)
+		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end();++it)
 		{
 			if (it->strid.compare(data->strid) == 0)
 			{

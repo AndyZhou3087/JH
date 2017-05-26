@@ -83,6 +83,7 @@ private:
 	std::map<HeroAtrType, std::vector<PackageData>> map_carryData;//装备栏数据
 	Sprite* m_select;//选中标识
 	PackageData* m_lastSelectedData;//上次选中中的装备数据
+	cocos2d::EventListenerTouchOneByOne* m_listener;
 };
 #endif
 

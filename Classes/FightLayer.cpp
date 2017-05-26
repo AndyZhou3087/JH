@@ -68,7 +68,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	int maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	//角色血量显示
 	herohpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("herohpvaluetext");
-	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), maxlife);
+	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), maxlife);
 	herohpvaluetext->setString(hpstr);
 
 
@@ -224,13 +224,13 @@ void FightLayer::delayBossFight(float dt)
 		curheroHp = 0;
 	g_hero->setLifeValue(curheroHp);
 
-	std::string hpstr = StringUtils::format("%d/%d", g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 	herohpvaluetext->setString(hpstr);
 	int herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	herohpbar->setPercent(herohppercent);
 	showFightWord(1, herohurt);
 
-	if (g_hero->getLifeValue() > 0)
+	if (g_hero->getLifeValue() > 0.0f)
 	{
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
 

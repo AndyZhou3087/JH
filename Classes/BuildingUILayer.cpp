@@ -11,6 +11,7 @@
 #include "SoundManager.h"
 #include "ResDetailsLayer.h"
 #include "BuildingDetailsLayer.h"
+#include "HomeLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -142,6 +143,9 @@ void BuildingUILayer::loadActionUi()
 		icon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 
+		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
+		icon->setTag(1000 * i);
+
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
 		actbtn->setTag(ACTION + i);
@@ -196,14 +200,17 @@ void BuildingUILayer::loadActionUi()
 			else
 			{
 				desc->setString(GlobalData::map_buidACData[name].at(i).desc);
+				desc->setColor(Color3B(0, 0, 0));
 				desc->setVisible(true);
+				actbtn->setEnabled(true);
 			}
 
 		}
 		else
 		{
 			actbtn->setEnabled(false);
-			
+			desc->setString(CommonFuncs::gbk2utf("需要更高等级的建筑！"));
+			desc->setColor(Color3B(204, 4, 4));
 			desc->setVisible(true);
 		}
 	}
@@ -296,6 +303,9 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			franmename = "ui/buildtext1.png";
 		}
 		showFinishHintText(franmename);
+		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+		if (homelayer != NULL)
+			homelayer->updateBuilding();
 	}
 	else//操作完成
 	{
@@ -452,17 +462,23 @@ void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 	{
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
+		std::string strid;
 		int intresid = 0;
-		if (tag >= 100)//需要合成的
+		if (tag >= 100 && tag < 1000)//小图标资源
 		{
 			intresid = GlobalData::map_buidACData[m_build->data.name][tag / 100 - 1].res[tag % 100];
+			strid = StringUtils::format("%d", intresid / 1000);
 	
+		}
+		else if (tag >= 1000)//需要合成的
+		{
+			strid = GlobalData::map_buidACData[m_build->data.name][tag / 1000].icon;
 		}
 		else//建筑物的
 		{
 			intresid = m_build->data.Res[m_build->data.level][tag];
+			strid = StringUtils::format("%d", intresid / 1000);
 		}
-		std::string strid = StringUtils::format("%d", intresid / 1000);
 		ResDetailsLayer::whereClick = 1;
 		this->addChild(ResDetailsLayer::createByResId(strid));
 	}
@@ -480,7 +496,7 @@ void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widge
 void BuildingUILayer::showFinishHintText(std::string path)
 {
 	Sprite* bsprite = Sprite::createWithSpriteFrameName(path);
-	bsprite->runAction(Sequence::create(Spawn::create(MoveTo::create(3.0f, Vec2(360, 900)), FadeOut::create(3.0f), NULL), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));
+	bsprite->runAction(Sequence::create(FadeOut::create(1.5f), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));
 	bsprite->setPosition(Vec2(360, 600));
 	this->addChild(bsprite);
 }

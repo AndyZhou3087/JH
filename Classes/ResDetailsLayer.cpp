@@ -139,7 +139,7 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 		{
 			for (unsigned int i = 0; i < GlobalData::map_buidACData[it->first].size(); i++)
 			{
-				if (resid.compare(GlobalData::map_buidACData[it->first][i].icon))
+				if (resid.compare(GlobalData::map_buidACData[it->first][i].icon) == 0)
 				{
 					isInRes = true;
 					sdata.desc = GlobalData::map_buidACData[it->first][i].desc;
@@ -177,6 +177,16 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						isInres = true;
 						int addvalue = GlobalData::vec_resData[i].ep[0];
 						recoveHungerValue(addvalue);
+						int r = 0;
+						if (m_packageData->strid.compare("6") == 0 || m_packageData->strid.compare("9") == 0)
+						{
+							r = GlobalData::createRandomNum(100);
+						}
+						
+						if (r >= 50)
+						{
+							g_hero->setOutinjuryValue(g_hero->getOutinjuryValue() - 10);
+						}
 
 						StorageRoom::use(m_packageData->strid);
 						break;
@@ -284,12 +294,15 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 						if (gfData->exp > vec_gfExp[i])
 						{
 							lv = i + 1;
+							gfData->exp = gfData->exp - vec_gfExp[i];
 						}
 					}
 					if (lv > curlv)
 					{
+						if (lv >= vec_gfExp.size())
+							lv = vec_gfExp.size() - 1;
 						gfData->lv = lv;
-						gfData->exp = gfData->exp - vec_gfExp[lv - 1];
+
 					}
 				}
 
@@ -330,12 +343,15 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				if (g_hero->getExpValue() > vec_heroExp[i])
 				{
 					lv = i + 1;
+					g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
 				}
 			}
 			if (lv > curlv)
 			{
+				if (lv >= vec_heroExp.size())
+					lv = vec_heroExp.size() - 1;
 				g_hero->setLVValue(lv);
-				g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv - 1]);
+				
 			}
 		}
 		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
@@ -349,12 +365,12 @@ void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)
 	if (addwvalue + outvalue > g_hero->getMaxOutinjuryValue())
 		g_hero->setOutinjuryValue(g_hero->getMaxOutinjuryValue());
 	else
-		g_hero->setOutinjuryValue(addwvalue + outvalue);
+		g_hero->recoverOutjury(addwvalue);
 	int invalue = g_hero->getInnerinjuryValue();
 	if (invalue + addnvalue > g_hero->getMaxInnerinjuryValue())
 		g_hero->setInnerinjuryValue(g_hero->getMaxInnerinjuryValue());
 	else
-		g_hero->setInnerinjuryValue(invalue + addnvalue);
+		g_hero->recoverInjury(addnvalue);
 }
 
 void ResDetailsLayer::recoveHungerValue(int addvalue)
@@ -363,7 +379,7 @@ void ResDetailsLayer::recoveHungerValue(int addvalue)
 	if (addvalue + hungervale > g_hero->getMaxHungerValue())
 		g_hero->setHungerValue(g_hero->getMaxHungerValue());
 	else
-		g_hero->setHungerValue(addvalue + hungervale);
+		g_hero->recoverHunger(addvalue);
 }
 
 void ResDetailsLayer::removSelf()

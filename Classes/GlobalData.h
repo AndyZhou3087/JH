@@ -310,6 +310,25 @@ public:
 	*****************************/
 	static void setSaveListId(std::vector<std::string> vec_val);
 
+    static void setNoAds(bool val);
+    static bool getNoAds();
+    
+    static void setHasBuy(bool val);
+    static bool getHasBuy();
+    
+    static void setDailyAdsCount(int val);
+    static int getDailyAdsCount();
+    
+    static void setDailyAdsDay(int val);
+    static int getDailyAdsDay();
+    static void setNoComments(bool val);
+    static bool getNoComments();
+    
+    static void setAdsInterval(int val);
+    static int getAdsInterval();
+    static void setAdsChoose(long val);
+    static int getAdsChoose(int position);
+
 public:
 	static std::vector<ResData> vec_resData;//一级资源vector
 	static std::vector<std::string> vec_hillResid;//后山资源列表vector
@@ -325,6 +344,11 @@ private:
 	static std::string uid;//
 
 	static std::vector<std::string> vec_saveids;//存档的id
+    
+    static bool hasBuy;
+    static int adsinterval;
+    static long adschoose;
+    static std::string addUidString(std::string val);
 };
 #endif
 

@@ -294,7 +294,7 @@ void GameScene::timerSaveResData(float dt)
 void GameScene::checkiflive(float dt)
 {
 	//生命为0，死掉，弹出复活界面
-	if (g_hero->getLifeValue() <= 0)
+	if (g_hero->getLifeValue() <= 0.0f)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		Director::getInstance()->pause();

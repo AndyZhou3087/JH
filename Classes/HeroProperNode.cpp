@@ -22,6 +22,7 @@ HeroProperNode::HeroProperNode()
 {
 	lastclickindex = -1;
 	m_lastSelectedData = NULL;
+	m_listener = NULL;
 }
 
 
@@ -105,6 +106,9 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
+
+		_eventDispatcher->removeEventListener(m_listener);
+		m_listener = NULL;
 	}
 }
 
@@ -128,6 +132,18 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		heroppoint->setPosition(Vec2(propeImages[tag]->getPositionX(), propeImages[tag]->getPositionY() - propeImages[tag]->getContentSize().height / 2 - 5));
 
 		heroselectbg->setPositionY(heroppoint->getPositionY() - heroppoint->getContentSize().height + 3);
+
+		if (m_listener == NULL)
+		{
+			m_listener = EventListenerTouchOneByOne::create();
+			m_listener->onTouchBegan = [=](Touch *touch, Event *event)
+			{
+				return true;
+			};
+
+			m_listener->setSwallowTouches(true);
+			_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
+		}
 	}
 }
 

@@ -19,12 +19,17 @@ float Hero::MAXSpiritValue = 100.0f;
 Hero::Hero()
 {
 	maxlifepercent = 1.0f;
+	liferecoverpercent = 1.0f;
 	m_atkpercent = 1.0f;
 	m_dfpercent = 1.0f;
 	m_maxHunger = MAXHungerValue;
 	m_maxInnerinjury = MAXInnerinjuryValue;
-	m_outinjury = MAXOutinjuryValue;
+	m_maxOutinjury = MAXOutinjuryValue;
 	m_maxSpirit = MAXSpiritValue;
+
+	injuryrecoverpercent = 1.0f;
+	outjuryrecoverpercent = 1.0f;
+	hungerrecoverpercent = 1.0f;
 }
 
 
@@ -46,18 +51,18 @@ void Hero::updateData(float dt)
 	if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 	{
 		m_innerinjury -= InnerinjurySpeed * 2;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 	}
 	if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
 	{
 		m_outinjury -= OutinjurySpeed * 1;
 		m_innerinjury -= InnerinjurySpeed * 1;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 	}
 	if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
 	{
 		m_outinjury -= OutinjurySpeed * 2;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100;
+		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 	}
 
 	//接上严重界限的消耗
@@ -75,7 +80,7 @@ void Hero::updateData(float dt)
 		m_outinjury = 0;
 	if (m_hunger < 0)
 		m_hunger = 0;
-	if (m_life < 0)
+	if (m_life < 0.0f)
 		m_hunger = 0;
 	if (m_spirit < 0)
 		m_spirit = 0;
@@ -92,7 +97,7 @@ void Hero::sleep(int hour)
 void Hero::sleepbystep(float dt)
 {
 	//每次恢复的生命值
-	m_life += GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * 10 * sleephour / 100 / (TIMESCALE* ACTION_BAR_TIME);
+	m_life += GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * sleephour * 0.1f * liferecoverpercent / (TIMESCALE* ACTION_BAR_TIME);
 	if (m_life > getMaxLifeValue())
 	{
 		m_life = getMaxLifeValue();
@@ -127,10 +132,10 @@ int Hero::getDfValue()
 	return GlobalData::map_heroAtr[getHeadID()].vec_df[getLVValue()];
 }
 
-int Hero::getMaxLifeValue()
+float Hero::getMaxLifeValue()
 {
 	float flife = maxlifepercent * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
-	return (int)flife;
+	return flife;
 }
 
 void Hero::setAtrByType(HeroAtrType type, PackageData pData)
@@ -147,6 +152,7 @@ void Hero::revive()
 	//复活-满状态复活
 
 	maxlifepercent = 1.0f;
+	liferecoverpercent = 1.0f;
 	m_atkpercent = 1.0f;
 	m_dfpercent = 1.0f;
 
@@ -198,55 +204,53 @@ bool Hero::checkifHasGF(std::string gfid)
 void Hero::checkMaxVaule(float dt)
 {
 	float mlife = 1.0f;
-	int mhvalue = MAXHungerValue;
-	int mivalue = MAXInnerinjuryValue;
-	int movalue = MAXOutinjuryValue;
+
 	float matk = 1.0f;
 	float mdf = 1.0f;
 	if (m_spirit <= 10)
 	{
-		mlife = 0.3f;
-		mhvalue = 30;
-		mivalue = 30;
-		movalue = 30;
+		liferecoverpercent = 0.3f;
+		injuryrecoverpercent = 0.3f;
+		outjuryrecoverpercent = 0.3f;
+		hungerrecoverpercent = 0.3f;
 		matk = 0.7f;
 		mdf = 0.7f;
 	}
 	else if (m_spirit <= 20)
 	{
-		mlife = 0.4f;
-		mhvalue = 40;
-		mivalue = 40;
-		movalue = 40;
+		liferecoverpercent = 0.4f;
+		injuryrecoverpercent = 0.4f;
+		outjuryrecoverpercent = 0.4f;
+		hungerrecoverpercent = 0.4f;
 		matk = 0.9f;
 		mdf = 0.9f;
 	}
 
 	else if (m_spirit <= 30)
 	{
-		mlife = 0.7f;
-		mhvalue = 70;
-		mivalue = 70;
-		movalue = 70;
+		liferecoverpercent = 0.7f;
+		injuryrecoverpercent = 0.7f;
+		outjuryrecoverpercent = 0.7f;
+		hungerrecoverpercent = 0.7f;
 		matk =  1.0f;
 		mdf = 1.0f;
 	}
 
 	else if (m_spirit <= 40)
 	{
-		mlife = 0.9f;
-		mhvalue = 90;
-		mivalue = 90;
-		movalue = 90;
+		liferecoverpercent = 0.9f;
+		injuryrecoverpercent = 0.9f;
+		outjuryrecoverpercent = 0.9f;
+		hungerrecoverpercent = 0.9f;
 		matk = 1.0f;
 		mdf = 1.0f;
 	}
 	else
 	{
-		mlife = 1.0f;
-		mhvalue = MAXHungerValue;
-		mivalue = MAXInnerinjuryValue;
-		movalue = MAXOutinjuryValue;
+		liferecoverpercent = 1.0f;
+		injuryrecoverpercent = 1.0f;
+		outjuryrecoverpercent = 1.0f;
+		hungerrecoverpercent = 1.0f;
 		matk = 1.0f;
 		mdf = 1.0f;
 	}
@@ -326,19 +330,27 @@ void Hero::checkMaxVaule(float dt)
 
 	maxlifepercent = mlife;
 
-	setMaxHungerValue(mhvalue);
 	if (m_life > getMaxLifeValue())
 		setLifeValue(getMaxLifeValue());
 
-	setMaxInnerinjuryValue(mivalue);
-	if (m_innerinjury > getMaxInnerinjuryValue())
-		m_innerinjury = getMaxInnerinjuryValue();
-
-	setMaxOutinjuryValue(movalue);
-
-	if (m_outinjury > getMaxOutinjuryValue())
-		setMaxOutinjuryValue(getMaxOutinjuryValue());
-
 	setAtkPercent(matk);
 	setDfPercent(mdf);
+}
+
+void Hero::recoverOutjury(int val)
+{
+	float fval = val * outjuryrecoverpercent;
+	m_outinjury += (int)fval;
+}
+
+void Hero::recoverInjury(int val)
+{
+	float fval = val* injuryrecoverpercent;
+	m_innerinjury += (int)fval;
+}
+
+void Hero::recoverHunger(int val)
+{
+	float fval = val* hungerrecoverpercent;
+	m_hunger += (int)fval;
 }

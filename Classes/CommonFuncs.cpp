@@ -77,7 +77,7 @@ std::string CommonFuncs::gbk2utf(const char *inbuf)
 		strRet = outbuf;
 	}
 	delete[] outbuf;
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	strRet = inbuf;
 #endif
 	return strRet;

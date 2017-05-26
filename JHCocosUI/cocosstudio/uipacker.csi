@@ -28,7 +28,6 @@
       <FilePathData Path="ui/topspiritbg.png" />
       <FilePathData Path="ui/toptemperature.png" />
       <FilePathData Path="ui/toptimeicon.png" />
-      <FilePathData Path="ui/room.jpg" />
       <FilePathData Path="ui/bed.png" />
       <FilePathData Path="ui/cooktable.png" />
       <FilePathData Path="ui/exerciseroom.png" />
@@ -336,6 +335,8 @@
       <FilePathData Path="ui/buildtext2.png" />
       <FilePathData Path="ui/redpoint.png" />
       <FilePathData Path="ui/saveitembg.png" />
+      <FilePathData Path="ui/badfurnace.png" />
+      <FilePathData Path="ui/room.jpg" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

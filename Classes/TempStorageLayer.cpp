@@ -209,6 +209,7 @@ void TempStorageLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 void TempStorageLayer::loadTempData()
 {
+	tempResData.clear();
 	std::string datastr = GameDataSave::getInstance()->getTempStorage(m_addrname);
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");

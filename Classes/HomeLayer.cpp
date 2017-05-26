@@ -32,6 +32,9 @@ bool HomeLayer::init()
 	Building* bed = Bed::create();
 	Vec_Buildings.push_back(bed);
 
+	cocos2d::ui::Widget* badfurnace = (cocos2d::ui::Widget*)csbnode->getChildByName("badfurnace");
+	badfurnace->setLocalZOrder(1);
+
 	MenuItemSprite* bedItem = MenuItemSprite::create(
 		bed,
 		bed,
@@ -40,6 +43,7 @@ bool HomeLayer::init()
 	bedItem->setName("bed");
 	bedItem->setTag(0);
 	bedItem->setPosition(Vec2(160, 700));
+	bedItem->setOpacity(0);
 	Menu* menu = Menu::create();
 	menu->addChild(bedItem);
 	menu->setPosition(Vec2(0, 0));
@@ -54,6 +58,7 @@ bool HomeLayer::init()
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	cooktableItem->setName("cooktable");
 	cooktableItem->setTag(1);
+	cooktableItem->setOpacity(0);
 	cooktableItem->setPosition(Vec2(580, 786));
 	menu->addChild(cooktableItem);
 
@@ -65,6 +70,7 @@ bool HomeLayer::init()
 		forgingtable,
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	forgingtableItem->setName("forgingtable");
+	forgingtableItem->setOpacity(0);
 	forgingtableItem->setTag(2);
 	forgingtableItem->setPosition(Vec2(195, 410));
 	menu->addChild(forgingtableItem);
@@ -77,6 +83,7 @@ bool HomeLayer::init()
 		winemaker,
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	winemakerItem->setName("winemaker");
+	winemakerItem->setOpacity(0);
 	winemakerItem->setTag(3);
 	winemakerItem->setPosition(Vec2(445, 800));
 	menu->addChild(winemakerItem);
@@ -89,6 +96,7 @@ bool HomeLayer::init()
 		medicinekit,
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	medicinekitItem->setName("medicinekit");
+	medicinekitItem->setOpacity(0);
 	medicinekitItem->setTag(4);
 	medicinekitItem->setPosition(Vec2(678, 625));
 	menu->addChild(medicinekitItem);
@@ -103,6 +111,7 @@ bool HomeLayer::init()
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	furnaceItem->setName("furnace");
 	furnaceItem->setTag(5);
+	furnaceItem->setOpacity(0);
 	furnaceItem->setPosition(Vec2(125, 613));
 	menu->addChild(furnaceItem);
 
@@ -114,6 +123,7 @@ bool HomeLayer::init()
 		winetable,
 		CC_CALLBACK_1(HomeLayer::onclick, this));
 	winetableItem->setName("winetable");
+	winetableItem->setOpacity(0);
 	winetableItem->setTag(6);
 	winetableItem->setPosition(Vec2(540, 470));
 	menu->addChild(winetableItem);
@@ -138,6 +148,7 @@ bool HomeLayer::init()
 	fenceItem->setPosition(Vec2(630, 48));
 	menu->addChild(fenceItem);
 
+	updateBuilding();
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
@@ -198,4 +209,14 @@ void HomeLayer::onFence(Ref* pSender)
 	Layer* layer = OutDoor::create();
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(layer, 10, "OutDoor");
+}
+
+void HomeLayer::updateBuilding()
+{
+	for (unsigned int i = 0; i < Vec_Buildings.size(); i++)
+	{
+		MenuItemSprite* item = (MenuItemSprite*)Vec_Buildings[i]->getParent();
+		if (Vec_Buildings[i]->data.level >= 1)
+			item->setOpacity(255);
+	}
 }

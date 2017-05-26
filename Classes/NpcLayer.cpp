@@ -39,7 +39,8 @@ bool NpcLayer::init(std::string addrid)
 	m_csbnode = CSLoader::createNode("npcLayer.csb");
 	this->addChild(m_csbnode);
 
-	m_npctalkbg = (cocos2d::ui::Widget*)m_csbnode->getChildByName("npctalkbg");
+	m_npctalkbg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("npctalkbg");
+	m_npctalkbg->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onTalkbg, this));
 	m_npctalkbg->setOpacity(0);
 
 	m_addrstr = addrid;
@@ -126,6 +127,20 @@ void NpcLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	}
 }
 
+void NpcLayer::onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		if (isShowWord)
+		{
+			if (vec_wordstr[m_wordindex].length() > 0)
+			{
+				fastShowWord();
+			}
+		}
+	}
+}
+
 void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
@@ -143,28 +158,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		{
 			if (vec_wordstr[m_wordindex].length() > 0)
 			{
-				m_wordcount = 0;
-				m_wordindex++;
-
-				if (m_wordindex >= size)
-					return;
-
-				this->unscheduleAllCallbacks();
-				m_wordlbl->unscheduleAllCallbacks();
-				int index = 0;
-				while (m_wordlbl->getLetter(index) != NULL)
-				{
-					m_wordlbl->getLetter(index)->setScale(1);
-					index++;
-				}
-
-				checkWordLblColor(vec_wordstr[m_wordindex]);
-				float dt = 0.0f;
-				for (unsigned int i = m_wordindex; i < vec_wordstr.size(); i++)
-				{
-					this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
-					dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
-				}
+				fastShowWord();
 				return;
 			}
 		}
@@ -373,5 +367,31 @@ void NpcLayer::updatePlotUI()
 				onFight->addChild(dicon);
 			}
 		}
+	}
+}
+
+void NpcLayer::fastShowWord()
+{
+	m_wordcount = 0;
+	m_wordindex++;
+
+	if (m_wordindex >= vec_wordstr.size())
+		return;
+
+	this->unscheduleAllCallbacks();
+	m_wordlbl->unscheduleAllCallbacks();
+	int index = 0;
+	while (m_wordlbl->getLetter(index) != NULL)
+	{
+		m_wordlbl->getLetter(index)->setScale(1);
+		index++;
+	}
+
+	checkWordLblColor(vec_wordstr[m_wordindex]);
+	float dt = 0.0f;
+	for (unsigned int i = m_wordindex; i < vec_wordstr.size(); i++)
+	{
+		this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
+		dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
 	}
 }

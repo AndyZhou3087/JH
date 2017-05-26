@@ -121,7 +121,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	herostatus[7]->setString(CommonFuncs::gbk2utf("一般"));
 
 	//生命值属性
-	std::string str = StringUtils::format("%d/%d", g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	std::string str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 	herostatus[8]->setString(str);
 
 	int weaponAtk = 0;

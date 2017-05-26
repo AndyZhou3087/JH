@@ -25,6 +25,13 @@ bool SettingLayer::init()
 	//关闭按钮
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onBack, this));
+	backbtn->setVisible(true);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	//ios 恢复购买按钮
+	cocos2d::ui::Button* resumebuybtn = (cocos2d::ui::Button*)csbnode->getChildByName("resumebuybtn");
+	resumebuybtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onResumeBuy, this));
+	resumebuybtn->setVisible(true);
+#endif
 
 	//checkbox
 	m_soundCheckBox = (cocos2d::ui::CheckBox*)csbnode->getChildByName("soundcheck");
@@ -93,3 +100,13 @@ void SettingLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		this->removeFromParentAndCleanup(true);
 	}
 }
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+	}
+}
+#endif

@@ -81,7 +81,7 @@ public:
 	/****************************
 	角色生命值设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_life, LifeValue);
+	CC_SYNTHESIZE(float, m_life, LifeValue);
 
 	/****************************
 	角色经验值设置
@@ -131,7 +131,7 @@ public:
 	/****************************
 	获取角色最大生命值
 	*****************************/
-	int getMaxLifeValue();
+	float getMaxLifeValue();
 
 	/****************************
 	设置角色装备
@@ -174,6 +174,24 @@ public:
 	检查最大值属性
 	*****************************/
 	void checkMaxVaule(float dt);
+
+	/****************************
+	恢复外伤值
+	@param 恢复的数值
+	*****************************/
+	void recoverOutjury(int val);
+
+	/****************************
+	恢复内伤值
+	@param 恢复的数值
+	*****************************/
+	void recoverInjury(int val);
+
+	/****************************
+	恢复饥饿值
+	@param 恢复的数值
+	*****************************/
+	void recoverHunger(int val);
 public:
 	static int MAXInnerinjuryValue;//最大内伤值
 	static int MAXOutinjuryValue;//最大外伤值
@@ -187,7 +205,10 @@ private:
 private:
 	int sleephour;//睡觉时间
 	float maxlifepercent;//最大生命百分比
-
+	float liferecoverpercent;//最大生命恢复百分比
+	float injuryrecoverpercent;//内伤恢复百分比
+	float outjuryrecoverpercent;//外伤恢复百分比
+	float hungerrecoverpercent;//饥饿恢复百分比
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

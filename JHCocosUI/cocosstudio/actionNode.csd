@@ -168,19 +168,19 @@
                 <PreSize X="0.1997" Y="0.4576" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <TextColor A="255" R="255" G="255" B="255" />
-                <DisabledFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+                <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
                 <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc" ActionTag="-2104322458" VisibleForFrame="False" Tag="80" IconVisible="False" LeftMargin="232.0000" RightMargin="232.0000" TopMargin="32.3005" BottomMargin="63.6995" FontSize="20" LabelText="需要更高的建筑" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="desc" ActionTag="-2104322458" VisibleForFrame="False" Tag="80" IconVisible="False" LeftMargin="116.0046" RightMargin="347.9954" TopMargin="32.3006" BottomMargin="63.6994" FontSize="20" LabelText="需要更高的建筑" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="142.0000" Y="22.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="303.0000" Y="74.6995" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="116.0046" Y="74.6994" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="0" B="0" />
-                <PrePosition X="0.5000" Y="0.6330" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.1914" Y="0.6330" />
                 <PreSize X="0.2343" Y="0.1864" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />

@@ -28,6 +28,10 @@ std::string GlobalData::uid = "";
 
 std::vector<std::string> GlobalData::vec_saveids;
 
+bool GlobalData::hasBuy = false;
+int GlobalData::adsinterval = 10;
+long GlobalData::adschoose = 11111111;
+
 GlobalData::GlobalData()
 {
 
@@ -673,3 +677,89 @@ void GlobalData::setSaveListId(std::vector<std::string> vec_val)
 
 	GameDataSave::getInstance()->setSaveListId(str.substr(0, str.length() - 1));
 }
+
+std::string GlobalData::addUidString(std::string val)
+{
+    return uid + val;
+}
+
+void GlobalData::setNoAds(bool val)
+{
+    UserDefault::getInstance()->setBoolForKey(addUidString("noads").c_str(), val);
+    UserDefault::getInstance()->flush();
+}
+
+bool GlobalData::getNoAds()
+{
+    return UserDefault::getInstance()->getBoolForKey(addUidString("noads").c_str(), false);
+}
+
+void GlobalData::setNoComments(bool val)
+{
+    UserDefault::getInstance()->setBoolForKey(addUidString("nocomments").c_str(), val);
+    UserDefault::getInstance()->flush();
+}
+
+bool GlobalData::getNoComments()
+{
+    return UserDefault::getInstance()->getBoolForKey(addUidString("nocomments").c_str(), false);
+}
+
+void GlobalData::setDailyAdsCount(int val)
+{
+    UserDefault::getInstance()->setIntegerForKey(addUidString("dailyadscount").c_str(), val);
+    UserDefault::getInstance()->flush();
+}
+
+int GlobalData::getDailyAdsCount()
+{
+    return UserDefault::getInstance()->getIntegerForKey(addUidString("dailyadscount").c_str(), 0);
+}
+
+void GlobalData::setDailyAdsDay(int val)
+{
+    UserDefault::getInstance()->setIntegerForKey(addUidString("dailyadsday").c_str(), val);
+    UserDefault::getInstance()->flush();
+}
+
+int GlobalData::getDailyAdsDay()
+{
+    return UserDefault::getInstance()->getIntegerForKey(addUidString("dailyadsday").c_str(), 0);
+}
+
+void GlobalData::setAdsInterval(int val)
+{
+    adsinterval = val;
+}
+
+int GlobalData::getAdsInterval()
+{
+    return adsinterval;
+}
+
+void GlobalData::setAdsChoose(long val)
+{
+    adschoose = val;
+}
+
+int GlobalData::getAdsChoose(int position)
+{
+    /*long m = adschoose;
+     int n =pow(10,position);
+     float x = m/n;
+     long i = (long)(m/n);
+     int j = i % 10;
+     return j;*/
+    return (int)(adschoose/pow(10, position)) % 10;
+}
+
+void GlobalData::setHasBuy(bool val)
+{
+    hasBuy = val;
+}
+
+bool GlobalData::getHasBuy()
+{
+    return hasBuy;
+}
+

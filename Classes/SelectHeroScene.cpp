@@ -82,6 +82,7 @@ bool SelectHeroScene::init()
 	selectimg[defaultindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	selectimg[defaultindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	selectimg[defaultindex]->getChildByName("sheroname")->setPositionX(selectimg[defaultindex]->getContentSize().width / 2);
+
     return true;
 }
 

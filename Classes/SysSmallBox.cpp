@@ -33,11 +33,15 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	title1Txt->setString(CommonFuncs::gbk2utf(title1.c_str()));
 	textTxt->setString(CommonFuncs::gbk2utf(text.c_str()));
 
+	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
-		this->schedule(schedule_selector(SysSmallBox::removeself), 0.05f);
 		return true;
+	};
+	listener->onTouchEnded = [=](Touch *touch, Event *event)
+	{
+		this->removeFromParentAndCleanup(true);
 	};
 
 	listener->setSwallowTouches(true);
@@ -60,11 +64,6 @@ SysSmallBox* SysSmallBox::create(BoxType type, std::string imagepath, std::strin
 		pRet = NULL;
 	}
 	return pRet;
-}
-
-void SysSmallBox::removeself(float dt)
-{
-	this->removeFromParentAndCleanup(true);
 }
 
 void SysSmallBox::updataUI(float dt)
@@ -231,7 +230,7 @@ void SysSmallBox::updataUI(float dt)
 	}
 	if (mType == LIFE)
 	{
-		std::string livevaluestr = StringUtils::format("%d/%d", g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+		std::string livevaluestr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 		title1Txt->setString(CommonFuncs::gbk2utf(livevaluestr.c_str()));
 	}
 }

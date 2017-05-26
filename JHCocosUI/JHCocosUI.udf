@@ -1,5 +1,19 @@
 <UserData Version="3.10.0.0">
   <Properties>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="activityLayer.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="goodsNode.csd" />
+          <FilePathData Path="npcLayer.csd" />
+          <FilePathData Path="homeLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="homeLayer.csd" />
+      </Value>
+    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />

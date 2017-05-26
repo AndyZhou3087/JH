@@ -16,10 +16,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/goodsbg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="-118.4840" RightMargin="-12.5160" TopMargin="-146.2266" BottomMargin="111.2266" FontSize="32" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="131.0000" Y="35.0000" />
+          <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="-128.4839" RightMargin="5.4839" TopMargin="-153.2265" BottomMargin="120.2265" FontSize="30" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="123.0000" Y="33.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="-118.4840" Y="128.7266" />
+            <Position X="-128.4839" Y="136.7265" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
@@ -39,8 +39,8 @@
             <FileData Type="MarkedSubImage" Path="ui/goodssepline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rmb" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="42.0335" RightMargin="-67.0335" TopMargin="-116.9493" BottomMargin="91.9493" FontSize="25" LabelText="￥" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="25.0000" Y="25.0000" />
+          <AbstractNodeData Name="rmb" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="43.0335" RightMargin="-66.0335" TopMargin="-115.9493" BottomMargin="92.9493" FontSize="23" LabelText="￥" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="23.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="54.5335" Y="104.4493" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -50,8 +50,8 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="price" ActionTag="818323410" Tag="98" IconVisible="False" LeftMargin="65.6895" RightMargin="-130.6895" TopMargin="-116.9493" BottomMargin="91.9493" FontSize="25" LabelText="12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="65.0000" Y="25.0000" />
+          <AbstractNodeData Name="price" ActionTag="818323410" Tag="98" IconVisible="False" LeftMargin="65.6895" RightMargin="-125.6895" TopMargin="-115.9493" BottomMargin="92.9493" FontSize="23" LabelText="12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="60.0000" Y="23.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="65.6895" Y="104.4493" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />

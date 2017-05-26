@@ -1,6 +1,14 @@
 ﻿#include "AppDelegate.h"
 #include "StartScene.h"
 #include "SoundManager.h"
+#ifdef ANALYTICS
+#include "MobClickCpp.h"
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "UnityAdsMana.h"
+#include "IOSPurchaseWrap.h"
+#include "iosfunc.h"
+#endif
 
 USING_NS_CC;
 
@@ -40,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
         glview = GLViewImpl::createWithRect("JH", Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
         glview = GLViewImpl::create("JH");
@@ -49,7 +57,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
@@ -74,6 +82,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     //}
 
     register_all_packages();
+
+#ifdef ANALYTICS
+    MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    //initAds();
+    initBuy();
+#endif	
 
 	SoundManager::getInstance()->loadSounds();
     // create a scene. it's an autorelease object

@@ -36,7 +36,6 @@ private:
 
 private:
 	void updataUI(float dt);
-	void removeself(float dt);
 	int lastvalue;
 };
 #endif

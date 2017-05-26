@@ -81,14 +81,12 @@ bool HomeHill::init()
 					waittext->setVisible(true);
 					waittime->setVisible(true);
 					actionbtn->setEnabled(false);
-					actionbtn->setBright(false);
 				}
 				else
 				{
 					waittext->setVisible(false);
 					waittime->setVisible(false);
 					actionbtn->setEnabled(true);
-					actionbtn->setBright(true);
 				}
 
 				actionbtn->setTitleText(CommonFuncs::gbk2utf(acname[data.actype].c_str()));
@@ -191,7 +189,6 @@ void HomeHill::updateUI(float dt)
 					waittime->setVisible(true);
 					count->setColor(Color3B::RED);
 					actionbtn->setEnabled(false);
-					actionbtn->setBright(false);
 				}
 				else
 				{
@@ -199,7 +196,6 @@ void HomeHill::updateUI(float dt)
 					waittime->setVisible(false);
 					count->setColor(Color3B::BLACK);
 					actionbtn->setEnabled(true);
-					actionbtn->setBright(true);
 				}
 			}
 		}

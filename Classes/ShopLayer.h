@@ -8,7 +8,7 @@ USING_NS_CC;
 
 typedef enum
 {
-	PAY_SUCC,
+	PAY_SUCC = 0,
 	PAY_FAIL
 }PYARET;
 

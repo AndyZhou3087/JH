@@ -6,6 +6,7 @@
 #include "ResDetailsLayer.h"
 #include "SoundManager.h"
 #include "ShopLayer.h"
+#include "MyMenu.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源", "工具", "其他"};
 
@@ -126,7 +127,7 @@ void StorageUILayer::updateResContent()
 				boxItem->setTag(0);
 				boxItem->setUserData(&StorageRoom::map_storageData[i].at(m));
 				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m / 5 * 130));
-				Menu* menu = Menu::create();
+				MyMenu* menu = MyMenu::create();
 				menu->addChild(boxItem);
 				menu->setPosition(Vec2(0, 0));
 				scrollview->addChild(menu);

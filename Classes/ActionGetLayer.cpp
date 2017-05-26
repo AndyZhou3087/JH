@@ -140,6 +140,11 @@ void ActionGetLayer::doAction(float dt)
 	updataRewardUI();
 
 	setBtnStatus(true);
+
+	if (GlobalData::vec_resData[mrid].count <= 0)
+	{
+		m_getbtn->setEnabled(false);
+	}
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
@@ -299,7 +304,6 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		if (GlobalData::vec_resData[mrid].count <= 0)
 		{
 			m_getbtn->setEnabled(false);
-			m_getbtn->setBright(false);
 		}
 	}
 }
@@ -496,11 +500,8 @@ void ActionGetLayer::onExit()
 void ActionGetLayer::setBtnStatus(bool enable)
 {
 	m_getbtn->setEnabled(enable);
-	m_getbtn->setBright(enable);
 	m_getallbtn->setEnabled(enable);
-	m_getallbtn->setBright(enable);
 	m_backbtn->setEnabled(enable);
-	m_backbtn->setBright(enable);
 }
 
 void ActionGetLayer::addEventText()

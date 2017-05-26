@@ -69,7 +69,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		csbnode->getChildByName("gftext")->setVisible(false);
 	}
 
-	
+	loadTempData();
 
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
 	int curplot = GlobalData::getPlotMissionIndex();
@@ -236,12 +236,14 @@ void Winlayer::updataLV()
 		if (g_hero->getExpValue() > vec_heroExp[i])
 		{
 			lv = i + 1;
+			g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
 		}
 	}
 	if (lv > curlv)
 	{
+		if (lv >= vec_heroExp.size())
+			lv = vec_heroExp.size() - 1;
 		g_hero->setLVValue(lv);
-		g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[lv - 1]);
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
 
 		showLvUpText();
@@ -261,12 +263,14 @@ void Winlayer::updataLV()
 				if (gfData->exp > vec_gfExp[i])
 				{
 					lv = i + 1;
+					gfData->exp = gfData->exp - vec_gfExp[i];
 				}
 			}
 			if (lv > curlv)
 			{
+				if (lv >= vec_gfExp.size())
+					lv = vec_gfExp.size() - 1;
 				gfData->lv = lv;
-				gfData->exp = gfData->exp - vec_gfExp[lv - 1];
 			}
 		}
 
@@ -422,6 +426,7 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 
 void Winlayer::loadTempData()
 {
+	tempResData.clear();
 	std::string datastr = GameDataSave::getInstance()->getTempStorage("m1-2");
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");
@@ -445,7 +450,6 @@ void Winlayer::loadTempData()
 
 void Winlayer::saveTempData()
 {
-	loadTempData();
 	std::vector<PackageData> allResData = tempResData;
 
 	for (unsigned int i = 0; i < getRewardData.size(); i++)

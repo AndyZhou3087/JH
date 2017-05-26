@@ -53,7 +53,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npctalkbg" ActionTag="1873585694" Tag="62" IconVisible="False" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="531.0000" BottomMargin="481.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="npctalkbg" ActionTag="-341055346" Tag="79" IconVisible="False" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="531.0000" BottomMargin="481.0000" TouchEnable="True" LeftEage="203" RightEage="203" TopEage="88" BottomEage="88" Scale9OriginX="203" Scale9OriginY="88" Scale9Width="212" Scale9Height="92" ctype="ImageViewObjectData">
             <Size X="618.0000" Y="268.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="615.0000" />
@@ -62,7 +62,6 @@
             <PrePosition X="0.5000" Y="0.4805" />
             <PreSize X="0.8583" Y="0.2094" />
             <FileData Type="MarkedSubImage" Path="ui/npctalkbg.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

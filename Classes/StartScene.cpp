@@ -61,7 +61,6 @@ bool StartScene::init()
 	std::string uid = GlobalData::getUId();
 
 	continuebtn->setEnabled(uid.length() <= 0?false:true);
-	continuebtn->setBright(uid.length() <= 0 ? false : true);
 
 	cocos2d::ui::Widget* setbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("setbtn");
 	setbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onSet, this));

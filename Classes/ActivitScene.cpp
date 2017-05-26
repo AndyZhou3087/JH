@@ -1,6 +1,8 @@
 ﻿#include "ActivitScene.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
+#include "Const.h"
+#include "GlobalData.h"
 ActivitScene::ActivitScene()
 {
 
@@ -45,9 +47,11 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		this->addChild(night);
 	}
 	cocos2d::ui::Text* tips = (cocos2d::ui::Text*)csbnode->getChildByName("tips");
-	tips->setString("tips:");
+	int r = GlobalData::createRandomNum(sizeof(tipswords) / sizeof(tipswords[0]));
+	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
+	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
 
-	this->scheduleOnce(schedule_selector(ActivitScene::popself), 3.0f);
+	this->scheduleOnce(schedule_selector(ActivitScene::popself), 2.0f);
 	return true;
 }
 

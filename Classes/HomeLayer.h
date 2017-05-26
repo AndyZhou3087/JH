@@ -14,6 +14,7 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(HomeLayer);
+	void updateBuilding();
 private:
 	void onclick(Ref* pSender);
 	void onStorageRoom(Ref* pSender);
