@@ -8,6 +8,7 @@
 #include "MapLayer.h"
 #include "CommonFuncs.h"
 #include "ReviveLayer.h"
+#include "NewerGuideLayer.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -112,7 +113,7 @@ bool GameScene::init()
 	//任务属性和天气
 	topBar = TopBar::create();
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
-	addChild(topBar, 3);
+	addChild(topBar, 3, "topbar");
 	
 	this->schedule(schedule_selector(GameScene::updata), 0.2f);
 	this->schedule(schedule_selector(GameScene::timerSaveResData), 3.0f);
@@ -309,4 +310,24 @@ void GameScene::heroRevive()
 	g_hero->revive();
 	Director::getInstance()->resume();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
+}
+
+void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
+{
+	if (NewerGuideLayer::checkifNewerGuide(m_newerStep))
+	{
+		m_newerStep = step;
+		m_newerNode = nodes;
+		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.2f);
+	}
+}
+
+void GameScene::delayShowNewerGuide(float dt)
+{
+	if (g_NewerGuideLayer == NULL)
+	{
+		g_NewerGuideLayer = NewerGuideLayer::create(m_newerStep, m_newerNode);
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(g_NewerGuideLayer, 10);
+	}
 }

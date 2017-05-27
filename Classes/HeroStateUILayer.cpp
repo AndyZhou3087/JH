@@ -24,7 +24,7 @@ bool HeroStateUILayer::init()
 	m_csbnode->setPosition(Vec2(0, -90));
 	this->addChild(m_csbnode);
 
-	Node* heroproper = HeroProperNode::create();
+	HeroProperNode* heroproper = HeroProperNode::create();
 	heroproper->setPosition(Vec2(360, 810));
 	m_csbnode->addChild(heroproper);
 
@@ -170,4 +170,11 @@ void HeroStateUILayer::updateStatus(float dt)
 void HeroStateUILayer::onExit()
 {
 	Layer::onExit();
+}
+
+void HeroStateUILayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	nodes.push_back(m_csbnode->getChildByName("backbtn"));
+	g_gameLayer->showNewerGuide(step, nodes);
 }

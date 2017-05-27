@@ -300,3 +300,16 @@ void GameDataSave::setSaveListId(std::string val)
 	saveStringDataByKey("savelistid", val);
 }
 
+bool GameDataSave::getIsNewerGuide(int index)
+{
+	std::string key = StringUtils::format("guide%d", index);
+	int val = loadIntDataByKey(key, 1);
+	return val == 1 ? true : false;
+}
+
+void GameDataSave::setIsNewerGuide(int index, bool val)
+{
+	std::string key = StringUtils::format("guide%d", index);
+	saveIntDataByKey(key, (int)val);
+}
+

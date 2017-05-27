@@ -309,6 +309,16 @@ public:
 	****************************/
 	void setSaveListId(std::string val);
 
+	/****************************
+	获取是否有新手引导
+	****************************/
+	bool getIsNewerGuide(int index);
+
+	/****************************
+	设置是否有新手引导
+	****************************/
+	void setIsNewerGuide(int index, bool val);
+
 private:
 	/****************************
 	加上userid后的字符串

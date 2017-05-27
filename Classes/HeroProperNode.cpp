@@ -11,6 +11,7 @@
 #include "TempStorageLayer.h"
 #include "Winlayer.h"
 #include "OutDoor.h"
+#include "HeroStateUILayer.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -23,6 +24,7 @@ HeroProperNode::HeroProperNode()
 	lastclickindex = -1;
 	m_lastSelectedData = NULL;
 	m_listener = NULL;
+	m_step = 3;
 }
 
 
@@ -99,6 +101,12 @@ bool HeroProperNode::init()
 	return true;
 }
 
+void HeroProperNode::onEnterTransitionDidFinish()
+{
+	Node::onEnterTransitionDidFinish();
+	showNewerGuide(m_step);
+}
+
 void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
@@ -109,6 +117,10 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 		_eventDispatcher->removeEventListener(m_listener);
 		m_listener = NULL;
+
+		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
+		if (heroStateUILayer != NULL)
+			heroStateUILayer->showNewerGuide(12);
 	}
 }
 
@@ -144,6 +156,8 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 			m_listener->setSwallowTouches(true);
 			_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
 		}
+
+		showNewerGuide(++m_step);
 	}
 }
 
@@ -420,6 +434,7 @@ void HeroProperNode::onItem(Ref* pSender)
 	m_lastSelectedData = (PackageData*)node->getUserData();
 
 	updataMyPackageUI();
+	showNewerGuide(++m_step);
 }
 
 void HeroProperNode::removeitem()
@@ -483,4 +498,35 @@ void HeroProperNode::updataMyPackageUI()
 			Olayer->updata();
 		}
 	}
+}
+
+void HeroProperNode::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	Node* resItemNode = NULL;
+	if (step == 3)
+		nodes.push_back(propeImages[0]);
+	else if (step == 4 || step == 6 || step == 8 || step == 10)
+	{
+		resItemNode = m_scrollView->getChildByName("resitem0");
+		nodes.push_back(resItemNode->getChildren().at(0));
+	}
+	else if (step == 5)
+	{
+		nodes.push_back(propeImages[1]);
+	}
+	else if (step == 7)
+	{
+		nodes.push_back(propeImages[2]);
+	}
+	else if (step == 9)
+	{
+		nodes.push_back(propeImages[3]);
+	}
+	else if (step == 11)
+	{
+		nodes.push_back(heroselectbg->getChildByName("okbtn"));
+	}
+	if (step <= 11)
+		g_gameLayer->showNewerGuide(step, nodes);
 }

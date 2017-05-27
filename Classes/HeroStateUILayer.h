@@ -18,6 +18,11 @@ public:
 	virtual bool init();
 	virtual void onExit();
 	CREATE_FUNC(HeroStateUILayer);
+
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
 private:
 	/****************************
 	点击“返回”按钮回调

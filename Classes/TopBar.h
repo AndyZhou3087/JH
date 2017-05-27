@@ -17,6 +17,8 @@ public:
 
 	CREATE_FUNC(TopBar);
 
+	void showNewerGuide(int step);
+
 private:
 	cocos2d::ui::ImageView* heroimg;
 	cocos2d::ui::ImageView* reason;

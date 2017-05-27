@@ -180,7 +180,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		SysSmallBox* sbox = NULL;
 		if (cnode->getName().compare("hero") == 0)
 		{
-			Director::getInstance()->getRunningScene()->addChild(HeroStateUILayer::create());
+			g_gameLayer->addChild(HeroStateUILayer::create(), 4, "HeroStateUILayer");
 		}
 		else if (cnode->getName().compare("reason") == 0)
 		{
@@ -286,7 +286,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, livevaluestr, lifedesc);
 		}
 		if (sbox != NULL)
-			Director::getInstance()->getRunningScene()->addChild(sbox, 4);
+			g_gameLayer->addChild(sbox, 4);
 	}
 }
 
@@ -383,4 +383,11 @@ void TopBar::updataUI(float dt)
 		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastlife = g_hero->getLifeValue();
 	}
+}
+
+void TopBar::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	nodes.push_back(heroimg);
+	g_gameLayer->showNewerGuide(step, nodes);
 }

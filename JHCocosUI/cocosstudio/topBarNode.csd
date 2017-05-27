@@ -17,10 +17,10 @@
             <FileData Type="MarkedSubImage" Path="ui/topbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroimg" ActionTag="-514659789" Tag="4" IconVisible="False" LeftMargin="-359.4999" RightMargin="178.4999" TopMargin="-217.0000" BottomMargin="-21.0000" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="heroimg" ActionTag="-514659789" Tag="4" IconVisible="False" LeftMargin="-372.8527" RightMargin="191.8527" TopMargin="-217.0007" BottomMargin="-20.9993" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
             <Size X="181.0000" Y="238.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-268.9999" Y="98.0000" />
+            <Position X="-282.3527" Y="98.0007" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -58,7 +58,7 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2776" Y="0.4574" />
-                <PreSize X="0.3056" Y="0.3855" />
+                <PreSize X="0.3492" Y="0.3678" />
                 <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
@@ -92,7 +92,7 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4872" Y="0.5099" />
-                <PreSize X="0.3056" Y="0.3855" />
+                <PreSize X="0.2785" Y="0.4000" />
                 <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
@@ -160,7 +160,7 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5135" Y="0.5707" />
-                <PreSize X="0.3056" Y="0.3855" />
+                <PreSize X="0.3014" Y="0.3596" />
                 <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
@@ -194,7 +194,7 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4998" Y="0.5283" />
-                <PreSize X="0.3056" Y="0.3855" />
+                <PreSize X="0.2785" Y="0.3951" />
                 <FileData Type="MarkedSubImage" Path="ui/topdown.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
@@ -208,10 +208,10 @@
             <FileData Type="MarkedSubImage" Path="ui/toplifered.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="reason" ActionTag="-2107257345" Tag="23" IconVisible="False" LeftMargin="-195.7670" RightMargin="137.7670" TopMargin="-179.2546" BottomMargin="137.2546" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="13" BottomEage="13" Scale9OriginX="19" Scale9OriginY="13" Scale9Width="20" Scale9Height="16" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="reason" ActionTag="-2107257345" Tag="23" IconVisible="False" LeftMargin="-187.7673" RightMargin="129.7673" TopMargin="-178.2559" BottomMargin="136.2559" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="13" BottomEage="13" Scale9OriginX="19" Scale9OriginY="13" Scale9Width="20" Scale9Height="16" ctype="ImageViewObjectData">
             <Size X="58.0000" Y="42.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-166.7670" Y="158.2546" />
+            <Position X="-158.7673" Y="157.2559" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

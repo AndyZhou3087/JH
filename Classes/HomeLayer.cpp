@@ -168,7 +168,18 @@ bool HomeLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_HOME);
+
+
 	return true;
+}
+
+void HomeLayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+
+	std::vector<Node*> nodes;
+	nodes.push_back(Vec_Buildings[0]->getParent());
+	g_gameLayer->showNewerGuide(0, nodes);
 }
 
 void HomeLayer::onclick(Ref* pSender)
@@ -179,7 +190,7 @@ void HomeLayer::onclick(Ref* pSender)
 	int nodetag = node->getTag();
 
 	Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
-	Director::getInstance()->getRunningScene()->addChild(layer);
+	g_gameLayer->addChild(layer, 4);
 }
 
 void HomeLayer::loadJsonData()

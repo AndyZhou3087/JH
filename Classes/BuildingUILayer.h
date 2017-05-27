@@ -22,6 +22,7 @@ public:
 	~BuildingUILayer();
 
 	virtual bool init(Building* build);
+	virtual void onEnterTransitionDidFinish();
 
 	static BuildingUILayer* create(Building* build);
 
@@ -61,6 +62,11 @@ private:
 	更新建筑物自己操作的UI
 	****************************/
 	void updataActionRes();
+
+	/****************************
+	更新建筑物自己操作的UI
+	****************************/
+	void showNewerGuide(float dt);
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE

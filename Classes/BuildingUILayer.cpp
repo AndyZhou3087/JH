@@ -98,11 +98,25 @@ bool BuildingUILayer::init(Building* build)
 	return true;
 }
 
+void BuildingUILayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+	cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
+	cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName("res0");
+
+	std::vector<Node*> nodes;
+	nodes.push_back(resitem);
+	g_gameLayer->showNewerGuide(1, nodes);
+}
+
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+		if (topbar != NULL)
+			topbar->showNewerGuide(2);
 		this->removeFromParentAndCleanup(true);
 	}
 }

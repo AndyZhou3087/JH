@@ -10,8 +10,9 @@
           <FilePathData Path="goodsNode.csd" />
           <FilePathData Path="npcLayer.csd" />
           <FilePathData Path="homeLayer.csd" />
+          <FilePathData Path="topBarNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="homeLayer.csd" />
+        <ActiveDocument Path="topBarNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

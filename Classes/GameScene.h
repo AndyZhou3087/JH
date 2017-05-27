@@ -25,9 +25,22 @@ public:
 	角色复活更新UI
 	*****************************/
 	void heroRevive();
+
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step, std::vector<Node*> nodes);
+
+	/****************************
+	延迟新手引导
+	*****************************/
+	void delayShowNewerGuide(float dt);
+
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家
+	std::vector<Node*> m_newerNode;
+	int m_newerStep;
 	
 private:
 	/****************************

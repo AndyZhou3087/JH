@@ -17,6 +17,7 @@ public:
 	~HeroProperNode();
 
 	virtual bool init();
+	virtual void onEnterTransitionDidFinish();
 	virtual void onExit();
 	CREATE_FUNC(HeroProperNode);
 
@@ -24,6 +25,11 @@ public:
 	刷新map_carryData 列表
 	*****************************/
 	void refreshCarryData();
+
+	/****************************
+	显示新手引导
+	*****************************/
+	void showNewerGuide(int step);
 private:
 
 	/****************************
@@ -71,6 +77,7 @@ private:
 	更新背包栏数据
 	*****************************/
 	void updataMyPackageUI();
+
 private:
 	Node* csbroot;
 	cocos2d::ui::ImageView* propeImages[8];//8种装备类型
@@ -84,6 +91,7 @@ private:
 	Sprite* m_select;//选中标识
 	PackageData* m_lastSelectedData;//上次选中中的装备数据
 	cocos2d::EventListenerTouchOneByOne* m_listener;
+	int m_step;//新手引导索引
 };
 #endif
 

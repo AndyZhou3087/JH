@@ -12,6 +12,7 @@ public:
 	~HomeLayer();
 
 	virtual bool init();
+	virtual void onEnterTransitionDidFinish();
 
 	CREATE_FUNC(HomeLayer);
 	void updateBuilding();
@@ -21,7 +22,6 @@ private:
 	void onFence(Ref* pSender);
 	
 	void loadJsonData();
-
 private:
 	Building* m_storageroom;
 	std::vector<Building*> Vec_Buildings;
