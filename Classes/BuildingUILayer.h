@@ -67,6 +67,11 @@ private:
 	更新建筑物自己操作的UI
 	****************************/
 	void showNewerGuide(float dt);
+
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE

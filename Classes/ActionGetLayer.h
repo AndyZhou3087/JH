@@ -101,6 +101,11 @@ private:
 	*****************************/
 	void addEventText2(float dt);
 
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
+
 private:
 	int mrid;//后山资源列表中的ID
 	std::vector<int> rewardids;//1："采集", 2："砍伐", 3："挖掘"产出的ID

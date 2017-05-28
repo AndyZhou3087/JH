@@ -42,6 +42,10 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	listener->onTouchEnded = [=](Touch *touch, Event *event)
 	{
 		this->removeFromParentAndCleanup(true);
+
+		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+		if (topbar != NULL)
+			topbar->showNewerGuide(++topbar->newerStep);
 	};
 
 	listener->setSwallowTouches(true);

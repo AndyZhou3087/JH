@@ -7,6 +7,8 @@
 #include "GameDataSave.h"
 #include "GameScene.h"
 #include "SoundManager.h"
+#include "NewerGuideLayer.h"
+#include "HomeHill.h"
 
 ActionGetLayer::ActionGetLayer()
 {
@@ -145,6 +147,23 @@ void ActionGetLayer::doAction(float dt)
 	{
 		m_getbtn->setEnabled(false);
 	}
+
+	if (NewerGuideLayer::checkifNewerGuide(24))
+	{
+		showNewerGuide(24);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(26))
+	{
+		showNewerGuide(26);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(29))
+	{
+		showNewerGuide(29);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(31))
+	{
+		showNewerGuide(31);
+	}
 }
 
 void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
@@ -209,6 +228,10 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 
 	//更新UI
 	updata();
+	if (NewerGuideLayer::checkifNewerGuide(25))
+		showNewerGuide(25);
+	else if (NewerGuideLayer::checkifNewerGuide(30))
+		showNewerGuide(30);
 }
 
 void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
@@ -272,6 +295,14 @@ void ActionGetLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		HomeHill* homehill = (HomeHill*)g_gameLayer->getChildByName("homehill");
+		if (homehill != NULL)
+		{
+			if (NewerGuideLayer::checkifNewerGuide(28))
+				homehill->showNewerGuide(28);
+			else if (NewerGuideLayer::checkifNewerGuide(33))
+				homehill->showNewerGuide(33);
+		}
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -354,6 +385,10 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		}
 		saveTempData();
 		updata();
+		if (NewerGuideLayer::checkifNewerGuide(27))
+			showNewerGuide(27);
+		else if (NewerGuideLayer::checkifNewerGuide(32))
+			showNewerGuide(32);
 	}
 }
 
@@ -541,4 +576,26 @@ void ActionGetLayer::addEventText2(float dt)
 	desc = CommonFuncs::gbk2utf(acdesc2[m_actype].c_str());
 	desc.append(GlobalData::vec_resData[mrid].unitname);
 	g_uiScroll->addEventText(desc);
+}
+
+void ActionGetLayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 24 || step == 29)
+	{
+		nodes.push_back(this->getChildByName("resitem0")->getChildren().at(0));
+	}
+	else if (step == 25 || step == 30)
+	{
+		nodes.push_back(m_getbtn);
+	}
+	else if (step == 26 || step == 31)
+	{
+		nodes.push_back(m_getallbtn);
+	}
+	else if (step == 27 || step == 32)
+	{
+		nodes.push_back(m_backbtn);
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

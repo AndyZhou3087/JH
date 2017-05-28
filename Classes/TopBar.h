@@ -18,7 +18,7 @@ public:
 	CREATE_FUNC(TopBar);
 
 	void showNewerGuide(int step);
-
+	int newerStep;
 private:
 	cocos2d::ui::ImageView* heroimg;
 	cocos2d::ui::ImageView* reason;
@@ -38,6 +38,13 @@ private:
 	cocos2d::ui::Widget* hungerRed;
 	cocos2d::ui::Widget* spiritRed;
 	cocos2d::ui::Widget* lifeRed;
+
+	cocos2d::ui::ImageView* outinjury;
+	cocos2d::ui::ImageView* innerinjury;
+	cocos2d::ui::ImageView* hunger;
+	cocos2d::ui::ImageView* spirit;
+	cocos2d::ui::ImageView* life;
+
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updataUI(float dt);

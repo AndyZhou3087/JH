@@ -10,6 +10,7 @@
 #include "NpcLayer.h"
 #include "SoundManager.h"
 #include "GameDataSave.h"
+#include "NewerGuideLayer.h"
 
 GoWhereLayer::GoWhereLayer()
 {
@@ -79,8 +80,8 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onClose, this));
 
-	cocos2d::ui::Button* gobtn = (cocos2d::ui::Button*)csbnode->getChildByName("gobtn");
-	gobtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onGO, this));
+	m_gobtn = (cocos2d::ui::Button*)csbnode->getChildByName("gobtn");
+	m_gobtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onGO, this));
 
 	//物品存放
 	cocos2d::ui::Button* stbtn = (cocos2d::ui::Button*)csbnode->getChildByName("stbtn");
@@ -89,8 +90,8 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	m_stredpoint = (cocos2d::ui::Widget*)stbtn->getChildByName("redpoint");
 	checkRedPoint(0);
 
-	cocos2d::ui::Button* enterbtn = (cocos2d::ui::Button*)csbnode->getChildByName("enterbtn");
-	enterbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onComeIn, this));
+	m_enterbtn = (cocos2d::ui::Button*)csbnode->getChildByName("enterbtn");
+	m_enterbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onComeIn, this));
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onClose, this));
@@ -98,24 +99,24 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	if (type == GOWHERE)
 	{
 		closebtn->setVisible(true);
-		gobtn->setVisible(true);
+		m_gobtn->setVisible(true);
 		stbtn->setVisible(false);
-		enterbtn->setVisible(false);
+		m_enterbtn->setVisible(false);
 		fast->setVisible(true);
 		fasttitle->setVisible(true);
 	}
 	else
 	{
 		closebtn->setVisible(false);
-		gobtn->setVisible(false);
+		m_gobtn->setVisible(false);
 		stbtn->setVisible(true);
-		enterbtn->setVisible(true);
+		m_enterbtn->setVisible(true);
 		fast->setVisible(false);
 		fasttitle->setVisible(false);
 		if (m_addrstr.compare("m1-1") == 0)//家，没有物品存放
 		{
 			stbtn->setVisible(false);
-			enterbtn->setPositionX(360);
+			m_enterbtn->setPositionX(360);
 		}
 	}
 	//////layer 点击事件，屏蔽下层事件
@@ -130,6 +131,20 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 
 	this->schedule(schedule_selector(GoWhereLayer::checkRedPoint), 1.0f);
 	return true;
+}
+
+
+void GoWhereLayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+	if (NewerGuideLayer::checkifNewerGuide(21))
+		showNewerGuide(21);
+	else if (NewerGuideLayer::checkifNewerGuide(22))
+		showNewerGuide(22);
+	else if (NewerGuideLayer::checkifNewerGuide(41))
+		showNewerGuide(41);
+	else if (NewerGuideLayer::checkifNewerGuide(42))
+		showNewerGuide(42);
 }
 
 void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -177,7 +192,7 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		else if (m_addrstr.compare("m1-2") == 0)//进入后山
 		{
 			if (g_gameLayer != NULL)
-				g_gameLayer->addChild(HomeHill::create(), 2);
+				g_gameLayer->addChild(HomeHill::create(), 2, "homehill");
 		}
 		else//进入NPC
 		{
@@ -196,4 +211,14 @@ void GoWhereLayer::checkRedPoint(float dt)
 		m_stredpoint->setVisible(true);
 	else
 		m_stredpoint->setVisible(false);
+}
+
+void GoWhereLayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 21 || step == 41)
+		nodes.push_back(m_gobtn);
+	else if (step == 22 || step == 42)
+		nodes.push_back(m_enterbtn);	
+	g_gameLayer->showNewerGuide(step, nodes);
 }

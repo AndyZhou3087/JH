@@ -7,10 +7,12 @@
 #include "SoundManager.h"
 #include "Const.h"
 #include "ActivitScene.h"
+#include "HomeLayer.h"
 
 TopBar::TopBar()
 {
 	pastmin = g_nature->getTime();
+	newerStep = 2;
 }
 
 
@@ -82,23 +84,23 @@ bool TopBar::init()
 	str = StringUtils::format("%d", g_nature->getTemperature());
 	templbl->setString(str);
 
-	cocos2d::ui::ImageView* outinjury = (cocos2d::ui::ImageView*)csbnode->getChildByName("topoutinjurybg");
+	outinjury = (cocos2d::ui::ImageView*)csbnode->getChildByName("topoutinjurybg");
 	outinjury->setName("outinjury");
 	outinjury->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	cocos2d::ui::ImageView* innerinjury = (cocos2d::ui::ImageView*)csbnode->getChildByName("topinnerinjurybg");
+	innerinjury = (cocos2d::ui::ImageView*)csbnode->getChildByName("topinnerinjurybg");
 	innerinjury->setName("innerinjury");
 	innerinjury->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	cocos2d::ui::ImageView* hunger = (cocos2d::ui::ImageView*)csbnode->getChildByName("tophungerbg");
+	hunger = (cocos2d::ui::ImageView*)csbnode->getChildByName("tophungerbg");
 	hunger->setName("hunger");
 	hunger->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	cocos2d::ui::ImageView* spirit = (cocos2d::ui::ImageView*)csbnode->getChildByName("topspiritbg");
+	spirit = (cocos2d::ui::ImageView*)csbnode->getChildByName("topspiritbg");
 	spirit->setName("spirit");
 	spirit->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
-	cocos2d::ui::ImageView* life = (cocos2d::ui::ImageView*)csbnode->getChildByName("toplifebg");
+	life = (cocos2d::ui::ImageView*)csbnode->getChildByName("toplifebg");
 	life->setName("life");
 	life->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
@@ -388,6 +390,38 @@ void TopBar::updataUI(float dt)
 void TopBar::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	nodes.push_back(heroimg);
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (step == 2)
+	{
+		nodes.push_back(heroimg);
+	}
+	else if (step == 13)
+	{
+		newerStep = 13;
+		nodes.push_back(life);
+	}
+	else if (step == 14)
+	{
+		nodes.push_back(spirit);
+	}
+	else if (step == 15)
+	{
+		nodes.push_back(hunger);
+	}
+	else if (step == 16)
+	{
+		nodes.push_back(outinjury);
+	}
+	else if (step == 17)
+	{
+		nodes.push_back(innerinjury);
+	}
+	if (step == 2 || (step >= 13 && step <= 17))
+		g_gameLayer->showNewerGuide(step, nodes);
+
+	if (step == 18)
+	{
+		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+		if (homelayer != NULL)
+			homelayer->showNewerGuide(step);
+	}
 }

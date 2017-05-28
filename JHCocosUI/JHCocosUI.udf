@@ -11,8 +11,12 @@
           <FilePathData Path="npcLayer.csd" />
           <FilePathData Path="homeLayer.csd" />
           <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="mapLayer.csd" />
+          <FilePathData Path="npcNode.csd" />
+          <FilePathData Path="goWhereLayer.csd" />
+          <FilePathData Path="buildingDetailsLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="topBarNode.csd" />
+        <ActiveDocument Path="actionNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

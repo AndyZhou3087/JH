@@ -18,6 +18,8 @@ public:
 
 	void showUnlockLayer(float dt);
 	void updataPlotMissionIcon();
+	void delayShowMapNewerGuide(float dt);
+	void showNewerGuide(int step);
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

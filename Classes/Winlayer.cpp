@@ -9,6 +9,8 @@
 #include "MapLayer.h"
 #include "SoundManager.h"
 #include "NpcLayer.h"
+#include "HomeHill.h"
+#include "NewerGuideLayer.h"
 
 Winlayer::Winlayer()
 {
@@ -43,11 +45,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	m_addrid = addrid;
 	m_npcid = npcid;
 
-	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
-	backbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onBack, this));
+	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onBack, this));
 
-	cocos2d::ui::Button* getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
-	getallbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onAllGet, this));
+	m_getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
+	m_getallbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onAllGet, this));
 
 	cocos2d::ui::Text* addrname = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrname->setString(GlobalData::map_maps[m_addrid].cname);
@@ -223,6 +225,15 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	return true;
 }
 
+void Winlayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+	if (NewerGuideLayer::checkifNewerGuide(34))
+		showNewerGuide(34);
+	else if (NewerGuideLayer::checkifNewerGuide(37))
+		showNewerGuide(37);
+}
+
 void Winlayer::updataLV()
 {
 	int winexp = GlobalData::map_npcs[m_npcid].exp;
@@ -334,6 +345,7 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 	}
 	saveTempData();
 	updata();
+	showNewerGuide(35);
 }
 
 void Winlayer::onPackageItem(cocos2d::Ref* pSender)
@@ -374,6 +386,15 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+		HomeHill* homehill = (HomeHill*)g_gameLayer->getChildByName("homehill");
+		if (homehill != NULL)
+		{
+			if (NewerGuideLayer::checkifNewerGuide(36))
+				homehill->showNewerGuide(36);
+			else if (NewerGuideLayer::checkifNewerGuide(39))
+				homehill->showNewerGuide(39);
+		}
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -420,6 +441,7 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 		}
 		saveTempData();
 		updata();
+		showNewerGuide(38);
 	}
 }
 
@@ -566,4 +588,23 @@ void Winlayer::showLvUpText()
 	lvUpSprite->setPosition(Vec2(360, 400));
 	this->addChild(lvUpSprite);
 	lvUpSprite->runAction(Spawn::create(MoveTo::create(3.0f, Vec2(360, 700)), FadeOut::create(3.0f), NULL));
+}
+
+void Winlayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 34)
+	{
+		Node* resnode = this->getChildByName("resitem0");
+		nodes.push_back(resnode->getChildren().at(0));
+	}
+	else if (step == 35 || step == 38)
+	{
+		nodes.push_back(m_backbtn);
+	}
+	else if (step == 37)
+	{
+		nodes.push_back(m_getallbtn);
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

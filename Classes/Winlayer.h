@@ -13,9 +13,14 @@ public:
 
 	bool init(std::string addr, std::string npcid);
 	virtual void onExit();
+	virtual void onEnterTransitionDidFinish();
 	static Winlayer* create(std::string addr, std::string npcid);
 	void updataMyPackageUI();
 	void updataRewardUI();
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -33,6 +38,8 @@ private:
 	std::vector<PackageData> tempResData;
 	cocos2d::ui::Text* explbl;
 	cocos2d::ui::Text* gfexplbl;
+	cocos2d::ui::Widget* m_backbtn;
+	cocos2d::ui::Button* m_getallbtn;
 };
 #endif
 

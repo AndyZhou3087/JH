@@ -7,6 +7,7 @@
 #include "GameScene.h"
 #include "Winlayer.h"
 #include "SoundManager.h"
+#include "NewerGuideLayer.h"
 
 FightLayer::FightLayer()
 {
@@ -99,6 +100,8 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_escapebtn->addTouchEventListener(CC_CALLBACK_2(FightLayer::onEscape, this));
 	m_escapebtn->setTag(0);
 
+	if (NewerGuideLayer::checkifNewerGuide(39))
+		m_escapebtn->setVisible(false);
 	// 滚动文字
 	m_fihgtScorll = UIScroll::create(610.0f, 400.0f);
 	m_fihgtScorll->setPosition(Vec2(360, 370));

@@ -11,6 +11,7 @@
 #include "ShopLayer.h"
 #include "SoundManager.h"
 #include "UnlockLayer.h"
+#include "NewerGuideLayer.h"
 
 static Vec2 heroPos;
 
@@ -252,4 +253,27 @@ void MapLayer::updataPlotMissionIcon()
 			}
 		}
 	}
+}
+
+
+void MapLayer::delayShowMapNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(20))
+		showNewerGuide(20);
+	else if (NewerGuideLayer::checkifNewerGuide(40))
+		showNewerGuide(40);
+}
+
+void MapLayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 20)
+	{
+		nodes.push_back(m_mapbg->getChildByName("m1-2"));
+	}
+	else if (step == 40)
+	{
+		nodes.push_back(m_mapbg->getChildByName("m1-1"));
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

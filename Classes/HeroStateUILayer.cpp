@@ -58,6 +58,10 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
+
+		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+		if (topbar != NULL)
+			topbar->showNewerGuide(13);
 	}
 }
 

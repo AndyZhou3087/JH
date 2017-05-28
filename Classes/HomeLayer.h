@@ -16,6 +16,8 @@ public:
 
 	CREATE_FUNC(HomeLayer);
 	void updateBuilding();
+
+	void showNewerGuide(int step);
 private:
 	void onclick(Ref* pSender);
 	void onStorageRoom(Ref* pSender);
@@ -24,6 +26,7 @@ private:
 	void loadJsonData();
 private:
 	Building* m_storageroom;
+	Building* m_fence;
 	std::vector<Building*> Vec_Buildings;
 };
 #endif

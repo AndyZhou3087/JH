@@ -24,6 +24,7 @@ public:
 	GoWhereLayer();
 	~GoWhereLayer();
 
+	virtual void onEnterTransitionDidFinish();
 	/****************************
 	初始化
 	@param 地点id
@@ -58,11 +59,19 @@ private:
 	临时存放点按钮红点提示，定时刷新
 	*****************************/
 	void checkRedPoint(float dt);
+
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
 private:
 	std::string m_addrstr;//地点ID
 	WHERELAYER_TYPE m_type;
 	static float m_distance;
 	cocos2d::ui::Widget* m_stredpoint;//临时物品红点
+
+	cocos2d::ui::Button* m_gobtn;//出发按钮
+	cocos2d::ui::Button* m_enterbtn;//进入按钮
 };
 #endif
 

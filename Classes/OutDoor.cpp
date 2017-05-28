@@ -52,6 +52,13 @@ bool OutDoor::init()
 	return true;
 }
 
+void OutDoor::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+
+	showNewerGuide(19);
+}
+
 void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
@@ -76,7 +83,9 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
 		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
-		this->scheduleOnce(schedule_selector(OutDoor::delayShowGOOut), 0.05f);
+		this->scheduleOnce(schedule_selector(OutDoor::delayShowGOOut), 0.02f);
+
+
 	}
 }
 
@@ -86,6 +95,7 @@ void OutDoor::delayShowGOOut(float dt)
 	g_maplayer = MapLayer::create();
 	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
 	g_gameLayer->removeChildByName("homelayer");
+	g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 	this->removeFromParentAndCleanup(true);
 }
 
@@ -260,4 +270,15 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 	MyPackage::cutone(data.strid);
 	m_heroproper->refreshCarryData();
 	updata();
+}
+
+
+void OutDoor::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 19)
+	{
+		nodes.push_back(m_outbtn);
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

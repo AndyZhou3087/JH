@@ -314,7 +314,7 @@ void GameScene::heroRevive()
 
 void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 {
-	if (NewerGuideLayer::checkifNewerGuide(m_newerStep))
+	if (NewerGuideLayer::checkifNewerGuide(step))
 	{
 		m_newerStep = step;
 		m_newerNode = nodes;

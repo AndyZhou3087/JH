@@ -8,7 +8,7 @@
 #include "CommonFuncs.h"
 #include "FightLayer.h"
 #include "SoundManager.h"
-
+#include "MapLayer.h"
 HomeHill::HomeHill()
 {
 }
@@ -23,8 +23,8 @@ bool HomeHill::init()
 	Node* csbnode = CSLoader::createNode("homeHillLayer.csb");
 	this->addChild(csbnode);
 
-	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
-	backbtn->addTouchEventListener(CC_CALLBACK_2(HomeHill::onBack, this));
+	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(HomeHill::onBack, this));
 	
 	int ressize = GlobalData::vec_hillResid.size();
 	scrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
@@ -111,11 +111,20 @@ bool HomeHill::init()
 
 	return true;
 }
+
+void HomeHill::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+	showNewerGuide(23);
+}
+
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -200,4 +209,35 @@ void HomeHill::updateUI(float dt)
 			}
 		}
 	}
+}
+
+void HomeHill::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 23)
+	{
+		Node* resnode = scrollView->getChildByName("node0");
+		resnode->getChildByName("actionbtn");
+		nodes.push_back(resnode->getChildByName("actionbtn"));
+	}
+	else if (step == 28)
+	{
+		Node* resnode = scrollView->getChildByName("node3");
+		resnode->getChildByName("actionbtn");
+		nodes.push_back(resnode->getChildByName("actionbtn"));
+	}
+
+	else if (step == 33 || step == 36)
+	{
+		scrollView->jumpToPercentVertical(55);
+		Node* resnode = scrollView->getChildByName("node6");
+		resnode->getChildByName("actionbtn");
+		nodes.push_back(resnode->getChildByName("actionbtn"));
+	}
+	else if (step == 39)
+	{
+		nodes.push_back(m_backbtn);
+	}
+
+	g_gameLayer->showNewerGuide(step, nodes);
 }

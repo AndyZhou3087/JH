@@ -12,6 +12,7 @@
 #include "ResDetailsLayer.h"
 #include "BuildingDetailsLayer.h"
 #include "HomeLayer.h"
+#include "NewerGuideLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -101,12 +102,11 @@ bool BuildingUILayer::init(Building* build)
 void BuildingUILayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
-	cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName("res0");
+	if (NewerGuideLayer::checkifNewerGuide(0))
+		showNewerGuide(1);
+	else if (NewerGuideLayer::checkifNewerGuide(44))
+		showNewerGuide(44);
 
-	std::vector<Node*> nodes;
-	nodes.push_back(resitem);
-	g_gameLayer->showNewerGuide(1, nodes);
 }
 
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -518,4 +518,22 @@ void BuildingUILayer::showFinishHintText(std::string path)
 void BuildingUILayer::finishAnim(Ref* pSender, Node* node)
 {
 	node->removeFromParentAndCleanup(true);
+}
+
+void BuildingUILayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 1)
+	{
+		cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
+		cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName("res0");
+
+		std::vector<Node*> nodes;
+		nodes.push_back(resitem);
+	}
+	else if (step == 44)
+	{
+		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

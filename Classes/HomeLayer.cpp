@@ -14,6 +14,7 @@
 #include "OutDoor.h"
 #include "GameScene.h"
 #include "SoundManager.h"
+#include "NewerGuideLayer.h"
 
 HomeLayer::HomeLayer()
 {
@@ -139,11 +140,11 @@ bool HomeLayer::init()
 	storageroomItem->setPosition(Vec2(105, 188));
 	menu->addChild(storageroomItem);
 
-	Building* fence = Fence::create();
+	m_fence = Fence::create();
 	MenuItemSprite* fenceItem = MenuItemSprite::create(
-		fence,
-		fence,
-		fence,
+		m_fence,
+		m_fence,
+		m_fence,
 		CC_CALLBACK_1(HomeLayer::onFence, this));
 	fenceItem->setPosition(Vec2(630, 48));
 	menu->addChild(fenceItem);
@@ -176,10 +177,18 @@ bool HomeLayer::init()
 void HomeLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
+	if (NewerGuideLayer::checkifNewerGuide(0))
+		showNewerGuide(0);
+	else if (NewerGuideLayer::checkifNewerGuide(43))
+		showNewerGuide(43);
+	else
+	{
+		//有足够资源引导建造
+		for (unsigned int i = 1; Vec_Buildings.size(); i++)
+		{
 
-	std::vector<Node*> nodes;
-	nodes.push_back(Vec_Buildings[0]->getParent());
-	g_gameLayer->showNewerGuide(0, nodes);
+		}
+	}
 }
 
 void HomeLayer::onclick(Ref* pSender)
@@ -230,4 +239,18 @@ void HomeLayer::updateBuilding()
 		if (Vec_Buildings[i]->data.level >= 1)
 			item->setOpacity(255);
 	}
+}
+
+void HomeLayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 0 || step == 43)
+	{
+		nodes.push_back(Vec_Buildings[0]->getParent());
+	}
+	else if (step == 18)
+	{
+		nodes.push_back(m_fence->getParent());
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }
