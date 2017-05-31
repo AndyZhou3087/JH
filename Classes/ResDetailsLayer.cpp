@@ -384,6 +384,9 @@ void ResDetailsLayer::recoveHungerValue(int addvalue)
 
 void ResDetailsLayer::removSelf()
 {
+	StorageUILayer* storagelayer = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
+	if (storagelayer != NULL)
+		storagelayer->showNewerGuide(47);
 	this->removeFromParentAndCleanup(true);
 }
 

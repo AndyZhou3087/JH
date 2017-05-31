@@ -1,6 +1,7 @@
 ﻿#include "Hero.h"
 #include "Const.h"
 #include "Nature.h"
+#include "GameScene.h"
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
@@ -30,6 +31,8 @@ Hero::Hero()
 	injuryrecoverpercent = 1.0f;
 	outjuryrecoverpercent = 1.0f;
 	hungerrecoverpercent = 1.0f;
+
+	m_pastmin = 0;
 }
 
 
@@ -40,50 +43,56 @@ Hero::~Hero()
 
 bool Hero::init()
 {
-	//12s，（游戏时间1小时更新一次）
-	this->schedule(schedule_selector(Hero::updateData), 60.0f / TIMESCALE);
+	this->schedule(schedule_selector(Hero::updateData), 1.0f/*60.0f / TIMESCALE*/);
 	this->schedule(schedule_selector(Hero::checkMaxVaule), 1.0f);
 	return true;
 }
 
 void Hero::updateData(float dt)
 {
-	if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
+	//12s，（游戏时间1小时更新一次）
+	m_pastmin += g_nature->getTimeInterval();
+	if (m_pastmin >= 60)
 	{
-		m_innerinjury -= InnerinjurySpeed * 2;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
-	}
-	if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
-	{
-		m_outinjury -= OutinjurySpeed * 1;
-		m_innerinjury -= InnerinjurySpeed * 1;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
-	}
-	if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
-	{
-		m_outinjury -= OutinjurySpeed * 2;
-		m_life -= LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
-	}
+		int hour = m_pastmin / 60;
+		m_pastmin = m_pastmin % 60;
+		if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
+		{
+			m_innerinjury -= hour * InnerinjurySpeed * 2;
+			m_life -= hour * LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
+		}
+		if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
+		{
+			m_outinjury -= hour * OutinjurySpeed * 1;
+			m_innerinjury -= hour * InnerinjurySpeed * 1;
+			m_life -= hour * LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
+		}
+		if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤3倍下降
+		{
+			m_outinjury -= hour * OutinjurySpeed * 2;
+			m_life -= hour * LifeLostSpeed * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
+		}
 
-	//接上严重界限的消耗
-	m_hunger -= HungerSpeed;
-	
-	if (m_innerinjury < MAXInnerinjuryValue)
-		m_innerinjury -= InnerinjurySpeed;
-	if (m_outinjury < MAXOutinjuryValue)
-		m_outinjury -= OutinjurySpeed;
-	m_spirit -= SpiritSpeed;
+		//接上严重界限的消耗
+		m_hunger -= hour * HungerSpeed;
 
-	if (m_innerinjury < 0)
-		m_innerinjury = 0;
-	if (m_outinjury < 0)
-		m_outinjury = 0;
-	if (m_hunger < 0)
-		m_hunger = 0;
-	if (m_life < 0.0f)
-		m_hunger = 0;
-	if (m_spirit < 0)
-		m_spirit = 0;
+		if (m_innerinjury < MAXInnerinjuryValue)
+			m_innerinjury -= hour * InnerinjurySpeed;
+		if (m_outinjury < MAXOutinjuryValue)
+			m_outinjury -= hour * OutinjurySpeed;
+		m_spirit -= hour * SpiritSpeed;
+
+		if (m_innerinjury < 0)
+			m_innerinjury = 0;
+		if (m_outinjury < 0)
+			m_outinjury = 0;
+		if (m_hunger < 0)
+			m_hunger = 0;
+		if (m_life < 0.0f)
+			m_hunger = 0;
+		if (m_spirit < 0)
+			m_spirit = 0;
+	}
 
 }
 

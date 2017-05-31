@@ -80,12 +80,13 @@ bool GameScene::init()
 	g_nature = Nature::create();
 	this->addChild(g_nature);
 
+	loadSaveNatureData();
+
 	//角色数据
 	g_hero = Hero::create();
 	this->addChild(g_hero);
 
-	//
-	loadSaveData();
+	loadSaveHeroData();
 
 	//角色目前在哪个地点，第一次进入家
 	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
@@ -121,7 +122,7 @@ bool GameScene::init()
     return true;
 }
 
-void GameScene::loadSaveData()
+void GameScene::loadSaveNatureData()
 {
 	//设置保存的季节
 	g_nature->setReason((EReason)GameDataSave::getInstance()->getNatureReason());
@@ -142,6 +143,20 @@ void GameScene::loadSaveData()
 	//天数
 	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
 	
+	//设置黑夜或白天
+
+	if (g_nature->getTime() < 60 * 6 - 1 || g_nature->getTime() >= 18 * 60)
+	{
+		g_nature->setDayOrNight(Night);
+	}
+	else
+	{
+		g_nature->setDayOrNight(Day);
+	}
+}
+
+void GameScene::loadSaveHeroData()
+{
 	//外伤
 	g_hero->setOutinjuryValue(GameDataSave::getInstance()->getHeroOutinjury());
 	//内伤
@@ -163,7 +178,7 @@ void GameScene::loadSaveData()
 	g_hero->setExpValue(exp);
 	//角色是否在家
 	g_hero->setIsOut(GameDataSave::getInstance()->getHeroIsOut());
-	
+
 	//角色生命值
 	int hlife = GameDataSave::getInstance()->getHeroLife();
 	if (hlife > -1)//-1 新的角色第一次开始玩
@@ -171,17 +186,6 @@ void GameScene::loadSaveData()
 	else
 	{
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
-	}
-
-	//设置黑夜或白天
-
-	if (g_nature->getTime() < 60 * 6 - 1 || g_nature->getTime() >= 18 * 60)
-	{
-		g_nature->setDayOrNight(Night);
-	}
-	else
-	{
-		g_nature->setDayOrNight(Day);
 	}
 
 	//读取保存的仓库数据

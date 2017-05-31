@@ -203,6 +203,7 @@ private:
 	void sleepbystep(float dt);//睡觉--恢复值一点点恢复
 	void drinkbystep(float dt);//喝酒--恢复值一点点恢复
 private:
+	int m_pastmin;//游戏时间，分钟为单位
 	int sleephour;//睡觉时间
 	float maxlifepercent;//最大生命百分比
 	float liferecoverpercent;//最大生命恢复百分比

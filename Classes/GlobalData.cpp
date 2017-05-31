@@ -454,6 +454,8 @@ void GlobalData::loadEquipJsonData()
 		data.cname = v.GetString();
 		v = item["desc"];
 		data.desc = v.GetString();
+		v = item["extype"];
+		data.extype = atoi(v.GetString());
 		map_equips[data.id] = data;
 	}
 }

@@ -64,6 +64,11 @@ private:
 	新手引导
 	*****************************/
 	void showNewerGuide(int step);
+
+	/****************************
+	延迟显示新手引导
+	*****************************/
+	void delayShowNewerGuide(float dt);
 private:
 	std::string m_addrstr;//地点ID
 	WHERELAYER_TYPE m_type;
@@ -72,6 +77,7 @@ private:
 
 	cocos2d::ui::Button* m_gobtn;//出发按钮
 	cocos2d::ui::Button* m_enterbtn;//进入按钮
+	cocos2d::ui::Button* m_stbtn;//临时存放按钮
 };
 #endif
 

@@ -56,6 +56,12 @@ bool StorageUILayer::init()
 	return true;
 }
 
+void StorageUILayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+
+	showNewerGuide(46);
+}
 
 void StorageUILayer::updateResContent()
 {
@@ -130,7 +136,8 @@ void StorageUILayer::updateResContent()
 				MyMenu* menu = MyMenu::create();
 				menu->addChild(boxItem);
 				menu->setPosition(Vec2(0, 0));
-				scrollview->addChild(menu);
+				std::string namestr = StringUtils::format("resitem%d", i * 100 + m);
+				scrollview->addChild(menu, 0, namestr);
 
 				std::string str = StringUtils::format("ui/%s.png", StorageRoom::map_storageData[i].at(m).strid.c_str());
 				Sprite * res = Sprite::createWithSpriteFrameName(str);
@@ -179,4 +186,18 @@ void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->addChild(ShopLayer::create());
 	}
+}
+
+void StorageUILayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	if (step == 46)
+	{
+		nodes.push_back(scrollview->getChildByName("resitem0")->getChildren().at(0));
+	}
+	else if (step == 47)
+	{
+		nodes.push_back(scrollview->getChildByName("resitem100")->getChildren().at(0));
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

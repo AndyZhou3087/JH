@@ -36,16 +36,21 @@ bool MapLayer::init()
 
 	m_mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
 	int mapnamecount = GlobalData::map_maps.size();
+	int heroposindex = 0;
+	std::string addr = GameDataSave::getInstance()->getHeroAddr();
+
 	for (int i = 0; i < mapnamecount; i++)
 	{
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setVisible(false);
+		if (mapname->getName().compare(addr) == 0)
+			heroposindex = i;
 	}
 	float offsetx = 0.0f;
 	float offsety = 0.0f;
 	Size scollviewsize = mapscroll->getContentSize();
-	Vec2 pos = m_mapbg->getChildren().at(0)->getPosition();
+	Vec2 pos = m_mapbg->getChildren().at(heroposindex)->getPosition();
 
 	if (pos.x > scollviewsize.width / 2)
 		offsetx = pos.x - scollviewsize.width / 2;
@@ -55,7 +60,7 @@ bool MapLayer::init()
 	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 
 	m_distance = 0.0f;
-	std::string addr = GameDataSave::getInstance()->getHeroAddr();
+
 	heroPos = m_mapbg->getChildByName(addr)->getPosition();
 
 	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getHeadID());
@@ -262,6 +267,8 @@ void MapLayer::delayShowMapNewerGuide(float dt)
 		showNewerGuide(20);
 	else if (NewerGuideLayer::checkifNewerGuide(40))
 		showNewerGuide(40);
+	else if (NewerGuideLayer::checkifNewerGuide(48))
+		showNewerGuide(48);
 }
 
 void MapLayer::showNewerGuide(int step)
@@ -274,6 +281,10 @@ void MapLayer::showNewerGuide(int step)
 	else if (step == 40)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-1"));
+	}
+	else if (step == 48)
+	{
+		nodes.push_back(m_mapbg->getChildByName("m1-4"));
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
 }

@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "MapLayer.h"
 #include "SoundManager.h"
+#include "NewerGuideLayer.h"
 
 NpcLayer::NpcLayer()
 {
@@ -118,6 +119,13 @@ bool NpcLayer::init(std::string addrid)
 	return true;
 }
 
+void NpcLayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+
+	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.1f);
+}
+
 void NpcLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
@@ -131,6 +139,11 @@ void NpcLayer::onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		int size = vec_wordstr.size();
+
+		if (size > 0 && m_wordindex >= size)
+			return;
+
 		if (isShowWord)
 		{
 			if (vec_wordstr[m_wordindex].length() > 0)
@@ -199,10 +212,11 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				{
 					GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
 
+					int unlockchapter = GlobalData::vec_PlotMissionData[curplot].unlockchapter;
 					GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
 
 					GlobalData::setPlotMissionIndex(curplot + 1);
-					if (g_maplayer != NULL)
+					if (g_maplayer != NULL && unlockchapter > 0)
 					{
 						g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 					}
@@ -394,4 +408,21 @@ void NpcLayer::fastShowWord()
 		this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
 		dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
 	}
+}
+
+void NpcLayer::showNewerGuide(int step)
+{
+	std::vector<Node*> nodes;
+	Node* npcitem = m_csbnode->getChildByName(GlobalData::map_maps[m_addrstr].npcs[0]);
+	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
+	nodes.push_back(talkbtn);
+	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void NpcLayer::delayShowNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(49) && m_addrstr.compare("m1-4") == 0)
+		showNewerGuide(49);
+	else if (NewerGuideLayer::checkifNewerGuide(50) && m_addrstr.compare("m1-3") == 0)
+		showNewerGuide(50);
 }

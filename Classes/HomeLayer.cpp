@@ -177,18 +177,9 @@ bool HomeLayer::init()
 void HomeLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	if (NewerGuideLayer::checkifNewerGuide(0))
-		showNewerGuide(0);
-	else if (NewerGuideLayer::checkifNewerGuide(43))
-		showNewerGuide(43);
-	else
-	{
-		//有足够资源引导建造
-		for (unsigned int i = 1; Vec_Buildings.size(); i++)
-		{
 
-		}
-	}
+	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.1f);
+
 }
 
 void HomeLayer::onclick(Ref* pSender)
@@ -219,7 +210,7 @@ void HomeLayer::onStorageRoom(Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Layer* layer = StorageUILayer::create();
-	Director::getInstance()->getRunningScene()->addChild(layer);
+	g_gameLayer->addChild(layer, 10, "storageuilayer");
 }
 
 void HomeLayer::onFence(Ref* pSender)
@@ -252,5 +243,58 @@ void HomeLayer::showNewerGuide(int step)
 	{
 		nodes.push_back(m_fence->getParent());
 	}
+	else if (step == 45)
+	{
+		nodes.push_back(m_storageroom->getParent());
+	}
+	else if (step > 55)
+	{
+		nodes.push_back(Vec_Buildings[step - 55]->getParent());
+	}
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void HomeLayer::delayShowNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(0))
+		showNewerGuide(0);
+	else if (NewerGuideLayer::checkifNewerGuide(43))
+		showNewerGuide(43);
+	else
+	{
+		std::vector<PackageData>::iterator it;
+		//有足够资源引导建造
+		for (unsigned int i = 1; i < Vec_Buildings.size(); i++)
+		{
+			int findcount = 0;
+			int bulidressize = Vec_Buildings[i]->data.Res[0].size();
+			for (int n = 0; n < bulidressize; n++)
+			{
+				int buildresid = Vec_Buildings[i]->data.Res[0][n] / 1000;
+				int buildrescount = Vec_Buildings[i]->data.Res[0][n] % 1000;
+				std::string strResid = StringUtils::format("%d", buildresid);
+				for (int m = 0; m < RES_MAX; m++)
+				{
+					for (int k = 0; k < StorageRoom::map_storageData[m].size(); k++)
+					{
+						if (StorageRoom::map_storageData[m][k].strid.compare(strResid) == 0)
+						{
+							if (StorageRoom::map_storageData[m][k].count >= buildrescount)
+							{
+								findcount++;
+							}
+						}
+					}
+				}
+			}
+			if (findcount == bulidressize)
+			{
+				if (NewerGuideLayer::checkifNewerGuide(55 + i))
+				{
+					showNewerGuide(55 + i);
+					break;
+				}
+			}
+		}
+	}
 }

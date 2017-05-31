@@ -13,6 +13,7 @@ public:
 	~NpcLayer();
 
 	bool init(std::string addrid);
+	virtual void onEnterTransitionDidFinish();
 	static NpcLayer* create(std::string addrid);
 	void updatePlotUI();
 private:
@@ -25,6 +26,16 @@ private:
 	void checkWordLblColor(std::string wordstr);
 	void fastShowWord();
 	void onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
+
+	/****************************
+	延迟新手引导
+	*****************************/
+	void delayShowNewerGuide(float dt);
+	
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;

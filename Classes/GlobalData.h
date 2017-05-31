@@ -115,6 +115,7 @@ typedef struct
 	int df;
 	std::string cname;
 	std::string desc;
+	int extype;//扩展类型，区分棍，刀，剑
 }EquipData;
 
 /****************************

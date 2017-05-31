@@ -281,9 +281,10 @@ void FightLayer::showFightWord(int type, int value)
 		std::string herowordstr;
 		if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器
 		{
-			size = sizeof(herofightdesc1) / sizeof(herofightdesc1[0]);
+			int extype = g_hero->getAtrByType(H_WEAPON)->extype;
+			size = sizeof(herofightdesc1[extype - 1]) / sizeof(herofightdesc1[extype - 1][0]);
 			r = GlobalData::createRandomNum(size);
-			wordstr = herofightdesc1[r];
+			wordstr = herofightdesc1[extype - 1][r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
 		}
 		else//没有武器

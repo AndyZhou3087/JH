@@ -84,10 +84,10 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	m_gobtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onGO, this));
 
 	//物品存放
-	cocos2d::ui::Button* stbtn = (cocos2d::ui::Button*)csbnode->getChildByName("stbtn");
-	stbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onST, this));
+	m_stbtn = (cocos2d::ui::Button*)csbnode->getChildByName("stbtn");
+	m_stbtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onST, this));
 
-	m_stredpoint = (cocos2d::ui::Widget*)stbtn->getChildByName("redpoint");
+	m_stredpoint = (cocos2d::ui::Widget*)m_stbtn->getChildByName("redpoint");
 	checkRedPoint(0);
 
 	m_enterbtn = (cocos2d::ui::Button*)csbnode->getChildByName("enterbtn");
@@ -100,7 +100,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	{
 		closebtn->setVisible(true);
 		m_gobtn->setVisible(true);
-		stbtn->setVisible(false);
+		m_stbtn->setVisible(false);
 		m_enterbtn->setVisible(false);
 		fast->setVisible(true);
 		fasttitle->setVisible(true);
@@ -109,13 +109,13 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	{
 		closebtn->setVisible(false);
 		m_gobtn->setVisible(false);
-		stbtn->setVisible(true);
+		m_stbtn->setVisible(true);
 		m_enterbtn->setVisible(true);
 		fast->setVisible(false);
 		fasttitle->setVisible(false);
 		if (m_addrstr.compare("m1-1") == 0)//家，没有物品存放
 		{
-			stbtn->setVisible(false);
+			m_stbtn->setVisible(false);
 			m_enterbtn->setPositionX(360);
 		}
 	}
@@ -137,14 +137,8 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 void GoWhereLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	if (NewerGuideLayer::checkifNewerGuide(21))
-		showNewerGuide(21);
-	else if (NewerGuideLayer::checkifNewerGuide(22))
-		showNewerGuide(22);
-	else if (NewerGuideLayer::checkifNewerGuide(41))
-		showNewerGuide(41);
-	else if (NewerGuideLayer::checkifNewerGuide(42))
-		showNewerGuide(42);
+
+	this->scheduleOnce(schedule_selector(GoWhereLayer::delayShowNewerGuide), 0.1f);
 }
 
 void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -220,5 +214,30 @@ void GoWhereLayer::showNewerGuide(int step)
 		nodes.push_back(m_gobtn);
 	else if (step == 22 || step == 42)
 		nodes.push_back(m_enterbtn);	
+	else if (step == 51)
+		nodes.push_back(m_stbtn);
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void GoWhereLayer::delayShowNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(21))
+		showNewerGuide(21);
+	else if (NewerGuideLayer::checkifNewerGuide(22))
+		showNewerGuide(22);
+	else if (NewerGuideLayer::checkifNewerGuide(41))
+		showNewerGuide(41);
+	else if (NewerGuideLayer::checkifNewerGuide(42))
+		showNewerGuide(42);
+	else if (NewerGuideLayer::checkifNewerGuide(51))
+	{
+		if (m_type == ARRIVE)
+		{
+			std::string datastr = GameDataSave::getInstance()->getTempStorage(m_addrstr);
+			std::vector<std::string> vec_retstr;
+			CommonFuncs::split(datastr, vec_retstr, ";");
+			if (vec_retstr.size() > 0)
+				showNewerGuide(51);
+		}
+	}
 }

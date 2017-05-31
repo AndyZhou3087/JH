@@ -3,14 +3,17 @@
 #include "SoundManager.h"
 #include "Const.h"
 #include "GlobalData.h"
+
+bool ActivitScene::ispoping = false;
 ActivitScene::ActivitScene()
 {
-
+	ispoping = false;
 }
 
 
 ActivitScene::~ActivitScene()
 {
+	ispoping = false;
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
@@ -52,6 +55,8 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 	this->scheduleOnce(schedule_selector(ActivitScene::popself), 2.0f);
+	if (ispoping)
+		this->scheduleOnce(schedule_selector(ActivitScene::popself), 1.0f);
 	return true;
 }
 
@@ -72,6 +77,7 @@ ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
 
 void ActivitScene::popself(float dt)
 {
+	ispoping = true;
 	Director::getInstance()->popScene();
 }
 

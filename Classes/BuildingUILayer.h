@@ -72,6 +72,11 @@ private:
 	新手引导
 	*****************************/
 	void showNewerGuide(int step);
+
+	/****************************
+	延迟显示新手引导
+	*****************************/
+	void delayShowNewerGuide(float dt);
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE

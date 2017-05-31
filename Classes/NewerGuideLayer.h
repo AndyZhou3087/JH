@@ -19,7 +19,7 @@ private:
 	Layer* m_colorlayer;
 	ClippingNode* m_clippingNode;
 	int m_step;
-	static bool isNewerGuide[40];
+	static bool isNewerGuide[65];
 private:
 	void showAnim(Vec2 pos);
 

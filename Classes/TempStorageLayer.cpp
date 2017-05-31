@@ -38,6 +38,11 @@ bool TempStorageLayer::init(std::string addrname)
 	this->addChild(csbnode);
 	m_addrname = addrname;
 
+	MapData mdata = GlobalData::map_maps[addrname];
+
+	cocos2d::ui::Text* title = (cocos2d::ui::Text*)csbnode->getChildByName("title");
+	title->setString(mdata.cname);
+
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(TempStorageLayer::onBack, this));
 

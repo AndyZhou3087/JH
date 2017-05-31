@@ -80,7 +80,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
 		{
 			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
-			GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
+			int unlockchapter = GlobalData::vec_PlotMissionData[curplot].unlockchapter;
+			GlobalData::setUnlockChapter(unlockchapter);
 			winres = GlobalData::vec_PlotMissionData[curplot].rewords;
 			for (unsigned int i = 0; i < winres.size(); i++)
 			{
@@ -96,7 +97,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					npclayer->updatePlotUI();
 			}
 
-			if (g_maplayer != NULL)
+			if (g_maplayer != NULL && unlockchapter > 0)
 				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 		}
 	}
@@ -203,6 +204,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 							data.name = edata.cname;
 							data.type = edata.type - 1;
 							data.goodvalue = 100;
+							data.extype = edata.extype;
 							getRewardData.push_back(data);
 							break;
 						}
@@ -228,10 +230,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 void Winlayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	if (NewerGuideLayer::checkifNewerGuide(34))
-		showNewerGuide(34);
-	else if (NewerGuideLayer::checkifNewerGuide(37))
-		showNewerGuide(37);
+	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.1f);
 }
 
 void Winlayer::updataLV()
@@ -607,4 +606,13 @@ void Winlayer::showNewerGuide(int step)
 		nodes.push_back(m_getallbtn);
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+
+void Winlayer::delayShowNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(34))
+		showNewerGuide(34);
+	else if (NewerGuideLayer::checkifNewerGuide(37))
+		showNewerGuide(37);
 }

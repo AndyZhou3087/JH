@@ -102,11 +102,8 @@ bool BuildingUILayer::init(Building* build)
 void BuildingUILayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	if (NewerGuideLayer::checkifNewerGuide(0))
-		showNewerGuide(1);
-	else if (NewerGuideLayer::checkifNewerGuide(44))
-		showNewerGuide(44);
 
+	this->scheduleOnce(schedule_selector(BuildingUILayer::delayShowNewerGuide), 0.1f);
 }
 
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -114,9 +111,19 @@ void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
-		if (topbar != NULL)
-			topbar->showNewerGuide(2);
+
+		if (NewerGuideLayer::checkifNewerGuide(2))
+		{
+			TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+			if (topbar != NULL)
+				topbar->showNewerGuide(2);
+		}
+		else if (NewerGuideLayer::checkifNewerGuide(45))
+		{
+			HomeLayer* homlayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+			if (homlayer != NULL)
+				homlayer->showNewerGuide(45);
+		}
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -528,7 +535,6 @@ void BuildingUILayer::showNewerGuide(int step)
 		cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
 		cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName("res0");
 
-		std::vector<Node*> nodes;
 		nodes.push_back(resitem);
 	}
 	else if (step == 44)
@@ -536,4 +542,12 @@ void BuildingUILayer::showNewerGuide(int step)
 		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void BuildingUILayer::delayShowNewerGuide(float dt)
+{
+	if (NewerGuideLayer::checkifNewerGuide(1))
+		showNewerGuide(1);
+	else if (NewerGuideLayer::checkifNewerGuide(44))
+		showNewerGuide(44);
 }

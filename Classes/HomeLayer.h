@@ -24,6 +24,11 @@ private:
 	void onFence(Ref* pSender);
 	
 	void loadJsonData();
+
+	/****************************
+	延迟显示新手引导
+	*****************************/
+	void delayShowNewerGuide(float dt);
 private:
 	Building* m_storageroom;
 	Building* m_fence;

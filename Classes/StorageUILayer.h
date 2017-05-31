@@ -16,8 +16,10 @@ public:
 	~StorageUILayer();
 
 	virtual bool init();
+	virtual void onEnterTransitionDidFinish();
 	CREATE_FUNC(StorageUILayer);
 	void updateResContent();
+	void showNewerGuide(int step);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

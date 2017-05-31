@@ -43,7 +43,9 @@ void Building::parseData(rapidjson::Value& jsonvalue)
 			int size = resvalue.Size();
 			for (int j = 0; j < size; j++)
 			{
-				res.push_back(resvalue[j].GetInt());
+				int intid = resvalue[j].GetInt();
+				if (intid > 0)
+					res.push_back(resvalue[j].GetInt());
 			}
 			data.Res.push_back(res);
 		}
