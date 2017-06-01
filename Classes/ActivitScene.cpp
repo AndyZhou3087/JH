@@ -4,7 +4,7 @@
 #include "Const.h"
 #include "GlobalData.h"
 
-bool ActivitScene::ispoping = false;
+int ActivitScene::entercount = 0;
 ActivitScene::ActivitScene()
 {
 
@@ -13,7 +13,8 @@ ActivitScene::ActivitScene()
 
 ActivitScene::~ActivitScene()
 {
-	ispoping = false;
+	--entercount;
+	log("zhou entercount = %d", entercount);
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
@@ -53,10 +54,9 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	int r = GlobalData::createRandomNum(sizeof(tipswords) / sizeof(tipswords[0]));
 	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
-
+	entercount++;
 	this->scheduleOnce(schedule_selector(ActivitScene::popself), 2.0f);
-	if (ispoping)
-		this->scheduleOnce(schedule_selector(ActivitScene::popself), 1.0f);
+	log("zhou entercount = %d", entercount);
 	return true;
 }
 
@@ -77,7 +77,6 @@ ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
 
 void ActivitScene::popself(float dt)
 {
-	ispoping = true;
 	Director::getInstance()->popScene();
 }
 

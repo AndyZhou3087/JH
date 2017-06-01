@@ -40,7 +40,10 @@ public:
 		MUSIC_ID_HOME,//家
 		MUSIC_ID_MAP,//地图界面
 		MUSIC_ID_ENTER_MAPADDR,//进入地图地点（家以外）
-		MUSIC_ID_FIGHT,//战斗
+		MUSIC_ID_FIGHT_0,//战斗
+		MUSIC_ID_FIGHT_1,
+		MUSIC_ID_FIGHT_2,
+		MUSIC_ID_FIGHT_3,
 		MUSIC_ID_DEATH,//死亡界面
 	};
 	

@@ -290,7 +290,7 @@ void HomeLayer::delayShowNewerGuide(float dt)
 			}
 			if (findcount == bulidressize)
 			{
-				if (NewerGuideLayer::checkifNewerGuide(55 + i))
+				if (NewerGuideLayer::checkifNewerGuide(55 + i) && Vec_Buildings[i]->data.level <= 0)
 				{
 					showNewerGuide(55 + i);
 					break;

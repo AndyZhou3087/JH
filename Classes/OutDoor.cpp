@@ -80,12 +80,10 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		m_outbtn->setEnabled(false);
 
+		delayShowGOOut(0);
 		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
 		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
-		this->scheduleOnce(schedule_selector(OutDoor::delayShowGOOut), 0.02f);
-
-
 	}
 }
 

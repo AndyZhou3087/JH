@@ -165,7 +165,7 @@ void BuildingUILayer::loadActionUi()
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 
 		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-		icon->setTag(1000 * i);
+		icon->setTag(1000 * (i +1));
 
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
@@ -493,7 +493,7 @@ void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 		}
 		else if (tag >= 1000)//需要合成的
 		{
-			strid = GlobalData::map_buidACData[m_build->data.name][tag / 1000].icon;
+			strid = GlobalData::map_buidACData[m_build->data.name][tag / 1000 - 1].icon;
 		}
 		else//建筑物的
 		{

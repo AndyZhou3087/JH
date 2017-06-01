@@ -66,7 +66,7 @@ bool HeroProperNode::init()
 			}
 			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE || Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
 			{
-				str = StringUtils::format("耐久度%d", hpdata->goodvalue);
+				str = StringUtils::format("耐久度%d%%", hpdata->goodvalue);
 			}
 			else
 			{
@@ -281,7 +281,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		}
 		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE || index == H_ARMOR || index == H_WEAPON)
 		{
-			str = StringUtils::format("耐久度%d", map_carryData[index][i].goodvalue);
+			str = StringUtils::format("耐久度%d%%", map_carryData[index][i].goodvalue);
 		}
 		else
 		{
@@ -331,7 +331,17 @@ void HeroProperNode::onItem(Ref* pSender)
 		{
 
 			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
-			if (m_lastSelectedData->type == udata->type && m_lastSelectedData->extype == udata->extype)
+			bool issametool = false;
+			bool issameother = false;
+			if (m_lastSelectedData->type == TOOLS)
+			{
+				issametool = m_lastSelectedData->type == udata->type &&  m_lastSelectedData->extype == udata->extype;
+			}
+			else
+			{
+				issameother = m_lastSelectedData->type == udata->type;
+			}
+			if (issametool || issameother)
 			{
 				if (isout)
 				{
@@ -376,13 +386,13 @@ void HeroProperNode::onItem(Ref* pSender)
 			MyPackage::cutone(udata->strid);
 			g_hero->setAtrByType(atrype, *udata);
 
-			if (Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG || Atrytpe[lastclickindex] == H_ARMOR)
+			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
 			{
 				str = StringUtils::format("Lv.%d", udata->lv + 1);
 			}
-			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE)
+			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
 			{
-				str = StringUtils::format("耐久度%d", udata->goodvalue);
+				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
 			}
 			else
 			{
@@ -407,13 +417,13 @@ void HeroProperNode::onItem(Ref* pSender)
 		{
 			StorageRoom::use(udata->strid);
 			g_hero->setAtrByType(atrype, *udata);
-			if (Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG || Atrytpe[lastclickindex] == H_ARMOR)
+			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
 			{
 				str = StringUtils::format("Lv.%d", udata->lv + 1);
 			}
-			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE)
+			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
 			{
-				str = StringUtils::format("耐久度%d", udata->goodvalue);
+				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
 			}
 			else
 			{

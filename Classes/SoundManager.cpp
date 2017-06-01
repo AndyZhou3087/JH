@@ -39,7 +39,10 @@ void SoundManager::loadSounds()
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_HOME, "sounds/home.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_MAP, "sounds/map.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_ENTER_MAPADDR, "sounds/mapaddr.mp3"));
-	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT, "sounds/fight.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT_0, "sounds/fight0.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT_1, "sounds/fight1.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT_2, "sounds/fight2.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT_3, "sounds/fight3.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_DEATH, "sounds/death.mp3"));
 
 

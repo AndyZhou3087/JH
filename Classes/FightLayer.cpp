@@ -17,6 +17,7 @@ FightLayer::FightLayer()
 
 FightLayer::~FightLayer()
 {
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
 }
 
 FightLayer* FightLayer::create(std::string addrid, std::string npcid)
@@ -118,7 +119,8 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_FIGHT);
+	int r = GlobalData::createRandomNum(4);
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_FIGHT_0 + r);
 	return true;
 }
 
