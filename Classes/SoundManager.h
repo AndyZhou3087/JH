@@ -26,6 +26,11 @@ public:
 	enum SoundId
 	{
 		SOUND_ID_BUTTON,//∞¥≈•µ„ª˜
+		SOUND_ID_CAIJI,
+		SOUND_ID_KANSHU,
+		SOUND_ID_WAJUE,
+		SOUND_ID_ATTACK,
+		SOUND_ID_HURT
 	};
 
 	//±≥æ∞“Ù¿÷

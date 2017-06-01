@@ -409,11 +409,11 @@ void TopBar::showNewerGuide(int step)
 	}
 	else if (step == 16)
 	{
-		nodes.push_back(outinjury);
+		nodes.push_back(innerinjury);
 	}
 	else if (step == 17)
 	{
-		nodes.push_back(innerinjury);
+		nodes.push_back(outinjury);
 	}
 	if (step == 2 || (step >= 13 && step <= 17))
 		g_gameLayer->showNewerGuide(step, nodes);

@@ -29,18 +29,28 @@ void SoundManager::loadSounds()
 {
     // TODO :插入soundid列表
 	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_BUTTON, "sounds/button.mp3"));
-
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_CAIJI, "sounds/caiji.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_KANSHU, "sounds/kanshu.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_WAJUE, "sounds/wajue.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_ATTACK, "sounds/attack.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_HURT, "sounds/hurt.mp3"));
 	//插入背景音乐列表
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_START, "sounds/start.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_HOME, "sounds/home.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_MAP, "sounds/map.mp3"));
-	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_ENTER_MAPADDR, "sounds/entermapaddr.mp3"));
+	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_ENTER_MAPADDR, "sounds/mapaddr.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_FIGHT, "sounds/fight.mp3"));
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_DEATH, "sounds/death.mp3"));
 
 
 	//预加载音效
 	SimpleAudioEngine::getInstance()->preloadEffect("sounds/button.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/caiji.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/kanshu.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/wajue.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/attack.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/hurt.mp3");
+
 }
 
 void SoundManager::unloadSounds()

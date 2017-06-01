@@ -130,6 +130,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->schedule(schedule_selector(GoWhereLayer::checkRedPoint), 1.0f);
+	this->scheduleOnce(schedule_selector(GoWhereLayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
@@ -137,8 +138,6 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 void GoWhereLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
-	this->scheduleOnce(schedule_selector(GoWhereLayer::delayShowNewerGuide), 0.1f);
 }
 
 void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

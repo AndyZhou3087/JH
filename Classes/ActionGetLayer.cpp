@@ -61,11 +61,7 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	addEventText();
 
 	//点击后山列表中的操作获取一次资源
-	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)
-		doAction(0);
-	else
-		this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
-
+	this->scheduleOnce(schedule_selector(ActionGetLayer::delayDoAction), 0.3f);
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -321,14 +317,7 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			GlobalData::vec_resData[mrid].count--;
 			std::string desc;
-			if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
-			{
-				doAction(0);
-			}
-			else
-			{
-				this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
-			}
+			delayDoAction(0);
 			addEventText();
 		}
 
@@ -336,6 +325,28 @@ void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			m_getbtn->setEnabled(false);
 		}
+	}
+}
+
+void ActionGetLayer::delayDoAction(float dt)
+{
+	if (m_actype == 1)
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_CAIJI);
+	else if (m_actype == 2)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_KANSHU);
+	}
+	else if (m_actype == 3)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_WAJUE);
+	}
+	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
+	{
+		doAction(0);
+	}
+	else
+	{
+		this->scheduleOnce(schedule_selector(ActionGetLayer::doAction), 1.0f);
 	}
 }
 

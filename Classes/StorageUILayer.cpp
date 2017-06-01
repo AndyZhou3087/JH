@@ -193,11 +193,16 @@ void StorageUILayer::showNewerGuide(int step)
 	std::vector<Node*> nodes;
 	if (step == 46)
 	{
-		nodes.push_back(scrollview->getChildByName("resitem0")->getChildren().at(0));
+		Node* itemnode = scrollview->getChildByName("resitem0");
+		if (itemnode != NULL)
+			nodes.push_back(itemnode->getChildren().at(0));
 	}
 	else if (step == 47)
 	{
-		nodes.push_back(scrollview->getChildByName("resitem100")->getChildren().at(0));
+		Node* itemnode = scrollview->getChildByName("resitem100");
+		if (itemnode != NULL)
+			nodes.push_back(itemnode->getChildren().at(0));
 	}
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (nodes.size() > 0)
+		g_gameLayer->showNewerGuide(step, nodes);
 }

@@ -33,8 +33,8 @@ bool HomeLayer::init()
 	Building* bed = Bed::create();
 	Vec_Buildings.push_back(bed);
 
-	cocos2d::ui::Widget* badfurnace = (cocos2d::ui::Widget*)csbnode->getChildByName("badfurnace");
-	badfurnace->setLocalZOrder(1);
+	m_badfurnace = (cocos2d::ui::Widget*)csbnode->getChildByName("badfurnace");
+	m_badfurnace->setLocalZOrder(1);
 
 	MenuItemSprite* bedItem = MenuItemSprite::create(
 		bed,
@@ -170,16 +170,13 @@ bool HomeLayer::init()
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_HOME);
 
-
+	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
 void HomeLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
-	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.1f);
-
 }
 
 void HomeLayer::onclick(Ref* pSender)
@@ -228,7 +225,11 @@ void HomeLayer::updateBuilding()
 	{
 		MenuItemSprite* item = (MenuItemSprite*)Vec_Buildings[i]->getParent();
 		if (Vec_Buildings[i]->data.level >= 1)
+		{
 			item->setOpacity(255);
+			if (i == 5)
+				m_badfurnace->setVisible(false);
+		}
 	}
 }
 

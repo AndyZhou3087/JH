@@ -96,6 +96,7 @@ bool BuildingUILayer::init(Building* build)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
+	this->scheduleOnce(schedule_selector(BuildingUILayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
@@ -103,7 +104,6 @@ void BuildingUILayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
 
-	this->scheduleOnce(schedule_selector(BuildingUILayer::delayShowNewerGuide), 0.1f);
 }
 
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

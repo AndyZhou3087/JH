@@ -58,10 +58,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	explbl = (cocos2d::ui::Text*)csbnode->getChildByName("explbl");
 	std::string lblstr = StringUtils::format("+%d", winexp);
 	explbl->setString(lblstr);
-
+	gfexplbl = (cocos2d::ui::Text*)csbnode->getChildByName("gfexplbl");
 	if (g_hero->getAtrByType(H_WG)->count > 0 || g_hero->getAtrByType(H_NG)->count > 0)
 	{
-		gfexplbl = (cocos2d::ui::Text*)csbnode->getChildByName("gfexplbl");
 		lblstr = StringUtils::format("+%d", winexp * 3 / 2);
 		gfexplbl->setString(lblstr);
 	}
@@ -175,6 +174,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 						isfind = true;
 						data.strid = gfdata.id;
 						data.count = 1;
+						data.lv = 0;
 						if (data.strid.substr(0, 1).compare("w") == 0)
 						{
 							data.type = W_GONG;
@@ -223,14 +223,14 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
+	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
 void Winlayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.1f);
+
 }
 
 void Winlayer::updataLV()
@@ -281,6 +281,7 @@ void Winlayer::updataLV()
 				if (lv >= vec_gfExp.size())
 					lv = vec_gfExp.size() - 1;
 				gfData->lv = lv;
+				GlobalData::map_wgngs[gfname].lv = lv;
 			}
 		}
 

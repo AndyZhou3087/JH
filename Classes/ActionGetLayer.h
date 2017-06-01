@@ -106,6 +106,11 @@ private:
 	*****************************/
 	void showNewerGuide(int step);
 
+	/****************************
+	延迟获取资源
+	*****************************/
+	void delayDoAction(float dt);
+
 private:
 	int mrid;//后山资源列表中的ID
 	std::vector<int> rewardids;//1："采集", 2："砍伐", 3："挖掘"产出的ID

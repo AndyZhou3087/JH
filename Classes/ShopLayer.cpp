@@ -220,6 +220,7 @@ void ShopLayer::addBuyGoods()
 					PackageData pdata;
 					pdata.strid = gfdata.id;
 					pdata.count = 1;
+					pdata.lv = 0;
 					if (pdata.strid.substr(0, 1).compare("w") == 0)
 					{
 						pdata.type = W_GONG;

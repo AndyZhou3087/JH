@@ -60,11 +60,11 @@ bool HeroProperNode::init()
 			propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 			 
-			if (Atrytpe[i] == H_WEAPON || Atrytpe[i] == H_WG || Atrytpe[i] == H_NG || Atrytpe[i] == H_ARMOR)
+			if (Atrytpe[i] == H_WG || Atrytpe[i] == H_NG)
 			{
 				str = StringUtils::format("Lv.%d", hpdata->lv + 1);
 			}
-			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE)
+			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE || Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
 			{
 				str = StringUtils::format("耐久度%d", hpdata->goodvalue);
 			}
@@ -72,7 +72,7 @@ bool HeroProperNode::init()
 			{
 				str = "";
 			}
-			lvtext[i]->setString(str);
+			lvtext[i]->setString(CommonFuncs::gbk2utf(str.c_str()));
 		}
 		else
 		{
@@ -275,11 +275,11 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		namelbl->setPosition(Vec2(box->getContentSize().width / 2, - 10));
 		box->addChild(namelbl);
 
-		if (index == H_WEAPON || index == H_WG || index == H_NG || index == H_ARMOR)
+		if (index == H_WG || index == H_NG )
 		{
 			str = StringUtils::format("Lv.%d", map_carryData[index][i].lv + 1);
 		}
-		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE)
+		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE || index == H_ARMOR || index == H_WEAPON)
 		{
 			str = StringUtils::format("耐久度%d", map_carryData[index][i].goodvalue);
 		}
@@ -509,7 +509,8 @@ void HeroProperNode::showNewerGuide(int step)
 	else if (step == 4 || step == 6 || step == 8 || step == 10)
 	{
 		resItemNode = m_scrollView->getChildByName("resitem0");
-		nodes.push_back(resItemNode->getChildren().at(0));
+		if (resItemNode != NULL)
+			nodes.push_back(resItemNode->getChildren().at(0));
 	}
 	else if (step == 5)
 	{
@@ -527,6 +528,6 @@ void HeroProperNode::showNewerGuide(int step)
 	{
 		nodes.push_back(heroselectbg->getChildByName("okbtn"));
 	}
-	if (step <= 11)
+	if (step <= 11 && nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);
 }

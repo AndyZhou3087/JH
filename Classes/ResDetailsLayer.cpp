@@ -302,6 +302,7 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 						if (lv >= vec_gfExp.size())
 							lv = vec_gfExp.size() - 1;
 						gfData->lv = lv;
+						GlobalData::map_wgngs[gfname].lv = lv;
 
 					}
 				}

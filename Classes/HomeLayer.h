@@ -33,6 +33,7 @@ private:
 	Building* m_storageroom;
 	Building* m_fence;
 	std::vector<Building*> Vec_Buildings;
+	cocos2d::ui::Widget* m_badfurnace;
 };
 #endif
 

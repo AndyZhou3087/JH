@@ -7,7 +7,7 @@
 bool ActivitScene::ispoping = false;
 ActivitScene::ActivitScene()
 {
-	ispoping = false;
+
 }
 
 

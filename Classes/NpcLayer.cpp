@@ -116,14 +116,13 @@ bool NpcLayer::init(std::string addrid)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
+	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
 void NpcLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
-	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.1f);
 }
 
 void NpcLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

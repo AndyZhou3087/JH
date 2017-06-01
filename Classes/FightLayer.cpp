@@ -258,7 +258,11 @@ void FightLayer::delayBossFight(float dt)
 			}
 		}
 	}
-
+	else
+	{
+		m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+		m_escapebtn->setTag(1);
+	}
 	
 }
 
@@ -295,15 +299,34 @@ void FightLayer::showFightWord(int type, int value)
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name);
 		}
 		
+		if (m_npcid.compare("n003") == 0)
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightworfword[0].c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name);
+		else if (m_npcid.compare("n002") == 0)
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightRabbitword[0].c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name);
+
 		checkWordLblColor(herowordstr);
 
-		size = sizeof(herofightdesc2) / sizeof(herofightdesc2[0]);
-		r = GlobalData::createRandomNum(size);
-		wordstr = herofightdesc2[r];
-		herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+		if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+		{
+			int extype = g_hero->getAtrByType(H_WEAPON)->extype;
+			size = sizeof(herofightdesc2[extype - 1]) / sizeof(herofightdesc2[extype - 1][0]);
+			r = GlobalData::createRandomNum(size);
+			wordstr = herofightdesc2[extype - 1][r];
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+		}
+		else
+		{
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightdesc3[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+		}
+
+		if (m_npcid.compare("n003") == 0)
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightworfword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+		else if (m_npcid.compare("n002") == 0)
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightRabbitword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		checkWordLblColor(herowordstr);
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_ATTACK);
 	}
-	else//需要战斗
+	else//
 	{
 		std::string bosswordstr;
 		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
@@ -320,8 +343,12 @@ void FightLayer::showFightWord(int type, int value)
 			wordstr = bossfight[r];
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		}
-
+		if (m_npcid.compare("n003") == 0)
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(worffight[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
+		else if (m_npcid.compare("n002") == 0)
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(rabbitfightword[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		checkWordLblColor(bosswordstr);
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT);
 	}
 }
 
