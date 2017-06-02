@@ -55,6 +55,7 @@ private:
 	int m_lastlife;
 	EWeather m_lastweather;
 	EDAYNIGTH m_lastDayOrNigth;
+	int m_lastpastLiveDay;
 };
 #endif
 

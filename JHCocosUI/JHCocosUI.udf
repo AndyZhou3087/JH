@@ -15,8 +15,10 @@
           <FilePathData Path="npcNode.csd" />
           <FilePathData Path="goWhereLayer.csd" />
           <FilePathData Path="buildingDetailsLayer.csd" />
+          <FilePathData Path="reviveLayer.csd" />
+          <FilePathData Path="unlockLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="actionNode.csd" />
+        <ActiveDocument Path="unlockLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

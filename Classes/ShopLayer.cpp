@@ -6,8 +6,10 @@
 #include "GameScene.h"
 #include "SelectHeroScene.h"
 #include "SoundManager.h"
+#include "ReviveLayer.h"
 
 #include "json.h"
+#include "AnalyticUtil.h"
 
 std::vector<GoodsData> ShopLayer::vec_goods;
 int ShopLayer::payindex;
@@ -146,17 +148,32 @@ void ShopLayer::setMessage(PYARET ret)
 		{
 			if (g_SelectHeroScene != NULL)
 				g_SelectHeroScene->unlockSucc(payindex);
+#ifdef ANALYTICS
+			std::string heroname[] = { "bxym", "bssy", "bjxb", "baq" };
+			AnalyticUtil::onEvent(heroname[payindex].c_str());
+#endif
 		}
 		else
 		{
 			addBuyGoods();
+			if (ReviveLayer::isBuyRevive)
+				ReviveLayer::doRevive();
+#ifdef ANALYTICS
+			std::string heroname[] = { "bzyys", "bdlw", "bfsf", "bfh","bbasepkg", "badvpkg","bemergpkg", "bfoodpkg","bjhgspkg"};
+			AnalyticUtil::onEvent(heroname[payindex - 4].c_str());
+#endif
 		}
+#ifdef ANALYTICS
+		AnalyticUtil::pay("pay", buyprice[payindex], 1);
+#endif
 	}
 }
 
 void ShopLayer::addBuyGoods()
 {
 	int goodsindex = payindex - 4;
+	if (vec_goods.size() <= 0)
+		loadShopData();
 	std::vector<std::string> payRes = vec_goods[goodsindex].vec_res;
 	for (unsigned int i = 0; i < payRes.size(); i++)
 	{

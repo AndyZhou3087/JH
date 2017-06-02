@@ -11,12 +11,13 @@
 
 OutDoor::OutDoor()
 {
-
+	lastSrollViewHeight = -1;
 }
 
 
 OutDoor::~OutDoor()
 {
+	lastSrollViewHeight = -1;
 }
 
 bool OutDoor::init()
@@ -159,10 +160,15 @@ void OutDoor::updataStorageUI()
 	int row = typecount % 5 == 0 ? typecount / 5 : (typecount / 5 + 1);
 
 	int innerheight = row * 130;
-	int contentheight = scrollview->getContentSize().height;
-	if (innerheight < contentheight)
-		innerheight = contentheight;
-	scrollview->setInnerContainerSize(Size(650, innerheight));
+	if (lastSrollViewHeight < 0)
+	{
+		int contentheight = scrollview->getContentSize().height;
+		if (innerheight < contentheight)
+			innerheight = contentheight;
+		lastSrollViewHeight = innerheight;
+		scrollview->setInnerContainerSize(Size(650, innerheight));
+	}
+
 
 	allStorageData.clear();
 	for (int i = 0; i < RES_MAX; i++)
@@ -188,6 +194,7 @@ void OutDoor::updataStorageUI()
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
 		MyMenu* menu = MyMenu::create();
 		menu->addChild(boxItem);
+		menu->setTouchlimit(scrollview);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("resitem%d", i);
 		scrollview->addChild(menu, 0, name);

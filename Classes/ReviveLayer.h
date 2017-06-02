@@ -13,8 +13,10 @@ public:
 
 	virtual bool init();
 	static ReviveLayer* create();
+	static void doRevive();
+	static bool isBuyRevive;
 private:
-
+	int revivecount;
 
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

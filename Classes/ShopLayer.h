@@ -24,7 +24,7 @@ public:
 	static void setMessage(PYARET ret);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void loadShopData();
+	static void loadShopData();
 	static void addBuyGoods();
 private:
 	static std::vector<GoodsData> vec_goods;

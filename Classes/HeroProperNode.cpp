@@ -12,6 +12,7 @@
 #include "Winlayer.h"
 #include "OutDoor.h"
 #include "HeroStateUILayer.h"
+#include "MyMenu.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -257,8 +258,14 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 			CC_CALLBACK_1(HeroProperNode::onItem, this));
 		boxItem->setTag(index);
 		boxItem->setUserData(&map_carryData[index][i]);
-		boxItem->setPosition(Vec2(70 + i % 4 * 135, innerheight - i / 4 * itemheight - itemheight / 2));
-		Menu* menu = Menu::create();
+		if (i == 0 && g_hero->getAtrByType(index)->count > 0)
+		{
+			boxItem->setUserData(g_hero->getAtrByType(index));
+		}
+
+		boxItem->setPosition(Vec2(80 + i % 4 * 145, innerheight - i / 4 * itemheight - itemheight / 2));
+		MyMenu* menu = MyMenu::create();
+		menu->setTouchlimit(m_scrollView);
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("resitem%d", i);
@@ -327,7 +334,7 @@ void HeroProperNode::onItem(Ref* pSender)
 	
 	if (m_lastSelectedData != NULL)
 	{
-		if (m_lastSelectedData->strid.compare(udata->strid) != 0)//是否再次点击
+		if (m_lastSelectedData != udata)//是否再次点击
 		{
 
 			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
@@ -404,9 +411,7 @@ void HeroProperNode::onItem(Ref* pSender)
 		else//卸掉装备 设置count = -1
 		{
 			MyPackage::add(*g_hero->getAtrByType(atrype));
-			PackageData data;
-			data.count = -1;
-			g_hero->setAtrByType(atrype, data);
+			g_hero->getAtrByType(atrype)->count = -1;
 			lvtext[lastclickindex]->setString("");
 		}
 		
@@ -435,9 +440,7 @@ void HeroProperNode::onItem(Ref* pSender)
 		else
 		{
 			StorageRoom::add(*g_hero->getAtrByType(atrype));
-			PackageData data;
-			data.count = -1;
-			g_hero->setAtrByType(atrype, data);
+			g_hero->getAtrByType(atrype)->count = -1;
 			lvtext[lastclickindex]->setString("");
 		}
 	}

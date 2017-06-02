@@ -12,12 +12,13 @@ const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "
 
 StorageUILayer::StorageUILayer()
 {
-
+	lastScrollViewHeight = -1;
 }
 
 
 StorageUILayer::~StorageUILayer()
 {
+	lastScrollViewHeight = -1;
 }
 
 bool StorageUILayer::init()
@@ -84,16 +85,22 @@ void StorageUILayer::updateResContent()
 		}
 	}
 
-	int dataheigth = 0;
-	for (int i = 0; i < RES_MAX; i++)
+	int innerheight = scrollview->getInnerContainerSize().height;
+	if (lastScrollViewHeight < 0)
 	{
-		dataheigth += typerow[i] * 130;
+		int dataheigth = 0;
+		for (int i = 0; i < RES_MAX; i++)
+		{
+			dataheigth += typerow[i] * 130;
+		}
+		innerheight = textheigth + dataheigth;
+
+		int contentheight = scrollview->getContentSize().height;
+		if (innerheight < contentheight)
+			innerheight = contentheight;
+		scrollview->setInnerContainerSize(Size(650, innerheight));
+		lastScrollViewHeight = innerheight;
 	}
-	int innerheight = textheigth + dataheigth;
-	int contentheight = scrollview->getContentSize().height;
-	if (innerheight < contentheight)
-		innerheight = contentheight;
-	scrollview->setInnerContainerSize(Size(650, innerheight));
 
 	for (int i = 0; i < RES_MAX; i++)
 	{
@@ -135,6 +142,7 @@ void StorageUILayer::updateResContent()
 				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m / 5 * 130));
 				MyMenu* menu = MyMenu::create();
 				menu->addChild(boxItem);
+				menu->setTouchlimit(scrollview);
 				menu->setPosition(Vec2(0, 0));
 				std::string namestr = StringUtils::format("resitem%d", i * 100 + m);
 				scrollview->addChild(menu, 0, namestr);

@@ -1,6 +1,9 @@
 ﻿#include "SettingLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "IOSPurchaseWrap.h"
+#endif
 SettingLayer::SettingLayer()
 {
 
@@ -106,7 +109,7 @@ void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
+		restoreBuy();
 	}
 }
 #endif

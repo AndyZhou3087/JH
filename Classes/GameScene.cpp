@@ -304,7 +304,7 @@ void GameScene::checkiflive(float dt)
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		Director::getInstance()->pause();
 		ReviveLayer* layer = ReviveLayer::create();
-		Director::getInstance()->getRunningScene()->addChild(layer, 10);
+		g_gameLayer->addChild(layer, 10, "revivelayer");
 	}
 }
 

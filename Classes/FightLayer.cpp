@@ -8,6 +8,7 @@
 #include "Winlayer.h"
 #include "SoundManager.h"
 #include "NewerGuideLayer.h"
+#include "AnalyticUtil.h"
 
 FightLayer::FightLayer()
 {
@@ -132,11 +133,19 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		if (node->getTag() == 0)
 		{
-			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("逃跑成功！"));
-			addChild(hbox);
-			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
-			m_escapebtn->setTag(1);
-			isecapeok = true;
+			int r = GlobalData::createRandomNum(100);
+			if (r > 50)
+			{
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("逃跑成功！"));
+				addChild(hbox);
+				m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+				m_escapebtn->setTag(1);
+				isecapeok = true;
+			}
+			else
+			{
+				m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你乘机逃跑，可惜失败了！！"));
+			}
 		}
 		else
 		{
@@ -165,11 +174,11 @@ void FightLayer::delayHeroFight(float dt)
 	}
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
 	float fack = g_hero->getAtkPercent() * heroCurAck;
-	heroCurAck = int(fack + 1.0f);
+	heroCurAck = int(fack + 0.5f);
 
 	int npchurt = heroCurAck - npcdf;
 	float fminack = 0.1f * heroCurAck;
-	int intminack = int(fminack + 1.0f);
+	int intminack = int(fminack + 0.5f);
 	if (npchurt < intminack)
 		npchurt = intminack;
 
@@ -215,11 +224,11 @@ void FightLayer::delayBossFight(float dt)
 	int curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
 	float fdf = g_hero->getDfPercent() * curheroDf;
-	curheroDf = int(fdf + 1.0f);
+	curheroDf = int(fdf + 0.5f);
 	int herohurt = npcatk - curheroDf;
 
 	float fminack = 0.1f * npcatk;
-	int intminack = int(fminack + 1.0f);
+	int intminack = int(fminack + 0.5f);
 
 	if (herohurt < intminack)
 		herohurt = intminack;
@@ -264,6 +273,11 @@ void FightLayer::delayBossFight(float dt)
 	{
 		m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
 		m_escapebtn->setTag(1);
+
+#ifdef ANALYTICS
+		std::string deathstr = StringUtils::format("d-%s", m_npcid.c_str());
+		AnalyticUtil::onEvent(m_npcid.c_str());
+#endif
 	}
 	
 }
@@ -281,7 +295,7 @@ void FightLayer::showFightWord(int type, int value)
 	std::string wordstr;
 	int size = 0;
 	int r = 0;
-
+	bool isbroken = false;
 	if (type == 0)//
 	{
 		std::string herowordstr;
@@ -292,6 +306,19 @@ void FightLayer::showFightWord(int type, int value)
 			r = GlobalData::createRandomNum(size);
 			wordstr = herofightdesc1[extype - 1][r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
+			int r = GlobalData::createRandomNum(100);
+			if (r > 50)
+			{
+				g_hero->getAtrByType(H_WEAPON)->goodvalue--;
+				if (g_hero->getAtrByType(H_WEAPON)->goodvalue <= 0)
+				{
+					StorageRoom::use(g_hero->getAtrByType(H_WEAPON)->strid);
+					PackageData data;
+					data.count = -1;
+					g_hero->setAtrByType(H_WEAPON, data);
+					isbroken = true;
+				}
+			}
 		}
 		else//没有武器
 		{
@@ -326,6 +353,10 @@ void FightLayer::showFightWord(int type, int value)
 		else if (m_npcid.compare("n002") == 0)
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightRabbitword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		checkWordLblColor(herowordstr);
+		if (isbroken)
+		{
+			m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你的武器已毁坏！！"));
+		}
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_ATTACK);
 	}
 	else//
@@ -333,6 +364,21 @@ void FightLayer::showFightWord(int type, int value)
 		std::string bosswordstr;
 		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
 		{
+			int r = GlobalData::createRandomNum(100);
+			if (r > 50)
+			{
+				g_hero->getAtrByType(H_ARMOR)->goodvalue--;
+
+				if (g_hero->getAtrByType(H_ARMOR)->goodvalue <= 0)
+				{
+					StorageRoom::use(g_hero->getAtrByType(H_ARMOR)->strid);
+					PackageData data;
+					data.count = -1;
+					g_hero->setAtrByType(H_ARMOR, data);
+					isbroken = true;
+				}
+			}
+
 			size = sizeof(bossfight1) / sizeof(bossfight1[0]);
 			r = GlobalData::createRandomNum(size);
 			wordstr = bossfight1[r];
@@ -350,6 +396,12 @@ void FightLayer::showFightWord(int type, int value)
 		else if (m_npcid.compare("n002") == 0)
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(rabbitfightword[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		checkWordLblColor(bosswordstr);
+
+		if (isbroken)
+		{
+			m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你的护甲已毁坏！！"));
+		}
+
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT);
 	}
 }

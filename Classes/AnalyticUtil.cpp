@@ -1,5 +1,5 @@
 ﻿#include "AnalyticUtil.h"
-
+#include "Const.h"
 #ifdef ANALYTICS
 #include "MobClickCpp.h"
 
@@ -16,7 +16,7 @@ void AnalyticUtil::startLevel(const char * level) {
     }
     
     void AnalyticUtil::pay(const char * item ,int money, int number)  {
-        umeng::MobClickCpp::pay((double)money, 5, item, number, (double)0);
+        umeng::MobClickCpp::pay((double)money, 1, item, number, (double)0);
     }
     
     void AnalyticUtil::buy(const char * item, int number, float gem)

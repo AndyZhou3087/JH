@@ -63,7 +63,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 		countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
-		countstr = StringUtils::format("功法等级%d", pdata->lv);
+		countstr = StringUtils::format("功法等级%d", pdata->lv + 1);
 		usebtn->setVisible(true);
 		okbtn->setPositionX(460);
 

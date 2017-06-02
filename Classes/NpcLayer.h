@@ -35,7 +35,7 @@ private:
 	延迟新手引导
 	*****************************/
 	void delayShowNewerGuide(float dt);
-	
+	void getWinRes();
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;

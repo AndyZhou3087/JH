@@ -11,6 +11,7 @@
 #include "NpcLayer.h"
 #include "HomeHill.h"
 #include "NewerGuideLayer.h"
+#include "AnalyticUtil.h"
 
 Winlayer::Winlayer()
 {
@@ -96,8 +97,12 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					npclayer->updatePlotUI();
 			}
 
-			if (g_maplayer != NULL && unlockchapter > 0)
-				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+			if (g_maplayer != NULL )
+			{
+				g_maplayer->updataPlotMissionIcon();
+				if (unlockchapter > 0)
+					g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+			}
 		}
 	}
 
@@ -224,13 +229,17 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
+
+#ifdef ANALYTICS
+	if (m_npcid.compare("n089") == 0)
+		AnalyticUtil::onEvent("allpass");
+#endif
 	return true;
 }
 
 void Winlayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
 }
 
 void Winlayer::updataLV()
@@ -357,7 +366,7 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 	unsigned int i = 0;
 	for (i = 0; i < getRewardData.size(); i++)
 	{
-		if (data.strid.compare(getRewardData[i].strid) == 0)
+		if (data.strid.compare(getRewardData[i].strid) == 0 && (getRewardData[i].type == FOOD || getRewardData[i].type == MEDICINAL || getRewardData[i].type == RES_1 || getRewardData[i].type == RES_2))
 		{
 			getRewardData[i].count++;
 			break;
@@ -449,7 +458,7 @@ void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 void Winlayer::loadTempData()
 {
 	tempResData.clear();
-	std::string datastr = GameDataSave::getInstance()->getTempStorage("m1-2");
+	std::string datastr = GameDataSave::getInstance()->getTempStorage(m_addrid);
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");
 	for (unsigned int i = 0; i < vec_retstr.size(); i++)
@@ -480,7 +489,7 @@ void Winlayer::saveTempData()
 		int j = 0;
 		for (j = 0; j < tmpsize; j++)
 		{
-			if (getRewardData[i].strid.compare(tempResData[j].strid) == 0)
+			if (getRewardData[i].strid.compare(tempResData[j].strid) == 0 && (getRewardData[i].type == FOOD || getRewardData[i].type == MEDICINAL || getRewardData[i].type == RES_1 || getRewardData[i].type == RES_2))
 			{
 				allResData[j].count += getRewardData[i].count;
 				break;

@@ -61,7 +61,7 @@ bool ActionGetLayer::init(int rid, std::vector<int> res_ids, int type, int actyp
 	addEventText();
 
 	//点击后山列表中的操作获取一次资源
-	this->scheduleOnce(schedule_selector(ActionGetLayer::delayDoAction), 0.3f);
+	this->scheduleOnce(schedule_selector(ActionGetLayer::delayDoAction), 0.2f);
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -241,7 +241,7 @@ void ActionGetLayer::onPackageItem(cocos2d::Ref* pSender)
 	for (i = 0; i < getResData.size(); i++)
 	{
 		//奖励栏有背包中的资源，背包-1，奖励栏数据-1
-		if (data.strid.compare(getResData[i].strid) == 0)
+		if (data.strid.compare(getResData[i].strid) == 0 && (getResData[i].type == FOOD || getResData[i].type == MEDICINAL || getResData[i].type == RES_1 || getResData[i].type == RES_2))
 		{
 			getResData[i].count++;
 			break;
@@ -340,8 +340,27 @@ void ActionGetLayer::delayDoAction(float dt)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_WAJUE);
 	}
-	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
+
+	int resrid = atoi(GlobalData::vec_resData[mrid].strid.c_str());
+	if (g_hero->getAtrByType((HeroAtrType)m_actype)->count > 0 || resrid == 69)//打水)//是否有工具m_actype：1："采集", 2："砍伐", 3："挖掘"
 	{
+		if (resrid != 69)
+		{
+			int r = GlobalData::createRandomNum(100);
+			if (r > 50)
+			{
+				g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue--;
+
+				if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue <= 0)
+				{
+					StorageRoom::use(g_hero->getAtrByType((HeroAtrType)m_actype)->strid);
+					PackageData data;
+					data.count = -1;
+					g_hero->setAtrByType((HeroAtrType)m_actype, data);
+					g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的工具已损坏！！"));
+				}
+			}
+		}
 		doAction(0);
 	}
 	else
@@ -438,7 +457,7 @@ void ActionGetLayer::saveTempData()
 		int j = 0;
 		for (j = 0; j < tmpsize; j++)
 		{
-			if (getResData[i].strid.compare(tempResData[j].strid) == 0)
+			if (getResData[i].strid.compare(tempResData[j].strid) == 0 && (getResData[i].type == FOOD || getResData[i].type == MEDICINAL || getResData[i].type == RES_1 || getResData[i].type == RES_2))
 			{
 				allResData[j].count += getResData[i].count;
 				break;
@@ -569,7 +588,7 @@ void ActionGetLayer::addEventText()
 	}
 	if (resrid == 69)//打水
 	{
-		desc = CommonFuncs::gbk2utf("你三下五除从水井里打出");
+		desc = CommonFuncs::gbk2utf("你三下五除二从水井里打出");
 		desc.append(GlobalData::vec_resData[mrid].unitname);
 		g_uiScroll->addEventText(desc);
 	}

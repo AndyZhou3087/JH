@@ -54,6 +54,11 @@ private:
 	void updataBuildRes();
 
 	/****************************
+	延迟加载建筑物自己操作的UI
+	*****************************/
+	void delayLoadActionUi(float dt);
+
+	/****************************
 	加载建筑物自己操作的UI
 	****************************/
 	void loadActionUi();
@@ -92,6 +97,7 @@ private:
 	void showFinishHintText(std::string path);//显示完成后的提示文字
 	void finishAnim(Ref* pSender, Node* node);//建造，建筑物自己的操作 完成后的提示动画
 	std::vector<Node*> vec_actionItem;//建筑物自己操作 item node
+	Label* m_loadlbl;//加载文字
 };
 #endif
 

@@ -81,10 +81,23 @@ bool BuildingUILayer::init(Building* build)
 	//建筑升级进度条
 	buildbar = (cocos2d::ui::LoadingBar*)buildnode->getChildByName("item")->getChildByName("loadingbar");
 
+	cocos2d::ui::Text* needtimelbl = (cocos2d::ui::Text*)buildnode->getChildByName("item")->getChildByName("needtime");
+	int blv = m_build->data.level;
+	if (blv >= m_build->data.maxlevel)
+		blv = m_build->data.maxlevel - 1;
+	std::string needtimestr = StringUtils::format("%d分钟", m_build->data.needtime[blv]);
+	needtimelbl->setString(CommonFuncs::gbk2utf(needtimestr.c_str()));
+
 	updataBuildRes();
 
-	loadActionUi();
-
+	if (m_build->data.level > 0)
+	{
+		m_loadlbl = Label::createWithTTF(CommonFuncs::gbk2utf("加载中..."), "fonts/STXINGKA.TTF", 28);
+		m_loadlbl->setColor(Color3B(0, 0, 0));
+		m_loadlbl->setPosition(Vec2(320, 640));
+		this->addChild(m_loadlbl);
+		this->scheduleOnce(schedule_selector(BuildingUILayer::delayLoadActionUi), 0.1f);
+	}
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -176,6 +189,13 @@ void BuildingUILayer::loadActionUi()
 		cocos2d::ui::LoadingBar* actloadbar = (cocos2d::ui::LoadingBar*)item->getChildByName("loadingbar");
 		vec_actionbar.push_back(actloadbar);
 
+		cocos2d::ui::Text* needtimelbl = (cocos2d::ui::Text*)item->getChildByName("needtime");
+		std::string needtimestr = StringUtils::format("%d分钟", GlobalData::map_buidACData[name].at(i).actime);
+		needtimelbl->setString(CommonFuncs::gbk2utf(needtimestr.c_str()));
+		if (name.compare("bed") == 0)
+			needtimelbl->setVisible(false);
+
+
 		cocos2d::ui::Text* desc = (cocos2d::ui::Text*)item->getChildByName("desc");
 
 		if (m_build->data.level >= GlobalData::map_buidACData[name].at(i).blv)
@@ -235,6 +255,12 @@ void BuildingUILayer::loadActionUi()
 			desc->setVisible(true);
 		}
 	}
+}
+
+void BuildingUILayer::delayLoadActionUi(float dt)
+{
+	loadActionUi();
+	m_loadlbl->removeFromParentAndCleanup(true);
 }
 
 void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -381,6 +407,7 @@ void BuildingUILayer::updataBuildRes()
 			buildnode->getChildByName("item")->getChildByName("progressbg")->setVisible(false);
 			buildbtn->setEnabled(false);
 			buildbtn->setTitleText(CommonFuncs::gbk2utf("最高级"));
+			buildnode->getChildByName("item")->getChildByName("needtime")->setVisible(false);
 		}
 		else
 		{

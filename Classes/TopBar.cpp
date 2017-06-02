@@ -18,6 +18,7 @@ TopBar::TopBar()
 
 TopBar::~TopBar()
 {
+
 }
 
 bool TopBar::init()
@@ -168,6 +169,8 @@ bool TopBar::init()
 	m_lastweather = g_nature->getWeather();
 
 	m_lastDayOrNigth = g_nature->getDayOrNight();
+
+	m_lastpastLiveDay = g_nature->getPastDays();
 
 	schedule(schedule_selector(TopBar::updataUI), NORMAL_TIMEINTERVAL * 1.0f/TIMESCALE);
 	return true;
@@ -332,17 +335,24 @@ void TopBar::updataUI(float dt)
 
 	if (m_lastDayOrNigth != g_nature->getDayOrNight())
 	{
-		if (g_nature->getDayOrNight() == Day)
-		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
-			Director::getInstance()->pushScene(transition);
-		}
-		else
-		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
-			Director::getInstance()->pushScene(transition);
-		}
+		//if (g_nature->getDayOrNight() == Day)
+		//{
+		//	auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
+		//	Director::getInstance()->pushScene(transition);
+		//}
+		//else
+		//{
+		//	auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
+		//	Director::getInstance()->pushScene(transition);
+		//}
 		m_lastDayOrNigth = g_nature->getDayOrNight();
+	}
+
+	if (g_nature->getPastDays() >= 1 && m_lastpastLiveDay != g_nature->getPastDays())
+	{
+		m_lastpastLiveDay = g_nature->getPastDays();
+		auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")));
+		Director::getInstance()->pushScene(transition);
 	}
 
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());

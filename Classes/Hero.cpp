@@ -2,6 +2,7 @@
 #include "Const.h"
 #include "Nature.h"
 #include "GameScene.h"
+#include "NewerGuideLayer.h"
 int Hero::MAXInnerinjuryValue = 100;
 int Hero::MAXOutinjuryValue = 100;
 int Hero::MAXHungerValue = 100;
@@ -56,6 +57,9 @@ void Hero::updateData(float dt)
 	{
 		int hour = m_pastmin / 60;
 		m_pastmin = m_pastmin % 60;
+
+		if (g_NewerGuideLayer != NULL)
+			return;
 		if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 		{
 			m_innerinjury -= hour * InnerinjurySpeed * 2;

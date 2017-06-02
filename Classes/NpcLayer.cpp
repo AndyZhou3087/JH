@@ -87,17 +87,28 @@ bool NpcLayer::init(std::string addrid)
 
 		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
 		{
-			Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
-			micon->setScale(0.6f);
-			micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height-10));
-			talkbtn->addChild(micon, 0, "m0");
+			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() > 0)
+			{
+				Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
+				micon->setScale(0.6f);
+				micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
+				talkbtn->addChild(micon, 0, "m0");
+			}
 		}
 		if (dnpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
 		{
 			Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
 			dicon->setScale(0.6f);
-			dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height-10));
-			onFight->addChild(dicon,0, "m1");
+			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].type == 1)
+			{
+				dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
+				onFight->addChild(dicon, 0, "m1");
+			}
+			else
+			{
+				dicon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
+				talkbtn->addChild(dicon, 0, "m1");
+			}
 		}
 	}
 
@@ -161,11 +172,12 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		NpcData npc = GlobalData::map_npcs[GlobalData::map_maps[m_addrstr].npcs[node->getTag()]];
 
-		int size = vec_wordstr.size();
-
-		if (size > 0 && m_wordindex >= size)
+		if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() <= 0)
 			return;
 
+		int size = vec_wordstr.size();
+		if (m_wordindex >= size && size > 0)
+			return;
 		if (isShowWord)
 		{
 			if (vec_wordstr[m_wordindex].length() > 0)
@@ -210,15 +222,23 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				if (GlobalData::vec_PlotMissionData[curplot].type == 0)
 				{
 					GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
+					updatePlotUI();
+
+					getWinRes();
 
 					int unlockchapter = GlobalData::vec_PlotMissionData[curplot].unlockchapter;
 					GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
 
 					GlobalData::setPlotMissionIndex(curplot + 1);
-					if (g_maplayer != NULL && unlockchapter > 0)
+
+					if (g_maplayer != NULL)
 					{
-						g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+						g_maplayer->updataPlotMissionIcon();
+						if (unlockchapter > 0)
+							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
 					}
+
+
 				}
 
 				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)
@@ -363,21 +383,34 @@ void NpcLayer::updatePlotUI()
 		{
 			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
 			{
-				Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
-				micon->setScale(0.6f);
-				micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-				talkbtn->addChild(micon, 0, "m0");
+				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() > 0)
+				{
+
+					Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
+					micon->setScale(0.6f);
+					micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
+					talkbtn->addChild(micon, 0, "m0");
+				}
 			}
 		}
 		onFight->removeChildByName("m1");
+		talkbtn->removeChildByName("m1");
 		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
 		{
 			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
 			{
 				Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
 				dicon->setScale(0.6f);
-				dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
-				onFight->addChild(dicon);
+				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].type == 1)
+				{
+					dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
+					onFight->addChild(dicon);
+				}
+				else
+				{
+					dicon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
+					talkbtn->addChild(dicon);
+				}
 			}
 		}
 	}
@@ -407,6 +440,120 @@ void NpcLayer::fastShowWord()
 		this->scheduleOnce(schedule_selector(NpcLayer::showTypeText), dt);
 		dt += vec_wordstr[i].size() / 3 * 0.1f + 1.0f;
 	}
+}
+
+void NpcLayer::getWinRes()
+{
+	std::vector<std::string> winres = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].rewords;
+	for (unsigned int i = 0; i < winres.size(); i++)
+	{
+		int res = atoi(winres[i].c_str());
+
+		if (res != 0)
+		{
+			PackageData data;
+			bool isfind = false;
+			std::string strid = StringUtils::format("%d", res / 1000);
+			data.strid = strid;
+			data.count = res % 1000;
+
+			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			{
+				ResData rdata = GlobalData::vec_resData[i];
+				if (atoi(rdata.strid.c_str()) == res / 1000)
+				{
+					isfind = true;
+					data.type = rdata.type - 1;
+					data.name = rdata.cname;
+					data.desc = rdata.desc;
+					break;
+				}
+			}
+
+			if (!isfind)
+			{
+				std::map<std::string, std::vector<BuildActionData>>::iterator it;
+				for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+				{
+					std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
+
+					for (unsigned int m = 0; m < vec_bactData.size(); m++)
+					{
+						BuildActionData bdata = vec_bactData[m];
+						if (atoi(bdata.icon) == res / 1000)
+						{
+							isfind = true;
+							data.strid = bdata.icon;
+							data.count = res % 1000;
+							data.type = bdata.type - 1;
+							data.desc = bdata.desc;
+							data.name = bdata.cname;
+							break;
+						}
+					}
+					if (isfind)
+						break;
+				}
+			}
+			MyPackage::add(data);
+		}
+		else
+		{
+			PackageData data;
+			std::string strid = winres[i];
+			data.strid = strid;
+			data.count = 1;
+
+			bool isfind = false;
+			std::map<std::string, WG_NGData>::iterator it;
+			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+			{
+				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]))
+				{
+					isfind = true;
+					data.strid = gfdata.id;
+					data.count = 1;
+					data.lv = 0;
+					if (data.strid.substr(0, 1).compare("w") == 0)
+					{
+						data.type = W_GONG;
+					}
+					else if (data.strid.substr(0, 1).compare("x") == 0)
+					{
+						data.type = N_GONG;
+					}
+					data.desc = gfdata.desc;
+					data.name = gfdata.cname;
+					MyPackage::add(data);
+					break;
+				}
+			}
+
+			if (!isfind)
+			{
+				std::map<std::string, EquipData>::iterator ite;
+				for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+				{
+					EquipData edata = GlobalData::map_equips[ite->first];
+					if (winres[i].compare(edata.id) == 0)
+					{
+						data.strid = edata.id;
+						data.count = 1;
+						data.desc = edata.desc;
+						data.name = edata.cname;
+						data.type = edata.type - 1;
+						data.goodvalue = 100;
+						data.extype = edata.extype;
+						MyPackage::add(data);
+						break;
+					}
+				}
+			}
+		}
+
+	}
+
 }
 
 void NpcLayer::showNewerGuide(int step)

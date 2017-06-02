@@ -2,6 +2,7 @@
 #include "Const.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "GlobalData.h"
 
 std::map<int, std::vector<PackageData>> StorageRoom::map_storageData;
 StorageRoom::StorageRoom()
@@ -80,7 +81,7 @@ void StorageRoom::add(PackageData data)
 	for (i = 0; i < typesize; i++)
 	{
 		PackageData *sdata = &map_storageData[data.type][i];
-		if (data.strid.compare(sdata->strid) == 0)
+		if (data.strid.compare(sdata->strid) == 0 && (data.type == FOOD || data.type == MEDICINAL || data.type == RES_1 || data.type == RES_2))
 		{
 			sdata->count += data.count;
 			break;

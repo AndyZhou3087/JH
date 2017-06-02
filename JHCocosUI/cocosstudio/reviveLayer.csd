@@ -95,6 +95,30 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="revivetext" ActionTag="628692703" Tag="145" IconVisible="False" LeftMargin="414.5192" RightMargin="198.4808" TopMargin="766.4667" BottomMargin="485.5333" FontSize="26" LabelText="复活药水" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="107.0000" Y="28.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="468.0192" Y="499.5333" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="254" G="4" B="4" />
+            <PrePosition X="0.6500" Y="0.3903" />
+            <PreSize X="0.1486" Y="0.0219" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="revivecount" ActionTag="76454667" Tag="146" IconVisible="False" LeftMargin="522.4923" RightMargin="166.5077" TopMargin="765.5784" BottomMargin="486.4216" FontSize="26" LabelText="x12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="31.0000" Y="28.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="522.4923" Y="500.4216" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="254" G="4" B="4" />
+            <PrePosition X="0.7257" Y="0.3910" />
+            <PreSize X="0.0431" Y="0.0219" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

@@ -2,6 +2,9 @@
 #include "CommonFuncs.h"
 #include "StartScene.h"
 #include "SoundManager.h"
+#include "Const.h"
+#include "AnalyticUtil.h"
+#include "GameScene.h"
 DeathLayer::DeathLayer()
 {
 
@@ -38,6 +41,11 @@ bool DeathLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_DEATH);
+
+#ifdef ANALYTICS
+	std::string pastdaystr = StringUtils::format("pastday%d", g_nature->getPastDays());
+	AnalyticUtil::onEvent(pastdaystr.c_str());
+#endif
 
 	return true;
 }

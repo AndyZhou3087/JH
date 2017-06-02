@@ -14,7 +14,9 @@ ActivitScene::ActivitScene()
 ActivitScene::~ActivitScene()
 {
 	--entercount;
-	log("zhou entercount = %d", entercount);
+	log("zhou entercount1111 = %d", entercount);
+	if (entercount > 0)
+		Director::getInstance()->popScene();
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
@@ -44,7 +46,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::LOCAL);
 	cocos2d::ui::Text* text = (cocos2d::ui::Text*)csbnode->getChildByName("text");
 	text->setString(content);
-	if (imagepath.compare("images/cday.jpg") == 0 && content.compare(CommonFuncs::gbk2utf("黑夜降临...")) == 0)
+	if (imagepath.compare("images/cday.jpg") == 0 && content.compare(CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")) == 0)
 	{
 		Sprite* night = Sprite::create("images/cdaynight.png");
 		night->setPosition(image->getPosition());

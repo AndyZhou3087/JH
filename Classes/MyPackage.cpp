@@ -1,6 +1,7 @@
 ﻿#include "MyPackage.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "GlobalData.h"
 
 int MyPackage::max = 5;
 std::vector<PackageData> MyPackage::vec_packages;
@@ -25,7 +26,7 @@ int MyPackage::add(PackageData pdata)
 		int index = 0;
 		for (unsigned int i = 0; i < vec_packages.size(); i++)
 		{
-			if (pdata.strid.compare(vec_packages[i].strid) == 0)
+			if (pdata.strid.compare(vec_packages[i].strid) == 0 && (pdata.type == FOOD || pdata.type == MEDICINAL || pdata.type == RES_1 || pdata.type == RES_2))
 			{
 				if (vec_packages[i].count < 10)
 				{

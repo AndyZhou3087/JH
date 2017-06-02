@@ -3,6 +3,8 @@
 #include "GlobalData.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "Const.h"
+#include "AnalyticUtil.h"
 
 std::string descText[] = {"在这里可查看建造所需要的资源", "点击材料即可查看材料的详细信息", "点击角色头像即可查看角色属性及更换装备等操作", "点击武功即可选择武功进行使用",
 "", "点击内功即可选择内功进行使用", "", "点击武器即可选择武器进行使用",
@@ -55,7 +57,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	{
 		m_clippingNode = ClippingNode::create();
 		m_clippingNode->setInverted(true);//设置底板可见
-		m_clippingNode->setAlphaThreshold(0.0f);//设置透明度Alpha值为0
+		m_clippingNode->setAlphaThreshold(0.5f);//设置透明度Alpha值为0
 		this->addChild(m_clippingNode, 1);
 
 		m_colorlayer = LayerColor::create(Color4B(0, 0, 0, 0));
@@ -77,6 +79,10 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		showAnim(stencilNodes[stencilNodes.size() - 1]->getParent()->convertToWorldSpace(stencilNodes[stencilNodes.size() - 1]->getPosition()));
 	}
 
+	if (step == 18)
+	{
+		m_colorlayer->setOpacity(125);
+	}
 	if (descText[step].length() > 0)
 	{
 		Sprite* textbox = Sprite::create("images/newerguide/newertextbox.png");
@@ -141,8 +147,14 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		GameDataSave::getInstance()->setIsNewerGuide(step, 0);
 	};
 
-
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+#ifdef ANALYTICS
+	if (step == 0)
+		AnalyticUtil::onEvent("newerstart");
+	else if (step == 44)
+		AnalyticUtil::onEvent("newerend");
+#endif
 
 	return true;
 }

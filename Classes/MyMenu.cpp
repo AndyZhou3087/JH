@@ -4,6 +4,17 @@ bool MyMenu::init()
 	return initWithArray(Vector<MenuItem*>());
 }
  
+MyMenu::MyMenu()
+{
+	m_szTouchLimitNode = NULL;
+	m_bTouchLimit = false;
+}
+
+MyMenu::~MyMenu()
+{
+	m_szTouchLimitNode = NULL;
+}
+
 bool MyMenu::initWithArray(const Vector<MenuItem*>& arrayOfItems)
 {
     if (Layer::init())
@@ -101,4 +112,62 @@ MyMenu* MyMenu::create( MenuItem* item, ... )
 MyMenu* MyMenu::create()
 {
 	return MyMenu::create(nullptr, nullptr);
+}
+
+bool MyMenu::onTouchBegan(Touch* touch, Event* event)
+{
+	auto camera = Camera::getVisitingCamera();
+	if (_state != Menu::State::WAITING || !_visible || !_enabled || !camera)
+	{
+		return false;
+	}
+
+	for (Node *c = this->_parent; c != nullptr; c = c->getParent())
+	{
+		if (c->isVisible() == false)
+		{
+			return false;
+		}
+	}
+
+	if (isInTouchLimit(touch))
+	{
+		return false;
+	}
+
+	_selectedItem = this->getItemForTouch(touch, camera);
+	if (_selectedItem)
+	{
+		_state = Menu::State::TRACKING_TOUCH;
+		_selectedWithCamera = camera;
+		_selectedItem->selected();
+
+		return true;
+	}
+
+	return false;
+}
+
+void MyMenu::setTouchlimit(cocos2d::Node *node)
+{
+	m_szTouchLimitNode = node;
+	m_bTouchLimit = true;
+}
+
+bool MyMenu::isInTouchLimit(Touch* touch)
+{
+	if (m_bTouchLimit)
+	{
+		Vec2 touchLocation = touch->getLocation();
+
+		Vec2 local = m_szTouchLimitNode->convertToNodeSpace(touchLocation);
+		Rect r = m_szTouchLimitNode->getBoundingBox();
+		r.origin = Vec2::ZERO;
+
+		if (!r.containsPoint(local))
+		{
+			return true;
+		}
+	}
+	return false;
 }

@@ -256,8 +256,9 @@ void GlobalData::loadNpcJsonData()
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
 			std::string str = v[m].GetString();
-			if (str.length() > 1)
-				data.winresrnd.push_back(atoi(str.c_str()));
+			int rnd = atoi(str.c_str());
+			if (rnd > 0)
+				data.winresrnd.push_back(rnd);
 		}
 		v = item["exchg"];
 		for (unsigned int m = 0; m < v.Size(); m++)
@@ -286,7 +287,7 @@ void GlobalData::loadNpcJsonData()
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
 			std::string str = v[m].GetString();
-			if (str.length() > 1)
+			if (str.length() > 0)
 				data.words.push_back(str);
 		}
 

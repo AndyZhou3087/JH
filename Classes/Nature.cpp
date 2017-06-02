@@ -3,7 +3,7 @@
 #include "GameScene.h"
 #include "CommonFuncs.h"
 
-int Nature::ReasonCDays = 90;
+int Nature::ReasonCDays = 30;
 
 Nature::Nature()
 {
@@ -104,8 +104,8 @@ void Nature::updateData(float dt)
 	m_time += getTimeInterval();
 	if (m_time >= 1440.0f)
 	{
-		m_time = 0.0f;
 		m_pastdays++;
+		m_time = 0.0f;
 		changeWeatherCount = 0;
 		changeWeatherRandow = GlobalData::createRandomNum(24) + 1;
 		ChangeReason();

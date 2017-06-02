@@ -57,7 +57,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(false);
+    director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
@@ -83,7 +83,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-#ifdef ANALYTICS
+#if defined(CC_PLATFORM_IOS) && defined(ANALYTICS)
     MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)

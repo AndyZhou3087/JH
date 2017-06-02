@@ -12,6 +12,7 @@
 #include "SoundManager.h"
 #include "UnlockLayer.h"
 #include "NewerGuideLayer.h"
+#include "AnalyticUtil.h"
 
 static Vec2 heroPos;
 
@@ -49,6 +50,7 @@ bool MapLayer::init()
 	}
 	float offsetx = 0.0f;
 	float offsety = 0.0f;
+
 	Size scollviewsize = mapscroll->getContentSize();
 	Vec2 pos = m_mapbg->getChildren().at(heroposindex)->getPosition();
 
@@ -56,6 +58,11 @@ bool MapLayer::init()
 		offsetx = pos.x - scollviewsize.width / 2;
 	if (pos.y > scollviewsize.height / 2)
 		offsety = pos.y - scollviewsize.height / 2;
+
+	if (pos.x + scollviewsize.width/2 > mapscroll->getInnerContainerSize().width)
+		offsetx = mapscroll->getInnerContainerSize().width - scollviewsize.width/2;
+	if (pos.y + scollviewsize.height/2 > mapscroll->getInnerContainerSize().height)
+		offsety = mapscroll->getInnerContainerSize().height - scollviewsize.height/2;
 
 	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 
@@ -211,7 +218,11 @@ void MapLayer::showUnlockLayer(float dt)
 {
 	Director::getInstance()->getRunningScene()->addChild(UnlockLayer::create(), 10);
 	updateUnlockChapter();
-	updataPlotMissionIcon();
+
+#ifdef ANALYTICS
+	std::string unlockstr = StringUtils::format("u%d", GlobalData::getUnlockChapter());
+	AnalyticUtil::onEvent(unlockstr.c_str());
+#endif
 }
 
 void MapLayer::updataPlotMissionIcon()
@@ -223,6 +234,7 @@ void MapLayer::updataPlotMissionIcon()
 	m_smissionIcon->setVisible(false);
 	m_smissionIcon->setVisible(false);
 
+	int plotindex = GlobalData::getPlotMissionIndex();
 	for (int i = 0; i < mapnamecount; i++)
 	{
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
@@ -230,11 +242,18 @@ void MapLayer::updataPlotMissionIcon()
 		{
 			if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 			{
-				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
+				if (GlobalData::vec_PlotMissionData[plotindex].status == M_NONE)
 				{
-					m_smissionIcon->setVisible(true);
-					m_smissionIcon->runAction(RepeatForever::create(Blink::create(2, 3)));
-					m_smissionIcon->setPosition(mapname->getPosition());
+					if (GlobalData::vec_PlotMissionData[plotindex].words.size() <= 0)
+					{
+						GlobalData::vec_PlotMissionData[plotindex].status = M_DOING;
+					}
+					else
+					{
+						m_smissionIcon->setVisible(true);
+						m_smissionIcon->runAction(RepeatForever::create(Blink::create(2, 3)));
+						m_smissionIcon->setPosition(mapname->getPosition());
+					}
 				}
 				else
 				{
@@ -242,9 +261,16 @@ void MapLayer::updataPlotMissionIcon()
 					m_smissionIcon->setVisible(false);
 				}
 			}
+		}
+	}
+	for (int i = 0; i < mapnamecount; i++)
+	{
+		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+		for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+		{
 			if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 			{
-				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
+				if (GlobalData::vec_PlotMissionData[plotindex].status == M_DOING)
 				{
 					m_dmissionIcon->setVisible(true);
 					m_dmissionIcon->runAction(RepeatForever::create(Blink::create(2, 3)));

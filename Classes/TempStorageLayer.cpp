@@ -7,6 +7,7 @@
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
+#include "MyMenu.h"
 
 TempStorageLayer::TempStorageLayer()
 {
@@ -136,7 +137,7 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 	unsigned int i = 0;
 	for (i = 0; i < tempResData.size(); i++)
 	{
-		if (data.strid == tempResData[i].strid)
+		if (data.strid == tempResData[i].strid && (tempResData[i].type == FOOD || tempResData[i].type == MEDICINAL || tempResData[i].type == RES_1 || tempResData[i].type == RES_2))
 		{
 			tempResData[i].count++;
 			break;
@@ -164,7 +165,7 @@ void TempStorageLayer::onPackageItem(cocos2d::Ref* pSender)
 void TempStorageLayer::updataTempUI()
 {
 	int tempsize = tempResData.size();
-	int itemheight = 135;
+	int itemheight = 125;
 	int row = tempsize % 5 == 0 ? tempsize / 5 : (tempsize / 5 + 1);
 	int innerheight = itemheight * row;
 	int contentheight = m_scrollView->getContentSize().height;
@@ -183,9 +184,10 @@ void TempStorageLayer::updataTempUI()
 			CC_CALLBACK_1(TempStorageLayer::onRewardItem, this));
 		boxItem->setTag(i);
 		boxItem->setUserData(&tempResData[i]);
-		boxItem->setPosition(Vec2(70 + i % 5 * 135, innerheight - i / 5 * itemheight - itemheight / 2));
-		Menu* menu = Menu::create();
+		boxItem->setPosition(Vec2(70 + i % 5 * 128, innerheight - i / 5 * itemheight - itemheight / 2));
+		MyMenu* menu = MyMenu::create();
 		menu->addChild(boxItem);
+		menu->setTouchlimit(m_scrollView);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->addChild(menu, 0, name);
