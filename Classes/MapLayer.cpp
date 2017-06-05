@@ -34,6 +34,7 @@ bool MapLayer::init()
 	this->addChild(csbnode);
 
 	cocos2d::ui::ScrollView* mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
+	mapscroll->setScrollBarEnabled(false);
 
 	m_mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
 	int mapnamecount = GlobalData::map_maps.size();

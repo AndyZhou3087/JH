@@ -1,6 +1,7 @@
 ﻿#include "SysSmallBox.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
+#include "Hero.h"
 
 SysSmallBox::SysSmallBox()
 {
@@ -25,6 +26,7 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	titleTxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	title1Txt = (cocos2d::ui::Text*)csbnode->getChildByName("title1");
 	textTxt = (cocos2d::ui::Text*) csbnode->getChildByName("text");
+	valueTxt = (cocos2d::ui::Text*) csbnode->getChildByName("valuelbl");
 
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	image->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
@@ -169,6 +171,8 @@ void SysSmallBox::updataUI(float dt)
 			}
 
 			title1Txt->setString(CommonFuncs::gbk2utf(outInjurydesc1[index].c_str()));
+			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxOutinjuryValue());
+			valueTxt->setString(vstr);
 		}
 	}
 	if (mType == INNERINJURY)
@@ -189,6 +193,8 @@ void SysSmallBox::updataUI(float dt)
 				}
 			}
 			title1Txt->setString(CommonFuncs::gbk2utf(innerInjurydesc1[index].c_str()));
+			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxInnerinjuryValue());
+			valueTxt->setString(vstr);
 		}
 	
 	}
@@ -210,6 +216,8 @@ void SysSmallBox::updataUI(float dt)
 				}
 			}
 			title1Txt->setString(CommonFuncs::gbk2utf(hungerdesc1[index].c_str()));
+			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxHungerValue());
+			valueTxt->setString(vstr);
 		}
 	}
 	if (mType == SPIRIT)
@@ -230,6 +238,8 @@ void SysSmallBox::updataUI(float dt)
 				}
 			}
 			title1Txt->setString(CommonFuncs::gbk2utf(spiritInjurydesc1[index].c_str()));
+			std::string vstr = StringUtils::format("(%d/%d)", v, (int)g_hero->getMaxSpiritValue());
+			valueTxt->setString(vstr);
 		}
 	}
 	if (mType == LIFE)

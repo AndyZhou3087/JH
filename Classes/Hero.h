@@ -221,7 +221,7 @@ static std::string hungerdesc1[] = { "鼓腹含和", "酒足饭饱", "啜菽饮�
 static std::string hungerdesc = { "过度饥饿时会加速其它属性的消耗，并降低攻击力与防御力的效果。适当饮食可保持良好状态。" };
 
 static std::string spiritInjurydesc1[] = { "意气风发", "朝气蓬勃", "神气十足", "垂头丧气", "没精打采", "萎靡不振", "生无可恋" };
-static std::string spiritInjurydesc = { "精神状态不好时会降低所有属性效果及恢复效率，保持良好的精神状态很重要。喝酒或打败恶人会恢复精神状态。" };
+static std::string spiritInjurydesc = { "精神状态不好时会降低所有属性效果及恢复效率，保持良好的精神状态很重要。喝酒会恢复精神状态。" };
 
 static std::string lifedesc = { "生命值消耗完时角色死亡，通过睡眠可恢复生命。" };
 #endif

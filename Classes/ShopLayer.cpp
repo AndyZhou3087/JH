@@ -10,6 +10,9 @@
 
 #include "json.h"
 #include "AnalyticUtil.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "IOSPurchaseWrap.h"
+#endif
 
 std::vector<GoodsData> ShopLayer::vec_goods;
 int ShopLayer::payindex;
@@ -58,6 +61,8 @@ bool ShopLayer::init()
 
 
 	m_scrollview = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
+	m_scrollview->setScrollBarEnabled(false);
+	m_scrollview->setBounceEnabled(true);
 
 	int itemheight = 350;
 	int innerheight = itemheight * row;
@@ -137,6 +142,7 @@ void ShopLayer::beginPay(int index)
 
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	//payCode
+	buy((char*)payCode[payindex].c_str());
 #endif
 }
 void ShopLayer::setMessage(PYARET ret)

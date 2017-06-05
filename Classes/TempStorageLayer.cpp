@@ -51,6 +51,8 @@ bool TempStorageLayer::init(std::string addrname)
 	getallbtn->addTouchEventListener(CC_CALLBACK_2(TempStorageLayer::onAllGet, this));
 
 	m_scrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
+	m_scrollView->setScrollBarEnabled(false);
+	m_scrollView->setBounceEnabled(true);
 
 	loadTempData();
 

@@ -23,11 +23,14 @@ bool HomeHill::init()
 	Node* csbnode = CSLoader::createNode("homeHillLayer.csb");
 	this->addChild(csbnode);
 
+	//返回按钮
 	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	m_backbtn->addTouchEventListener(CC_CALLBACK_2(HomeHill::onBack, this));
 	
 	int ressize = GlobalData::vec_hillResid.size();
 	scrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
+	scrollView->setScrollBarEnabled(false);
+	scrollView->setBounceEnabled(true);
 
 	int itemheight = 140;
 	int innerheight = itemheight * ressize;
@@ -38,21 +41,30 @@ bool HomeHill::init()
 
 	for (int i = 0; i < ressize; i++)
 	{
+		//产出资源node
 		Node* resnode = CSLoader::createNode("resNode.csb");
 		std::string namestr = StringUtils::format("node%d", i);
 		scrollView->addChild(resnode,0, namestr);
 		resnode->setPosition(Vec2(scrollView->getContentSize().width/2, innerheight - i * itemheight - itemheight / 2));
 
+		//资源id
 		cocos2d::ui::ImageView* iconimg = (cocos2d::ui::ImageView*)resnode->getChildByName("icon");
+		//资源名称
 		cocos2d::ui::Text* name = (cocos2d::ui::Text*)resnode->getChildByName("name");
+		//产出个数
 		cocos2d::ui::Text* count = (cocos2d::ui::Text*)resnode->getChildByName("count");
+		//产出速度
 		cocos2d::ui::Text* speed = (cocos2d::ui::Text*)resnode->getChildByName("speed");
+		//等待时间，采完之后显示，恢复满
 		cocos2d::ui::Text* waittime = (cocos2d::ui::Text*)resnode->getChildByName("waittime");
+		//资源描述
 		cocos2d::ui::Text* desc = (cocos2d::ui::Text*)resnode->getChildByName("desc");
 		cocos2d::ui::Text* waittext = (cocos2d::ui::Text*)resnode->getChildByName("waittext");
 		
+		//操作按钮
 		cocos2d::ui::Button* actionbtn = (cocos2d::ui::Button*)resnode->getChildByName("actionbtn");
 		actionbtn->addTouchEventListener(CC_CALLBACK_2(HomeHill::onclick, this));
+
 		for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
 		{
 			ResData data = GlobalData::vec_resData[m];

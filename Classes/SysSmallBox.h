@@ -32,6 +32,7 @@ private:
 	cocos2d::ui::Text* titleTxt;
 	cocos2d::ui::Text* title1Txt;
 	cocos2d::ui::Text* textTxt;
+	cocos2d::ui::Text* valueTxt;
 	BoxType mType;
 
 private:

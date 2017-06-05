@@ -138,7 +138,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
-		wgAtk = GlobalData::map_wgngs[strid].vec_bns[GlobalData::map_wgngs[strid].lv];
+		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
 	}
 	//攻击属性
 	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
@@ -150,7 +150,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
-		ngdf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
 	}
 
 	if (g_hero->getAtrByType(H_ARMOR)->count > 0)

@@ -36,6 +36,10 @@ public:
 	*****************************/
 	void delayShowNewerGuide(float dt);
 
+	/****************************
+	保存数据到本地文件
+	*****************************/
+	void saveAllData();
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家
@@ -53,16 +57,10 @@ private:
 	*****************************/
 	void loadSaveHeroData();
 
-
 	/****************************
 	读取保存到本地的角色属性数据
 	*****************************/
 	void loadSavedHeroPropData();
-
-	/****************************
-	保存数据到本地文件
-	*****************************/
-	void saveAllData();
 
 	/****************************
 	定时更新资源列表数据
@@ -78,7 +76,6 @@ private:
 	定时查看角色是否死亡，生命为0死掉
 	*****************************/
 	void checkiflive(float dt);
-
 
 };
 extern Nature* g_nature;//天气数据

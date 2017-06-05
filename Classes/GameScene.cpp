@@ -107,8 +107,8 @@ bool GameScene::init()
 	this->addChild(bg, 4);
 
 	//滚动文字
-	g_uiScroll = UIScroll::create(560.0f, 132.0f);
-	g_uiScroll->setPosition(Vec2(visibleSize.width / 2, 960));
+	g_uiScroll = UIScroll::create(600.0F, 132.0f);
+	g_uiScroll->setPosition(Vec2(visibleSize.width / 2 + 15, 960));
 	addChild(g_uiScroll, 4);
 
 	//任务属性和天气

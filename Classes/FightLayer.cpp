@@ -144,7 +144,7 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			}
 			else
 			{
-				m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你乘机逃跑，可惜失败了！！"));
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你乘机逃跑，可惜失败了！！"), 25, Color3B(204, 4, 4));
 			}
 		}
 		else
@@ -164,7 +164,7 @@ void FightLayer::delayHeroFight(float dt)
 	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
 	{
 		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
-		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
 	}
 
 	if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器--加攻
@@ -212,7 +212,7 @@ void FightLayer::delayBossFight(float dt)
 	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
-		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[GlobalData::map_wgngs[gfname].lv];
+		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
 	}
 
 	if (g_hero->getAtrByType(H_ARMOR)->count > 0)////是否有防具--加防
@@ -355,7 +355,7 @@ void FightLayer::showFightWord(int type, int value)
 		checkWordLblColor(herowordstr);
 		if (isbroken)
 		{
-			m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你的武器已毁坏！！"));
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的武器已毁坏！！"), 25, Color3B(204, 4, 4));
 		}
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_ATTACK);
 	}
@@ -399,7 +399,7 @@ void FightLayer::showFightWord(int type, int value)
 
 		if (isbroken)
 		{
-			m_fihgtScorll->addEventText(CommonFuncs::gbk2utf("你的护甲已毁坏！！"));
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的护甲已毁坏！！"), 25, Color3B(204, 4, 4));
 		}
 
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT);

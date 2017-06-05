@@ -1,6 +1,8 @@
 ﻿#include "AppDelegate.h"
 #include "StartScene.h"
 #include "SoundManager.h"
+#include "Const.h"
+#include "GameScene.h"
 #ifdef ANALYTICS
 #include "MobClickCpp.h"
 #endif
@@ -104,6 +106,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 	SoundManager::getInstance()->pauseBackMusic();
+	if (g_gameLayer != NULL)
+		g_gameLayer->saveAllData();
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -112,6 +116,7 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 	SoundManager::getInstance()->resumeBackMusic();
+	SoundManager::getInstance()->resumeAllEffectSound();
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

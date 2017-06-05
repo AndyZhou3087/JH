@@ -357,7 +357,7 @@ void ActionGetLayer::delayDoAction(float dt)
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType((HeroAtrType)m_actype, data);
-					g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的工具已损坏！！"));
+					g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的工具已损坏！！"), 25, Color3B(204, 4, 4));
 				}
 			}
 		}

@@ -396,7 +396,6 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
-		data.lv = 0;
 		map_wgngs[data.id] = data;
 	}
 
@@ -430,7 +429,6 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
-		data.lv = 0;
 		map_wgngs[data.id] = data;
 	}
 }

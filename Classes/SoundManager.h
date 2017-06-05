@@ -44,7 +44,7 @@ public:
 		MUSIC_ID_FIGHT_1,
 		MUSIC_ID_FIGHT_2,
 		MUSIC_ID_FIGHT_3,
-		MUSIC_ID_DEATH,//死亡界面
+		MUSIC_ID_DEATH//死亡界面
 	};
 	
 	//soundmanage 实例

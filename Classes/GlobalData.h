@@ -99,7 +99,6 @@ typedef struct
 	int maxlv;
 	std::vector<int> vec_bns;//外功--加攻或者内功--加防
 	std::vector<int> vec_exp;
-	int lv;//目前等级
 	std::string cname;
 	std::string desc;
 }WG_NGData;

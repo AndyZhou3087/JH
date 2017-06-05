@@ -21,10 +21,12 @@ bool GoodsItem::init(GoodsData* gdata)
 	csbnode->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 	this->addChild(csbnode);
 
-	icon = (cocos2d::ui::ImageView*)csbnode->getChildByName("icon");
-	nameTxt = (cocos2d::ui::Text*)csbnode->getChildByName("name");
-	descTxt = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
-	priceTxt = (cocos2d::ui::Text*) csbnode->getChildByName("price");
+	Node* bgnode = csbnode->getChildByName("bg");
+
+	icon = (cocos2d::ui::ImageView*)bgnode->getChildByName("icon");
+	nameTxt = (cocos2d::ui::Text*)bgnode->getChildByName("name");
+	descTxt = (cocos2d::ui::Text*)bgnode->getChildByName("desc");
+	priceTxt = (cocos2d::ui::Text*)bgnode->getChildByName("price");
 
 	//图标
 	std::string imagepath = StringUtils::format("ui/%s.png", gdata->icon.c_str());
@@ -60,8 +62,17 @@ GoodsItem* GoodsItem::create(GoodsData* gdata)
 }
 void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	if (type == ui::Widget::TouchEventType::ENDED)
+	if (type == ui::Widget::TouchEventType::BEGAN || type == ui::Widget::TouchEventType::MOVED)
 	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 0.95f), NULL));
+	}
+	else if (type == ui::Widget::TouchEventType::CANCELED)
+	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
+	}
+	else if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		//购买
 		ShopLayer::beginPay(this->getTag());

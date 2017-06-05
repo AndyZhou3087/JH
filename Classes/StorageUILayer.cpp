@@ -39,6 +39,9 @@ bool StorageUILayer::init()
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(StorageUILayer::onShop, this));
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
+	scrollview->setScrollBarEnabled(false);
+	scrollview->setBounceEnabled(true);
+
 	scrollview->setContentSize(Size(650, 750));
 	scrollview->setPositionY(200);
 	

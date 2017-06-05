@@ -86,6 +86,8 @@ bool HeroProperNode::init()
 	heroppoint = (cocos2d::ui::Widget*)csbroot->getChildByName("heroppoint");
 
 	m_scrollView = (cocos2d::ui::ScrollView*)heroselectbg->getChildByName("ScrollView");
+	m_scrollView->setScrollBarEnabled(false);
+	m_scrollView->setBounceEnabled(true);
 
 	cocos2d::ui::Button* okbtn = (cocos2d::ui::Button*)heroselectbg->getChildByName("okbtn");
 	okbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onOK, this));
@@ -186,7 +188,8 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 		}
 		if (g_hero->getAtrByType(index)->count > 0)//已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
-			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
+			PackageData sdata = *g_hero->getAtrByType(index);
+			map_carryData[index].insert(map_carryData[index].begin(), sdata);
 		}
 
 	}
@@ -195,22 +198,34 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 		if (index == H_WEAPON)//武器
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[WEAPON].size(); m++)
-				map_carryData[index].push_back(StorageRoom::map_storageData[WEAPON][m]);
+			{
+				PackageData data = StorageRoom::map_storageData[WEAPON][m];
+				map_carryData[index].push_back(data);
+			}
 		}
 		else if (index == H_WG)//外功
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[W_GONG].size(); m++)
-				map_carryData[index].push_back(StorageRoom::map_storageData[W_GONG][m]);
+			{
+				PackageData data = StorageRoom::map_storageData[W_GONG][m];
+				map_carryData[index].push_back(data);
+			}
 		}
 		else if (index == H_NG)//内功
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[N_GONG].size(); m++)
+			{
+				PackageData data = StorageRoom::map_storageData[N_GONG][m];
 				map_carryData[index].push_back(StorageRoom::map_storageData[N_GONG][m]);
+			}
 		}
 		else if (index == H_ARMOR)//防具
 		{
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[PROTECT_EQU].size(); m++)
+			{
+				PackageData data = StorageRoom::map_storageData[PROTECT_EQU][m];
 				map_carryData[index].push_back(StorageRoom::map_storageData[PROTECT_EQU][m]);
+			}
 		}
 		else//工具
 		{
@@ -221,17 +236,19 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 
 				for (unsigned int m = 0; m < StorageRoom::map_storageData[TOOLS].size(); m++)
 				{
-					if (StorageRoom::map_storageData[TOOLS][m].extype == 1 && index == H_GATHER)//采集
-						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
-					else if (StorageRoom::map_storageData[TOOLS][m].extype == 2 && index == H_FELL)//砍伐
-						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
-					else if (StorageRoom::map_storageData[TOOLS][m].extype == 3 && index == H_EXCAVATE)//挖掘
-						map_carryData[index].push_back(StorageRoom::map_storageData[TOOLS][m]);
+					PackageData data = StorageRoom::map_storageData[TOOLS][m];
+					if (data.extype == 1 && index == H_GATHER)//采集
+						map_carryData[index].push_back(data);
+					else if (data.extype == 2 && index == H_FELL)//砍伐
+						map_carryData[index].push_back(data);
+					else if (data.extype == 3 && index == H_EXCAVATE)//挖掘
+						map_carryData[index].push_back(data);
 				}
 			}
 		}
 		if (g_hero->getAtrByType(index)->count > 0) // 已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
+			PackageData sdata = *g_hero->getAtrByType(index);
 			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
 		}
 	}
@@ -260,7 +277,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		boxItem->setUserData(&map_carryData[index][i]);
 		if (i == 0 && g_hero->getAtrByType(index)->count > 0)
 		{
-			boxItem->setUserData(g_hero->getAtrByType(index));
+			m_lastSelectedData = &map_carryData[index][i];
 		}
 
 		boxItem->setPosition(Vec2(80 + i % 4 * 145, innerheight - i / 4 * itemheight - itemheight / 2));
@@ -318,7 +335,6 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 					break;
 				}
 			}
-			m_lastSelectedData = hpdata;
 		}
 	}
 }
@@ -336,7 +352,6 @@ void HeroProperNode::onItem(Ref* pSender)
 	{
 		if (m_lastSelectedData != udata)//是否再次点击
 		{
-
 			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
 			bool issametool = false;
 			bool issameother = false;
@@ -360,8 +375,8 @@ void HeroProperNode::onItem(Ref* pSender)
 					if (m_select->isVisible())
 						StorageRoom::add(*m_lastSelectedData);
 				}
-				m_select->setVisible(false);
 			}
+			m_select->setVisible(false);
 		}
 
 	}

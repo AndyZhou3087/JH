@@ -59,13 +59,14 @@ void MyPackage::cutone(std::string strid)
 	{
 		if (strid.compare(MyPackage::vec_packages[index].strid) == 0)
 		{
+			if (--vec_packages[index].count <= 0)
+			{
+				vec_packages.erase(vec_packages.begin() + index);
+			}
 			break;
 		}
 	}
-	if (--vec_packages[index].count <= 0)
-	{
-		vec_packages.erase(vec_packages.begin() + index);
-	}
+
 	save();
 }
 

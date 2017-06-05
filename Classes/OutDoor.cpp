@@ -30,6 +30,8 @@ bool OutDoor::init()
 	m_csbnode->addChild(m_heroproper, 1);
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
+	scrollview->setScrollBarEnabled(false);
+	scrollview->setBounceEnabled(true);
 
 	updata();
 
@@ -159,9 +161,10 @@ void OutDoor::updataStorageUI()
 
 	int row = typecount % 5 == 0 ? typecount / 5 : (typecount / 5 + 1);
 
-	int innerheight = row * 130;
+	int innerheight = scrollview->getContentSize().height;
 	if (lastSrollViewHeight < 0)
 	{
+		innerheight = row * 130;
 		int contentheight = scrollview->getContentSize().height;
 		if (innerheight < contentheight)
 			innerheight = contentheight;

@@ -287,7 +287,7 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				{
 					std::string gfname = gfData->strid;
 					std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
-					curlv = GlobalData::map_wgngs[gfname].lv;
+					curlv = gfData->lv;
 					gfData->exp += resdata.ep[0];
 					for (i = curlv; i < vec_gfExp.size(); i++)
 					{
@@ -302,8 +302,6 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 						if (lv >= vec_gfExp.size())
 							lv = vec_gfExp.size() - 1;
 						gfData->lv = lv;
-						GlobalData::map_wgngs[gfname].lv = lv;
-
 					}
 				}
 
@@ -350,7 +348,10 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			if (lv > curlv)
 			{
 				if (lv >= vec_heroExp.size())
+				{
+					g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
 					lv = vec_heroExp.size() - 1;
+				}
 				g_hero->setLVValue(lv);
 				
 			}

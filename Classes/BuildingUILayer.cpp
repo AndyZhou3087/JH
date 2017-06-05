@@ -56,7 +56,10 @@ bool BuildingUILayer::init(Building* build)
 	//返回按钮
 	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBack, this));
+
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
+	scrollview->setScrollBarEnabled(false);
+	scrollview->setBounceEnabled(true);
 	if (m_build->data.level <= 0)
 		scrollview->setVisible(false);
 
@@ -176,9 +179,9 @@ void BuildingUILayer::loadActionUi()
 		std::string iconstr = StringUtils::format("ui/%s.png", GlobalData::map_buidACData[name].at(i).icon);
 		icon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
-
+		/*建筑物操作的显示ICON*/
 		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-		icon->setTag(1000 * (i +1));
+		icon->setTag(1000 * (i +1));//点击按钮TAG来区分1000以上 
 
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
@@ -208,10 +211,11 @@ void BuildingUILayer::loadActionUi()
 					int restypecount = GlobalData::map_buidACData[name].at(i).res.at(m);
 					if (restypecount > 0)
 					{
+						//建筑物的图标
 						std::string str = StringUtils::format("res%d", m);
 						cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
 						resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-						resitem->setTag((i + 1) * 100 + m);
+						resitem->setTag((i + 1) * 100 + m); //点击按钮TAG来区分100以上
 						resitem->setVisible(true);
 
 						str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
@@ -425,11 +429,12 @@ void BuildingUILayer::updataBuildRes()
 		//更新升级需要的资源
 		for (unsigned int i = 0; i < m_build->data.Res[level].size(); i++)
 		{
+			//需要的资源图标
 			std::string str = StringUtils::format("res%d", i);
 			cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
 
 			resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-			resitem->setTag(i);
+			resitem->setTag(i); //点击按钮TAG来区分1000以上
 
 			str = StringUtils::format("count%d", i);
 			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);

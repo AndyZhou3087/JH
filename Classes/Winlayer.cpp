@@ -261,7 +261,10 @@ void Winlayer::updataLV()
 	if (lv > curlv)
 	{
 		if (lv >= vec_heroExp.size())
+		{
+			g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
 			lv = vec_heroExp.size() - 1;
+		}
 		g_hero->setLVValue(lv);
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
 
@@ -275,7 +278,7 @@ void Winlayer::updataLV()
 		{
 			std::string gfname = gfData->strid;
 			std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
-			curlv = GlobalData::map_wgngs[gfname].lv;
+			curlv = gfData->lv;
 			gfData->exp += winexp * 3 / 2;
 			for (i = curlv; i < vec_gfExp.size(); i++)
 			{
@@ -290,7 +293,6 @@ void Winlayer::updataLV()
 				if (lv >= vec_gfExp.size())
 					lv = vec_gfExp.size() - 1;
 				gfData->lv = lv;
-				GlobalData::map_wgngs[gfname].lv = lv;
 			}
 		}
 
