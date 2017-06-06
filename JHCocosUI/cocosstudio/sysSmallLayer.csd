@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.7264" Y="0.4344" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="image" ActionTag="265372925" Tag="30" IconVisible="False" LeftMargin="330.9959" RightMargin="331.0041" TopMargin="451.1711" BottomMargin="786.8289" LeftEage="19" RightEage="19" TopEage="13" BottomEage="13" Scale9OriginX="19" Scale9OriginY="13" Scale9Width="20" Scale9Height="16" ctype="ImageViewObjectData">

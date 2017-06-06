@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/topbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/topbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="heroimg" ActionTag="-514659789" Tag="4" IconVisible="False" LeftMargin="-372.8527" RightMargin="191.8527" TopMargin="-217.0007" BottomMargin="-20.9993" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">

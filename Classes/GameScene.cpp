@@ -116,8 +116,8 @@ bool GameScene::init()
 	topBar->setPosition(Vec2(visibleSize.width/2, 1063));
 	addChild(topBar, 3, "topbar");
 	
-	this->schedule(schedule_selector(GameScene::updata), 0.2f);
-	this->schedule(schedule_selector(GameScene::timerSaveResData), 3.0f);
+	this->schedule(schedule_selector(GameScene::updata), 1.0f);
+	this->schedule(schedule_selector(GameScene::timerSaveData), 5.0f);
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
     return true;
 }
@@ -235,7 +235,6 @@ void GameScene::onExit()
 
 void GameScene::saveAllData()
 {
-	
 	GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
 	GameDataSave::getInstance()->setNatureWeather(g_nature->getWeather());
 	GameDataSave::getInstance()->setNatureWeatherChangeCount(g_nature->changeWeatherCount * 10000 + g_nature->changeWeatherRandow);
@@ -251,6 +250,9 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroId(g_hero->getHeadID());
 	GameDataSave::getInstance()->setHeroExp(g_hero->getExpValue());
 	GameDataSave::getInstance()->setHeroIsOut(g_hero->getIsOut());
+
+	//保存资源数据
+	GlobalData::saveResData();
 }
 
 void GameScene::updata(float dt)
@@ -266,7 +268,7 @@ void GameScene::updata(float dt)
 				if (data->count <= 0)//采完，等待
 				{
 					data->pastmin = 0;
-					data->waittime += 1;
+					data->waittime += g_nature->getTimeInterval();
 					if (data->waittime >= data->speed * data->max)
 					{
 						data->count = data->max;
@@ -275,24 +277,30 @@ void GameScene::updata(float dt)
 				}
 				else
 				{
-					data->pastmin += 1;
+					data->pastmin += g_nature->getTimeInterval();
 					if (data->pastmin >= data->speed)
 					{
-						data->pastmin = 0;
-						data->count++;
+						int pcount = data->pastmin / data->speed;
+						data->count += pcount;
+
+						int leftmin = data->pastmin % data->speed;
+						data->pastmin = leftmin;
+	
 					}
 
 					if (data->count >= data->max)//产出最大
+					{
+						data->pastmin = 0;
 						data->count = data->max;
+					}
 				}
 			}
 		}
 	}
 }
 
-void GameScene::timerSaveResData(float dt)
+void GameScene::timerSaveData(float dt)
 {
-	GlobalData::saveResData();
 	saveAllData();
 }
 

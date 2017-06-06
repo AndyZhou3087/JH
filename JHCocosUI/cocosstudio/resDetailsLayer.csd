@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.7264" Y="0.4344" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="okbtn" ActionTag="-37325359" Tag="118" IconVisible="False" LeftMargin="299.5000" RightMargin="299.5000" TopMargin="807.1471" BottomMargin="418.8529" TouchEnable="True" FontSize="36" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="121.0000" Y="54.0000" />

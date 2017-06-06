@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.7264" Y="0.4344" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="shopsepline" ActionTag="337243557" Tag="316" IconVisible="False" LeftMargin="154.7038" RightMargin="147.2962" TopMargin="540.3448" BottomMargin="733.6552" ctype="SpriteObjectData">

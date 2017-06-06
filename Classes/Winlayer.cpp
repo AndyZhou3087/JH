@@ -271,6 +271,7 @@ void Winlayer::updataLV()
 		showLvUpText();
 	}
 
+	lv = 0;
 	for (int m = H_WG; m <= H_NG; m++)
 	{
 		PackageData* gfData = g_hero->getAtrByType((HeroAtrType)m);

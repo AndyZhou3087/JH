@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.3383" />
             <PreSize X="1.0000" Y="0.6922" />
-            <FileData Type="MarkedSubImage" Path="ui/normalboxgb.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="backbtn" ActionTag="900287557" Tag="156" IconVisible="False" LeftMargin="551.8295" RightMargin="46.1705" TopMargin="473.2864" BottomMargin="743.7136" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="122.0000" Y="63.0000" />
@@ -39,7 +39,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4799" />
             <PreSize X="0.8361" Y="0.2109" />
-            <FileData Type="MarkedSubImage" Path="ui/t001.jpg" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/t001.jpg" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="title" ActionTag="1254659606" Tag="158" IconVisible="False" LeftMargin="82.0233" RightMargin="484.9767" TopMargin="474.2267" BottomMargin="750.7733" FontSize="50" LabelText="百花谷" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="153.0000" Y="55.0000" />
@@ -61,7 +61,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4805" />
             <PreSize X="0.8583" Y="0.2094" />
-            <FileData Type="MarkedSubImage" Path="ui/npctalkbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/npctalkbg.png" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

@@ -13,15 +13,19 @@
 #include "BuildingDetailsLayer.h"
 #include "HomeLayer.h"
 #include "NewerGuideLayer.h"
+#include "GameDataSave.h"
+
 
 BuildingUILayer::BuildingUILayer()
 {
-
+	selectActionIndex = -1;
+	estarttime = 0;
 }
 
 
 BuildingUILayer::~BuildingUILayer()
 {
+
 }
 
 
@@ -101,6 +105,9 @@ bool BuildingUILayer::init(Building* build)
 		this->addChild(m_loadlbl);
 		this->scheduleOnce(schedule_selector(BuildingUILayer::delayLoadActionUi), 0.1f);
 	}
+
+	updateExerciseDesc();
+
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -189,6 +196,8 @@ void BuildingUILayer::loadActionUi()
 		actbtn->setTitleText(GlobalData::map_buidACData[name].at(i).actext);
 		vec_actionbtn.push_back(actbtn);
 
+		vec_progresstext.push_back((cocos2d::ui::Text*)item->getChildByName("progresstext"));
+
 		cocos2d::ui::LoadingBar* actloadbar = (cocos2d::ui::LoadingBar*)item->getChildByName("loadingbar");
 		vec_actionbar.push_back(actloadbar);
 
@@ -265,6 +274,52 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 {
 	loadActionUi();
 	m_loadlbl->removeFromParentAndCleanup(true);
+
+	if (strcmp(m_build->data.name, "exerciseroom") == 0)
+	{
+		std::string estr = GameDataSave::getInstance()->getExersiceTime();
+		int index = -1;
+
+		if (estr.length() > 0)
+		{
+			std::vector<std::string> tmp;
+			CommonFuncs::split(estr, tmp, "-");
+			if (tmp.size() >= 2)
+			{
+				index = atoi(tmp[0].c_str());
+				estarttime = atoi(tmp[1].c_str());
+			}
+		}
+		selectActionIndex = index;
+		if (index >= 0)
+		{
+			int curtime = GlobalData::getSysSecTime();
+			int pasttime = curtime - estarttime;
+
+			if (pasttime >= GlobalData::map_buidACData[m_build->data.name].at(index).actime * 60)
+			{
+				vec_actionbar[index]->setPercent(100);
+				onExercisefinish(NULL, BACTIONTYPE(index + 1));
+			}
+			else
+			{
+				int tatoltime = GlobalData::map_buidACData[m_build->data.name].at(index).actime * 60;
+				float pecert = 100.0f*(curtime - estarttime) / tatoltime;
+				vec_actionbar[index]->setPercent(pecert);
+				vec_actionbar[index]->runAction(Sequence::create(MyProgressTo::create(tatoltime * (100.0f - pecert)/100, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)(index + 1))), NULL));
+				
+				vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("取消"));
+				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+			}
+
+			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+			{
+				if (i != index)
+					vec_actionbtn[i]->setEnabled(false);
+			}
+		}
+
+	}
 }
 
 void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -274,6 +329,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
 		if (tag == BUILD)//建造或者升级
 		{
 			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
@@ -287,8 +343,10 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 					return;
 				}
 			}
-
 			buildbtn->setEnabled(false);
+			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+				vec_actionbtn[i]->setEnabled(false);
+
 			buildbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, BUILD)), NULL));
 			m_build->build();
 		}
@@ -305,6 +363,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 					return;
 				}
 			}
+			buildbtn->setEnabled(false);
 
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
@@ -321,7 +380,26 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 				m_build->setActionBarTime(ACTION_BAR_TIME);
 			}
 
-			vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(m_build->getActionBarTime(), 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
+			if (strcmp(m_build->data.name, "exerciseroom") == 0)
+			{
+				selectActionIndex = tag - ACTION;
+				for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+				{
+					if (i != selectActionIndex)
+						vec_actionbtn[i]->setEnabled(false);
+				}
+
+				estarttime = GlobalData::getSysSecTime();
+				vec_actionbtn[tag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
+				vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(actime * 60, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)tag)), NULL));
+
+				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+				std::string estr = StringUtils::format("%d-%d", tag - ACTION, GlobalData::getSysSecTime());
+				GameDataSave::getInstance()->setExersiceTime(estr);
+
+			}
+			else
+				vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(m_build->getActionBarTime(), 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
 
 			m_build->action(actime, extime);
 		}
@@ -339,15 +417,14 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			std::string strid = StringUtils::format("%d", restypecount / 1000);
 			StorageRoom::use(strid, restypecount % 1000);
 		}
-
 		updataBuildRes();
+		updateExerciseDesc();
 		buildbar->setPercent(0);
 		loadActionUi();
-		//std::string text = "建造成功!";
-		//if (m_build->data.level > 1)
-		//	text = "升级完成";
-		//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf(text.c_str()));
-		//this->addChild(layer);
+
+		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+			vec_actionbtn[i]->setEnabled(true);
+
 		std::string franmename = "ui/buildtext0.png";
 		if (m_build->data.level > 1)
 		{
@@ -362,6 +439,10 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	{
 		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 			vec_actionbtn[i]->setEnabled(true);
+
+		if (m_build->data.level < m_build->data.maxlevel)
+			buildbtn->setEnabled(true);
+
 		vec_actionbar[type - ACTION]->setPercent(0);
 		std::string strid = GlobalData::map_buidACData[m_build->data.name].at(type - ACTION).icon;
 		//是否是产出新的物品，（睡觉和暖炉不会产出新的物品 icon以“0-”开头，其他建筑物的操作或产出新的物品，eg:制作烤肉）
@@ -582,4 +663,33 @@ void BuildingUILayer::delayShowNewerGuide(float dt)
 		showNewerGuide(1);
 	else if (NewerGuideLayer::checkifNewerGuide(44))
 		showNewerGuide(44);
+}
+
+void BuildingUILayer::onExercisefinish(Ref* pSender, BACTIONTYPE type)
+{
+	vec_actionbtn[type - ACTION]->setTitleText(CommonFuncs::gbk2utf("出关"));
+	this->unschedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime));
+	vec_progresstext[type - ACTION]->setVisible(false);
+}
+
+void BuildingUILayer::updateExerciseDesc()
+{
+	if (strcmp(m_build->data.name, "exerciseroom") == 0 && m_build->data.level >= 1)
+	{
+		cocos2d::ui::Text* importdesc = (cocos2d::ui::Text*)buildnode->getChildByName("item")->getChildByName("desc");
+		importdesc->setVisible(true);
+		importdesc->setString(CommonFuncs::gbk2utf(exersiceDesc.c_str()));
+	}
+}
+
+void BuildingUILayer::updateExerciseLeftTime(float dt)
+{
+	if (selectActionIndex >= 0)
+	{
+		int tatoltime = GlobalData::map_buidACData[m_build->data.name].at(selectActionIndex).actime * 60;
+		int lefttime = tatoltime - (GlobalData::getSysSecTime() - estarttime);
+		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime / 60, lefttime%60);
+		vec_progresstext[selectActionIndex]->setVisible(true);
+		vec_progresstext[selectActionIndex]->setString(str);
+	}
 }

@@ -10,7 +10,6 @@
       <FilePathData Path="ui/top_weather2.png" />
       <FilePathData Path="ui/top_weather3.png" />
       <FilePathData Path="ui/top_weather0.png" />
-      <FilePathData Path="ui/topbg.png" />
       <FilePathData Path="ui/topbox.png" />
       <FilePathData Path="ui/topdegree.png" />
       <FilePathData Path="ui/topeventwordbox.png" />
@@ -37,10 +36,8 @@
       <FilePathData Path="ui/medicinekit.png" />
       <FilePathData Path="ui/storageroom.png" />
       <FilePathData Path="ui/winemake.png" />
-      <FilePathData Path="ui/syssmallbg.png" />
       <FilePathData Path="ui/syssmalltie.png" />
       <FilePathData Path="ui/builditem.png" />
-      <FilePathData Path="ui/normalboxgb.png" />
       <FilePathData Path="ui/backbtn.png" />
       <FilePathData Path="ui/buildsmall.png" />
       <FilePathData Path="ui/resbox.png" />
@@ -87,7 +84,6 @@
       <FilePathData Path="ui/8.png" />
       <FilePathData Path="ui/9.png" />
       <FilePathData Path="ui/heroppoint.png" />
-      <FilePathData Path="ui/heroselectbg.png" />
       <FilePathData Path="ui/hp3.png" />
       <FilePathData Path="ui/hp4.png" />
       <FilePathData Path="ui/hp5.png" />
@@ -165,19 +161,6 @@
       <FilePathData Path="ui/n002.png" />
       <FilePathData Path="ui/n003.png" />
       <FilePathData Path="ui/69.png" />
-      <FilePathData Path="ui/t001.jpg" />
-      <FilePathData Path="ui/t002.jpg" />
-      <FilePathData Path="ui/t003.jpg" />
-      <FilePathData Path="ui/t004.jpg" />
-      <FilePathData Path="ui/t005.jpg" />
-      <FilePathData Path="ui/t006.jpg" />
-      <FilePathData Path="ui/t007.jpg" />
-      <FilePathData Path="ui/t008.jpg" />
-      <FilePathData Path="ui/t009.jpg" />
-      <FilePathData Path="ui/t010.jpg" />
-      <FilePathData Path="ui/t011.jpg" />
-      <FilePathData Path="ui/t012.jpg" />
-      <FilePathData Path="ui/t013.jpg" />
       <FilePathData Path="ui/herohead1.png" />
       <FilePathData Path="ui/npcicon.png" />
       <FilePathData Path="ui/fighticon.png" />
@@ -316,7 +299,6 @@
       <FilePathData Path="ui/blank.png" />
       <FilePathData Path="ui/shopbtn.png" />
       <FilePathData Path="ui/gp5.png" />
-      <FilePathData Path="ui/npctalkbg.png" />
       <FilePathData Path="ui/m5-4.png" />
       <FilePathData Path="ui/settingselect.png" />
       <FilePathData Path="ui/settingselectbox.png" />
@@ -336,8 +318,14 @@
       <FilePathData Path="ui/redpoint.png" />
       <FilePathData Path="ui/saveitembg.png" />
       <FilePathData Path="ui/badfurnace.png" />
-      <FilePathData Path="ui/room.jpg" />
+      <FilePathData Path="ui/npcrsi0.png" />
+      <FilePathData Path="ui/npcrsi1.png" />
+      <FilePathData Path="ui/npcrsi2.png" />
+      <FilePathData Path="ui/0-ex0.png" />
+      <FilePathData Path="ui/0-ex1.png" />
+      <FilePathData Path="ui/0-ex2.png" />
+      <FilePathData Path="ui/sexerciseroom.png" />
     </ImageFiles>
-    <MaxSize Width="4096" Height="4096" />
+    <MaxSize Width="2048" Height="4096" />
   </Content>
 </PlistInfoProjectFile>

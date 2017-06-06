@@ -313,3 +313,14 @@ void GameDataSave::setIsNewerGuide(int index, bool val)
 	saveIntDataByKey(key, (int)val);
 }
 
+
+void GameDataSave::setExersiceTime(std::string strval)
+{
+	saveStringDataByKey(addUIDString("exsercise"), strval);
+}
+
+std::string GameDataSave::getExersiceTime()
+{
+	return loadStringDataByKey(addUIDString("exsercise"), "");
+}
+

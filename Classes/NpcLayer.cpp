@@ -52,9 +52,8 @@ bool NpcLayer::init(std::string addrid)
 	title->setString(mdata.cname);
 
 	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("typepng");
-	std::string str = StringUtils::format("ui/%s.jpg", mdata.tpngname);
-	typeimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	typeimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	std::string str = StringUtils::format("images/%s.jpg", mdata.tpngname);
+	typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 	
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onBack, this));
@@ -72,6 +71,21 @@ bool NpcLayer::init(std::string addrid)
 
 		cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
 		npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
+
+		cocos2d::ui::ImageView* npcrsi = (cocos2d::ui::ImageView*)npcitem->getChildByName("npcrsi");
+		npcrsi->setPositionX(npcname->getPositionX() + npcname->getContentSize().width + 25);
+
+		std::string rsistr;
+		int npclv = GlobalData::map_npcs[mdata.npcs[i]].lv;
+		int herolv = g_hero->getLVValue() + 1;
+		if (npclv - herolv > 5)
+			rsistr = "ui/npcrsi2.png";
+		else if (npclv - herolv > 0)
+			rsistr = "ui/npcrsi1.png";
+		else
+			rsistr = "ui/npcrsi0.png";
+
+		npcrsi->loadTexture(rsistr, cocos2d::ui::TextureResType::PLIST);
 
 		cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
 		talkbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemTalk, this));

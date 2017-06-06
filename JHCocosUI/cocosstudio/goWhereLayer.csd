@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.3672" />
             <PreSize X="1.0000" Y="0.6094" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="title" ActionTag="-258326701" Tag="43" IconVisible="False" LeftMargin="359.9900" RightMargin="360.0100" TopMargin="489.2315" BottomMargin="790.7685" FontSize="50" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
@@ -58,7 +58,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4432" />
             <PreSize X="0.8361" Y="0.2109" />
-            <FileData Type="MarkedSubImage" Path="ui/t001.jpg" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/t001.jpg" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="desc" ActionTag="1011250509" Tag="47" IconVisible="False" LeftMargin="85.0000" RightMargin="85.0000" TopMargin="853.0000" BottomMargin="277.0000" IsCustomSize="True" FontSize="32" LabelText="后山" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="550.0000" Y="150.0000" />

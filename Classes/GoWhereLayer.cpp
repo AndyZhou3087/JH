@@ -73,9 +73,8 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	
 	//地点的类型
 	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("typepng");
-	std::string str = StringUtils::format("ui/%s.jpg", mdata.tpngname);
-	typeimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	typeimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	std::string str = StringUtils::format("images/%s.jpg", mdata.tpngname);
+	typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 	
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onClose, this));

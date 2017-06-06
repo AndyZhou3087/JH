@@ -319,6 +319,16 @@ public:
 	****************************/
 	void setIsNewerGuide(int index, bool val);
 
+	/****************************
+	保存闭关时间
+	****************************/
+	void setExersiceTime(std::string strval);
+
+	/****************************
+	获取闭关时间
+	****************************/
+	std::string getExersiceTime();
+
 private:
 	/****************************
 	加上userid后的字符串

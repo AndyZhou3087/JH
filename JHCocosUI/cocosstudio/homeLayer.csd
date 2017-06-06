@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="1.0000" Y="0.6969" />
-            <FileData Type="MarkedSubImage" Path="ui/room.jpg" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/room.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="badfurnace" ActionTag="451834243" Tag="91" IconVisible="False" LeftMargin="77.0000" RightMargin="547.0000" TopMargin="610.5000" BottomMargin="556.5000" ctype="SpriteObjectData">

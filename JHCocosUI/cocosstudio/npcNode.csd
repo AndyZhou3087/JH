@@ -76,10 +76,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="2031208432" Tag="107" IconVisible="False" LeftMargin="-194.5281" RightMargin="72.5281" TopMargin="-55.8176" BottomMargin="11.8176" FontSize="40" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="2031208432" Tag="107" IconVisible="False" LeftMargin="-209.5281" RightMargin="87.5281" TopMargin="-57.8176" BottomMargin="13.8176" FontSize="40" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="122.0000" Y="44.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="-194.5281" Y="33.8176" />
+            <Position X="-209.5281" Y="35.8176" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
@@ -98,6 +98,16 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/xline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="npcrsi" ActionTag="1707640718" Tag="17" IconVisible="False" LeftMargin="-67.0000" RightMargin="11.0000" TopMargin="-46.0000" BottomMargin="18.0000" LeftEage="18" RightEage="18" TopEage="9" BottomEage="9" Scale9OriginX="18" Scale9OriginY="9" Scale9Width="20" Scale9Height="10" ctype="ImageViewObjectData">
+            <Size X="56.0000" Y="28.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="-67.0000" Y="32.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/npcrsi2.png" Plist="uipacker.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

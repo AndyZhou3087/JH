@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.7264" Y="0.4344" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="syssmalltie_left" ActionTag="-1393580100" Tag="44" IconVisible="False" LeftMargin="131.4486" RightMargin="408.5514" TopMargin="410.7097" BottomMargin="831.2903" ctype="SpriteObjectData">

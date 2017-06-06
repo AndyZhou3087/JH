@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.7264" Y="0.3820" />
-            <FileData Type="MarkedSubImage" Path="ui/syssmallbg.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="title" ActionTag="385671525" Tag="461" IconVisible="False" LeftMargin="276.6517" RightMargin="345.3483" TopMargin="431.3739" BottomMargin="804.6261" FontSize="40" LabelText="角色：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="98.0000" Y="44.0000" />

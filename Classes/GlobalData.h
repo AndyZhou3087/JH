@@ -70,6 +70,7 @@ typedef struct
 	int atk;//攻击
 	int exp;//经验值
 	int df;//防御
+	int lv;//npc等级
 	std::vector<std::string> winres;//打败npc赢得奖励
 	std::vector<int> winresrnd;//打败npc出奖励的概率
 	std::vector<std::string> exchgres;//兑换的资源

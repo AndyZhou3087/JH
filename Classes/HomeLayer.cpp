@@ -9,6 +9,7 @@
 #include "WineMaker.h"
 #include "StorageRoom.h"
 #include "Fence.h"
+#include "ExerciseRoom.h"
 #include "BuildingUILayer.h"
 #include "StorageUILayer.h"
 #include "OutDoor.h"
@@ -128,6 +129,19 @@ bool HomeLayer::init()
 	winetableItem->setTag(6);
 	winetableItem->setPosition(Vec2(540, 470));
 	menu->addChild(winetableItem);
+
+	Building* exersiceroom = ExerciseRoom::create();
+	Vec_Buildings.push_back(exersiceroom);
+	MenuItemSprite* exersiceroomItem = MenuItemSprite::create(
+		exersiceroom,
+		exersiceroom,
+		exersiceroom,
+		CC_CALLBACK_1(HomeLayer::onclick, this));
+	exersiceroomItem->setName("exersiceroom");
+	exersiceroomItem->setOpacity(0);
+	exersiceroomItem->setTag(7);
+	exersiceroomItem->setPosition(Vec2(257, 93));
+	menu->addChild(exersiceroomItem);
 
 	loadJsonData();
 

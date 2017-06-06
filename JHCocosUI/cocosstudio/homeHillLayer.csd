@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.3375" />
             <PreSize X="1.0000" Y="0.6922" />
-            <FileData Type="MarkedSubImage" Path="ui/normalboxgb.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="syssmalltie_0" ActionTag="-1832767753" Tag="76" IconVisible="False" LeftMargin="71.1066" RightMargin="468.8934" TopMargin="556.1945" BottomMargin="685.8055" ctype="SpriteObjectData">
             <Size X="180.0000" Y="38.0000" />

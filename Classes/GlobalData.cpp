@@ -245,6 +245,9 @@ void GlobalData::loadNpcJsonData()
 		v = item["exp"];
 		data.exp = atoi(v.GetString());
 
+		v = item["lv"];
+		data.lv = atoi(v.GetString());
+
 		v = item["winres"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{

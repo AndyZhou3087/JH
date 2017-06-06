@@ -82,6 +82,17 @@ private:
 	延迟显示新手引导
 	*****************************/
 	void delayShowNewerGuide(float dt);
+
+	/****************************
+	更新闭关的说明
+	*****************************/
+	void updateExerciseDesc();
+
+	/****************************
+	更新关闭剩余时间
+	*****************************/
+	void updateExerciseLeftTime(float dt);
+
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE
@@ -92,12 +103,16 @@ private:
 
 	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;//建筑物自己的操作 进度条控件
 	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
+	std::vector<cocos2d::ui::Text*> vec_progresstext;//进度条上的文字控件，这里用来显示时间
 	void onfinish(Ref* pSender, BACTIONTYPE type);//建造，建筑物自己的操作 完成
+	void onExercisefinish(Ref* pSender, BACTIONTYPE type);//闭关完成
 
 	void showFinishHintText(std::string path);//显示完成后的提示文字
 	void finishAnim(Ref* pSender, Node* node);//建造，建筑物自己的操作 完成后的提示动画
 	std::vector<Node*> vec_actionItem;//建筑物自己操作 item node
 	Label* m_loadlbl;//加载文字
+	int selectActionIndex;//闭关选择的item索引
+	int estarttime;//闭关开始的时间
 };
 #endif
 

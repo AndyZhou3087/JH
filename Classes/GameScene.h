@@ -27,6 +27,11 @@ public:
 	void heroRevive();
 
 	/****************************
+	保存数据到本地文件
+	*****************************/
+	void saveAllData();
+
+	/****************************
 	新手引导
 	*****************************/
 	void showNewerGuide(int step, std::vector<Node*> nodes);
@@ -36,10 +41,6 @@ public:
 	*****************************/
 	void delayShowNewerGuide(float dt);
 
-	/****************************
-	保存数据到本地文件
-	*****************************/
-	void saveAllData();
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家
@@ -68,15 +69,14 @@ private:
 	void updata(float dt);
 
 	/****************************
-	定时保存后山资源列表的数据
-	*****************************/
-	void timerSaveResData(float dt);
-
-	/****************************
 	定时查看角色是否死亡，生命为0死掉
 	*****************************/
 	void checkiflive(float dt);
 
+	/****************************
+	定时保存数据
+	*****************************/
+	void timerSaveData(float dt);
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据
