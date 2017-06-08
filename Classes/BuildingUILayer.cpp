@@ -14,6 +14,7 @@
 #include "HomeLayer.h"
 #include "NewerGuideLayer.h"
 #include "GameDataSave.h"
+#include "ExerciseCancelLayer.h"
 
 
 BuildingUILayer::BuildingUILayer()
@@ -188,7 +189,7 @@ void BuildingUILayer::loadActionUi()
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 		/*建筑物操作的显示ICON*/
 		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-		icon->setTag(1000 * (i +1));//点击按钮TAG来区分1000以上 
+		icon->setTag(10000 * (i + 1));//点击按钮TAG来区分10000以上 
 
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
@@ -220,7 +221,7 @@ void BuildingUILayer::loadActionUi()
 					int restypecount = GlobalData::map_buidACData[name].at(i).res.at(m);
 					if (restypecount > 0)
 					{
-						//建筑物的图标
+						//合成需要的资源
 						std::string str = StringUtils::format("res%d", m);
 						cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)item->getChildByName(str);
 						resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
@@ -277,17 +278,19 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 
 	if (strcmp(m_build->data.name, "exerciseroom") == 0)
 	{
-		std::string estr = GameDataSave::getInstance()->getExersiceTime();
+		std::string estr = GameDataSave::getInstance()->getExersiceCfg();
 		int index = -1;
 
 		if (estr.length() > 0)
 		{
 			std::vector<std::string> tmp;
 			CommonFuncs::split(estr, tmp, "-");
-			if (tmp.size() >= 2)
+			if (tmp.size() >= 4)
 			{
 				index = atoi(tmp[0].c_str());
 				estarttime = atoi(tmp[1].c_str());
+				ex_wgstrid = tmp[2];
+				ex_ngstrid = tmp[3];
 			}
 		}
 		selectActionIndex = index;
@@ -309,6 +312,7 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 				vec_actionbar[index]->runAction(Sequence::create(MyProgressTo::create(tatoltime * (100.0f - pecert)/100, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)(index + 1))), NULL));
 				
 				vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("取消"));
+				updateExerciseLeftTime(0);
 				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
 			}
 
@@ -316,7 +320,10 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 			{
 				if (i != index)
 					vec_actionbtn[i]->setEnabled(false);
+				else
+					vec_actionbtn[i]->setEnabled(true);
 			}
+
 		}
 
 	}
@@ -387,15 +394,44 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 				{
 					if (i != selectActionIndex)
 						vec_actionbtn[i]->setEnabled(false);
+					else
+						vec_actionbtn[i]->setEnabled(true);
 				}
 
-				estarttime = GlobalData::getSysSecTime();
-				vec_actionbtn[tag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
-				vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(actime * 60, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)tag)), NULL));
+				if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("闭关")) == 0)
+				{
+					estarttime = GlobalData::getSysSecTime();
+					vec_actionbtn[tag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
+					vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(actime * 60, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)tag)), NULL));
 
-				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
-				std::string estr = StringUtils::format("%d-%d", tag - ACTION, GlobalData::getSysSecTime());
-				GameDataSave::getInstance()->setExersiceTime(estr);
+					this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+					std::string wgstr;
+					std::string ngstr;
+
+					if (g_hero->getAtrByType(H_WG)->count > 0)
+					{
+						wgstr = g_hero->getAtrByType(H_WG)->strid;
+					}
+					if (g_hero->getAtrByType(H_NG)->count > 0)
+					{
+						ngstr = g_hero->getAtrByType(H_NG)->strid;
+					}
+					
+					std::string estr = StringUtils::format("%d-%d-%s-%s", tag - ACTION, GlobalData::getSysSecTime(), wgstr.c_str(), ngstr.c_str());
+					GameDataSave::getInstance()->setExersiceCfg(estr);
+				}
+				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("取消")) == 0)
+				{
+					ExerciseCancelLayer* layer = ExerciseCancelLayer::create();
+
+					this->addChild(layer, 4);
+					//resetExercise();
+				}
+
+				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
+				{
+					exerciseDone();
+				}
 
 			}
 			else
@@ -510,12 +546,12 @@ void BuildingUILayer::updataBuildRes()
 		//更新升级需要的资源
 		for (unsigned int i = 0; i < m_build->data.Res[level].size(); i++)
 		{
-			//需要的资源图标
+			//建筑物需要的资源图标
 			std::string str = StringUtils::format("res%d", i);
 			cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName(str);
 
 			resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
-			resitem->setTag(i); //点击按钮TAG来区分1000以上
+			resitem->setTag(i); 
 
 			str = StringUtils::format("count%d", i);
 			cocos2d::ui::Text* rescount = (cocos2d::ui::Text*)mainitem->getChildByName(str);
@@ -598,17 +634,17 @@ void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 		int tag = node->getTag();
 		std::string strid;
 		int intresid = 0;
-		if (tag >= 100 && tag < 1000)//小图标资源
+		if (tag >= 100 && tag < 10000)//小图标资源
 		{
 			intresid = GlobalData::map_buidACData[m_build->data.name][tag / 100 - 1].res[tag % 100];
 			strid = StringUtils::format("%d", intresid / 1000);
 	
 		}
-		else if (tag >= 1000)//需要合成的
+		else if (tag >= 10000)//需要合成的
 		{
-			strid = GlobalData::map_buidACData[m_build->data.name][tag / 1000 - 1].icon;
+			strid = GlobalData::map_buidACData[m_build->data.name][tag / 10000 - 1].icon;
 		}
-		else//建筑物的
+		else//建筑物需要的资源
 		{
 			intresid = m_build->data.Res[m_build->data.level][tag];
 			strid = StringUtils::format("%d", intresid / 1000);
@@ -688,8 +724,115 @@ void BuildingUILayer::updateExerciseLeftTime(float dt)
 	{
 		int tatoltime = GlobalData::map_buidACData[m_build->data.name].at(selectActionIndex).actime * 60;
 		int lefttime = tatoltime - (GlobalData::getSysSecTime() - estarttime);
-		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime / 60, lefttime%60);
+		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime % 3600/60, lefttime%3600%60);
 		vec_progresstext[selectActionIndex]->setVisible(true);
 		vec_progresstext[selectActionIndex]->setString(str);
+	}
+}
+
+void BuildingUILayer::resetExercise()
+{
+	this->unschedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime));
+	GameDataSave::getInstance()->setExersiceCfg("");
+	vec_progresstext[selectActionIndex]->setVisible(false);
+	vec_actionbar[selectActionIndex]->setPercent(0);
+	vec_actionbar[selectActionIndex]->stopAllActions();
+	vec_actionbtn[selectActionIndex]->setTitleText(CommonFuncs::gbk2utf("闭关"));
+	for (int i = 0; i < vec_actionbtn.size(); i++)
+	{
+		vec_actionbtn[i]->setEnabled(true);
+	}
+}
+
+void BuildingUILayer::exerciseDone()
+{
+	int f_gfexp = 100;
+	int f_heroexp = 100;
+
+	resetExercise();
+
+	std::vector<PackageData*> vec_gfdata;
+
+	std::string gfstrid[] = { ex_wgstrid, ex_ngstrid };
+	StorageType gfSType[] = { W_GONG , N_GONG};
+	int gfexp[] = { 100, 100 };
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (gfstrid[i].length() > 0)
+		{
+			bool isfind = false;
+			PackageData * gfdata = NULL;
+			gfdata = g_hero->getAtrByType(HeroAtrType(i + H_WG));
+			if (gfdata != NULL && gfdata->count > 0 && gfdata->strid.compare(gfstrid[i]) == 0)
+			{
+				isfind = true;
+			}
+			else
+			{
+				for (unsigned int m = 0; m < StorageRoom::map_storageData[gfSType[i]].size(); m++)
+				{
+					gfdata = &StorageRoom::map_storageData[gfSType[i]][m];
+					if (gfdata->strid.compare(gfstrid[i]) == 0)
+					{
+						isfind = true;
+						break;
+					}
+				}
+			}
+
+			if (isfind)
+			{
+				vec_gfdata.push_back(gfdata);
+			}
+		}
+	}
+
+	for (unsigned int m = 0; m < vec_gfdata.size(); m++)
+	{
+		std::string gfname = vec_gfdata[m]->strid;
+		std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
+		int lv = 0;
+		int curlv = vec_gfdata[m]->lv;
+		vec_gfdata[m]->exp += f_gfexp;
+		for (unsigned i = curlv; i < vec_gfExp.size(); i++)
+		{
+			if (vec_gfdata[m]->exp > vec_gfExp[i])
+			{
+				lv = i + 1;
+				vec_gfdata[m]->exp = vec_gfdata[m]->exp - vec_gfExp[i];
+			}
+		}
+		if (lv > curlv)
+		{
+			if (lv >= vec_gfExp.size())
+				lv = vec_gfExp.size() - 1;
+			vec_gfdata[m]->lv = lv;
+		}
+	}
+
+
+	g_hero->setExpValue(g_hero->getExpValue() + f_heroexp);
+	int curlv = g_hero->getLVValue();
+	unsigned int i = 0;
+	int lv = 0;
+	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp;
+	for (i = curlv; i < vec_heroExp.size(); i++)
+	{
+		if (g_hero->getExpValue() > vec_heroExp[i])
+		{
+			lv = i + 1;
+			g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
+		}
+	}
+	if (lv > curlv)
+	{
+		if (lv >= vec_heroExp.size())
+		{
+			g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
+			lv = vec_heroExp.size() - 1;
+		}
+		g_hero->setLVValue(lv);
+		g_hero->setLifeValue(g_hero->getMaxLifeValue());
 	}
 }

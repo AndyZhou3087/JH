@@ -43,16 +43,16 @@ public:
 	/****************************
 	角色内伤设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_innerinjury, InnerinjuryValue);
+	CC_SYNTHESIZE(float, m_innerinjury, InnerinjuryValue);
 	/****************************
 	角色外伤设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_outinjury, OutinjuryValue);
+	CC_SYNTHESIZE(float, m_outinjury, OutinjuryValue);
 
 	/****************************
 	角色饱食度设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_hunger, HungerValue);
+	CC_SYNTHESIZE(float, m_hunger, HungerValue);
 
 	/****************************
 	角色精神值设置
@@ -62,16 +62,16 @@ public:
 	/****************************
 	角色最大内伤设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_maxInnerinjury, MaxInnerinjuryValue);
+	CC_SYNTHESIZE(float, m_maxInnerinjury, MaxInnerinjuryValue);
 	/****************************
 	角色最大外伤设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_maxOutinjury, MaxOutinjuryValue);
+	CC_SYNTHESIZE(float, m_maxOutinjury, MaxOutinjuryValue);
 
 	/****************************
 	角色最大饱食度设置
 	*****************************/
-	CC_SYNTHESIZE(int, m_maxHunger, MaxHungerValue);
+	CC_SYNTHESIZE(float, m_maxHunger, MaxHungerValue);
 
 	/****************************
 	角色最大精神值设置
@@ -193,9 +193,9 @@ public:
 	*****************************/
 	void recoverHunger(int val);
 public:
-	static int MAXInnerinjuryValue;//最大内伤值
-	static int MAXOutinjuryValue;//最大外伤值
-	static int MAXHungerValue;//最大饱食度
+	static float MAXInnerinjuryValue;//最大内伤值
+	static float MAXOutinjuryValue;//最大外伤值
+	static float MAXHungerValue;//最大饱食度
 	static float MAXSpiritValue;//最大精神值
 	std::map<HeroAtrType, PackageData> map_heroAtr;//角色装备栏数据
 private:

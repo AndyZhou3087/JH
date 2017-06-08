@@ -20,8 +20,12 @@
           <FilePathData Path="sysSmallLayer.csd" />
           <FilePathData Path="selectSavedLayer.csd" />
           <FilePathData Path="selectSaveComfirmLayer.csd" />
+          <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="exerciseCancelLayer.csd" />
+          <FilePathData Path="resNode.csd" />
+          <FilePathData Path="homeHillLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="selectSaveComfirmLayer.csd" />
+        <ActiveDocument Path="resNode.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

@@ -27,55 +27,49 @@ void GameDataSave::setLiveDays(int val)
 	saveIntDataByKey(addUIDString("livedays"), val);
 }
 
-int GameDataSave::getHeroOutinjury()
+float GameDataSave::getHeroOutinjury()
 {
-	return loadIntDataByKey(addUIDString("outinjury"), Hero::MAXOutinjuryValue);
+	return loadFloatDataByKey(addUIDString("outinjury"), Hero::MAXOutinjuryValue);
 }
-void GameDataSave::setHeroOutinjury(int val)
+void GameDataSave::setHeroOutinjury(float val)
 {
-	saveIntDataByKey(addUIDString("outinjury"), val);
-}
-
-int GameDataSave::getHeroInnerinjury()
-{
-	return loadIntDataByKey(addUIDString("innerinjury"), Hero::MAXInnerinjuryValue);
-}
-void GameDataSave::setHeroInnerinjury(int val)
-{
-	saveIntDataByKey(addUIDString("innerinjury"), val);
+	saveFloatDataByKey(addUIDString("outinjury"), val);
 }
 
-int GameDataSave::getHeroHunger()
+float GameDataSave::getHeroInnerinjury()
 {
-	return loadIntDataByKey(addUIDString("hunger"), Hero::MAXHungerValue);
+	return loadFloatDataByKey(addUIDString("innerinjury"), Hero::MAXInnerinjuryValue);
 }
-void GameDataSave::setHeroHunger(int val)
+void GameDataSave::setHeroInnerinjury(float val)
 {
-	saveIntDataByKey(addUIDString("hunger"), val);
+	saveFloatDataByKey(addUIDString("innerinjury"), val);
+}
+
+float GameDataSave::getHeroHunger()
+{
+	return loadFloatDataByKey(addUIDString("hunger"), Hero::MAXHungerValue);
+}
+void GameDataSave::setHeroHunger(float val)
+{
+	saveFloatDataByKey(addUIDString("hunger"), val);
 }
 
 float GameDataSave::getHeroSpirit()
 {
-	std::string str = loadStringDataByKey(addUIDString("spirit"), "");
-	if (str.length() <= 0)
-		return Hero::MAXSpiritValue;
-	else 
-		return atof(str.c_str());
-
+	return loadFloatDataByKey(addUIDString("spirit"), Hero::MAXSpiritValue);
 }
 void GameDataSave::setHeroSpirit(float val)
 {
-	std::string str = StringUtils::format("%.2f", val);
-	saveStringDataByKey(addUIDString("spirit"), str);
+	saveFloatDataByKey(addUIDString("spirit"), val);
 }
 
-int GameDataSave::getHeroLife()
+float GameDataSave::getHeroLife()
 {
-	return loadIntDataByKey(addUIDString("life"), -1);
+	return loadFloatDataByKey(addUIDString("life"), -100.0f);
 }
-void GameDataSave::setHeroLife(int val)
+void GameDataSave::setHeroLife(float val)
 {
-	saveIntDataByKey(addUIDString("life"), val);
+	saveFloatDataByKey(addUIDString("life"), val);
 }
 
 int GameDataSave::getNatureTime()
@@ -314,12 +308,12 @@ void GameDataSave::setIsNewerGuide(int index, bool val)
 }
 
 
-void GameDataSave::setExersiceTime(std::string strval)
+void GameDataSave::setExersiceCfg(std::string strval)
 {
 	saveStringDataByKey(addUIDString("exsercise"), strval);
 }
 
-std::string GameDataSave::getExersiceTime()
+std::string GameDataSave::getExersiceCfg()
 {
 	return loadStringDataByKey(addUIDString("exsercise"), "");
 }

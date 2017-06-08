@@ -18,6 +18,7 @@ NpcLayer::NpcLayer()
 
 NpcLayer::~NpcLayer()
 {
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
 }
 
 NpcLayer* NpcLayer::create(std::string addrname)
@@ -78,7 +79,7 @@ bool NpcLayer::init(std::string addrid)
 		std::string rsistr;
 		int npclv = GlobalData::map_npcs[mdata.npcs[i]].lv;
 		int herolv = g_hero->getLVValue() + 1;
-		if (npclv - herolv > 5)
+		if (npclv - herolv > 3)
 			rsistr = "ui/npcrsi2.png";
 		else if (npclv - herolv > 0)
 			rsistr = "ui/npcrsi1.png";

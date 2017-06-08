@@ -138,17 +138,11 @@ void MapLayer::showMoveToDest()
 	float dt = m_distance * HERO_MOVE_SPEED;
 	
 	g_nature->setTimeInterval(TIMESCALE * 8);
-	this->scheduleOnce(schedule_selector(MapLayer::Arrive), dt / (TIMESCALE * 8.0f));
-	m_herohead->runAction(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos));
-	this->scheduleOnce(schedule_selector(MapLayer::movefinish), dt / (TIMESCALE * 8.0f));
+
+	m_herohead->runAction(Sequence::create(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos), CallFunc::create(CC_CALLBACK_0(MapLayer::Arrive, this)), NULL));
 }
 
-void MapLayer::movefinish(float dt)
-{
-	ismoving = false;
-}
-
-void MapLayer::Arrive(float dt)
+void MapLayer::Arrive()
 {
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	heroPos = m_destPos;
@@ -182,6 +176,7 @@ void MapLayer::Arrive(float dt)
 	}
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2);
+	ismoving = false;
 }
 
 void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

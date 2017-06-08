@@ -26,6 +26,11 @@ public:
 
 	static BuildingUILayer* create(Building* build);
 
+	/****************************
+	取消闭关
+	*****************************/
+	void resetExercise();
+
 private:
 
 	/****************************
@@ -89,9 +94,14 @@ private:
 	void updateExerciseDesc();
 
 	/****************************
-	更新关闭剩余时间
+	更新闭关剩余时间
 	*****************************/
 	void updateExerciseLeftTime(float dt);
+
+	/****************************
+	出关
+	*****************************/
+	void exerciseDone();
 
 private:
 	Building* m_build;
@@ -113,6 +123,8 @@ private:
 	Label* m_loadlbl;//加载文字
 	int selectActionIndex;//闭关选择的item索引
 	int estarttime;//闭关开始的时间
+	std::string ex_wgstrid;
+	std::string ex_ngstrid;
 };
 #endif
 

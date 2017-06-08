@@ -81,32 +81,32 @@ public:
 	/****************************
 	获取保存的角色外伤值
 	****************************/
-	int getHeroOutinjury();
+	float getHeroOutinjury();
 
 	/****************************
 	保存角色外伤值
 	****************************/
-	void setHeroOutinjury(int val);
+	void setHeroOutinjury(float val);
 
 	/****************************
 	获取保存的角色内伤值
 	****************************/
-	int getHeroInnerinjury();
+	float getHeroInnerinjury();
 
 	/****************************
 	保存角色内伤值
 	****************************/
-	void setHeroInnerinjury(int val);
+	void setHeroInnerinjury(float val);
 
 	/****************************
 	获取保存的角色饱食度值
 	****************************/
-	int getHeroHunger();
+	float getHeroHunger();
 
 	/****************************
 	保存角色饱食度值
 	****************************/
-	void setHeroHunger(int val);
+	void setHeroHunger(float val);
 
 	/****************************
 	获取保存的角色精神值
@@ -121,12 +121,12 @@ public:
 	/****************************
 	获取保存的角色生命值，生命为0，游戏结束
 	****************************/
-	int getHeroLife();
+	float getHeroLife();
 
 	/****************************
 	保存角色生命值
 	****************************/
-	void setHeroLife(int val);
+	void setHeroLife(float val);
 
 	/****************************
 	获取保存的仓库数据
@@ -320,14 +320,14 @@ public:
 	void setIsNewerGuide(int index, bool val);
 
 	/****************************
-	保存闭关时间
+	保存闭关参数
 	****************************/
-	void setExersiceTime(std::string strval);
+	void setExersiceCfg(std::string strval);
 
 	/****************************
 	获取闭关时间
 	****************************/
-	std::string getExersiceTime();
+	std::string getExersiceCfg();
 
 private:
 	/****************************

@@ -132,8 +132,8 @@ void ActionGetLayer::doAction(float dt)
 		if (r < 50)
 			g_hero->setSpiritValue(g_hero->getSpiritValue() - 0.5f);
 	}
-	if (g_hero->getSpiritValue() < 0)
-		g_hero->setSpiritValue(0);
+	if (g_hero->getSpiritValue() < 0.0f)
+		g_hero->setSpiritValue(0.0f);
 
 	updataRewardUI();
 

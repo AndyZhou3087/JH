@@ -54,22 +54,25 @@ private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
-	
+	点击商城按钮回调
 	*****************************/
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void Arrive(float dt);
-	void movefinish(float dt);
+
+	/****************************
+	到达目的地
+	*****************************/
+	void Arrive();
 
 private:
-	float m_distance;
-	Vec2 m_destPos;
-	std::string m_addrname;
-	Sprite* m_herohead;
-	bool ismoving;
-	cocos2d::ui::Widget* m_mapbg;
-	Sprite* m_smissionIcon;
-	Sprite* m_dmissionIcon;
+	float m_distance;//达到目的地的像素距离
+	Vec2 m_destPos;//目的地像素坐标
+	std::string m_addrname;//目的地名称
+	Sprite* m_herohead;//角色头像
+	bool ismoving;//是否正在移动
+	cocos2d::ui::Widget* m_mapbg;//整个地图
+	Sprite* m_smissionIcon;//发任务的图标
+	Sprite* m_dmissionIcon;//接任务的图标
 };
-extern MapLayer* g_maplayer;
+extern MapLayer* g_maplayer;//全局地图层
 #endif
 

@@ -37,6 +37,12 @@ inline void saveIntDataByKey(string key, int nVal){
 	saveStringDataByKey(key, buffer);
 }
 
+inline void saveFloatDataByKey(string key, float nVal){
+	char buffer[32];
+	sprintf(buffer, "%f", nVal);
+	saveStringDataByKey(key, buffer);
+}
+
 inline int loadIntDataByKey(string key, int defaultValue = 0){
 	char buffer[32];
 	sprintf(buffer, "%s", key.c_str());
@@ -50,6 +56,22 @@ inline int loadIntDataByKey(string key, int defaultValue = 0){
 	return atoi(parseKey.c_str());	
 #else
 	return atoi(s.c_str());
+#endif
+}
+
+inline float loadFloatDataByKey(string key, float defaultValue = 0.0f){
+	char buffer[32];
+	sprintf(buffer, "%s", key.c_str());
+
+	string s = UserDefault::getInstance()->getStringForKey(buffer);
+	if (s == "") {
+		return defaultValue;
+	}
+#if encrypt_data
+	string parseKey = parseData(s);
+	return atof(parseKey.c_str());
+#else
+	return atof(s.c_str());
 #endif
 }
 

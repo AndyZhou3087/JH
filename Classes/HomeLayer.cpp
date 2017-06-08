@@ -16,6 +16,8 @@
 #include "GameScene.h"
 #include "SoundManager.h"
 #include "NewerGuideLayer.h"
+#include "HintBox.h"
+#include "CommonFuncs.h"
 
 HomeLayer::HomeLayer()
 {
@@ -200,8 +202,16 @@ void HomeLayer::onclick(Ref* pSender)
 	std::string nodename = node->getName();
 	int nodetag = node->getTag();
 
-	Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
-	g_gameLayer->addChild(layer, 4);
+	//if (nodename.compare("exersiceroom") == 0)
+	//{
+	//	HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("暂未开放，敬请期待！"));
+	//	g_gameLayer->addChild(layer, 4);
+	//}
+	//else
+	//{
+		Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
+		g_gameLayer->addChild(layer, 4);
+	//}
 }
 
 void HomeLayer::loadJsonData()

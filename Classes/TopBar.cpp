@@ -370,30 +370,30 @@ void TopBar::updataUI(float dt)
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 
-	if (m_lastinnerinjury > g_hero->getInnerinjuryValue())
+	if (m_lastinnerinjury > (int)g_hero->getInnerinjuryValue())
 	{
 		innerinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
-		m_lastinnerinjury = g_hero->getInnerinjuryValue();
+		m_lastinnerinjury = (int)g_hero->getInnerinjuryValue();
 	}
-	if (m_lastoutinjury > g_hero->getOutinjuryValue())
+	if (m_lastoutinjury > (int)g_hero->getOutinjuryValue())
 	{
 		outinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
-		m_lastoutinjury = g_hero->getOutinjuryValue();
+		m_lastoutinjury = (int)g_hero->getOutinjuryValue();
 	}
-	if (m_lasthunger > g_hero->getHungerValue())
+	if (m_lasthunger > (int)g_hero->getHungerValue())
 	{
 		hungerRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
-		m_lasthunger = g_hero->getHungerValue();
+		m_lasthunger = (int)g_hero->getHungerValue();
 	}
-	if (m_lastspirit > g_hero->getSpiritValue())
+	if (m_lastspirit > (int)g_hero->getSpiritValue())
 	{
 		spiritRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
-		m_lastspirit = g_hero->getSpiritValue();
+		m_lastspirit = (int)g_hero->getSpiritValue();
 	}
-	if (m_lastlife > g_hero->getLifeValue())
+	if (m_lastlife > (int)g_hero->getLifeValue())
 	{
 		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
-		m_lastlife = g_hero->getLifeValue();
+		m_lastlife = (int)g_hero->getLifeValue();
 	}
 }
 

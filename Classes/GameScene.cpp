@@ -180,8 +180,8 @@ void GameScene::loadSaveHeroData()
 	g_hero->setIsOut(GameDataSave::getInstance()->getHeroIsOut());
 
 	//角色生命值
-	int hlife = GameDataSave::getInstance()->getHeroLife();
-	if (hlife > -1)//-1 新的角色第一次开始玩
+	float hlife = GameDataSave::getInstance()->getHeroLife();
+	if (hlife > -1)//-100 新的角色第一次开始玩
 		g_hero->setLifeValue(hlife);
 	else
 	{
@@ -267,9 +267,9 @@ void GameScene::updata(float dt)
 			{
 				if (data->count <= 0)//采完，等待
 				{
-					data->pastmin = 0;
+					data->pastmin = 0.0f;
 					data->waittime += g_nature->getTimeInterval();
-					if (data->waittime >= data->speed * data->max)
+					if (data->waittime >= data->speed[g_nature->getReason()] * data->max)
 					{
 						data->count = data->max;
 						data->waittime = 0.0f;
@@ -278,12 +278,12 @@ void GameScene::updata(float dt)
 				else
 				{
 					data->pastmin += g_nature->getTimeInterval();
-					if (data->pastmin >= data->speed)
+					if (data->pastmin >= data->speed[g_nature->getReason()])
 					{
-						int pcount = data->pastmin / data->speed;
+						int pcount = data->pastmin / data->speed[g_nature->getReason()];
 						data->count += pcount;
 
-						int leftmin = data->pastmin % data->speed;
+						float leftmin = data->pastmin - (data->speed[g_nature->getReason()] * pcount);
 						data->pastmin = leftmin;
 	
 					}

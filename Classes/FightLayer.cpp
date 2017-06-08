@@ -76,7 +76,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 
 
 	//角色血量进度
-	int herohppercent = 100 * g_hero->getLifeValue() / maxlife;
+	float herohppercent = 100 * g_hero->getLifeValue() / maxlife;
 
 	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
 	herohpbar->setPercent(herohppercent);
@@ -221,7 +221,7 @@ void FightLayer::delayBossFight(float dt)
 		adf = GlobalData::map_equips[aname].df;
 	}
 
-	int curheroHp = g_hero->getLifeValue();
+	float curheroHp = g_hero->getLifeValue();
 	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
 	float fdf = g_hero->getDfPercent() * curheroDf;
 	curheroDf = int(fdf + 0.5f);
@@ -234,13 +234,13 @@ void FightLayer::delayBossFight(float dt)
 		herohurt = intminack;
 	curheroHp -= herohurt;
 
-	if (curheroHp < 0)
-		curheroHp = 0;
+	if (curheroHp < 0.0f)
+		curheroHp = 0.0f;
 	g_hero->setLifeValue(curheroHp);
 
 	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 	herohpvaluetext->setString(hpstr);
-	int herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
+	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	herohpbar->setPercent(herohppercent);
 	showFightWord(1, herohurt);
 
@@ -254,17 +254,17 @@ void FightLayer::delayBossFight(float dt)
 			int r = GlobalData::createRandomNum(100);
 			if (r < 30)//30%概率收内伤
 			{
-				int curvalue = g_hero->getInnerinjuryValue() - 5;
-				if (curvalue < 0)
-					curvalue = 0;
+				float curvalue = g_hero->getInnerinjuryValue() - 5.0f;
+				if (curvalue < 0.0f)
+					curvalue = 0.0f;
 				g_hero->setInnerinjuryValue(curvalue);
 
 			}
 			else//70%概率收外伤
 			{
-				int curvalue = g_hero->getOutinjuryValue() - 5;
-				if (curvalue < 0)
-					curvalue = 0;
+				float curvalue = g_hero->getOutinjuryValue() - 5.0f;
+				if (curvalue < 0.0f)
+					curvalue = 0.0f;
 				g_hero->setOutinjuryValue(curvalue);
 			}
 		}
@@ -408,7 +408,7 @@ void FightLayer::showFightWord(int type, int value)
 
 void FightLayer::checkWordLblColor(std::string wordstr)
 {
-	Label* wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
+	Label* wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 28);
 	wordlbl->setLineBreakWithoutSpace(true);
 	wordlbl->setMaxLineWidth(610);
 	int index = 0;

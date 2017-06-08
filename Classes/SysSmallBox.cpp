@@ -171,7 +171,7 @@ void SysSmallBox::updataUI(float dt)
 			}
 
 			title1Txt->setString(CommonFuncs::gbk2utf(outInjurydesc1[index].c_str()));
-			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxOutinjuryValue());
+			std::string vstr = StringUtils::format("(%d/%d)", v, (int)g_hero->getMaxOutinjuryValue());
 			valueTxt->setString(vstr);
 		}
 	}
@@ -193,7 +193,7 @@ void SysSmallBox::updataUI(float dt)
 				}
 			}
 			title1Txt->setString(CommonFuncs::gbk2utf(innerInjurydesc1[index].c_str()));
-			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxInnerinjuryValue());
+			std::string vstr = StringUtils::format("(%d/%d)", v, (int)g_hero->getMaxInnerinjuryValue());
 			valueTxt->setString(vstr);
 		}
 	
@@ -216,13 +216,13 @@ void SysSmallBox::updataUI(float dt)
 				}
 			}
 			title1Txt->setString(CommonFuncs::gbk2utf(hungerdesc1[index].c_str()));
-			std::string vstr = StringUtils::format("(%d/%d)", v, g_hero->getMaxHungerValue());
+			std::string vstr = StringUtils::format("(%d/%d)", v, (int)g_hero->getMaxHungerValue());
 			valueTxt->setString(vstr);
 		}
 	}
 	if (mType == SPIRIT)
 	{
-		int v = floorl(g_hero->getSpiritValue());
+		int v = g_hero->getSpiritValue();
 
 		if (lastvalue != v)
 		{

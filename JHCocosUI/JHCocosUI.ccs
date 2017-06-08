@@ -10,8 +10,12 @@
         <Folder Name="images">
           <Image Name="dead.jpg" />
           <Image Name="gameovertext.png" />
+          <Image Name="heroselectbg.png" />
           <Image Name="logo.png" />
           <Image Name="mapbg.jpg" />
+          <Image Name="normalboxgb.png" />
+          <Image Name="npctalkbg.png" />
+          <Image Name="room.jpg" />
           <Image Name="selectherobg.jpg" />
           <Image Name="shero1.jpg" />
           <Image Name="shero1_s.jpg" />
@@ -26,8 +30,7 @@
           <Image Name="shero4_s.jpg" />
           <Image Name="shero4name.png" />
           <Image Name="startbg.jpg" />
-          <Image Name="unlockbg.png" />
-          <Image Name="unlocktitle.png" />
+          <Image Name="syssmallbg.png" />
           <Image Name="t001.jpg" />
           <Image Name="t002.jpg" />
           <Image Name="t003.jpg" />
@@ -41,12 +44,9 @@
           <Image Name="t011.jpg" />
           <Image Name="t012.jpg" />
           <Image Name="t013.jpg" />
-          <Image Name="normalboxgb.png" />
-          <Image Name="room.jpg" />
-          <Image Name="syssmallbg.png" />
           <Image Name="topbg.png" />
-          <Image Name="npctalkbg.png" />
-          <Image Name="heroselectbg.png" />
+          <Image Name="unlockbg.png" />
+          <Image Name="unlocktitle.png" />
         </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
@@ -381,6 +381,7 @@
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="comfirmSaveLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
+        <Project Name="exerciseCancelLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />

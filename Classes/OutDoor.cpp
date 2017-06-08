@@ -12,6 +12,7 @@
 OutDoor::OutDoor()
 {
 	lastSrollViewHeight = -1;
+	lastrows = 0;
 }
 
 
@@ -161,8 +162,8 @@ void OutDoor::updataStorageUI()
 
 	int row = typecount % 5 == 0 ? typecount / 5 : (typecount / 5 + 1);
 
-	int innerheight = scrollview->getContentSize().height;
-	if (lastSrollViewHeight < 0)
+	int innerheight = scrollview->getInnerContainerSize().height;
+	if (lastSrollViewHeight < 0 || lastrows < row)
 	{
 		innerheight = row * 130;
 		int contentheight = scrollview->getContentSize().height;
@@ -171,7 +172,7 @@ void OutDoor::updataStorageUI()
 		lastSrollViewHeight = innerheight;
 		scrollview->setInnerContainerSize(Size(650, innerheight));
 	}
-
+	lastrows = row;
 
 	allStorageData.clear();
 	for (int i = 0; i < RES_MAX; i++)

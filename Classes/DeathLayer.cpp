@@ -13,6 +13,7 @@ DeathLayer::DeathLayer()
 
 DeathLayer::~DeathLayer()
 {
+
 }
 
 bool DeathLayer::init()

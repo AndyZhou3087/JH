@@ -1,5 +1,7 @@
 ﻿#include "GlobalData.h"
 #include "Building.h"
+#include "StorageRoom.h"
+#include "MyPackage.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 #include "json.h"
@@ -147,10 +149,15 @@ void GlobalData::loadResJsonData()
 		data.max = atoi(v.GetString());
 
 		data.count = data.max;
-		data.pastmin = 0;
+		data.pastmin = 0.0f;
 		data.waittime = 0.0f;
 		v = item["perhour"];
-		data.speed = (int)(atof(v.GetString()) * 60);
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			data.speed.push_back(v[m].GetDouble() * 60);
+		}
+
 		v = item["type"];
 		data.type = atoi(v.GetString());
 		v = item["actype"];
@@ -680,6 +687,34 @@ void GlobalData::setSaveListId(std::vector<std::string> vec_val)
 	}
 
 	GameDataSave::getInstance()->setSaveListId(str.substr(0, str.length() - 1));
+}
+
+bool GlobalData::isExercising()
+{
+	std::string str = GameDataSave::getInstance()->getExersiceCfg();
+	return str.length() > 0 ? true : false;
+}
+
+bool GlobalData::isHasFSF()
+{
+	for (unsigned int m = 0; m < StorageRoom::map_storageData[RES_2].size(); m++)
+	{
+		PackageData* pData = &StorageRoom::map_storageData[RES_2][m];
+		if (pData->strid.compare("72") == 0 && pData->count > 0)
+		{
+			return true;
+		}
+	}
+
+	for (unsigned int m = 0; m < MyPackage::vec_packages.size(); m++)
+	{
+		PackageData* pData = &MyPackage::vec_packages[m];
+		if (pData->strid.compare("72") == 0 && pData->count > 0)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 std::string GlobalData::addUidString(std::string val)

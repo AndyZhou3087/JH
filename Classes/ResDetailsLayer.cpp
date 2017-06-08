@@ -185,7 +185,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						
 						if (r >= 50)
 						{
-							g_hero->setOutinjuryValue(g_hero->getOutinjuryValue() - 10);
+							g_hero->setInnerinjuryValue(g_hero->getInnerinjuryValue() - 10.0f);
 						}
 
 						StorageRoom::use(m_packageData->strid);
@@ -363,12 +363,12 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 }
 void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)
 {
-	int outvalue = g_hero->getOutinjuryValue();
+	float outvalue = g_hero->getOutinjuryValue();
 	if (addwvalue + outvalue > g_hero->getMaxOutinjuryValue())
 		g_hero->setOutinjuryValue(g_hero->getMaxOutinjuryValue());
 	else
 		g_hero->recoverOutjury(addwvalue);
-	int invalue = g_hero->getInnerinjuryValue();
+	float invalue = g_hero->getInnerinjuryValue();
 	if (invalue + addnvalue > g_hero->getMaxInnerinjuryValue())
 		g_hero->setInnerinjuryValue(g_hero->getMaxInnerinjuryValue());
 	else
@@ -377,7 +377,7 @@ void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)
 
 void ResDetailsLayer::recoveHungerValue(int addvalue)
 {
-	int hungervale = g_hero->getHungerValue();
+	float hungervale = g_hero->getHungerValue();
 	if (addvalue + hungervale > g_hero->getMaxHungerValue())
 		g_hero->setHungerValue(g_hero->getMaxHungerValue());
 	else

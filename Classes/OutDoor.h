@@ -35,6 +35,7 @@ private:
 	HeroProperNode* m_heroproper;
 	cocos2d::ui::Button* m_outbtn;
 	int lastSrollViewHeight;
+	int lastrows;
 };
 #endif
 

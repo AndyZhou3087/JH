@@ -16,6 +16,7 @@ HomeHill::HomeHill()
 
 HomeHill::~HomeHill()
 {
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
 }
 
 bool HomeHill::init()
@@ -80,7 +81,7 @@ bool HomeHill::init()
 				str = StringUtils::format("%d", data.count);
 				count->setString(str);
 
-				float fs = ((float)data.speed) / 60.0f;
+				float fs = (data.speed[g_nature->getReason()]) / 60.0f;
 				str = StringUtils::format("%.1fh", fs);
 				speed->setString(str);
 
@@ -198,10 +199,10 @@ void HomeHill::updateUI(float dt)
 			{
 				std::string str = StringUtils::format("%d", data->count);
 				count->setString(str);
-				str = StringUtils::format("%.1fh", data->speed / 60.f);
+				str = StringUtils::format("%.1fh", data->speed[g_nature->getReason()] / 60.f);
 				speed->setString(str);
 
-				str = StringUtils::format("%.1fh", (data->speed* data->max - data->waittime) / 60.f);
+				str = StringUtils::format("%.1fh", (data->speed[g_nature->getReason()] * data->max - data->waittime) / 60.f);
 				waittime->setString(str);
 	
 				if (data->count <= 0)

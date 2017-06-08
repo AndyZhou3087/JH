@@ -33,14 +33,14 @@ typedef struct
 	std::string strid;//id
 	int count;//产出剩下的个数
 	int max;//产出最大个数
-	int speed;//产出速度
+	std::vector<float> speed;//产出速度
 	int type;//类型StorageType
 	int actype;////工具时的标识1："采集", 2："砍伐", 3："挖掘"
 	std::vector<int> ep; // 使用后的效果，eg:加生命，加精神
 	char cname[32];//中文显示名
 	char desc[200];//描述
 	std::vector<int> res;//合成需要的资源
-	int pastmin;//过去的时间
+	float pastmin;//过去的时间
 	float waittime;//单个产出等待时间
 	std::string unitname;//资源的单位 eg:一根木材
 
@@ -310,6 +310,16 @@ public:
 	@param 保存的id vector
 	*****************************/
 	static void setSaveListId(std::vector<std::string> vec_val);
+
+	/****************************
+	是否在闭关中
+	*****************************/
+	static bool isExercising();
+
+	/****************************
+	是否有分身符
+	*****************************/
+	static bool isHasFSF();
 
     static void setNoAds(bool val);
     static bool getNoAds();

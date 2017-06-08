@@ -81,7 +81,10 @@ void ReviveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 		if (g_gameLayer != NULL)
+		{
 			g_gameLayer->removeChildByName("fightlayer");
+			g_gameLayer->saveAllData();
+		}
 		Director::getInstance()->resume();
 		DeathLayer* layer = DeathLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(layer);
