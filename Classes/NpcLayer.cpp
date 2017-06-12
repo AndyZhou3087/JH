@@ -13,12 +13,17 @@ NpcLayer::NpcLayer()
 	isShowWord = false;
 	m_wordcount = 0; 
 	m_wordindex = 0;
+	isNewPlot = false;
 }
 
 
 NpcLayer::~NpcLayer()
 {
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
+	if (isNewPlot && g_maplayer != NULL)
+	{
+		g_maplayer->showPlotAddr();
+	}
 }
 
 NpcLayer* NpcLayer::create(std::string addrname)
@@ -226,6 +231,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			}
 			if (g_maplayer != NULL)
 				g_maplayer->updataPlotMissionIcon();
+			isNewPlot = true;
 		}
 
 		if (GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
@@ -252,8 +258,6 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 						if (unlockchapter > 0)
 							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
 					}
-
-
 				}
 
 				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)
@@ -419,12 +423,12 @@ void NpcLayer::updatePlotUI()
 				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].type == 1)
 				{
 					dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
-					onFight->addChild(dicon);
+					onFight->addChild(dicon, 0 , "m1");
 				}
 				else
 				{
 					dicon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-					talkbtn->addChild(dicon);
+					talkbtn->addChild(dicon, 0, "m1");
 				}
 			}
 		}

@@ -59,28 +59,37 @@ void Hero::updateData(float dt)
 		int hour = m_pastmin / 60;
 		m_pastmin = m_pastmin % 60;
 
+		//新手引导不扣属性消耗
 		if (g_NewerGuideLayer != NULL)
+			return;
+
+		//闭关没有分身符不扣属性消耗， 有分身符要扣
+		if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 			return;
 
 		if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 		{
-			m_innerinjury -= hour * InnerinjurySpeed * 3.0f;
+			if (m_innerinjury < MAXInnerinjuryValue)
+				m_innerinjury -= hour * InnerinjurySpeed * 3.0f;
 			m_life -= hour * LifeLostSpeed * 1.0f * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 		}
 		if (m_hunger < SeriousHunger)//过度饥饿 2倍外伤，2倍内伤下降
 		{
-			m_outinjury -= hour * OutinjurySpeed * 2.0f;
-			m_innerinjury -= hour * InnerinjurySpeed * 2.0f;
+			if (m_outinjury < MAXOutinjuryValue)
+				m_outinjury -= hour * OutinjurySpeed * 2.0f;
+			if (m_innerinjury < MAXInnerinjuryValue)
+				m_innerinjury -= hour * InnerinjurySpeed * 2.0f;
 			m_life -= hour * LifeLostSpeed * 1.0f * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 		}
 		if (m_innerinjury < SeriousInnerinjury)//严重内伤，外伤2倍下降
 		{
-			m_outinjury -= hour * OutinjurySpeed * 3.0f;
+			if (m_outinjury < MAXOutinjuryValue)
+				m_outinjury -= hour * OutinjurySpeed * 3.0f;
 			m_life -= hour * LifeLostSpeed * 1.0f * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 		}
 
 		//接上严重界限的消耗
-		m_hunger -= hour * HungerSpeed * 0.1f;
+		m_hunger -= hour * HungerSpeed * 1.0f;
 
 		if (m_innerinjury < MAXInnerinjuryValue)
 		{
@@ -99,12 +108,13 @@ void Hero::updateData(float dt)
 				m_outinjury -= hour * OutinjurySpeed * 0.5f;
 			else
 				m_outinjury -= hour * OutinjurySpeed * 2.0f;
+
+			if (g_nature->getTemperature() > 20)
+			{
+				m_outinjury -= hour * OutinjurySpeed * 1.0f;
+			}
 		}
 
-		if (g_nature->getTemperature() > 20)
-		{
-			m_outinjury -= hour * OutinjurySpeed * 1.0f;
-		}
 		else if (g_nature->getTemperature() < -5)
 		{
 			m_life -= hour * LifeLostSpeed * 1.0f * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;

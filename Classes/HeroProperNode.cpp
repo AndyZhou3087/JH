@@ -13,6 +13,7 @@
 #include "OutDoor.h"
 #include "HeroStateUILayer.h"
 #include "MyMenu.h"
+#include "BuyComfirmLayer.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -342,8 +343,15 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 void HeroProperNode::onItem(Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-	Node* node = (Node*)pSender;
 
+	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
+	{
+		BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+		g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+		return;
+	}
+
+	Node* node = (Node*)pSender;
 	HeroAtrType atrype = (HeroAtrType)node->getTag();
 	PackageData* udata = (PackageData*)node->getUserData();
 	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));

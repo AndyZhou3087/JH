@@ -16,6 +16,8 @@ public:
 	virtual void onEnterTransitionDidFinish();
 	static NpcLayer* create(std::string addrid);
 	void updatePlotUI();
+public:
+	bool isNewPlot;
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

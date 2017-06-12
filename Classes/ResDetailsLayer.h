@@ -27,6 +27,7 @@ private:
 private:
 	PackageData* m_packageData;
 	cocos2d::ui::Text* uselbl;
+	cocos2d::ui::Button* m_okbtn;
 };
 
 #endif

@@ -20,6 +20,7 @@ MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
 	ismoving = false;
+	m_distance = 0.0f;
 }
 
 
@@ -33,10 +34,10 @@ bool MapLayer::init()
 	Node* csbnode = CSLoader::createNode("mapLayer.csb");
 	this->addChild(csbnode);
 
-	cocos2d::ui::ScrollView* mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
-	mapscroll->setScrollBarEnabled(false);
+	m_mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
+	m_mapscroll->setScrollBarEnabled(false);
 
-	m_mapbg = (cocos2d::ui::Widget*)mapscroll->getChildByName("mapbg");
+	m_mapbg = (cocos2d::ui::Widget*)m_mapscroll->getChildByName("mapbg");
 	int mapnamecount = GlobalData::map_maps.size();
 	int heroposindex = 0;
 	std::string addr = GameDataSave::getInstance()->getHeroAddr();
@@ -49,25 +50,10 @@ bool MapLayer::init()
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
 	}
-	float offsetx = 0.0f;
-	float offsety = 0.0f;
 
-	Size scollviewsize = mapscroll->getContentSize();
 	Vec2 pos = m_mapbg->getChildren().at(heroposindex)->getPosition();
 
-	if (pos.x > scollviewsize.width / 2)
-		offsetx = pos.x - scollviewsize.width / 2;
-	if (pos.y > scollviewsize.height / 2)
-		offsety = pos.y - scollviewsize.height / 2;
-
-	if (pos.x + scollviewsize.width/2 > mapscroll->getInnerContainerSize().width)
-		offsetx = mapscroll->getInnerContainerSize().width - scollviewsize.width/2;
-	if (pos.y + scollviewsize.height/2 > mapscroll->getInnerContainerSize().height)
-		offsety = mapscroll->getInnerContainerSize().height - scollviewsize.height/2;
-
-	mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
-
-	m_distance = 0.0f;
+	mapMoveTo(pos);
 
 	heroPos = m_mapbg->getChildByName(addr)->getPosition();
 
@@ -76,7 +62,7 @@ bool MapLayer::init()
 	m_herohead->setAnchorPoint(Vec2(0.5, 0));
 	m_herohead->setPosition(heroPos);
 
-	mapscroll->addChild(m_herohead);
+	m_mapscroll->addChild(m_herohead);
 
 	updateUnlockChapter();
 
@@ -140,6 +126,7 @@ void MapLayer::showMoveToDest()
 	g_nature->setTimeInterval(TIMESCALE * 8);
 
 	m_herohead->runAction(Sequence::create(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos), CallFunc::create(CC_CALLBACK_0(MapLayer::Arrive, this)), NULL));
+
 }
 
 void MapLayer::Arrive()
@@ -282,6 +269,35 @@ void MapLayer::updataPlotMissionIcon()
 	}
 }
 
+void MapLayer::mapMoveTo(Vec2 pos)
+{
+	float offsetx = 0.0f;
+	float offsety = 0.0f;
+	Size scollviewsize = m_mapscroll->getContentSize();
+	if (pos.x > scollviewsize.width / 2)
+		offsetx = pos.x - scollviewsize.width / 2;
+	if (pos.y > scollviewsize.height / 2)
+		offsety = pos.y - scollviewsize.height / 2;
+
+	if (pos.x + scollviewsize.width / 2 > m_mapscroll->getInnerContainerSize().width)
+		offsetx = m_mapscroll->getInnerContainerSize().width - scollviewsize.width / 2;
+	if (pos.y + scollviewsize.height / 2 > m_mapscroll->getInnerContainerSize().height)
+		offsety = m_mapscroll->getInnerContainerSize().height - scollviewsize.height / 2;
+
+	m_mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
+}
+
+void MapLayer::showPlotAddr()
+{
+	std::string plotaddr;
+	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
+	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
+	if (snpc.compare(m_addrname) != 0)
+	{
+		plotaddr = snpc;
+	}
+	mapMoveTo();
+}
 
 void MapLayer::delayShowMapNewerGuide(float dt)
 {

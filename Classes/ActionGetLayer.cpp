@@ -347,7 +347,7 @@ void ActionGetLayer::delayDoAction(float dt)
 		if (resrid != 69)
 		{
 			int r = GlobalData::createRandomNum(100);
-			if (r > 50)
+			if (r < 80)
 			{
 				g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue--;
 

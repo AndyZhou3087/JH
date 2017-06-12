@@ -15,7 +15,8 @@
 #include "NewerGuideLayer.h"
 #include "GameDataSave.h"
 #include "ExerciseCancelLayer.h"
-
+#include "ExerciseDoneLayer.h"
+#include "BuyComfirmLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -337,6 +338,13 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
+		if (GlobalData::isExercising() && !GlobalData::isHasFSF() && strcmp(m_build->data.name, "exerciseroom") != 0)
+		{
+			BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+			g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+			return;
+		}
+
 		if (tag == BUILD)//建造或者升级
 		{
 			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
@@ -430,6 +438,8 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
 				{
+					ExerciseDoneLayer* layer = ExerciseDoneLayer::create();
+					this->addChild(layer, 4);
 					exerciseDone();
 				}
 
@@ -630,6 +640,7 @@ void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 		std::string strid;
@@ -746,8 +757,8 @@ void BuildingUILayer::resetExercise()
 
 void BuildingUILayer::exerciseDone()
 {
-	int f_gfexp = 100;
-	int f_heroexp = 100;
+	int f_gfexp = EXSERCISE_DONE_GFEXP;
+	int f_heroexp = EXSERCISE_DONE_HEROEXP;
 
 	resetExercise();
 

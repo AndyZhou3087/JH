@@ -168,6 +168,8 @@ void ShopLayer::setMessage(PYARET ret)
 			std::string heroname[] = { "bzyys", "bdlw", "bfsf", "bfh","bbasepkg", "badvpkg","bemergpkg", "bfoodpkg","bjhgspkg"};
 			AnalyticUtil::onEvent(heroname[payindex - 4].c_str());
 #endif
+			if (g_gameLayer->getChildByName("buycomfirmlayer") != NULL)
+				g_gameLayer->removeChildByName("buycomfirmlayer");
 		}
 #ifdef ANALYTICS
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);

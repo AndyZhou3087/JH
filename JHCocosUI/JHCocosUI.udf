@@ -3,29 +3,15 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="activityLayer.csd" />
+          <FilePathData Path="exerciseDoneLayer.csd" />
           <FilePathData Path="buidingUiLayer.csd" />
-          <FilePathData Path="actionNode.csd" />
-          <FilePathData Path="goodsNode.csd" />
-          <FilePathData Path="npcLayer.csd" />
-          <FilePathData Path="homeLayer.csd" />
-          <FilePathData Path="topBarNode.csd" />
-          <FilePathData Path="mapLayer.csd" />
-          <FilePathData Path="npcNode.csd" />
-          <FilePathData Path="goWhereLayer.csd" />
-          <FilePathData Path="buildingDetailsLayer.csd" />
+          <FilePathData Path="buyDetailsLayer.csd" />
           <FilePathData Path="reviveLayer.csd" />
-          <FilePathData Path="unlockLayer.csd" />
-          <FilePathData Path="sysSmallLayer.csd" />
-          <FilePathData Path="selectSavedLayer.csd" />
-          <FilePathData Path="selectSaveComfirmLayer.csd" />
-          <FilePathData Path="hintLayer.csd" />
-          <FilePathData Path="exerciseCancelLayer.csd" />
-          <FilePathData Path="resNode.csd" />
-          <FilePathData Path="homeHillLayer.csd" />
+          <FilePathData Path="buyComfirmLayer.csd" />
+          <FilePathData Path="resDetailsLayer.csd" />
+          <FilePathData Path="npcLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="resNode.csd" />
+        <ActiveDocument Path="npcLayer.csd" />
       </Value>
     </Item>
     <Item Key="CocosRecentOperation">

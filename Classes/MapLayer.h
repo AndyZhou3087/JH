@@ -46,6 +46,11 @@ public:
 	新手引导
 	*****************************/
 	void showNewerGuide(int step);
+
+	/****************************
+	地图移动到任务图片
+	*****************************/
+	void showPlotAddr();
 private:
 
 	/****************************
@@ -63,6 +68,11 @@ private:
 	*****************************/
 	void Arrive();
 
+	/****************************
+	地图移动
+	*****************************/
+	void mapMoveTo(Vec2 pos);
+
 private:
 	float m_distance;//达到目的地的像素距离
 	Vec2 m_destPos;//目的地像素坐标
@@ -72,6 +82,7 @@ private:
 	cocos2d::ui::Widget* m_mapbg;//整个地图
 	Sprite* m_smissionIcon;//发任务的图标
 	Sprite* m_dmissionIcon;//接任务的图标
+	cocos2d::ui::ScrollView* m_mapscroll;//地图
 };
 extern MapLayer* g_maplayer;//全局地图层
 #endif

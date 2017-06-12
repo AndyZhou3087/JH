@@ -6,6 +6,7 @@
 #include "Hero.h"
 #include "StorageUILayer.h"
 #include "SoundManager.h"
+#include "BuyComfirmLayer.h"
 
 #define WINESTRID "23"
 
@@ -33,8 +34,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	Node* csbnode = CSLoader::createNode("resDetailsLayer.csb");
 	this->addChild(csbnode);
 
-	cocos2d::ui::Button* okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
-	okbtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onOk, this));
+	m_okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
+	m_okbtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onOk, this));
 
 	cocos2d::ui::Button* usebtn = (cocos2d::ui::Button*)csbnode->getChildByName("usebtn");
 	usebtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onUse, this));
@@ -42,7 +43,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	uselbl = (cocos2d::ui::Text*)usebtn->getChildByName("valuelbl");
 
 	if ((pdata->type == FOOD || (pdata->type == MEDICINAL && pdata->strid.compare(WINESTRID) != 0)) && whereClick == 0)
-		okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
+		m_okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall")->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/%s.png", pdata->strid.c_str());
@@ -65,7 +66,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	{
 		countstr = StringUtils::format("功法等级%d", pdata->lv + 1);
 		usebtn->setVisible(true);
-		okbtn->setPositionX(460);
+		m_okbtn->setPositionX(460);
 
 		std::string uselblstr = StringUtils::format("大力丸 x%d", StorageRoom::getCountById("71"));
 		uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
@@ -76,7 +77,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 		if (pdata->strid.compare("70") == 0)
 		{
 			usebtn->setVisible(true);
-			okbtn->setPositionX(460);
+			m_okbtn->setPositionX(460);
 			std::string uselblstr = StringUtils::format("经验药水 x%d", StorageRoom::getCountById("70"));
 			uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
 		}
@@ -163,10 +164,18 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
 		if (whereClick == 0)
 		{
+			if (GlobalData::isExercising() && !GlobalData::isHasFSF() && m_okbtn->getTitleText().compare(CommonFuncs::gbk2utf("使用")) == 0)
+			{
+				BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+				g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+				return;
+			}
+
 			if (m_packageData->type == FOOD)
 			{
 				bool isInres = false;

@@ -248,7 +248,7 @@ void FightLayer::delayBossFight(float dt)
 	{
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
 
-		float f1maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()] * 0.1f;
+		float f1maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()] * 0.05f;
 		if (herohurt >= (int)f1maxlife)//受到大于10%伤害
 		{
 			int r = GlobalData::createRandomNum(100);
@@ -307,7 +307,7 @@ void FightLayer::showFightWord(int type, int value)
 			wordstr = herofightdesc1[extype - 1][r];
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
 			int r = GlobalData::createRandomNum(100);
-			if (r > 50)
+			if (r < 80)
 			{
 				g_hero->getAtrByType(H_WEAPON)->goodvalue--;
 				if (g_hero->getAtrByType(H_WEAPON)->goodvalue <= 0)
@@ -365,7 +365,7 @@ void FightLayer::showFightWord(int type, int value)
 		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
 		{
 			int r = GlobalData::createRandomNum(100);
-			if (r > 50)
+			if (r < 80)
 			{
 				g_hero->getAtrByType(H_ARMOR)->goodvalue--;
 

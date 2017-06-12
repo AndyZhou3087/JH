@@ -5,6 +5,8 @@
 #define TIMESCALE 5.0f//时间比例尺
 #define ACTION_BAR_TIME 4.0f//建筑物中进度条秒数
 #define HERO_MOVE_SPEED 0.6f//地图中移动速度，min/px
+#define EXSERCISE_DONE_HEROEXP (100)
+#define EXSERCISE_DONE_GFEXP (100)
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #define ANALYTICS
@@ -51,4 +53,5 @@ static std::string tipswords[] = { "精神的愉悦可以让你的做任何事�
 "后山上有可供你活下去的各种资源，合理的利用可以让你的生活更好", "后山的狼和兔子是个练基本功的好对手" };
 
 static std::string exersiceDesc = "建议退出游戏前闭关，闭关期间无法进行其它行为（拥有分身符可同时）。闭关时间为现实时间，请选择合理时间进行闭关！";
+
 #endif // _H_CONST_H_

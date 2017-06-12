@@ -372,27 +372,27 @@ void TopBar::updataUI(float dt)
 
 	if (m_lastinnerinjury > (int)g_hero->getInnerinjuryValue())
 	{
-		innerinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		innerinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastinnerinjury = (int)g_hero->getInnerinjuryValue();
 	}
 	if (m_lastoutinjury > (int)g_hero->getOutinjuryValue())
 	{
-		outinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		outinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastoutinjury = (int)g_hero->getOutinjuryValue();
 	}
 	if (m_lasthunger > (int)g_hero->getHungerValue())
 	{
-		hungerRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		hungerRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lasthunger = (int)g_hero->getHungerValue();
 	}
 	if (m_lastspirit > (int)g_hero->getSpiritValue())
 	{
-		spiritRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		spiritRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastspirit = (int)g_hero->getSpiritValue();
 	}
 	if (m_lastlife > (int)g_hero->getLifeValue())
 	{
-		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(10)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
+		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastlife = (int)g_hero->getLifeValue();
 	}
 }

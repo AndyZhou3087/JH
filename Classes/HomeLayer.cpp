@@ -18,6 +18,7 @@
 #include "NewerGuideLayer.h"
 #include "HintBox.h"
 #include "CommonFuncs.h"
+#include "BuyComfirmLayer.h"
 
 HomeLayer::HomeLayer()
 {
@@ -237,6 +238,13 @@ void HomeLayer::onStorageRoom(Ref* pSender)
 void HomeLayer::onFence(Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
+	{
+		BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+		g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+		return;
+	}
 
 	Layer* layer = OutDoor::create();
 	if (g_gameLayer != NULL)

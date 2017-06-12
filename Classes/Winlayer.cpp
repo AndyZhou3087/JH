@@ -94,7 +94,10 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			{
 				NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
 				if (npclayer != NULL)
+				{
+					npclayer->isNewPlot = true;
 					npclayer->updatePlotUI();
+				}
 			}
 
 			if (g_maplayer != NULL )

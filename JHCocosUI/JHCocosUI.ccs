@@ -9,6 +9,7 @@
         </Folder>
         <Folder Name="images">
           <Image Name="dead.jpg" />
+          <Image Name="exsercisedone.png" />
           <Image Name="gameovertext.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="logo.png" />
@@ -378,10 +379,12 @@
         <Project Name="activityLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="buildingDetailsLayer.csd" Type="Layer" />
+        <Project Name="buyComfirmLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="comfirmSaveLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="exerciseCancelLayer.csd" Type="Layer" />
+        <Project Name="exerciseDoneLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
