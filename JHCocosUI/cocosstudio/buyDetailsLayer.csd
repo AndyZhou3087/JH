@@ -62,13 +62,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-879945319" Tag="317" IconVisible="False" LeftMargin="142.2415" RightMargin="127.7585" TopMargin="557.0790" BottomMargin="492.9210" IsCustomSize="True" FontSize="25" LabelText="小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desc" ActionTag="-879945319" Tag="317" IconVisible="False" LeftMargin="133.2424" RightMargin="136.7576" TopMargin="557.0789" BottomMargin="492.9211" IsCustomSize="True" FontSize="32" LabelText="小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿小鱼儿" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="450.0000" Y="230.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="142.2415" Y="607.9210" />
+            <Position X="133.2424" Y="607.9211" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.1976" Y="0.4749" />
+            <PrePosition X="0.1851" Y="0.4749" />
             <PreSize X="0.6250" Y="0.1797" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

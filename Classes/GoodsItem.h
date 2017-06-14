@@ -36,7 +36,7 @@ private:
 	cocos2d::ui::Text* nameTxt;
 	cocos2d::ui::Text* descTxt;
 	cocos2d::ui::Text* priceTxt;
-
+	bool isDraging;
 private:
 
 	/****************************

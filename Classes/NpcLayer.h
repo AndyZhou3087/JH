@@ -16,8 +16,7 @@ public:
 	virtual void onEnterTransitionDidFinish();
 	static NpcLayer* create(std::string addrid);
 	void updatePlotUI();
-public:
-	bool isNewPlot;
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -38,6 +37,8 @@ private:
 	*****************************/
 	void delayShowNewerGuide(float dt);
 	void getWinRes();
+
+	int checkFightCount(std::string npcid);
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;
@@ -46,6 +47,7 @@ private:
 	int m_wordcount;
 	bool isShowWord;
 	cocos2d::ui::ImageView* m_npctalkbg;
+	cocos2d::ui::ScrollView* m_scrollview;
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;
 	int m_plotindex;

@@ -8,7 +8,9 @@
 #include "StoryScene.h"
 #include "ComfirmSaveLayer.h"
 #include "SelectSaveLayer.h"
-
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "iosfunc.h"
+#endif
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -55,6 +57,9 @@ bool StartScene::init()
 
 	cocos2d::ui::Widget* savedbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("savedbtn");
 	savedbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onLoadSaved, this));
+
+	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)csbnode->getChildByName("qq");
+	qq->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
 
 	cocos2d::ui::Widget* continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
 	continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
@@ -126,4 +131,16 @@ void StartScene::onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		SettingLayer* layer = SettingLayer::create();
 		addChild(layer);
 	}
+}
+
+void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender; 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		copytoclipboard(qq->getString());
+#endif
+	}
+
 }

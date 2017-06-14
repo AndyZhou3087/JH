@@ -63,6 +63,20 @@
             <PreSize X="0.8583" Y="0.2094" />
             <FileData Type="Normal" Path="images/npctalkbg.png" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="ScrollView" ActionTag="581376873" Tag="163" IconVisible="False" LeftMargin="40.0000" RightMargin="30.0000" TopMargin="792.0000" BottomMargin="33.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="650.0000" Y="455.0000" />
+            <AnchorPoint />
+            <Position X="40.0000" Y="33.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0556" Y="0.0258" />
+            <PreSize X="0.9028" Y="0.3555" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="650" Height="455" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

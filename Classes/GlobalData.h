@@ -102,6 +102,8 @@ typedef struct
 	std::vector<int> vec_exp;
 	std::string cname;
 	std::string desc;
+	int qu;//品级
+	int type;//1：棍 2：刀 3：剑
 }WG_NGData;
 
 /****************************
@@ -161,6 +163,8 @@ typedef struct
 	int unlockchapter;//完成后解锁的章节
 	int status;//状态
 	int type;//对话0；需要战斗1
+	bool isshowsnpc;
+	bool isshowdnpc;
 }PlotMissionData;
 
 class GlobalData

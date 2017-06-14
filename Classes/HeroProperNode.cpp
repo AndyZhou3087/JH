@@ -64,7 +64,10 @@ bool HeroProperNode::init()
 			 
 			if (Atrytpe[i] == H_WG || Atrytpe[i] == H_NG)
 			{
-				str = StringUtils::format("Lv.%d", hpdata->lv + 1);
+				int lv = hpdata->lv + 1;
+				str = StringUtils::format("Lv.%d", lv);
+				if (lv >= GlobalData::map_wgngs[hpdata->strid].maxlv)
+					str = StringUtils::format("Lv.%d(max)", lv);
 			}
 			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE || Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
 			{
@@ -174,11 +177,11 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			PackageData data = MyPackage::vec_packages[i];
 			if (index == H_WEAPON && data.type == WEAPON)//武器
 				map_carryData[index].push_back(data);
-			else if (index == H_GATHER && data.extype == 1)//采集工具
+			else if (index == H_GATHER && data.extype == 1 && data.type == TOOLS)//采集工具
 				map_carryData[index].push_back(data);
-			else if (index == H_FELL && data.extype == 2)//砍伐工具
+			else if (index == H_FELL && data.extype == 2 && data.type == TOOLS)//砍伐工具
 				map_carryData[index].push_back(data);
-			else if (index == H_EXCAVATE && data.extype == 3)//挖掘工具
+			else if (index == H_EXCAVATE && data.extype == 3 && data.type == TOOLS)//挖掘工具
 				map_carryData[index].push_back(data);
 			else if (index == H_WG && data.type == W_GONG)//外功
 				map_carryData[index].push_back(data);
@@ -217,7 +220,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[N_GONG].size(); m++)
 			{
 				PackageData data = StorageRoom::map_storageData[N_GONG][m];
-				map_carryData[index].push_back(StorageRoom::map_storageData[N_GONG][m]);
+				map_carryData[index].push_back(data);
 			}
 		}
 		else if (index == H_ARMOR)//防具
@@ -225,7 +228,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[PROTECT_EQU].size(); m++)
 			{
 				PackageData data = StorageRoom::map_storageData[PROTECT_EQU][m];
-				map_carryData[index].push_back(StorageRoom::map_storageData[PROTECT_EQU][m]);
+				map_carryData[index].push_back(data);
 			}
 		}
 		else//工具
@@ -250,7 +253,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 		if (g_hero->getAtrByType(index)->count > 0) // 已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
 			PackageData sdata = *g_hero->getAtrByType(index);
-			map_carryData[index].insert(map_carryData[index].begin(), *g_hero->getAtrByType(index));
+			map_carryData[index].insert(map_carryData[index].begin(), sdata);
 		}
 	}
 }
@@ -264,6 +267,8 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 	if (innerheight < contentheight)
 		innerheight = contentheight;
 	m_scrollView->setInnerContainerSize(Size(650, innerheight));
+
+	m_select->setVisible(false);
 
 	for (int i = 0; i < tempsize; i++)
 	{
@@ -302,7 +307,11 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 
 		if (index == H_WG || index == H_NG )
 		{
-			str = StringUtils::format("Lv.%d", map_carryData[index][i].lv + 1);
+			int lv = map_carryData[index][i].lv + 1;
+			str = StringUtils::format("Lv.%d", lv);
+
+			if (lv >= GlobalData::map_wgngs[map_carryData[index][i].strid].maxlv)
+				str = StringUtils::format("Lv.%d(max)", lv);
 		}
 		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE || index == H_ARMOR || index == H_WEAPON)
 		{
@@ -317,24 +326,13 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		lvlbl->setAnchorPoint(Vec2(1, 0));
 		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
 		box->addChild(lvlbl);
-	}
-	m_select->setVisible(false);
-	if (tempsize > 0)
-	{
-		PackageData *hpdata = g_hero->getAtrByType(index);
-		if (hpdata->count > 0)//是否装备了hpdata->count ==-1没有装备
+
+		if (g_hero->getAtrByType(index) > 0)//是否装备了hpdata->count ==-1没有装备
 		{
-			for (int i = 0; i < tempsize; i++)
+			if (i == 0)
 			{
-				PackageData carrydata = map_carryData[index][i];
-				if (carrydata.strid.compare(hpdata->strid) == 0 && carrydata.goodvalue == hpdata->goodvalue)
-				{
-					std::string name = StringUtils::format("resitem%d", i);
-					Node* node = m_scrollView->getChildByName(name)->getChildren().at(0);
-					m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width / 2, node->getPositionY() + node->getContentSize().height / 2));
-					m_select->setVisible(true);
-					break;
-				}
+				m_select->setPosition(Vec2(boxItem->getPositionX() - boxItem->getContentSize().width / 2, boxItem->getPositionY() + boxItem->getContentSize().height / 2));
+				m_select->setVisible(true);
 			}
 		}
 	}
@@ -393,7 +391,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (m_select->isVisible())//之前是选中m_select可见，现在点了就是没选中
 	{
-		if (udata->type >= TOOLS)
+		if (udata->type == TOOLS)
 			str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
 		else
 			str = StringUtils::format("ui/hp%d.png", udata->type + 1);
@@ -418,7 +416,11 @@ void HeroProperNode::onItem(Ref* pSender)
 
 			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
 			{
-				str = StringUtils::format("Lv.%d", udata->lv + 1);
+				int lv = udata->lv + 1;
+				str = StringUtils::format("Lv.%d", lv);
+
+				if (lv >= GlobalData::map_wgngs[udata->strid].maxlv)
+					str = StringUtils::format("Lv.%d(max)", lv);
 			}
 			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
 			{
@@ -433,7 +435,8 @@ void HeroProperNode::onItem(Ref* pSender)
 		}
 		else//卸掉装备 设置count = -1
 		{
-			MyPackage::add(*g_hero->getAtrByType(atrype));
+			PackageData mydata = *g_hero->getAtrByType(atrype);
+			MyPackage::add(mydata);
 			g_hero->getAtrByType(atrype)->count = -1;
 			lvtext[lastclickindex]->setString("");
 		}
@@ -447,7 +450,11 @@ void HeroProperNode::onItem(Ref* pSender)
 			g_hero->setAtrByType(atrype, *udata);
 			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
 			{
-				str = StringUtils::format("Lv.%d", udata->lv + 1);
+				int lv = udata->lv + 1;
+				str = StringUtils::format("Lv.%d", lv);
+
+				if (lv >= GlobalData::map_wgngs[udata->strid].maxlv)
+					str = StringUtils::format("Lv.%d(max)", lv);
 			}
 			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
 			{
@@ -462,7 +469,8 @@ void HeroProperNode::onItem(Ref* pSender)
 		}
 		else
 		{
-			StorageRoom::add(*g_hero->getAtrByType(atrype));
+			PackageData mydata = *g_hero->getAtrByType(atrype);
+			StorageRoom::add(mydata);
 			g_hero->getAtrByType(atrype)->count = -1;
 			lvtext[lastclickindex]->setString("");
 		}

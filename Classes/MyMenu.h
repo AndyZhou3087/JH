@@ -9,6 +9,9 @@ public:
 	~MyMenu();
     bool init();
 	virtual bool onTouchBegan(Touch* touch, Event* event);
+	virtual void onTouchMoved(Touch *touch, Event *event);
+	virtual void onTouchEnded(Touch *touch, Event *event);
+	virtual void onTouchCancelled(Touch *touch, Event *event);
     /** initializes a Menu with a NSArray of MenuItem objects */
     bool initWithArray(const Vector<MenuItem*>& arrayOfItems);
 	static MyMenu* createWithArray(const Vector<MenuItem*>& arrayOfItems);
@@ -23,5 +26,6 @@ private:
 private:
 	Node* m_szTouchLimitNode;
 	bool m_bTouchLimit;
+	bool m_isdraging;
 };
 #endif

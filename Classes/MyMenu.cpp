@@ -8,6 +8,7 @@ MyMenu::MyMenu()
 {
 	m_szTouchLimitNode = NULL;
 	m_bTouchLimit = false;
+	m_isdraging = false;
 }
 
 MyMenu::~MyMenu()
@@ -148,6 +149,59 @@ bool MyMenu::onTouchBegan(Touch* touch, Event* event)
 	return false;
 }
 
+
+void MyMenu::onTouchEnded(Touch* touch, Event* event)
+{
+	if (!m_isdraging)
+	{
+		CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchEnded] -- invalid state");
+		this->retain();
+		if (_selectedItem)
+		{
+			_selectedItem->unselected();
+			_selectedItem->activate();
+		}
+		_state = Menu::State::WAITING;
+		_selectedWithCamera = nullptr;
+		this->release();
+	}
+	else
+	{
+		onTouchCancelled(touch, event);
+		m_isdraging = false;
+	}
+}
+
+void MyMenu::onTouchCancelled(Touch* touch, Event* event)
+{
+	CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchCancelled] -- invalid state");
+	this->retain();
+	if (_selectedItem)
+	{
+		_selectedItem->unselected();
+	}
+	_state = Menu::State::WAITING;
+	this->release();
+}
+
+void MyMenu::onTouchMoved(Touch* touch, Event* event)
+{
+	m_isdraging = true;
+	CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchMoved] -- invalid state");
+	MenuItem *currentItem = this->getItemForTouch(touch, _selectedWithCamera);
+	if (currentItem != _selectedItem)
+	{
+		if (_selectedItem)
+		{
+			_selectedItem->unselected();
+		}
+		_selectedItem = currentItem;
+		if (_selectedItem)
+		{
+			_selectedItem->selected();
+		}
+	}
+}
 void MyMenu::setTouchlimit(cocos2d::Node *node)
 {
 	m_szTouchLimitNode = node;

@@ -149,9 +149,15 @@ public:
 
 	/****************************
 	睡觉
+	@param 消耗时间
 	@param 睡觉时间 （小时）
 	*****************************/
-	void sleep(int hour);
+	void sleep(int losttime, int hour);
+
+	/****************************
+	睡觉完成，定时器控制
+	*****************************/
+	void sleepDone(float dt);
 
 	/****************************
 	喝酒
@@ -210,6 +216,7 @@ private:
 	float injuryrecoverpercent;//内伤恢复百分比
 	float outjuryrecoverpercent;//外伤恢复百分比
 	float hungerrecoverpercent;//饥饿恢复百分比
+	float sleepLostPercent;//睡觉时饥饿与精神的降低速度为正常时的一半
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

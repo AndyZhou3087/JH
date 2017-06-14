@@ -7,6 +7,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "Building.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 typedef enum
@@ -69,6 +70,11 @@ private:
 	void loadActionUi();
 
 	/****************************
+	显示建筑物自己操作的UI
+	****************************/
+	void showActionUi();
+
+	/****************************
 	更新建筑物自己操作的UI
 	****************************/
 	void updataActionRes();
@@ -103,6 +109,22 @@ private:
 	*****************************/
 	void exerciseDone();
 
+	/****************************
+	点击锻造台分类按钮回调
+	*****************************/
+	void onCategory(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	锻造台分类加载
+	@category 分类
+	*****************************/
+	void loadActionUIByCategory(int category);
+
+	/****************************
+	延迟显示分类
+	*****************************/
+	void delayShowCategoryActionUI(float dt);
+
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE
@@ -123,8 +145,11 @@ private:
 	Label* m_loadlbl;//加载文字
 	int selectActionIndex;//闭关选择的item索引
 	int estarttime;//闭关开始的时间
-	std::string ex_wgstrid;
-	std::string ex_ngstrid;
+	std::string ex_wgstrid;//闭关时装备的外功ID;
+	std::string ex_ngstrid;//闭关室装备的内功ID
+	std::vector<cocos2d::ui::Button*> vec_categoryBtn;//锻造台分类按钮
+	std::vector<BuildActionData> vec_buildAcitonData;//建筑物操作的数据
+	int lastCategoryindex;
 };
 #endif
 

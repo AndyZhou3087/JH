@@ -120,6 +120,8 @@
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
           <Image Name="buildsmall.png" />
+          <Image Name="buildtagbtn0.png" />
+          <Image Name="buildtagbtn1.png" />
           <Image Name="buildtext0.png" />
           <Image Name="buildtext1.png" />
           <Image Name="buildtext2.png" />
@@ -238,6 +240,8 @@
           <Image Name="npcrsi0.png" />
           <Image Name="npcrsi1.png" />
           <Image Name="npcrsi2.png" />
+          <Image Name="pausebtn.png" />
+          <Image Name="qqline0.png" />
           <Image Name="redpoint.png" />
           <Image Name="resbox.png" />
           <Image Name="saveitembg.png" />
@@ -413,6 +417,7 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="pauseLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

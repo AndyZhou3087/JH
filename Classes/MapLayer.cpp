@@ -213,10 +213,11 @@ void MapLayer::updataPlotMissionIcon()
 	
 	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
 	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
-	int mapnamecount = GlobalData::map_maps.size();
+
 	m_smissionIcon->setVisible(false);
 	m_smissionIcon->setVisible(false);
 
+	int mapnamecount = GlobalData::map_maps.size();
 	int plotindex = GlobalData::getPlotMissionIndex();
 	for (int i = 0; i < mapnamecount; i++)
 	{
@@ -287,16 +288,74 @@ void MapLayer::mapMoveTo(Vec2 pos)
 	m_mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 }
 
+//此方法无法实现地图移动到任务地点的功能
+void MapLayer::mapScrollPlotAddr(Vec2 pos)
+{
+	float offsetx = 0.0f;
+	float offsety = 0.0f;
+	Size scollviewsize = m_mapscroll->getContentSize();
+	if (pos.x > scollviewsize.width / 2)
+		offsetx = pos.x - scollviewsize.width / 2;
+	if (pos.y > scollviewsize.height / 2)
+		offsety = pos.y - scollviewsize.height / 2;
+
+	if (pos.x + scollviewsize.width / 2 > m_mapscroll->getInnerContainerSize().width)
+		offsetx = m_mapscroll->getInnerContainerSize().width - scollviewsize.width / 2;
+	if (pos.y + scollviewsize.height / 2 > m_mapscroll->getInnerContainerSize().height)
+		offsety = m_mapscroll->getInnerContainerSize().height - scollviewsize.height / 2;
+
+	float h = m_mapscroll->getInnerContainerSize().height - m_mapscroll->getContentSize().height;
+	float w = m_mapscroll->getInnerContainerSize().width - m_mapscroll->getContentSize().width;
+
+	float percentx = offsetx * 100 / w;
+	float percenty = offsety * 100 / h;
+	m_mapscroll->scrollToPercentBothDirection(Vec2(percentx, percenty), 1, false);
+}
+
+
 void MapLayer::showPlotAddr()
 {
 	std::string plotaddr;
-	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
-	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
-	if (snpc.compare(m_addrname) != 0)
+
+	PlotMissionData *mdata = &GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
+	std::string snpc = mdata->snpc;
+	std::string dnpc = mdata->dnpc;
+
+	if (mdata->status == M_NONE && !mdata->isshowsnpc)
 	{
-		plotaddr = snpc;
+		mdata->isshowsnpc = true;
+		int mapnamecount = GlobalData::map_maps.size();
+		for (int i = 0; i < mapnamecount; i++)
+		{
+			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+			{
+				if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
+				{
+					mapScrollPlotAddr(mapname->getPosition());
+					return;
+				}
+			}
+		}
 	}
-	mapMoveTo();
+	else if (mdata->status == M_DOING && !mdata->isshowdnpc)
+	{
+		mdata->isshowdnpc = true;
+		int mapnamecount = GlobalData::map_maps.size();
+		for (int i = 0; i < mapnamecount; i++)
+		{
+			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+			{
+				if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
+				{
+					mapScrollPlotAddr(mapname->getPosition());
+					return;
+				}
+			}
+		}
+	}
+
 }
 
 void MapLayer::delayShowMapNewerGuide(float dt)

@@ -24,6 +24,7 @@ public:
 	static void setMessage(PYARET ret);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static void loadShopData();
 	static void addBuyGoods();
 private:

@@ -73,6 +73,11 @@ private:
 	*****************************/
 	void mapMoveTo(Vec2 pos);
 
+	/****************************
+	地图移动到任务图标位置
+	*****************************/
+	void mapScrollPlotAddr(Vec2 pos);
+
 private:
 	float m_distance;//达到目的地的像素距离
 	Vec2 m_destPos;//目的地像素坐标

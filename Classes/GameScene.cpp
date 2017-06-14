@@ -9,6 +9,7 @@
 #include "CommonFuncs.h"
 #include "ReviveLayer.h"
 #include "NewerGuideLayer.h"
+#include "ActivitScene.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -307,7 +308,7 @@ void GameScene::timerSaveData(float dt)
 void GameScene::checkiflive(float dt)
 {
 	//生命为0，死掉，弹出复活界面
-	if (g_hero->getLifeValue() <= 0.0f)
+	if (g_hero->getLifeValue() <= 0.0f && ActivitScene::count <= 0)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		Director::getInstance()->pause();

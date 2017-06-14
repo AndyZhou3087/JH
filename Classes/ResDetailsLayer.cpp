@@ -54,6 +54,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	resname->setString(pdata->name);
 
+	cocos2d::ui::Text* atkdftext = (cocos2d::ui::Text*)csbnode->getChildByName("atkdftext");
+
 	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)csbnode->getChildByName("valuelbl");
 	int count = StorageRoom::getCountById(pdata->strid);
 	std::string countstr;
@@ -61,10 +63,27 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	if (pdata->type == FOOD || pdata->type == MEDICINAL || pdata->type == RES_1)
 		countstr = StringUtils::format("库存%d", count);
 	else if (pdata->type == WEAPON || pdata->type == PROTECT_EQU || pdata->type == TOOLS)
+	{
 		countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
+		std::string tmpstr;
+		if (pdata->type == WEAPON)
+		{
+			tmpstr = StringUtils::format("攻击力增加%d", GlobalData::map_equips[pdata->strid].atk);
+		}
+		else if (pdata->type == PROTECT_EQU)
+		{
+			tmpstr = StringUtils::format("防御力增加%d", GlobalData::map_equips[pdata->strid].df);
+		}
+		if (tmpstr.length() > 0)
+			atkdftext->setString(CommonFuncs::gbk2utf(tmpstr.c_str()));
+	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
-		countstr = StringUtils::format("功法等级%d", pdata->lv + 1);
+		int lv = pdata->lv + 1;
+		countstr = StringUtils::format("功法等级%d", lv);
+
+		if (lv >= GlobalData::map_wgngs[pdata->strid].maxlv)
+			countstr = StringUtils::format("功法等级%d(max)", lv);
 		usebtn->setVisible(true);
 		m_okbtn->setPositionX(460);
 

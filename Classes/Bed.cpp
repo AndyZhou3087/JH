@@ -31,5 +31,5 @@ void Bed::action(int minute, int exminute)
 	//更新时间刷新的间隔，这样实现消耗游戏时间
 	g_nature->setTimeInterval(exminute * NORMAL_TIMEINTERVAL * 1.0f / (getActionBarTime() * TIMESCALE));
 	//
-	g_hero->sleep(exminute / 60);
+	g_hero->sleep(minute, exminute / 60);
 }

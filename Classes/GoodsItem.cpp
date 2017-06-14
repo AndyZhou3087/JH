@@ -4,7 +4,7 @@
 #include "SoundManager.h"
 GoodsItem::GoodsItem()
 {
-
+	isDraging = false;
 }
 
 
@@ -64,6 +64,8 @@ void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::BEGAN || type == ui::Widget::TouchEventType::MOVED)
 	{
+		if (type == ui::Widget::TouchEventType::MOVED)
+			isDraging = true;
 		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 0.95f), NULL));
 	}
 	else if (type == ui::Widget::TouchEventType::CANCELED)
@@ -72,9 +74,14 @@ void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	}
 	else if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		//购买
-		ShopLayer::beginPay(this->getTag());
+		if (!isDraging)
+		{
+			((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
+
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+			//购买
+			ShopLayer::beginPay(this->getTag());
+		}
+		isDraging = false;
 	}
 }

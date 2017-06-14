@@ -13,16 +13,15 @@ NpcLayer::NpcLayer()
 	isShowWord = false;
 	m_wordcount = 0; 
 	m_wordindex = 0;
-	isNewPlot = false;
 }
 
 
 NpcLayer::~NpcLayer()
 {
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
-	if (isNewPlot && g_maplayer != NULL)
+	if (g_maplayer != NULL)
 	{
-		g_maplayer->showPlotAddr();
+		//g_maplayer->showPlotAddr();
 	}
 }
 
@@ -64,16 +63,27 @@ bool NpcLayer::init(std::string addrid)
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onBack, this));
 
+	m_scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
+
+	m_scrollview->setScrollBarEnabled(false);
+	m_scrollview->setBounceEnabled(true);
+
 	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
 	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
 
 	int ncpsize = mdata.npcs.size();
+	int itemheight = 153;
+	int innerheight = itemheight * ncpsize;
+	int contentheight = m_scrollview->getContentSize().height;
+	if (innerheight < contentheight)
+		innerheight = contentheight;
+	m_scrollview->setInnerContainerSize(Size(650, innerheight));
+
 	for (int i = 0; i < ncpsize; i++)
 	{
 		Node* npcitem = CSLoader::createNode("npcNode.csb");
-		npcitem->setName(mdata.npcs[i]);
-		npcitem->setPosition(Vec2(360, 415 - 155 * i));
-		m_csbnode->addChild(npcitem);
+		npcitem->setPosition(Vec2(m_scrollview->getContentSize().width / 2, innerheight - i * itemheight - itemheight / 2));
+		m_scrollview->addChild(npcitem, 0, mdata.npcs[i]);
 
 		cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
 		npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
@@ -81,15 +91,23 @@ bool NpcLayer::init(std::string addrid)
 		cocos2d::ui::ImageView* npcrsi = (cocos2d::ui::ImageView*)npcitem->getChildByName("npcrsi");
 		npcrsi->setPositionX(npcname->getPositionX() + npcname->getContentSize().width + 25);
 
+		int count = checkFightCount(mdata.npcs[i]);
+
 		std::string rsistr;
-		int npclv = GlobalData::map_npcs[mdata.npcs[i]].lv;
-		int herolv = g_hero->getLVValue() + 1;
-		if (npclv - herolv > 3)
-			rsistr = "ui/npcrsi2.png";
-		else if (npclv - herolv > 0)
-			rsistr = "ui/npcrsi1.png";
+		if (count > 0)
+		{
+			if (count <= 3)
+				rsistr = "ui/npcrsi0.png";
+			else
+				rsistr = "ui/npcrsi1.png";
+		}
 		else
-			rsistr = "ui/npcrsi0.png";
+		{
+			if (count >= -3)
+				rsistr = "ui/npcrsi2.png";
+			else
+				rsistr = "ui/npcrsi1.png";
+		}
 
 		npcrsi->loadTexture(rsistr, cocos2d::ui::TextureResType::PLIST);
 
@@ -176,6 +194,9 @@ void NpcLayer::onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 
 		if (isShowWord)
 		{
+			if (vec_wordstr.size() <= 0)
+				return;
+
 			if (vec_wordstr[m_wordindex].length() > 0)
 			{
 				fastShowWord();
@@ -200,6 +221,17 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			return;
 		if (isShowWord)
 		{
+			if (size <= 0)
+			{
+				int index = 0;
+				while (m_wordlbl->getLetter(index) != NULL)
+				{
+					m_wordlbl->getLetter(index)->setScale(1);
+					index++;
+				}
+				this->scheduleOnce(schedule_selector(NpcLayer::removeNpcWord), 0.5f);
+				return;
+			}
 			if (vec_wordstr[m_wordindex].length() > 0)
 			{
 				fastShowWord();
@@ -231,7 +263,6 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			}
 			if (g_maplayer != NULL)
 				g_maplayer->updataPlotMissionIcon();
-			isNewPlot = true;
 		}
 
 		if (GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
@@ -296,6 +327,31 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
 
+		//if (g_hero->getLVValue() + 1 < 10)
+		//{
+		//	std::string protectword;
+		//	if (npcid.compare("n004") == 0)
+		//	{
+		//		protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！");
+		//	}
+		//	else if (npcid.compare("n005") == 0)
+		//	{
+		//		protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！");
+
+		//	}
+		//	if (protectword.length() > 0)
+		//	{
+		//		if (isShowWord)
+		//			return;
+
+		//		m_npctalkbg->runAction(FadeIn::create(0.2f));
+		//		checkWordLblColor(protectword);
+		//		showTypeText(0);
+
+		//		return;
+		//	}
+		//}
+
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
 	}
@@ -329,7 +385,7 @@ void NpcLayer::showTypeText(float dt)
 				this->scheduleOnce(schedule_selector(NpcLayer::removeNpcWord), 2.0f);
 			}
 			m_wordcount = 0;
-			isShowWord = false;
+			//isShowWord = false;
 			m_wordlbl->unschedule("schedule_typecallback");
 		}
 
@@ -380,6 +436,7 @@ void NpcLayer::checkWordLblColor(std::string wordstr)
 void NpcLayer::removeNpcWord(float dt)
 {
 	isShowWord = false;
+	m_wordcount = 0;
 	m_wordindex= 0;
 	m_npctalkbg->runAction(FadeOut::create(0.2f));
 	vec_wordstr.clear();
@@ -393,7 +450,7 @@ void NpcLayer::updatePlotUI()
 	int ncpsize = GlobalData::map_maps[m_addrstr].npcs.size();
 	for (int i = 0; i < ncpsize; i++)
 	{
-		Node* npcitem = m_csbnode->getChildByName(GlobalData::map_maps[m_addrstr].npcs[i]);
+		Node* npcitem = m_scrollview->getChildByName(GlobalData::map_maps[m_addrstr].npcs[i]);
 		cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
 		cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
 
@@ -440,9 +497,6 @@ void NpcLayer::fastShowWord()
 	m_wordcount = 0;
 	m_wordindex++;
 
-	if (m_wordindex >= vec_wordstr.size())
-		return;
-
 	this->unscheduleAllCallbacks();
 	m_wordlbl->unscheduleAllCallbacks();
 	int index = 0;
@@ -450,6 +504,11 @@ void NpcLayer::fastShowWord()
 	{
 		m_wordlbl->getLetter(index)->setScale(1);
 		index++;
+	}
+	if (m_wordindex >= vec_wordstr.size())
+	{
+		this->scheduleOnce(schedule_selector(NpcLayer::removeNpcWord), 2.0f);
+		return;
 	}
 
 	checkWordLblColor(vec_wordstr[m_wordindex]);
@@ -578,7 +637,7 @@ void NpcLayer::getWinRes()
 void NpcLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	Node* npcitem = m_csbnode->getChildByName(GlobalData::map_maps[m_addrstr].npcs[0]);
+	Node* npcitem = m_scrollview->getChildByName(GlobalData::map_maps[m_addrstr].npcs[0]);
 	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
 	nodes.push_back(talkbtn);
 	g_gameLayer->showNewerGuide(step, nodes);
@@ -590,4 +649,78 @@ void NpcLayer::delayShowNewerGuide(float dt)
 		showNewerGuide(49);
 	else if (NewerGuideLayer::checkifNewerGuide(50) && m_addrstr.compare("m1-3") == 0)
 		showNewerGuide(50);
+}
+
+int NpcLayer::checkFightCount(std::string npcid)
+{
+	int gfBonusAck = 0;
+	int weaponAck = 0;
+	int npcdf = GlobalData::map_npcs[npcid].df;
+	int npcatk = GlobalData::map_npcs[npcid].atk;
+	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
+	{
+		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
+		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+	}
+
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器--加攻
+	{
+		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
+		weaponAck = GlobalData::map_equips[wname].atk;
+	}
+
+	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
+	float fack = g_hero->getAtkPercent() * heroCurAck;
+	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
+	{
+		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
+		{
+			fack += fack * 0.1f;
+		}
+	}
+
+	heroCurAck = int(fack + 0.5f);
+
+	int npchurt = heroCurAck - npcdf;
+	float fminack = 0.1f * heroCurAck;
+	int intminack = int(fminack + 0.5f);
+	if (npchurt < intminack)
+		npchurt = intminack;
+
+	int npclife = GlobalData::map_npcs[npcid].life;
+	
+	int heroVsBossCount = npclife % npchurt == 0 ? npclife / npchurt : (npclife / npchurt + 1);
+
+	int gfBonusDf = 0;
+	int adf = 0;
+	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
+	{
+		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
+		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+	}
+
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0)////是否有防具--加防
+	{
+		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
+		adf = GlobalData::map_equips[aname].df;
+	}
+
+	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
+	float fdf = g_hero->getDfPercent() * curheroDf;
+	curheroDf = int(fdf + 0.5f);
+	int herohurt = npcatk - curheroDf;
+
+	fminack = 0.1f * npcatk;
+	intminack = int(fminack + 0.5f);
+
+	if (herohurt < intminack)
+		herohurt = intminack;
+
+	int intlife = int(g_hero->getLifeValue() + 1);
+	int bossVsHeroCount = intlife % herohurt == 0 ? intlife / herohurt : (intlife / herohurt + 1);
+
+	if (heroVsBossCount <= bossVsHeroCount)
+		return heroVsBossCount;
+	else
+		return -bossVsHeroCount;
 }

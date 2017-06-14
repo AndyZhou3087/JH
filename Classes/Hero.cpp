@@ -32,6 +32,7 @@ Hero::Hero()
 	injuryrecoverpercent = 1.0f;
 	outjuryrecoverpercent = 1.0f;
 	hungerrecoverpercent = 1.0f;
+	sleepLostPercent = 1.0f;
 
 	m_pastmin = 0;
 }
@@ -89,7 +90,7 @@ void Hero::updateData(float dt)
 		}
 
 		//接上严重界限的消耗
-		m_hunger -= hour * HungerSpeed * 1.0f;
+		m_hunger -= hour * HungerSpeed * 1.0f * sleepLostPercent;
 
 		if (m_innerinjury < MAXInnerinjuryValue)
 		{
@@ -120,7 +121,7 @@ void Hero::updateData(float dt)
 			m_life -= hour * LifeLostSpeed * 1.0f * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] / 100.0f;
 		}
 
-		m_spirit -= hour * SpiritSpeed * 1.0f;
+		m_spirit -= hour * SpiritSpeed * 1.0f * sleepLostPercent;
 
 		if (m_innerinjury < 0.0f)
 			m_innerinjury = 0.0f;
@@ -136,11 +137,19 @@ void Hero::updateData(float dt)
 
 }
 
-void Hero::sleep(int hour)
+void Hero::sleep(int losttime, int hour)
 {
 	//按次恢复生命
 	sleephour = hour;
 	this->schedule(schedule_selector(Hero::sleepbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
+	sleepLostPercent = 0.5f;
+
+	float delay = 0.0f;
+	if (losttime < TIMESCALE * ACTION_BAR_TIME)
+		delay = delay / TIMESCALE;
+	else
+		delay = ACTION_BAR_TIME;
+	this->scheduleOnce(schedule_selector(Hero::sleepDone), delay);
 }
 
 void Hero::sleepbystep(float dt)
@@ -152,6 +161,11 @@ void Hero::sleepbystep(float dt)
 		m_life = getMaxLifeValue();
 		this->unschedule(schedule_selector(Hero::sleepbystep));
 	}
+}
+
+void Hero::sleepDone(float dt)
+{
+	sleepLostPercent = 1.0f;
 }
 
 void Hero::drinking()

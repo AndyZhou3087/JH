@@ -6,6 +6,7 @@
 #include "Hero.h"
 #include "GlobalData.h"
 #include "SoundManager.h"
+#include "PauseLayer.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -30,6 +31,9 @@ bool HeroStateUILayer::init()
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(HeroStateUILayer::onBack, this));
+
+	cocos2d::ui::Button* pausebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("pausebtn");
+	pausebtn->addTouchEventListener(CC_CALLBACK_2(HeroStateUILayer::onPause, this));
 
 	for (int i = 0; i < sizeof(herostatus) / sizeof(herostatus[0]); i++)
 	{
@@ -62,6 +66,16 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
 		if (topbar != NULL)
 			topbar->showNewerGuide(13);
+	}
+}
+
+void HeroStateUILayer::onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		Director::getInstance()->pause();
+		this->addChild(PauseLayer::create(), 2);
 	}
 }
 
@@ -142,6 +156,14 @@ void HeroStateUILayer::updateStatus(float dt)
 	}
 	//攻击属性
 	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
+
+	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
+	{
+		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
+		{
+			fack += fack * 0.1f;
+		}
+	}
 	str = StringUtils::format("%d", int(fack + 0.5f));
 	herostatus[9]->setString(str);
 

@@ -406,6 +406,11 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
+		v = vitem["qu"];
+		data.qu = atoi(v.GetString());
+		v = vitem["type"];
+		data.type = atoi(v.GetString());
+
 		map_wgngs[data.id] = data;
 	}
 
@@ -575,6 +580,9 @@ void GlobalData::loadPlotMissionJsonData()
 		data.type = atoi(v.GetString());
 
 		data.status = M_NONE;
+		data.isshowdnpc = false;
+		data.isshowsnpc = false;
+
 		v = vitem["word"];
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{

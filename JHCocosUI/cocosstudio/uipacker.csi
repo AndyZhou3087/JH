@@ -325,6 +325,10 @@
       <FilePathData Path="ui/0-ex1.png" />
       <FilePathData Path="ui/0-ex2.png" />
       <FilePathData Path="ui/sexerciseroom.png" />
+      <FilePathData Path="ui/buildtagbtn0.png" />
+      <FilePathData Path="ui/buildtagbtn1.png" />
+      <FilePathData Path="ui/qqline0.png" />
+      <FilePathData Path="ui/pausebtn.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

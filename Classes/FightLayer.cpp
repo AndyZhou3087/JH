@@ -138,14 +138,16 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			{
 				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("逃跑成功！"));
 				addChild(hbox);
-				m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
-				m_escapebtn->setTag(1);
+
 				isecapeok = true;
 			}
 			else
 			{
 				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你乘机逃跑，可惜失败了！！"), 25, Color3B(204, 4, 4));
+				m_escapebtn->setEnabled(false);
 			}
+			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+			m_escapebtn->setTag(1);
 		}
 		else
 		{
@@ -161,6 +163,7 @@ void FightLayer::delayHeroFight(float dt)
 
 	int gfBonusAck = 0;
 	int weaponAck = 0;
+
 	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
 	{
 		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
@@ -172,8 +175,17 @@ void FightLayer::delayHeroFight(float dt)
 		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAck = GlobalData::map_equips[wname].atk;
 	}
+
 	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
 	float fack = g_hero->getAtkPercent() * heroCurAck;
+	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
+	{
+		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
+		{
+			fack += fack * 0.1f;
+		}
+	}
+
 	heroCurAck = int(fack + 0.5f);
 
 	int npchurt = heroCurAck - npcdf;

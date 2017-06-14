@@ -1,19 +1,5 @@
 <UserData Version="3.10.0.0">
   <Properties>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="exerciseDoneLayer.csd" />
-          <FilePathData Path="buidingUiLayer.csd" />
-          <FilePathData Path="buyDetailsLayer.csd" />
-          <FilePathData Path="reviveLayer.csd" />
-          <FilePathData Path="buyComfirmLayer.csd" />
-          <FilePathData Path="resDetailsLayer.csd" />
-          <FilePathData Path="npcLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="npcLayer.csd" />
-      </Value>
-    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />

@@ -16,13 +16,11 @@ public:
 
 	bool init(std::string imagepath, std::string content);
 	static cocos2d::Scene* createScene(std::string imagepath, std::string content);
-	
+	static int count;
 private:
 	static ActivitScene* create(std::string imagepath, std::string content);
 	void popself(float dt);
 private:
-
-	static int entercount;
 };
 #endif
 

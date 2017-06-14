@@ -7,11 +7,11 @@
 #include "SelectHeroScene.h"
 #include "SoundManager.h"
 #include "ReviveLayer.h"
-
 #include "json.h"
 #include "AnalyticUtil.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
+#include "iosfunc.h"
 #endif
 
 std::vector<GoodsData> ShopLayer::vec_goods;
@@ -81,6 +81,9 @@ bool ShopLayer::init()
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onBack, this));
+
+	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)csbnode->getChildByName("qq");
+	qq->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -284,4 +287,15 @@ void ShopLayer::addBuyGoods()
 			}
 		}
 	}
+}
+void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		copytoclipboard(qq->getString());
+#endif
+	}
+
 }

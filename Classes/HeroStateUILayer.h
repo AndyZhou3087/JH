@@ -28,6 +28,12 @@ private:
 	点击“返回”按钮回调
 	*****************************/
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	点击“暂停”按钮回调
+	*****************************/
+	void onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
 	Node* m_csbnode;
 	//13个属性值显示控件
 	cocos2d::ui::Text* herostatus[13];

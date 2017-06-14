@@ -4,19 +4,21 @@
 #include "Const.h"
 #include "GlobalData.h"
 
-int ActivitScene::entercount = 0;
+int ActivitScene::count = 0;
 ActivitScene::ActivitScene()
 {
-
+	count++;
 }
 
 
 ActivitScene::~ActivitScene()
 {
-	--entercount;
-	log("zhou entercount1111 = %d", entercount);
-	if (entercount > 0)
+	--count;
+	if (count > 0)
+	{
+		count = 0;
 		Director::getInstance()->popScene();
+	}
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
@@ -56,9 +58,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	int r = GlobalData::createRandomNum(sizeof(tipswords) / sizeof(tipswords[0]));
 	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
-	entercount++;
 	this->scheduleOnce(schedule_selector(ActivitScene::popself), 2.0f);
-	log("zhou entercount = %d", entercount);
 	return true;
 }
 
