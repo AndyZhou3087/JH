@@ -1,4 +1,5 @@
 #include "MyMenu.h"
+
 bool MyMenu::init()
 {
 	return initWithArray(Vector<MenuItem*>());
@@ -117,6 +118,7 @@ MyMenu* MyMenu::create()
 
 bool MyMenu::onTouchBegan(Touch* touch, Event* event)
 {
+	startY = touch->getLocation().y;
 	auto camera = Camera::getVisitingCamera();
 	if (_state != Menu::State::WAITING || !_visible || !_enabled || !camera)
 	{
@@ -135,7 +137,7 @@ bool MyMenu::onTouchBegan(Touch* touch, Event* event)
 	{
 		return false;
 	}
-
+	
 	_selectedItem = this->getItemForTouch(touch, camera);
 	if (_selectedItem)
 	{
@@ -145,16 +147,17 @@ bool MyMenu::onTouchBegan(Touch* touch, Event* event)
 
 		return true;
 	}
-
 	return false;
 }
 
 
 void MyMenu::onTouchEnded(Touch* touch, Event* event)
 {
+	//CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchEnded] -- invalid state");
+	if (_state != Menu::State::TRACKING_TOUCH)
+		return;
 	if (!m_isdraging)
 	{
-		CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchEnded] -- invalid state");
 		this->retain();
 		if (_selectedItem)
 		{
@@ -174,7 +177,9 @@ void MyMenu::onTouchEnded(Touch* touch, Event* event)
 
 void MyMenu::onTouchCancelled(Touch* touch, Event* event)
 {
-	CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchCancelled] -- invalid state");
+	//CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchCancelled] -- invalid state");
+	if (_state != Menu::State::TRACKING_TOUCH)
+		return;
 	this->retain();
 	if (_selectedItem)
 	{
@@ -186,8 +191,14 @@ void MyMenu::onTouchCancelled(Touch* touch, Event* event)
 
 void MyMenu::onTouchMoved(Touch* touch, Event* event)
 {
-	m_isdraging = true;
-	CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchMoved] -- invalid state");
+	//CCASSERT(_state == Menu::State::TRACKING_TOUCH, "[Menu ccTouchMoved] -- invalid state");
+	if (_state != Menu::State::TRACKING_TOUCH)
+		return;
+
+	if (fabsf(startY - touch->getLocation().y) > 20)
+		m_isdraging = true;
+
+
 	MenuItem *currentItem = this->getItemForTouch(touch, _selectedWithCamera);
 	if (currentItem != _selectedItem)
 	{

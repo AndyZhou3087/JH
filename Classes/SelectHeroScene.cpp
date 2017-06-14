@@ -4,9 +4,10 @@
 #include "HintBox.h"
 #include "CommonFuncs.h"
 #include "GameDataSave.h"
-#include "GameScene.h"
 #include "BuyDetailsLayer.h"
 #include "SoundManager.h"
+#include "StoryScene.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -172,8 +173,13 @@ void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 		std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
 		GameDataSave::getInstance()->setStorageData(defaultStorageStr);
-
-		Scene* scene = GameScene::createScene();
+		Scene* scene;
+		if (_lastSelect == 1)
+		{
+			scene = StoryScene::createScene();
+		}
+		else
+			scene = GameScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
 }

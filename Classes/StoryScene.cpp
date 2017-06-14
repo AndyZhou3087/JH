@@ -1,6 +1,6 @@
 ﻿#include "StoryScene.h"
 #include "CommonFuncs.h"
-#include "SelectHeroScene.h"
+#include "GameScene.h"
 StoryScene::StoryScene()
 {
 	m_wordlbl = NULL;
@@ -111,6 +111,6 @@ void StoryScene::showClickText(float dt)
 }
 void StoryScene::showNextScene(float dt)
 {
-	auto transition = TransitionCrossFade::create(0.5f, SelectHeroScene::createScene());
+	auto transition = TransitionCrossFade::create(0.5f, GameScene::createScene());
 	Director::getInstance()->replaceScene(transition);
 }

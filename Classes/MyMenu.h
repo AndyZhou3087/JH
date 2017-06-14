@@ -27,5 +27,6 @@ private:
 	Node* m_szTouchLimitNode;
 	bool m_bTouchLimit;
 	bool m_isdraging;
+	float startY;
 };
 #endif

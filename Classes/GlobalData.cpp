@@ -676,7 +676,7 @@ std::vector<std::string> GlobalData::getSaveListId()
 
 	std::vector<std::string> tmp;
 	CommonFuncs::split(str, tmp, ";");
-
+	vec_saveids.clear();
 	for (unsigned int i = 0; i < tmp.size(); i++)
 	{
 		vec_saveids.push_back(tmp[i]);

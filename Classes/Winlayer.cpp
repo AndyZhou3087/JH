@@ -56,6 +56,15 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	addrname->setString(GlobalData::map_maps[m_addrid].cname);
 	
 	int winexp = GlobalData::map_npcs[m_npcid].exp;
+	int herolv = g_hero->getLVValue() + 1;
+	int bosslv = GlobalData::map_npcs[m_npcid].lv;
+	int lvless = herolv - bosslv;
+	if (lvless > 30)
+		winexp = winexp * 0.1f;
+	else if (lvless > 20)
+		winexp = winexp * 0.3f;
+	else if (lvless > 10)
+		winexp = winexp * 0.5f;
 	explbl = (cocos2d::ui::Text*)csbnode->getChildByName("explbl");
 	std::string lblstr = StringUtils::format("+%d", winexp);
 	explbl->setString(lblstr);
@@ -247,6 +256,15 @@ void Winlayer::onEnterTransitionDidFinish()
 void Winlayer::updataLV()
 {
 	int winexp = GlobalData::map_npcs[m_npcid].exp;
+	int herolv = g_hero->getLVValue() + 1;
+	int bosslv = GlobalData::map_npcs[m_npcid].lv;
+	int lvless = herolv - bosslv;
+	if (lvless > 30)
+		winexp = winexp * 0.1f;
+	else if (lvless > 20)
+		winexp = winexp * 0.3f;
+	else if (lvless > 10)
+		winexp = winexp * 0.5f;
 	g_hero->setExpValue(g_hero->getExpValue() + winexp);
 	int curlv = g_hero->getLVValue();
 	unsigned int i = 0;
@@ -282,6 +300,7 @@ void Winlayer::updataLV()
 			std::string gfname = gfData->strid;
 			std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
 			curlv = gfData->lv;
+			 
 			gfData->exp += winexp * 3 / 2;
 			for (i = curlv; i < vec_gfExp.size(); i++)
 			{

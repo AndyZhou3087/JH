@@ -3,7 +3,7 @@
 #include "SoundManager.h"
 #include "GameDataSave.h"
 #include "Utility.h"
-#include "StoryScene.h"
+#include "SelectHeroScene.h"
 bool ComfirmSaveLayer::init()
 {
 	
@@ -45,7 +45,7 @@ void ComfirmSaveLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		saveUserIds();
 		removSelf();
-		Scene* scene = StoryScene::createScene();
+		Scene* scene = SelectHeroScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
 }
@@ -67,7 +67,8 @@ void ComfirmSaveLayer::removSelf()
 
 void ComfirmSaveLayer::saveUserIds()
 {
-	std::string uid = GlobalData::getUId();
+	std::string uid = GameDataSave::getInstance()->getUserId();
+	GlobalData::setUId(uid);
 	int heroid = GameDataSave::getInstance()->getHeroId();
 	std::vector<std::string> vec_ids = GlobalData::getSaveListId();
 

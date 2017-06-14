@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "Const.h"
 #include "SelectSaveComfirmLayer.h"
+#include "CommonFuncs.h"
 bool SelectSaveLayer::init()
 {
 	
@@ -48,7 +49,7 @@ bool SelectSaveLayer::init()
 			selectbtn->setTag(i);
 			textnode->setVisible(true);
 			cocos2d::ui::Text* nametxt = (cocos2d::ui::Text*)textnode->getChildByName("name");
-			nametxt->setString(heroname[i]);
+			nametxt->setString(CommonFuncs::gbk2utf(heroname[i].c_str()));
 
 			std::string str = StringUtils::format("%sherolv", saveids[i].c_str());
 			int lv = loadIntDataByKey(str, 0);

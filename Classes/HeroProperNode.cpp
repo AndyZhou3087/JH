@@ -327,7 +327,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
 		box->addChild(lvlbl);
 
-		if (g_hero->getAtrByType(index) > 0)//是否装备了hpdata->count ==-1没有装备
+		if (g_hero->getAtrByType(index)->count > 0)//是否装备了hpdata->count ==-1没有装备
 		{
 			if (i == 0)
 			{
@@ -555,6 +555,7 @@ void HeroProperNode::showNewerGuide(int step)
 		resItemNode = m_scrollView->getChildByName("resitem0");
 		if (resItemNode != NULL)
 			nodes.push_back(resItemNode->getChildren().at(0));
+		m_scrollView->setEnabled(false);
 	}
 	else if (step == 5)
 	{

@@ -5,7 +5,7 @@
 #include "CommonFuncs.h"
 #include "SettingLayer.h"
 #include "SoundManager.h"
-#include "StoryScene.h"
+#include "SelectHeroScene.h"
 #include "ComfirmSaveLayer.h"
 #include "SelectSaveLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -88,7 +88,7 @@ void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		std::string uid = GlobalData::getUId();
 		if (uid.size() <= 0)
 		{
-			Scene* scene = StoryScene::createScene();
+			Scene* scene = SelectHeroScene::createScene();
 			Director::getInstance()->replaceScene(scene);
 		}
 		else
