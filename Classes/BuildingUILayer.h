@@ -70,9 +70,9 @@ private:
 	void loadActionUi();
 
 	/****************************
-	显示建筑物自己操作的UI
+	添加建筑物自己操作的UI到scrollview
 	****************************/
-	void showActionUi();
+	void setActionScrollViewUI();
 
 	/****************************
 	更新建筑物自己操作的UI
