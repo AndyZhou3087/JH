@@ -58,6 +58,11 @@ private:
 	定时器执行
 	****************************/
 	void delayShowWinLayer(float dt);
+
+	/****************************
+	获取主角使用功法招式的文字字符串
+	****************************/
+	std::string getGfFightStr();
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件
@@ -72,6 +77,7 @@ private:
 	std::string m_addrid;//地点ID
 	std::string m_npcid;//NPC ID
 	bool isecapeok;//是否逃跑成功
+	bool isUseWg;//是否使用外功
 };
 #endif
 

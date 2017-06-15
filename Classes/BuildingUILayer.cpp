@@ -466,9 +466,9 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
 				{
-					ExerciseDoneLayer* layer = ExerciseDoneLayer::create();
+					ExerciseDoneLayer* layer = ExerciseDoneLayer::create(extime / 60);
 					this->addChild(layer, 4);
-					exerciseDone();
+					exerciseDone(extime/60);
 				}
 
 			}
@@ -783,10 +783,10 @@ void BuildingUILayer::resetExercise()
 	}
 }
 
-void BuildingUILayer::exerciseDone()
+void BuildingUILayer::exerciseDone(int hour)
 {
-	int f_gfexp = EXSERCISE_DONE_GFEXP;
-	int f_heroexp = EXSERCISE_DONE_HEROEXP;
+	int f_gfexp = EXSERCISE_DONE_GFEXP * hour;
+	int f_heroexp = EXSERCISE_DONE_HEROEXP * hour;
 
 	resetExercise();
 
@@ -794,7 +794,6 @@ void BuildingUILayer::exerciseDone()
 
 	std::string gfstrid[] = { ex_wgstrid, ex_ngstrid };
 	StorageType gfSType[] = { W_GONG , N_GONG};
-	int gfexp[] = { 100, 100 };
 
 	for (int i = 0; i < 2; i++)
 	{

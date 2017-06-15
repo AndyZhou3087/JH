@@ -91,7 +91,7 @@
       <FilePathData Path="ui/hp8-1.png" />
       <FilePathData Path="ui/hp8-2.png" />
       <FilePathData Path="ui/hp8-3.png" />
-      <FilePathData Path="ui/hp8-4.png" />
+      <FilePathData Path="ui/hp9-4.png" />
       <FilePathData Path="ui/m10-1.png" />
       <FilePathData Path="ui/m10-2.png" />
       <FilePathData Path="ui/m10-3.png" />
@@ -329,6 +329,11 @@
       <FilePathData Path="ui/buildtagbtn1.png" />
       <FilePathData Path="ui/qqline0.png" />
       <FilePathData Path="ui/pausebtn.png" />
+      <FilePathData Path="ui/74.png" />
+      <FilePathData Path="ui/75.png" />
+      <FilePathData Path="ui/76.png" />
+      <FilePathData Path="ui/77.png" />
+      <FilePathData Path="ui/78.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

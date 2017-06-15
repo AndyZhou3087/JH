@@ -24,6 +24,8 @@ std::map<std::string, EquipData> GlobalData::map_equips;
 
 std::vector<PlotMissionData> GlobalData::vec_PlotMissionData;
 
+std::map<std::string, GFSkillData> GlobalData::map_gfskills;
+
 bool GlobalData::unlockhero[4];
 
 std::string GlobalData::uid = "";
@@ -268,7 +270,10 @@ void GlobalData::loadNpcJsonData()
 			std::string str = v[m].GetString();
 			int rnd = atoi(str.c_str());
 			if (rnd > 0)
+			{
 				data.winresrnd.push_back(rnd);
+				data.winrescount.push_back(-1);
+			}
 		}
 		v = item["exchg"];
 		for (unsigned int m = 0; m < v.Size(); m++)
@@ -408,6 +413,7 @@ void GlobalData::loadWG_NGJsonData()
 		}
 		v = vitem["qu"];
 		data.qu = atoi(v.GetString());
+
 		v = vitem["type"];
 		data.type = atoi(v.GetString());
 
@@ -444,6 +450,10 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
+
+		v = vitem["qu"];
+		data.qu = atoi(v.GetString());
+
 		map_wgngs[data.id] = data;
 	}
 }
@@ -470,6 +480,8 @@ void GlobalData::loadEquipJsonData()
 		data.desc = v.GetString();
 		v = item["extype"];
 		data.extype = atoi(v.GetString());
+		v = item["qu"];
+		data.qu = atoi(v.GetString());
 		map_equips[data.id] = data;
 	}
 }
@@ -723,6 +735,28 @@ bool GlobalData::isHasFSF()
 		}
 	}
 	return false;
+}
+
+void GlobalData::loadGfskillData()
+{
+	rapidjson::Document doc = ReadJsonFile("data/gfskill.json");
+	rapidjson::Value& values = doc["s"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		GFSkillData data;
+		rapidjson::Value& v = vitem["id"];
+		data.id = v.GetString();
+
+		v = vitem["name"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			data.snames.push_back(str);
+		}
+
+		map_gfskills[data.id] = data;
+	}
 }
 
 std::string GlobalData::addUidString(std::string val)

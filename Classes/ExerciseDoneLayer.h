@@ -14,8 +14,8 @@ public:
 	ExerciseDoneLayer();
 	~ExerciseDoneLayer();
 
-	virtual bool init();
-	CREATE_FUNC(ExerciseDoneLayer);
+	virtual bool init(int hour);
+	static ExerciseDoneLayer* create(int hour);
 private:
 	void showText(float dt);
 	void removeself(float dt);

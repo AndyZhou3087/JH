@@ -89,6 +89,11 @@
           <Image Name="71.png" />
           <Image Name="72.png" />
           <Image Name="73.png" />
+          <Image Name="74.png" />
+          <Image Name="75.png" />
+          <Image Name="76.png" />
+          <Image Name="77.png" />
+          <Image Name="78.png" />
           <Image Name="8.png" />
           <Image Name="9.png" />
           <Image Name="a001.png" />
@@ -165,7 +170,7 @@
           <Image Name="hp8-1.png" />
           <Image Name="hp8-2.png" />
           <Image Name="hp8-3.png" />
-          <Image Name="hp8-4.png" />
+          <Image Name="hp9-4.png" />
           <Image Name="m10-1.png" />
           <Image Name="m10-2.png" />
           <Image Name="m10-3.png" />
@@ -401,6 +406,7 @@
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
+        <Project Name="pauseLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
@@ -417,7 +423,6 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="pauseLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

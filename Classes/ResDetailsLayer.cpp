@@ -100,6 +100,13 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			std::string uselblstr = StringUtils::format("经验药水 x%d", StorageRoom::getCountById("70"));
 			uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
 		}
+
+		else if (pdata->strid.compare("74") == 0)
+		{
+			countstr = StringUtils::format("生命%d", pdata->goodvalue);
+		}
+		else if (pdata->extype == 4)
+			countstr = "永久";
 	}
 
 	valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));

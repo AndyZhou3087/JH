@@ -131,7 +131,18 @@ void StorageUILayer::updateResContent()
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
 			{
 
-				Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+				std::string boxstr = "ui/buildsmall.png";
+				PackageData tmpdata = StorageRoom::map_storageData[i][m];
+				if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+				{
+					boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+				}
+				else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+				{
+					boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+				}
+
+				Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 				//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
 				//scrollview->addChild(box);
 

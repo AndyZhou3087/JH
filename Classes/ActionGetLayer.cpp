@@ -353,7 +353,7 @@ void ActionGetLayer::delayDoAction(float dt)
 
 				if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue <= 0)
 				{
-					StorageRoom::use(g_hero->getAtrByType((HeroAtrType)m_actype)->strid);
+					//StorageRoom::use(g_hero->getAtrByType((HeroAtrType)m_actype)->strid);
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType((HeroAtrType)m_actype, data);
@@ -496,7 +496,17 @@ void ActionGetLayer::updataMyPackageUI()
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = MyPackage::vec_packages[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,
@@ -527,7 +537,18 @@ void ActionGetLayer::updataRewardUI()
 {
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = getResData[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,

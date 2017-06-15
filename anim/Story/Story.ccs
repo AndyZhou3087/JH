@@ -21,8 +21,6 @@
           <Image Name="wenzi09.png" />
           <Image Name="wenzi10.png" />
         </Folder>
-        <Project Name="story1.csd" Type="Skeleton" />
-        <Project Name="story2.csd" Type="Skeleton" />
         <Folder Name="story2">
           <Image Name="juqingmanhua07.png" />
           <Image Name="juqingmanhua08.png" />
@@ -38,6 +36,8 @@
           <Image Name="wenzi16.png" />
           <Image Name="wenzi17.png" />
         </Folder>
+        <Project Name="story1.csd" Type="Skeleton" />
+        <Project Name="story2.csd" Type="Skeleton" />
       </RootFolder>
     </Group>
   </SolutionFolder>

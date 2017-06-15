@@ -119,7 +119,18 @@ void OutDoor::updataMyPackageUI()
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = MyPackage::vec_packages[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,
@@ -185,7 +196,18 @@ void OutDoor::updataStorageUI()
 
 	for (unsigned int i = 0; i < allStorageData.size(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = *allStorageData[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 		//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
 		//scrollview->addChild(box);
 

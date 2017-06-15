@@ -397,6 +397,23 @@ void TopBar::updataUI(float dt)
 	}
 }
 
+void TopBar::stopLoseAnim()
+{
+	innerinjuryRed->stopAllActions();
+	innerinjuryRed->setVisible(false);
+
+	outinjuryRed->stopAllActions();
+	outinjuryRed->setVisible(false);
+
+	hungerRed->stopAllActions();
+	hungerRed->setVisible(false);
+
+	spiritRed->stopAllActions();
+	spiritRed->setVisible(false);
+
+	lifeRed->stopAllActions();
+	lifeRed->setVisible(false);	
+}
 void TopBar::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;

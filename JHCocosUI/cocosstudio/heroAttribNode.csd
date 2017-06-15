@@ -241,7 +241,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/hp8-4.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/hp9-4.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="lvtext_7" ActionTag="978784068" Tag="60" IconVisible="False" LeftMargin="242.7701" RightMargin="-282.7701" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="40.0000" Y="15.0000" />

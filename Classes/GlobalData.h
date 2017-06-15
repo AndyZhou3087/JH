@@ -73,6 +73,7 @@ typedef struct
 	int lv;//npc等级
 	std::vector<std::string> winres;//打败npc赢得奖励
 	std::vector<int> winresrnd;//打败npc出奖励的概率
+	std::vector<int> winrescount;//打多少次随机
 	std::vector<std::string> exchgres;//兑换的资源
 	std::vector<std::vector<std::string>> exchgneedres;//兑换需要的资源
 	std::vector<std::string> words;//npc 对话
@@ -118,6 +119,7 @@ typedef struct
 	std::string cname;
 	std::string desc;
 	int extype;//扩展类型，区分棍，刀，剑
+	int qu;//品级
 }EquipData;
 
 /****************************
@@ -166,6 +168,15 @@ typedef struct
 	bool isshowsnpc;
 	bool isshowdnpc;
 }PlotMissionData;
+
+/****************************
+招式招数数据
+*****************************/
+typedef struct
+{
+	std::string id;//ID
+	std::vector<std::string> snames;//招式名称
+}GFSkillData;
 
 class GlobalData
 {
@@ -325,6 +336,11 @@ public:
 	*****************************/
 	static bool isHasFSF();
 
+	/****************************
+	解析招式数据
+	*****************************/
+	static void loadGfskillData();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -354,6 +370,7 @@ public:
 	static std::map<std::string, EquipData> map_equips;//武器防具数据
 	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;//建筑物数据
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
+	static std::map<std::string, GFSkillData> map_gfskills;//招式数据
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

@@ -1,6 +1,5 @@
-//
+ï»¿//
 //  iosfunc.m
-//  kuxx-hllm_v1.1.1
 //
 //  Created by  admin on 16-11-25.
 //
@@ -39,15 +38,15 @@ bool getUserDefaultsBool() {
 }
 
 void copytoclipboard(char * p) {
-    //°Ñchar*×ª»»³ÉOCµÄNSString
+    //æŠŠchar*è½¬æ¢æˆOCçš„NSString
     NSString *nsMessage= [[NSString alloc] initWithCString:p encoding:NSUTF8StringEncoding];
     
-    //»ñµÃiOSµÄ¼ôÇĞ°å
+    //è·å¾—iOSçš„å‰ªåˆ‡æ¿
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     
-    //¸Ä±ä¼ôÇĞ°åµÄÄÚÈİ
+    //æ”¹å˜å‰ªåˆ‡æ¿çš„å†…å®¹
     pasteboard.string = nsMessage;
-    toast("QQºÅÂëÒÑ¾­¸´ÖÆµ½ÁË¼ôÌù°å£¡");
+    toast("QQå·ç å·²ç»å¤åˆ¶åˆ°å‰ªè´´æ¿ï¼");
 }
 
 const void toast(char * info)
@@ -58,7 +57,7 @@ const void toast(char * info)
     HUD.label.text = [NSString stringWithUTF8String:info];
     HUD.mode = MBProgressHUDModeText;
     
-    //Ö¸¶¨¾àÀëÖĞĞÄµãµÄXÖáºÍYÖáµÄÆ«ÒÆÁ¿£¬Èç¹û²»Ö¸¶¨ÔòÔÚÆÁÄ»ÖĞ¼äÏÔÊ¾
+    //æŒ‡å®šè·ç¦»ä¸­å¿ƒç‚¹çš„Xè½´å’ŒYè½´çš„åç§»é‡ï¼Œå¦‚æœä¸æŒ‡å®šåˆ™åœ¨å±å¹•ä¸­é—´æ˜¾ç¤º
     //    HUD.yOffset = 150.0f;
     //    HUD.xOffset = 100.0f;
     

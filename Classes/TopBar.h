@@ -18,6 +18,7 @@ public:
 	CREATE_FUNC(TopBar);
 
 	void showNewerGuide(int step);
+	void stopLoseAnim();
 	int newerStep;
 private:
 	cocos2d::ui::ImageView* heroimg;

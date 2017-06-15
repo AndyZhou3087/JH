@@ -229,6 +229,7 @@ void ShopLayer::addBuyGoods()
 						pdata.type = rdata.type - 1;
 						pdata.desc = rdata.desc;
 						pdata.name = rdata.cname;
+						pdata.extype = rdata.actype;
 						StorageRoom::add(pdata);
 						break;
 					}
@@ -294,7 +295,7 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 	{
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		copytoclipboard(qq->getString());
+		copytoclipboard((char*)qq->getString().c_str());
 #endif
 	}
 

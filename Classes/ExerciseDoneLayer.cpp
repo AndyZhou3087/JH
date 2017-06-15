@@ -12,7 +12,7 @@ ExerciseDoneLayer::~ExerciseDoneLayer()
 {
 }
 
-bool ExerciseDoneLayer::init()
+bool ExerciseDoneLayer::init(int hour)
 {
 	LayerColor* color = LayerColor::create(Color4B(0, 0, 0, 150));
 	this->addChild(color);
@@ -34,12 +34,12 @@ bool ExerciseDoneLayer::init()
 
 	m_wgtext = (cocos2d::ui::Text*)csbnode->getChildByName("wgtext");
 	m_wgtext->setVisible(false);
-	str = StringUtils::format("武功经验值： +%d", EXSERCISE_DONE_GFEXP);
+	str = StringUtils::format("武功经验值： +%d", EXSERCISE_DONE_GFEXP * hour);
 	m_wgtext->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 	m_ngtext = (cocos2d::ui::Text*)csbnode->getChildByName("ngtext");
 	m_ngtext->setVisible(false);
-	str = StringUtils::format("内功经验值： +%d", EXSERCISE_DONE_GFEXP);
+	str = StringUtils::format("内功经验值： +%d", EXSERCISE_DONE_GFEXP * hour);
 	m_ngtext->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 	////layer 点击事件，屏蔽下层事件
@@ -57,6 +57,20 @@ bool ExerciseDoneLayer::init()
 	return true;
 }
 
+ExerciseDoneLayer* ExerciseDoneLayer::create(int hour)
+{
+	ExerciseDoneLayer *pRet = new ExerciseDoneLayer();
+	if (pRet && pRet->init(hour))
+	{
+		pRet->autorelease();
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+	}
+	return pRet;
+}
 
 void ExerciseDoneLayer::showText(float dt)
 {

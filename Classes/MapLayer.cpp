@@ -122,8 +122,27 @@ void MapLayer::showMoveToDest()
 {
 	ismoving = true;
 	float dt = m_distance * HERO_MOVE_SPEED;
-	
+
 	g_nature->setTimeInterval(TIMESCALE * 8);
+
+	if (g_hero->getAtrByType(H_MOUNT)->count > 0)
+	{
+		int index = -1;
+		for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+		{
+			ResData rdata = GlobalData::vec_resData[i];
+			if (rdata.strid.compare(g_hero->getAtrByType(H_MOUNT)->strid) == 0)
+			{
+				index = i;
+				break;
+			}
+		}
+		if (index >= 0)
+		{
+			int ep = GlobalData::vec_resData[index].ep[0];
+			dt *= 100.0f / (100.0f + ep);
+		}
+	}
 
 	m_herohead->runAction(Sequence::create(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos), CallFunc::create(CC_CALLBACK_0(MapLayer::Arrive, this)), NULL));
 
@@ -160,6 +179,19 @@ void MapLayer::Arrive()
 		str.append(CommonFuncs::gbk2utf("。"));
 		str.append(npcnames);
 		g_uiScroll->addEventText(str.c_str());
+
+		if (g_hero->getAtrByType(H_MOUNT)->count > 0 && g_hero->getAtrByType(H_MOUNT)->strid.compare("74") == 0)
+		{
+			g_hero->getAtrByType(H_MOUNT)->goodvalue--;
+
+			if (g_hero->getAtrByType(H_MOUNT)->goodvalue <= 0)
+			{
+				PackageData data;
+				data.count = -1;
+				g_hero->setAtrByType(H_MOUNT, data);
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的白马累死了！！"), 25, Color3B(204, 4, 4));
+			}
+		}
 	}
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2);

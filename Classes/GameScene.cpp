@@ -74,6 +74,9 @@ bool GameScene::init()
 	//读取剧情配置文件
 	GlobalData::loadPlotMissionJsonData();
 
+	//读取武功招式配置文件
+	GlobalData::loadGfskillData();
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -311,6 +314,7 @@ void GameScene::checkiflive(float dt)
 	if (g_hero->getLifeValue() <= 0.0f && ActivitScene::count <= 0)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
+		topBar->stopLoseAnim();
 		Director::getInstance()->pause();
 		ReviveLayer* layer = ReviveLayer::create();
 		g_gameLayer->addChild(layer, 10, "revivelayer");

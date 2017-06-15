@@ -189,6 +189,10 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 				map_carryData[index].push_back(data);
 			else if (index == H_ARMOR && data.type == PROTECT_EQU)//防具
 				map_carryData[index].push_back(data);
+			else if (index == H_MOUNT && data.type == RES_2 && data.extype == 4)
+			{
+				map_carryData[index].push_back(data);
+			}
 		}
 		if (g_hero->getAtrByType(index)->count > 0)//已经装备上的放在最前面。hpdata->count == -1没有装备
 		{
@@ -229,6 +233,15 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			{
 				PackageData data = StorageRoom::map_storageData[PROTECT_EQU][m];
 				map_carryData[index].push_back(data);
+			}
+		}
+		else if (index == H_MOUNT)
+		{
+			for (unsigned int m = 0; m < StorageRoom::map_storageData[RES_2].size(); m++)
+			{
+				PackageData data = StorageRoom::map_storageData[RES_2][m];
+				if (data.extype == 4)
+					map_carryData[index].push_back(data);
 			}
 		}
 		else//工具
@@ -272,7 +285,18 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 
 	for (int i = 0; i < tempsize; i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = map_carryData[index][i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,
@@ -316,6 +340,15 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE || index == H_ARMOR || index == H_WEAPON)
 		{
 			str = StringUtils::format("耐久度%d%%", map_carryData[index][i].goodvalue);
+		}
+		else if (index == H_MOUNT)
+		{
+			if (map_carryData[index][i].strid.compare("74") == 0)
+			{
+				str = StringUtils::format("生命%d", map_carryData[index][i].goodvalue);
+			}
+			else
+				str = "永久";
 		}
 		else
 		{
@@ -391,7 +424,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (m_select->isVisible())//之前是选中m_select可见，现在点了就是没选中
 	{
-		if (udata->type == TOOLS)
+		if (udata->type >= TOOLS)
 			str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
 		else
 			str = StringUtils::format("ui/hp%d.png", udata->type + 1);
@@ -426,6 +459,15 @@ void HeroProperNode::onItem(Ref* pSender)
 			{
 				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
 			}
+			else if (Atrytpe[lastclickindex] == H_MOUNT)
+			{
+				if (udata->strid.compare("74") == 0)
+				{
+					str = StringUtils::format("生命%d", udata->goodvalue);
+				}
+				else
+					str = "永久";
+			}
 			else
 			{
 				str = "";
@@ -459,6 +501,16 @@ void HeroProperNode::onItem(Ref* pSender)
 			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
 			{
 				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
+			}
+
+			else if (Atrytpe[lastclickindex] == H_MOUNT)
+			{
+				if (udata->strid.compare("74") == 0)
+				{
+					str = StringUtils::format("生命%d", udata->goodvalue);
+				}
+				else
+					str = "永久";
 			}
 			else
 			{

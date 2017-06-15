@@ -117,12 +117,41 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 	}
 
-	for (unsigned int i = 0; i < winres.size(); i++)
+	int winressize = winres.size();
+	if (winressize <= 0)
+		m_getallbtn->setEnabled(false);
+
+	for (int i = 0; i < winressize; i++)
 	{
 		int res = atoi(winres[i].c_str());
 
-		int r = GlobalData::createRandomNum(100)+ 1;
-		if (r <= GlobalData::map_npcs[npcid].winresrnd[i])
+		int r = 0;
+		int winrnd = GlobalData::map_npcs[npcid].winresrnd[i];
+		if (winrnd < 10)
+		{
+			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
+			{
+				r = GlobalData::createRandomNum(100) + 1;
+				GlobalData::map_npcs[npcid].winrescount[i] = 1;
+			}
+			else
+			{
+				GlobalData::map_npcs[npcid].winrescount[i]++;
+				if (GlobalData::map_npcs[npcid].winrescount[i] < 10)
+					r = -1;
+				else
+				{
+					r = GlobalData::createRandomNum(100) + 1;
+					GlobalData::map_npcs[npcid].winrescount[i] = 0;
+				}
+			}
+		}
+		else
+		{
+			r = GlobalData::createRandomNum(100) + 1;
+		}
+
+		if (r <= winrnd)
 		{
 			
 			if (res != 0)
@@ -551,7 +580,18 @@ void Winlayer::updataMyPackageUI()
 
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = MyPackage::vec_packages[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,
@@ -581,7 +621,18 @@ void Winlayer::updataRewardUI()
 {
 	for (unsigned int i = 0; i < getRewardData.size(); i++)
 	{
-		Sprite * box = Sprite::createWithSpriteFrameName("ui/buildsmall.png");
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = getRewardData[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 
 		MenuItemSprite* boxItem = MenuItemSprite::create(
 			box,
