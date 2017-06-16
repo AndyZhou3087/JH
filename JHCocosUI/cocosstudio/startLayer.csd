@@ -103,24 +103,24 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qq" ActionTag="-151597376" Tag="172" IconVisible="False" LeftMargin="145.0060" RightMargin="457.9940" TopMargin="1232.8245" BottomMargin="22.1756" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="qq" ActionTag="-151597376" Tag="172" IconVisible="False" LeftMargin="148.0061" RightMargin="454.9940" TopMargin="1232.8245" BottomMargin="22.1756" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="117.0000" Y="25.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="203.5060" Y="34.6756" />
+            <Position X="206.5061" Y="34.6756" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2826" Y="0.0271" />
+            <PrePosition X="0.2868" Y="0.0271" />
             <PreSize X="0.1625" Y="0.0195" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqline" ActionTag="-1124685286" Tag="173" IconVisible="False" LeftMargin="140.6835" RightMargin="452.3165" TopMargin="1257.0874" BottomMargin="20.9126" ctype="SpriteObjectData">
+          <AbstractNodeData Name="qqline" ActionTag="-1124685286" Tag="173" IconVisible="False" LeftMargin="143.6835" RightMargin="449.3165" TopMargin="1257.0874" BottomMargin="20.9126" ctype="SpriteObjectData">
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="204.1835" Y="21.9126" />
+            <Position X="207.1835" Y="21.9126" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2836" Y="0.0171" />
+            <PrePosition X="0.2878" Y="0.0171" />
             <PreSize X="0.1764" Y="0.0016" />
             <FileData Type="MarkedSubImage" Path="ui/qqline0.png" Plist="uipacker.plist" />
             <BlendFunc Src="770" Dst="771" />

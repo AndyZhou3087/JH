@@ -172,7 +172,11 @@ void MapLayer::Arrive()
 		}
 
 		std::string str;
-		str.append(CommonFuncs::gbk2utf("你跑得双腿发麻，来到了"));
+		if (g_hero->getAtrByType(H_MOUNT)->count > 0)
+			str.append(CommonFuncs::gbk2utf("你骑着马儿，一溜烟的来到了")); 
+		else
+			str.append(CommonFuncs::gbk2utf("你跑得双腿发麻，来到了"));
+
 		str.append(GlobalData::map_maps[m_addrname].cname);
 		str.append(CommonFuncs::gbk2utf("，"));
 		str.append(GlobalData::map_maps[m_addrname].desc);
@@ -313,9 +317,9 @@ void MapLayer::mapMoveTo(Vec2 pos)
 		offsety = pos.y - scollviewsize.height / 2;
 
 	if (pos.x + scollviewsize.width / 2 > m_mapscroll->getInnerContainerSize().width)
-		offsetx = m_mapscroll->getInnerContainerSize().width - scollviewsize.width / 2;
+		offsetx = m_mapscroll->getInnerContainerSize().width - scollviewsize.width;
 	if (pos.y + scollviewsize.height / 2 > m_mapscroll->getInnerContainerSize().height)
-		offsety = m_mapscroll->getInnerContainerSize().height - scollviewsize.height / 2;
+		offsety = m_mapscroll->getInnerContainerSize().height - scollviewsize.height;
 
 	m_mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 }

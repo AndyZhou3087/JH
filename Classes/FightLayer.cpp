@@ -162,32 +162,7 @@ void FightLayer::delayHeroFight(float dt)
 	if (isecapeok)//逃跑成功
 		return;
 
-	int gfBonusAck = 0;
-	int weaponAck = 0;
-
-	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
-	{
-		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
-		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
-	}
-
-	if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器--加攻
-	{
-		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
-		weaponAck = GlobalData::map_equips[wname].atk;
-	}
-
-	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
-	float fack = g_hero->getAtkPercent() * heroCurAck;
-	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
-	{
-		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
-		{
-			fack += fack * 0.1f;
-		}
-	}
-
-	heroCurAck = int(fack + 0.5f);
+	int heroCurAck = g_hero->getTotalAtck();
 
 	int npchurt = heroCurAck - npcdf;
 	float fminack = 0.1f * heroCurAck;
@@ -220,24 +195,10 @@ void FightLayer::delayBossFight(float dt)
 	if (isecapeok)//逃跑成功
 		return;
 
-	int gfBonusDf = 0;
-	int adf = 0;
-	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
-	{
-		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
-		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
-	}
-
-	if (g_hero->getAtrByType(H_ARMOR)->count > 0)////是否有防具--加防
-	{
-		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
-		adf = GlobalData::map_equips[aname].df;
-	}
-
 	float curheroHp = g_hero->getLifeValue();
-	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
-	float fdf = g_hero->getDfPercent() * curheroDf;
-	curheroDf = int(fdf + 0.5f);
+
+	int curheroDf = g_hero->getTotalDf();
+
 	int herohurt = npcatk - curheroDf;
 
 	float fminack = 0.1f * npcatk;
@@ -627,6 +588,7 @@ std::string FightLayer::getGfFightStr()
 	int r1 = GlobalData::createRandomNum(2);
 	int r2 = GlobalData::createRandomNum(4);
 
+	std::string gfstr = g_hero->getAtrByType(H_WG)->strid;
 	GFSkillData sdata = GlobalData::map_gfskills[g_hero->getAtrByType(H_WG)->strid];
 	int r3 = GlobalData::createRandomNum(sdata.snames.size());
 	std::string gfname = sdata.snames[r3];

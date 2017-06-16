@@ -78,9 +78,23 @@ private:
 	*****************************/
 	void updataMyPackageUI();
 
+	/****************************
+	带上装备
+	@param 装备类型
+	@param 装备数据
+	*****************************/
+	void takeon(HeroAtrType atrype, PackageData* pdata);
+
+	/****************************
+	卸下装备
+	@param 装备类型
+	*****************************/
+	void takeoff(HeroAtrType atrype);
+
 private:
 	Node* csbroot;
 	cocos2d::ui::ImageView* propeImages[8];//8种装备类型
+	cocos2d::ui::ImageView* imgbtn[8];//8种装备框
 	cocos2d::ui::Text* lvtext[8];//8种装备等级或者耐久度
 	cocos2d::ui::Widget* heroselectbg;//选择装备背景
 	cocos2d::ui::Widget* heroppoint;//装备背景上的三角形
@@ -90,7 +104,6 @@ private:
 	std::map<HeroAtrType, std::vector<PackageData>> map_carryData;//装备栏数据
 	Sprite* m_select;//选中标识
 	PackageData* m_lastSelectedData;//上次选中中的装备数据
-	cocos2d::EventListenerTouchOneByOne* m_listener;
 	int m_step;//新手引导索引
 };
 #endif

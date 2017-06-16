@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="story1" Type="Skeleton" ID="90c499dc-8bf8-42e5-acf5-b935d89bc953" Version="3.10.0.0" />
+  <PropertyGroup Name="story1_1" Type="Skeleton" ID="90c499dc-8bf8-42e5-acf5-b935d89bc953" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="101" Speed="0.1667">
@@ -823,7 +823,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua06.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua06.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer59" ActionTag="34137829" ZOrder="16" Alpha="0" Length="195.0000" RotationSkewX="-270.0074" RotationSkewY="-270.0074" ctype="BoneNodeObjectData">
@@ -837,11 +837,11 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi10.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi10.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
-                <Position X="364.0038" Y="72.7500" />
+                <Position X="364.0042" Y="72.8500" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <BlendFunc Src="1" Dst="771" />
@@ -865,7 +865,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua05.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua05.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer58" ActionTag="36022757" ZOrder="15" Alpha="0" Length="135.0000" RotationSkewX="-90.0493" RotationSkewY="-90.0493" ctype="BoneNodeObjectData">
@@ -879,7 +879,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi09.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi09.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -899,7 +899,7 @@
           <AbstractNodeData Name="tu4" ActionTag="32162181" ZOrder="4" Length="138.0000" RotationSkewX="178.3397" RotationSkewY="178.3397" ctype="BoneNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="juqingmanhua04" ActionTag="21024178" RotationSkewX="181.6596" RotationSkewY="-178.3397" IconVisible="False" LeftMargin="-13.7968" RightMargin="-706.2031" TopMargin="-162.0419" BottomMargin="-148.9581" ctype="SpriteObjectData">
+              <AbstractNodeData Name="juqingmanhua04" ActionTag="21024178" RotationSkewX="181.6596" RotationSkewY="-178.3397" IconVisible="False" LeftMargin="-13.7968" RightMargin="-706.2032" TopMargin="-162.0419" BottomMargin="-148.9581" ctype="SpriteObjectData">
                 <Size X="720.0000" Y="311.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="346.2032" Y="6.5419" />
@@ -907,7 +907,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua04.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua04.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer53" ActionTag="54999878" ZOrder="13" Alpha="0" Length="75.0000" RotationSkewX="-177.5758" RotationSkewY="-177.5758" ctype="BoneNodeObjectData">
@@ -921,7 +921,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi07.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi07.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -942,7 +942,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi08.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi08.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -970,7 +970,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua03.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua03.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer49" ActionTag="58941788" ZOrder="14" Alpha="0" Length="165.0000" RotationSkewX="-270.0903" RotationSkewY="-270.0903" ctype="BoneNodeObjectData">
@@ -984,7 +984,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi06.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi06.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -1012,7 +1012,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua01.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua01.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer42" ActionTag="35798250" ZOrder="9" Alpha="0" Length="228.0000" RotationSkewX="-268.3750" RotationSkewY="-268.3750" ctype="BoneNodeObjectData">
@@ -1026,7 +1026,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi03.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi03.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -1036,7 +1036,7 @@
                 <BlendFunc Src="1" Dst="771" />
                 <BoneColor A="255" R="25" G="25" B="25" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Layer41" ActionTag="13977142" ZOrder="8" Alpha="212" Length="198.0000" RotationSkewX="-268.0475" RotationSkewY="-268.0475" ctype="BoneNodeObjectData">
+              <AbstractNodeData Name="Layer41" ActionTag="13977142" ZOrder="8" Length="198.0000" RotationSkewX="-268.0475" RotationSkewY="-268.0475" ctype="BoneNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="wenzi02" ActionTag="58685418" RotationSkewX="89.4213" RotationSkewY="89.4212" IconVisible="False" LeftMargin="67.8176" RightMargin="-101.8176" TopMargin="-140.7249" BottomMargin="-143.2751" ctype="SpriteObjectData">
@@ -1047,7 +1047,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi02.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi02.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -1068,7 +1068,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi01.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi01.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -1096,7 +1096,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="story1/juqingmanhua02.png" Plist="" />
+                <FileData Type="Normal" Path="story1_1/juqingmanhua02.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Layer45" ActionTag="14842765" ZOrder="11" Alpha="0" Length="214.0000" RotationSkewX="-88.6766" RotationSkewY="-88.6766" ctype="BoneNodeObjectData">
@@ -1110,11 +1110,11 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi05.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi05.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>
-                <Position X="285.7809" Y="-89.0217" />
+                <Position X="285.8851" Y="-89.0246" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <BlendFunc Src="1" Dst="771" />
@@ -1131,7 +1131,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="story1/wenzi04.png" Plist="" />
+                    <FileData Type="Normal" Path="story1_1/wenzi04.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                 </Children>

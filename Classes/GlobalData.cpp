@@ -570,7 +570,12 @@ int GlobalData::getPlotMissionIndex()
 
 void GlobalData::loadPlotMissionJsonData()
 {
-	rapidjson::Document doc = ReadJsonFile("data/plotmission.json");
+	int heroindex = GameDataSave::getInstance()->getHeroId();
+	std::string plotfilename = "data/plotmission.json";
+	if (heroindex == 2)
+		plotfilename = "data/plotmission2.json";
+
+	rapidjson::Document doc = ReadJsonFile(plotfilename);
 	rapidjson::Value& values = doc["m"];
 	for (unsigned int i = 0; i < values.Size(); i++)//剧情数组
 	{
@@ -757,6 +762,38 @@ void GlobalData::loadGfskillData()
 
 		map_gfskills[data.id] = data;
 	}
+}
+
+bool GlobalData::tempHasgf(std::string strid)
+{
+	std::vector<std::string> tempResId;
+
+	std::map<std::string, MapData>::iterator it;
+
+	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	{
+		std::string mapid = GlobalData::map_maps[it->first].strid;
+
+		std::string datastr = GameDataSave::getInstance()->getTempStorage(mapid);
+		if (datastr.length() > 0)
+		{
+			std::vector<std::string> vec_retstr;
+			CommonFuncs::split(datastr, vec_retstr, ";");
+			for (unsigned int i = 0; i < vec_retstr.size(); i++)
+			{
+				std::vector<std::string> tmp;
+				CommonFuncs::split(vec_retstr[i], tmp, "-");
+				tempResId.push_back(tmp[0]);
+			}
+		}
+	}
+
+	for (unsigned int i = 0; i < tempResId.size(); i++)
+	{
+		if (tempResId[i].compare(strid) == 0)
+			return true;
+	}
+	return false;
 }
 
 std::string GlobalData::addUidString(std::string val)

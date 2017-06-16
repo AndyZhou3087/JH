@@ -31,6 +31,7 @@ private:
 	static std::vector<GoodsData> vec_goods;
 	cocos2d::ui::ScrollView* m_scrollview;
 	static int payindex;
+	static bool isPaying;
 };
 #endif
 

@@ -417,3 +417,55 @@ void Hero::recoverHunger(int val)
 	float fval = val* hungerrecoverpercent;
 	m_hunger += fval;
 }
+
+int Hero::getTotalDf()
+{
+	int adf = 0;
+	int ngdf = 0;
+	if (g_hero->getAtrByType(H_NG)->count > 0)
+	{
+		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
+		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
+	}
+
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0)
+	{
+		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
+		adf = GlobalData::map_equips[aname].df;
+	}
+	//防御属性
+	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
+
+	adf = int(fdf + 0.5f);
+	return adf;
+}
+
+int Hero::getTotalAtck()
+{
+	int weaponAtk = 0;
+	int wgAtk = 0;
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+	{
+		std::string strid = g_hero->getAtrByType(H_WEAPON)->strid;
+		weaponAtk = GlobalData::map_equips[strid].atk;
+	}
+	if (g_hero->getAtrByType(H_WG)->count > 0)
+	{
+		std::string strid = g_hero->getAtrByType(H_WG)->strid;
+		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+	}
+	//攻击属性
+	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
+
+	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
+	{
+		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
+		{
+			float back = fack * 0.1f;
+			fack += back;
+		}
+	}
+
+	int tatk = int(fack + 0.5f);
+	return tatk;
+}

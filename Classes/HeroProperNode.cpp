@@ -14,6 +14,7 @@
 #include "HeroStateUILayer.h"
 #include "MyMenu.h"
 #include "BuyComfirmLayer.h"
+#include "NewerGuideLayer.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -25,7 +26,6 @@ HeroProperNode::HeroProperNode()
 {
 	lastclickindex = -1;
 	m_lastSelectedData = NULL;
-	m_listener = NULL;
 	m_step = 3;
 }
 
@@ -48,9 +48,9 @@ bool HeroProperNode::init()
 		lvtext[i] = (cocos2d::ui::Text*)csbroot->getChildByName(str);
 
 		str = StringUtils::format("box_%d", i);
-		cocos2d::ui::Button* imgbtn = (cocos2d::ui::Button*)csbroot->getChildByName(str);
-		imgbtn->setTag(i);
-		imgbtn->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
+		imgbtn[i] = (cocos2d::ui::ImageView*)csbroot->getChildByName(str);
+		imgbtn[i]->setTag(i);
+		imgbtn[i]->addTouchEventListener(CC_CALLBACK_2(HeroProperNode::onImageClick, this));
 		addCarryData(Atrytpe[i]);
 
 		//获取每个装备栏装备的数据，如果没有hpdata->count = 0
@@ -60,7 +60,6 @@ bool HeroProperNode::init()
 			str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
 			propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 			propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-
 			 
 			if (Atrytpe[i] == H_WG || Atrytpe[i] == H_NG)
 			{
@@ -68,11 +67,32 @@ bool HeroProperNode::init()
 				str = StringUtils::format("Lv.%d", lv);
 				if (lv >= GlobalData::map_wgngs[hpdata->strid].maxlv)
 					str = StringUtils::format("Lv.%d(max)", lv);
+
+				std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[hpdata->strid].qu);
+				imgbtn[i]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+				imgbtn[i]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+
 			}
 			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE || Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
 			{
 				str = StringUtils::format("耐久度%d%%", hpdata->goodvalue);
+				if (Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
+				{
+					std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[hpdata->strid].qu);
+					imgbtn[i]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+					imgbtn[i]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+				}
 			}
+			else if (Atrytpe[i] == H_MOUNT)
+			{
+				if (hpdata->strid.compare("74") == 0)
+				{
+					str = StringUtils::format("生命%d", hpdata->goodvalue);
+				}
+				else
+					str = "永久";
+			}
+
 			else
 			{
 				str = "";
@@ -122,9 +142,6 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
 
-		_eventDispatcher->removeEventListener(m_listener);
-		m_listener = NULL;
-
 		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
 		if (heroStateUILayer != NULL)
 			heroStateUILayer->showNewerGuide(12);
@@ -151,18 +168,6 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		heroppoint->setPosition(Vec2(propeImages[tag]->getPositionX(), propeImages[tag]->getPositionY() - propeImages[tag]->getContentSize().height / 2 - 5));
 
 		heroselectbg->setPositionY(heroppoint->getPositionY() - heroppoint->getContentSize().height + 3);
-
-		if (m_listener == NULL)
-		{
-			m_listener = EventListenerTouchOneByOne::create();
-			m_listener->onTouchBegan = [=](Touch *touch, Event *event)
-			{
-				return true;
-			};
-
-			m_listener->setSwallowTouches(true);
-			_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
-		}
 
 		showNewerGuide(++m_step);
 	}
@@ -272,6 +277,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 }
 void HeroProperNode::showSelectFrame(HeroAtrType index)
 {
+	refreshCarryData();
 	int tempsize = map_carryData[index].size();
 	int itemheight = 150;
 	int row = tempsize % 4 == 0 ? tempsize / 4 : (tempsize / 4 + 1);
@@ -440,97 +446,83 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-	if (isout)
+
+	if (m_select->isVisible())
 	{
-		if (m_select->isVisible())
-		{
-			MyPackage::cutone(udata->strid);
-			g_hero->setAtrByType(atrype, *udata);
-
-			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
-			{
-				int lv = udata->lv + 1;
-				str = StringUtils::format("Lv.%d", lv);
-
-				if (lv >= GlobalData::map_wgngs[udata->strid].maxlv)
-					str = StringUtils::format("Lv.%d(max)", lv);
-			}
-			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
-			{
-				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
-			}
-			else if (Atrytpe[lastclickindex] == H_MOUNT)
-			{
-				if (udata->strid.compare("74") == 0)
-				{
-					str = StringUtils::format("生命%d", udata->goodvalue);
-				}
-				else
-					str = "永久";
-			}
-			else
-			{
-				str = "";
-			}
-
-			lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
-		}
-		else//卸掉装备 设置count = -1
-		{
-			PackageData mydata = *g_hero->getAtrByType(atrype);
-			MyPackage::add(mydata);
-			g_hero->getAtrByType(atrype)->count = -1;
-			lvtext[lastclickindex]->setString("");
-		}
-		
+		takeon(atrype, udata);
 	}
 	else
 	{
-		if (m_select->isVisible())
-		{
-			StorageRoom::use(udata->strid);
-			g_hero->setAtrByType(atrype, *udata);
-			if (Atrytpe[lastclickindex] == H_WG || Atrytpe[lastclickindex] == H_NG)
-			{
-				int lv = udata->lv + 1;
-				str = StringUtils::format("Lv.%d", lv);
-
-				if (lv >= GlobalData::map_wgngs[udata->strid].maxlv)
-					str = StringUtils::format("Lv.%d(max)", lv);
-			}
-			else if (Atrytpe[lastclickindex] == H_GATHER || Atrytpe[lastclickindex] == H_FELL || Atrytpe[lastclickindex] == H_EXCAVATE || Atrytpe[lastclickindex] == H_WEAPON || Atrytpe[lastclickindex] == H_ARMOR)
-			{
-				str = StringUtils::format("耐久度%d%%", udata->goodvalue);
-			}
-
-			else if (Atrytpe[lastclickindex] == H_MOUNT)
-			{
-				if (udata->strid.compare("74") == 0)
-				{
-					str = StringUtils::format("生命%d", udata->goodvalue);
-				}
-				else
-					str = "永久";
-			}
-			else
-			{
-				str = "";
-			}
-
-			lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
-		}
-		else
-		{
-			PackageData mydata = *g_hero->getAtrByType(atrype);
-			StorageRoom::add(mydata);
-			g_hero->getAtrByType(atrype)->count = -1;
-			lvtext[lastclickindex]->setString("");
-		}
+		takeoff(atrype);
 	}
 	m_lastSelectedData = (PackageData*)node->getUserData();
 
 	updataMyPackageUI();
 	showNewerGuide(++m_step);
+}
+
+void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
+{
+	if (g_hero->getIsOut())
+		MyPackage::cutone(pdata->strid);
+	else
+		StorageRoom::use(pdata->strid);
+
+	g_hero->setAtrByType(atrype, *pdata);
+	std::string str;
+	if (atrype == H_WG || atrype == H_NG)
+	{
+		int lv = pdata->lv + 1;
+		str = StringUtils::format("Lv.%d", lv);
+
+		if (lv >= GlobalData::map_wgngs[pdata->strid].maxlv)
+			str = StringUtils::format("Lv.%d(max)", lv);
+
+		std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
+		imgbtn[lastclickindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+		imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+	}
+	else if (atrype == H_GATHER || atrype == H_FELL || atrype == H_EXCAVATE || atrype == H_WEAPON || atrype == H_ARMOR)
+	{
+		str = StringUtils::format("耐久度%d%%", pdata->goodvalue);
+
+		if (atrype == H_WEAPON || atrype == H_ARMOR)
+		{
+			std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
+			imgbtn[lastclickindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+			imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+		}
+	}
+	else if (atrype == H_MOUNT)
+	{
+		if (pdata->strid.compare("74") == 0)
+		{
+			str = StringUtils::format("生命%d", pdata->goodvalue);
+		}
+		else
+			str = "永久";
+	}
+	else
+	{
+		str = "";
+	}
+
+	lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
+}
+
+void HeroProperNode::takeoff(HeroAtrType atrype)
+{
+	PackageData mydata = *g_hero->getAtrByType(atrype);
+	if (g_hero->getIsOut())
+		MyPackage::add(mydata);
+	else
+		StorageRoom::add(mydata);
+	g_hero->getAtrByType(atrype)->count = -1;
+	lvtext[lastclickindex]->setString("");
+
+	std::string str = "ui/buildsmall.png";
+	imgbtn[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 }
 
 void HeroProperNode::removeitem()
@@ -607,7 +599,8 @@ void HeroProperNode::showNewerGuide(int step)
 		resItemNode = m_scrollView->getChildByName("resitem0");
 		if (resItemNode != NULL)
 			nodes.push_back(resItemNode->getChildren().at(0));
-		m_scrollView->setEnabled(false);
+		if (NewerGuideLayer::checkifNewerGuide(step))
+			m_scrollView->setEnabled(false);
 	}
 	else if (step == 5)
 	{

@@ -44,7 +44,21 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	if ((pdata->type == FOOD || (pdata->type == MEDICINAL && pdata->strid.compare(WINESTRID) != 0)) && whereClick == 0)
 		m_okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
-	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall")->getChildByName("Image");
+
+	cocos2d::ui::ImageView* resbox = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall");
+	std::string qustr = "ui/buildsmall.png";
+	if (pdata->type == WEAPON || pdata->type == PROTECT_EQU)
+	{
+		qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
+	}
+	else if (pdata->type == N_GONG || pdata->type == W_GONG)
+	{
+		qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
+	}
+	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+	resbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+
+	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)resbox->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/%s.png", pdata->strid.c_str());
 	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);

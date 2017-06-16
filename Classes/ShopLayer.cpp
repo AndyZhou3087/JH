@@ -15,11 +15,12 @@
 #endif
 
 std::vector<GoodsData> ShopLayer::vec_goods;
-int ShopLayer::payindex;
-
+int ShopLayer::payindex = -1;
+bool ShopLayer::isPaying = false;
 ShopLayer::ShopLayer()
 {
 	payindex = -1;
+	//isPaying = false;
 	vec_goods.clear();
 }
 
@@ -27,6 +28,7 @@ ShopLayer::ShopLayer()
 ShopLayer::~ShopLayer()
 {
 	payindex = -1;
+	//isPaying = false;
 	vec_goods.clear();
 }
 
@@ -137,6 +139,10 @@ void ShopLayer::loadShopData()
 
 void ShopLayer::beginPay(int index)
 {
+	if (isPaying)
+		return;
+
+	isPaying = true;
 	payindex = index;
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -150,6 +156,8 @@ void ShopLayer::beginPay(int index)
 }
 void ShopLayer::setMessage(PYARET ret)
 {
+	isPaying = false;
+
 	if (ret == PAY_SUCC)
 	{
 		int shopgoodsszie = vec_goods.size();

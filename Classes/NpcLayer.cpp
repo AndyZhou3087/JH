@@ -327,30 +327,30 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
 
-		//if (g_hero->getLVValue() + 1 < 10)
-		//{
-		//	std::string protectword;
-		//	if (npcid.compare("n004") == 0)
-		//	{
-		//		protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！");
-		//	}
-		//	else if (npcid.compare("n005") == 0)
-		//	{
-		//		protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！");
+		if (g_hero->getLVValue() + 1 < 10)
+		{
+			std::string protectword;
+			if (npcid.compare("n004") == 0)
+			{
+				protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
+			}
+			else if (npcid.compare("n005") == 0)
+			{
+				protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
 
-		//	}
-		//	if (protectword.length() > 0)
-		//	{
-		//		if (isShowWord)
-		//			return;
+			}
+			if (protectword.length() > 0)
+			{
+				if (isShowWord)
+					return;
 
-		//		m_npctalkbg->runAction(FadeIn::create(0.2f));
-		//		checkWordLblColor(protectword);
-		//		showTypeText(0);
+				m_npctalkbg->runAction(FadeIn::create(0.2f));
+				checkWordLblColor(protectword);
+				showTypeText(0);
 
-		//		return;
-		//	}
-		//}
+				return;
+			}
+		}
 
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
@@ -687,6 +687,8 @@ int NpcLayer::checkFightCount(std::string npcid)
 	if (npchurt < intminack)
 		npchurt = intminack;
 
+	if (npchurt <= 0)
+		npchurt = 1;
 	int npclife = GlobalData::map_npcs[npcid].life;
 	
 	int heroVsBossCount = npclife % npchurt == 0 ? npclife / npchurt : (npclife / npchurt + 1);
@@ -715,6 +717,9 @@ int NpcLayer::checkFightCount(std::string npcid)
 
 	if (herohurt < intminack)
 		herohurt = intminack;
+
+	if (herohurt <= 0)
+		herohurt = 1;
 
 	int intlife = int(g_hero->getLifeValue() + 1);
 	int bossVsHeroCount = intlife % herohurt == 0 ? intlife / herohurt : (intlife / herohurt + 1);

@@ -198,6 +198,16 @@ public:
 	@param 恢复的数值
 	*****************************/
 	void recoverHunger(int val);
+
+	/****************************
+	总的防御
+	*****************************/
+	int getTotalDf();
+
+	/****************************
+	总的攻击
+	*****************************/
+	int getTotalAtck();
 public:
 	static float MAXInnerinjuryValue;//最大内伤值
 	static float MAXOutinjuryValue;//最大外伤值

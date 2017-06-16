@@ -453,8 +453,8 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			updataActionRes();
 		}
 
-		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
-			vec_actionbtn[i]->setEnabled(true);
+		//for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+		//	vec_actionbtn[i]->setEnabled(true);
 
 		std::string franmename = "ui/buildtext0.png";
 		if (m_build->data.level > 1)
@@ -468,8 +468,8 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	}
 	else//操作完成
 	{
-		for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
-			vec_actionbtn[i]->setEnabled(true);
+		//for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+		//	vec_actionbtn[i]->setEnabled(true);
 
 		if (m_build->data.level < m_build->data.maxlevel)
 			buildbtn->setEnabled(true);

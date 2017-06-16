@@ -174,7 +174,7 @@ void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
 		GameDataSave::getInstance()->setStorageData(defaultStorageStr);
 		Scene* scene;
-		if (_lastSelect == 1)
+		if (_lastSelect == 1 || _lastSelect == 2)
 		{
 			scene = StoryScene::createScene();
 		}

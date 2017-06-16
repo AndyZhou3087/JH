@@ -231,11 +231,11 @@ void GameDataSave::setHeroProperData(std::string strval)
 
 std::string GameDataSave::getHeroUnlockData()
 {
-	return loadStringDataByKey(addUIDString("herounlock"), "1-0-0-0");
+	return loadStringDataByKey("herounlock", "1-0-0-0");
 }
 void GameDataSave::setHeroUnlockData(std::string strval)
 {
-	saveStringDataByKey(addUIDString("herounlock"), strval);
+	saveStringDataByKey("herounlock", strval);
 }
 
 std::string GameDataSave::getUserId()

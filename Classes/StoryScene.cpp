@@ -1,6 +1,8 @@
 ﻿#include "StoryScene.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
+#include "GameDataSave.h"
+
 StoryScene::StoryScene()
 {
 	m_wordlbl = NULL;
@@ -30,13 +32,16 @@ Scene* StoryScene::createScene()
 bool StoryScene::init()
 {
 	clickcount = 0;
-	m_csbnode = CSLoader::createNode("story1.csb");
-	m_csbnode->setPosition(Vec2(360, 640));
+	m_heroindex = GameDataSave::getInstance()->getHeroId();
+	std::string storystr = StringUtils::format("story%d_1.csb", m_heroindex);
+	m_csbnode = CSLoader::createNode(storystr);
+	if (m_heroindex == 1)
+		m_csbnode->setPosition(Vec2(360, 640));
 	this->addChild(m_csbnode);
 
-	m_action = CSLoader::createTimeline("story1.csb");
+	m_action = CSLoader::createTimeline(storystr);
 	m_csbnode->runAction(m_action);
-	m_action->gotoFrameAndPlay(0, 105, false);
+	m_action->gotoFrameAndPlay(0, false);
 
 	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.5f);
 
@@ -90,13 +95,18 @@ void StoryScene::delayShowNextStory(float dt)
 	m_csbnode->removeFromParentAndCleanup(true);
 	if (m_wordlbl != NULL)
 		m_wordlbl->removeFromParentAndCleanup(true);
-	m_csbnode = CSLoader::createNode("story2.csb");
-	m_csbnode->setPosition(Vec2(360, 640));
+
+	std::string storystr = StringUtils::format("story%d_2.csb", m_heroindex);
+
+	m_csbnode = CSLoader::createNode(storystr);
+	if (m_heroindex == 1)
+		m_csbnode->setPosition(Vec2(360, 640));
+
 	this->addChild(m_csbnode);
 
-	m_action = CSLoader::createTimeline("story2.csb");
+	m_action = CSLoader::createTimeline(storystr);
 	m_csbnode->runAction(m_action);
-	m_action->gotoFrameAndPlay(0, 90, false);
+	m_action->gotoFrameAndPlay(0, false);
 	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.0f);
 }
 

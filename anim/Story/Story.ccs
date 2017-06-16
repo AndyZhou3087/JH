@@ -3,7 +3,7 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
-        <Folder Name="story1">
+        <Folder Name="story1_1">
           <Image Name="juqingmanhua01.png" />
           <Image Name="juqingmanhua02.png" />
           <Image Name="juqingmanhua03.png" />
@@ -21,7 +21,7 @@
           <Image Name="wenzi09.png" />
           <Image Name="wenzi10.png" />
         </Folder>
-        <Folder Name="story2">
+        <Folder Name="story1_2">
           <Image Name="juqingmanhua07.png" />
           <Image Name="juqingmanhua08.png" />
           <Image Name="juqingmanhua09.png" />
@@ -36,8 +36,45 @@
           <Image Name="wenzi16.png" />
           <Image Name="wenzi17.png" />
         </Folder>
-        <Project Name="story1.csd" Type="Skeleton" />
-        <Project Name="story2.csd" Type="Skeleton" />
+        <Folder Name="story2_1">
+          <Image Name="sanshaoyejuqing01(1).png" />
+          <Image Name="sanshaoyejuqing02.png" />
+          <Image Name="sanshaoyejuqing03.png" />
+          <Image Name="sanshaoyejuqing04.jpg" />
+          <Image Name="sanshaoyejuqing05.png" />
+          <Image Name="sanshaoyejuqing06.png" />
+          <Image Name="sanshaoyejuqing07.png" />
+          <Image Name="sanshaoyejuqing08.png" />
+          <Image Name="sanshaoyejuqing09.png" />
+          <Image Name="sanshaoyejuqing10.png" />
+          <Image Name="sanshaoyejuqing11.jpg" />
+          <Image Name="sanshaoyejuqing12.png" />
+          <Image Name="sanshaoyejuqing13.png" />
+          <Image Name="sanshaoyejuqing14.png" />
+          <Image Name="sanshaoyejuqing15.png" />
+        </Folder>
+        <Project Name="story1_1.csd" Type="Skeleton" />
+        <Project Name="story1_2.csd" Type="Skeleton" />
+        <Project Name="story2_1.csd" Type="Layer" />
+        <Project Name="story2_2.csd" Type="Layer" />
+        <Folder Name="story2_2">
+          <Image Name="sanshaoyejuqing16.jpg" />
+          <Image Name="sanshaoyejuqing17.png" />
+          <Image Name="sanshaoyejuqing18.png" />
+          <Image Name="sanshaoyejuqing19.png" />
+          <Image Name="sanshaoyejuqing20.png" />
+          <Image Name="sanshaoyejuqing21.png" />
+          <Image Name="sanshaoyejuqing22.jpg" />
+          <Image Name="sanshaoyejuqing23.png" />
+          <Image Name="sanshaoyejuqing24.png" />
+          <Image Name="sanshaoyejuqing25.png" />
+          <Image Name="sanshaoyejuqing26.png" />
+          <Image Name="sanshaoyejuqing27.png" />
+          <Image Name="sanshaoyejuqing28.png" />
+          <Image Name="sanshaoyejuqing29.png" />
+          <Image Name="sanshaoyejuqing30.png" />
+          <Image Name="sanshaoyejuqing31.png" />
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>

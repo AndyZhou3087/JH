@@ -334,6 +334,7 @@
       <FilePathData Path="ui/76.png" />
       <FilePathData Path="ui/77.png" />
       <FilePathData Path="ui/78.png" />
+      <FilePathData Path="ui/qubox4.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

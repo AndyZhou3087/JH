@@ -341,6 +341,8 @@ public:
 	*****************************/
 	static void loadGfskillData();
 
+	static bool tempHasgf(std::string strid);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     

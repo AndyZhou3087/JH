@@ -138,11 +138,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			{
 				GlobalData::map_npcs[npcid].winrescount[i]++;
 				if (GlobalData::map_npcs[npcid].winrescount[i] < 10)
-					r = -1;
+					r = 200;
 				else
 				{
 					r = GlobalData::createRandomNum(100) + 1;
-					GlobalData::map_npcs[npcid].winrescount[i] = 0;
+					GlobalData::map_npcs[npcid].winrescount[i] = 1;
 				}
 			}
 		}
@@ -152,8 +152,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 
 		if (r <= winrnd)
-		{
-			
+		{			
 			if (res != 0)
 			{
 				PackageData data;
@@ -214,7 +213,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 				for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 				{
 					WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-					if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]))
+					if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]) && !GlobalData::tempHasgf(winres[i]))
 					{
 						isfind = true;
 						data.strid = gfdata.id;
