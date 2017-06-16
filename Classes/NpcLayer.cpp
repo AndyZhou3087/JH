@@ -653,33 +653,11 @@ void NpcLayer::delayShowNewerGuide(float dt)
 
 int NpcLayer::checkFightCount(std::string npcid)
 {
-	int gfBonusAck = 0;
-	int weaponAck = 0;
+
 	int npcdf = GlobalData::map_npcs[npcid].df;
 	int npcatk = GlobalData::map_npcs[npcid].atk;
-	if (g_hero->getAtrByType(H_WG)->count > 0)//是否有外功--加攻
-	{
-		std::string gfname = g_hero->getAtrByType(H_WG)->strid;
-		gfBonusAck = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
-	}
 
-	if (g_hero->getAtrByType(H_WEAPON)->count > 0)//是否有武器--加攻
-	{
-		std::string wname = g_hero->getAtrByType(H_WEAPON)->strid;
-		weaponAck = GlobalData::map_equips[wname].atk;
-	}
-
-	int heroCurAck = g_hero->getAtkValue() + gfBonusAck + weaponAck;
-	float fack = g_hero->getAtkPercent() * heroCurAck;
-	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
-	{
-		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
-		{
-			fack += fack * 0.1f;
-		}
-	}
-
-	heroCurAck = int(fack + 0.5f);
+	int heroCurAck = g_hero->getTotalAtck();
 
 	int npchurt = heroCurAck - npcdf;
 	float fminack = 0.1f * heroCurAck;
@@ -689,27 +667,13 @@ int NpcLayer::checkFightCount(std::string npcid)
 
 	if (npchurt <= 0)
 		npchurt = 1;
+
 	int npclife = GlobalData::map_npcs[npcid].life;
 	
 	int heroVsBossCount = npclife % npchurt == 0 ? npclife / npchurt : (npclife / npchurt + 1);
 
-	int gfBonusDf = 0;
-	int adf = 0;
-	if (g_hero->getAtrByType(H_NG)->count > 0)////是否有内功--加防
-	{
-		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
-		gfBonusDf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_WG)->lv];
-	}
+	int curheroDf = g_hero->getTotalDf();
 
-	if (g_hero->getAtrByType(H_ARMOR)->count > 0)////是否有防具--加防
-	{
-		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
-		adf = GlobalData::map_equips[aname].df;
-	}
-
-	int curheroDf = g_hero->getDfValue() + gfBonusDf + adf;
-	float fdf = g_hero->getDfPercent() * curheroDf;
-	curheroDf = int(fdf + 0.5f);
 	int herohurt = npcatk - curheroDf;
 
 	fminack = 0.1f * npcatk;
