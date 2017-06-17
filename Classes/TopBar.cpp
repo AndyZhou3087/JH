@@ -173,6 +173,7 @@ bool TopBar::init()
 	m_lastpastLiveDay = g_nature->getPastDays();
 
 	schedule(schedule_selector(TopBar::updataUI), NORMAL_TIMEINTERVAL * 1.0f/TIMESCALE);
+
 	return true;
 }
 

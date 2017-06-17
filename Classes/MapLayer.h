@@ -99,6 +99,9 @@ private:
 	Sprite* m_smissionIcon;//发任务的图标
 	Sprite* m_dmissionIcon;//接任务的图标
 	cocos2d::ui::ScrollView* m_mapscroll;//地图
+	int m_startClickX;
+	int m_startClickY;
+	bool m_isDraging;
 };
 extern MapLayer* g_maplayer;//全局地图层
 #endif

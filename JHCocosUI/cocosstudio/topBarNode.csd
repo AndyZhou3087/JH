@@ -6,6 +6,16 @@
       <ObjectData Name="Node" Tag="2" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
+          <AbstractNodeData Name="blankimg" ActionTag="693643010" Tag="47" IconVisible="False" LeftMargin="-360.0000" RightMargin="-360.0000" TopMargin="-216.5000" BottomMargin="-198.5000" TouchEnable="True" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
+            <Size X="720.0000" Y="415.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position Y="9.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/blank.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
           <AbstractNodeData Name="topbg" ActionTag="-762573810" Tag="3" IconVisible="False" LeftMargin="-360.0000" RightMargin="-360.0000" TopMargin="-217.5000" BottomMargin="-217.5000" ctype="SpriteObjectData">
             <Size X="720.0000" Y="435.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

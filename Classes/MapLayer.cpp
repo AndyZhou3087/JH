@@ -21,6 +21,7 @@ MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
 	ismoving = false;
+	m_isDraging = false;
 	m_distance = 0.0f;
 }
 
@@ -37,8 +38,10 @@ bool MapLayer::init()
 
 	m_mapscroll = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
 	m_mapscroll->setScrollBarEnabled(false);
+	m_mapscroll->setSwallowTouches(false);
 
 	m_mapbg = (cocos2d::ui::Widget*)m_mapscroll->getChildByName("mapbg");
+
 	int mapnamecount = GlobalData::map_maps.size();
 	int heroposindex = 0;
 	std::string addr = GameDataSave::getInstance()->getHeroAddr();
@@ -47,6 +50,7 @@ bool MapLayer::init()
 	{
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
+		mapname->setSwallowTouches(false);
 		mapname->setVisible(false);
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
@@ -82,13 +86,23 @@ bool MapLayer::init()
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
 
+	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
+		m_isDraging = false;
+		m_startClickX = touch->getLocation().x;
+		m_startClickY = touch->getLocation().y;
 		return true;
 	};
 
-	listener->setSwallowTouches(true);
+	listener->onTouchMoved = [=](Touch *touch, Event *event)
+	{
+		if (fabsf(m_startClickX - touch->getLocation().x) > 20 || fabsf(m_startClickY - touch->getLocation().y) > 20)
+			m_isDraging = true;
+	};
+
+	listener->setSwallowTouches(false);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
@@ -100,9 +114,12 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		if (ismoving)
+		if (m_isDraging || ismoving)
+		{
 			return;
+		}
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
 		Node* node = (Node*)pSender;
 		m_addrname = node->getName();
 		m_destPos = node->getPosition();
