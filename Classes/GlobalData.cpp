@@ -680,7 +680,7 @@ int GlobalData::createRandomNum(int val)
 {
 	int syssec = GlobalData::getSysSecTime();
 	int static randNum = 0;
-	randNum += 60 * 60 * 1000;
+	randNum += 100;
 	syssec += randNum;
 	srand(syssec);
 	int r = rand() % val;

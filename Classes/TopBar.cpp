@@ -351,8 +351,24 @@ void TopBar::updataUI(float dt)
 	if (g_nature->getPastDays() >= 1 && m_lastpastLiveDay != g_nature->getPastDays())
 	{
 		m_lastpastLiveDay = g_nature->getPastDays();
-		auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")));
-		Director::getInstance()->pushScene(transition);
+
+		bool isthieves = false;
+		if (g_hero->getIsOut())
+		{
+			int r = GlobalData::createRandomNum(100);
+			if (r < 30)
+				isthieves = true;
+		}
+		if (isthieves)
+		{
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/thieves.jpg", CommonFuncs::gbk2utf("盗贼到来，丢失以下物品...")));
+			Director::getInstance()->pushScene(transition);
+		}
+		else
+		{
+			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")));
+			Director::getInstance()->pushScene(transition);
+		}
 	}
 
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());

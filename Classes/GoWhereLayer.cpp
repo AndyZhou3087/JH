@@ -58,26 +58,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	//距离 ，换算成时间
 	cocos2d::ui::Text* fast = (cocos2d::ui::Text*)csbnode->getChildByName("fast");
 
-	float fmin = distance * HERO_MOVE_SPEED;
-
-	if (g_hero->getAtrByType(H_MOUNT)->count > 0)
-	{
-		int index = -1;
-		for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
-		{
-			ResData rdata = GlobalData::vec_resData[i];
-			if (rdata.strid.compare(g_hero->getAtrByType(H_MOUNT)->strid) == 0)
-			{
-				index = i;
-				break;
-			}
-		}
-		if (index >= 0)
-		{
-			int ep = GlobalData::vec_resData[index].ep[0];
-			fmin *= 100.0f / (100.0f + ep);
-		}
-	}
+	float fmin =g_maplayer->moveToDestTime(distance);
 
 	int minute = (int)fmin;
 	std::string faststr;

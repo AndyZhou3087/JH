@@ -48,9 +48,10 @@ public:
 	void showNewerGuide(int step);
 
 	/****************************
-	地图移动到任务图片
+	移动到目的地的时间
 	*****************************/
-	void showPlotAddr();
+	float moveToDestTime(float distance);
+
 private:
 
 	/****************************
@@ -72,11 +73,6 @@ private:
 	地图移动
 	*****************************/
 	void mapMoveTo(Vec2 pos);
-
-	/****************************
-	地图移动到任务图标位置
-	*****************************/
-	void mapScrollPlotAddr(Vec2 pos);
 
 private:
 	float m_distance;//达到目的地的像素距离

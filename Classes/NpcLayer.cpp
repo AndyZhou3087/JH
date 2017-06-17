@@ -19,10 +19,7 @@ NpcLayer::NpcLayer()
 NpcLayer::~NpcLayer()
 {
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
-	if (g_maplayer != NULL)
-	{
-		//g_maplayer->showPlotAddr();
-	}
+
 }
 
 NpcLayer* NpcLayer::create(std::string addrname)

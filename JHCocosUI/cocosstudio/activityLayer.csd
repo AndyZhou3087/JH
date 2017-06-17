@@ -16,25 +16,25 @@
             <PreSize X="1.0000" Y="0.6313" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text" ActionTag="-1022397713" Tag="24" IconVisible="False" LeftMargin="360.0000" RightMargin="360.0000" TopMargin="1065.0000" BottomMargin="215.0000" FontSize="40" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="text" ActionTag="-1022397713" Tag="24" IconVisible="False" LeftMargin="360.0000" RightMargin="360.0000" TopMargin="1050.0000" BottomMargin="230.0000" FontSize="40" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="215.0000" />
+            <Position X="360.0000" Y="230.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1680" />
+            <PrePosition X="0.5000" Y="0.1797" />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="tips" ActionTag="-1668341743" Tag="38" IconVisible="False" LeftMargin="20.0000" RightMargin="20.0000" TopMargin="1157.0417" BottomMargin="62.9582" IsCustomSize="True" FontSize="28" LabelText="" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="tips" ActionTag="-1668341743" Tag="38" IconVisible="False" LeftMargin="20.0000" RightMargin="20.0000" TopMargin="1110.0000" BottomMargin="110.0000" IsCustomSize="True" FontSize="28" LabelText="" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="680.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-            <Position X="360.0000" Y="122.9582" />
+            <Position X="360.0000" Y="170.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.0961" />
+            <PrePosition X="0.5000" Y="0.1328" />
             <PreSize X="0.9444" Y="0.0469" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
