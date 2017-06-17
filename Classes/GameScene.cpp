@@ -326,6 +326,8 @@ void GameScene::heroRevive()
 	//复活成功
 	g_hero->revive();
 	Director::getInstance()->resume();
+	if (g_maplayer != NULL)
+		g_maplayer->heroResumeMoving();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
 }
 

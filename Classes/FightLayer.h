@@ -20,13 +20,18 @@ public:
 	@param npcid NPC ID
 	****************************/
 	bool init(std::string addrname, std::string npcid);
-
+	virtual void onEnterTransitionDidFinish();
 	static FightLayer* create(std::string addrid, std::string npcid);
 private:
 	/****************************
 	逃跑按钮回调
 	****************************/
 	void onEscape (cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	战斗按钮回调
+	****************************/
+	void onFihgt(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
 	角色攻击
@@ -63,9 +68,21 @@ private:
 	获取主角使用功法招式的文字字符串
 	****************************/
 	std::string getGfFightStr();
+
+	/****************************
+	山贼时更新生命值
+	****************************/
+	void checkHeroLife(float dt);
+
+	/****************************
+	与山战斗
+	****************************/
+	void fightRobber();
+
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件
+	cocos2d::ui::Button* m_fightbtn;//战斗按钮控件
 	cocos2d::ui::Text* herohpvaluetext;//角色血量控件
 	cocos2d::ui::Text* npchpvaluetext;//NCP血量控件
 	cocos2d::ui::LoadingBar* herohpbar;//角色血量进度条控件

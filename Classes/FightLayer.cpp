@@ -9,6 +9,7 @@
 #include "SoundManager.h"
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
+#include "MapLayer.h"
 
 FightLayer::FightLayer()
 {
@@ -110,7 +111,17 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_fihgtScorll->setPosition(Vec2(360, 350));
 	csbnode->addChild(m_fihgtScorll);
 
-	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
+	if (npcid.compare("n001") != 0)
+		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
+	else
+	{
+		addrnametxt->setString(CommonFuncs::gbk2utf("路上"));
+		m_fightbtn = (cocos2d::ui::Button*)csbnode->getChildByName("fightbtn");
+		m_fightbtn->addTouchEventListener(CC_CALLBACK_2(FightLayer::onFihgt, this));
+		m_fightbtn->setVisible(true);
+		m_escapebtn->setPositionX(480);
+		this->schedule(schedule_selector(FightLayer::checkHeroLife), 0.5f);
+	}
 
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -124,6 +135,16 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	int r = GlobalData::createRandomNum(4);
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_FIGHT_0 + r);
 	return true;
+}
+
+void FightLayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+	if (m_npcid.compare("n001") == 0)
+	{
+		g_maplayer->heroPauseMoving();
+	}
+
 }
 
 void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -146,15 +167,41 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			{
 				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你乘机逃跑，可惜失败了！！"), 25, Color3B(204, 4, 4));
 				m_escapebtn->setEnabled(false);
+				if (m_npcid.compare("n001") == 0)
+				{
+					fightRobber();
+				}
 			}
 			m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
 			m_escapebtn->setTag(1);
+			if (isecapeok && m_npcid.compare("n001") == 0)//山贼
+			{
+				g_maplayer->heroResumeMoving();
+				this->removeFromParentAndCleanup(true);
+			}
 		}
 		else
 		{
 			this->removeFromParentAndCleanup(true);
 		}
 	}
+}
+
+void FightLayer::onFihgt(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		m_escapebtn->setEnabled(false);
+		fightRobber();
+	}
+}
+
+void FightLayer::fightRobber()
+{
+	m_fightbtn->setEnabled(false);
+	this->unschedule(schedule_selector(FightLayer::checkHeroLife));
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.5f);
 }
 
 void FightLayer::delayHeroFight(float dt)
@@ -212,10 +259,8 @@ void FightLayer::delayBossFight(float dt)
 		curheroHp = 0.0f;
 	g_hero->setLifeValue(curheroHp);
 
-	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
-	herohpvaluetext->setString(hpstr);
-	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
-	herohpbar->setPercent(herohppercent);
+	checkHeroLife(0);
+
 	showFightWord(1, herohurt);
 
 	if (g_hero->getLifeValue() > 0.0f)
@@ -599,4 +644,12 @@ std::string FightLayer::getGfFightStr()
 		retstr = StringUtils::format(wordstr.c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name, gfname.c_str(), gfname.c_str(), GlobalData::map_npcs[m_npcid].name);
 
 	return retstr;
+}
+
+void FightLayer::checkHeroLife(float dt)
+{
+	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	herohpvaluetext->setString(hpstr);
+	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
+	herohpbar->setPercent(herohppercent);
 }

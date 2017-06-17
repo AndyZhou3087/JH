@@ -13,6 +13,7 @@
 #include "UnlockLayer.h"
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
+#include "FightLayer.h"
 
 static Vec2 heroPos;
 
@@ -118,6 +119,27 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	}
 }
 
+void MapLayer::heroPauseMoving()
+{
+	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
+	m_herohead->pause();
+}
+
+void MapLayer::heroResumeMoving()
+{
+	if (ismoving)
+	{
+		g_nature->setTimeInterval(TIMESCALE * 8);
+		m_herohead->resume();
+	}
+}
+
+void MapLayer::showRobberFight(float dt)
+{
+	heroPauseMoving();
+	g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
+}
+
 void MapLayer::showMoveToDest()
 {
 	ismoving = true;
@@ -127,6 +149,19 @@ void MapLayer::showMoveToDest()
 
 	m_herohead->runAction(Sequence::create(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos), CallFunc::create(CC_CALLBACK_0(MapLayer::Arrive, this)), NULL));
 
+	int sec = dt / (TIMESCALE * 8.0f);
+	if (sec >= 2)
+	{
+		int r = GlobalData::createRandomNum(100);
+		int rnd = g_nature->getDayOrNight() == Night ? 30 : 20;
+
+		if (r < rnd)
+		{
+			int r1 = GlobalData::createRandomNum(sec - 1) + 1;
+
+			this->scheduleOnce(schedule_selector(MapLayer::showRobberFight), r1);
+		}
+	}
 }
 
 void MapLayer::Arrive()

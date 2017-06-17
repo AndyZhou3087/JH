@@ -20,6 +20,8 @@ Winlayer::Winlayer()
 
 Winlayer::~Winlayer()
 {
+	if (g_maplayer != NULL)
+		g_maplayer->heroResumeMoving();
 }
 
 

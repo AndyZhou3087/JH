@@ -50,10 +50,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="escapebtn" ActionTag="439873083" Tag="121" IconVisible="False" LeftMargin="299.4981" RightMargin="299.5019" TopMargin="1169.3223" BottomMargin="56.6777" TouchEnable="True" FontSize="36" ButtonText="逃跑" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="escapebtn" ActionTag="439873083" Tag="121" IconVisible="False" LeftMargin="299.5000" RightMargin="299.5000" TopMargin="1169.3223" BottomMargin="56.6777" TouchEnable="True" FontSize="36" ButtonText="逃跑" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="121.0000" Y="54.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="359.9981" Y="83.6777" />
+            <Position X="360.0000" Y="83.6777" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.0654" />
@@ -183,6 +183,22 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7778" Y="0.4734" />
             <PreSize X="0.0667" Y="0.0117" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="fightbtn" ActionTag="-140830922" VisibleForFrame="False" Tag="22" IconVisible="False" LeftMargin="179.5000" RightMargin="419.5000" TopMargin="1169.3199" BottomMargin="56.6800" TouchEnable="True" FontSize="36" ButtonText="战斗" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="121.0000" Y="54.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="240.0000" Y="83.6800" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3333" Y="0.0654" />
+            <PreSize X="0.1681" Y="0.0422" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
