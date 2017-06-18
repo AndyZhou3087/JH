@@ -300,6 +300,26 @@ public:
 	int getPlotUnlockChapter();
 
 	/****************************
+	获取支线剧情完成到哪一个
+	****************************/
+	void setBranchPlotMissionIndex(int val);
+
+	/****************************
+	保存支线剧情完成到哪一个
+	****************************/
+	int getBranchPlotMissionIndex();
+
+	/****************************
+	获取支线剧情完成状态
+	****************************/
+	void setBranchPlotMissionStatus(std::string strval);
+
+	/****************************
+	保存支线剧情完成状态
+	****************************/
+	std::string getBranchPlotMissionStatus();
+
+	/****************************
 	获取存档ID
 	****************************/
 	std::string getSaveListId();

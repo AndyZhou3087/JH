@@ -56,6 +56,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	cocos2d::ui::Text* addrname = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrname->setString(GlobalData::map_maps[m_addrid].cname);
+
+	if (m_npcid.compare("n001") == 0)//在路上碰到山贼
+		addrname->setString(CommonFuncs::gbk2utf("路上"));
 	
 	int winexp = GlobalData::map_npcs[m_npcid].exp;
 	int herolv = g_hero->getLVValue() + 1;
@@ -85,37 +88,61 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	loadTempData();
 
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
+
 	int curplot = GlobalData::getPlotMissionIndex();
-	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
+	PlotMissionData * plotdata = NULL;
+	int plottype = 0;
+	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
 	{
-		if (GlobalData::vec_PlotMissionData[curplot].type == 1)
+		plotdata = &GlobalData::vec_PlotMissionData[curplot];
+		plottype = 0;
+	}
+	else
+	{
+		curplot = GlobalData::getBranchPlotMissionIndex();
+		if (GlobalData::vec_BranchPlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_BranchPlotMissionData[curplot].type == 1 && GlobalData::vec_BranchPlotMissionData[curplot].status == M_DOING)
+			plotdata = &GlobalData::vec_BranchPlotMissionData[curplot];
+		plottype = 1;
+	}
+
+	if (plotdata != NULL)
+	{
+		plotdata->status = M_DONE;
+
+		winres = plotdata->rewords;
+		for (unsigned int i = 0; i < winres.size(); i++)
 		{
-			GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
-			int unlockchapter = GlobalData::vec_PlotMissionData[curplot].unlockchapter;
+			GlobalData::map_npcs[npcid].winresrnd[i] = 100;
+		}
+		int unlockchapter = 0;
+		if (plottype == 0)
+		{
+			unlockchapter = plotdata->unlockchapter;
 			GlobalData::setUnlockChapter(unlockchapter);
-			winres = GlobalData::vec_PlotMissionData[curplot].rewords;
-			for (unsigned int i = 0; i < winres.size(); i++)
-			{
-				GlobalData::map_npcs[npcid].winresrnd[i] = 100;
-			}
 			GlobalData::setPlotMissionIndex(curplot + 1);
 			GlobalData::savePlotMissionStatus();
+		}
+		else
+		{
+			GlobalData::setBranchPlotMissionIndex(curplot + 1);
+			GlobalData::saveBranchPlotMissionStatus();
+		}
 
-			if (g_gameLayer != NULL)
-			{
-				NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
-				if (npclayer != NULL)
-				{
-					npclayer->updatePlotUI();
-				}
-			}
 
-			if (g_maplayer != NULL )
+		if (g_gameLayer != NULL)
+		{
+			NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
+			if (npclayer != NULL)
 			{
-				g_maplayer->updataPlotMissionIcon();
-				if (unlockchapter > 0)
-					g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+				npclayer->updatePlotUI(plottype);
 			}
+		}
+
+		if (g_maplayer != NULL )
+		{
+			g_maplayer->updataPlotMissionIcon(plottype);
+			if (unlockchapter > 0 && plottype == 0)
+				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 		}
 	}
 
@@ -535,6 +562,8 @@ void Winlayer::loadTempData()
 
 void Winlayer::saveTempData()
 {
+	if (m_npcid.compare("n001") == 0)//在路上碰到山贼不保存物品
+		return;
 	std::vector<PackageData> allResData = tempResData;
 
 	for (unsigned int i = 0; i < getRewardData.size(); i++)

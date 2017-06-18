@@ -66,13 +66,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroicon" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="77.3578" RightMargin="408.6422" TopMargin="575.0692" BottomMargin="614.9308" ctype="SpriteObjectData">
+          <AbstractNodeData Name="heroicon" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="53.3570" RightMargin="432.6430" TopMargin="575.0007" BottomMargin="614.9993" FlipX="True" ctype="SpriteObjectData">
             <Size X="234.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="194.3578" Y="659.9308" />
+            <Position X="170.3570" Y="659.9993" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2699" Y="0.5156" />
+            <PrePosition X="0.2366" Y="0.5156" />
             <PreSize X="0.3250" Y="0.0703" />
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
@@ -87,13 +87,13 @@
             <PreSize X="0.3250" Y="0.0703" />
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="155.8781" RightMargin="436.1219" TopMargin="583.2919" BottomMargin="650.7081" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="74.8751" RightMargin="517.1249" TopMargin="582.0000" BottomMargin="652.0000" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="155.8781" Y="673.7081" />
+            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+            <Position X="202.8751" Y="675.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2165" Y="0.5263" />
+            <PrePosition X="0.2818" Y="0.5273" />
             <PreSize X="0.1778" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -110,25 +110,25 @@
             <FileData Type="MarkedSubImage" Path="ui/fighticon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="527.0309" RightMargin="64.9691" TopMargin="581.2919" BottomMargin="652.7081" FontSize="42" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="519.0302" RightMargin="72.9698" TopMargin="582.0000" BottomMargin="652.0000" FontSize="42" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="527.0309" Y="675.7081" />
+            <Position X="519.0302" Y="675.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7320" Y="0.5279" />
+            <PrePosition X="0.7209" Y="0.5273" />
             <PreSize X="0.1778" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herohpbg" ActionTag="-1309708595" Tag="131" IconVisible="False" LeftMargin="79.0000" RightMargin="409.0000" TopMargin="666.0000" BottomMargin="596.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="herohpbg" ActionTag="-1309708595" Tag="131" IconVisible="False" LeftMargin="54.0000" RightMargin="434.0000" TopMargin="666.0000" BottomMargin="596.0000" ctype="SpriteObjectData">
             <Size X="232.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="195.0000" Y="605.0000" />
+            <Position X="170.0000" Y="605.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2708" Y="0.4727" />
+            <PrePosition X="0.2361" Y="0.4727" />
             <PreSize X="0.3222" Y="0.0141" />
             <FileData Type="MarkedSubImage" Path="ui/fighthpbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
@@ -144,13 +144,13 @@
             <FileData Type="MarkedSubImage" Path="ui/fighthpbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herohpbar" ActionTag="-919271343" Tag="133" IconVisible="False" LeftMargin="79.0000" RightMargin="409.0000" TopMargin="666.0000" BottomMargin="596.0000" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="herohpbar" ActionTag="-919271343" Tag="133" IconVisible="False" LeftMargin="53.9970" RightMargin="434.0030" TopMargin="666.0005" BottomMargin="595.9995" ctype="LoadingBarObjectData">
             <Size X="232.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="195.0000" Y="605.0000" />
+            <Position X="169.9970" Y="604.9995" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2708" Y="0.4727" />
+            <PrePosition X="0.2361" Y="0.4727" />
             <PreSize X="0.3222" Y="0.0141" />
             <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
@@ -164,13 +164,13 @@
             <PreSize X="0.3222" Y="0.0141" />
             <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herohpvaluetext" ActionTag="613342465" Tag="135" IconVisible="False" LeftMargin="171.0000" RightMargin="501.0000" TopMargin="666.5000" BottomMargin="598.5000" FontSize="15" LabelText="95/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herohpvaluetext" ActionTag="613342465" Tag="135" IconVisible="False" LeftMargin="145.9971" RightMargin="526.0029" TopMargin="666.5024" BottomMargin="598.4976" FontSize="15" LabelText="95/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="48.0000" Y="15.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="195.0000" Y="606.0000" />
+            <Position X="169.9971" Y="605.9976" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2708" Y="0.4734" />
+            <PrePosition X="0.2361" Y="0.4734" />
             <PreSize X="0.0667" Y="0.0117" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

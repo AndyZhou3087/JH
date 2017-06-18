@@ -4,6 +4,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "UIScroll.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
 class NpcLayer :public Layer
@@ -15,7 +16,19 @@ public:
 	bool init(std::string addrid);
 	virtual void onEnterTransitionDidFinish();
 	static NpcLayer* create(std::string addrid);
-	void updatePlotUI();
+	/****************************
+	更新任务的图标显示
+	@param 任务类型 0：主线；1：支线
+	*****************************/
+	void updatePlotUI(int type);
+
+	/****************************
+	执行任务
+	@param 任务类型 0：主线；1：支线
+	@param npcdata
+	@return 是否有任务
+	*****************************/
+	bool doCheckPlotMisson(int type, NpcData npcdata);
 
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -36,7 +49,7 @@ private:
 	延迟新手引导
 	*****************************/
 	void delayShowNewerGuide(float dt);
-	void getWinRes();
+	void getWinRes(int type);
 
 	int checkFightCount(std::string npcid);
 private:

@@ -33,9 +33,10 @@ public:
 	void showUnlockLayer(float dt);
 
 	/****************************
-	更新主线任务的图标显示
+	更新任务的图标显示
+	@param 任务类型 0：主线；1：支线
 	*****************************/
-	void updataPlotMissionIcon();
+	void updataPlotMissionIcon(int type);
 
 	/****************************
 	延迟显示新手引导
@@ -96,8 +97,9 @@ private:
 	Sprite* m_herohead;//角色头像
 	bool ismoving;//是否正在移动
 	cocos2d::ui::Widget* m_mapbg;//整个地图
-	Sprite* m_smissionIcon;//发任务的图标
-	Sprite* m_dmissionIcon;//接任务的图标
+	Sprite* m_smissionIcon[2];//发任务的图标
+	Sprite* m_dmissionIcon[2];//接任务的图标
+
 	cocos2d::ui::ScrollView* m_mapscroll;//地图
 	int m_startClickX;
 	int m_startClickY;

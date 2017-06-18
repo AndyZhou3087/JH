@@ -24,6 +24,8 @@ std::map<std::string, EquipData> GlobalData::map_equips;
 
 std::vector<PlotMissionData> GlobalData::vec_PlotMissionData;
 
+std::vector<PlotMissionData> GlobalData::vec_BranchPlotMissionData;
+
 std::map<std::string, GFSkillData> GlobalData::map_gfskills;
 
 bool GlobalData::unlockhero[4];
@@ -568,6 +570,16 @@ int GlobalData::getPlotMissionIndex()
 }
 
 
+void GlobalData::setBranchPlotMissionIndex(int val)
+{
+	GameDataSave::getInstance()->setBranchPlotMissionIndex(val);
+}
+
+int GlobalData::getBranchPlotMissionIndex()
+{
+	return GameDataSave::getInstance()->getBranchPlotMissionIndex();
+}
+
 void GlobalData::loadPlotMissionJsonData()
 {
 	int heroindex = GameDataSave::getInstance()->getHeroId();
@@ -636,6 +648,71 @@ void GlobalData::loadPlotMissionJsonData()
 	GlobalData::updatePlotMissionStatus();
 }
 
+void GlobalData::loadBranchPlotMissionJsonData()
+{
+	std::string plotfilename = "data/branchplotmission.json";
+
+	rapidjson::Document doc = ReadJsonFile(plotfilename);
+	rapidjson::Value& values = doc["m"];
+	for (unsigned int i = 0; i < values.Size(); i++)//剧情数组
+	{
+		rapidjson::Value& vitem = values[i];
+		PlotMissionData data;
+		rapidjson::Value& v = vitem["id"];
+		data.id = v.GetString();
+
+		v = vitem["snpc"];
+		data.snpc = v.GetString();
+
+		v = vitem["dnpc"];
+		data.dnpc = v.GetString();
+
+		v = vitem["unlock"];
+		data.unlockchapter = atoi(v.GetString());
+
+		v = vitem["t"];
+		data.type = atoi(v.GetString());
+
+		data.status = M_NONE;
+		data.isshowdnpc = false;
+		data.isshowsnpc = false;
+
+		v = vitem["word"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.words.push_back(str);
+		}
+
+		v = vitem["myword"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.mywords.push_back(str);
+		}
+
+		v = vitem["bossword"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.bossword.push_back(str);
+		}
+		v = vitem["rwds"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 0)
+				data.rewords.push_back(str);
+		}
+		vec_BranchPlotMissionData.push_back(data);
+	}
+
+	GlobalData::updateBranchPlotMissionStatus();
+}
+
 void GlobalData::savePlotMissionStatus()
 {
 	//保存剧情状态"-"分割
@@ -664,10 +741,39 @@ void GlobalData::updatePlotMissionStatus()
 	}
 }
 
+void GlobalData::saveBranchPlotMissionStatus()
+{
+	//保存支线剧情状态"-"分割
+	std::string str;
+	for (unsigned int i = 0; i < GlobalData::vec_BranchPlotMissionData.size(); i++)
+	{
+		std::string tmpstr = StringUtils::format("%d-", GlobalData::vec_BranchPlotMissionData[i].status);
+		str.append(tmpstr);
+	}
+	GameDataSave::getInstance()->setBranchPlotMissionStatus(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::updateBranchPlotMissionStatus()
+{
+	//解析支线剧情状态"-"分割
+	std::string str = GameDataSave::getInstance()->getBranchPlotMissionStatus();
+	if (str.length() > 0)
+	{
+		std::vector<std::string> tmp;
+		CommonFuncs::split(str, tmp, "-");
+
+		for (unsigned int i = 0; i < tmp.size(); i++)
+		{
+			GlobalData::vec_BranchPlotMissionData[i].status = atoi(tmp[i].c_str());
+		}
+	}
+}
+
 int GlobalData::getUnlockChapter()
 {
 	return GameDataSave::getInstance()->getPlotUnlockChapter();
 }
+
 void GlobalData::setUnlockChapter(int val)
 {
 	int lastChapter = GlobalData::getUnlockChapter();

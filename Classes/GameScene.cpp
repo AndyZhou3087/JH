@@ -74,6 +74,9 @@ bool GameScene::init()
 	//读取剧情配置文件
 	GlobalData::loadPlotMissionJsonData();
 
+	//读取支线剧情配置文件
+	GlobalData::loadBranchPlotMissionJsonData();
+
 	//读取武功招式配置文件
 	GlobalData::loadGfskillData();
 

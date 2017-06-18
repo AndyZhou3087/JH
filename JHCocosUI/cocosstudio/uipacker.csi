@@ -310,8 +310,8 @@
       <FilePathData Path="ui/toplifered.png" />
       <FilePathData Path="ui/topoutinjuryred.png" />
       <FilePathData Path="ui/topspiritred.png" />
-      <FilePathData Path="ui/mapmission0.png" />
-      <FilePathData Path="ui/mapmission1.png" />
+      <FilePathData Path="ui/mapmission0_0.png" />
+      <FilePathData Path="ui/mapmission0_1.png" />
       <FilePathData Path="ui/buildtext0.png" />
       <FilePathData Path="ui/buildtext1.png" />
       <FilePathData Path="ui/buildtext2.png" />
@@ -335,6 +335,8 @@
       <FilePathData Path="ui/77.png" />
       <FilePathData Path="ui/78.png" />
       <FilePathData Path="ui/qubox4.png" />
+      <FilePathData Path="ui/mapmission1_0.png" />
+      <FilePathData Path="ui/mapmission1_1.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

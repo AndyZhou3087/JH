@@ -2409,7 +2409,7 @@
                 <key>sourceSize</key>
                 <string>{103,62}</string>
             </dict>
-            <key>ui/mapmission0.png</key>
+            <key>ui/mapmission0_0.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1736,815},{50,62}}</string>
@@ -2422,7 +2422,7 @@
                 <key>sourceSize</key>
                 <string>{50,62}</string>
             </dict>
-            <key>ui/mapmission1.png</key>
+            <key>ui/mapmission0_1.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{1983,704},{50,62}}</string>
@@ -2434,6 +2434,32 @@
                 <string>{{0,0},{50,62}}</string>
                 <key>sourceSize</key>
                 <string>{50,62}</string>
+            </dict>
+            <key>ui/mapmission1_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{610,462},{34,32}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{34,32}}</string>
+                <key>sourceSize</key>
+                <string>{34,32}</string>
+            </dict>
+            <key>ui/mapmission1_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{169,1384},{38,38}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{38,38}}</string>
+                <key>sourceSize</key>
+                <string>{38,38}</string>
             </dict>
             <key>ui/medicinekit.png</key>
             <dict>
@@ -4395,7 +4421,7 @@
             <key>size</key>
             <string>{2048,4096}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:2e593618d1a147bb496d715b65f80693:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:0aa09108006e9d1a038e509c9563d290:1/1$</string>
             <key>textureFileName</key>
             <string>uipacker.png</string>
         </dict>

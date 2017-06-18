@@ -284,6 +284,26 @@ int GameDataSave::getPlotUnlockChapter()
 	return loadIntDataByKey(addUIDString("unlockchapter"), 1);
 }
 
+void GameDataSave::setBranchPlotMissionIndex(int val)
+{
+	saveIntDataByKey(addUIDString("bplot"), val);
+}
+
+int GameDataSave::getBranchPlotMissionIndex()
+{
+	return loadIntDataByKey(addUIDString("bplot"), 0);
+}
+
+void GameDataSave::setBranchPlotMissionStatus(std::string strval)
+{
+	saveStringDataByKey(addUIDString("bplotstatus"), strval);
+}
+
+std::string GameDataSave::getBranchPlotMissionStatus()
+{
+	return loadStringDataByKey(addUIDString("bplotstatus"));
+}
+
 std::string GameDataSave::getSaveListId()
 {
 	return loadStringDataByKey("savelistid", ";;;");

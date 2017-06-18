@@ -299,6 +299,32 @@ public:
 	static void updatePlotMissionStatus();
 
 	/****************************
+	设置支线剧情ID
+	@param 剧情ID
+	*****************************/
+	static void setBranchPlotMissionIndex(int val);
+
+	/****************************
+	获取支线剧情ID
+	*****************************/
+	static int getBranchPlotMissionIndex();
+
+	/****************************
+	解析支线剧情ID
+	*****************************/
+	static void loadBranchPlotMissionJsonData();
+
+	/****************************
+	保存支线剧情状态
+	*****************************/
+	static void saveBranchPlotMissionStatus();
+
+	/****************************
+	更新支线剧情状态
+	*****************************/
+	static void updateBranchPlotMissionStatus();
+
+	/****************************
 	获取解锁的章节
 	*****************************/
 	static int getUnlockChapter();
@@ -372,6 +398,7 @@ public:
 	static std::map<std::string, EquipData> map_equips;//武器防具数据
 	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;//建筑物数据
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
+	static std::vector<PlotMissionData> vec_BranchPlotMissionData;//支线剧情数据
 	static std::map<std::string, GFSkillData> map_gfskills;//招式数据
 private:
 	static bool unlockhero[4];//角色解锁

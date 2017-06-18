@@ -1,12 +1,12 @@
 ﻿#include "NpcLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
-#include "GlobalData.h"
 #include "FightLayer.h"
 #include "GameScene.h"
 #include "MapLayer.h"
 #include "SoundManager.h"
 #include "NewerGuideLayer.h"
+#include "GameDataSave.h"
 
 NpcLayer::NpcLayer()
 {
@@ -65,9 +65,6 @@ bool NpcLayer::init(std::string addrid)
 	m_scrollview->setScrollBarEnabled(false);
 	m_scrollview->setBounceEnabled(true);
 
-	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
-	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
-
 	int ncpsize = mdata.npcs.size();
 	int itemheight = 153;
 	int innerheight = itemheight * ncpsize;
@@ -119,33 +116,10 @@ bool NpcLayer::init(std::string addrid)
 		onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemExchange, this));
 		if (GlobalData::map_npcs[mdata.npcs[i]].exchgres.size() <= 0)
 			onExchange->setVisible(false);
-
-		if (snpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
-		{
-			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() > 0)
-			{
-				Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
-				micon->setScale(0.6f);
-				micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-				talkbtn->addChild(micon, 0, "m0");
-			}
-		}
-		if (dnpc.compare(mdata.npcs[i]) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
-		{
-			Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
-			dicon->setScale(0.6f);
-			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].type == 1)
-			{
-				dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
-				onFight->addChild(dicon, 0, "m1");
-			}
-			else
-			{
-				dicon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-				talkbtn->addChild(dicon, 0, "m1");
-			}
-		}
 	}
+
+	for (int i = 1; i >= 0;i--)
+		updatePlotUI(i);
 
 
 	m_talkScroll = UIScroll::create(610.0f, 260.f);
@@ -212,6 +186,8 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 		if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() <= 0)
 			return;
+		else if (GlobalData::vec_BranchPlotMissionData[GlobalData::getBranchPlotMissionIndex()].snpc.compare(npc.id) == 0 && GlobalData::vec_BranchPlotMissionData[GlobalData::getBranchPlotMissionIndex()].words.size() <= 0)
+			return;
 
 		int size = vec_wordstr.size();
 		if (m_wordindex >= size && size > 0)
@@ -242,60 +218,14 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 		m_wordcount = 0;
 		std::string wordstr;
-
 		bool isplotMissioning = false;
+		PlotMissionData pdata = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
+		int plottype = 1;
+		if (pdata.snpc.compare(npc.id) == 0 || (pdata.dnpc.compare(npc.id) == 0))
+			plottype = 0;
 
-		int curplot = GlobalData::getPlotMissionIndex();
-		if (GlobalData::vec_PlotMissionData[curplot].snpc.compare(npc.id) == 0 && GlobalData::vec_PlotMissionData[curplot].status != M_DONE)
-		{
-			isplotMissioning = true;
-			GlobalData::vec_PlotMissionData[curplot].status = M_DOING;
-			updatePlotUI();
-			for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].words.size(); m++)
-			{
-				wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].words[m].c_str());
-				vec_wordstr.push_back(wordstr);
-				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].mywords[m].c_str());
-				vec_wordstr.push_back(wordstr);
-			}
-			if (g_maplayer != NULL)
-				g_maplayer->updataPlotMissionIcon();
-		}
+		isplotMissioning = doCheckPlotMisson(plottype, npc);
 
-		if (GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
-		{
-			if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(npc.id) == 0)
-			{
-				isplotMissioning = true;
-
-				if (GlobalData::vec_PlotMissionData[curplot].type == 0)
-				{
-					GlobalData::vec_PlotMissionData[curplot].status = M_DONE;
-					updatePlotUI();
-
-					getWinRes();
-
-					int unlockchapter = GlobalData::vec_PlotMissionData[curplot].unlockchapter;
-					GlobalData::setUnlockChapter(GlobalData::vec_PlotMissionData[curplot].unlockchapter);
-
-					GlobalData::setPlotMissionIndex(curplot + 1);
-
-					if (g_maplayer != NULL)
-					{
-						g_maplayer->updataPlotMissionIcon();
-						if (unlockchapter > 0)
-							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
-					}
-				}
-
-				for (unsigned int m = 0; m < GlobalData::vec_PlotMissionData[curplot].bossword.size(); m++)
-				{
-					wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), GlobalData::vec_PlotMissionData[curplot].bossword[m].c_str());
-					vec_wordstr.push_back(wordstr);
-				}
-			}
-		}
-		GlobalData::savePlotMissionStatus();
 		if (!isplotMissioning)
 		{
 			wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), npc.words[0].c_str());
@@ -359,6 +289,99 @@ void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 	}
+}
+
+bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
+{
+	bool isplotMissioning = false;
+	std::string wordstr;
+	int curplot = 0;
+	PlotMissionData* plotData = NULL;
+	if (type == 0)
+	{
+		curplot = GlobalData::getPlotMissionIndex();
+		plotData = &GlobalData::vec_PlotMissionData[curplot];
+	}
+	else
+	{
+		curplot = GlobalData::getBranchPlotMissionIndex();
+		if (GlobalData::vec_BranchPlotMissionData[curplot].unlockchapter <= GlobalData::getUnlockChapter())
+			plotData = &GlobalData::vec_BranchPlotMissionData[curplot];
+	}
+	
+	if (plotData != NULL)
+	{
+		if (plotData->snpc.compare(npcdata.id) == 0 && plotData->status != M_DONE)
+		{
+			isplotMissioning = true;
+			plotData->status = M_DOING;
+			updatePlotUI(type);
+			for (unsigned int m = 0; m < plotData->words.size(); m++)
+			{
+				wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->words[m].c_str());
+				vec_wordstr.push_back(wordstr);
+				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), plotData->mywords[m].c_str());
+				vec_wordstr.push_back(wordstr);
+			}
+			if (g_maplayer != NULL)
+				g_maplayer->updataPlotMissionIcon(type);
+		}
+
+		if (plotData->status == M_DOING)
+		{
+			if (plotData->dnpc.compare(npcdata.id) == 0)
+			{
+				isplotMissioning = true;
+
+				if (plotData->type == 0)
+				{
+					plotData->status = M_DONE;
+					getWinRes(type);
+
+					int unlockchapter = 0;
+					if (type == 0)
+					{
+						unlockchapter = plotData->unlockchapter;
+						GlobalData::setUnlockChapter(unlockchapter);
+
+						GlobalData::setPlotMissionIndex(curplot + 1);
+					}
+					else
+					{
+						GlobalData::setBranchPlotMissionIndex(curplot + 1);
+					}
+
+					updatePlotUI(type);
+
+					if (g_maplayer != NULL)
+					{
+						g_maplayer->updataPlotMissionIcon(type);
+						if (unlockchapter > 0 && type == 0)
+							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
+					}
+				}
+
+				for (unsigned int m = 0; m < plotData->bossword.size(); m++)
+				{
+					wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->bossword[m].c_str());
+					vec_wordstr.push_back(wordstr);
+				}
+			}
+		}
+		if (isplotMissioning)
+		{
+			if (type == 0)
+			{
+				GlobalData::savePlotMissionStatus();
+				if (plotData->status == M_DONE)
+					updatePlotUI(1);
+			}
+			else
+				GlobalData::saveBranchPlotMissionStatus();
+		}
+	}
+
+	return isplotMissioning;
 }
 
 void NpcLayer::showTypeText(float dt)
@@ -440,10 +463,24 @@ void NpcLayer::removeNpcWord(float dt)
 	m_talkScroll->clean();
 }
 
-void NpcLayer::updatePlotUI()
+void NpcLayer::updatePlotUI(int type)
 {
-	std::string snpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].snpc;
-	std::string dnpc = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].dnpc;
+	int plotIndex = 0;
+	PlotMissionData* plotData;
+
+	if (type == 0)
+	{
+		plotIndex = GlobalData::getPlotMissionIndex();
+		plotData = &GlobalData::vec_PlotMissionData[plotIndex];
+	}
+	else
+	{
+		plotIndex = GlobalData::getBranchPlotMissionIndex();
+		plotData = &GlobalData::vec_BranchPlotMissionData[plotIndex];
+	}
+
+	std::string snpc = plotData->snpc;
+	std::string dnpc = plotData->dnpc;
 	int ncpsize = GlobalData::map_maps[m_addrstr].npcs.size();
 	for (int i = 0; i < ncpsize; i++)
 	{
@@ -451,38 +488,51 @@ void NpcLayer::updatePlotUI()
 		cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
 		cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
 
-		talkbtn->removeChildByName("m0");
+		std::string smissionname = StringUtils::format("m%d_0", type);
+		if (talkbtn->getChildByName(smissionname) != NULL)
+			talkbtn->removeChildByName(smissionname);
 		if (snpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
 		{
-			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_NONE)
+			if (plotData->status == M_NONE)
 			{
-				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].words.size() > 0)
+				if (plotData->words.size() <= 0)
 				{
-
-					Sprite* micon = Sprite::createWithSpriteFrameName("ui/mapmission0.png");
+					plotData->status = M_DOING;
+				}
+				else
+				{
+					std::string miconstr = StringUtils::format("ui/mapmission%d_0.png", type);
+					Sprite* micon = Sprite::createWithSpriteFrameName(miconstr);
 					micon->setScale(0.6f);
 					micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-					talkbtn->addChild(micon, 0, "m0");
+					talkbtn->addChild(micon, 0, smissionname);
 				}
 			}
 		}
-		onFight->removeChildByName("m1");
-		talkbtn->removeChildByName("m1");
+
+		std::string dmissionname = StringUtils::format("m%d_1", type);
+
+		if (onFight->getChildByName(dmissionname) != NULL)
+			onFight->removeChildByName(dmissionname);
+
+		if (talkbtn->getChildByName(dmissionname) != NULL)
+			talkbtn->removeChildByName(dmissionname);
 		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
 		{
-			if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].status == M_DOING)
+			if (plotData->status == M_DOING)
 			{
-				Sprite* dicon = Sprite::createWithSpriteFrameName("ui/mapmission1.png");
+				std::string diconstr = StringUtils::format("ui/mapmission%d_1.png", type);
+				Sprite* dicon = Sprite::createWithSpriteFrameName(diconstr);
 				dicon->setScale(0.6f);
-				if (GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].type == 1)
+				if (plotData->type == 1)
 				{
 					dicon->setPosition(Vec2(onFight->getContentSize().width - 10, onFight->getContentSize().height - 10));
-					onFight->addChild(dicon, 0 , "m1");
+					onFight->addChild(dicon, 0, dmissionname);
 				}
 				else
 				{
 					dicon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
-					talkbtn->addChild(dicon, 0, "m1");
+					talkbtn->addChild(dicon, 0, dmissionname);
 				}
 			}
 		}
@@ -517,16 +567,22 @@ void NpcLayer::fastShowWord()
 	}
 }
 
-void NpcLayer::getWinRes()
+void NpcLayer::getWinRes(int type)
 {
-	std::vector<std::string> winres = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].rewords;
+	std::vector<PackageData> tempResData;//背包满了，保存到临时存放点
+	std::vector<std::string> winres;
+	if (type == 0)
+		winres = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()].rewords;
+	else
+		winres = GlobalData::vec_BranchPlotMissionData[GlobalData::getBranchPlotMissionIndex()].rewords;
+	int addret = 0;
+	PackageData data;
 	for (unsigned int i = 0; i < winres.size(); i++)
 	{
 		int res = atoi(winres[i].c_str());
 
 		if (res != 0)
 		{
-			PackageData data;
 			bool isfind = false;
 			std::string strid = StringUtils::format("%d", res / 1000);
 			data.strid = strid;
@@ -570,11 +626,10 @@ void NpcLayer::getWinRes()
 						break;
 				}
 			}
-			MyPackage::add(data);
+			addret = MyPackage::add(data);
 		}
 		else
 		{
-			PackageData data;
 			std::string strid = winres[i];
 			data.strid = strid;
 			data.count = 1;
@@ -584,7 +639,7 @@ void NpcLayer::getWinRes()
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]))
+				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]) && !GlobalData::tempHasgf(winres[i]))
 				{
 					isfind = true;
 					data.strid = gfdata.id;
@@ -600,7 +655,7 @@ void NpcLayer::getWinRes()
 					}
 					data.desc = gfdata.desc;
 					data.name = gfdata.cname;
-					MyPackage::add(data);
+					addret = MyPackage::add(data);
 					break;
 				}
 			}
@@ -620,13 +675,33 @@ void NpcLayer::getWinRes()
 						data.type = edata.type - 1;
 						data.goodvalue = 100;
 						data.extype = edata.extype;
-						MyPackage::add(data);
+						addret = MyPackage::add(data);
 						break;
 					}
 				}
 			}
 		}
+		if (addret < 0 && data.count > 0)
+		{
+			tempResData.push_back(data);
+		}
+	}
 
+	if (tempResData.size() > 0)
+	{
+		std::string datastr = GameDataSave::getInstance()->getTempStorage(m_addrstr);
+
+		for (unsigned int i = 0; i < tempResData.size(); i++)
+		{
+			std::string sepstr;
+			if (datastr.size() <= 0)
+				sepstr = "";
+			else
+				sepstr = ";";
+			std::string onestr = StringUtils::format("%s%s-%d-%d-%d-%d-%d-%d-%s-%s",sepstr.c_str(), tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].name.c_str(), tempResData[i].desc.c_str());
+			datastr.append(onestr);
+		}
+		GameDataSave::getInstance()->setTempStorage(m_addrstr, datastr);
 	}
 
 }
