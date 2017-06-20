@@ -338,6 +338,8 @@
       <FilePathData Path="ui/mapmission1_0.png" />
       <FilePathData Path="ui/mapmission1_1.png" />
       <FilePathData Path="ui/backstartbtn.png" />
+      <FilePathData Path="ui/shareicon.png" />
+      <FilePathData Path="ui/closebtn.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

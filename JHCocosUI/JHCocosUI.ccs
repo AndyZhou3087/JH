@@ -132,6 +132,7 @@
           <Image Name="buildtext1.png" />
           <Image Name="buildtext2.png" />
           <Image Name="bwine.png" />
+          <Image Name="closebtn.png" />
           <Image Name="cooktable.png" />
           <Image Name="disbtn.png" />
           <Image Name="e001.png" />
@@ -262,6 +263,7 @@
           <Image Name="sexerciseroom.png" />
           <Image Name="sforgingtable.png" />
           <Image Name="sfurnace.png" />
+          <Image Name="shareicon.png" />
           <Image Name="shopbtn.png" />
           <Image Name="shopsepline.png" />
           <Image Name="slock.png" />
