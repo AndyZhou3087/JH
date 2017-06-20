@@ -14,8 +14,9 @@
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
 #include "FightLayer.h"
-
-static Vec2 heroPos;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "UnityAdsMana.h"
+#endif
 
 MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
@@ -51,7 +52,7 @@ bool MapLayer::init()
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
-		mapname->setVisible(false);
+		mapname->setVisible(true);
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
 	}
@@ -60,12 +61,12 @@ bool MapLayer::init()
 
 	mapMoveTo(pos);
 
-	heroPos = m_mapbg->getChildByName(addr)->getPosition();
+	m_heroPos = m_mapbg->getChildByName(addr)->getPosition();
 
 	std::string heroidstr = StringUtils::format("ui/herohead%d.png", g_hero->getHeadID());
 	m_herohead = Sprite::createWithSpriteFrameName(heroidstr);
 	m_herohead->setAnchorPoint(Vec2(0.5, 0));
-	m_herohead->setPosition(heroPos);
+	m_herohead->setPosition(m_heroPos);
 
 	m_mapscroll->addChild(m_herohead);
 
@@ -127,7 +128,7 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		Node* node = (Node*)pSender;
 		m_addrname = node->getName();
 		m_destPos = node->getPosition();
-		m_distance = fabsf(heroPos.distance(m_destPos));
+		m_distance = fabsf(m_heroPos.distance(m_destPos));
 		WHERELAYER_TYPE type = ARRIVE;
 		if (m_distance <= 1.0f)
 			type = ARRIVE;
@@ -188,7 +189,7 @@ void MapLayer::showMoveToDest()
 void MapLayer::Arrive()
 {
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
-	heroPos = m_destPos;
+	m_heroPos = m_destPos;
 	GameDataSave::getInstance()->setHeroAddr(m_addrname);
 
 	if (m_distance > 1.0f)
@@ -209,7 +210,7 @@ void MapLayer::Arrive()
 		}
 
 		std::string str;
-		if (g_hero->getAtrByType(H_MOUNT)->count > 0)
+		if (g_hero->getAtrByType(H_MOUNT)->count > 0 && g_hero->getAtrByType(H_MOUNT)->goodvalue> 0)
 			str.append(CommonFuncs::gbk2utf("你骑着马儿，一溜烟的来到了")); 
 		else
 			str.append(CommonFuncs::gbk2utf("你跑得双腿发麻，来到了"));
@@ -225,12 +226,15 @@ void MapLayer::Arrive()
 		{
 			g_hero->getAtrByType(H_MOUNT)->goodvalue--;
 
-			if (g_hero->getAtrByType(H_MOUNT)->goodvalue <= 0)
+			if (g_hero->getAtrByType(H_MOUNT)->goodvalue < 0)
 			{
-				PackageData data;
-				data.count = -1;
-				g_hero->setAtrByType(H_MOUNT, data);
-				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的白马累死了！！"), 25, Color3B(204, 4, 4));
+				g_hero->getAtrByType(H_MOUNT)->goodvalue = 0;
+			}
+			else if (g_hero->getAtrByType(H_MOUNT)->goodvalue == 20 || g_hero->getAtrByType(H_MOUNT)->goodvalue == 10)
+			{
+				std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_MOUNT)->name.c_str(), CommonFuncs::gbk2utf("生命仅剩").c_str(), g_hero->getAtrByType(H_MOUNT)->goodvalue);
+
+				g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 			}
 		}
 	}
@@ -278,6 +282,10 @@ void MapLayer::showUnlockLayer(float dt)
 #ifdef ANALYTICS
 	std::string unlockstr = StringUtils::format("u%d", GlobalData::getUnlockChapter());
 	AnalyticUtil::onEvent(unlockstr.c_str());
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	if (!GlobalData::getNoComments())
+		alterView();
 #endif
 }
 
@@ -390,7 +398,7 @@ void MapLayer::delayShowMapNewerGuide(float dt)
 float MapLayer::moveToDestTime(float distance)
 {
 	float dt = distance * HERO_MOVE_SPEED;
-	if (g_hero->getAtrByType(H_MOUNT)->count > 0)
+	if (g_hero->getAtrByType(H_MOUNT)->count > 0 && g_hero->getAtrByType(H_MOUNT)->goodvalue > 0)
 	{
 		int index = -1;
 		for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)

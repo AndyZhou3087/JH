@@ -1,27 +1,5 @@
 <UserData Version="3.10.0.0">
   <Properties>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="heroStateLayer.csd" />
-          <FilePathData Path="heroAttribNode.csd" />
-          <FilePathData Path="startLayer.csd" />
-          <FilePathData Path="shopLayer.csd" />
-          <FilePathData Path="sysSmallLayer.csd" />
-          <FilePathData Path="hintLayer.csd" />
-          <FilePathData Path="pauseLayer.csd" />
-          <FilePathData Path="buildingDetailsLayer.csd" />
-          <FilePathData Path="buyDetailsLayer.csd" />
-          <FilePathData Path="buyComfirmLayer.csd" />
-          <FilePathData Path="fightLayer.csd" />
-          <FilePathData Path="resDetailsLayer.csd" />
-          <FilePathData Path="actionGetLayer.csd" />
-          <FilePathData Path="activityLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="fightLayer.csd" />
-      </Value>
-    </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />

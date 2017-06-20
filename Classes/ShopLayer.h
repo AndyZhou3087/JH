@@ -4,6 +4,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "GoodsItem.h"
+#include "MyPackage.h"
 USING_NS_CC;
 
 typedef enum
@@ -27,6 +28,7 @@ private:
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static void loadShopData();
 	static void addBuyGoods();
+	static void updateDefaultStorage(PackageData pdata);
 private:
 	static std::vector<GoodsData> vec_goods;
 	cocos2d::ui::ScrollView* m_scrollview;

@@ -16,18 +16,16 @@ public:
 
 	/****************************
 	初始化
-	@param imagepath 角色头像
-	@param name 角色名称
-	@param desc 角色描述
-	@param price 价格
+	@param heroid
 	****************************/
-	virtual bool init(std::string imagepath, std::string name, std::string desc, int price);
-	static BuyDetailsLayer* create(std::string imagepath, std::string name, std::string desc, int price);
+	virtual bool init(int heroid);
+	static BuyDetailsLayer* create(int heroid);
 private:
 	cocos2d::ui::ImageView* image;//头像 image
 	cocos2d::ui::Text* nameTxt;//角色名称控件
 	cocos2d::ui::Text* descTxt;//角色描述控件
 	cocos2d::ui::Text* priceTxt;//角色价格控件
+	cocos2d::ui::Text* goodstext;//初始物品控件
 
 private:
 	/****************************

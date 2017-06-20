@@ -308,7 +308,7 @@ void HomeLayer::delayShowNewerGuide(float dt)
 				std::string strResid = StringUtils::format("%d", buildresid);
 				for (int m = 0; m < RES_MAX; m++)
 				{
-					for (int k = 0; k < StorageRoom::map_storageData[m].size(); k++)
+					for (unsigned int k = 0; k < StorageRoom::map_storageData[m].size(); k++)
 					{
 						if (StorageRoom::map_storageData[m][k].strid.compare(strResid) == 0)
 						{

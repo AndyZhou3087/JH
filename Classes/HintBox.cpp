@@ -51,9 +51,9 @@ HintBox* HintBox::create(std::string content)
 
 void HintBox::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removSelf();
 	}
 }

@@ -65,9 +65,9 @@ void OutDoor::onEnterTransitionDidFinish()
 
 void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
 			StorageRoom::add(MyPackage::vec_packages[i]);
@@ -79,9 +79,9 @@ void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 
 void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		m_outbtn->setEnabled(false);
 
 		delayShowGOOut(0);

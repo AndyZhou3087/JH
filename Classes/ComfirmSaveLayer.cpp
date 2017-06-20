@@ -4,6 +4,7 @@
 #include "GameDataSave.h"
 #include "Utility.h"
 #include "SelectHeroScene.h"
+#include "CommonFuncs.h"
 bool ComfirmSaveLayer::init()
 {
 	
@@ -40,22 +41,20 @@ bool ComfirmSaveLayer::init()
 
 void ComfirmSaveLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		saveUserIds();
-		removSelf();
-		Scene* scene = SelectHeroScene::createScene();
-		Director::getInstance()->replaceScene(scene);
+		SelectHeroScene* parant = (SelectHeroScene*)this->getParent();
+		parant->enterNextScene();
+		GlobalData::setCurHeroIdToSaveList();
 	}
 }
 
 void ComfirmSaveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		removSelf();
 	}
 }
@@ -63,17 +62,5 @@ void ComfirmSaveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 void ComfirmSaveLayer::removSelf()
 {
 	this->removeFromParentAndCleanup(true);
-}
-
-void ComfirmSaveLayer::saveUserIds()
-{
-	std::string uid = GameDataSave::getInstance()->getUserId();
-	GlobalData::setUId(uid);
-	int heroid = GameDataSave::getInstance()->getHeroId();
-	std::vector<std::string> vec_ids = GlobalData::getSaveListId();
-
-	vec_ids[heroid - 1] = uid;
-
-	GlobalData::setSaveListId(vec_ids);
 }
 

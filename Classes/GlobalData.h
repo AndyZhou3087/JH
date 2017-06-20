@@ -267,10 +267,16 @@ public:
 	static void setUId(std::string struid);
 
 	/****************************
-	解析默认仓储数据
+	获取默认仓储数据
 	@param heroindex 角色ID
 	*****************************/
 	static std::string getDefaultStorage(int heroindex);
+
+	/****************************
+	解析原始默认仓储数据
+	@param heroindex 角色ID
+	*****************************/
+	static std::string getOriginLocalStorage(int heroindex);
 
 	/****************************
 	设置剧情ID
@@ -351,6 +357,11 @@ public:
 	@param 保存的id vector
 	*****************************/
 	static void setSaveListId(std::vector<std::string> vec_val);
+
+	/****************************
+	保存当前的角色ID到进度列表
+	*****************************/
+	static void setCurHeroIdToSaveList();
 
 	/****************************
 	是否在闭关中

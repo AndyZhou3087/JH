@@ -3,6 +3,7 @@
 #include "SoundManager.h"
 #include "GameDataSave.h"
 #include "GameScene.h"
+#include "CommonFuncs.h"
 bool SelectSaveComfirmLayer::init(int index)
 {
 	
@@ -58,9 +59,9 @@ SelectSaveComfirmLayer* SelectSaveComfirmLayer::create(int index)
 
 void SelectSaveComfirmLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 		std::string suid = GlobalData::getSaveListId().at(tag);
@@ -74,10 +75,9 @@ void SelectSaveComfirmLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 
 void SelectSaveComfirmLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
-	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		
+	{	
 		removSelf();
 	}
 }

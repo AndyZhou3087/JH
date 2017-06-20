@@ -24,10 +24,14 @@ private:
 	void onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void recoveInjuryValue(int addwvalue, int addnvalue);
 	void recoveHungerValue(int addvalue);
+
+	void updateHorseData(int addvalue);
+
 private:
 	PackageData* m_packageData;
 	cocos2d::ui::Text* uselbl;
 	cocos2d::ui::Button* m_okbtn;
+	Node* m_csbnode;
 };
 
 #endif

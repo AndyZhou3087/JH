@@ -8,6 +8,9 @@
 #include "SoundManager.h"
 #include "StoryScene.h"
 #include "GameScene.h"
+#include "StartScene.h"
+#include "ComfirmSaveLayer.h"
+#include "GameDataSave.h"
 
 USING_NS_CC;
 
@@ -56,6 +59,9 @@ bool SelectHeroScene::init()
 	cocos2d::ui::Widget* startbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("startbtn");
 	startbtn->addTouchEventListener(CC_CALLBACK_2(SelectHeroScene::onStart, this));
 
+	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	backbtn->addTouchEventListener(CC_CALLBACK_2(SelectHeroScene::onBack, this));
+
 	for (int i = 0; i < 4; i++)
 	{
 		std::string str = StringUtils::format("heroimg%d", i + 1);
@@ -102,8 +108,7 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 		if (!GlobalData::getUnlocHero(tag - 1))
 		{
-			std::string imagpath = StringUtils::format("ui/tophero%d.png", tag);
-			Layer* layer = BuyDetailsLayer::create(imagpath, heroname[tag-1], herodesc[tag-1], heroprice[tag-1]);
+			Layer* layer = BuyDetailsLayer::create(tag);
 			layer->setTag(tag - 1);
 			this->addChild(layer, 0, "buyherolayer");
 			return;
@@ -161,27 +166,72 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	}
 }
 
-void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+void SelectHeroScene::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		int systime = GlobalData::getSysSecTime();
-		std::string uidstr = StringUtils::format("%d", systime);
-		GlobalData::setUId(uidstr);
-		GameDataSave::getInstance()->setHeroId(_lastSelect);
+		Director::getInstance()->replaceScene(StartScene::createScene());
+	}
+}
 
-		std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
-		GameDataSave::getInstance()->setStorageData(defaultStorageStr);
-		Scene* scene;
-		if (_lastSelect == 1 || _lastSelect == 2)
+void SelectHeroScene::onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		std::string uid = GlobalData::getUId();
+		if (uid.size() <= 0)
 		{
-			scene = StoryScene::createScene();
+			enterNextScene();
+			return;
+		}
+
+		bool isExit = false;
+		std::vector<std::string> vec_ids = GlobalData::getSaveListId();
+		
+		for (unsigned int i = 0; i < vec_ids.size(); i++)
+		{
+			std::string saveuid = vec_ids[i];
+			if (saveuid.length() > 0)
+			{
+				int heroid = GameDataSave::getInstance()->getHeroIdByUid(saveuid);
+				if (heroid == _lastSelect)
+				{
+					isExit = true;
+					break;
+				}
+			}
+		}
+		if (isExit)
+		{
+			this->addChild(ComfirmSaveLayer::create());
 		}
 		else
-			scene = GameScene::createScene();
-		Director::getInstance()->replaceScene(scene);
+		{
+			enterNextScene();
+		}
 	}
+}
+
+void SelectHeroScene::enterNextScene()
+{
+	int systime = GlobalData::getSysSecTime();
+	std::string uidstr = StringUtils::format("%d", systime);
+	GlobalData::setUId(uidstr);
+	GameDataSave::getInstance()->setHeroId(_lastSelect);
+
+	std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
+	GameDataSave::getInstance()->setStorageData(defaultStorageStr);
+
+	Scene* scene;
+	if (_lastSelect == 1 || _lastSelect == 2)
+	{
+		scene = StoryScene::createScene();
+	}
+	else
+		scene = GameScene::createScene();
+	Director::getInstance()->replaceScene(scene);
 }
 
 void SelectHeroScene::unlockSucc(int index)

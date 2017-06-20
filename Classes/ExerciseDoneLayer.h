@@ -14,12 +14,18 @@ public:
 	ExerciseDoneLayer();
 	~ExerciseDoneLayer();
 
-	virtual bool init(int hour);
-	static ExerciseDoneLayer* create(int hour);
+	virtual bool init(std::string wgidstr, std::string ngidstr, int hour);
+	static ExerciseDoneLayer* create(std::string wgidstr, std::string ngidstr, int hour);
 private:
 	void showText(float dt);
 	void removeself(float dt);
-
+	/****************************
+	出关
+	@param 外功id
+	@param 内功id
+	@param 闭关了多少小时
+	*****************************/
+	void exerciseDone(std::string wgidstr, std::string ngidstr, int hour);
 private:
 	cocos2d::ui::Widget* m_unlockbg;
 	cocos2d::ui::Text* m_title;

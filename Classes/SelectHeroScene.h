@@ -17,6 +17,7 @@ public:
     
 	CREATE_FUNC(SelectHeroScene);
 	void unlockSucc(int index);
+	void enterNextScene();
 private:
 	cocos2d::ui::ImageView* heroimg[4];
 	cocos2d::ui::ImageView* selectimg[4];
@@ -27,8 +28,10 @@ private:
 private:
 	void onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void clickMoveFinish(float dt);
+
 };
 extern SelectHeroScene* g_SelectHeroScene;
 #endif

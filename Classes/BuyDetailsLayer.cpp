@@ -2,6 +2,8 @@
 #include "CommonFuncs.h"
 #include "ShopLayer.h"
 #include "SoundManager.h"
+#include "GlobalData.h"
+#include "Const.h"
 BuyDetailsLayer::BuyDetailsLayer()
 {
 
@@ -12,7 +14,7 @@ BuyDetailsLayer::~BuyDetailsLayer()
 {
 }
 
-bool BuyDetailsLayer::init(std::string imagepath, std::string name, std::string desc, int price)
+bool BuyDetailsLayer::init(int heroid)
 {
 	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 150));
 	this->addChild(color);
@@ -24,12 +26,34 @@ bool BuyDetailsLayer::init(std::string imagepath, std::string name, std::string 
 	descTxt = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
 	priceTxt = (cocos2d::ui::Text*) csbnode->getChildByName("price");
 
+	goodstext = (cocos2d::ui::Text*) csbnode->getChildByName("goodsdesc");
+
+	std::string goodsstr;
+	goodsstr.append(CommonFuncs::gbk2utf("初始物品："));
+	std::string strval = GlobalData::getOriginLocalStorage(heroid);
+
+	std::vector<std::string> tmp;
+	CommonFuncs::split(strval, tmp, ";");
+	for (unsigned int i = 0; i < tmp.size(); i++)
+	{
+		std::vector<std::string> tmp2;
+		CommonFuncs::split(tmp[i], tmp2, "-");
+
+		std::string countstr = StringUtils::format("*%s", tmp2[2].c_str());
+		std::string namstr = tmp2[7];
+		goodsstr.append(namstr);
+		goodsstr.append(countstr);
+		if (i <= tmp.size()-2)
+			goodsstr.append(CommonFuncs::gbk2utf("，"));
+	}
+	goodstext->setString(goodsstr);
+	std::string imagepath = StringUtils::format("ui/tophero%d.png", heroid);
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	image->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 
-	nameTxt->setString(CommonFuncs::gbk2utf(name.c_str()));
-	descTxt->setString(CommonFuncs::gbk2utf(desc.c_str()));
-	std::string pricestr = StringUtils::format("￥%d.00", price);
+	nameTxt->setString(CommonFuncs::gbk2utf(heroname[heroid - 1].c_str()));
+	descTxt->setString(CommonFuncs::gbk2utf(herodesc[heroid - 1].c_str()));
+	std::string pricestr = StringUtils::format("￥%d.00", heroprice[heroid - 1]);
 	priceTxt->setString(CommonFuncs::gbk2utf(pricestr.c_str()));
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
@@ -50,10 +74,10 @@ bool BuyDetailsLayer::init(std::string imagepath, std::string name, std::string 
 	return true;
 }
 
-BuyDetailsLayer* BuyDetailsLayer::create(std::string imagepath, std::string name, std::string desc, int price)
+BuyDetailsLayer* BuyDetailsLayer::create(int heroid)
 {
 	BuyDetailsLayer *pRet = new BuyDetailsLayer();
-	if (pRet && pRet->init(imagepath, name, desc, price))
+	if (pRet && pRet->init(heroid))
 	{
 		pRet->autorelease();
 	}
@@ -67,17 +91,17 @@ BuyDetailsLayer* BuyDetailsLayer::create(std::string imagepath, std::string name
 
 void BuyDetailsLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
 void BuyDetailsLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer::beginPay(this->getTag());
 	}
 }

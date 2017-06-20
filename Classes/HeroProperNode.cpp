@@ -66,7 +66,7 @@ bool HeroProperNode::init()
 				int lv = hpdata->lv + 1;
 				str = StringUtils::format("Lv.%d", lv);
 				if (lv >= GlobalData::map_wgngs[hpdata->strid].maxlv)
-					str = StringUtils::format("Lv.%d(max)", lv);
+					str = StringUtils::format("Lv.%d(满级)", lv);
 
 				std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[hpdata->strid].qu);
 				imgbtn[i]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
@@ -103,8 +103,12 @@ bool HeroProperNode::init()
 		{
 			lvtext[i]->setString("");
 		}
-	}
 
+		if (hpdata->goodvalue < 20)
+			lvtext[i]->setColor(Color3B(204, 4, 4));
+		else
+			lvtext[i]->setColor(Color3B(255, 255, 255));
+	}
 
 	heroselectbg = (cocos2d::ui::Widget*)csbroot->getChildByName("heroselectbg");
 	heroppoint = (cocos2d::ui::Widget*)csbroot->getChildByName("heroppoint");
@@ -136,9 +140,9 @@ void HeroProperNode::onEnterTransitionDidFinish()
 
 void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
 
@@ -153,11 +157,13 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 		//点击相同的一个不做操作
 		if (lastclickindex == tag && heroselectbg->isVisible())
 			return;
+
 		removeitem();
 		showSelectFrame(Atrytpe[tag]);
 
@@ -335,13 +341,19 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		namelbl->setPosition(Vec2(box->getContentSize().width / 2, - 10));
 		box->addChild(namelbl);
 
+		Label * lvlbl = Label::createWithSystemFont("", "", 15);
+		lvlbl->setColor(Color3B(255, 255, 255));
+		lvlbl->setAnchorPoint(Vec2(1, 0));
+		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
+		box->addChild(lvlbl);
+
 		if (index == H_WG || index == H_NG )
 		{
 			int lv = map_carryData[index][i].lv + 1;
 			str = StringUtils::format("Lv.%d", lv);
 
 			if (lv >= GlobalData::map_wgngs[map_carryData[index][i].strid].maxlv)
-				str = StringUtils::format("Lv.%d(max)", lv);
+				str = StringUtils::format("Lv.%d(满级)", lv);
 		}
 		else if (index == H_GATHER || index == H_FELL || index == H_EXCAVATE || index == H_ARMOR || index == H_WEAPON)
 		{
@@ -360,11 +372,12 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		{
 			str = "";
 		}
-		Label * lvlbl = Label::createWithSystemFont(CommonFuncs::gbk2utf(str.c_str()), "", 15);
-		lvlbl->setColor(Color3B(255, 255, 255));
-		lvlbl->setAnchorPoint(Vec2(1, 0));
-		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
-		box->addChild(lvlbl);
+		if (map_carryData[index][i].goodvalue < 20)
+			lvlbl->setColor(Color3B(204, 4, 4));
+		else
+			lvlbl->setColor(Color3B(255, 255, 255));
+
+		lvlbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 		if (g_hero->getAtrByType(index)->count > 0)//是否装备了hpdata->count ==-1没有装备
 		{
@@ -476,7 +489,7 @@ void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
 		str = StringUtils::format("Lv.%d", lv);
 
 		if (lv >= GlobalData::map_wgngs[pdata->strid].maxlv)
-			str = StringUtils::format("Lv.%d(max)", lv);
+			str = StringUtils::format("Lv.%d(满级)", lv);
 
 		std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
 		imgbtn[lastclickindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
@@ -506,6 +519,11 @@ void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
 	{
 		str = "";
 	}
+
+	if (pdata->goodvalue < 20)
+		lvtext[lastclickindex]->setColor(Color3B(204, 4, 4));
+	else
+		lvtext[lastclickindex]->setColor(Color3B(255, 255, 255));
 
 	lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 }

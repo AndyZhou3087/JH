@@ -64,14 +64,14 @@
                 <PreSize X="0.3706" Y="0.3174" />
                 <FileData Type="MarkedSubImage" Path="ui/gp1.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc" ActionTag="394713484" Tag="100" IconVisible="False" LeftMargin="21.2152" RightMargin="14.7848" TopMargin="199.7014" BottomMargin="34.2986" IsCustomSize="True" FontSize="22" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="250.0000" Y="100.0000" />
+              <AbstractNodeData Name="desc" ActionTag="394713484" Tag="100" IconVisible="False" LeftMargin="10.0000" RightMargin="16.0000" TopMargin="203.7000" BottomMargin="30.3000" IsCustomSize="True" FontSize="23" LabelText="获得降龙十八掌、白首太玄经、倚天剑、乌蝉衣" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="260.0000" Y="100.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="21.2152" Y="84.2986" />
+                <Position X="10.0000" Y="80.3000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.0742" Y="0.2524" />
-                <PreSize X="0.8741" Y="0.2994" />
+                <PrePosition X="0.0350" Y="0.2404" />
+                <PreSize X="0.9091" Y="0.2994" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

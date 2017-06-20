@@ -71,19 +71,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="150.9996" RightMargin="168.0004" TopMargin="686.2817" BottomMargin="443.7183" IsCustomSize="True" FontSize="25" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="text" ActionTag="-1837269180" Tag="33" IconVisible="False" LeftMargin="150.9993" RightMargin="168.0007" TopMargin="701.2818" BottomMargin="428.7182" IsCustomSize="True" FontSize="25" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="401.0000" Y="150.0000" />
             <AnchorPoint ScaleY="1.0000" />
-            <Position X="150.9996" Y="593.7183" />
+            <Position X="150.9993" Y="578.7182" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2097" Y="0.4638" />
+            <PrePosition X="0.2097" Y="0.4521" />
             <PreSize X="0.5569" Y="0.1172" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="valuelbl" ActionTag="-1029168433" Tag="15" IconVisible="False" LeftMargin="347.0000" RightMargin="373.0000" TopMargin="666.1710" BottomMargin="613.8290" FontSize="20" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="valuelbl" ActionTag="-1029168433" Tag="15" IconVisible="False" LeftMargin="347.0000" RightMargin="373.0000" TopMargin="666.1710" BottomMargin="613.8290" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="347.0000" Y="613.8290" />

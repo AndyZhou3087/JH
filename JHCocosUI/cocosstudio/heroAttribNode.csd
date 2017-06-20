@@ -302,13 +302,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ScrollView" ActionTag="-723096159" Tag="74" IconVisible="False" LeftMargin="20.9583" RightMargin="23.0417" TopMargin="62.2900" BottomMargin="103.7100" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="ScrollView" ActionTag="-723096159" Tag="74" IconVisible="False" LeftMargin="20.9586" RightMargin="23.0414" TopMargin="57.2902" BottomMargin="108.7098" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="600.0000" Y="400.0000" />
                 <AnchorPoint />
-                <Position X="20.9583" Y="103.7100" />
+                <Position X="20.9586" Y="108.7098" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0325" Y="0.1832" />
+                <PrePosition X="0.0325" Y="0.1921" />
                 <PreSize X="0.9317" Y="0.7067" />
                 <SingleColor A="255" R="255" G="150" B="100" />
                 <FirstColor A="255" R="255" G="150" B="100" />
@@ -316,14 +316,14 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="600" Height="400" />
               </AbstractNodeData>
-              <AbstractNodeData Name="okbtn" ActionTag="-1655275635" Tag="93" IconVisible="False" LeftMargin="255.7359" RightMargin="267.2641" TopMargin="475.8694" BottomMargin="36.1306" TouchEnable="True" FontSize="30" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="121.0000" Y="54.0000" />
+              <AbstractNodeData Name="okbtn" ActionTag="-1655275635" Tag="93" IconVisible="False" LeftMargin="241.2355" RightMargin="252.7645" TopMargin="457.8696" BottomMargin="18.1304" TouchEnable="True" FontSize="40" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="150.0000" Y="90.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="316.2359" Y="63.1306" />
+                <Position X="316.2355" Y="63.1304" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4910" Y="0.1115" />
-                <PreSize X="0.1879" Y="0.0954" />
+                <PreSize X="0.2329" Y="0.1590" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <TextColor A="255" R="255" G="255" B="255" />
                 <DisabledFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />

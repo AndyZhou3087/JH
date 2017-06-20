@@ -32,9 +32,11 @@ bool BuyComfirmLayer::init(int shopGoodsIndex)
 
 	std::string desc;
 
+	cocos2d::ui::Text* desctext = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
+
 	if (m_goodsIndex == 6)
 		desc = "闭关中！没有分身符无法进行此操作。是否立即购买分身符？";
-	cocos2d::ui::Text* desctext = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
+
 	desctext->setString(desc);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -66,17 +68,17 @@ BuyComfirmLayer* BuyComfirmLayer::create(int shopGoodsIndex)
 
 void BuyComfirmLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
 void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer::beginPay(m_goodsIndex);
 	}
 }

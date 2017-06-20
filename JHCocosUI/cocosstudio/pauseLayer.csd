@@ -16,14 +16,14 @@
             <PreSize X="0.7264" Y="0.4344" />
             <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-516988748" Tag="203" IconVisible="False" LeftMargin="322.1481" RightMargin="328.8519" TopMargin="425.5816" BottomMargin="816.4184" FontSize="35" LabelText="暂停" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="69.0000" Y="38.0000" />
+          <AbstractNodeData Name="title" ActionTag="-516988748" Tag="203" IconVisible="False" LeftMargin="313.1481" RightMargin="319.8519" TopMargin="420.0816" BottomMargin="810.9184" FontSize="45" LabelText="暂停" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="87.0000" Y="49.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="356.6481" Y="835.4184" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4953" Y="0.6527" />
-            <PreSize X="0.0958" Y="0.0297" />
+            <PreSize X="0.1208" Y="0.0383" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

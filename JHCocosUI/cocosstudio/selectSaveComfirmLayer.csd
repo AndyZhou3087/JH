@@ -28,14 +28,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cancelbtn" ActionTag="1027717341" Tag="458" IconVisible="False" LeftMargin="171.6389" RightMargin="427.3611" TopMargin="763.9215" BottomMargin="462.0785" TouchEnable="True" FontSize="36" ButtonText="取消" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="cancelbtn" ActionTag="1027717341" Tag="458" IconVisible="False" LeftMargin="157.1389" RightMargin="412.8611" TopMargin="745.9215" BottomMargin="444.0785" TouchEnable="True" FontSize="40" ButtonText="取消" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="232.1389" Y="489.0785" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3224" Y="0.3821" />
-            <PreSize X="0.1681" Y="0.0422" />
+            <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
@@ -44,14 +44,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="okbtn" ActionTag="948309105" Tag="459" IconVisible="False" LeftMargin="407.5388" RightMargin="191.4612" TopMargin="763.9215" BottomMargin="462.0785" TouchEnable="True" FontSize="36" ButtonText="进入" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="okbtn" ActionTag="948309105" Tag="459" IconVisible="False" LeftMargin="393.0388" RightMargin="176.9612" TopMargin="745.9215" BottomMargin="444.0785" TouchEnable="True" FontSize="40" ButtonText="进入" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="468.0388" Y="489.0785" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6501" Y="0.3821" />
-            <PreSize X="0.1681" Y="0.0422" />
+            <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
@@ -60,7 +60,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="content" ActionTag="-2086344551" Tag="460" IconVisible="False" LeftMargin="140.9999" RightMargin="147.0001" TopMargin="564.5215" BottomMargin="545.4785" IsCustomSize="True" FontSize="28" LabelText="确认使用该存档开始游戏吗？" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="content" ActionTag="-2086344551" Tag="460" IconVisible="False" LeftMargin="140.9999" RightMargin="147.0001" TopMargin="564.5215" BottomMargin="545.4785" IsCustomSize="True" FontSize="30" LabelText="确认使用该存档开始游戏吗？" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="432.0000" Y="170.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="356.9999" Y="630.4785" />

@@ -9,8 +9,11 @@
 #include "BuyComfirmLayer.h"
 
 #define WINESTRID "23"
+#define GRASSRID "5"
 
 int ResDetailsLayer::whereClick = 0;//0--仓库，1其他
+
+std::string gfqudesc[] = {"（入门）", "（一流）", "（上乘）", "（传世）", "（绝世）"};
 
 ResDetailsLayer::ResDetailsLayer()
 {
@@ -31,30 +34,49 @@ bool ResDetailsLayer::init(PackageData* pdata)
     }
 
 	m_packageData = pdata;
-	Node* csbnode = CSLoader::createNode("resDetailsLayer.csb");
-	this->addChild(csbnode);
+	m_csbnode = CSLoader::createNode("resDetailsLayer.csb");
+	this->addChild(m_csbnode);
 
-	m_okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
+	m_okbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("okbtn");
 	m_okbtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onOk, this));
 
-	cocos2d::ui::Button* usebtn = (cocos2d::ui::Button*)csbnode->getChildByName("usebtn");
+	cocos2d::ui::Button* usebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("usebtn");
 	usebtn->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onUse, this));
 
 	uselbl = (cocos2d::ui::Text*)usebtn->getChildByName("valuelbl");
 
 	if ((pdata->type == FOOD || (pdata->type == MEDICINAL && pdata->strid.compare(WINESTRID) != 0)) && whereClick == 0)
 		m_okbtn->setTitleText(CommonFuncs::gbk2utf("使用"));
+	else if (pdata->type == RES_1 && pdata->strid.compare(GRASSRID) == 0 && whereClick == 0)
+	{
+		m_okbtn->setTitleText(CommonFuncs::gbk2utf("喂马"));
+		updateHorseData(0);
+	}
 
-	cocos2d::ui::ImageView* resbox = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall");
+	cocos2d::ui::Text* resname = (cocos2d::ui::Text*)m_csbnode->getChildByName("namelbl");
+
+	resname->setString(pdata->name);
+
+	cocos2d::ui::Text* qulbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("qulbl");
+
+	cocos2d::ui::ImageView* resbox = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("buildsmall");
 	std::string qustr = "ui/buildsmall.png";
+	int qu = -1;
 	if (pdata->type == WEAPON || pdata->type == PROTECT_EQU)
 	{
-		qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
+		qu = GlobalData::map_equips[pdata->strid].qu;
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
-		qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
+		qu = GlobalData::map_wgngs[pdata->strid].qu;
 	}
+	if (qu > 0)
+	{
+		qustr = StringUtils::format("ui/qubox%d.png", qu);
+		qulbl->setVisible(true);
+		qulbl->setString(CommonFuncs::gbk2utf(gfqudesc[qu - 1].c_str()));
+	}
+
 	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
 	resbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
@@ -64,13 +86,9 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
-	cocos2d::ui::Text* resname = (cocos2d::ui::Text*)csbnode->getChildByName("namelbl");
+	cocos2d::ui::Text* atkdftext = (cocos2d::ui::Text*)m_csbnode->getChildByName("atkdftext");
 
-	resname->setString(pdata->name);
-
-	cocos2d::ui::Text* atkdftext = (cocos2d::ui::Text*)csbnode->getChildByName("atkdftext");
-
-	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)csbnode->getChildByName("valuelbl");
+	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 	int count = StorageRoom::getCountById(pdata->strid);
 	std::string countstr;
 
@@ -93,11 +111,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
-		int lv = pdata->lv + 1;
-		countstr = StringUtils::format("功法等级%d", lv);
+		resname->setString(pdata->name);
 
-		if (lv >= GlobalData::map_wgngs[pdata->strid].maxlv)
-			countstr = StringUtils::format("功法等级%d(max)", lv);
+		int lv = pdata->lv + 1;
+		countstr = StringUtils::format("功法等级 %d/%d", lv, GlobalData::map_wgngs[pdata->strid].maxlv);
+
 		usebtn->setVisible(true);
 		m_okbtn->setPositionX(460);
 
@@ -125,7 +143,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));
 
-	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)csbnode->getChildByName("desclbl");
+	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("desclbl");
 	resdesc->setString(pdata->desc);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -202,10 +220,10 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 
 void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
 
 		if (whereClick == 0)
 		{
@@ -256,6 +274,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						}
 					}
 				}
+				storageUI->updateResContent();
 			}
 			else if (m_packageData->type == MEDICINAL)
 			{
@@ -286,14 +305,27 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						}
 					}
 				}
-
-			}
-
-			if (m_packageData->type == FOOD || m_packageData->type == MEDICINAL)
-			{
-				StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
 				storageUI->updateResContent();
 			}
+			else if (m_packageData->type == RES_1 && m_packageData->strid.compare(GRASSRID) == 0)
+			{
+				StorageRoom::use(m_packageData->strid);
+
+				int count = StorageRoom::getCountById(GRASSRID);
+				if (count <= 0)
+				{
+					m_okbtn->setEnabled(false);
+				}
+
+				cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
+				std::string countstr = StringUtils::format("库存%d", count);
+				valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));
+
+				updateHorseData(1);
+				storageUI->updateResContent();
+				return;
+			}
+
 		}
 		removSelf();
 	}
@@ -301,9 +333,9 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 
 void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (m_packageData->type == N_GONG || m_packageData->type == W_GONG)
 		{
 			if (StorageRoom::getCountById("71") > 0)
@@ -348,8 +380,9 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					}
 					if (lv > curlv)
 					{
-						if (lv >= vec_gfExp.size())
-							lv = vec_gfExp.size() - 1;
+						int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
+						if (lv >= gfmaxlv)
+							lv = gfmaxlv - 1;
 						gfData->lv = lv;
 					}
 				}
@@ -396,10 +429,11 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			}
 			if (lv > curlv)
 			{
-				if (lv >= vec_heroExp.size())
+				int heromaxlv = vec_heroExp.size();
+				if (lv >= heromaxlv)
 				{
-					g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
-					lv = vec_heroExp.size() - 1;
+					g_hero->setExpValue(vec_heroExp[heromaxlv - 1]);
+					lv = heromaxlv - 1;
 				}
 				g_hero->setLVValue(lv);
 				
@@ -439,5 +473,52 @@ void ResDetailsLayer::removSelf()
 	if (storagelayer != NULL)
 		storagelayer->showNewerGuide(47);
 	this->removeFromParentAndCleanup(true);
+}
+
+void ResDetailsLayer::updateHorseData(int addvalue)
+{
+	PackageData* horseData = NULL;
+	if (g_hero->getAtrByType(H_MOUNT)->count > 0)
+		horseData = g_hero->getAtrByType(H_MOUNT);
+	else
+	{
+		bool isfind = false;
+		std::map<int, std::vector<PackageData>>::iterator it;
+		for (it = StorageRoom::map_storageData.begin(); it != StorageRoom::map_storageData.end(); ++it)
+		{
+			for (unsigned int i = 0; i < StorageRoom::map_storageData[it->first].size(); i++)
+			{
+				PackageData *sdata = &StorageRoom::map_storageData[it->first][i];
+				if (sdata->strid.compare("74") == 0)
+				{
+					isfind = true;
+					horseData = sdata;
+					break;
+				}
+			}
+		}
+		if (!isfind)
+		{
+			for (int i = 0; i < MyPackage::getSize(); i++)
+			{
+				if (MyPackage::vec_packages[i].strid.compare("74") == 0)
+				{
+					horseData =  &MyPackage::vec_packages[i];
+					break;
+				}
+			}
+		}
+	}
+	if (horseData != NULL)
+	{
+		cocos2d::ui::Text* horselbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("horselbl");
+		horselbl->setVisible(true);
+		horseData->goodvalue += addvalue;
+		if (horseData->goodvalue > 100)
+			horseData->goodvalue = 100;
+		std::string temp = horselbl->getString().c_str();
+		std::string horesstr = StringUtils::format(CommonFuncs::gbk2utf("白马（生命%d）").c_str(), horseData->goodvalue);
+		horselbl->setString(horesstr);
+	}
 }
 

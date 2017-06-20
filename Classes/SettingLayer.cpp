@@ -97,18 +97,18 @@ void SettingLayer::soundCheckBoxCallback(cocos2d::Ref* pSender, cocos2d::ui::Che
 
 void SettingLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		restoreBuy();
 	}
 }

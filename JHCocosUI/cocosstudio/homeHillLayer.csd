@@ -50,14 +50,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="-1932802189" Tag="74" IconVisible="False" LeftMargin="554.0000" RightMargin="44.0000" TopMargin="484.4805" BottomMargin="732.5195" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="122.0000" Y="63.0000" />
+          <AbstractNodeData Name="backbtn" ActionTag="-1932802189" Tag="74" IconVisible="False" LeftMargin="540.0000" RightMargin="30.0000" TopMargin="470.9805" BottomMargin="719.0195" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="615.0000" Y="764.0195" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8542" Y="0.5969" />
-            <PreSize X="0.1694" Y="0.0492" />
+            <PreSize X="0.2083" Y="0.0703" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
@@ -65,19 +65,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="161008347" Tag="72" IconVisible="False" LeftMargin="34.1422" RightMargin="15.8578" TopMargin="611.3918" BottomMargin="68.6082" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="670.0000" Y="600.0000" />
+          <AbstractNodeData Name="ScrollView" ActionTag="161008347" Tag="72" IconVisible="False" LeftMargin="34.1426" RightMargin="15.8574" TopMargin="602.3917" BottomMargin="37.6082" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="670.0000" Y="640.0000" />
             <AnchorPoint />
-            <Position X="34.1422" Y="68.6082" />
+            <Position X="34.1426" Y="37.6082" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0474" Y="0.0536" />
-            <PreSize X="0.9306" Y="0.4688" />
+            <PrePosition X="0.0474" Y="0.0294" />
+            <PreSize X="0.9306" Y="0.5000" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="670" Height="755" />
+            <InnerNodeSize Width="670" Height="640" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

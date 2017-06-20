@@ -288,9 +288,9 @@ ActionGetLayer* ActionGetLayer::create(int rid, std::vector<int> res_ids, int ty
 
 void ActionGetLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		HomeHill* homehill = (HomeHill*)g_gameLayer->getChildByName("homehill");
 		if (homehill != NULL)
 		{
@@ -305,11 +305,11 @@ void ActionGetLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 void ActionGetLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
+
 	//1："继续采集", 2："继续砍伐", 3："继续挖掘"按钮
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		setBtnStatus(false);
 
 		//更新后山资源列表中的数据，为0，就不出产出资源了，需等待资源恢复
@@ -357,7 +357,14 @@ void ActionGetLayer::delayDoAction(float dt)
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType((HeroAtrType)m_actype, data);
-					g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的工具已损坏！！"), 25, Color3B(204, 4, 4));
+					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
+					g_uiScroll->addEventText(brokenstr, 25, Color3B(204, 4, 4));
+				}
+				else if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 20 || g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 10)
+				{
+					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue);
+
+					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
 			}
 		}
@@ -371,11 +378,10 @@ void ActionGetLayer::delayDoAction(float dt)
 
 void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	//全部拾取
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		for (unsigned int i = 0; i < getResData.size(); i++)
 		{
 			std::string name = StringUtils::format("resitem%d", i);

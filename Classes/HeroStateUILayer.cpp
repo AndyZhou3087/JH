@@ -58,9 +58,9 @@ bool HeroStateUILayer::init()
 
 void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 
 		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
@@ -71,9 +71,9 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 void HeroStateUILayer::onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Director::getInstance()->pause();
 		this->addChild(PauseLayer::create(), 2);
 	}

@@ -51,14 +51,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="1697434666" Tag="58" IconVisible="False" LeftMargin="554.0001" RightMargin="43.9999" TopMargin="183.4998" BottomMargin="1033.5002" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="122.0000" Y="63.0000" />
+          <AbstractNodeData Name="backbtn" ActionTag="1697434666" Tag="58" IconVisible="False" LeftMargin="540.0001" RightMargin="29.9999" TopMargin="169.9998" BottomMargin="1020.0002" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="615.0001" Y="1065.0002" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8542" Y="0.8320" />
-            <PreSize X="0.1694" Y="0.0492" />
+            <PreSize X="0.2083" Y="0.0703" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
@@ -96,7 +96,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="savedNode.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="save3" ActionTag="2085264853" Tag="349" IconVisible="True" LeftMargin="365.0000" RightMargin="355.0000" TopMargin="1028.9570" BottomMargin="251.0429" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+          <AbstractNodeData Name="save3" ActionTag="2085264853" Tag="349" IconVisible="True" LeftMargin="365.0000" RightMargin="355.0000" TopMargin="1028.9572" BottomMargin="251.0429" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position X="365.0000" Y="251.0429" />

@@ -5,8 +5,6 @@
 #include "CommonFuncs.h"
 #include "SettingLayer.h"
 #include "SoundManager.h"
-#include "SelectHeroScene.h"
-#include "ComfirmSaveLayer.h"
 #include "SelectSaveLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -81,29 +79,24 @@ void StartScene::onExit()
 
 void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		
-		std::string uid = GlobalData::getUId();
-		if (uid.size() <= 0)
+		if (GlobalData::getUId().length() > 0)
 		{
-			Scene* scene = SelectHeroScene::createScene();
-			Director::getInstance()->replaceScene(scene);
+			GlobalData::setCurHeroIdToSaveList();
 		}
-		else
-		{
-			ComfirmSaveLayer* layer = ComfirmSaveLayer::create();
-			this->addChild(layer);
-		}
+	
+		Scene* scene = SelectHeroScene::createScene();
+		Director::getInstance()->replaceScene(scene);
 	}
 }
 
 void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		std::string uid = GlobalData::getUId();
 		GlobalData::setUId(uid);
 
@@ -115,19 +108,18 @@ void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 void StartScene::onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		this->addChild(SelectSaveLayer::create());
 	}
 }
 
 void StartScene::onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		SettingLayer* layer = SettingLayer::create();
 		addChild(layer);
 	}
@@ -137,6 +129,7 @@ void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender; 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		copytoclipboard((char*)qq->getString().c_str());

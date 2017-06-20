@@ -28,7 +28,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desclbl" ActionTag="-294266301" Tag="139" IconVisible="False" LeftMargin="133.4196" RightMargin="126.5804" TopMargin="646.1957" BottomMargin="483.8043" IsCustomSize="True" FontSize="25" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desclbl" ActionTag="-294266301" Tag="139" IconVisible="False" LeftMargin="133.4196" RightMargin="126.5804" TopMargin="646.1957" BottomMargin="483.8043" IsCustomSize="True" FontSize="28" LabelText="" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="460.0000" Y="150.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="363.4196" Y="558.8043" />
@@ -63,14 +63,14 @@
             <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="okbtn" ActionTag="796276417" Tag="144" IconVisible="False" LeftMargin="299.5000" RightMargin="299.5000" TopMargin="807.1471" BottomMargin="418.8529" TouchEnable="True" FontSize="36" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="okbtn" ActionTag="796276417" Tag="144" IconVisible="False" LeftMargin="285.0000" RightMargin="285.0000" TopMargin="789.1471" BottomMargin="400.8529" TouchEnable="True" FontSize="40" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="445.8529" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.3483" />
-            <PreSize X="0.1681" Y="0.0422" />
+            <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />

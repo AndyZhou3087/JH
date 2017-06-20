@@ -9,6 +9,8 @@
 #include "ReviveLayer.h"
 #include "json.h"
 #include "AnalyticUtil.h"
+#include "GameDataSave.h"
+#include "CommonFuncs.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #include "iosfunc.h"
@@ -101,9 +103,9 @@ bool ShopLayer::init()
 
 void ShopLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -229,7 +231,8 @@ void ShopLayer::addBuyGoods()
 				for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
 				{
 					ResData rdata = GlobalData::vec_resData[n];
-					if (atoi(rdata.strid.c_str()) == intRes / 1000)
+					int rint = atoi(rdata.strid.c_str());
+					if (rint == intRes / 1000)
 					{
 						PackageData pdata;
 						pdata.strid = rdata.strid;
@@ -238,6 +241,9 @@ void ShopLayer::addBuyGoods()
 						pdata.desc = rdata.desc;
 						pdata.name = rdata.cname;
 						pdata.extype = rdata.actype;
+
+						if (rint >= 75 && rint <= 78)
+							updateDefaultStorage(pdata);
 						StorageRoom::add(pdata);
 						break;
 					}
@@ -251,7 +257,7 @@ void ShopLayer::addBuyGoods()
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (payRes[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(payRes[i]))
+				if (payRes[i].compare(gfdata.id) == 0)
 				{
 					isfind = true;
 					PackageData pdata;
@@ -268,8 +274,12 @@ void ShopLayer::addBuyGoods()
 					}
 					pdata.desc = gfdata.desc;
 					pdata.name = gfdata.cname;
-					StorageRoom::add(pdata);
-					break;
+					updateDefaultStorage(pdata);
+					if (!g_hero->checkifHasGF(payRes[i]))
+					{
+						StorageRoom::add(pdata);
+						break;
+					}
 				}
 			}
 
@@ -290,6 +300,7 @@ void ShopLayer::addBuyGoods()
 						pdata.goodvalue = 100;
 						pdata.extype = edata.extype;
 						StorageRoom::add(pdata);
+						updateDefaultStorage(pdata);
 						break;
 					}
 				}
@@ -301,10 +312,58 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		copytoclipboard((char*)qq->getString().c_str());
 #endif
 	}
+
+}
+
+void ShopLayer::updateDefaultStorage(PackageData pdata)
+{
+	vector<PackageData> vec_defaultStorage;
+	std::string datastr = GlobalData::getDefaultStorage(g_hero->getHeadID());
+
+	std::vector<std::string> vec_retstr;
+	CommonFuncs::split(datastr, vec_retstr, ";");
+	for (unsigned int i = 0; i < vec_retstr.size(); i++)
+	{
+		std::vector<std::string> tmp;
+		CommonFuncs::split(vec_retstr[i], tmp, "-");
+		PackageData data;
+		data.strid = tmp[0];
+		data.type = atoi(tmp[1].c_str());
+		data.count = atoi(tmp[2].c_str());
+		data.extype = atoi(tmp[3].c_str());
+		data.lv = atoi(tmp[4].c_str());
+		data.exp = atoi(tmp[5].c_str());
+		data.goodvalue = atoi(tmp[6].c_str());
+		data.name = tmp[7];
+		data.desc = tmp[8];
+		vec_defaultStorage.push_back(data);
+	}
+
+	bool ishas = false;
+	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
+	{
+		if (vec_defaultStorage[i].strid.compare(pdata.strid) == 0)
+		{
+			ishas = true;
+			break;
+		}
+	}
+
+	if (!ishas)
+		vec_defaultStorage.push_back(pdata);
+
+	std::string str;
+	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
+	{
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue, vec_defaultStorage[i].name.c_str(), vec_defaultStorage[i].desc.c_str());
+		str.append(onestr);
+	}
+	GameDataSave::getInstance()->setModifyDefaultStorage(g_hero->getHeadID(), str.substr(0, str.length() - 1));
 
 }

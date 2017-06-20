@@ -16,21 +16,6 @@
             <PreSize X="1.0000" Y="0.6922" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="900287557" Tag="156" IconVisible="False" LeftMargin="551.8295" RightMargin="46.1705" TopMargin="473.2864" BottomMargin="743.7136" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="41" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="122.0000" Y="63.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="612.8295" Y="775.2136" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8512" Y="0.6056" />
-            <PreSize X="0.1694" Y="0.0492" />
-            <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
-            <PressedFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
           <AbstractNodeData Name="typepng" ActionTag="-134229131" Tag="157" IconVisible="False" LeftMargin="58.9967" RightMargin="59.0033" TopMargin="530.6685" BottomMargin="479.3315" LeftEage="198" RightEage="198" TopEage="89" BottomEage="89" Scale9OriginX="198" Scale9OriginY="89" Scale9Width="206" Scale9Height="92" ctype="ImageViewObjectData">
             <Size X="602.0000" Y="270.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -63,7 +48,22 @@
             <PreSize X="0.8583" Y="0.2094" />
             <FileData Type="Normal" Path="images/npctalkbg.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="581376873" Tag="163" IconVisible="False" LeftMargin="40.0000" RightMargin="30.0000" TopMargin="792.0000" BottomMargin="33.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="900287557" Tag="156" IconVisible="False" LeftMargin="537.8296" RightMargin="32.1704" TopMargin="458.7866" BottomMargin="731.2134" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="612.8296" Y="776.2134" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8512" Y="0.6064" />
+            <PreSize X="0.2083" Y="0.0703" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="ScrollView" ActionTag="581376873" Tag="163" IconVisible="False" LeftMargin="40.0000" RightMargin="30.0000" TopMargin="792.0000" BottomMargin="33.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="650.0000" Y="455.0000" />
             <AnchorPoint />
             <Position X="40.0000" Y="33.0000" />

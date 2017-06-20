@@ -39,38 +39,38 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="531408379" Tag="93" IconVisible="False" LeftMargin="322.1471" RightMargin="328.8529" TopMargin="411.5800" BottomMargin="830.4200" FontSize="35" LabelText="提示" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="69.0000" Y="38.0000" />
+          <AbstractNodeData Name="title" ActionTag="531408379" Tag="93" IconVisible="False" LeftMargin="313.1471" RightMargin="319.8529" TopMargin="406.0800" BottomMargin="824.9200" FontSize="45" LabelText="提示" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="87.0000" Y="49.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="356.6471" Y="849.4200" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4953" Y="0.6636" />
-            <PreSize X="0.0958" Y="0.0297" />
+            <PreSize X="0.1208" Y="0.0383" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="55827270" Tag="92" IconVisible="False" LeftMargin="120.0000" RightMargin="120.0000" TopMargin="489.0959" BottomMargin="510.9041" IsCustomSize="True" FontSize="40" LabelText="是否立即复活？" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="480.0000" Y="280.0000" />
+          <AbstractNodeData Name="desc" ActionTag="55827270" Tag="92" IconVisible="False" LeftMargin="130.0000" RightMargin="130.0000" TopMargin="489.0959" BottomMargin="510.9041" IsCustomSize="True" FontSize="30" LabelText="闭关中！没有分身符无法进行此操作。是否立即购买分身符？" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="460.0000" Y="280.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="650.9041" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5085" />
-            <PreSize X="0.6667" Y="0.2188" />
+            <PreSize X="0.6389" Y="0.2188" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cacelbtn" ActionTag="-1754904531" Tag="90" IconVisible="False" LeftMargin="173.6073" RightMargin="425.3927" TopMargin="800.1987" BottomMargin="425.8013" TouchEnable="True" FontSize="36" ButtonText="放弃" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="cacelbtn" ActionTag="-1754904531" Tag="90" IconVisible="False" LeftMargin="159.1073" RightMargin="410.8927" TopMargin="782.1987" BottomMargin="407.8013" TouchEnable="True" FontSize="40" ButtonText="取消" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="234.1073" Y="452.8013" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3251" Y="0.3538" />
-            <PreSize X="0.1681" Y="0.0422" />
+            <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
@@ -79,14 +79,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="buybtn" ActionTag="1539629347" Tag="91" IconVisible="False" LeftMargin="419.9146" RightMargin="179.0854" TopMargin="800.1987" BottomMargin="425.8013" TouchEnable="True" FontSize="36" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="buybtn" ActionTag="1539629347" Tag="91" IconVisible="False" LeftMargin="405.4146" RightMargin="164.5854" TopMargin="782.1987" BottomMargin="407.8013" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.4146" Y="452.8013" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6672" Y="0.3538" />
-            <PreSize X="0.1681" Y="0.0422" />
+            <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />

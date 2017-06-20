@@ -546,13 +546,26 @@ void GlobalData::setUId(std::string struid)
 std::string GlobalData::getDefaultStorage(int heroindex)
 {
 	//默认仓库的数据
+	
+	std::string defaultdata = GameDataSave::getInstance()->getModifyDefaultStorage(heroindex);
+	if (defaultdata.length() > 0)
+		return defaultdata;
+	else
+	{
+		return getOriginLocalStorage(heroindex);
+	}
+	return "";
+}
+
+std::string GlobalData::getOriginLocalStorage(int heroindex)
+{
 	rapidjson::Document doc = ReadJsonFile("data/defaultstorage.json");
 	rapidjson::Value& values = doc["ds"];
 
 	int size = values.Size();
 	if (size > 0 && heroindex <= size)
 	{
-		rapidjson::Value& item = values[heroindex-1];
+		rapidjson::Value& item = values[heroindex - 1];
 		rapidjson::Value& v = item["val"];
 		return v.GetString();
 	}
@@ -561,6 +574,9 @@ std::string GlobalData::getDefaultStorage(int heroindex)
 
 void GlobalData::setPlotMissionIndex(int val)
 {
+	int max = vec_PlotMissionData.size();
+	if (val >= max)
+		val = max - 1;
 	GameDataSave::getInstance()->setPlotMissionIndex(val);
 }
 
@@ -572,6 +588,9 @@ int GlobalData::getPlotMissionIndex()
 
 void GlobalData::setBranchPlotMissionIndex(int val)
 {
+	int max = vec_BranchPlotMissionData.size();
+	if (val >= max)
+		val = max - 1;
 	GameDataSave::getInstance()->setBranchPlotMissionIndex(val);
 }
 
@@ -818,6 +837,18 @@ void GlobalData::setSaveListId(std::vector<std::string> vec_val)
 	}
 
 	GameDataSave::getInstance()->setSaveListId(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::setCurHeroIdToSaveList()
+{
+	std::string uid = GameDataSave::getInstance()->getUserId();
+
+	int heroid = GameDataSave::getInstance()->getHeroIdByUid(uid);
+	std::vector<std::string> vec_ids = GlobalData::getSaveListId();
+
+	vec_ids[heroid - 1] = uid;
+
+	GlobalData::setSaveListId(vec_ids);
 }
 
 bool GlobalData::isExercising()

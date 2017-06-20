@@ -39,7 +39,7 @@ void Nature::ChangeWeather()
 	{
 		int c = w - m_weather;
 		setWeather(w);
-		setTemperature(m_temperature + c * 5);
+		setTemperature(m_temperature - c * 5);
 		g_uiScroll->addEventText(CommonFuncs::gbk2utf(weatherEventText[w].c_str()));
 	}
 
@@ -71,7 +71,10 @@ void Nature::ChangeReason()
 		setReason(r);
 		int maxr = tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1;
 		int  t = tempeRange[m_reason][0] + GlobalData::createRandomNum(maxr);
+		if (m_ismakewarm)
+			t += 15;
 		setTemperature(t);
+
 		g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[r].c_str()));
 	}
 

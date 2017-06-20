@@ -133,10 +133,9 @@ void HomeHill::onEnterTransitionDidFinish()
 
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 		this->removeFromParentAndCleanup(true);
 	}
@@ -144,9 +143,9 @@ void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 
 void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		unsigned int i = 0;
 		ResData* data = NULL;

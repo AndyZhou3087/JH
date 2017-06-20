@@ -60,8 +60,8 @@ bool BuildingUILayer::init(Building* build)
 	title->setString(m_build->data.cname);
 
 	//返回按钮
-	cocos2d::ui::Widget* backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
-	backbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBack, this));
+	m_backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBack, this));
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 	scrollview->setScrollBarEnabled(false);
@@ -133,10 +133,9 @@ void BuildingUILayer::onEnterTransitionDidFinish()
 
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		if (NewerGuideLayer::checkifNewerGuide(2))
 		{
 			TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
@@ -306,12 +305,11 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 
 void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	Node* node = (Node*)pSender;
-	int tag = node->getTag();
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
+		Node* node = (Node*)pSender;
+		int tag = node->getTag();
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF() && strcmp(m_build->data.name, "exerciseroom") != 0)
 		{
 			BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
@@ -321,6 +319,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 		if (tag == BUILD)//建造或者升级
 		{
+
 			for (unsigned int i = 0; i < m_build->data.Res[m_build->data.level].size(); i++)
 			{
 				int restypecount = m_build->data.Res[m_build->data.level].at(i);
@@ -333,6 +332,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 				}
 			}
 			buildbtn->setEnabled(false);
+			m_backbtn->setEnabled(false);
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
 
@@ -412,15 +412,17 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
 				{
-					ExerciseDoneLayer* layer = ExerciseDoneLayer::create(extime / 60);
+					ExerciseDoneLayer* layer = ExerciseDoneLayer::create(ex_wgstrid, ex_ngstrid, extime / 60);
 					this->addChild(layer, 4);
-					exerciseDone(extime/60);
+					resetExercise();
 				}
 
 			}
 			else
+			{
+				m_backbtn->setEnabled(false);
 				vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(m_build->getActionBarTime(), 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onfinish, this, (BACTIONTYPE)tag)), NULL));
-
+			}
 			m_build->action(actime, extime);
 		}
 	}
@@ -453,8 +455,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			updataActionRes();
 		}
 
-		//for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
-		//	vec_actionbtn[i]->setEnabled(true);
+		m_backbtn->setEnabled(true);
 
 		std::string franmename = "ui/buildtext0.png";
 		if (m_build->data.level > 1)
@@ -468,8 +469,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 	}
 	else//操作完成
 	{
-		//for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
-		//	vec_actionbtn[i]->setEnabled(true);
+		m_backbtn->setEnabled(true);
 
 		if (m_build->data.level < m_build->data.maxlevel)
 			buildbtn->setEnabled(true);
@@ -659,6 +659,7 @@ void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 		std::string strid;
@@ -687,6 +688,7 @@ void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widge
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->addChild(BuildingDetailsLayer::create(m_build));
 	}
 }
@@ -764,106 +766,15 @@ void BuildingUILayer::resetExercise()
 	vec_actionbar[selectActionIndex]->setPercent(0);
 	vec_actionbar[selectActionIndex]->stopAllActions();
 	vec_actionbtn[selectActionIndex]->setTitleText(CommonFuncs::gbk2utf("闭关"));
-	for (int i = 0; i < vec_actionbtn.size(); i++)
+	for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 	{
 		vec_actionbtn[i]->setEnabled(true);
 	}
 }
 
-void BuildingUILayer::exerciseDone(int hour)
-{
-	int f_gfexp = EXSERCISE_DONE_GFEXP * hour;
-	int f_heroexp = EXSERCISE_DONE_HEROEXP * hour;
-
-	resetExercise();
-
-	std::vector<PackageData*> vec_gfdata;
-
-	std::string gfstrid[] = { ex_wgstrid, ex_ngstrid };
-	StorageType gfSType[] = { W_GONG , N_GONG};
-
-	for (int i = 0; i < 2; i++)
-	{
-		if (gfstrid[i].length() > 0)
-		{
-			bool isfind = false;
-			PackageData * gfdata = NULL;
-			gfdata = g_hero->getAtrByType(HeroAtrType(i + H_WG));
-			if (gfdata != NULL && gfdata->count > 0 && gfdata->strid.compare(gfstrid[i]) == 0)
-			{
-				isfind = true;
-			}
-			else
-			{
-				for (unsigned int m = 0; m < StorageRoom::map_storageData[gfSType[i]].size(); m++)
-				{
-					gfdata = &StorageRoom::map_storageData[gfSType[i]][m];
-					if (gfdata->strid.compare(gfstrid[i]) == 0)
-					{
-						isfind = true;
-						break;
-					}
-				}
-			}
-
-			if (isfind)
-			{
-				vec_gfdata.push_back(gfdata);
-			}
-		}
-	}
-
-	for (unsigned int m = 0; m < vec_gfdata.size(); m++)
-	{
-		std::string gfname = vec_gfdata[m]->strid;
-		std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
-		int lv = 0;
-		int curlv = vec_gfdata[m]->lv;
-		vec_gfdata[m]->exp += f_gfexp;
-		for (unsigned i = curlv; i < vec_gfExp.size(); i++)
-		{
-			if (vec_gfdata[m]->exp > vec_gfExp[i])
-			{
-				lv = i + 1;
-				vec_gfdata[m]->exp = vec_gfdata[m]->exp - vec_gfExp[i];
-			}
-		}
-		if (lv > curlv)
-		{
-			if (lv >= vec_gfExp.size())
-				lv = vec_gfExp.size() - 1;
-			vec_gfdata[m]->lv = lv;
-		}
-	}
-
-
-	g_hero->setExpValue(g_hero->getExpValue() + f_heroexp);
-	int curlv = g_hero->getLVValue();
-	unsigned int i = 0;
-	int lv = 0;
-	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp;
-	for (i = curlv; i < vec_heroExp.size(); i++)
-	{
-		if (g_hero->getExpValue() > vec_heroExp[i])
-		{
-			lv = i + 1;
-			g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
-		}
-	}
-	if (lv > curlv)
-	{
-		if (lv >= vec_heroExp.size())
-		{
-			g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
-			lv = vec_heroExp.size() - 1;
-		}
-		g_hero->setLVValue(lv);
-		g_hero->setLifeValue(g_hero->getMaxLifeValue());
-	}
-}
-
 void BuildingUILayer::onCategory(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;

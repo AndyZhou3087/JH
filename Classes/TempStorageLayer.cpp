@@ -219,9 +219,9 @@ void TempStorageLayer::updataTempUI()
 
 void TempStorageLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -264,10 +264,9 @@ void TempStorageLayer::saveTempData()
 
 void TempStorageLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		for (unsigned int i = 0; i < tempResData.size(); i++)
 		{
 			std::string name = StringUtils::format("resitem%d", i);

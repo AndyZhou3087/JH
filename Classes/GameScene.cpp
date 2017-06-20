@@ -114,8 +114,8 @@ bool GameScene::init()
 	this->addChild(bg, 4);
 
 	//滚动文字
-	g_uiScroll = UIScroll::create(600.0F, 132.0f);
-	g_uiScroll->setPosition(Vec2(visibleSize.width / 2 + 15, 960));
+	g_uiScroll = UIScroll::create(620.0F, 132.0f);
+	g_uiScroll->setPosition(Vec2(visibleSize.width / 2 + 25, 960));
 	addChild(g_uiScroll, 4);
 
 	//任务属性和天气
@@ -329,7 +329,7 @@ void GameScene::heroRevive()
 	//复活成功
 	g_hero->revive();
 	Director::getInstance()->resume();
-	if (g_maplayer != NULL)
+	if (g_maplayer != NULL && g_hero->getIsOut())
 		g_maplayer->heroResumeMoving();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
 }

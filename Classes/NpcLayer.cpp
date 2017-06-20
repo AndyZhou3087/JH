@@ -147,9 +147,9 @@ void NpcLayer::onEnterTransitionDidFinish()
 
 void NpcLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -178,9 +178,9 @@ void NpcLayer::onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 
 void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		NpcData npc = GlobalData::map_npcs[GlobalData::map_maps[m_addrstr].npcs[node->getTag()]];
 
@@ -248,9 +248,9 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
 
@@ -286,6 +286,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 
 void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 	}
@@ -552,7 +553,8 @@ void NpcLayer::fastShowWord()
 		m_wordlbl->getLetter(index)->setScale(1);
 		index++;
 	}
-	if (m_wordindex >= vec_wordstr.size())
+	int wordsize = vec_wordstr.size();
+	if (m_wordindex >= wordsize)
 	{
 		this->scheduleOnce(schedule_selector(NpcLayer::removeNpcWord), 2.0f);
 		return;

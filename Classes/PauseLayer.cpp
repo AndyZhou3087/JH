@@ -2,6 +2,7 @@
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "StartScene.h"
+#include "CommonFuncs.h"
 bool PauseLayer::init()
 {
 	
@@ -56,9 +57,9 @@ PauseLayer* PauseLayer::create()
 
 void PauseLayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removSelf();
 		Director::getInstance()->resume();
 	}
@@ -66,9 +67,9 @@ void PauseLayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 void PauseLayer::onGoHome(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removSelf();
 		Director::getInstance()->replaceScene(StartScene::createScene());
 		Director::getInstance()->resume();

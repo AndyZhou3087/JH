@@ -149,9 +149,9 @@ void FightLayer::onEnterTransitionDidFinish()
 
 void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		if (node->getTag() == 0)
 		{
@@ -189,9 +189,9 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 
 void FightLayer::onFihgt(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		m_escapebtn->setEnabled(false);
 		fightRobber();
 	}
@@ -314,7 +314,6 @@ void FightLayer::showFightWord(int type, int value)
 	std::string wordstr;
 	int size = 0;
 	int r = 0;
-	bool isbroken = false;
 	if (type == 0)//
 	{
 		std::string herowordstr;
@@ -353,7 +352,14 @@ void FightLayer::showFightWord(int type, int value)
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType(H_WEAPON, data);
-					isbroken = true;
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+				}
+				else if (g_hero->getAtrByType(H_WEAPON)->goodvalue == 20 || g_hero->getAtrByType(H_WEAPON)->goodvalue == 10)
+				{
+					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_WEAPON)->goodvalue);
+
+					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
 			}
 		}
@@ -411,10 +417,7 @@ void FightLayer::showFightWord(int type, int value)
 		else if (m_npcid.compare("n002") == 0)
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightRabbitword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		checkWordLblColor(herowordstr);
-		if (isbroken)
-		{
-			g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的武器已毁坏！！"), 25, Color3B(204, 4, 4));
-		}
+
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_ATTACK);
 	}
 	else//
@@ -434,7 +437,15 @@ void FightLayer::showFightWord(int type, int value)
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType(H_ARMOR, data);
-					isbroken = true;
+					
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+				}
+				else if (g_hero->getAtrByType(H_ARMOR)->goodvalue == 20 || g_hero->getAtrByType(H_ARMOR)->goodvalue == 10)
+				{
+					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_ARMOR)->goodvalue);
+
+					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
 			}
 
@@ -456,11 +467,6 @@ void FightLayer::showFightWord(int type, int value)
 		else if (m_npcid.compare("n002") == 0)
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(rabbitfightword[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		checkWordLblColor(bosswordstr);
-
-		if (isbroken)
-		{
-			g_uiScroll->addEventText(CommonFuncs::gbk2utf("你的护甲已毁坏！！"), 25, Color3B(204, 4, 4));
-		}
 
 		isUseWg = false;
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT);

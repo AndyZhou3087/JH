@@ -28,10 +28,10 @@
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="talkbtn" ActionTag="-266203856" Tag="98" IconVisible="False" LeftMargin="-234.2070" RightMargin="113.2070" TopMargin="3.6469" BottomMargin="-57.6469" TouchEnable="True" FontSize="36" ButtonText="对话" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="talkbtn" ActionTag="-266203856" Tag="98" IconVisible="False" LeftMargin="-248.7072" RightMargin="98.7072" TopMargin="-9.3532" BottomMargin="-80.6468" TouchEnable="True" FontSize="40" ButtonText="对话" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-173.7070" Y="-30.6469" />
+            <Position X="-173.7072" Y="-35.6468" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -44,10 +44,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="fightbtn" ActionTag="-1373352815" Tag="99" IconVisible="False" LeftMargin="-60.5001" RightMargin="-60.4999" TopMargin="3.6499" BottomMargin="-57.6499" TouchEnable="True" FontSize="36" ButtonText="战斗" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="fightbtn" ActionTag="-1373352815" Tag="99" IconVisible="False" LeftMargin="-56.0713" RightMargin="-93.9287" TopMargin="-9.3532" BottomMargin="-80.6468" TouchEnable="True" FontSize="40" ButtonText="战斗" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-0.0001" Y="-30.6499" />
+            <Position X="18.9287" Y="-35.6468" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -60,10 +60,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="exchgbtn" ActionTag="-1907514993" Tag="100" IconVisible="False" LeftMargin="109.0660" RightMargin="-230.0660" TopMargin="3.6468" BottomMargin="-57.6468" TouchEnable="True" FontSize="36" ButtonText="交易" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="exchgbtn" ActionTag="-1907514993" Tag="100" IconVisible="False" LeftMargin="136.5646" RightMargin="-286.5646" TopMargin="-9.3532" BottomMargin="-80.6468" TouchEnable="True" FontSize="40" ButtonText="交易" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="169.5660" Y="-30.6468" />
+            <Position X="211.5646" Y="-35.6468" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

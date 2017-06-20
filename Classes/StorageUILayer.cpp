@@ -177,9 +177,9 @@ void StorageUILayer::updateResContent()
 
 void StorageUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -205,7 +205,6 @@ void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->addChild(ShopLayer::create());
 	}
 }

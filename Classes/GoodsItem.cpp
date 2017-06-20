@@ -62,23 +62,17 @@ GoodsItem* GoodsItem::create(GoodsData* gdata)
 }
 void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::BEGAN || type == ui::Widget::TouchEventType::MOVED)
 	{
 		if (type == ui::Widget::TouchEventType::MOVED)
 			isDraging = true;
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 0.95f), NULL));
 	}
-	else if (type == ui::Widget::TouchEventType::CANCELED)
-	{
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
-	}
+
 	else if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		if (!isDraging)
 		{
-			((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
-
-			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 			//购买
 			ShopLayer::beginPay(this->getTag());
 		}

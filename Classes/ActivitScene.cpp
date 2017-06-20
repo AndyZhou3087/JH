@@ -69,14 +69,24 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		std::map<int, std::vector<PackageData>>::iterator it;
 		for (it = StorageRoom::map_storageData.begin(); it != StorageRoom::map_storageData.end(); ++it)
 		{
-		int size = StorageRoom::map_storageData[it->first].size();
+			int size = StorageRoom::map_storageData[it->first].size();
 			for (int j = 0; j < size; j++)
 			{
 				PackageData sdata = StorageRoom::map_storageData[it->first][j];
 
 				if (sdata.strid.compare("x001") != 0 && sdata.strid.compare("w001") != 0 && sdata.count > 0)
 				{
-					allStorageData.push_back(sdata);
+					bool isadd = true;
+					if ((sdata.type == WEAPON || sdata.type == PROTECT_EQU) && GlobalData::map_equips[sdata.strid].qu >= 5)
+					{
+						isadd = false;
+					}
+					else if ((sdata.type == N_GONG || sdata.type == W_GONG) && GlobalData::map_wgngs[sdata.strid].qu >= 5)
+					{
+						isadd = false;
+					}
+					if (isadd)
+						allStorageData.push_back(sdata);
 				}
 			}
 		}

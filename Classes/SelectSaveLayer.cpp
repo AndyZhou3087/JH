@@ -83,29 +83,18 @@ bool SelectSaveLayer::init()
 
 void SelectSaveLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		removSelf();
 	}
 }
 
 void SelectSaveLayer::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-
-	if (type == ui::Widget::TouchEventType::BEGAN || type == ui::Widget::TouchEventType::MOVED)
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 0.95f), NULL));
-	}
-	else if (type == ui::Widget::TouchEventType::CANCELED)
-	{
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
-	}
-	else if (type == ui::Widget::TouchEventType::ENDED)
-	{
-		((cocos2d::ui::Widget*)pSender)->runAction(Sequence::create(ScaleTo::create(0.05f, 1), NULL));
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		SelectSaveComfirmLayer* layer = SelectSaveComfirmLayer::create(node->getTag());
 		this->addChild(layer);

@@ -40,10 +40,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroimg1" ActionTag="-180532818" Tag="72" IconVisible="False" LeftMargin="-1.0000" RightMargin="469.0000" TopMargin="208.0000" BottomMargin="208.0001" TouchEnable="True" LeftEage="83" RightEage="83" TopEage="285" BottomEage="285" Scale9OriginX="83" Scale9OriginY="285" Scale9Width="86" Scale9Height="294" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="heroimg1" ActionTag="-180532818" Tag="72" IconVisible="False" LeftMargin="-1.0000" RightMargin="469.0000" TopMargin="207.9999" BottomMargin="208.0001" TouchEnable="True" LeftEage="83" RightEage="83" TopEage="285" BottomEage="285" Scale9OriginX="83" Scale9OriginY="285" Scale9Width="90" Scale9Height="294" ctype="ImageViewObjectData">
             <Size X="252.0000" Y="864.0000" />
             <Children>
-              <AbstractNodeData Name="select_1" ActionTag="1079912175" Tag="115" IconVisible="False" LeftMargin="-0.9998" RightMargin="0.9998" TopMargin="134.0006" BottomMargin="-0.0006" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="152" Scale9Height="250" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="select_1" ActionTag="1079912175" Tag="115" IconVisible="False" LeftMargin="-0.9998" RightMargin="0.9998" TopMargin="134.0006" BottomMargin="-0.0006" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="154" Scale9Height="250" ctype="ImageViewObjectData">
                 <Size X="252.0000" Y="730.0000" />
                 <Children>
                   <AbstractNodeData Name="sheroname" ActionTag="-49503055" Tag="123" IconVisible="False" LeftMargin="109.0000" RightMargin="109.0000" TopMargin="573.0000" BottomMargin="43.0000" ctype="SpriteObjectData">
@@ -88,17 +88,17 @@
           <AbstractNodeData Name="heroimg2" ActionTag="-1282023354" Tag="73" IconVisible="False" LeftMargin="250.0000" RightMargin="314.0000" TopMargin="208.0000" BottomMargin="208.0000" TouchEnable="True" LeftEage="51" RightEage="51" TopEage="285" BottomEage="285" Scale9OriginX="51" Scale9OriginY="285" Scale9Width="54" Scale9Height="294" ctype="ImageViewObjectData">
             <Size X="156.0000" Y="864.0000" />
             <Children>
-              <AbstractNodeData Name="select_2" ActionTag="1835402373" Tag="116" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="134.0000" BottomMargin="0.0000" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="52" Scale9Height="250" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="select_2" ActionTag="1835402373" Tag="116" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="134.0000" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="54" Scale9Height="250" ctype="ImageViewObjectData">
                 <Size X="152.0000" Y="730.0000" />
                 <Children>
-                  <AbstractNodeData Name="sheroname" ActionTag="-1067961544" Tag="124" IconVisible="False" LeftMargin="52.0000" RightMargin="64.0000" TopMargin="573.0000" BottomMargin="43.0000" ctype="SpriteObjectData">
-                    <Size X="36.0000" Y="114.0000" />
+                  <AbstractNodeData Name="sheroname" ActionTag="-1067961544" Tag="124" IconVisible="False" LeftMargin="52.5000" RightMargin="64.5000" TopMargin="570.5000" BottomMargin="40.5000" ctype="SpriteObjectData">
+                    <Size X="35.0000" Y="119.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.0000" Y="100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4605" Y="0.1370" />
-                    <PreSize X="0.2368" Y="0.1562" />
+                    <PreSize X="0.2303" Y="0.1630" />
                     <FileData Type="Normal" Path="images/shero2name.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
@@ -133,17 +133,17 @@
           <AbstractNodeData Name="heroimg3" ActionTag="-453701092" Tag="74" IconVisible="False" LeftMargin="406.0000" RightMargin="158.0000" TopMargin="208.0000" BottomMargin="208.0000" TouchEnable="True" LeftEage="51" RightEage="51" TopEage="285" BottomEage="285" Scale9OriginX="51" Scale9OriginY="285" Scale9Width="54" Scale9Height="294" ctype="ImageViewObjectData">
             <Size X="156.0000" Y="864.0000" />
             <Children>
-              <AbstractNodeData Name="select_3" ActionTag="-1781988492" Tag="117" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="134.0000" BottomMargin="0.0000" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="52" Scale9Height="250" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="select_3" ActionTag="-1781988492" Tag="117" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="134.0000" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="54" Scale9Height="250" ctype="ImageViewObjectData">
                 <Size X="152.0000" Y="730.0000" />
                 <Children>
-                  <AbstractNodeData Name="sheroname" ActionTag="1703797753" Tag="125" IconVisible="False" LeftMargin="53.0000" RightMargin="65.0000" TopMargin="577.5000" BottomMargin="47.5000" ctype="SpriteObjectData">
-                    <Size X="34.0000" Y="105.0000" />
+                  <AbstractNodeData Name="sheroname" ActionTag="1703797753" Tag="125" IconVisible="False" LeftMargin="51.5000" RightMargin="63.5000" TopMargin="574.5000" BottomMargin="44.5000" ctype="SpriteObjectData">
+                    <Size X="37.0000" Y="111.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.0000" Y="100.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4605" Y="0.1370" />
-                    <PreSize X="0.2237" Y="0.1438" />
+                    <PreSize X="0.2434" Y="0.1521" />
                     <FileData Type="Normal" Path="images/shero3name.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
@@ -178,7 +178,7 @@
           <AbstractNodeData Name="heroimg4" ActionTag="114208573" Tag="75" IconVisible="False" LeftMargin="562.0000" RightMargin="2.0000" TopMargin="208.0000" BottomMargin="208.0000" TouchEnable="True" LeftEage="51" RightEage="51" TopEage="285" BottomEage="285" Scale9OriginX="51" Scale9OriginY="285" Scale9Width="54" Scale9Height="294" ctype="ImageViewObjectData">
             <Size X="156.0000" Y="864.0000" />
             <Children>
-              <AbstractNodeData Name="select_4" ActionTag="1165662411" Tag="118" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="133.9999" BottomMargin="0.0002" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="52" Scale9Height="250" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="select_4" ActionTag="1165662411" Tag="118" IconVisible="False" LeftMargin="2.0000" RightMargin="2.0000" TopMargin="133.9998" BottomMargin="0.0002" LeftEage="50" RightEage="50" TopEage="240" BottomEage="240" Scale9OriginX="50" Scale9OriginY="240" Scale9Width="54" Scale9Height="250" ctype="ImageViewObjectData">
                 <Size X="152.0000" Y="730.0000" />
                 <Children>
                   <AbstractNodeData Name="sheroname" ActionTag="-827229989" Tag="126" IconVisible="False" LeftMargin="53.0000" RightMargin="65.0000" TopMargin="576.0000" BottomMargin="46.0000" ctype="SpriteObjectData">
@@ -220,7 +220,7 @@
             <PreSize X="0.2167" Y="0.6750" />
             <FileData Type="Normal" Path="images/shero4_s.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ssepline_up" ActionTag="-688050734" Tag="108" IconVisible="False" LeftMargin="0.0000" TopMargin="202.7585" BottomMargin="1071.2415" ctype="SpriteObjectData">
+          <AbstractNodeData Name="ssepline_up" ActionTag="-688050734" Tag="108" IconVisible="False" TopMargin="202.7585" BottomMargin="1071.2415" ctype="SpriteObjectData">
             <Size X="720.0000" Y="6.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="1074.2415" />
@@ -231,7 +231,7 @@
             <FileData Type="MarkedSubImage" Path="ui/ssepline.jpg" Plist="uipacker.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ssepline_down" ActionTag="380896356" Tag="109" IconVisible="False" LeftMargin="-0.0002" RightMargin="0.0001" TopMargin="1070.9758" BottomMargin="203.0242" ctype="SpriteObjectData">
+          <AbstractNodeData Name="ssepline_down" ActionTag="380896356" Tag="109" IconVisible="False" LeftMargin="-0.0002" RightMargin="0.0002" TopMargin="1070.9758" BottomMargin="203.0242" ctype="SpriteObjectData">
             <Size X="720.0000" Y="6.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="206.0242" />
@@ -254,6 +254,21 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/sstartbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/sstartbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/sstartbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="backbtn" ActionTag="311515033" Tag="937" IconVisible="False" LeftMargin="-3.0000" RightMargin="623.0000" TopMargin="1194.0000" BottomMargin="-4.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="70" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="100.0000" Y="90.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="47.0000" Y="41.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0653" Y="0.0320" />
+            <PreSize X="0.1389" Y="0.0703" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/backstartbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/backstartbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/backstartbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

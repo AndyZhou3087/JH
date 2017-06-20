@@ -64,10 +64,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="speedtext" ActionTag="154578785" Tag="30" IconVisible="False" LeftMargin="4.4142" RightMargin="-114.4142" TopMargin="-49.4997" BottomMargin="22.4997" FontSize="25" LabelText="繁衍速度:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="speedtext" ActionTag="154578785" Tag="30" IconVisible="False" LeftMargin="1.4143" RightMargin="-111.4143" TopMargin="-49.4997" BottomMargin="22.4997" FontSize="25" LabelText="繁衍速度:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="110.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="4.4142" Y="35.9997" />
+            <Position X="1.4143" Y="35.9997" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
@@ -76,10 +76,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="speed" ActionTag="-1990396237" Tag="31" IconVisible="False" LeftMargin="117.0002" RightMargin="-139.0002" TopMargin="-47.4998" BottomMargin="20.4998" FontSize="25" LabelText="12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="speed" ActionTag="-1990396237" Tag="31" IconVisible="False" LeftMargin="114.0005" RightMargin="-136.0005" TopMargin="-47.4998" BottomMargin="20.4998" FontSize="25" LabelText="12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="22.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="117.0002" Y="33.9998" />
+            <Position X="114.0005" Y="33.9998" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
@@ -88,10 +88,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="actionbtn" ActionTag="1305172232" Tag="51" IconVisible="False" LeftMargin="182.5001" RightMargin="-303.5001" TopMargin="-37.5246" BottomMargin="-16.4754" TouchEnable="True" FontSize="36" ButtonText="砍伐" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="121.0000" Y="54.0000" />
+          <AbstractNodeData Name="actionbtn" ActionTag="1305172232" Tag="51" IconVisible="False" LeftMargin="170.0000" RightMargin="-320.0000" TopMargin="-55.5246" BottomMargin="-34.4754" TouchEnable="True" FontSize="40" ButtonText="砍伐" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="243.0001" Y="10.5246" />
+            <Position X="245.0000" Y="10.5246" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -104,10 +104,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="waittext" ActionTag="-1659657881" Tag="53" IconVisible="False" LeftMargin="4.4142" RightMargin="-114.4142" TopMargin="-20.1436" BottomMargin="-6.8564" FontSize="25" LabelText="等待时间:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="waittext" ActionTag="-1659657881" Tag="53" IconVisible="False" LeftMargin="1.4143" RightMargin="-111.4143" TopMargin="-20.1435" BottomMargin="-6.8565" FontSize="25" LabelText="等待时间:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="110.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="4.4142" Y="6.6436" />
+            <Position X="1.4143" Y="6.6435" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="0" B="0" />
             <PrePosition />
@@ -116,10 +116,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="waittime" ActionTag="326835107" Tag="54" IconVisible="False" LeftMargin="117.0002" RightMargin="-139.0002" TopMargin="-18.3410" BottomMargin="-8.6590" FontSize="25" LabelText="12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="waittime" ActionTag="326835107" Tag="54" IconVisible="False" LeftMargin="114.0005" RightMargin="-136.0005" TopMargin="-18.3409" BottomMargin="-8.6591" FontSize="25" LabelText="12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="22.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="117.0002" Y="4.8410" />
+            <Position X="114.0005" Y="4.8409" />
             <Scale ScaleX="0.9587" ScaleY="1.0000" />
             <CColor A="255" R="255" G="0" B="0" />
             <PrePosition />

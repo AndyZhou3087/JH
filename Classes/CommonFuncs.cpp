@@ -1,7 +1,13 @@
 ﻿#include "CommonFuncs.h"
+#include "Const.h"
+#include "SoundManager.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #include "../cocos2d//external//win32-specific/icon/include/iconv.h"
 #endif
+
+#define Button_ACTION (Sequence::create(ScaleTo::create(0.05f,0.92f),NULL))
+#define Button_ACTION1 (Sequence::create(ScaleTo::create(0.05f,1),NULL))
+
 int CommonFuncs::split(const std::string& str, std::vector<std::string>& ret_, std::string sep)
 {
 	if (str.empty())
@@ -81,4 +87,21 @@ std::string CommonFuncs::gbk2utf(const char *inbuf)
 	strRet = inbuf;
 #endif
 	return strRet;
+}
+
+void CommonFuncs::BtnAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == cocos2d::ui::Widget::TouchEventType::BEGAN || type == cocos2d::ui::Widget::TouchEventType::MOVED)
+	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Button_ACTION);
+	}
+	else if (type == cocos2d::ui::Widget::TouchEventType::CANCELED)
+	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Button_ACTION1);
+	}
+	else if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+	{
+		((cocos2d::ui::Widget*)pSender)->runAction(Button_ACTION1);
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+	}
 }

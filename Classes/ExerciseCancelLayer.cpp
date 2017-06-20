@@ -1,6 +1,7 @@
 ﻿#include "ExerciseCancelLayer.h"
 #include "SoundManager.h"
 #include "BuildingUILayer.h"
+#include "CommonFuncs.h"
 bool ExerciseCancelLayer::init()
 {
 	
@@ -36,9 +37,9 @@ bool ExerciseCancelLayer::init()
 
 void ExerciseCancelLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		BuildingUILayer* parent = (BuildingUILayer*)this->getParent();
 		parent->resetExercise();
 		removSelf();
@@ -47,9 +48,9 @@ void ExerciseCancelLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 void ExerciseCancelLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		removSelf();
 	}
 }

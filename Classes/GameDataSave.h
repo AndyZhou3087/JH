@@ -204,6 +204,12 @@ public:
 	int getHeroId();
 
 	/****************************
+	获取角色ID,目前只有4个
+	@param uid 
+	****************************/
+	int getHeroIdByUid(std::string uid);
+
+	/****************************
 	保存角色ID
 	****************************/
 	void setHeroId(int id);
@@ -348,6 +354,16 @@ public:
 	获取闭关时间
 	****************************/
 	std::string getExersiceCfg();
+
+	/****************************
+	保存修改的默认仓库数据
+	****************************/
+	void setModifyDefaultStorage(int heroindex, std::string strval);
+
+	/****************************
+	获取保存修改的默认仓库数据
+	****************************/
+	std::string getModifyDefaultStorage(int heroindex);
 
 private:
 	/****************************

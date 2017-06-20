@@ -156,7 +156,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 		int r = 0;
 		int winrnd = GlobalData::map_npcs[npcid].winresrnd[i];
-		if (winrnd < 10)
+		if (winrnd < 5)
 		{
 			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
 			{
@@ -337,10 +337,11 @@ void Winlayer::updataLV()
 	}
 	if (lv > curlv)
 	{
-		if (lv >= vec_heroExp.size())
+		int heromaxlv = vec_heroExp.size();
+		if (lv >= heromaxlv)
 		{
-			g_hero->setExpValue(vec_heroExp[vec_heroExp.size() - 1]);
-			lv = vec_heroExp.size() - 1;
+			g_hero->setExpValue(vec_heroExp[heromaxlv - 1]);
+			lv = heromaxlv - 1;
 		}
 		g_hero->setLVValue(lv);
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
@@ -369,8 +370,9 @@ void Winlayer::updataLV()
 			}
 			if (lv > curlv)
 			{
-				if (lv >= vec_gfExp.size())
-					lv = vec_gfExp.size() - 1;
+				int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
+				if (lv >= gfmaxlv)
+					lv = gfmaxlv - 1;
 				gfData->lv = lv;
 			}
 		}
@@ -473,10 +475,9 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 
 void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
 		HomeHill* homehill = (HomeHill*)g_gameLayer->getChildByName("homehill");
 		if (homehill != NULL)
 		{
@@ -491,9 +492,9 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 
 void Winlayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		for (unsigned int i = 0; i < getRewardData.size(); i++)
 		{
 			std::string name = StringUtils::format("resitem%d", i);

@@ -158,14 +158,14 @@
                 <PreSize X="0.6205" Y="0.1525" />
                 <ImageFileData Type="MarkedSubImage" Path="ui/buildprogressbar.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="actionbtn" ActionTag="294009507" Tag="73" IconVisible="False" LeftMargin="504.5002" RightMargin="-19.5002" TopMargin="31.0000" BottomMargin="33.0000" TouchEnable="True" FontSize="30" ButtonText="建造" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="91" Scale9Height="32" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="121.0000" Y="54.0000" />
+              <AbstractNodeData Name="actionbtn" ActionTag="294009507" Tag="73" IconVisible="False" LeftMargin="488.0004" RightMargin="-32.0004" TopMargin="12.9998" BottomMargin="15.0002" TouchEnable="True" FontSize="40" ButtonText="建造" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="150.0000" Y="90.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="565.0002" Y="60.0000" />
+                <Position X="563.0004" Y="60.0002" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.9323" Y="0.5085" />
-                <PreSize X="0.1997" Y="0.4576" />
+                <PrePosition X="0.9290" Y="0.5085" />
+                <PreSize X="0.2475" Y="0.7627" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <TextColor A="255" R="255" G="255" B="255" />
                 <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
@@ -186,13 +186,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="needtime" ActionTag="1785667529" Tag="35" IconVisible="False" LeftMargin="531.0001" RightMargin="10.9999" TopMargin="88.0834" BottomMargin="4.9166" FontSize="23" LabelText="10分钟" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="needtime" ActionTag="1785667529" Tag="35" IconVisible="False" LeftMargin="525.9998" RightMargin="16.0002" TopMargin="88.0834" BottomMargin="4.9166" FontSize="23" LabelText="10分钟" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="64.0000" Y="25.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="563.0001" Y="17.4166" />
+                <Position X="557.9998" Y="17.4166" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.9290" Y="0.1476" />
+                <PrePosition X="0.9208" Y="0.1476" />
                 <PreSize X="0.1056" Y="0.2119" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />

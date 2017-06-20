@@ -99,7 +99,7 @@ private:
 	cocos2d::ui::Widget* m_mapbg;//整个地图
 	Sprite* m_smissionIcon[2];//发任务的图标
 	Sprite* m_dmissionIcon[2];//接任务的图标
-
+	Vec2 m_heroPos;//角色头像位置
 	cocos2d::ui::ScrollView* m_mapscroll;//地图
 	int m_startClickX;
 	int m_startClickY;

@@ -3,6 +3,8 @@
 #include <iostream>
 #include "cocos2d.h"
 #include <algorithm>
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
 class CommonFuncs
 {
 public:
@@ -20,6 +22,9 @@ public:
 	@return 转换后的字符串
 	****************************/
 	static std::string gbk2utf(const char *inbuf);
+
+
+	static void BtnAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
 
 	/****************************
@@ -33,6 +38,7 @@ private:
 	@param outlen 转换后的字符长度
 	****************************/
 	static int code_convert(const char *from_charset, const char *to_charset, const char *inbuf, size_t inlen, char *outbuf, size_t outlen);
+
 };
 
 #endif

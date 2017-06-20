@@ -105,12 +105,6 @@ private:
 	void updateExerciseLeftTime(float dt);
 
 	/****************************
-	出关
-	@param 闭关了多少小时
-	*****************************/
-	void exerciseDone(int hour);
-
-	/****************************
 	点击锻造台分类按钮回调
 	*****************************/
 	void onCategory(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -133,7 +127,7 @@ private:
 	cocos2d::ui::LoadingBar* buildbar;//建造进度条控件
 	cocos2d::ui::Button* buildbtn;//建造按钮控件
 	cocos2d::ui::ScrollView* scrollview;//操作滚动列表控件
-
+	cocos2d::ui::Widget* m_backbtn;//返回按钮控件
 	std::vector<cocos2d::ui::LoadingBar*> vec_actionbar;//建筑物自己的操作 进度条控件
 	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
 	std::vector<cocos2d::ui::Text*> vec_progresstext;//进度条上的文字控件，这里用来显示时间

@@ -186,6 +186,13 @@ int GameDataSave::getHeroId()
 {
 	return loadIntDataByKey(addUIDString("heroid"), 1);
 }
+
+int GameDataSave::getHeroIdByUid(std::string uid)
+{
+	std::string key = StringUtils::format("%sheroid", uid.c_str());
+	return loadIntDataByKey(key, 1);
+}
+
 void GameDataSave::setHeroId(int id)
 {
 	saveIntDataByKey(addUIDString("heroid"), id);
@@ -336,5 +343,18 @@ void GameDataSave::setExersiceCfg(std::string strval)
 std::string GameDataSave::getExersiceCfg()
 {
 	return loadStringDataByKey(addUIDString("exsercise"), "");
+}
+
+
+void GameDataSave::setModifyDefaultStorage(int heroindex, std::string strval)
+{
+	std::string key = StringUtils::format("hero%ddefstorge", heroindex);
+	saveStringDataByKey(key, strval);
+}
+
+std::string GameDataSave::getModifyDefaultStorage(int heroindex)
+{
+	std::string key = StringUtils::format("hero%ddefstorge", heroindex);
+	return loadStringDataByKey(key, "");
 }
 

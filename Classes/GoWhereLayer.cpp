@@ -141,18 +141,18 @@ void GoWhereLayer::onEnterTransitionDidFinish()
 
 void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 	}
 }
 
 void GoWhereLayer::onGO(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		this->removeFromParentAndCleanup(true);
 		if (g_maplayer != NULL)//地图上移动角色头像
 			g_maplayer->showMoveToDest();
@@ -161,9 +161,9 @@ void GoWhereLayer::onGO(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 
 void GoWhereLayer::onST(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		TempStorageLayer* layer = TempStorageLayer::create(m_addrstr);
 
 		if (g_gameLayer != NULL)
@@ -173,9 +173,9 @@ void GoWhereLayer::onST(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 
 void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (m_addrstr.compare("m1-1") == 0)//进入家
 		{
 			g_gameLayer->addChild(HomeLayer::create(), 1, "homelayer");
