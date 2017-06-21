@@ -158,8 +158,6 @@ void ShopLayer::beginPay(int index)
 }
 void ShopLayer::setMessage(PYARET ret)
 {
-	isPaying = false;
-
 	if (ret == PAY_SUCC)
 	{
 		int shopgoodsszie = vec_goods.size();
@@ -188,6 +186,7 @@ void ShopLayer::setMessage(PYARET ret)
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);
 #endif
 	}
+	isPaying = false;
 }
 
 void ShopLayer::addBuyGoods()

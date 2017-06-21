@@ -28,7 +28,7 @@ std::vector<PlotMissionData> GlobalData::vec_BranchPlotMissionData;
 
 std::map<std::string, GFSkillData> GlobalData::map_gfskills;
 
-bool GlobalData::unlockhero[4];
+bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
 
@@ -508,7 +508,7 @@ void GlobalData::setUnlockHero(int index, bool val)
 	std::string str;
 	for (int i = 0; i < 4; i++)
 	{
-		std::string tmp = StringUtils::format("%d-", unlockhero[i]);
+		std::string tmp = StringUtils::format("%d-", unlockhero[i]?1:0);
 		str.append(tmp);
 	}
 	GameDataSave::getInstance()->setHeroUnlockData(str.substr(0, str.length() - 1));
@@ -605,6 +605,8 @@ void GlobalData::loadPlotMissionJsonData()
 	std::string plotfilename = "data/plotmission.json";
 	if (heroindex == 2)
 		plotfilename = "data/plotmission2.json";
+	else if (heroindex == 3)
+		plotfilename = "data/plotmission3.json";
 
 	rapidjson::Document doc = ReadJsonFile(plotfilename);
 	rapidjson::Value& values = doc["m"];

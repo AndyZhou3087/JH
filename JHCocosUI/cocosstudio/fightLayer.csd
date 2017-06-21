@@ -66,7 +66,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroicon" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="53.3570" RightMargin="432.6430" TopMargin="575.0007" BottomMargin="614.9993" FlipX="True" ctype="SpriteObjectData">
+          <AbstractNodeData Name="heroicon" ActionTag="-925200546" Tag="126" IconVisible="False" LeftMargin="53.3570" RightMargin="432.6430" TopMargin="575.0007" BottomMargin="614.9993" ctype="SpriteObjectData">
             <Size X="234.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="170.3570" Y="659.9993" />
@@ -87,13 +87,13 @@
             <PreSize X="0.3250" Y="0.0703" />
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="74.8751" RightMargin="517.1249" TopMargin="582.0000" BottomMargin="652.0000" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="137.8751" RightMargin="454.1249" TopMargin="582.0000" BottomMargin="652.0000" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
-            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="202.8751" Y="675.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="137.8751" Y="675.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2818" Y="0.5273" />
+            <PrePosition X="0.1915" Y="0.5273" />
             <PreSize X="0.1778" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

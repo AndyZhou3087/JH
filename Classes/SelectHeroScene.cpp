@@ -225,7 +225,7 @@ void SelectHeroScene::enterNextScene()
 	GameDataSave::getInstance()->setStorageData(defaultStorageStr);
 
 	Scene* scene;
-	if (_lastSelect == 1 || _lastSelect == 2)
+	if (_lastSelect == 1 || _lastSelect == 2 || _lastSelect == 3)
 	{
 		scene = StoryScene::createScene();
 	}
