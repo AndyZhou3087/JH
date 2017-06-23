@@ -297,7 +297,9 @@ void MapLayer::showUnlockLayer(float dt)
 void MapLayer::updataPlotMissionIcon(int type)
 {
 
+	m_smissionIcon[type]->stopAllActions();
 	m_smissionIcon[type]->setVisible(false);
+	m_dmissionIcon[type]->stopAllActions();
 	m_dmissionIcon[type]->setVisible(false);
 
 	PlotMissionData* plotData = NULL;
@@ -334,9 +336,9 @@ void MapLayer::updataPlotMissionIcon(int type)
 						}
 						else
 						{
+							m_smissionIcon[type]->setPosition(mapname->getPosition());
 							m_smissionIcon[type]->setVisible(true);
 							m_smissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
-							m_smissionIcon[type]->setPosition(mapname->getPosition());
 						}
 					}
 					else
