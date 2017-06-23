@@ -340,6 +340,7 @@
       <FilePathData Path="ui/backstartbtn.png" />
       <FilePathData Path="ui/shareicon.png" />
       <FilePathData Path="ui/closebtn.png" />
+      <FilePathData Path="ui/hintdown.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

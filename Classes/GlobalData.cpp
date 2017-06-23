@@ -497,8 +497,9 @@ void GlobalData::loadUnlockHeroData()
 
 	for (unsigned int i = 0; i < tmp.size(); i++)
 	{
-		unlockhero[i] = atoi(tmp[i].c_str()) == 1 ? true : false;
+		unlockhero[i] = atoi(tmp[i].c_str()) == 1 ? true : false;	
 	}
+	unlockhero[0] = true;
 }
 
 void GlobalData::setUnlockHero(int index, bool val)
@@ -530,6 +531,22 @@ int GlobalData::getSysSecTime()
 	timep = tv.tv_sec;
 #endif
 	return timep;
+}
+
+int GlobalData::getDayOfYear()
+{
+	struct tm *tm;
+	time_t timep;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	time(&timep);
+#else
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	timep = tv.tv_sec;
+#endif
+	tm = localtime(&timep);
+	int day = tm->tm_yday;
+	return day;
 }
 
 std::string GlobalData::getUId()
@@ -933,6 +950,16 @@ bool GlobalData::tempHasgf(std::string strid)
 			return true;
 	}
 	return false;
+}
+
+int GlobalData::getShareDay()
+{
+	return GameDataSave::getInstance()->getShareDayOfYear();
+}
+
+void GlobalData::setShareDay(int day)
+{
+	GameDataSave::getInstance()->setShareDayOfYear(day);
 }
 
 std::string GlobalData::addUidString(std::string val)

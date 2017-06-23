@@ -365,6 +365,18 @@ public:
 	****************************/
 	std::string getModifyDefaultStorage(int heroindex);
 
+	/****************************
+	设置分享的日期，
+	@para 一年中的天数
+	****************************/
+	void setShareDayOfYear(int day);
+
+	/****************************
+	获取分享的日期，
+	@return 一年中的天数
+	****************************/
+	int getShareDayOfYear();
+
 private:
 	/****************************
 	加上userid后的字符串

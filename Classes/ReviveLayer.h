@@ -14,13 +14,17 @@ public:
 	virtual bool init();
 	static ReviveLayer* create();
 	static void doRevive();
+	static void reviveOk();
 	static bool isBuyRevive;
 private:
 	int revivecount;
-
+	Node* m_csbnode;
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onShare(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	static void shareCallback(int platform, int stCode, std::string& errorMsg);
 };
 #endif
 

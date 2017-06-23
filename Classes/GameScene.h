@@ -41,6 +41,11 @@ public:
 	*****************************/
 	void delayShowNewerGuide(float dt);
 
+	/****************************
+	延迟显示出门场景
+	*****************************/
+	void delayShowOutScence(float dt);
+
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家

@@ -348,12 +348,11 @@ void FightLayer::showFightWord(int type, int value)
 				g_hero->getAtrByType(H_WEAPON)->goodvalue--;
 				if (g_hero->getAtrByType(H_WEAPON)->goodvalue <= 0)
 				{
-					//StorageRoom::use(g_hero->getAtrByType(H_WEAPON)->strid);
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType(H_WEAPON, data);
-					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
-					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 				}
 				else if (g_hero->getAtrByType(H_WEAPON)->goodvalue == 20 || g_hero->getAtrByType(H_WEAPON)->goodvalue == 10)
 				{
@@ -433,13 +432,11 @@ void FightLayer::showFightWord(int type, int value)
 
 				if (g_hero->getAtrByType(H_ARMOR)->goodvalue <= 0)
 				{
-					//StorageRoom::use(g_hero->getAtrByType(H_ARMOR)->strid);
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType(H_ARMOR, data);
-					
-					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
-					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 				}
 				else if (g_hero->getAtrByType(H_ARMOR)->goodvalue == 20 || g_hero->getAtrByType(H_ARMOR)->goodvalue == 10)
 				{

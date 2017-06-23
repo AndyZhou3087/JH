@@ -6,25 +6,23 @@
 #include "MyPackage.h"
 #include "StorageRoom.h"
 
-int ActivitScene::count = 0;
+bool ActivitScene::isShowing = false;
 ActivitScene::ActivitScene()
 {
-	count++;
+
 }
 
 
 ActivitScene::~ActivitScene()
 {
-	--count;
-	if (count > 0)
-	{
-		count = 0;
-		Director::getInstance()->popScene();
-	}
+	isShowing = false;
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
 {
+	if (isShowing)
+		return NULL;
+	isShowing = true;
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
@@ -85,6 +83,10 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 					{
 						isadd = false;
 					}
+					else if (sdata.type == RES_2 && atoi(sdata.strid.c_str()) >= 70 && atoi(sdata.strid.c_str()) <= 78)
+					{
+						isadd = false;
+					}
 					if (isadd)
 						allStorageData.push_back(sdata);
 				}
@@ -92,7 +94,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		}
 		if (allStorageData.size() > 0)
 		{
-			int rcount = allStorageData.size() < 5 ? allStorageData.size() : 5;
+			int rcount = allStorageData.size() < 3 ? allStorageData.size() : 3;
 			int r = GlobalData::createRandomNum(rcount) + 1;
 			int startx[] = { 360, 300, 240, 180, 120 };
 			int spacex[] = { 120, 120, 120, 120, 120 };
@@ -126,7 +128,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 				namelbl->setPosition(Vec2(box->getPositionX(), 75));
 				this->addChild(namelbl);
 
-				int rndcount = tmpdata.count < 5 ? tmpdata.count : 5;
+				int rndcount = tmpdata.count < 3 ? tmpdata.count : 3;
 				int r1 = GlobalData::createRandomNum(rndcount) + 1;
 
 				std::string strcount = StringUtils::format("x%d", r1);

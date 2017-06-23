@@ -135,6 +135,9 @@ public:
 	@param volume 声音大小，最大100
 	****************************/
     void setVolume(float volume);
+    
+    void saveVolume();
+    int getSaveVolume();
 
 	/****************************
 	获取音效开关

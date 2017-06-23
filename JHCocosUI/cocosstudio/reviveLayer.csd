@@ -85,7 +85,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="closebtn" ActionTag="1904619282" Tag="171" IconVisible="False" LeftMargin="530.5189" RightMargin="109.4811" TopMargin="376.4491" BottomMargin="823.5509" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="50" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="closebtn" ActionTag="1904619282" VisibleForFrame="False" Tag="171" IconVisible="False" LeftMargin="530.5189" RightMargin="109.4811" TopMargin="376.4491" BottomMargin="823.5509" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="50" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="80.0000" Y="80.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="570.5189" Y="863.5509" />
@@ -101,7 +101,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sharetext" ActionTag="-969405136" Tag="172" IconVisible="False" LeftMargin="171.4998" RightMargin="171.5002" TopMargin="837.3569" BottomMargin="414.6431" FontSize="26" LabelText="（分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="sharetext" ActionTag="-969405136" VisibleForFrame="False" Tag="172" IconVisible="False" LeftMargin="171.4998" RightMargin="171.5002" TopMargin="837.3569" BottomMargin="414.6431" FontSize="26" LabelText="（分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="377.0000" Y="28.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="428.6431" />
@@ -113,7 +113,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sharebtn" ActionTag="784518322" Tag="174" IconVisible="False" LeftMargin="159.1100" RightMargin="410.8900" TopMargin="738.2000" BottomMargin="451.8000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="sharebtn" ActionTag="784518322" VisibleForFrame="False" Tag="174" IconVisible="False" LeftMargin="159.1100" RightMargin="410.8900" TopMargin="738.2000" BottomMargin="451.8000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <Children>
               <AbstractNodeData Name="text" ActionTag="1731902981" Tag="175" IconVisible="False" LeftMargin="51.3061" RightMargin="22.6939" TopMargin="25.7598" BottomMargin="20.2402" FontSize="40" LabelText="分享" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -138,6 +138,48 @@
                 <PreSize X="0.2267" Y="0.3667" />
                 <FileData Type="MarkedSubImage" Path="ui/shareicon.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="234.1100" Y="496.8000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3252" Y="0.3881" />
+            <PreSize X="0.2083" Y="0.0703" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="freerevivebtn" ActionTag="-1298335833" VisibleForFrame="False" Tag="21" IconVisible="False" LeftMargin="159.1100" RightMargin="410.8900" TopMargin="738.2000" BottomMargin="451.8000" TouchEnable="True" FontSize="36" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
+            <Children>
+              <AbstractNodeData Name="text" ActionTag="856662343" Tag="22" IconVisible="False" LeftMargin="10.3070" RightMargin="21.6930" TopMargin="24.2597" BottomMargin="32.7403" FontSize="30" LabelText="免费复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="118.0000" Y="33.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="69.3070" Y="49.2403" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4620" Y="0.5471" />
+                <PreSize X="0.7867" Y="0.3667" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="count" ActionTag="548373963" Tag="38" IconVisible="False" LeftMargin="63.3070" RightMargin="62.6930" TopMargin="53.2596" BottomMargin="13.7404" FontSize="23" LabelText="x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="24.0000" Y="23.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="75.3070" Y="25.2404" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5020" Y="0.2804" />
+                <PreSize X="0.1600" Y="0.2556" />
+                <FontResource Type="Default" Path="" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

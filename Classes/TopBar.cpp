@@ -314,6 +314,7 @@ void TopBar::updataUI(float dt)
 		GameDataSave::getInstance()->setLiveDays(livedays);
 		GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
 	}
+	Scene* activityScene = NULL;
 
 	if (m_lastweather != g_nature->getWeather())
 	{
@@ -323,13 +324,11 @@ void TopBar::updataUI(float dt)
 
 		if (g_nature->getWeather() == Rainy)
 		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了...")));
-			Director::getInstance()->pushScene(transition);
+			activityScene = ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了..."));
 		}
 		else if (g_nature->getWeather() == Snowy)
 		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了...")));
-			Director::getInstance()->pushScene(transition);
+			activityScene = ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了..."));
 		}
 		m_lastweather = g_nature->getWeather();
 	}
@@ -338,13 +337,11 @@ void TopBar::updataUI(float dt)
 	{
 		//if (g_nature->getDayOrNight() == Day)
 		//{
-		//	auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了...")));
-		//	Director::getInstance()->pushScene(transition);
+		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了..."));
 		//}
 		//else
 		//{
-		//	auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临...")));
-		//	Director::getInstance()->pushScene(transition);
+		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临..."));
 		//}
 		m_lastDayOrNigth = g_nature->getDayOrNight();
 	}
@@ -357,24 +354,29 @@ void TopBar::updataUI(float dt)
 		if (g_hero->getIsOut())
 		{
 			int r = GlobalData::createRandomNum(100);
-			if (r < 30)
+			if (r < 10)
 				isthieves = true;
 		}
 		if (isthieves)
 		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/thieves.jpg", CommonFuncs::gbk2utf("盗贼到来，丢失以下物品...")));
-			Director::getInstance()->pushScene(transition);
+			activityScene = ActivitScene::createScene("images/thieves.jpg", CommonFuncs::gbk2utf("盗贼到来，丢失以下物品..."));
 		}
 		else
 		{
-			auto transition = TransitionCrossFade::create(0.5f, ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")));
-			Director::getInstance()->pushScene(transition);
+			activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始..."));
 		}
 	}
 
+	if (activityScene != NULL)
+	{
+		auto transition = TransitionCrossFade::create(0.5f, activityScene);
+		Director::getInstance()->pushScene(transition);
+	}
+
 	GameDataSave::getInstance()->setNatureTemperature(g_nature->getTemperature());
-	int hour = pastmin / 60;
-	int minute = (int)pastmin % 60;
+	int showtime = g_nature->getTime();
+	int hour = showtime / 60;
+	int minute = (int)showtime % 60;
 
 	str = StringUtils::format("%02d:%02d", hour, minute);
 	timelbl->setString(str);

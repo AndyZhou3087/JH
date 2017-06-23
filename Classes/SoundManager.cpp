@@ -12,6 +12,7 @@ SoundManager* SoundManager::getInstance()
     {
         g_sharedManager = new SoundManager();
         g_sharedManager->init();
+
     }
     
     return g_sharedManager;
@@ -19,8 +20,8 @@ SoundManager* SoundManager::getInstance()
 
 Ref* SoundManager::init()
 {
-    _isSoundOn = true;
-	_isMusicOn = true;
+	_isSoundOn = UserDefault::getInstance()->getBoolForKey("issoundon", true);
+	_isMusicOn = UserDefault::getInstance()->getBoolForKey("ismusicon", true);
 	_isMusicPlayed = false;
     return this;
 }
@@ -82,7 +83,6 @@ int SoundManager::playSound(int soundId, bool isloop)
 
 bool SoundManager::getSoundIsOn()
 {
-	_isSoundOn = UserDefault::getInstance()->getBoolForKey("isSoundOn", true);
 	return _isSoundOn;
 }
 
@@ -138,11 +138,13 @@ void SoundManager::resumeBackMusic()
 void SoundManager::setIsMusicOn(bool isMusicOn)
 {
 	_isMusicOn = isMusicOn;
+	UserDefault::getInstance()->setBoolForKey("ismusicon", _isMusicOn);
 }
 
 void SoundManager::setIsSoundOn(bool isSoundOn)
 {
     _isSoundOn = isSoundOn;
+	UserDefault::getInstance()->setBoolForKey("issoundon", _isSoundOn);
 }
 
 void SoundManager::stopSound(int soundId)
@@ -177,4 +179,14 @@ void SoundManager::setVolume(float volume)
     SimpleAudioEngine* soundEngine = SimpleAudioEngine::getInstance();
     soundEngine->setEffectsVolume(volume);
     soundEngine->setBackgroundMusicVolume(volume);
+}
+
+void SoundManager::saveVolume()
+{
+    UserDefault::getInstance()->setFloatForKey("volume", getVolume());
+}
+
+int SoundManager::getSaveVolume()
+{
+    return UserDefault::getInstance()->getFloatForKey("volume", getVolume());
 }

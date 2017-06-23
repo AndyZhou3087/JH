@@ -35,6 +35,8 @@ private:
 	void loadTempData();
 	void updataLV();
 	void showLvUpText();
+	int addHeroExp();
+	int addGfExp();
 private:
 	std::string m_npcid;
 	std::string m_addrid;

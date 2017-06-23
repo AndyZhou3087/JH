@@ -41,6 +41,7 @@ bool SettingLayer::init()
 	m_soundCheckBox->addEventListener(CC_CALLBACK_2(SettingLayer::soundCheckBoxCallback, this));
 
 	m_soundOnOffText = (cocos2d::ui::Text*)csbnode->getChildByName("settingdesc");
+
 	updateSoundStatus();
 
 	//layer 点击事件，屏蔽下层事件
@@ -67,7 +68,7 @@ void SettingLayer::updateSoundStatus()
 	}
 	else
 	{
-		m_soundCheckBox->setSelected(true);
+		m_soundCheckBox->setSelected(false);
 		m_soundOnOffText->setString(CommonFuncs::gbk2utf("关"));
 	}
 }

@@ -24,6 +24,7 @@ ShopLayer::ShopLayer()
 	payindex = -1;
 	//isPaying = false;
 	vec_goods.clear();
+	g_hero->setIsShoping(true);
 }
 
 
@@ -32,6 +33,7 @@ ShopLayer::~ShopLayer()
 	payindex = -1;
 	//isPaying = false;
 	vec_goods.clear();
+	g_hero->setIsShoping(false);
 }
 
 ShopLayer* ShopLayer::create()

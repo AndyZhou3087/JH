@@ -35,6 +35,8 @@ Hero::Hero()
 	sleepLostPercent = 1.0f;
 
 	m_pastmin = 0;
+
+	isshoping = false;
 }
 
 
@@ -52,6 +54,8 @@ bool Hero::init()
 
 void Hero::updateData(float dt)
 {
+	if (g_hero->getIsShoping())
+		return;
 	//12s，（游戏时间1小时更新一次）
 	m_pastmin += g_nature->getTimeInterval();
 
@@ -67,6 +71,8 @@ void Hero::updateData(float dt)
 		//闭关没有分身符不扣属性消耗， 有分身符要扣
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 			return;
+
+
 
 		if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 		{
@@ -468,4 +474,15 @@ int Hero::getTotalAtck()
 
 	int tatk = int(fack + 0.5f);
 	return tatk;
+}
+
+bool Hero::getIsShoping()
+{
+	return isshoping;
+}
+
+
+void Hero::setIsShoping(bool val)
+{
+	isshoping = val;
 }

@@ -104,6 +104,9 @@ void Nature::ChangeDayNight()
 
 void Nature::updateData(float dt)
 {
+	if (g_hero->getIsShoping())
+		return;
+
 	m_time += getTimeInterval();
 	if (m_time >= 1440.0f)
 	{

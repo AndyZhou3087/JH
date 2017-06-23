@@ -257,6 +257,12 @@ public:
 	static int getSysSecTime();
 
 	/****************************
+	一年中的天数
+	@return 一年中的天数(0-365)
+	*****************************/
+	static int getDayOfYear();
+
+	/****************************
 	获取userid
 	*****************************/
 	static std::string getUId();
@@ -378,7 +384,23 @@ public:
 	*****************************/
 	static void loadGfskillData();
 
+	/****************************
+	临时存放地是否有功法
+	@return false:没有，yes：有
+	*****************************/
 	static bool tempHasgf(std::string strid);
+
+	/****************************
+	获取分享的日期，只记录天数（一年中的天数）
+	return 天数（一年中的天数）
+	*****************************/
+	static int getShareDay();
+
+	/****************************
+	设置分享的日期
+	@para 天数（一年中的天数）
+	*****************************/
+	static void setShareDay(int day);
 
     static void setNoAds(bool val);
     static bool getNoAds();

@@ -91,7 +91,6 @@ bool MapLayer::init()
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
 
-	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -107,7 +106,7 @@ bool MapLayer::init()
 			m_isDraging = true;
 	};
 
-	listener->setSwallowTouches(false);
+	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
@@ -143,23 +142,23 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 
 void MapLayer::heroPauseMoving()
 {
-	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
-	m_herohead->pause();
+	//g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
+	//m_herohead->pause();
 }
 
 void MapLayer::heroResumeMoving()
 {
-	if (ismoving)
-	{
-		g_nature->setTimeInterval(TIMESCALE * 8);
-		m_herohead->resume();
-	}
+	//if (ismoving)
+	//{
+	//	g_nature->setTimeInterval(TIMESCALE * 8);
+	//	m_herohead->resume();
+	//}
 }
 
 void MapLayer::showRobberFight(float dt)
 {
-	heroPauseMoving();
-	g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
+	//heroPauseMoving();
+	//g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
 }
 
 void MapLayer::showMoveToDest()
@@ -171,19 +170,19 @@ void MapLayer::showMoveToDest()
 
 	m_herohead->runAction(Sequence::create(MoveTo::create(dt / (TIMESCALE * 8.0f), m_destPos), CallFunc::create(CC_CALLBACK_0(MapLayer::Arrive, this)), NULL));
 
-	int sec = dt / (TIMESCALE * 8.0f);
-	if (sec >= 2)
-	{
-		int r = GlobalData::createRandomNum(100);
-		int rnd = g_nature->getDayOrNight() == Night ? 30 : 20;
+	//int sec = dt / (TIMESCALE * 8.0f);
+	//if (sec >= 2)
+	//{
+	//	int r = GlobalData::createRandomNum(100);
+	//	int rnd = g_nature->getDayOrNight() == Night ? 30 : 20;
 
-		if (r < rnd)
-		{
-			int r1 = GlobalData::createRandomNum(sec - 1) + 1;
+	//	if (r < rnd)
+	//	{
+	//		int r1 = GlobalData::createRandomNum(sec - 1) + 1;
 
-			this->scheduleOnce(schedule_selector(MapLayer::showRobberFight), r1);
-		}
-	}
+	//		this->scheduleOnce(schedule_selector(MapLayer::showRobberFight), r1);
+	//	}
+	//}
 }
 
 void MapLayer::Arrive()
@@ -240,6 +239,12 @@ void MapLayer::Arrive()
 	}
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2);
+
+	this->scheduleOnce(schedule_selector(MapLayer::finishMove), 0.1f);
+}
+
+void MapLayer::finishMove(float dt)
+{
 	ismoving = false;
 }
 
@@ -291,6 +296,10 @@ void MapLayer::showUnlockLayer(float dt)
 
 void MapLayer::updataPlotMissionIcon(int type)
 {
+
+	m_smissionIcon[type]->setVisible(false);
+	m_dmissionIcon[type]->setVisible(false);
+
 	PlotMissionData* plotData = NULL;
 	int plotindex = 0;
 	if (type == 0)
@@ -300,7 +309,6 @@ void MapLayer::updataPlotMissionIcon(int type)
 	}
 	else
 	{
-		
 		plotindex = GlobalData::getBranchPlotMissionIndex();
 		if (GlobalData::vec_BranchPlotMissionData[plotindex].unlockchapter <= GlobalData::getUnlockChapter())
 			plotData = &GlobalData::vec_BranchPlotMissionData[plotindex];
@@ -309,10 +317,6 @@ void MapLayer::updataPlotMissionIcon(int type)
 	{
 		std::string snpc = plotData->snpc;
 		std::string dnpc = plotData->dnpc;
-
-		m_smissionIcon[type]->setVisible(false);
-		m_dmissionIcon[type]->setVisible(false);
-
 		int mapnamecount = GlobalData::map_maps.size();
 
 		for (int i = 0; i < mapnamecount; i++)

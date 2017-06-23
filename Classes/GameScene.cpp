@@ -114,8 +114,8 @@ bool GameScene::init()
 	this->addChild(bg, 4);
 
 	//滚动文字
-	g_uiScroll = UIScroll::create(620.0F, 132.0f);
-	g_uiScroll->setPosition(Vec2(visibleSize.width / 2 + 25, 960));
+	g_uiScroll = UIScroll::create(620.0F, 140.0f);
+	g_uiScroll->setPosition(Vec2(visibleSize.width / 2 + 25, 964));
 	addChild(g_uiScroll, 4);
 
 	//任务属性和天气
@@ -314,7 +314,7 @@ void GameScene::timerSaveData(float dt)
 void GameScene::checkiflive(float dt)
 {
 	//生命为0，死掉，弹出复活界面
-	if (g_hero->getLifeValue() <= 0.0f && ActivitScene::count <= 0)
+	if (g_hero->getLifeValue() <= 0.0f && !ActivitScene::isShowing)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		topBar->stopLoseAnim();
@@ -332,6 +332,16 @@ void GameScene::heroRevive()
 	if (g_maplayer != NULL && g_hero->getIsOut())
 		g_maplayer->heroResumeMoving();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
+}
+
+void GameScene::delayShowOutScence(float dt)
+{
+	Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
+	if (scene != NULL)
+	{
+		auto transition = TransitionCrossFade::create(0.5f, scene);
+		Director::getInstance()->pushScene(transition);
+	}
 }
 
 void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)

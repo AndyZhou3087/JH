@@ -83,22 +83,19 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		m_outbtn->setEnabled(false);
-
 		delayShowGOOut(0);
-		Scene* scene = ActivitScene::createScene("images/cout.jpg", CommonFuncs::gbk2utf("出门..."));
-		auto transition = TransitionCrossFade::create(0.5f, scene);
-		Director::getInstance()->pushScene(transition);
+		g_gameLayer->scheduleOnce(schedule_selector(GameScene::delayShowOutScence), 0.1f);
+		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.3f);
 	}
 }
 
 void OutDoor::delayShowGOOut(float dt)
 {
+	this->removeFromParentAndCleanup(true);
 	g_hero->setIsOut(true);
 	g_maplayer = MapLayer::create();
 	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
 	g_gameLayer->removeChildByName("homelayer");
-	g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
-	this->removeFromParentAndCleanup(true);
 }
 
 void OutDoor::updata()

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "iosfunc.h"
 #include "MBProgressHUD.h"
+#import <UShareUI/UShareUI.h>
 
 const char * getuuid()
 {
@@ -67,5 +68,45 @@ const void toast(char * info)
         [HUD removeFromSuperview];
         [HUD release];
         //HUD = NULL;
+    }];
+}
+
+void makeNotification()
+{
+    // 1.创建本地通知
+    UILocalNotification *localNote = [[UILocalNotification alloc] init];
+    
+    // 1.1.设置什么时间弹出
+    localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    
+    // 1.2.设置弹出的内容
+    localNote.alertBody = @"闭关已结束！";
+    
+    // 1.3.设置锁屏状态下,显示的一个文字
+    localNote.alertAction = @"快点打开";
+    
+    // 1.4.显示启动图片
+    localNote.alertLaunchImage = @"Icons/Icon-28.png";
+    
+    // 1.5.是否显示alertAction的文字(默认是YES)
+    localNote.hasAction = YES;
+    
+    // 1.6.设置音效
+    localNote.soundName =UILocalNotificationDefaultSoundName;
+    
+    // 1.7.应用图标右上角的提醒数字
+    localNote.applicationIconBadgeNumber =1;
+    
+    // 1.8.设置UserInfo来传递信息
+    localNote.userInfo = @{@"alertBody" : localNote.alertBody,@"applicationIconBadgeNumber" : @(localNote.applicationIconBadgeNumber)};
+    
+    // 2.调度通知
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
+}
+
+void UMShare()
+{
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        // 根据获取的platformType确定所选平台进行下一步操作
     }];
 }

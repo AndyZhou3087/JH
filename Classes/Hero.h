@@ -208,6 +208,16 @@ public:
 	总的攻击
 	*****************************/
 	int getTotalAtck();
+
+	/****************************
+	是否在商城
+	*****************************/
+	bool getIsShoping();
+
+	/****************************
+	是否在商城
+	*****************************/
+	void setIsShoping(bool val);
 public:
 	static float MAXInnerinjuryValue;//最大内伤值
 	static float MAXOutinjuryValue;//最大外伤值
@@ -227,6 +237,7 @@ private:
 	float outjuryrecoverpercent;//外伤恢复百分比
 	float hungerrecoverpercent;//饥饿恢复百分比
 	float sleepLostPercent;//睡觉时饥饿与精神的降低速度为正常时的一半
+	bool isshoping;
 };
 static std::string innerInjurydesc1[] = { "六脉调和", "脉络贯通", "舒筋活络", "内息混乱", "经脉错乱", "经脉寸断", "命不久已" };
 static std::string innerInjurydesc = {"内伤严重时会降低生命值上限，要时刻注意内伤状态，使用药物可治疗内伤。"};

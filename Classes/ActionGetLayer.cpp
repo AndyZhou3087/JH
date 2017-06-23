@@ -353,12 +353,11 @@ void ActionGetLayer::delayDoAction(float dt)
 
 				if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue <= 0)
 				{
-					//StorageRoom::use(g_hero->getAtrByType((HeroAtrType)m_actype)->strid);
+					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
+					g_uiScroll->addEventText(brokenstr, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
 					g_hero->setAtrByType((HeroAtrType)m_actype, data);
-					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
-					g_uiScroll->addEventText(brokenstr, 25, Color3B(204, 4, 4));
 				}
 				else if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 20 || g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 10)
 				{

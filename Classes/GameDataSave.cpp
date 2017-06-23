@@ -358,3 +358,12 @@ std::string GameDataSave::getModifyDefaultStorage(int heroindex)
 	return loadStringDataByKey(key, "");
 }
 
+void GameDataSave::setShareDayOfYear(int day)
+{
+	saveIntDataByKey(addUIDString("shareday"), day);
+}
+
+int GameDataSave::getShareDayOfYear()
+{
+	return loadIntDataByKey(addUIDString("shareday"), -1);
+}

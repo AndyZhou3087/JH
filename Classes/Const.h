@@ -10,7 +10,9 @@
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #define ANALYTICS
+#define UMENG_SHARE
 #endif
+
 
 static std::string acname[] = { "打猎", "采集", "砍伐", "挖掘" };
 static std::string acdesc[] = {"","你徒手采集", "你徒手劈树", "你徒手采矿"};

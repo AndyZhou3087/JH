@@ -156,6 +156,9 @@ void HeroStateUILayer::updateStatus(float dt)
 	herostatus[11]->setString(str);
 	//等级属性
 	str = StringUtils::format("%d", g_hero->getLVValue() + 1);
+	int lvmax = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp.size();
+	if (g_hero->getLVValue() + 1 >= lvmax)
+		str = StringUtils::format("%d%s", lvmax, CommonFuncs::gbk2utf("（满级）").c_str());
 	herostatus[12]->setString(str);
 }
 

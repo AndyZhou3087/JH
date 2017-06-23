@@ -90,6 +90,11 @@ private:
 	*****************************/
 	void mapMoveTo(Vec2 pos);
 
+	/****************************
+	角色头像完成移动
+	*****************************/
+	void finishMove(float dt);
+
 private:
 	float m_distance;//达到目的地的像素距离
 	Vec2 m_destPos;//目的地像素坐标

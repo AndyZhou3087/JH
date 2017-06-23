@@ -60,23 +60,14 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	if (m_npcid.compare("n001") == 0)//在路上碰到山贼
 		addrname->setString(CommonFuncs::gbk2utf("路上"));
 	
-	int winexp = GlobalData::map_npcs[m_npcid].exp;
-	int herolv = g_hero->getLVValue() + 1;
-	int bosslv = GlobalData::map_npcs[m_npcid].lv;
-	int lvless = herolv - bosslv;
-	if (lvless > 30)
-		winexp = winexp * 0.1f;
-	else if (lvless > 20)
-		winexp = winexp * 0.3f;
-	else if (lvless > 10)
-		winexp = winexp * 0.5f;
 	explbl = (cocos2d::ui::Text*)csbnode->getChildByName("explbl");
-	std::string lblstr = StringUtils::format("+%d", winexp);
+	std::string lblstr = StringUtils::format("+%d", addHeroExp());
 	explbl->setString(lblstr);
 	gfexplbl = (cocos2d::ui::Text*)csbnode->getChildByName("gfexplbl");
 	if (g_hero->getAtrByType(H_WG)->count > 0 || g_hero->getAtrByType(H_NG)->count > 0)
 	{
-		lblstr = StringUtils::format("+%d", winexp * 3 / 2);
+
+		lblstr = StringUtils::format("+%d", addGfExp());
 		gfexplbl->setString(lblstr);
 	}
 	else
@@ -156,7 +147,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 		int r = 0;
 		int winrnd = GlobalData::map_npcs[npcid].winresrnd[i];
-		if (winrnd < 5)
+		if (winrnd < 10)
 		{
 			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
 			{
@@ -166,7 +157,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			else
 			{
 				GlobalData::map_npcs[npcid].winrescount[i]++;
-				if (GlobalData::map_npcs[npcid].winrescount[i] < 10)
+				if (GlobalData::map_npcs[npcid].winrescount[i] < 5)
 					r = 200;
 				else
 				{
@@ -312,17 +303,8 @@ void Winlayer::onEnterTransitionDidFinish()
 
 void Winlayer::updataLV()
 {
-	int winexp = GlobalData::map_npcs[m_npcid].exp;
-	int herolv = g_hero->getLVValue() + 1;
-	int bosslv = GlobalData::map_npcs[m_npcid].lv;
-	int lvless = herolv - bosslv;
-	if (lvless > 30)
-		winexp = winexp * 0.1f;
-	else if (lvless > 20)
-		winexp = winexp * 0.3f;
-	else if (lvless > 10)
-		winexp = winexp * 0.5f;
-	g_hero->setExpValue(g_hero->getExpValue() + winexp);
+
+	g_hero->setExpValue(g_hero->getExpValue() + addHeroExp());
 	int curlv = g_hero->getLVValue();
 	unsigned int i = 0;
 	int lv = 0;
@@ -349,17 +331,17 @@ void Winlayer::updataLV()
 		showLvUpText();
 	}
 
-	lv = 0;
 	for (int m = H_WG; m <= H_NG; m++)
 	{
+		lv = 0;
 		PackageData* gfData = g_hero->getAtrByType((HeroAtrType)m);
 		if (gfData->count > 0)
 		{
 			std::string gfname = gfData->strid;
 			std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
 			curlv = gfData->lv;
-			 
-			gfData->exp += winexp * 3 / 2;
+
+			gfData->exp += addGfExp();
 			for (i = curlv; i < vec_gfExp.size(); i++)
 			{
 				if (gfData->exp > vec_gfExp[i])
@@ -731,4 +713,31 @@ void Winlayer::delayShowNewerGuide(float dt)
 		showNewerGuide(34);
 	else if (NewerGuideLayer::checkifNewerGuide(37))
 		showNewerGuide(37);
+}
+
+int Winlayer::addHeroExp()
+{
+	int winexp = GlobalData::map_npcs[m_npcid].exp;
+	int herolv = g_hero->getLVValue() + 1;
+	int bosslv = GlobalData::map_npcs[m_npcid].lv;
+	int lvless = herolv - bosslv;
+	if (lvless > 30)
+		winexp = winexp * 0.1f;
+	else if (lvless > 20)
+		winexp = winexp * 0.3f;
+	else if (lvless > 10)
+		winexp = winexp * 0.5f;
+	return winexp;
+}
+int Winlayer::addGfExp()
+{
+	int winexp = GlobalData::map_npcs[m_npcid].exp;
+	int herolv = g_hero->getLVValue() + 1;
+	int bosslv = GlobalData::map_npcs[m_npcid].lv;
+	int lvless = herolv - bosslv;
+
+	float gfwinexp = GlobalData::map_npcs[m_npcid].exp * 3.0f / 2.0f;
+	if (lvless > 10)
+		gfwinexp = gfwinexp * 0.5f;
+	return (int)gfwinexp;
 }

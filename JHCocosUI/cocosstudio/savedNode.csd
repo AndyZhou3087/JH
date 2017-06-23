@@ -141,7 +141,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="nodatatext" ActionTag="317591312" VisibleForFrame="False" Tag="48" IconVisible="False" LeftMargin="112.0000" RightMargin="-270.0000" TopMargin="-28.0000" BottomMargin="-16.0000" FontSize="40" LabelText="暂无存档" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="nodatatext" ActionTag="317591312" VisibleForFrame="False" Tag="48" IconVisible="False" LeftMargin="112.0000" RightMargin="-270.0000" TopMargin="-28.0000" BottomMargin="-16.0000" FontSize="40" LabelText="暂无进度" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="158.0000" Y="44.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="270.0000" Y="6.0000" />

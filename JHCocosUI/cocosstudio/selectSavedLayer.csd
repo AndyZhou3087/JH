@@ -39,14 +39,14 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-874927039" Tag="57" IconVisible="False" LeftMargin="261.9993" RightMargin="262.0007" TopMargin="239.7345" BottomMargin="985.2655" FontSize="50" LabelText="读取存档" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="196.0000" Y="55.0000" />
+          <AbstractNodeData Name="title" ActionTag="-874927039" Tag="57" IconVisible="False" LeftMargin="261.4993" RightMargin="261.5007" TopMargin="239.7345" BottomMargin="985.2655" FontSize="50" LabelText="读取进度" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="197.0000" Y="55.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9993" Y="1012.7655" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.7912" />
-            <PreSize X="0.2722" Y="0.0430" />
+            <PreSize X="0.2736" Y="0.0430" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

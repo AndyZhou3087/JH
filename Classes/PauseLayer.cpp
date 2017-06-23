@@ -61,7 +61,6 @@ void PauseLayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		removSelf();
-		Director::getInstance()->resume();
 	}
 }
 
@@ -72,12 +71,12 @@ void PauseLayer::onGoHome(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	{
 		removSelf();
 		Director::getInstance()->replaceScene(StartScene::createScene());
-		Director::getInstance()->resume();
 	}
 }
 
 void PauseLayer::removSelf()
 {
 	this->removeFromParentAndCleanup(true);
+	Director::getInstance()->resume();
 }
 

@@ -73,6 +73,16 @@ bool NpcLayer::init(std::string addrid)
 		innerheight = contentheight;
 	m_scrollview->setInnerContainerSize(Size(650, innerheight));
 
+	cocos2d::ui::Widget* hintdown = (cocos2d::ui::Widget*)m_csbnode->getChildByName("hintdown");
+	if (ncpsize >= 3)
+	{
+		hintdown->runAction(RepeatForever::create(Blink::create(2, 2)));
+	}
+	else
+	{
+		hintdown->setVisible(false);
+	}
+
 	for (int i = 0; i < ncpsize; i++)
 	{
 		Node* npcitem = CSLoader::createNode("npcNode.csb");
@@ -122,8 +132,8 @@ bool NpcLayer::init(std::string addrid)
 		updatePlotUI(i);
 
 
-	m_talkScroll = UIScroll::create(610.0f, 260.f);
-	m_talkScroll->setPosition(Vec2(360, 615));
+	m_talkScroll = UIScroll::create(610.0f, 250);
+	m_talkScroll->setPosition(Vec2(360, 652));
 	addChild(m_talkScroll);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -254,29 +264,26 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		Node* node = (Node*)pSender;
 		std::string npcid = node->getParent()->getName();
 
-		if (g_hero->getLVValue() + 1 < 10)
+		std::string protectword;
+		
+		if (npcid.compare("n004") == 0 && checkFightCount("n004") < 0)
 		{
-			std::string protectword;
-			if (npcid.compare("n004") == 0)
-			{
-				protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
-			}
-			else if (npcid.compare("n005") == 0)
-			{
-				protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
-
-			}
-			if (protectword.length() > 0)
-			{
-				if (isShowWord)
-					return;
-
-				m_npctalkbg->runAction(FadeIn::create(0.2f));
-				checkWordLblColor(protectword);
-				showTypeText(0);
-
+			protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
+		}
+		else if (npcid.compare("n005") == 0 && checkFightCount("n005") < 0)
+		{
+			protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
+		}
+		if (protectword.length() > 0)
+		{
+			if (isShowWord)
 				return;
-			}
+
+			m_npctalkbg->runAction(FadeIn::create(0.2f));
+			checkWordLblColor(protectword);
+			showTypeText(0);
+
+			return;
 		}
 
 		if (g_gameLayer != NULL)
@@ -358,7 +365,10 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 					{
 						g_maplayer->updataPlotMissionIcon(type);
 						if (unlockchapter > 0 && type == 0)
+						{
+							g_maplayer->updataPlotMissionIcon(1);
 							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
+						}
 					}
 				}
 
@@ -414,7 +424,7 @@ void NpcLayer::showTypeText(float dt)
 }
 void NpcLayer::checkWordLblColor(std::string wordstr)
 {
-	m_wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 25);
+	m_wordlbl = Label::createWithTTF(wordstr, "fonts/STXINGKA.TTF", 26);
 	m_wordlbl->setLineBreakWithoutSpace(true);
 	m_wordlbl->setMaxLineWidth(610);
 	int index = 0;
