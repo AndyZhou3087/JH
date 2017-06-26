@@ -103,8 +103,15 @@ void StorageRoom::use(std::string strid, int count)
 			PackageData *sdata = &map_storageData[it->first][i];
 			if (strid.compare(sdata->strid) == 0)
 			{
-				sdata->count -= count;
-				if (sdata->count <= 0)
+				if (sdata->type == FOOD || sdata->type == MEDICINAL || sdata->type == RES_1 || sdata->type == RES_2)
+				{
+					sdata->count -= count;
+					if (sdata->count <= 0)
+					{
+						map_storageData[it->first].erase(map_storageData[it->first].begin() + i);
+					}
+				}
+				else
 				{
 					map_storageData[it->first].erase(map_storageData[it->first].begin() + i);
 				}

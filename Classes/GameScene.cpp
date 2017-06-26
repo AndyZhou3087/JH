@@ -10,6 +10,7 @@
 #include "ReviveLayer.h"
 #include "NewerGuideLayer.h"
 #include "ActivitScene.h"
+#include "Const.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -88,7 +89,6 @@ bool GameScene::init()
 	this->addChild(g_nature);
 
 	loadSaveNatureData();
-
 	//角色数据
 	g_hero = Hero::create();
 	this->addChild(g_hero);
@@ -126,6 +126,28 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::updata), 1.0f);
 	this->schedule(schedule_selector(GameScene::timerSaveData), 5.0f);
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
+	
+	//处理制暖
+	std::string warmConfigStr = GlobalData::getMakeWarmConfig();
+	if (warmConfigStr.length() > 0)
+	{
+		std::vector<std::string> vec_retstr;
+		CommonFuncs::split(warmConfigStr, vec_retstr, "-");
+		int startwarmtime = atoi(vec_retstr[0].c_str());
+		int warmtime = atoi(vec_retstr[1].c_str());
+		int curtimemin = g_nature->getPastDays() * 24 * 60 + g_nature->getTime();
+		if (curtimemin - startwarmtime < warmtime)
+		{
+			g_nature->setIsMaKeWarm(true);
+			int leftmin = warmtime - (curtimemin - startwarmtime);
+			g_nature->scheduleOnce(schedule_selector(Nature::makewarmover), leftmin*1.0f / TIMESCALE);
+		}
+		else
+		{
+			g_nature->setTemperature(g_nature->getTemperature() - 15);
+			GlobalData::setMakeWarmConfig("");
+		}
+	}
     return true;
 }
 

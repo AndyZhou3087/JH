@@ -259,8 +259,7 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
-					data->count--;
-					StorageRoom::map_storageData[data->type].erase(it);
+					StorageRoom::use(data->strid);
 				}
 				break;
 			}
@@ -280,7 +279,7 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
-			data->count--;
+			StorageRoom::use(data->strid);
 		}
 	}
 	m_heroproper->refreshCarryData();

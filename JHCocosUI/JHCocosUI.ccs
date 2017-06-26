@@ -30,6 +30,7 @@
           <Image Name="shero4.jpg" />
           <Image Name="shero4_s.jpg" />
           <Image Name="shero4name.png" />
+          <Image Name="shoptitle.png" />
           <Image Name="startbg.jpg" />
           <Image Name="syssmallbg.png" />
           <Image Name="t001.jpg" />
@@ -252,7 +253,11 @@
           <Image Name="npcrsi2.png" />
           <Image Name="pausebtn.png" />
           <Image Name="qqline0.png" />
+          <Image Name="qubox1.png" />
+          <Image Name="qubox2.png" />
+          <Image Name="qubox3.png" />
           <Image Name="qubox4.png" />
+          <Image Name="qubox5.png" />
           <Image Name="redpoint.png" />
           <Image Name="resbox.png" />
           <Image Name="saveitembg.png" />

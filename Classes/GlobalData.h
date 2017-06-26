@@ -402,6 +402,16 @@ public:
 	*****************************/
 	static void setShareDay(int day);
 
+	/****************************
+	获取制暖的参数(开始制暖游戏分钟数，制暖时间)
+	*****************************/
+	static std::string getMakeWarmConfig();
+
+	/****************************
+	设置制暖的参数(开始制暖游戏分钟数，制暖时间)
+	*****************************/
+	static void setMakeWarmConfig(std::string strval);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     

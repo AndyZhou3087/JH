@@ -9,6 +9,7 @@ Nature::Nature()
 {
 	m_timeinterval = NORMAL_TIMEINTERVAL;
 	m_daynight = Night;
+	m_ismakewarm = false;
 }
 
 Nature::~Nature()
@@ -77,8 +78,27 @@ void Nature::ChangeReason()
 
 		g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[r].c_str()));
 	}
-
 }
+
+
+void Nature::makewarm(int extime)
+{
+	setIsMaKeWarm(true);
+	setTemperature(g_nature->getTemperature() + 15);
+	this->scheduleOnce(schedule_selector(Nature::makewarmover), extime / TIMESCALE);
+	std::string str = StringUtils::format("%d-%d", m_pastdays * 24 * 60 + (int)m_time, extime);
+	GlobalData::setMakeWarmConfig(str);
+}
+
+void Nature::makewarmover(float dt)
+{
+	//取暖时间到
+	setIsMaKeWarm(false);
+	setTemperature(g_nature->getTemperature() - 15);
+	GlobalData::setMakeWarmConfig("");
+}
+
+
 void Nature::ChangeDayNight()
 {
 	if (m_time < 60 * 6 - 1 || m_time >= 18 * 60)

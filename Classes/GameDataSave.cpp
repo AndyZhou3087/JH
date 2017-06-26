@@ -367,3 +367,14 @@ int GameDataSave::getShareDayOfYear()
 {
 	return loadIntDataByKey(addUIDString("shareday"), -1);
 }
+
+void GameDataSave::setWarmConfig(std::string strval)
+{
+	saveStringDataByKey(addUIDString("warmconfig"), strval);
+}
+
+
+std::string GameDataSave::getWarmConfig()
+{
+	return loadStringDataByKey(addUIDString("warmconfig"), "");
+}

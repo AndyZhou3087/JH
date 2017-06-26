@@ -91,7 +91,12 @@ bool MyPackage::isFull(PackageData pdata)
 				if (vec_packages[i].count >= 10)
 					ret = true;
 				else
-					ret = false;
+				{
+					if (pdata.type == FOOD || pdata.type == MEDICINAL || pdata.type == RES_1 || pdata.type == RES_2)
+						ret = false;
+					else
+						ret = true;
+				}
 			}
 
 		}

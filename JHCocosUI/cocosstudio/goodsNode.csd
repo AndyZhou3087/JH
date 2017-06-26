@@ -6,73 +6,89 @@
       <ObjectData Name="Node" Tag="36" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="bg" ActionTag="42567500" Tag="152" IconVisible="False" LeftMargin="-143.0000" RightMargin="-143.0000" TopMargin="-167.0000" BottomMargin="-167.0000" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="110" BottomEage="110" Scale9OriginX="94" Scale9OriginY="110" Scale9Width="98" Scale9Height="114" ctype="ImageViewObjectData">
-            <Size X="286.0000" Y="334.0000" />
+          <AbstractNodeData Name="bg" ActionTag="42567500" Tag="152" IconVisible="False" LeftMargin="-321.0000" RightMargin="-321.0000" TopMargin="-101.0000" BottomMargin="-101.0000" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
+            <Size X="642.0000" Y="202.0000" />
             <Children>
-              <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="15.3462" RightMargin="147.6538" TopMargin="10.7767" BottomMargin="290.2233" FontSize="30" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="123.0000" Y="33.0000" />
+              <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="147.5294" RightMargin="351.4706" TopMargin="24.4521" BottomMargin="139.5479" FontSize="35" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="143.0000" Y="38.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="15.3462" Y="306.7233" />
+                <Position X="147.5294" Y="158.5479" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.0537" Y="0.9183" />
-                <PreSize X="0.4301" Y="0.0988" />
+                <PrePosition X="0.2298" Y="0.7849" />
+                <PreSize X="0.2227" Y="0.1881" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="goodssepline" ActionTag="941350397" Tag="96" IconVisible="False" LeftMargin="26.8288" RightMargin="25.1712" TopMargin="72.8973" BottomMargin="257.1027" ctype="SpriteObjectData">
-                <Size X="234.0000" Y="4.0000" />
+              <AbstractNodeData Name="shopsepline" ActionTag="1619530326" Tag="174" IconVisible="False" LeftMargin="151.3520" RightMargin="182.6480" TopMargin="61.9585" BottomMargin="136.0415" ctype="SpriteObjectData">
+                <Size X="308.0000" Y="4.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="143.8288" Y="259.1027" />
+                <Position X="305.3520" Y="138.0415" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5029" Y="0.7758" />
-                <PreSize X="0.8182" Y="0.0120" />
-                <FileData Type="MarkedSubImage" Path="ui/goodssepline.png" Plist="uipacker.plist" />
+                <PrePosition X="0.4756" Y="0.6834" />
+                <PreSize X="0.4798" Y="0.0198" />
+                <FileData Type="MarkedSubImage" Path="ui/shopsepline.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="rmb" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="186.8609" RightMargin="76.1391" TopMargin="48.0541" BottomMargin="262.9459" FontSize="23" LabelText="￥" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="rmb" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="372.7350" RightMargin="246.2650" TopMargin="36.5391" BottomMargin="142.4609" FontSize="23" LabelText="￥" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="23.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="198.3609" Y="274.4459" />
+                <Position X="384.2350" Y="153.9609" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.6936" Y="0.8217" />
-                <PreSize X="0.0804" Y="0.0689" />
+                <PrePosition X="0.5985" Y="0.7622" />
+                <PreSize X="0.0358" Y="0.1139" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="price" ActionTag="818323410" Tag="98" IconVisible="False" LeftMargin="209.5186" RightMargin="16.4814" TopMargin="48.0541" BottomMargin="262.9459" FontSize="23" LabelText="12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="price" ActionTag="818323410" Tag="98" IconVisible="False" LeftMargin="395.3935" RightMargin="186.6065" TopMargin="36.5391" BottomMargin="142.4609" FontSize="23" LabelText="12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="60.0000" Y="23.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="209.5186" Y="274.4459" />
+                <Position X="395.3935" Y="153.9609" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.7326" Y="0.8217" />
-                <PreSize X="0.2098" Y="0.0689" />
+                <PrePosition X="0.6159" Y="0.7622" />
+                <PreSize X="0.0935" Y="0.1139" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="icon" ActionTag="-821878220" Tag="99" IconVisible="False" LeftMargin="90.8281" RightMargin="89.1719" TopMargin="87.3121" BottomMargin="140.6879" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="icon" ActionTag="-821878220" Tag="99" IconVisible="False" LeftMargin="29.0984" RightMargin="506.9016" TopMargin="38.9434" BottomMargin="57.0566" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
                 <Size X="106.0000" Y="106.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="143.8281" Y="193.6879" />
+                <Position X="82.0984" Y="110.0566" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5029" Y="0.5799" />
-                <PreSize X="0.3706" Y="0.3174" />
+                <PrePosition X="0.1279" Y="0.5448" />
+                <PreSize X="0.1651" Y="0.5248" />
                 <FileData Type="MarkedSubImage" Path="ui/gp1.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc" ActionTag="394713484" Tag="100" IconVisible="False" LeftMargin="10.0000" RightMargin="16.0000" TopMargin="203.7000" BottomMargin="30.3000" IsCustomSize="True" FontSize="23" LabelText="获得降龙十八掌、白首太玄经、倚天剑、乌蝉衣" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="260.0000" Y="100.0000" />
+              <AbstractNodeData Name="desc" ActionTag="394713484" Tag="100" IconVisible="False" LeftMargin="150.1028" RightMargin="181.8972" TopMargin="64.1516" BottomMargin="37.8484" IsCustomSize="True" FontSize="25" LabelText="获得降龙十八掌、白首太玄经、倚天剑、乌蝉衣" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="310.0000" Y="100.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="10.0000" Y="80.3000" />
+                <Position X="150.1028" Y="87.8484" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.0350" Y="0.2404" />
-                <PreSize X="0.9091" Y="0.2994" />
+                <PrePosition X="0.2338" Y="0.4349" />
+                <PreSize X="0.4829" Y="0.4950" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="buybtn" ActionTag="362216330" Tag="173" IconVisible="False" LeftMargin="476.1829" RightMargin="15.8171" TopMargin="47.1302" BottomMargin="64.8698" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="150.0000" Y="90.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="551.1829" Y="109.8698" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.8585" Y="0.5439" />
+                <PreSize X="0.2336" Y="0.4455" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <TextColor A="255" R="255" G="255" B="255" />
+                <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -83,7 +99,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/goodsbg.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/saveitembg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

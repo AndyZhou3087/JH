@@ -132,7 +132,7 @@ private:
 	std::vector<cocos2d::ui::Button*> vec_actionbtn;//建造进度条控件
 	std::vector<cocos2d::ui::Text*> vec_progresstext;//进度条上的文字控件，这里用来显示时间
 	void onfinish(Ref* pSender, BACTIONTYPE type);//建造，建筑物自己的操作 完成
-	void onExercisefinish(Ref* pSender, BACTIONTYPE type);//闭关完成
+	void onExercisefinish(int index);//闭关完成
 
 	void showFinishHintText(std::string path);//显示完成后的提示文字
 	void finishAnim(Ref* pSender, Node* node);//建造，建筑物自己的操作 完成后的提示动画

@@ -276,15 +276,10 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 			if (pasttime >= vec_buildAcitonData.at(index).actime * 60)
 			{
 				vec_actionbar[index]->setPercent(100);
-				onExercisefinish(NULL, BACTIONTYPE(index + 1));
+				onExercisefinish(selectActionIndex);
 			}
 			else
 			{
-				int tatoltime = vec_buildAcitonData.at(index).actime * 60;
-				float pecert = 100.0f*(curtime - estarttime) / tatoltime;
-				vec_actionbar[index]->setPercent(pecert);
-				vec_actionbar[index]->runAction(Sequence::create(MyProgressTo::create(tatoltime * (100.0f - pecert)/100, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)(index + 1))), NULL));
-				
 				vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("取消"));
 				updateExerciseLeftTime(0);
 				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
@@ -352,6 +347,14 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 					return;
 				}
 			}
+
+			if (strcmp(m_build->data.name, "furnace") == 0 && g_nature->getIsMaKeWarm())
+			{
+				HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf("暖炉中正在生火！请稍后再操作"));
+				Director::getInstance()->getRunningScene()->addChild(hintbox);
+				return;
+			}
+
 			buildbtn->setEnabled(false);
 
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
@@ -384,22 +387,19 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 				{
 					estarttime = GlobalData::getSysSecTime();
 					vec_actionbtn[tag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
-					vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(actime * 60, 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::onExercisefinish, this, (BACTIONTYPE)tag)), NULL));
-
+					updateExerciseLeftTime(0);
 					this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
-					std::string wgstr;
-					std::string ngstr;
 
 					if (g_hero->getAtrByType(H_WG)->count > 0)
 					{
-						wgstr = g_hero->getAtrByType(H_WG)->strid;
+						ex_wgstrid = g_hero->getAtrByType(H_WG)->strid;
 					}
 					if (g_hero->getAtrByType(H_NG)->count > 0)
 					{
-						ngstr = g_hero->getAtrByType(H_NG)->strid;
+						ex_ngstrid = g_hero->getAtrByType(H_NG)->strid;
 					}
 					
-					std::string estr = StringUtils::format("%d-%d-%s-%s", tag - ACTION, GlobalData::getSysSecTime(), wgstr.c_str(), ngstr.c_str());
+					std::string estr = StringUtils::format("%d-%d-%s-%s", tag - ACTION, GlobalData::getSysSecTime(), ex_wgstrid.c_str(), ex_ngstrid.c_str());
 					GameDataSave::getInstance()->setExersiceCfg(estr);
 				}
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("取消")) == 0)
@@ -732,11 +732,11 @@ void BuildingUILayer::delayShowNewerGuide(float dt)
 		showNewerGuide(44);
 }
 
-void BuildingUILayer::onExercisefinish(Ref* pSender, BACTIONTYPE type)
+void BuildingUILayer::onExercisefinish(int index)
 {
-	vec_actionbtn[type - ACTION]->setTitleText(CommonFuncs::gbk2utf("出关"));
+	vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("出关"));
 	this->unschedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime));
-	vec_progresstext[type - ACTION]->setVisible(false);
+	vec_progresstext[index]->setVisible(false);
 }
 
 void BuildingUILayer::updateExerciseDesc()
@@ -755,6 +755,14 @@ void BuildingUILayer::updateExerciseLeftTime(float dt)
 		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime % 3600/60, lefttime%3600%60);
 		vec_progresstext[selectActionIndex]->setVisible(true);
 		vec_progresstext[selectActionIndex]->setString(str);
+
+		float pecert = 100.0f*(GlobalData::getSysSecTime() - estarttime) / tatoltime;
+
+		vec_actionbar[selectActionIndex]->runAction(MyProgressFromTo::create(1.0f, vec_actionbar[selectActionIndex]->getPercent(), pecert));
+		if (lefttime <= 0)
+		{
+			onExercisefinish(selectActionIndex);
+		}
 	}
 }
 

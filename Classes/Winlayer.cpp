@@ -79,6 +79,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	loadTempData();
 
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
+	std::vector<int> winresrnd = GlobalData::map_npcs[npcid].winresrnd;
 
 	int curplot = GlobalData::getPlotMissionIndex();
 	PlotMissionData * plotdata = NULL;
@@ -103,7 +104,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		winres = plotdata->rewords;
 		for (unsigned int i = 0; i < winres.size(); i++)
 		{
-			GlobalData::map_npcs[npcid].winresrnd[i] = 100;
+			winresrnd.clear();
+			winresrnd.push_back(100);
 		}
 		int unlockchapter = 0;
 		if (plottype == 0)
@@ -146,7 +148,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		int res = atoi(winres[i].c_str());
 
 		int r = 0;
-		int winrnd = GlobalData::map_npcs[npcid].winresrnd[i];
+		int winrnd = winresrnd[i];
 		if (winrnd < 10)
 		{
 			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
@@ -311,7 +313,7 @@ void Winlayer::updataLV()
 	std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp;
 	for (i = curlv; i < vec_heroExp.size(); i++)
 	{
-		if (g_hero->getExpValue() > vec_heroExp[i])
+		if (g_hero->getExpValue() >= vec_heroExp[i])
 		{
 			lv = i + 1;
 			g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
@@ -324,11 +326,14 @@ void Winlayer::updataLV()
 		{
 			g_hero->setExpValue(vec_heroExp[heromaxlv - 1]);
 			lv = heromaxlv - 1;
+			g_hero->setLVValue(lv);
 		}
-		g_hero->setLVValue(lv);
-		g_hero->setLifeValue(g_hero->getMaxLifeValue());
-
-		showLvUpText();
+		else
+		{
+			g_hero->setLVValue(lv);
+			g_hero->setLifeValue(g_hero->getMaxLifeValue());
+			showLvUpText();
+		}
 	}
 
 	for (int m = H_WG; m <= H_NG; m++)
@@ -344,7 +349,7 @@ void Winlayer::updataLV()
 			gfData->exp += addGfExp();
 			for (i = curlv; i < vec_gfExp.size(); i++)
 			{
-				if (gfData->exp > vec_gfExp[i])
+				if (gfData->exp >= vec_gfExp[i])
 				{
 					lv = i + 1;
 					gfData->exp = gfData->exp - vec_gfExp[i];

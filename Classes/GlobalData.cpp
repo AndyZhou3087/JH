@@ -599,7 +599,12 @@ void GlobalData::setPlotMissionIndex(int val)
 
 int GlobalData::getPlotMissionIndex()
 {
-	return GameDataSave::getInstance()->getPlotMissionIndex();
+	//兼容上一版，已经到通关了，最大的INDEX溢出
+	int plotindex = GameDataSave::getInstance()->getPlotMissionIndex();
+	int max = vec_PlotMissionData.size();
+	if (plotindex >= max)
+		plotindex = max - 1;
+	return plotindex;
 }
 
 
@@ -619,7 +624,7 @@ int GlobalData::getBranchPlotMissionIndex()
 void GlobalData::loadPlotMissionJsonData()
 {
 	int heroindex = GameDataSave::getInstance()->getHeroId();
-	std::string plotfilename = "data/plotmission.json";
+	std::string plotfilename = "data/plotmission1.json";
 	if (heroindex == 2)
 		plotfilename = "data/plotmission2.json";
 	else if (heroindex == 3)
@@ -960,6 +965,17 @@ int GlobalData::getShareDay()
 void GlobalData::setShareDay(int day)
 {
 	GameDataSave::getInstance()->setShareDayOfYear(day);
+}
+
+
+std::string GlobalData::getMakeWarmConfig()
+{
+	return GameDataSave::getInstance()->getWarmConfig();
+}
+
+void GlobalData::setMakeWarmConfig(std::string strval)
+{
+	GameDataSave::getInstance()->setWarmConfig(strval);
 }
 
 std::string GlobalData::addUidString(std::string val)

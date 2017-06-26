@@ -1,6 +1,8 @@
 ﻿#include "Furnace.h"
 #include "Nature.h"
 #include "Const.h"
+#include "HintBox.h"
+#include "CommonFuncs.h"
 extern Nature* g_nature;
 
 Furnace::Furnace()
@@ -29,19 +31,11 @@ void Furnace::action(int minute, int exminute)
 	extime = exminute;
 	g_nature->setTimeInterval(minute * NORMAL_TIMEINTERVAL * 1.0f / (TIMESCALE* getActionBarTime()));
 
-	this->scheduleOnce(schedule_selector(Furnace::warm), getActionBarTime());
+	this->scheduleOnce(schedule_selector(Furnace::onfire), getActionBarTime());
 }
-void Furnace::warm(float dt)
+void Furnace::onfire(float dt)
 {
 	//温度+15°
-	g_nature->setIsMaKeWarm(true);
-	g_nature->setTemperature(g_nature->getTemperature() + 15);
-	this->scheduleOnce(schedule_selector(Furnace::warm), extime / TIMESCALE);
+	g_nature->makewarm(extime);
 	
-}
-void Furnace::warmover(float dt)
-{
-	//取暖时间到
-	g_nature->setIsMaKeWarm(false);
-	g_nature->setTemperature(g_nature->getTemperature() - 15);
 }

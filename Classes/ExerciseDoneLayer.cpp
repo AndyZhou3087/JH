@@ -94,7 +94,6 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 {
 	int f_gfexp = 0;
 	int f_heroexp = 0;
-
 	std::vector<PackageData*> vec_gfdata;
 
 	std::string gfstrid[] = { wgidstr, ngidstr };
@@ -139,6 +138,14 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 
 		int curlv = vec_gfdata[m]->lv;
 
+		//兼容上一个版本，功法等级溢出
+		int maxlv = GlobalData::map_wgngs[gfname].maxlv;
+		if (curlv >= maxlv)
+		{
+			curlv = maxlv - 1;
+			vec_gfdata[m]->lv = curlv;
+		}
+
 		f_gfexp = GlobalData::map_wgngs[gfname].vec_exp.at(curlv) * hour;
 
 		if (vec_gfdata[m]->type == W_GONG)
@@ -156,7 +163,7 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 
 		for (unsigned i = curlv; i < vec_gfExp.size(); i++)
 		{
-			if (vec_gfdata[m]->exp > vec_gfExp[i])
+			if (vec_gfdata[m]->exp >= vec_gfExp[i])
 			{
 				lv = i + 1;
 				vec_gfdata[m]->exp = vec_gfdata[m]->exp - vec_gfExp[i];
@@ -185,7 +192,7 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 
 	for (i = curlv; i < vec_heroExp.size(); i++)
 	{
-		if (g_hero->getExpValue() > vec_heroExp[i])
+		if (g_hero->getExpValue() >= vec_heroExp[i])
 		{
 			lv = i + 1;
 			g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
@@ -198,9 +205,13 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 		{
 			g_hero->setExpValue(vec_heroExp[heromaxlv - 1]);
 			lv = heromaxlv - 1;
+			g_hero->setLVValue(lv);
 		}
-		g_hero->setLVValue(lv);
-		g_hero->setLifeValue(g_hero->getMaxLifeValue());
+		else
+		{
+			g_hero->setLVValue(lv);
+			g_hero->setLifeValue(g_hero->getMaxLifeValue());
+		}
 	}
 
 	std::string str = StringUtils::format("角色经验值： +%d", f_heroexp);

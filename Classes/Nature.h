@@ -45,6 +45,9 @@ public:
 
 	CREATE_FUNC(Nature);
 
+	void makewarm(int extime);
+	void makewarmover(float dt);
+
 public:
 	int static ReasonCDays;//季节切换天数
 	int changeWeatherCount;//每天天气变化次数，最多1次

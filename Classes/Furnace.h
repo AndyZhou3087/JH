@@ -33,14 +33,7 @@ private:
 	@param
 	定时器执行
 	*****************************/
-	void warm(float dt);
-
-	/****************************
-	制暖
-	@param
-	制暖完了
-	*****************************/
-	void warmover(float dt);
+	void onfire(float dt);
 };
 #endif
 

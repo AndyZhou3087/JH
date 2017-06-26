@@ -63,14 +63,14 @@ bool ShopLayer::init()
 
 
 	int goodsize = vec_goods.size();
-	int row = goodsize % 2 == 0 ? goodsize / 2 : (goodsize / 2 + 1);
+	int row = goodsize;
 
 
 	m_scrollview = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
 	m_scrollview->setScrollBarEnabled(false);
 	m_scrollview->setBounceEnabled(true);
 
-	int itemheight = 350;
+	int itemheight = 205;
 	int innerheight = itemheight * row;
 	int contentheight = m_scrollview->getContentSize().height;
 	if (innerheight < contentheight)
@@ -82,7 +82,7 @@ bool ShopLayer::init()
 		GoodsItem* node = GoodsItem::create(&vec_goods[i]);
 		node->setTag(4 + i);
 		m_scrollview->addChild(node);
-		node->setPosition(Vec2(165 + i % 2 * 330, innerheight - itemheight / 2 - i / 2 * itemheight));
+		node->setPosition(Vec2(360, innerheight - itemheight / 2 - i * itemheight));
 	}
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");

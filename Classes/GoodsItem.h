@@ -37,12 +37,14 @@ private:
 	cocos2d::ui::Text* descTxt;
 	cocos2d::ui::Text* priceTxt;
 	bool isDraging;
+	Vec2 startPos;
 private:
 
 	/****************************
 	点击购买按钮回调
 	*****************************/
 	void onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void buyClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };
 #endif
 

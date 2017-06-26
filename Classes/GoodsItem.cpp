@@ -38,11 +38,13 @@ bool GoodsItem::init(GoodsData* gdata)
 	std::string pricestr = StringUtils::format("%d.00", gdata->price);
 	priceTxt->setString(pricestr);
 
-	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("bg");//整块节点击
-	backbtn->addTouchEventListener(CC_CALLBACK_2(GoodsItem::onBuy, this));
+	cocos2d::ui::Button* bgbtn = (cocos2d::ui::Button*)csbnode->getChildByName("bg");//整块节点击
+	bgbtn->addTouchEventListener(CC_CALLBACK_2(GoodsItem::buyClick, this));
+	bgbtn->setSwallowTouches(false);
 
-	backbtn->setSwallowTouches(false);
-
+	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)bgnode->getChildByName("buybtn");//整块节点击
+	buybtn->addTouchEventListener(CC_CALLBACK_2(GoodsItem::onBuy, this));
+	buybtn->setSwallowTouches(false);
 	return true;
 }
 
@@ -63,12 +65,22 @@ GoodsItem* GoodsItem::create(GoodsData* gdata)
 void GoodsItem::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);
-	if (type == ui::Widget::TouchEventType::BEGAN || type == ui::Widget::TouchEventType::MOVED)
+	buyClick(pSender, type);
+}
+
+void GoodsItem::buyClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	Node* node = (Node*)pSender;
+	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
-		if (type == ui::Widget::TouchEventType::MOVED)
+		startPos = node->convertToWorldSpace(this->getParent()->getPosition());
+	}
+	else if (type == ui::Widget::TouchEventType::MOVED)
+	{
+		Vec2 pos = node->convertToWorldSpace(this->getParent()->getPosition());
+		if (fabsf(pos.y - startPos.y) > 20)
 			isDraging = true;
 	}
-
 	else if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		if (!isDraging)
