@@ -9,6 +9,15 @@
 #include "StorageRoom.h"
 #include "GlobalData.h"
 USING_NS_CC;
+/****************************
+角色性别
+*****************************/
+typedef enum
+{
+	S_NONE = 0,
+	S_MAN,
+	S_WOMEN
+}H_SEX;
 
 /****************************
 角色属性（装备栏）类型，
@@ -119,6 +128,11 @@ public:
 	CC_SYNTHESIZE(float, m_dfpercent, DfPercent);
 
 	/****************************
+	角色性别
+	*****************************/
+	CC_SYNTHESIZE(H_SEX, m_sex, Sex);
+
+	/****************************
 	获取角色攻击
 	*****************************/
 	int getAtkValue();
@@ -175,6 +189,13 @@ public:
 	@param 功法ID
 	*****************************/
 	bool checkifHasGF(std::string gfid);
+
+	/****************************
+	是否有物品，
+	根据ID查找是否已经拥有
+	@param ID
+	*****************************/
+	bool checkifHas(std::string strid);
 
 	/****************************
 	检查最大值属性

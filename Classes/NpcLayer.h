@@ -52,6 +52,8 @@ private:
 	void getWinRes(int type);
 
 	int checkFightCount(std::string npcid);
+
+	std::string replaceSexWord(std::string dstr);
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;

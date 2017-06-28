@@ -78,12 +78,10 @@ void StorageUILayer::updateResContent()
 		{
 			int row = count % 5 == 0 ? count / 5 : (count / 5 + 1);
 			typerow[i] = row;
-			typecount[i] = count;
 			textheigth += 45;
 		}
 		else
 		{
-			typecount[i] = 0;
 			typerow[i] = 0;
 		}
 	}

@@ -8,6 +8,8 @@
 
 std::map<std::string, std::vector<BuildActionData>> GlobalData::map_buidACData;
 
+std::map<std::string, AllResource> GlobalData::map_allResource;
+
 std::vector<ResData> GlobalData::vec_resData;
 
 std::vector<std::string> GlobalData::vec_hillResid;
@@ -177,14 +179,31 @@ void GlobalData::loadResJsonData()
 		{
 			data.res.push_back(v[m].GetInt());
 		}
-		v = item["cname"];
-		strcpy(data.cname, v.GetString());
-		v = item["desc"];
-		strcpy(data.desc, v.GetString());
 
 		v = item["unit"];
 		data.unitname = v.GetString();
 		vec_resData.push_back(data);
+
+	}
+}
+
+void GlobalData::loadAllResourceJsonData()
+{
+	map_allResource.clear();
+	rapidjson::Document doc = ReadJsonFile("data/allresouces.json");
+	rapidjson::Value& values = doc["rd"];
+	for (unsigned int i = 0; i < values.Size(); i++)//一级资源数组
+	{
+		AllResource data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["id"];
+		data.strid = v.GetString();
+
+		v = item["cname"];
+		data.cname = v.GetString();
+		v = item["desc"];
+		data.desc = v.GetString();
+		map_allResource[data.strid]= data;
 
 	}
 }
@@ -202,6 +221,7 @@ void GlobalData::loadHillResJsonData()
 
 void GlobalData::loadMapJsonData()
 {
+	map_maps.clear();
 	rapidjson::Document doc = ReadJsonFile("data/map.json");
 	rapidjson::Value& values = doc["m"];
 	for (unsigned int i = 0; i < values.Size(); i++)//地图地点数组
@@ -235,6 +255,7 @@ void GlobalData::loadMapJsonData()
 
 void GlobalData::loadNpcJsonData()
 {
+	map_npcs.clear();
 	rapidjson::Document doc = ReadJsonFile("data/npc.json");
 	rapidjson::Value& values = doc["n"];
 	for (unsigned int i = 0; i < values.Size(); i++)//npc数组
@@ -284,22 +305,6 @@ void GlobalData::loadNpcJsonData()
 			if (str.length() > 1)
 				data.exchgres.push_back(str);
 		}
-		v = item["exchgneed"];
-		for (unsigned int m = 0; m < v.Size(); m++)
-		{
-			rapidjson::Value& ndresitem = v[m];
-			if (ndresitem.Size() > 0)
-			{
-				std::vector<std::string> vec_temp;
-				for (unsigned int n = 0; n < ndresitem.Size(); n++)
-				{
-					std::string str = ndresitem[m].GetString();
-					if (str.length() > 1)
-						vec_temp.push_back(str);
-				}
-				data.exchgneedres.push_back(vec_temp);
-			}
-		}
 		v = item["word"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
@@ -343,6 +348,7 @@ void GlobalData::loadResData()
 
 void GlobalData::loadHeroAtrJsonData()
 {
+	map_heroAtr.clear();
 	rapidjson::Document doc = ReadJsonFile("data/heroatr.json");
 	rapidjson::Value& values = doc["h"];
 	for (unsigned int i = 0; i < values.Size(); i++)//角色数组4个角色
@@ -384,6 +390,7 @@ void GlobalData::loadHeroAtrJsonData()
 
 void GlobalData::loadWG_NGJsonData()
 {
+	map_wgngs.clear();
 	rapidjson::Document doc = ReadJsonFile("data/wg.json");
 	rapidjson::Value& values = doc["w"];
 	for (unsigned int i = 0; i < values.Size(); i++)//外功数组
@@ -393,14 +400,8 @@ void GlobalData::loadWG_NGJsonData()
 		rapidjson::Value& v = vitem["id"];
 		strcpy(data.id, v.GetString());
 
-		v = vitem["cname"];
-		data.cname = v.GetString();
-
 		v = vitem["maxlv"];
 		data.maxlv = atoi(v.GetString());
-
-		v = vitem["desc"];
-		data.desc = v.GetString();
 
 		v = vitem["bns"];
 		for (unsigned int j = 0; j < v.Size(); j++)
@@ -413,11 +414,12 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
+		data.type = W_GONG + 1;
 		v = vitem["qu"];
 		data.qu = atoi(v.GetString());
 
 		v = vitem["type"];
-		data.type = atoi(v.GetString());
+		data.extype = atoi(v.GetString());
 
 		map_wgngs[data.id] = data;
 	}
@@ -432,14 +434,8 @@ void GlobalData::loadWG_NGJsonData()
 		rapidjson::Value& v = vitem["id"];
 		strcpy(data.id, v.GetString());
 
-		v = vitem["cname"];
-		data.cname = v.GetString();
-
 		v = vitem["maxlv"];
 		data.maxlv = atoi(v.GetString());
-
-		v = vitem["desc"];
-		data.desc = v.GetString();
 
 		v = vitem["bns"];
 		for (unsigned int j = 0; j < v.Size(); j++)
@@ -452,7 +448,8 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
-
+		data.type = N_GONG + 1;
+		data.extype = 0;
 		v = vitem["qu"];
 		data.qu = atoi(v.GetString());
 
@@ -462,6 +459,7 @@ void GlobalData::loadWG_NGJsonData()
 
 void GlobalData::loadEquipJsonData()
 {
+	map_equips.clear();
 	rapidjson::Document doc = ReadJsonFile("data/equip.json");
 	rapidjson::Value& values = doc["ae"];
 	for (unsigned int i = 0; i < values.Size(); i++)//武器防具数组
@@ -476,10 +474,6 @@ void GlobalData::loadEquipJsonData()
 		data.atk = atoi(v.GetString());
 		v = item["df"];
 		data.df = atoi(v.GetString());
-		v = item["cname"];
-		data.cname = v.GetString();
-		v = item["desc"];
-		data.desc = v.GetString();
 		v = item["extype"];
 		data.extype = atoi(v.GetString());
 		v = item["qu"];
@@ -623,12 +617,9 @@ int GlobalData::getBranchPlotMissionIndex()
 
 void GlobalData::loadPlotMissionJsonData()
 {
+	vec_PlotMissionData.clear();
 	int heroindex = GameDataSave::getInstance()->getHeroId();
-	std::string plotfilename = "data/plotmission1.json";
-	if (heroindex == 2)
-		plotfilename = "data/plotmission2.json";
-	else if (heroindex == 3)
-		plotfilename = "data/plotmission3.json";
+	std::string plotfilename = StringUtils::format("data/plotmission%d.json", heroindex);
 
 	rapidjson::Document doc = ReadJsonFile(plotfilename);
 	rapidjson::Value& values = doc["m"];
@@ -693,6 +684,7 @@ void GlobalData::loadPlotMissionJsonData()
 
 void GlobalData::loadBranchPlotMissionJsonData()
 {
+	vec_BranchPlotMissionData.clear();
 	std::string plotfilename = "data/branchplotmission.json";
 
 	rapidjson::Document doc = ReadJsonFile(plotfilename);
@@ -777,7 +769,7 @@ void GlobalData::updatePlotMissionStatus()
 		std::vector<std::string> tmp;
 		CommonFuncs::split(str, tmp, "-");
 
-		for (unsigned int i = 0; i < tmp.size(); i++)
+		for (unsigned int i = 0; i < GlobalData::vec_PlotMissionData.size(); i++)
 		{
 			GlobalData::vec_PlotMissionData[i].status = atoi(tmp[i].c_str());
 		}
@@ -805,7 +797,7 @@ void GlobalData::updateBranchPlotMissionStatus()
 		std::vector<std::string> tmp;
 		CommonFuncs::split(str, tmp, "-");
 
-		for (unsigned int i = 0; i < tmp.size(); i++)
+		for (unsigned int i = 0; i < GlobalData::vec_BranchPlotMissionData.size(); i++)
 		{
 			GlobalData::vec_BranchPlotMissionData[i].status = atoi(tmp[i].c_str());
 		}
@@ -905,6 +897,7 @@ bool GlobalData::isHasFSF()
 
 void GlobalData::loadGfskillData()
 {
+	map_gfskills.clear();
 	rapidjson::Document doc = ReadJsonFile("data/gfskill.json");
 	rapidjson::Value& values = doc["s"];
 	for (unsigned int i = 0; i < values.Size(); i++)

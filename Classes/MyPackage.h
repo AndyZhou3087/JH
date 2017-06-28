@@ -16,8 +16,6 @@ typedef struct _PackageData
 	int extype;//用于区分采集1，砍伐2，挖掘工具3，其他类型为0
 	int exp;
 	int goodvalue;
-	std::string name;
-	std::string desc;
 	_PackageData()
 	{
 		strid = "";
@@ -27,8 +25,6 @@ typedef struct _PackageData
 		extype = 0;
 		exp = 0;
 		goodvalue = 100;
-		name = "";
-		desc = "";
 	}
 
 }PackageData;
@@ -43,6 +39,7 @@ public:
 
 	static int add(PackageData pdata);
 	static void cutone(std::string strid);
+	static void cutone(PackageData pdata);
 	static void takeoff();
 	static bool isFull(PackageData pdata);
 	static void save();

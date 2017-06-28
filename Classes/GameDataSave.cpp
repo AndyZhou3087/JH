@@ -365,16 +365,46 @@ void GameDataSave::setShareDayOfYear(int day)
 
 int GameDataSave::getShareDayOfYear()
 {
-	return loadIntDataByKey(addUIDString("shareday"), -1);
+	return loadIntDataByKey("shareday", -1);
 }
 
 void GameDataSave::setWarmConfig(std::string strval)
 {
-	saveStringDataByKey(addUIDString("warmconfig"), strval);
+	saveStringDataByKey("warmconfig", strval);
 }
 
 
 std::string GameDataSave::getWarmConfig()
 {
 	return loadStringDataByKey(addUIDString("warmconfig"), "");
+}
+
+void GameDataSave::setHeroSex(int val)
+{
+	saveIntDataByKey(addUIDString("sex"), val);
+}
+
+int GameDataSave::getHeroSex()
+{
+	return loadIntDataByKey(addUIDString("sex"), -1);
+}
+
+void GameDataSave::setHeroExpEndTime(int val)
+{
+	saveIntDataByKey(addUIDString("heroexpetime"), val);
+}
+
+int GameDataSave::getHeroExpEndTime()
+{
+	return loadIntDataByKey(addUIDString("heroexpetime"), 0);
+}
+
+void GameDataSave::setGfEndTime(int val)
+{
+	saveIntDataByKey(addUIDString("gfexpetime"), val);
+}
+
+int GameDataSave::getGfEndTime()
+{
+	return loadIntDataByKey(addUIDString("gfexpetime"), 0);
 }

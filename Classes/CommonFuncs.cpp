@@ -40,8 +40,17 @@ int CommonFuncs::split(const std::string& str, std::vector<std::string>& ret_, s
 		//}
 	}
 
-
 	return 0;
+}
+
+std::string CommonFuncs::replace_all(std::string & s, std::string const & t, std::string const & w)
+{
+	std::string::size_type pos = s.find(t), t_size = t.size(), r_size = w.size();
+	while (pos != std::string::npos){ // found 
+		s.replace(pos, t_size, w);
+		pos = s.find(t, pos + r_size);
+	}
+	return s;
 }
 
 int CommonFuncs::code_convert(const char *from_charset, const char *to_charset, const char *inbuf, size_t inlen, char *outbuf, size_t outlen)
@@ -88,6 +97,7 @@ std::string CommonFuncs::gbk2utf(const char *inbuf)
 #endif
 	return strRet;
 }
+
 
 void CommonFuncs::BtnAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {

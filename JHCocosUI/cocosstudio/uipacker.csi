@@ -345,6 +345,10 @@
       <FilePathData Path="ui/x029.png" />
       <FilePathData Path="ui/x030.png" />
       <FilePathData Path="ui/xline.png" />
+      <FilePathData Path="ui/bookshelf.png" />
+      <FilePathData Path="ui/sbookshelf.png" />
+      <FilePathData Path="ui/w042.png" />
+      <FilePathData Path="ui/badbookshelf.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

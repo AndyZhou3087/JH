@@ -123,7 +123,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 				box->addChild(res);
 				box->setScale(0.6f);
 
-				Label * namelbl = Label::createWithTTF(tmpdata.name, "fonts/STXINGKA.TTF", 25);
+				Label * namelbl = Label::createWithTTF(GlobalData::map_allResource[tmpdata.strid].cname, "fonts/STXINGKA.TTF", 25);
 				namelbl->setColor(Color3B(255, 255, 255));
 				namelbl->setPosition(Vec2(box->getPositionX(), 75));
 				this->addChild(namelbl);

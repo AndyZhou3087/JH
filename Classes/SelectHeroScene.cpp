@@ -221,16 +221,13 @@ void SelectHeroScene::enterNextScene()
 	GlobalData::setUId(uidstr);
 	GameDataSave::getInstance()->setHeroId(_lastSelect);
 
+	GlobalData::setCurHeroIdToSaveList();
+
 	std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
 	GameDataSave::getInstance()->setStorageData(defaultStorageStr);
 
-	Scene* scene;
-	if (_lastSelect == 1 || _lastSelect == 2 || _lastSelect == 3)
-	{
-		scene = StoryScene::createScene();
-	}
-	else
-		scene = GameScene::createScene();
+	Scene* scene = StoryScene::createScene();
+
 	Director::getInstance()->replaceScene(scene);
 }
 

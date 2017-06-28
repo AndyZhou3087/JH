@@ -231,7 +231,8 @@ void MapLayer::Arrive()
 			}
 			else if (g_hero->getAtrByType(H_MOUNT)->goodvalue == 20 || g_hero->getAtrByType(H_MOUNT)->goodvalue == 10)
 			{
-				std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_MOUNT)->name.c_str(), CommonFuncs::gbk2utf("生命仅剩").c_str(), g_hero->getAtrByType(H_MOUNT)->goodvalue);
+				std::string strid = g_hero->getAtrByType(H_MOUNT)->strid;
+				std::string descstr = StringUtils::format("%s%s%d", GlobalData::map_allResource[strid].cname.c_str(), CommonFuncs::gbk2utf("生命仅剩").c_str(), g_hero->getAtrByType(H_MOUNT)->goodvalue);
 
 				g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 			}

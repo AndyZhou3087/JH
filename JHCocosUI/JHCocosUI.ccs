@@ -120,9 +120,11 @@
           <Image Name="atrselected.png" />
           <Image Name="backbtn.png" />
           <Image Name="backstartbtn.png" />
+          <Image Name="badbookshelf.png" />
           <Image Name="badfurnace.png" />
           <Image Name="bed.png" />
           <Image Name="blank.png" />
+          <Image Name="bookshelf.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
@@ -262,6 +264,7 @@
           <Image Name="resbox.png" />
           <Image Name="saveitembg.png" />
           <Image Name="sbed.png" />
+          <Image Name="sbookshelf.png" />
           <Image Name="scooktable.png" />
           <Image Name="select.png" />
           <Image Name="settingselect.png" />
@@ -360,6 +363,7 @@
           <Image Name="w039.png" />
           <Image Name="w040.png" />
           <Image Name="w041.png" />
+          <Image Name="w042.png" />
           <Image Name="winemake.png" />
           <Image Name="winetable.png" />
           <Image Name="wintitle.png" />
@@ -398,6 +402,8 @@
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="activityLayer.csd" Type="Layer" />
+        <Project Name="bookDetailsLayer.csd" Type="Layer" />
+        <Project Name="bookshelfLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="buildingDetailsLayer.csd" Type="Layer" />
         <Project Name="buyComfirmLayer.csd" Type="Layer" />
@@ -435,6 +441,7 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="sepcialLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

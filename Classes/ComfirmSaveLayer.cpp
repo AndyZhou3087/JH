@@ -46,7 +46,6 @@ void ComfirmSaveLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	{
 		SelectHeroScene* parant = (SelectHeroScene*)this->getParent();
 		parant->enterNextScene();
-		GlobalData::setCurHeroIdToSaveList();
 	}
 }
 

@@ -7,6 +7,7 @@
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "PauseLayer.h"
+#include "GameDataSave.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -23,11 +24,11 @@ bool HeroStateUILayer::init()
 
 	m_csbnode = CSLoader::createNode("heroStateLayer.csb");
 	m_csbnode->setPosition(Vec2(0, -90));
-	this->addChild(m_csbnode);
+	this->addChild(m_csbnode, 0, "csbnode");
 
 	HeroProperNode* heroproper = HeroProperNode::create();
-	heroproper->setPosition(Vec2(360, 810));
-	m_csbnode->addChild(heroproper);
+	heroproper->setPosition(Vec2(360, 835));
+	m_csbnode->addChild(heroproper, 0, "HeroProperNode");
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(HeroStateUILayer::onBack, this));
@@ -40,6 +41,13 @@ bool HeroStateUILayer::init()
 		std::string str = StringUtils::format("herostate%d", i);
 		herostatus[i] = (cocos2d::ui::Text*)m_csbnode->getChildByName(str);
 	}
+
+	m_heroexptimelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("heroexptime");
+	m_gfexptimelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("gfexptime");
+
+	m_heroexpendtime = GameDataSave::getInstance()->getHeroExpEndTime();
+	m_gfexpendtime = GameDataSave::getInstance()->getGfEndTime();
+
 	updateStatus(0);
 	//////layer 点击事件，屏蔽下层事件
 	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
@@ -160,6 +168,50 @@ void HeroStateUILayer::updateStatus(float dt)
 	if (g_hero->getLVValue() + 1 >= lvmax)
 		str = StringUtils::format("%d%s", lvmax, CommonFuncs::gbk2utf("（满级）").c_str());
 	herostatus[12]->setString(str);
+
+	//性别
+	if (g_hero->getSex() == S_NONE)
+	{
+		m_csbnode->getChildByName("herostatetext13")->setVisible(true);
+		herostatus[13]->setVisible(true);
+		herostatus[13]->setString(CommonFuncs::gbk2utf("不详"));
+	}
+
+	int letftime1 = m_heroexpendtime - GlobalData::getSysSecTime();
+	if (letftime1 > 0)
+	{
+		std::string str;
+		int day = letftime1 / 86400;
+		int sectime = letftime1 % 86400;
+		if (day > 0)
+			str = StringUtils::format("经验药水效果剩%d天%02d:%02d:%02d", day, sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		else
+			str = StringUtils::format("经验药水效果剩%02d:%02d:%02d", sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		m_heroexptimelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+		m_heroexptimelbl->setVisible(true);
+	}
+	else
+	{
+		m_heroexptimelbl->setVisible(false);
+	}
+
+	int letftime2 = m_gfexpendtime - GlobalData::getSysSecTime();
+	if (letftime2 > 0)
+	{
+		std::string str;
+		int day = letftime2 / 86400;
+		int sectime = letftime2 % 86400;
+		if (day > 0)
+			str = StringUtils::format("大力丸效果剩%d天%02d:%02d:%02d", day, sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		else
+			str = StringUtils::format("大力丸效果剩%02d:%02d:%02d", sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		m_gfexptimelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+		m_gfexptimelbl->setVisible(true);
+	}
+	else
+	{
+		m_gfexptimelbl->setVisible(false);
+	}
 }
 
 void HeroStateUILayer::onExit()

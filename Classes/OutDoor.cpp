@@ -245,7 +245,7 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		std::vector<PackageData>::iterator it;
 		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end();++it)
 		{
-			if (it->strid.compare(data->strid) == 0)
+			if (it->strid.compare(data->strid) == 0 && it->goodvalue == data->goodvalue)
 			{
 				PackageData pdata;
 				pdata.type = data->type;
@@ -255,11 +255,9 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 				pdata.extype = data->extype;
 				pdata.exp = data->extype;
 				pdata.goodvalue = data->goodvalue;
-				pdata.name = data->name;
-				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
-					StorageRoom::use(data->strid);
+					StorageRoom::use(pdata);
 				}
 				break;
 			}
@@ -275,8 +273,6 @@ void OutDoor::onStorageItem(cocos2d::Ref* pSender)
 		pdata.extype = data->extype;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
-		pdata.name = data->name;
-		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			StorageRoom::use(data->strid);
@@ -294,7 +290,7 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 	PackageData data = MyPackage::vec_packages[index];
 	data.count = 1;
 	StorageRoom::add(data);
-	MyPackage::cutone(data.strid);
+	MyPackage::cutone(data);
 	m_heroproper->refreshCarryData();
 	updata();
 }

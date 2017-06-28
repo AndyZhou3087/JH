@@ -30,6 +30,11 @@ public:
 	显示新手引导
 	*****************************/
 	void showNewerGuide(int step);
+
+	/****************************
+	选择装备
+	*****************************/
+	void selectCarryData();
 private:
 
 	/****************************
@@ -105,6 +110,8 @@ private:
 	Sprite* m_select;//选中标识
 	PackageData* m_lastSelectedData;//上次选中中的装备数据
 	int m_step;//新手引导索引
+	HeroAtrType m_select_atrype;
+	PackageData* m_select_udata;
 };
 #endif
 

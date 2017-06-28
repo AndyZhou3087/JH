@@ -7,5 +7,14 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="story4_1.csd" />
+          <FilePathData Path="story4_2.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="story4_1.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

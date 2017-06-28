@@ -15,6 +15,7 @@
 #include "MyMenu.h"
 #include "BuyComfirmLayer.h"
 #include "NewerGuideLayer.h"
+#include "SpecialHintLayer.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -330,12 +331,13 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		std::string name = StringUtils::format("resitem%d", i);
 		m_scrollView->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%s.png", map_carryData[index][i].strid.c_str());
+		std::string rstrid = map_carryData[index][i].strid;
+		std::string str = StringUtils::format("ui/%s.png", rstrid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 
-		str = StringUtils::format("%s", map_carryData[index][i].name.c_str());
+		str = StringUtils::format("%s", GlobalData::map_allResource[rstrid].cname.c_str());
 		Label * namelbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 24);
 		namelbl->setColor(Color3B(0, 0, 0));
 		namelbl->setPosition(Vec2(box->getContentSize().width / 2, - 10));
@@ -396,30 +398,44 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 	{
-		BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+		BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
 		g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
 		return;
 	}
 
 	Node* node = (Node*)pSender;
-	HeroAtrType atrype = (HeroAtrType)node->getTag();
-	PackageData* udata = (PackageData*)node->getUserData();
-	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width/2, node->getPositionY() + node->getContentSize().height/2));
-	
+	m_select_atrype = (HeroAtrType)node->getTag();
+	m_select_udata = (PackageData*)node->getUserData();
+	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width / 2, node->getPositionY() + node->getContentSize().height / 2));
+
+	if (g_hero->getSex() == S_MAN && (m_select_udata->strid.compare("w022") == 0 || m_select_udata->strid.compare("w040") == 0))
+	{
+		SpecialHintLayer* layer = SpecialHintLayer::create();
+		g_gameLayer->addChild(layer, 11);
+		return;
+	}
+
+	selectCarryData();
+
+	showNewerGuide(++m_step);
+}
+
+void HeroProperNode::selectCarryData()
+{
 	if (m_lastSelectedData != NULL)
 	{
-		if (m_lastSelectedData != udata)//是否再次点击
+		if (m_lastSelectedData != m_select_udata)//是否再次点击
 		{
 			//是否在同一种类型中切换装备，如果是先卸下，在装备上选中的
 			bool issametool = false;
 			bool issameother = false;
 			if (m_lastSelectedData->type == TOOLS)
 			{
-				issametool = m_lastSelectedData->type == udata->type &&  m_lastSelectedData->extype == udata->extype;
+				issametool = m_lastSelectedData->type == m_select_udata->type &&  m_lastSelectedData->extype == m_select_udata->extype;
 			}
 			else
 			{
-				issameother = m_lastSelectedData->type == udata->type;
+				issameother = m_lastSelectedData->type == m_select_udata->type;
 			}
 			if (issametool || issameother)
 			{
@@ -443,17 +459,17 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (m_select->isVisible())//之前是选中m_select可见，现在点了就是没选中
 	{
-		if (udata->type >= TOOLS)
-			str = StringUtils::format("ui/hp%d-%d.png", udata->type + 1, udata->extype);
+		if (m_select_udata->type >= TOOLS)
+			str = StringUtils::format("ui/hp%d-%d.png", m_select_udata->type + 1, m_select_udata->extype);
 		else
-			str = StringUtils::format("ui/hp%d.png", udata->type + 1);
+			str = StringUtils::format("ui/hp%d.png", m_select_udata->type + 1);
 
 		m_select->setVisible(false);
 	}
 	else//选中
 	{
 		m_select->setVisible(true);
-		str = StringUtils::format("ui/%s.png", udata->strid.c_str());
+		str = StringUtils::format("ui/%s.png", m_select_udata->strid.c_str());
 	}
 
 
@@ -462,24 +478,23 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (m_select->isVisible())
 	{
-		takeon(atrype, udata);
+		takeon(m_select_atrype, m_select_udata);
 	}
 	else
 	{
-		takeoff(atrype);
+		takeoff(m_select_atrype);
 	}
-	m_lastSelectedData = (PackageData*)node->getUserData();
+	m_lastSelectedData = m_select_udata;
 
 	updataMyPackageUI();
-	showNewerGuide(++m_step);
 }
 
 void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
 {
 	if (g_hero->getIsOut())
-		MyPackage::cutone(pdata->strid);
+		MyPackage::cutone(*pdata);
 	else
-		StorageRoom::use(pdata->strid);
+		StorageRoom::use(*pdata);
 
 	g_hero->setAtrByType(atrype, *pdata);
 	std::string str;
@@ -563,7 +578,7 @@ void HeroProperNode::saveData()
 	{
 		PackageData* sdata = g_hero->getAtrByType((HeroAtrType)i);
 	
-		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue,sdata->name.c_str(), sdata->desc.c_str());
+		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue);
 		str.append(idstr);
 	}
 	GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));

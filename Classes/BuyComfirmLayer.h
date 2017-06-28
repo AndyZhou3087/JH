@@ -5,6 +5,7 @@
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 
+#define FSFGOODSID 13
 class BuyComfirmLayer :public Layer
 {
 public:

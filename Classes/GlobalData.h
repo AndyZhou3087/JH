@@ -25,6 +25,17 @@ typedef struct
 	std::string desc;//描述
 }BuildActionData;
 
+
+/****************************
+所有资源数据结构
+*****************************/
+typedef struct
+{
+	std::string strid;//id
+	std::string cname;//中文显示名
+	std::string desc;//描述
+}AllResource;
+
 /****************************
 一级资源数据结构
 *****************************/
@@ -37,8 +48,6 @@ typedef struct
 	int type;//类型StorageType
 	int actype;////工具时的标识1："采集", 2："砍伐", 3："挖掘"
 	std::vector<int> ep; // 使用后的效果，eg:加生命，加精神
-	char cname[32];//中文显示名
-	char desc[200];//描述
 	std::vector<int> res;//合成需要的资源
 	float pastmin;//过去的时间
 	float waittime;//单个产出等待时间
@@ -75,7 +84,6 @@ typedef struct
 	std::vector<int> winresrnd;//打败npc出奖励的概率
 	std::vector<int> winrescount;//打多少次随机
 	std::vector<std::string> exchgres;//兑换的资源
-	std::vector<std::vector<std::string>> exchgneedres;//兑换需要的资源
 	std::vector<std::string> words;//npc 对话
 }NpcData;
 
@@ -101,10 +109,9 @@ typedef struct
 	int maxlv;
 	std::vector<int> vec_bns;//外功--加攻或者内功--加防
 	std::vector<int> vec_exp;
-	std::string cname;
-	std::string desc;
+	int type;//类型StorageType
 	int qu;//品级
-	int type;//1：棍 2：刀 3：剑
+	int extype;//1：棍 2：刀 3：剑
 }WG_NGData;
 
 /****************************
@@ -116,8 +123,6 @@ typedef struct
 	int type;//类型StorageType
 	int atk;
 	int df;
-	std::string cname;
-	std::string desc;
 	int extype;//扩展类型，区分棍，刀，剑
 	int qu;//品级
 }EquipData;
@@ -190,6 +195,11 @@ public:
 	@param 建筑物名称
 	*****************************/
 	static void loadBuildActionJSon(std::string buildname);
+
+	/****************************
+	解析所有资源详细描述数据
+	*****************************/
+	static void loadAllResourceJsonData();
 
 	/****************************
 	解析一级资源数据
@@ -432,6 +442,7 @@ public:
     static int getAdsChoose(int position);
 
 public:
+	static std::map<std::string, AllResource> map_allResource;//所有资源，主要是描述和交易数据
 	static std::vector<ResData> vec_resData;//一级资源vector
 	static std::vector<std::string> vec_hillResid;//后山资源列表vector
 	static std::map<std::string, MapData> map_maps;//地图数据

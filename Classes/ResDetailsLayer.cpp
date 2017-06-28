@@ -7,17 +7,17 @@
 #include "StorageUILayer.h"
 #include "SoundManager.h"
 #include "BuyComfirmLayer.h"
+#include "Const.h"
+#include "GameDataSave.h"
 
 #define WINESTRID "23"
 #define GRASSRID "5"
 
 int ResDetailsLayer::whereClick = 0;//0--仓库，1其他
 
-std::string gfqudesc[] = {"（入门）", "（一流）", "（上乘）", "（传世）", "（绝世）"};
-
 ResDetailsLayer::ResDetailsLayer()
 {
-
+	m_expendtime = 0;
 }
 
 ResDetailsLayer::~ResDetailsLayer()
@@ -55,7 +55,9 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	cocos2d::ui::Text* resname = (cocos2d::ui::Text*)m_csbnode->getChildByName("namelbl");
 
-	resname->setString(pdata->name);
+	resname->setString(GlobalData::map_allResource[pdata->strid].cname);
+
+	lefttimelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("lefttime");
 
 	cocos2d::ui::Text* qulbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("qulbl");
 
@@ -74,7 +76,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	{
 		qustr = StringUtils::format("ui/qubox%d.png", qu);
 		qulbl->setVisible(true);
-		qulbl->setString(CommonFuncs::gbk2utf(gfqudesc[qu - 1].c_str()));
+		qulbl->setString(CommonFuncs::gbk2utf(qudesc[qu - 1].c_str()));
+		qulbl->setTextColor(qucolor[qu - 1]);
 	}
 
 	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
@@ -111,17 +114,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
-		resname->setString(pdata->name);
-
 		int lv = pdata->lv + 1;
 		countstr = StringUtils::format("功法等级 %d/%d", lv, GlobalData::map_wgngs[pdata->strid].maxlv);
-
-		usebtn->setVisible(true);
-		m_okbtn->setPositionX(460);
-
-		std::string uselblstr = StringUtils::format("大力丸 x%d", StorageRoom::getCountById("71"));
-		uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
-		
 	}
 	else if (pdata->type == RES_2)
 	{
@@ -131,8 +125,20 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			m_okbtn->setPositionX(460);
 			std::string uselblstr = StringUtils::format("经验药水 x%d", StorageRoom::getCountById("70"));
 			uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
+			m_expendtime = GameDataSave::getInstance()->getHeroExpEndTime();
+			updataLeftTime(0);
+			this->schedule(schedule_selector(ResDetailsLayer::updataLeftTime), 1);
 		}
-
+		else if (pdata->strid.compare("71") == 0)
+		{
+			usebtn->setVisible(true);
+			m_okbtn->setPositionX(460);
+			std::string uselblstr = StringUtils::format("大力丸 x%d", StorageRoom::getCountById("71"));
+			uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
+			m_expendtime = GameDataSave::getInstance()->getGfEndTime();
+			updataLeftTime(0);
+			this->schedule(schedule_selector(ResDetailsLayer::updataLeftTime), 1);
+		}
 		else if (pdata->strid.compare("74") == 0)
 		{
 			countstr = StringUtils::format("生命%d", pdata->goodvalue);
@@ -144,7 +150,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));
 
 	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("desclbl");
-	resdesc->setString(pdata->desc);
+	resdesc->setString(GlobalData::map_allResource[pdata->strid].desc);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -184,8 +190,6 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 		if (resid.compare(GlobalData::vec_resData[i].strid) == 0)
 		{
 			isInRes = true;
-			sdata.desc = GlobalData::vec_resData[i].desc;
-			sdata.name = GlobalData::vec_resData[i].cname;
 			sdata.strid = resid;
 			sdata.type = GlobalData::vec_resData[i].type - 1;
 			break;
@@ -201,8 +205,6 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 				if (resid.compare(GlobalData::map_buidACData[it->first][i].icon) == 0)
 				{
 					isInRes = true;
-					sdata.desc = GlobalData::map_buidACData[it->first][i].desc;
-					sdata.name = GlobalData::map_buidACData[it->first][i].cname;
 					sdata.strid = resid;
 					sdata.type = GlobalData::map_buidACData[it->first][i].type - 1;
 					break;
@@ -229,7 +231,7 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			if (GlobalData::isExercising() && !GlobalData::isHasFSF() && m_okbtn->getTitleText().compare(CommonFuncs::gbk2utf("使用")) == 0)
 			{
-				BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+				BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
 				g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
 				return;
 			}
@@ -336,107 +338,49 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (m_packageData->type == N_GONG || m_packageData->type == W_GONG)
+		if (m_packageData->strid.compare("71") == 0)
 		{
-			if (StorageRoom::getCountById("71") > 0)
+			int count = StorageRoom::getCountById("71");
+			if (count > 0)
 			{
 				StorageRoom::use("71");
-				std::string uselblstr = StringUtils::format("大力丸 x%d", StorageRoom::getCountById("71"));
+				std::string uselblstr = StringUtils::format("大力丸 x%d", count - 1);
 				uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
-			}
-			else
-			{
-				return;
-			}
-
-			ResData resdata;
-			for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
-			{
-				if (GlobalData::vec_resData[m].strid.compare("70") == 0)
+				int gfetime = GameDataSave::getInstance()->getGfEndTime();
+				int cursectime = GlobalData::getSysSecTime();
+				if (cursectime <= gfetime)
 				{
-					resdata = GlobalData::vec_resData[m];
-					break;
+					GameDataSave::getInstance()->setGfEndTime(gfetime + 24 * 3600);
+					m_expendtime = gfetime + 24 * 3600;
+				}
+				else
+				{
+					GameDataSave::getInstance()->setGfEndTime(cursectime + 24 * 3600);
+					m_expendtime = cursectime + 24 * 3600;
 				}
 			}
-			unsigned int i = 0;
-			int lv = 0;
-			int curlv = 0;
-			for (unsigned int m = 0; m < StorageRoom::map_storageData[m_packageData->type].size(); m++)
-			{
-				PackageData* gfData = &StorageRoom::map_storageData[m_packageData->type][m];
-				if (gfData->count > 0)
-				{
-					std::string gfname = gfData->strid;
-					std::vector<int> vec_gfExp = GlobalData::map_wgngs[gfname].vec_exp;
-					curlv = gfData->lv;
-					gfData->exp += resdata.ep[0];
-					for (i = curlv; i < vec_gfExp.size(); i++)
-					{
-						if (gfData->exp >= vec_gfExp[i])
-						{
-							lv = i + 1;
-							gfData->exp = gfData->exp - vec_gfExp[i];
-						}
-					}
-					if (lv > curlv)
-					{
-						int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
-						if (lv >= gfmaxlv)
-							lv = gfmaxlv - 1;
-						gfData->lv = lv;
-					}
-				}
 
-			}
 		}
-		else if (m_packageData->type == RES_2)
+		else if (m_packageData->strid.compare("70") == 0)
 		{
-			if (StorageRoom::getCountById("70") > 0)
+			int count = StorageRoom::getCountById("70");
+			if (count > 0)
 			{
 				StorageRoom::use("70");
-				std::string uselblstr = StringUtils::format("经验药水 x%d", StorageRoom::getCountById("70"));
+				std::string uselblstr = StringUtils::format("经验药水 x%d", count - 1);
 				uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
-
-			}
-			else
-			{
-				return;
-			}
-
-			ResData resdata;
-			for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
-			{
-				if (GlobalData::vec_resData[m].strid.compare("70") == 0)
+				int heorexpetime = GameDataSave::getInstance()->getHeroExpEndTime();
+				int cursectime = GlobalData::getSysSecTime();
+				if (GlobalData::getSysSecTime() <= heorexpetime)
 				{
-					resdata = GlobalData::vec_resData[m];
-					break;
+					GameDataSave::getInstance()->setHeroExpEndTime(heorexpetime + 24 * 3600);
+					m_expendtime = heorexpetime + 24 * 3600;
 				}
-			}
-
-			int exp = resdata.ep[0];
-			g_hero->setExpValue(g_hero->getExpValue() + exp);
-			int curlv = g_hero->getLVValue();
-			unsigned int i = 0;
-			int lv = 0;
-			std::vector<int> vec_heroExp = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp;
-			for (i = curlv; i < vec_heroExp.size(); i++)
-			{
-				if (g_hero->getExpValue() >= vec_heroExp[i])
+				else
 				{
-					lv = i + 1;
-					g_hero->setExpValue(g_hero->getExpValue() - vec_heroExp[i]);
+					GameDataSave::getInstance()->setHeroExpEndTime(cursectime + 24 * 3600);
+					m_expendtime = cursectime + 24 * 3600;
 				}
-			}
-			if (lv > curlv)
-			{
-				int heromaxlv = vec_heroExp.size();
-				if (lv >= heromaxlv)
-				{
-					g_hero->setExpValue(vec_heroExp[heromaxlv - 1]);
-					lv = heromaxlv - 1;
-				}
-				g_hero->setLVValue(lv);
-				
 			}
 		}
 		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
@@ -519,6 +463,27 @@ void ResDetailsLayer::updateHorseData(int addvalue)
 		std::string temp = horselbl->getString().c_str();
 		std::string horesstr = StringUtils::format(CommonFuncs::gbk2utf("白马（生命%d）").c_str(), horseData->goodvalue);
 		horselbl->setString(horesstr);
+	}
+}
+
+void ResDetailsLayer::updataLeftTime(float dt)
+{
+	int letftime = m_expendtime - GlobalData::getSysSecTime();
+	if (letftime > 0)
+	{
+		std::string str;
+		int day = letftime / 86400;
+		int sectime = letftime % 86400;
+		if (day > 0)
+			str = StringUtils::format("剩%d天%02d:%02d:%02d", day, sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		else
+			str = StringUtils::format("剩%02d:%02d:%02d", sectime / 3600, sectime % 3600 / 60, sectime % 3600 % 60);
+		lefttimelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+		lefttimelbl->setVisible(true);
+	}
+	else
+	{
+		lefttimelbl->setVisible(false);
 	}
 }
 

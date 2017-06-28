@@ -8,6 +8,8 @@
 #include "NewerGuideLayer.h"
 #include "GameDataSave.h"
 
+std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
+std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
 NpcLayer::NpcLayer()
 {
 	isShowWord = false;
@@ -239,6 +241,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		if (!isplotMissioning)
 		{
 			wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), npc.words[0].c_str());
+			wordstr = replaceSexWord(wordstr);
 			vec_wordstr.push_back(wordstr);
 		}
 
@@ -269,10 +272,13 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		if (npcid.compare("n004") == 0 && checkFightCount("n004") < 0)
 		{
 			protectword = CommonFuncs::gbk2utf("田伯光：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
+			
 		}
 		else if (npcid.compare("n005") == 0 && checkFightCount("n005") < 0)
 		{
 			protectword = CommonFuncs::gbk2utf("平一指：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！");
+			if (g_hero->getHeadID() == 4)
+				protectword = replaceSexWord(protectword);	
 		}
 		if (protectword.length() > 0)
 		{
@@ -327,8 +333,11 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 			for (unsigned int m = 0; m < plotData->words.size(); m++)
 			{
 				wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->words[m].c_str());
+				wordstr = replaceSexWord(wordstr);
 				vec_wordstr.push_back(wordstr);
+
 				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), plotData->mywords[m].c_str());
+				wordstr = replaceSexWord(wordstr);
 				vec_wordstr.push_back(wordstr);
 			}
 			if (g_maplayer != NULL)
@@ -375,7 +384,9 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				for (unsigned int m = 0; m < plotData->bossword.size(); m++)
 				{
 					wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->bossword[m].c_str());
+					wordstr = replaceSexWord(wordstr);
 					vec_wordstr.push_back(wordstr);
+
 				}
 			}
 		}
@@ -607,8 +618,6 @@ void NpcLayer::getWinRes(int type)
 				{
 					isfind = true;
 					data.type = rdata.type - 1;
-					data.name = rdata.cname;
-					data.desc = rdata.desc;
 					break;
 				}
 			}
@@ -629,8 +638,6 @@ void NpcLayer::getWinRes(int type)
 							data.strid = bdata.icon;
 							data.count = res % 1000;
 							data.type = bdata.type - 1;
-							data.desc = bdata.desc;
-							data.name = bdata.cname;
 							break;
 						}
 					}
@@ -657,16 +664,7 @@ void NpcLayer::getWinRes(int type)
 					data.strid = gfdata.id;
 					data.count = 1;
 					data.lv = 0;
-					if (data.strid.substr(0, 1).compare("w") == 0)
-					{
-						data.type = W_GONG;
-					}
-					else if (data.strid.substr(0, 1).compare("x") == 0)
-					{
-						data.type = N_GONG;
-					}
-					data.desc = gfdata.desc;
-					data.name = gfdata.cname;
+					data.type = gfdata.type - 1;
 					addret = MyPackage::add(data);
 					break;
 				}
@@ -682,8 +680,6 @@ void NpcLayer::getWinRes(int type)
 					{
 						data.strid = edata.id;
 						data.count = 1;
-						data.desc = edata.desc;
-						data.name = edata.cname;
 						data.type = edata.type - 1;
 						data.goodvalue = 100;
 						data.extype = edata.extype;
@@ -710,7 +706,7 @@ void NpcLayer::getWinRes(int type)
 				sepstr = "";
 			else
 				sepstr = ";";
-			std::string onestr = StringUtils::format("%s%s-%d-%d-%d-%d-%d-%d-%s-%s",sepstr.c_str(), tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].name.c_str(), tempResData[i].desc.c_str());
+			std::string onestr = StringUtils::format("%s%s-%d-%d-%d-%d-%d-%d",sepstr.c_str(), tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue);
 			datastr.append(onestr);
 		}
 		GameDataSave::getInstance()->setTempStorage(m_addrstr, datastr);
@@ -776,4 +772,15 @@ int NpcLayer::checkFightCount(std::string npcid)
 		return heroVsBossCount;
 	else
 		return -bossVsHeroCount;
+}
+
+std::string NpcLayer::replaceSexWord(std::string dstr)
+{
+	std::string retstr = dstr;
+	int size = sizeof(replacestr) / sizeof(replacestr[0]);
+	for (int i = 0; i < size; i++)
+	{
+		retstr = CommonFuncs::replace_all(dstr, CommonFuncs::gbk2utf(replacestr[i].c_str()), CommonFuncs::gbk2utf(areplacestr[i].c_str()));
+	}
+	return retstr;
 }

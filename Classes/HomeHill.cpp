@@ -76,8 +76,9 @@ bool HomeHill::init()
 				iconimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 				iconimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
-				name->setString(data.cname);
-				desc->setString(data.desc);
+				name->setString(GlobalData::map_allResource[data.strid].cname);
+				desc->setString(GlobalData::map_allResource[data.strid].desc);
+
 				str = StringUtils::format("%d", data.count);
 				count->setString(str);
 

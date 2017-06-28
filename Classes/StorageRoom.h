@@ -26,6 +26,8 @@ public:
 	static std::map<int, std::vector<PackageData>> map_storageData;
 	static void add(PackageData data);
 	static void use(std::string strid, int count = 1);
+
+	static void use(PackageData data);
 	static int getCountById(std::string strid);
 };
 #endif

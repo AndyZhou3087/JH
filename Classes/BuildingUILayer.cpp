@@ -16,6 +16,7 @@
 #include "ExerciseCancelLayer.h"
 #include "ExerciseDoneLayer.h"
 #include "BuyComfirmLayer.h"
+#include "BookShelfLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -307,7 +308,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		int tag = node->getTag();
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF() && strcmp(m_build->data.name, "exerciseroom") != 0)
 		{
-			BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+			BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
 			g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
 			return;
 		}
@@ -466,6 +467,12 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
 		if (homelayer != NULL)
 			homelayer->updateBuilding();
+
+		if (strcmp(m_build->data.name, "bookshelf") == 0)
+		{
+			Director::getInstance()->getRunningScene()->addChild(BookShelfLayer::create(), 4);
+			this->removeFromParentAndCleanup(true);
+		}
 	}
 	else//操作完成
 	{
@@ -488,8 +495,6 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			data.exp = 0;
 			data.goodvalue = 100;
 			data.extype = vec_buildAcitonData.at(type - ACTION).extype;
-			data.name = vec_buildAcitonData.at(type - ACTION).cname;
-			data.desc = vec_buildAcitonData.at(type - ACTION).desc;
 			StorageRoom::add(data);
 			//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
 			//this->addChild(layer);

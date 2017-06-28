@@ -70,6 +70,25 @@ void MyPackage::cutone(std::string strid)
 	save();
 }
 
+
+void MyPackage::cutone(PackageData pdata)
+{
+	int index = 0;
+	for (index = MyPackage::getSize() - 1; index >= 0; index--)
+	{
+		if (pdata.strid.compare(MyPackage::vec_packages[index].strid) == 0 && pdata.goodvalue == MyPackage::vec_packages[index].goodvalue)
+		{
+			if (--vec_packages[index].count <= 0)
+			{
+				vec_packages.erase(vec_packages.begin() + index);
+			}
+			break;
+		}
+	}
+
+	save();
+}
+
 void MyPackage::takeoff()
 {
 	vec_packages.clear();
@@ -113,7 +132,7 @@ void MyPackage::save()
 	for (unsigned int i = 0; i < vec_packages.size(); i++)
 	{
 		//"%s-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", vec_packages[i].strid.c_str(), vec_packages[i].type, vec_packages[i].count, vec_packages[i].extype, vec_packages[i].lv, vec_packages[i].exp, vec_packages[i].goodvalue, vec_packages[i].name.c_str(), vec_packages[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", vec_packages[i].strid.c_str(), vec_packages[i].type, vec_packages[i].count, vec_packages[i].extype, vec_packages[i].lv, vec_packages[i].exp, vec_packages[i].goodvalue);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setPackage(str.substr(0, str.length() - 1));
@@ -138,8 +157,6 @@ void MyPackage::load()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
-		data.name = tmp[7];
-		data.desc = tmp[8];
 		vec_packages.push_back(data);
 	}
 }

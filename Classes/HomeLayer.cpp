@@ -19,6 +19,8 @@
 #include "HintBox.h"
 #include "CommonFuncs.h"
 #include "BuyComfirmLayer.h"
+#include "BookShelf.h"
+#include "BookShelfLayer.h"
 
 HomeLayer::HomeLayer()
 {
@@ -39,6 +41,9 @@ bool HomeLayer::init()
 
 	m_badfurnace = (cocos2d::ui::Widget*)csbnode->getChildByName("badfurnace");
 	m_badfurnace->setLocalZOrder(1);
+
+	m_badbookshelf = (cocos2d::ui::Widget*)csbnode->getChildByName("badbookshelf");
+	m_badbookshelf->setLocalZOrder(1);
 
 	MenuItemSprite* bedItem = MenuItemSprite::create(
 		bed,
@@ -103,7 +108,7 @@ bool HomeLayer::init()
 	medicinekitItem->setName("medicinekit");
 	medicinekitItem->setOpacity(0);
 	medicinekitItem->setTag(4);
-	medicinekitItem->setPosition(Vec2(678, 625));
+	medicinekitItem->setPosition(Vec2(310, 650));
 	menu->addChild(medicinekitItem);
 
 
@@ -145,6 +150,19 @@ bool HomeLayer::init()
 	exersiceroomItem->setTag(7);
 	exersiceroomItem->setPosition(Vec2(257, 93));
 	menu->addChild(exersiceroomItem);
+
+	Building* bookshelf = BookShelf::create();
+	Vec_Buildings.push_back(bookshelf);
+	MenuItemSprite* bookshelfItem = MenuItemSprite::create(
+		bookshelf,
+		bookshelf,
+		bookshelf,
+		CC_CALLBACK_1(HomeLayer::onclick, this));
+	bookshelfItem->setName("bookshelf");
+	bookshelfItem->setOpacity(0);
+	bookshelfItem->setTag(8);
+	bookshelfItem->setPosition(Vec2(665, 751));
+	menu->addChild(bookshelfItem);
 
 	loadJsonData();
 
@@ -203,16 +221,17 @@ void HomeLayer::onclick(Ref* pSender)
 	std::string nodename = node->getName();
 	int nodetag = node->getTag();
 
-	//if (nodename.compare("exersiceroom") == 0)
-	//{
-	//	HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("暂未开放，敬请期待！"));
-	//	g_gameLayer->addChild(layer, 4);
-	//}
-	//else
-	//{
+	if (nodename.compare("bookshelf") == 0 && Vec_Buildings[nodetag]->data.level >= Vec_Buildings[nodetag]->data.maxlevel)
+	{
+		Layer* layer = BookShelfLayer::create();
+		g_gameLayer->addChild(layer, 4);
+	}
+	else
+	{
 		Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
 		g_gameLayer->addChild(layer, 4);
-	//}
+	}
+
 }
 
 void HomeLayer::loadJsonData()
@@ -241,7 +260,7 @@ void HomeLayer::onFence(Ref* pSender)
 
 	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 	{
-		BuyComfirmLayer* layer = BuyComfirmLayer::create(6);
+		BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
 		g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
 		return;
 	}
@@ -261,6 +280,8 @@ void HomeLayer::updateBuilding()
 			item->setOpacity(255);
 			if (i == 5)
 				m_badfurnace->setVisible(false);
+			else if (i == 8)
+				m_badbookshelf->setVisible(false);
 		}
 	}
 }

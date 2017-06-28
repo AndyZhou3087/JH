@@ -27,7 +27,6 @@ private:
 	void onclick(Ref* pSender);
 	cocos2d::ui::ScrollView* scrollview;
 private:
-	int typecount[RES_MAX];
 	int typerow[RES_MAX];
 	int getCountByType(int type);
 	int lastScrollViewHeight;

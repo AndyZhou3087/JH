@@ -56,6 +56,7 @@ private:
 	Building* m_fence;//围墙
 	std::vector<Building*> Vec_Buildings;//建筑物vec
 	cocos2d::ui::Widget* m_badfurnace;//没有建造暖炉之前显示的图标
+	cocos2d::ui::Widget* m_badbookshelf;//没有建造书架之前显示的图标
 };
 #endif
 

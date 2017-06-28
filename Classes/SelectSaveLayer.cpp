@@ -53,7 +53,7 @@ bool SelectSaveLayer::init()
 
 			std::string str = StringUtils::format("%sherolv", saveids[i].c_str());
 			int lv = loadIntDataByKey(str, 0);
-			str = StringUtils::format("%d", lv);
+			str = StringUtils::format("%d", lv + 1);
 			cocos2d::ui::Text* lvtxt = (cocos2d::ui::Text*)textnode->getChildByName("lv");
 			lvtxt->setString(str);
 

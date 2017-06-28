@@ -81,12 +81,7 @@ void StartScene::onNewStart(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 {
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
-	{
-		if (GlobalData::getUId().length() > 0)
-		{
-			GlobalData::setCurHeroIdToSaveList();
-		}
-	
+	{	
 		Scene* scene = SelectHeroScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}

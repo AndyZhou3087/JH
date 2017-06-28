@@ -27,11 +27,15 @@ private:
 
 	void updateHorseData(int addvalue);
 
+	void updataLeftTime(float dt);
+
 private:
 	PackageData* m_packageData;
 	cocos2d::ui::Text* uselbl;
+	cocos2d::ui::Text* lefttimelbl;
 	cocos2d::ui::Button* m_okbtn;
 	Node* m_csbnode;
+	int m_expendtime;
 };
 
 #endif

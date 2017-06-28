@@ -10,7 +10,9 @@
 USING_NS_UM_SOCIAL;
 #include "iosfunc.h"
 #endif
+#define REVIVEGOODSID 14
 bool ReviveLayer::isBuyRevive = false;
+
 ReviveLayer::ReviveLayer()
 {
 	isBuyRevive = false;
@@ -137,7 +139,7 @@ void ReviveLayer::onShare(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		//platforms->push_back(QQ);
 		//platforms->push_back(WEIXIN);
 		platforms->push_back(WEIXIN_CIRCLE);
-        sdk->openShare(platforms, "来自分享面板", "武林群侠传", "Icon-87.png", 
+        sdk->openShare(platforms, "来自分享面板", "良心独立游戏！装备全靠刷！刚刷出自宫神功就被打死了！快来帮我！", "Icon-87.png", 
 		"https://itunes.apple.com/cn/app/%E6%AD%A6%E6%9E%97%E7%BE%A4%E4%BE%A0%E4%BC%A0-%E9%AB%98%E8%87%AA%E7%94%B1%E5%BA%A6%E6%AD%A6%E4%BE%A0%E5%85%BB%E6%88%90%E6%B8%B8%E6%88%8F/id1243387739?mt=8", 
 		share_selector(ReviveLayer::shareCallback));
         //UMShare();
@@ -210,7 +212,7 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		else
 		{
 			isBuyRevive = true;
-			ShopLayer::beginPay(7);
+			ShopLayer::beginPay(REVIVEGOODSID);
 		}
 	}
 }

@@ -36,7 +36,7 @@ void StorageRoom::save()
 		for (int j = 0; j < size; j++)
 		{
 			PackageData sdata = map_storageData[it->first][j];
-			std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue, sdata.name.c_str(), sdata.desc.c_str());
+			std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv, sdata.exp, sdata.goodvalue);
 			str.append(idstr);
 		}
 	}
@@ -50,6 +50,7 @@ void StorageRoom::loadStorageData()
 	{
 		map_storageData[it->first].clear();
 	}
+	map_storageData.clear();
 
 	std::string strval = GameDataSave::getInstance()->getStorageData();
 	std::vector<std::string> tmp;
@@ -62,14 +63,14 @@ void StorageRoom::loadStorageData()
 
 		PackageData sdata;
 		sdata.strid = tmp2[0];
+		if (sdata.strid.length() <= 0)
+			continue;
 		sdata.type = atoi(tmp2[1].c_str());
 		sdata.count = atoi(tmp2[2].c_str());
 		sdata.extype = atoi(tmp2[3].c_str());
 		sdata.lv = atoi(tmp2[4].c_str());
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());
-		sdata.name = tmp2[7];
-		sdata.desc = tmp2[8];
 		map_storageData[sdata.type].push_back(sdata);
 	}
 }
@@ -106,6 +107,35 @@ void StorageRoom::use(std::string strid, int count)
 				if (sdata->type == FOOD || sdata->type == MEDICINAL || sdata->type == RES_1 || sdata->type == RES_2)
 				{
 					sdata->count -= count;
+					if (sdata->count <= 0)
+					{
+						map_storageData[it->first].erase(map_storageData[it->first].begin() + i);
+					}
+				}
+				else
+				{
+					map_storageData[it->first].erase(map_storageData[it->first].begin() + i);
+				}
+				break;
+			}
+		}
+	}
+	StorageRoom::save();
+}
+
+void StorageRoom::use(PackageData data)
+{
+	std::map<int, std::vector<PackageData>>::iterator it;
+	for (it = map_storageData.begin(); it != map_storageData.end(); ++it)
+	{
+		for (unsigned int i = 0; i < map_storageData[it->first].size(); i++)
+		{
+			PackageData *sdata = &map_storageData[it->first][i];
+			if (data.strid.compare(sdata->strid) == 0 && data.goodvalue == sdata->goodvalue)
+			{
+				if (sdata->type == FOOD || sdata->type == MEDICINAL || sdata->type == RES_1 || sdata->type == RES_2)
+				{
+					sdata->count -= data.count;
 					if (sdata->count <= 0)
 					{
 						map_storageData[it->first].erase(map_storageData[it->first].begin() + i);

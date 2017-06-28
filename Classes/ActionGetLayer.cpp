@@ -109,16 +109,6 @@ void ActionGetLayer::doAction(float dt)
 			data.extype = 0;
 			data.exp = 0;
 			data.goodvalue = 100;
-
-			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
-			{
-				if (GlobalData::vec_resData[i].strid.compare(idstr) == 0)
-				{
-					data.name = GlobalData::vec_resData[i].cname;
-					data.desc = GlobalData::vec_resData[i].desc;
-					break;
-				}
-			}
 			getResData.push_back(data);
 			isget = true;
 		}
@@ -191,8 +181,6 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.count = 1;
 				pdata.exp = data->exp;
 				pdata.goodvalue = data->goodvalue;
-				pdata.name = data->name;
-				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -212,8 +200,6 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.count = 1;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
-		pdata.name = data->name;
-		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -350,10 +336,11 @@ void ActionGetLayer::delayDoAction(float dt)
 			if (r < 80)
 			{
 				g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue--;
-
+				std::string strid = g_hero->getAtrByType((HeroAtrType)m_actype)->strid;
 				if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue <= 0)
 				{
-					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
+
+					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), GlobalData::map_allResource[strid].cname.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
 					g_uiScroll->addEventText(brokenstr, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
@@ -361,7 +348,7 @@ void ActionGetLayer::delayDoAction(float dt)
 				}
 				else if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 20 || g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 10)
 				{
-					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType((HeroAtrType)m_actype)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue);
+					std::string descstr = StringUtils::format("%s%s%d", GlobalData::map_allResource[strid].cname.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue);
 
 					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
@@ -446,8 +433,6 @@ void ActionGetLayer::loadTempData()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
-		data.name = tmp[7];
-		data.desc = tmp[8];
 		tempResData.push_back(data);
 	}
 }
@@ -476,7 +461,7 @@ void ActionGetLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < allResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue, allResData[i].name.c_str(), allResData[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));

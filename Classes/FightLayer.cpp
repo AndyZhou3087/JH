@@ -321,6 +321,7 @@ void FightLayer::showFightWord(int type, int value)
 		{
 			int showr = GlobalData::createRandomNum(2);
 
+			std::string wstrid = g_hero->getAtrByType(H_WEAPON)->strid;
 			if (g_hero->getAtrByType(H_WG)->count > 0)
 			{
 				if (showr == 0)
@@ -338,7 +339,7 @@ void FightLayer::showFightWord(int type, int value)
 				size = sizeof(herofightdesc1[extype - 1]) / sizeof(herofightdesc1[extype - 1][0]);
 				r = GlobalData::createRandomNum(size);
 				wordstr = herofightdesc1[extype - 1][r];
-				herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), GlobalData::map_npcs[m_npcid].name);
+				herowordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), g_hero->getMyName().c_str(), GlobalData::map_allResource[wstrid].cname.c_str(), GlobalData::map_npcs[m_npcid].name);
 			}
 
 			
@@ -348,7 +349,7 @@ void FightLayer::showFightWord(int type, int value)
 				g_hero->getAtrByType(H_WEAPON)->goodvalue--;
 				if (g_hero->getAtrByType(H_WEAPON)->goodvalue <= 0)
 				{
-					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), GlobalData::map_allResource[wstrid].cname.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
 					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
@@ -356,7 +357,7 @@ void FightLayer::showFightWord(int type, int value)
 				}
 				else if (g_hero->getAtrByType(H_WEAPON)->goodvalue == 20 || g_hero->getAtrByType(H_WEAPON)->goodvalue == 10)
 				{
-					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_WEAPON)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_WEAPON)->goodvalue);
+					std::string descstr = StringUtils::format("%s%s%d", GlobalData::map_allResource[wstrid].cname.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_WEAPON)->goodvalue);
 
 					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
@@ -426,13 +427,14 @@ void FightLayer::showFightWord(int type, int value)
 		if (g_hero->getAtrByType(H_ARMOR)->count > 0)//是有有防具
 		{
 			int r = GlobalData::createRandomNum(100);
+			std::string astrid = g_hero->getAtrByType(H_ARMOR)->strid;
 			if (r < 80)
 			{
 				g_hero->getAtrByType(H_ARMOR)->goodvalue--;
 
 				if (g_hero->getAtrByType(H_ARMOR)->goodvalue <= 0)
 				{
-					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), GlobalData::map_allResource[astrid].cname.c_str(), CommonFuncs::gbk2utf("已毁坏！！").c_str());
 					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 					PackageData data;
 					data.count = -1;
@@ -440,7 +442,7 @@ void FightLayer::showFightWord(int type, int value)
 				}
 				else if (g_hero->getAtrByType(H_ARMOR)->goodvalue == 20 || g_hero->getAtrByType(H_ARMOR)->goodvalue == 10)
 				{
-					std::string descstr = StringUtils::format("%s%s%d", g_hero->getAtrByType(H_ARMOR)->name.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_ARMOR)->goodvalue);
+					std::string descstr = StringUtils::format("%s%s%d", GlobalData::map_allResource[astrid].cname.c_str(), CommonFuncs::gbk2utf("耐久度仅剩").c_str(), g_hero->getAtrByType(H_ARMOR)->goodvalue);
 
 					g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
 				}
@@ -449,7 +451,7 @@ void FightLayer::showFightWord(int type, int value)
 			size = sizeof(bossfight1) / sizeof(bossfight1[0]);
 			r = GlobalData::createRandomNum(size);
 			wordstr = bossfight1[r];
-			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), g_hero->getAtrByType(H_ARMOR)->name.c_str(), value);
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(wordstr.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), GlobalData::map_allResource[astrid].cname.c_str(), value);
 		}
 		else//没有防具
 		{
@@ -541,7 +543,7 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 	std::map<std::string, EquipData>::iterator ite;
 	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 	{
-		std::string ename = GlobalData::map_equips[ite->first].cname;
+		std::string ename = GlobalData::map_allResource[ite->first].cname;
 		std::size_t findpos;
 		std::string temp = wordstr;
 		while (1){

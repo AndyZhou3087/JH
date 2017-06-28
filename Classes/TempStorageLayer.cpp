@@ -98,8 +98,6 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.extype = data->extype;
 				pdata.exp = data->exp;
 				pdata.goodvalue = data->goodvalue;
-				pdata.name = data->name;
-				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -119,8 +117,6 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.extype = data->extype;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
-		pdata.name = data->name;
-		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -245,8 +241,6 @@ void TempStorageLayer::loadTempData()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
-		data.name = tmp[7];
-		data.desc = tmp[8];
 		tempResData.push_back(data);
 	}
 }
@@ -256,7 +250,7 @@ void TempStorageLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < tempResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].name.c_str(), tempResData[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage(m_addrname, str.substr(0, str.length() - 1));

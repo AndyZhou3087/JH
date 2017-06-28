@@ -218,8 +218,6 @@ void ShopLayer::addBuyGoods()
 						pdata.strid = bdata.icon;
 						pdata.count = intRes % 1000;
 						pdata.type = bdata.type - 1;
-						pdata.desc = bdata.desc;
-						pdata.name = bdata.cname;
 						StorageRoom::add(pdata);
 						break;
 					}
@@ -239,8 +237,6 @@ void ShopLayer::addBuyGoods()
 						pdata.strid = rdata.strid;
 						pdata.count = intRes % 1000;
 						pdata.type = rdata.type - 1;
-						pdata.desc = rdata.desc;
-						pdata.name = rdata.cname;
 						pdata.extype = rdata.actype;
 
 						if (rint >= 75 && rint <= 78)
@@ -265,16 +261,7 @@ void ShopLayer::addBuyGoods()
 					pdata.strid = gfdata.id;
 					pdata.count = 1;
 					pdata.lv = 0;
-					if (pdata.strid.substr(0, 1).compare("w") == 0)
-					{
-						pdata.type = W_GONG;
-					}
-					else if (pdata.strid.substr(0, 1).compare("x") == 0)
-					{
-						pdata.type = N_GONG;
-					}
-					pdata.desc = gfdata.desc;
-					pdata.name = gfdata.cname;
+					pdata.type = gfdata.type;
 					updateDefaultStorage(pdata);
 					if (!g_hero->checkifHasGF(payRes[i]))
 					{
@@ -295,8 +282,6 @@ void ShopLayer::addBuyGoods()
 						PackageData pdata;
 						pdata.strid = edata.id;
 						pdata.count = 1;
-						pdata.desc = edata.desc;
-						pdata.name = edata.cname;
 						pdata.type = edata.type - 1;
 						pdata.goodvalue = 100;
 						pdata.extype = edata.extype;
@@ -341,8 +326,6 @@ void ShopLayer::updateDefaultStorage(PackageData pdata)
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
-		data.name = tmp[7];
-		data.desc = tmp[8];
 		vec_defaultStorage.push_back(data);
 	}
 
@@ -362,7 +345,7 @@ void ShopLayer::updateDefaultStorage(PackageData pdata)
 	std::string str;
 	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue, vec_defaultStorage[i].name.c_str(), vec_defaultStorage[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setModifyDefaultStorage(g_hero->getHeadID(), str.substr(0, str.length() - 1));

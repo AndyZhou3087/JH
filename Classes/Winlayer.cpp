@@ -190,8 +190,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					{
 						isfind = true;
 						data.type = rdata.type - 1;
-						data.name = rdata.cname;
-						data.desc = rdata.desc;
 						break;
 					}
 				}
@@ -212,8 +210,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 								data.strid = bdata.icon;
 								data.count = res % 1000;
 								data.type = bdata.type - 1;
-								data.desc = bdata.desc;
-								data.name = bdata.cname;
 								break;
 							}
 						}
@@ -241,16 +237,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 						data.strid = gfdata.id;
 						data.count = 1;
 						data.lv = 0;
-						if (data.strid.substr(0, 1).compare("w") == 0)
-						{
-							data.type = W_GONG;
-						}
-						else if (data.strid.substr(0, 1).compare("x") == 0)
-						{
-							data.type = N_GONG;
-						}
-						data.desc = gfdata.desc;
-						data.name = gfdata.cname;
+						data.type = gfdata.type - 1;
 						getRewardData.push_back(data);
 						break;
 					}
@@ -266,8 +253,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 						{
 							data.strid = edata.id;
 							data.count = 1;
-							data.desc = edata.desc;
-							data.name = edata.cname;
 							data.type = edata.type - 1;
 							data.goodvalue = 100;
 							data.extype = edata.extype;
@@ -394,8 +379,6 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 				pdata.count = 1;
 				pdata.exp = data->exp;
 				pdata.goodvalue = data->goodvalue;
-				pdata.name = data->name;
-				pdata.desc = data->desc;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -415,8 +398,6 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 		pdata.count = 1;
 		pdata.exp = data->exp;
 		pdata.goodvalue = data->goodvalue;
-		pdata.name = data->name;
-		pdata.desc = data->desc;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;
@@ -449,7 +430,8 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 		getRewardData.push_back(data);
 	}
 	saveTempData();
-	MyPackage::cutone(data.strid);
+
+	MyPackage::cutone(data);
 
 	for (unsigned int i = 0; i < getRewardData.size(); i++)
 	{
@@ -542,8 +524,6 @@ void Winlayer::loadTempData()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
-		data.name = tmp[7];
-		data.desc = tmp[8];
 		tempResData.push_back(data);
 	}
 }
@@ -574,7 +554,7 @@ void Winlayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < allResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%s-%s;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue, allResData[i].name.c_str(), allResData[i].desc.c_str());
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage(m_addrid, str.substr(0, str.length() - 1));
@@ -732,6 +712,13 @@ int Winlayer::addHeroExp()
 		winexp = winexp * 0.3f;
 	else if (lvless > 10)
 		winexp = winexp * 0.5f;
+
+	int heorexpetime = GameDataSave::getInstance()->getHeroExpEndTime();
+	if (GlobalData::getSysSecTime() <= heorexpetime)
+	{
+		winexp *= 2;
+	}
+
 	return winexp;
 }
 int Winlayer::addGfExp()
@@ -744,5 +731,12 @@ int Winlayer::addGfExp()
 	float gfwinexp = GlobalData::map_npcs[m_npcid].exp * 3.0f / 2.0f;
 	if (lvless > 10)
 		gfwinexp = gfwinexp * 0.5f;
+
+	int gfetime = GameDataSave::getInstance()->getGfEndTime();
+	if (GlobalData::getSysSecTime() <= gfetime)
+	{
+		gfwinexp *= 2;
+	}
+
 	return (int)gfwinexp;
 }

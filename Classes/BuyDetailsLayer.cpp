@@ -40,10 +40,10 @@ bool BuyDetailsLayer::init(int heroid)
 		CommonFuncs::split(tmp[i], tmp2, "-");
 
 		std::string countstr = StringUtils::format("*%s", tmp2[2].c_str());
-		std::string namstr = tmp2[7];
-		goodsstr.append(namstr);
+		std::string idstr = tmp2[0];
+		goodsstr.append(GlobalData::map_allResource[idstr].cname);
 		goodsstr.append(countstr);
-		if (i <= tmp.size()-2)
+		if (i < tmp.size()-1)
 			goodsstr.append(CommonFuncs::gbk2utf("，"));
 	}
 	goodstext->setString(goodsstr);

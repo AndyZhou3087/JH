@@ -26,6 +26,7 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	GameDataSave::purgeGameSave();
+	g_gameLayer = NULL;
 }
 
 Scene* GameScene::createScene()
@@ -50,7 +51,9 @@ bool GameScene::init()
     {
         return false;
     }
-    
+
+	GlobalData::loadAllResourceJsonData();
+
 	//读取资源配置文件
 	GlobalData::loadResJsonData();
 
@@ -217,6 +220,17 @@ void GameScene::loadSaveHeroData()
 		g_hero->setLifeValue(g_hero->getMaxLifeValue());
 	}
 
+	int sex = GameDataSave::getInstance()->getHeroSex();
+	if (sex < 0)
+	{
+		if (heroid != 4)
+			g_hero->setSex(S_MAN);
+		else
+			g_hero->setSex(S_WOMEN);
+	}
+	else
+		g_hero->setSex((H_SEX)sex);
+
 	//读取保存的仓库数据
 	StorageRoom::loadStorageData();
 	//读取保存的背包数据
@@ -247,8 +261,6 @@ void GameScene::loadSavedHeroPropData()
 		sdata.lv = atoi(tmp2[4].c_str());
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());//耐久度
-		sdata.name = tmp2[7];
-		sdata.desc = tmp2[8];
 		g_hero->setAtrByType((HeroAtrType)i, sdata);
 		//g_hero->set [sdata.type].push_back(sdata);
 	}

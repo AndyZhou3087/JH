@@ -23,6 +23,7 @@ public:
 	新手引导
 	*****************************/
 	void showNewerGuide(int step);
+
 private:
 	/****************************
 	点击“返回”按钮回调
@@ -36,12 +37,18 @@ private:
 
 	Node* m_csbnode;
 	//13个属性值显示控件
-	cocos2d::ui::Text* herostatus[13];
+	cocos2d::ui::Text* herostatus[14];
 private:
 	/****************************
 	定时更新13个属性值
 	*****************************/
 	void updateStatus(float dt);
+
+private:
+	cocos2d::ui::Text* m_heroexptimelbl;//经验药水剩余时间控件
+	cocos2d::ui::Text* m_gfexptimelbl;//大力丸剩余时间控件
+	int m_heroexpendtime;//经验药水结束时间
+	int m_gfexpendtime;//经验药水结束时间
 };
 #endif
 

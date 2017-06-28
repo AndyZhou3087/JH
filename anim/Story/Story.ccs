@@ -106,12 +106,43 @@
           <Image Name="jiangxiaobaijuqing15.jpg" />
           <Image Name="jiangxiaobaijuqing16.png" />
         </Folder>
+        <Folder Name="story4_1">
+          <Image Name="aqingjuqing01.jpg" />
+          <Image Name="aqingjuqing02.png" />
+          <Image Name="aqingjuqing03.png" />
+          <Image Name="aqingjuqing04.jpg" />
+          <Image Name="aqingjuqing05.jpg" />
+          <Image Name="aqingjuqing06.png" />
+          <Image Name="aqingjuqing07.png" />
+          <Image Name="aqingjuqing08.png" />
+          <Image Name="aqingjuqing09.png" />
+          <Image Name="aqingjuqing10.png" />
+        </Folder>
+        <Folder Name="story4_2">
+          <Image Name="aqingjuqing11.png" />
+          <Image Name="aqingjuqing12.png" />
+          <Image Name="aqingjuqing13.png" />
+          <Image Name="aqingjuqing14.png" />
+          <Image Name="aqingjuqing15.png" />
+          <Image Name="aqingjuqing16.png" />
+          <Image Name="aqingjuqing17.png" />
+          <Image Name="aqingjuqing18.png" />
+          <Image Name="aqingjuqing19.jpg" />
+          <Image Name="aqingjuqing20.png" />
+          <Image Name="aqingjuqing21.png" />
+          <Image Name="aqingjuqing22.jpg" />
+          <Image Name="aqingjuqing23.png" />
+          <Image Name="aqingjuqing24.jpg" />
+          <Image Name="aqingjuqing25.png" />
+        </Folder>
+        <Project Name="story4_1.csd" Type="Layer" />
         <Project Name="story1_1.csd" Type="Skeleton" />
         <Project Name="story1_2.csd" Type="Skeleton" />
         <Project Name="story2_1.csd" Type="Layer" />
         <Project Name="story2_2.csd" Type="Layer" />
         <Project Name="story3_1.csd" Type="Layer" />
         <Project Name="story3_2.csd" Type="Layer" />
+        <Project Name="story4_2.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -270,6 +270,38 @@ bool Hero::checkifHasGF(std::string gfid)
 	return false;
 }
 
+bool Hero::checkifHas(std::string strid)
+{
+	//装备栏是否有
+	for (int i = H_WEAPON; i < H_MAX; i++)
+	{
+		if (getAtrByType((HeroAtrType)i)->count > 0 && getAtrByType((HeroAtrType)i)->strid.compare(strid) == 0)
+		{
+			return true;
+		}
+	}
+	//背包中是否有
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		if (MyPackage::vec_packages[i].strid.compare(strid) == 0)
+			return true;
+	}
+	//仓库中是否有
+
+	std::map<int, std::vector<PackageData>>::iterator it;
+	for (it = StorageRoom::map_storageData.begin(); it != StorageRoom::map_storageData.end(); ++it)
+	{
+		int size = StorageRoom::map_storageData[it->first].size();
+		for (int j = 0; j < size; j++)
+		{
+			PackageData sdata = StorageRoom::map_storageData[it->first][j];
+			if (sdata.strid.compare(strid) == 0)
+				return true;
+		}
+	}
+	return false;
+}
+
 void Hero::checkMaxVaule(float dt)
 {
 	float mlife = 1.0f;
@@ -465,7 +497,7 @@ int Hero::getTotalAtck()
 
 	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
 	{
-		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].type == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
+		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].extype == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
 		{
 			float back = fack * 0.1f;
 			fack += back;
