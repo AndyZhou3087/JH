@@ -261,7 +261,7 @@ void ShopLayer::addBuyGoods()
 					pdata.strid = gfdata.id;
 					pdata.count = 1;
 					pdata.lv = 0;
-					pdata.type = gfdata.type;
+					pdata.type = gfdata.type - 1;
 					updateDefaultStorage(pdata);
 					if (!g_hero->checkifHasGF(payRes[i]))
 					{

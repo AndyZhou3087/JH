@@ -141,7 +141,7 @@ bool BookDetailsLayer::init(BookData* bookdata)
 	if (isnpchas)
 	{
 		wherestr = wherestr.substr(0, wherestr.length() - 3);
-		wherestr.append(CommonFuncs::gbk2utf("随机获得"));
+		wherestr.append(CommonFuncs::gbk2utf("有机会获得"));
 		Label* wherelbl = Label::createWithTTF(wherestr, "fonts/STXINGKA.TTF", 25);
 		wherelbl->setAnchorPoint(Vec2(0, 1));
 		wherelbl->setLineBreakWithoutSpace(true);
