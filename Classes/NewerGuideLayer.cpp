@@ -154,7 +154,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 
 	listener->onTouchMoved = [=](Touch *touch, Event *event)
 	{
-		if (fabsf(starPos.x - touch->getLocation().x) > 20 || fabsf(starPos.y - touch->getLocation().y) > 20)
+		if (fabsf(starPos.x - touch->getLocation().x) > 10 || fabsf(starPos.y - touch->getLocation().y) > 10)
 			m_isDraging = true;
 	};
 

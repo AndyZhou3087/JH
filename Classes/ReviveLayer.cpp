@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "ShopLayer.h"
 #include "Const.h"
+
 #ifdef UMENG_SHARE
 #include "UmengShare/Common/CCUMSocialSDK.h"
 USING_NS_UM_SOCIAL;
@@ -127,25 +128,32 @@ ReviveLayer* ReviveLayer::create()
 	}
 	return pRet;
 }
+
 #ifdef UMENG_SHARE
 void ReviveLayer::onShare(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		std::string sharetxt[] = { "良心独立游戏！大侠也需要吃饭！装备全靠打！快来助我一统江湖！", "欲练此功，必先自宫？！大侠还请三思啊！！！", "出门只有一匹马！武功全靠打！快来跟我刷武功！", "谁是天下第一？是我！我可以打十个！不服来战！" };
+		int textsize = sizeof(sharetxt) / sizeof(sharetxt[0]);
+
 		CCUMSocialSDK *sdk = CCUMSocialSDK::create();
-		vector<int>* platforms = new vector<int>();
-		//platforms->push_back(QZONE);
-		//platforms->push_back(QQ);
-		//platforms->push_back(WEIXIN);
-		platforms->push_back(WEIXIN_CIRCLE);
-        sdk->openShare(platforms, "来自分享面板", "良心独立游戏！装备全靠刷！刚刷出自宫神功就被打死了！快来帮我！", "Icon-87.png", 
-		"https://itunes.apple.com/cn/app/%E6%AD%A6%E6%9E%97%E7%BE%A4%E4%BE%A0%E4%BC%A0-%E9%AB%98%E8%87%AA%E7%94%B1%E5%BA%A6%E6%AD%A6%E4%BE%A0%E5%85%BB%E6%88%90%E6%B8%B8%E6%88%8F/id1243387739?mt=8", 
-		share_selector(ReviveLayer::shareCallback));
+		//vector<int>* platforms = new vector<int>();
+		////platforms->push_back(QZONE);
+		////platforms->push_back(QQ);
+		////platforms->push_back(WEIXIN);
+		//platforms->push_back(WEIXIN_CIRCLE);
+		//int r = GlobalData::createRandomNum(textsize);
+
+		//sdk->openShare(platforms,"武林群侠传" sharetxt[r].c_str(), "Icon-87.png",
+		//"https://itunes.apple.com/cn/app/%E6%AD%A6%E6%9E%97%E7%BE%A4%E4%BE%A0%E4%BC%A0-%E9%AB%98%E8%87%AA%E7%94%B1%E5%BA%A6%E6%AD%A6%E4%BE%A0%E5%85%BB%E6%88%90%E6%B8%B8%E6%88%8F/id1243387739?mt=8", 
+		//share_selector(ReviveLayer::shareCallback));
+		sdk->openShare(platforms,"武林群侠传" sharetxt[r].c_str(),"https://itunes.apple.com/cn/app/%E6%AD%A6%E6%9E%97%E7%BE%A4%E4%BE%A0%E4%BC%A0-%E9%AB%98%E8%87%AA%E7%94%B1%E5%BA%A6%E6%AD%A6%E4%BE%A0%E5%85%BB%E6%88%90%E6%B8%B8%E6%88%8F/id1243387739?mt=8",
+			"Icon-87.png", share_selector(ReviveLayer::shareCallback));
         //UMShare();
 	}
 }
-
 /*
 * 分享回调
 * @param platform 要分享到的目标平台

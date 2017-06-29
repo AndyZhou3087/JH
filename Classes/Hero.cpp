@@ -136,7 +136,7 @@ void Hero::updateData(float dt)
 		if (m_hunger < 0.0f)
 			m_hunger = 0.0f;
 		if (m_life < 0.0f)
-			m_hunger = 0.0f;
+			m_life = 0.0f;
 		if (m_spirit < 0.0f)
 			m_spirit = 0.0f;
 	}

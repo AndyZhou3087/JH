@@ -241,7 +241,8 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		if (!isplotMissioning)
 		{
 			wordstr = StringUtils::format("%s%s%s", npc.name, CommonFuncs::gbk2utf("：").c_str(), npc.words[0].c_str());
-			wordstr = replaceSexWord(wordstr);
+			if (g_hero->getHeadID() == 4)
+				wordstr = replaceSexWord(wordstr);
 			vec_wordstr.push_back(wordstr);
 		}
 
@@ -333,11 +334,13 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 			for (unsigned int m = 0; m < plotData->words.size(); m++)
 			{
 				wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->words[m].c_str());
-				wordstr = replaceSexWord(wordstr);
+				if (g_hero->getHeadID() == 4)
+					wordstr = replaceSexWord(wordstr);
 				vec_wordstr.push_back(wordstr);
 
 				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), plotData->mywords[m].c_str());
-				wordstr = replaceSexWord(wordstr);
+				if (g_hero->getHeadID() == 4)
+					wordstr = replaceSexWord(wordstr);
 				vec_wordstr.push_back(wordstr);
 			}
 			if (g_maplayer != NULL)
@@ -384,7 +387,8 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				for (unsigned int m = 0; m < plotData->bossword.size(); m++)
 				{
 					wordstr = StringUtils::format("%s%s%s", npcdata.name, CommonFuncs::gbk2utf("：").c_str(), plotData->bossword[m].c_str());
-					wordstr = replaceSexWord(wordstr);
+					if (g_hero->getHeadID() == 4)
+						wordstr = replaceSexWord(wordstr);
 					vec_wordstr.push_back(wordstr);
 
 				}

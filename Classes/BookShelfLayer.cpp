@@ -137,7 +137,7 @@ void BookShelfLayer::updateContent(int category)
 
 				}
 				Sprite * sepline = Sprite::createWithSpriteFrameName("ui/storagesepline.png");
-				sepline->setPosition(Vec2(sepline->getContentSize().width / 2 + 40, innerheight - 50 - preheight));
+				sepline->setPosition(Vec2(sepline->getContentSize().width / 2 + 40, innerheight - 40 - preheight));
 				std::string sepname = StringUtils::format("sep%d", i);
 				scrollview->addChild(sepline, 0, sepname);
 				Label* namelbl = Label::createWithTTF(CommonFuncs::gbk2utf(name[i].c_str()), "fonts/STXINGKA.TTF", 22);
@@ -179,7 +179,7 @@ void BookShelfLayer::updateContent(int category)
 				if (sepline != NULL)
 					boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 50 + m % 4 * 140, sepline->getPositionY() - itemheight/2 - m / 4 * itemheight));
 				else
-					boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 50 + m % 4 * 140, innerheight - itemheight/2 - m / 4 * itemheight));
+					boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 50 + m % 4 * 140, innerheight + 10 - itemheight/2 - m / 4 * itemheight));
 
 				MyMenu* menu = MyMenu::create();
 				menu->addChild(boxItem);
@@ -204,6 +204,7 @@ void BookShelfLayer::updateContent(int category)
 					vec_graynode.push_back(box);
 					vec_graynode.push_back(res);
 					changeGray(vec_graynode);
+					namelbl->setOpacity(180);
 				}
 			}
 		}
