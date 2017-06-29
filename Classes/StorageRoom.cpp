@@ -66,13 +66,22 @@ void StorageRoom::loadStorageData()
 		if (sdata.strid.length() <= 0)
 			continue;
 		sdata.type = atoi(tmp2[1].c_str());
+
+		//修改商城购买江湖大礼包类型错了
+		if (sdata.strid.compare("w023") == 0)
+			sdata.type = W_GONG;
+		else if (sdata.strid.compare("x019") == 0)
+			sdata.type = N_GONG;
+
 		sdata.count = atoi(tmp2[2].c_str());
 		sdata.extype = atoi(tmp2[3].c_str());
 		sdata.lv = atoi(tmp2[4].c_str());
+
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());
 		map_storageData[sdata.type].push_back(sdata);
 	}
+
 }
 
 void StorageRoom::add(PackageData data)

@@ -403,10 +403,10 @@ void HeroProperNode::onItem(Ref* pSender)
 		return;
 	}
 
-	Node* node = (Node*)pSender;
-	m_select_atrype = (HeroAtrType)node->getTag();
-	m_select_udata = (PackageData*)node->getUserData();
-	m_select->setPosition(Vec2(node->getPositionX() - node->getContentSize().width / 2, node->getPositionY() + node->getContentSize().height / 2));
+	m_select_itemnode = (Node*)pSender;
+	m_select_atrype = (HeroAtrType)m_select_itemnode->getTag();
+	m_select_udata = (PackageData*)m_select_itemnode->getUserData();
+
 
 	if (g_hero->getSex() == S_MAN && (m_select_udata->strid.compare("w022") == 0 || m_select_udata->strid.compare("w040") == 0))
 	{
@@ -422,6 +422,7 @@ void HeroProperNode::onItem(Ref* pSender)
 
 void HeroProperNode::selectCarryData()
 {
+	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 	if (m_lastSelectedData != NULL)
 	{
 		if (m_lastSelectedData != m_select_udata)//是否再次点击

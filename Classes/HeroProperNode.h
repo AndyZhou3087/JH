@@ -111,6 +111,7 @@ private:
 	PackageData* m_lastSelectedData;//上次选中中的装备数据
 	int m_step;//新手引导索引
 	HeroAtrType m_select_atrype;
+	Node* m_select_itemnode;
 	PackageData* m_select_udata;
 };
 #endif

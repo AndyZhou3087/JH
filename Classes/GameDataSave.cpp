@@ -360,7 +360,7 @@ std::string GameDataSave::getModifyDefaultStorage(int heroindex)
 
 void GameDataSave::setShareDayOfYear(int day)
 {
-	saveIntDataByKey(addUIDString("shareday"), day);
+	saveIntDataByKey("shareday", day);
 }
 
 int GameDataSave::getShareDayOfYear()
@@ -370,7 +370,7 @@ int GameDataSave::getShareDayOfYear()
 
 void GameDataSave::setWarmConfig(std::string strval)
 {
-	saveStringDataByKey("warmconfig", strval);
+	saveStringDataByKey(addUIDString("warmconfig"), strval);
 }
 
 
