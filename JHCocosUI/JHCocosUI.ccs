@@ -432,6 +432,7 @@
         <Project Name="selectHeroLayer.csd" Type="Layer" />
         <Project Name="selectSaveComfirmLayer.csd" Type="Layer" />
         <Project Name="selectSavedLayer.csd" Type="Layer" />
+        <Project Name="sepcialLayer.csd" Type="Layer" />
         <Project Name="settingLayer.csd" Type="Layer" />
         <Project Name="shopLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
@@ -441,7 +442,7 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="sepcialLayer.csd" Type="Layer" />
+        <Project Name="exgLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -12,8 +12,9 @@
         <OpenedDocuments>
           <FilePathData Path="story4_1.csd" />
           <FilePathData Path="story4_2.csd" />
+          <FilePathData Path="end1_1.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="story4_1.csd" />
+        <ActiveDocument Path="end1_1.csd" />
       </Value>
     </Item>
   </Properties>

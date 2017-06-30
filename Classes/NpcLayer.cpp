@@ -7,6 +7,7 @@
 #include "SoundManager.h"
 #include "NewerGuideLayer.h"
 #include "GameDataSave.h"
+#include "ExchangeLayer.h"
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
@@ -125,6 +126,7 @@ bool NpcLayer::init(std::string addrid)
 		onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFight, this));
 
 		cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
+		onExchange->setTag(i);
 		onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemExchange, this));
 		if (GlobalData::map_npcs[mdata.npcs[i]].exchgres.size() <= 0)
 			onExchange->setVisible(false);
@@ -303,6 +305,9 @@ void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		Node* node = (Node*)pSender;
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[node->getTag()];
+		g_gameLayer->addChild(ExchangeLayer::create(npcid), 4);
 	}
 }
 

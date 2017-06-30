@@ -3,6 +3,18 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="end1_1">
+          <Image Name="xiaoxiamijieju01.png" />
+          <Image Name="xiaoxiamijieju02.png" />
+          <Image Name="xiaoxiamijieju03.png" />
+          <Image Name="xiaoxiamijieju04.png" />
+          <Image Name="xiaoxiamijieju05.png" />
+          <Image Name="xiaoxiamijieju06.png" />
+          <Image Name="xiaoxiamijieju07.png" />
+          <Image Name="xiaoxiamijieju08.jpg" />
+          <Image Name="xiaoxiamijieju09.jpg" />
+          <Image Name="xiaoxiamijieju10.jpg" />
+        </Folder>
         <Folder Name="story1_1">
           <Image Name="juqingmanhua01.png" />
           <Image Name="juqingmanhua02.png" />
@@ -135,13 +147,14 @@
           <Image Name="aqingjuqing24.jpg" />
           <Image Name="aqingjuqing25.png" />
         </Folder>
-        <Project Name="story4_1.csd" Type="Layer" />
+        <Project Name="end1_1.csd" Type="Layer" />
         <Project Name="story1_1.csd" Type="Skeleton" />
         <Project Name="story1_2.csd" Type="Skeleton" />
         <Project Name="story2_1.csd" Type="Layer" />
         <Project Name="story2_2.csd" Type="Layer" />
         <Project Name="story3_1.csd" Type="Layer" />
         <Project Name="story3_2.csd" Type="Layer" />
+        <Project Name="story4_1.csd" Type="Layer" />
         <Project Name="story4_2.csd" Type="Layer" />
       </RootFolder>
     </Group>
