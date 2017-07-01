@@ -20,23 +20,27 @@ public:
 
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updata();
 	void onNpcGoodsItem(cocos2d::Ref* pSender);
 	void onMyGoodsItem(cocos2d::Ref* pSender);
-	void addToMyGoods(PackageData data);
-	void addToNpcGoods(PackageData data);
+	void updateMyGoods(PackageData data, int type);//type:0-是我的物品，1-npc的物品
+	void updateNpcGoods(PackageData data, int type);//type:0-是我的物品，1-npc的物品
+
+	void checkValue();
 private:
 	cocos2d::ui::ScrollView* m_npcGoodsSrollView;
 	cocos2d::ui::ScrollView* m_myGoodsSrollView;
+	cocos2d::ui::Widget* m_exgbtn;
 	cocos2d::ui::Text* m_npcWordLbl;
 	int lastMyGoodsSrollViewHeight;
 	int lastNpcGoodsSrollViewHeight;
-	int npcGoodsMax;
-	int myGoodMax;
 	std::string m_npcid;
 	std::vector<PackageData> npcGoodsData;
 	std::vector<PackageData> myGoodsData;
 	std::vector<PackageData> npcExgData;
+	std::vector<PackageData> myExgData;
+	bool isExgOk;
 };
 #endif
 

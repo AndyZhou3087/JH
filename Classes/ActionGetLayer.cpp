@@ -158,12 +158,7 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 	//点击奖励栏的资源
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
-
-	for (unsigned int i = 0; i < getResData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
+	int size = getResData.size();
 
 	int count = data->count - 1;
 	if (count <= 0)//数量为0，全部加到背包中了，移除掉
@@ -204,6 +199,12 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 		{
 			data->count--;
 		}
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
 	}
 	//保存临时数据
 	saveTempData();

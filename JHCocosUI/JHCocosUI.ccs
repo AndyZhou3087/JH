@@ -95,7 +95,9 @@
           <Image Name="76.png" />
           <Image Name="77.png" />
           <Image Name="78.png" />
+          <Image Name="79.png" />
           <Image Name="8.png" />
+          <Image Name="80.png" />
           <Image Name="9.png" />
           <Image Name="a001.png" />
           <Image Name="a002.png" />
@@ -412,6 +414,7 @@
         <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="exerciseCancelLayer.csd" Type="Layer" />
         <Project Name="exerciseDoneLayer.csd" Type="Layer" />
+        <Project Name="exgLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="goodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
@@ -442,7 +445,6 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="exgLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

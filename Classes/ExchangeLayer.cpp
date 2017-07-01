@@ -7,13 +7,13 @@
 #include "StorageRoom.h"
 #include "SoundManager.h"
 #include "NpcLayer.h"
+#include "HintBox.h"
 
 ExchangeLayer::ExchangeLayer()
 {
 	lastMyGoodsSrollViewHeight = -1;
 	lastNpcGoodsSrollViewHeight = -1;
-	npcGoodsMax = 0;
-	myGoodMax = 0;
+	isExgOk = false;
 }
 
 
@@ -48,8 +48,12 @@ bool ExchangeLayer::init(std::string npcid)
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onBack, this));
 
+	m_exgbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("exgbtn");
+	m_exgbtn->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onExg, this));
+	m_exgbtn->setEnabled(false);
+
 	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcgoodstext");
-	std::string namestr = StringUtils::format("%s%s", GlobalData::map_maps[npcid].cname, CommonFuncs::gbk2utf("的物品").c_str());
+	std::string namestr = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("的物品").c_str());
 	npcname->setString(namestr);
 
 	m_npcWordLbl = (cocos2d::ui::Text*)csbnode->getChildByName("npcword");
@@ -158,8 +162,6 @@ bool ExchangeLayer::init(std::string npcid)
 		myGoodsData.push_back(MyPackage::vec_packages[i]);
 	}
 
-	npcGoodsMax = npcGoodsData.size();
-	myGoodMax = myGoodsData.size();
 	updata();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -182,144 +184,192 @@ void ExchangeLayer::onEnterTransitionDidFinish()
 void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+	int size0 = npcGoodsData.size();
+
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
 	int count = data->count - 1;
+	int datatag = node->getTag();
+
+	PackageData pdata;
+	pdata.type = data->type;
+	pdata.strid = data->strid;
+	pdata.lv = data->lv;
+	pdata.extype = data->extype;
+	pdata.count = 1;
+	pdata.exp = data->exp;
+	pdata.goodvalue = data->goodvalue;
+
 	if (count <= 0)
 	{
-		std::vector<PackageData>::iterator it;
-		for (it = npcGoodsData.begin(); it != npcGoodsData.end(); ++it)
+
+		if (datatag >= size0)
 		{
-			if (it->strid.compare(data->strid) == 0)
+			myExgData.erase(myExgData.begin() + (datatag - size0));
+			updateMyGoods(pdata, 0);
+		}
+		else
+		{
+	
+			npcGoodsData.erase(npcGoodsData.begin() + datatag);
+			updateMyGoods(pdata, 1);
+		}
+		
+	}
+	else
+	{
+		if (datatag >= size0)
+		{
+			updateMyGoods(pdata, 0);
+		}
+		else
+		{
+			updateMyGoods(pdata, 1);
+		}
+
+		data->count--;
+	}
+
+	updata();
+}
+
+void ExchangeLayer::updateMyGoods(PackageData data, int type)
+{
+	if (type == 0)
+	{
+		unsigned int i = 0;
+		for (i = 0; i < myGoodsData.size(); i++)
+		{
+			if (data.strid.compare(myGoodsData[i].strid) == 0 && (myGoodsData[i].type == FOOD || myGoodsData[i].type == MEDICINAL || myGoodsData[i].type == RES_1 || myGoodsData[i].type == RES_2))
 			{
-				PackageData pdata;
-				pdata.type = data->type;
-				pdata.strid = data->strid;
-				pdata.lv = data->lv;
-				pdata.extype = data->extype;
-				pdata.count = 1;
-				pdata.exp = data->exp;
-				pdata.goodvalue = data->goodvalue;
-
-				addToMyGoods(pdata);
-
-				npcGoodsData.erase(it);
-
-				break;
+				if (myGoodsData[i].count < 10)
+				{
+					myGoodsData[i].count++;
+					break;
+				}
+				else
+					continue;
 			}
+
+		}
+		if (i == myGoodsData.size())
+		{
+			data.count = 1;
+			myGoodsData.push_back(data);
 		}
 	}
 	else
 	{
-		PackageData pdata;
-		pdata.type = data->type;
-		pdata.strid = data->strid;
-		pdata.lv = data->lv;
-		pdata.extype = data->extype;
-		pdata.count = 1;
-		pdata.exp = data->exp;
-		pdata.goodvalue = data->goodvalue;
-		addToMyGoods(pdata);
-
-		data->count--;
-	}
-	updata();
-}
-
-void ExchangeLayer::addToMyGoods(PackageData data)
-{
-	unsigned int i = 0;
-	for (i = 0; i < myGoodsData.size(); i++)
-	{
-		if (data.strid.compare(myGoodsData[i].strid) == 0 && (myGoodsData[i].type == FOOD || myGoodsData[i].type == MEDICINAL || myGoodsData[i].type == RES_1 || myGoodsData[i].type == RES_2))
+		unsigned int i = 0;
+		for (i = 0; i < npcExgData.size(); i++)
 		{
-			myGoodsData[i].count++;
-			break;
+			if (data.strid.compare(npcExgData[i].strid) == 0 && (npcExgData[i].type == FOOD || npcExgData[i].type == MEDICINAL || npcExgData[i].type == RES_1 || npcExgData[i].type == RES_2))
+			{
+				if (npcExgData[i].count < 10)
+				{
+					npcExgData[i].count++;
+					break;
+				}
+				else
+					continue;
+			}
+
 		}
-
-	}
-	if (i == myGoodsData.size())
-	{
-		data.count = 1;
-		myGoodsData.push_back(data);
-	}
-
-	int smax = myGoodsData.size();
-	if (myGoodMax < smax)
-	{
-		myGoodMax = smax;
+		if (i == npcExgData.size())
+		{
+			data.count = 1;
+			npcExgData.push_back(data);
+		}
 	}
 
 }
 
-void ExchangeLayer::addToNpcGoods(PackageData data)
+void ExchangeLayer::updateNpcGoods(PackageData data, int type)
 {
-	unsigned int i = 0;
-	for (i = 0; i < npcGoodsData.size(); i++)
+	if (type == 1)
 	{
-		if (data.strid.compare(npcGoodsData[i].strid) == 0 && (npcGoodsData[i].type == FOOD || npcGoodsData[i].type == MEDICINAL || npcGoodsData[i].type == RES_1 || npcGoodsData[i].type == RES_2))
+		unsigned int i = 0;
+		for (i = 0; i < npcGoodsData.size(); i++)
 		{
-			npcGoodsData[i].count++;
-			break;
+			if (data.strid.compare(npcGoodsData[i].strid) == 0 && (npcGoodsData[i].type == FOOD || npcGoodsData[i].type == MEDICINAL || npcGoodsData[i].type == RES_1 || npcGoodsData[i].type == RES_2))
+			{
+				npcGoodsData[i].count++;
+				break;
+			}
+		}
+		if (i == npcGoodsData.size())
+		{
+			data.count = 1;
+			npcGoodsData.push_back(data);
 		}
 	}
-	if (i == npcGoodsData.size())
+	else
 	{
-		data.count = 1;
-		npcGoodsData.push_back(data);
-	}
-
-	int smax = npcGoodsData.size();
-	if (npcGoodsMax < smax)
-	{
-		npcGoodsMax = smax;
+		unsigned int i = 0;
+		for (i = 0; i < myExgData.size(); i++)
+		{
+			if (data.strid.compare(myExgData[i].strid) == 0 && (myExgData[i].type == FOOD || myExgData[i].type == MEDICINAL || myExgData[i].type == RES_1 || myExgData[i].type == RES_2))
+			{
+				myExgData[i].count++;
+				break;
+			}
+		}
+		if (i == myExgData.size())
+		{
+			data.count = 1;
+			myExgData.push_back(data);
+		}
 	}
 }
 
 void ExchangeLayer::onMyGoodsItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+	int size0 = myGoodsData.size();
+
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
+	int datatag = node->getTag();
 	int count = data->count - 1;
+
+	PackageData pdata;
+	pdata.type = data->type;
+	pdata.strid = data->strid;
+	pdata.lv = data->lv;
+	pdata.extype = data->extype;
+	pdata.count = 1;
+	pdata.exp = data->exp;
+	pdata.goodvalue = data->goodvalue;
+
 	if (count <= 0)
 	{
-		std::vector<PackageData>::iterator it;
-		for (it = myGoodsData.begin(); it != myGoodsData.end(); ++it)
+		if (datatag >= size0)
 		{
-			if (it->strid.compare(data->strid) == 0)
-			{
-				PackageData pdata;
-				pdata.type = data->type;
-				pdata.strid = data->strid;
-				pdata.lv = data->lv;
-				pdata.extype = data->extype;
-				pdata.count = 1;
-				pdata.exp = data->exp;
-				pdata.goodvalue = data->goodvalue;
-
-				addToNpcGoods(pdata);
-
-				myGoodsData.erase(it);
-
-				break;
-			}
+			npcExgData.erase(npcExgData.begin() + (datatag - size0));
+			updateNpcGoods(pdata, 1);
+		}
+		else
+		{
+			myGoodsData.erase(myGoodsData.begin() + datatag);
+			updateNpcGoods(pdata, 0);
 		}
 	}
 	else
 	{
-		PackageData pdata;
-		pdata.type = data->type;
-		pdata.strid = data->strid;
-		pdata.lv = data->lv;
-		pdata.extype = data->extype;
-		pdata.count = 1;
-		pdata.exp = data->exp;
-		pdata.goodvalue = data->goodvalue;
-		addToNpcGoods(pdata);
+		if (datatag >= size0)
+		{
+			updateNpcGoods(pdata, 1);
+		}
+		else
+		{
+			updateNpcGoods(pdata, 0);
+		}
 		data->count--;
 	}
+
 	updata();
 }
 
@@ -332,21 +382,123 @@ void ExchangeLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	}
 }
 
+void ExchangeLayer::onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		if (isExgOk)
+		{
+			m_npcWordLbl->setString(CommonFuncs::gbk2utf("下次再来吧！！"));
+			m_npcWordLbl->setTextColor(Color4B(0, 0, 0, 255));
+			return;
+		}
+		int size0 = myGoodsData.size();
+		int size1 = npcExgData.size();
+		int size = size0 + size1;
+		if (size > 5)
+		{
+			HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf("背包放不下了哦！！"));
+			this->addChild(hintbox);
+		}
+		else
+		{
+			MyPackage::vec_packages.clear();
+
+			for (int i = 0; i < size0; i++)
+			{
+				MyPackage::vec_packages.push_back(myGoodsData[i]);
+			}
+			for (int i = 0; i < size1; i++)
+			{
+				MyPackage::vec_packages.push_back(npcExgData[i]);
+			}
+
+		}
+	}
+}
+void ExchangeLayer::checkValue()
+{
+	int myval = 0;
+	int npcval = 0;
+
+	for (unsigned int i = 0; i < myExgData.size(); i++)
+	{
+		std::string resid = myExgData[i].strid;
+		std::vector<std::string> vec_npcs = GlobalData::map_allResource[resid].npc;
+		int val = GlobalData::map_allResource[resid].val * myExgData[i].count;
+		for (unsigned int j = 0; j < vec_npcs.size(); j++)
+		{
+			if (m_npcid.compare(vec_npcs[j]) == 0)
+			{
+				float fval = val *  GlobalData::map_allResource[resid].npcval[j];
+				val = int(fval + 0.5);
+				break;
+			}
+		}
+		myval += val;
+	}
+
+	for (unsigned int i = 0; i < npcExgData.size(); i++)
+	{
+		std::string resid = npcExgData[i].strid;
+		int val = GlobalData::map_allResource[resid].val;
+		npcval += val;
+	}
+
+	if (npcExgData.size() <= 0 && myExgData.size() <= 0)
+	{
+		m_npcWordLbl->setVisible(false);
+	}
+	else
+	{
+		m_npcWordLbl->setVisible(true);
+		if (npcval > myval)
+		{
+			m_exgbtn->setEnabled(false);
+			if (myval >= npcval * 2 / 3)
+			{
+				m_npcWordLbl->setString(CommonFuncs::gbk2utf("还差了一点啊，再加点吧！"));
+				m_npcWordLbl->setTextColor(Color4B(204, 4, 4, 255));
+			}
+			else
+			{
+				m_npcWordLbl->setString(CommonFuncs::gbk2utf("开什么玩笑，这点破东西也想跟我换？走开走开！"));
+				m_npcWordLbl->setTextColor(Color4B(204, 4, 4, 255));
+			}
+		}
+		else
+		{
+			m_exgbtn->setEnabled(true);
+			if ((myval - npcval) > npcval / 3)
+			{
+				m_npcWordLbl->setString(CommonFuncs::gbk2utf("痛快！痛快！果然是个痛快人！"));
+				m_npcWordLbl->setTextColor(Color4B(27, 141, 0, 255));
+			}
+			else
+			{
+				m_npcWordLbl->setString(CommonFuncs::gbk2utf("这是个公平的交易"));
+				m_npcWordLbl->setTextColor(Color4B(0, 0, 0, 180));
+			}
+		}
+	}
+}
+
 void ExchangeLayer::updata()
 {
 	updataMyGoodsUI();
 	updataNpcGoodsUI();
+	checkValue();
 }
 
 void ExchangeLayer::updataMyGoodsUI()
 {
-	for (int i = 0; i < myGoodMax; i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
-		m_myGoodsSrollView->removeChildByName(name);
-	}
+	int size0 = myGoodsData.size();
+	int size1 = npcExgData.size();
+	int size = size0 + size1;
 
-	int size = myGoodsData.size();
+	m_myGoodsSrollView->removeAllChildrenWithCleanup(true);
+
 	int row = size % 5 == 0 ? size / 5 : (size / 5 + 1);
 
 	int innerheight = m_myGoodsSrollView->getInnerContainerSize().height;
@@ -360,17 +512,27 @@ void ExchangeLayer::updataMyGoodsUI()
 		m_myGoodsSrollView->setInnerContainerSize(Size(m_myGoodsSrollView->getContentSize().width, innerheight));
 	}
 
+	std::vector<PackageData*> allMydata;
 	for (unsigned int i = 0; i < myGoodsData.size(); i++)
 	{
+		allMydata.push_back(&myGoodsData[i]);
+	}
+	for (unsigned int i = 0; i < npcExgData.size(); i++)
+	{
+		allMydata.push_back(&npcExgData[i]);
+	}
+
+	for (unsigned int i = 0; i < allMydata.size(); i++)
+	{
 		std::string boxstr = "ui/buildsmall.png";
-		PackageData tmpdata = myGoodsData[i];
-		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		PackageData* tmpdata = allMydata[i];
+		if (tmpdata->type == WEAPON || tmpdata->type == PROTECT_EQU)
 		{
-			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata->strid].qu);
 		}
-		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		else if (tmpdata->type == N_GONG || tmpdata->type == W_GONG)
 		{
-			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata->strid].qu);
 		}
 
 		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
@@ -380,7 +542,8 @@ void ExchangeLayer::updataMyGoodsUI()
 			box,
 			box,
 			CC_CALLBACK_1(ExchangeLayer::onMyGoodsItem, this));
-		boxItem->setUserData(&myGoodsData[i]);
+		boxItem->setUserData(allMydata[i]);
+		boxItem->setTag(i);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
@@ -388,25 +551,31 @@ void ExchangeLayer::updataMyGoodsUI()
 		std::string name = StringUtils::format("pitem%d", i);
 		m_myGoodsSrollView->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%s.png", tmpdata.strid.c_str());
+		std::string str = StringUtils::format("ui/%s.png", tmpdata->strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
-		str = StringUtils::format("%d", tmpdata.count);
+		str = StringUtils::format("%d", tmpdata->count);
 		Label * reslbl = Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
+		if (i >= size0)
+		{
+			Sprite * whos = Sprite::createWithSpriteFrameName("ui/atrselected.png");
+			whos->setPosition(Vec2(box->getContentSize().width - whos->getContentSize().width/2, box->getContentSize().height - whos->getContentSize().height/2));
+			box->addChild(whos);
+		}
 	}
 }
 
 void ExchangeLayer::updataNpcGoodsUI()
 {
-	for (int i = 0; i < npcGoodsMax; i++)
-	{
-		std::string name = StringUtils::format("pitem%d", i);
-		m_npcGoodsSrollView->removeChildByName(name);
-	}
-	int size = npcGoodsData.size();
+	int size0 = npcGoodsData.size();
+	int size1 = myExgData.size();
+	int size = size0 + size1;
+
+	m_npcGoodsSrollView->removeAllChildrenWithCleanup(true);
+
 	int row = size % 5 == 0 ? size / 5 : (size / 5 + 1);
 
 	int innerheight = m_npcGoodsSrollView->getInnerContainerSize().height;
@@ -420,17 +589,27 @@ void ExchangeLayer::updataNpcGoodsUI()
 		m_npcGoodsSrollView->setInnerContainerSize(Size(m_npcGoodsSrollView->getContentSize().width, innerheight));
 	}
 
-	for (int i = 0; i < size; i++)
+	std::vector<PackageData*> allNpcdata;
+	for (unsigned int i = 0; i < npcGoodsData.size(); i++)
+	{
+		allNpcdata.push_back(&npcGoodsData[i]);
+	}
+	for (unsigned int i = 0; i < myExgData.size(); i++)
+	{
+		allNpcdata.push_back(&myExgData[i]);
+	}
+
+	for (unsigned int i = 0; i < allNpcdata.size(); i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
-		PackageData tmpdata = npcGoodsData[i];
-		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		PackageData *tmpdata = allNpcdata[i];
+		if (tmpdata->type == WEAPON || tmpdata->type == PROTECT_EQU)
 		{
-			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata->strid].qu);
 		}
-		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		else if (tmpdata->type == N_GONG || tmpdata->type == W_GONG)
 		{
-			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata->strid].qu);
 		}
 
 		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
@@ -440,8 +619,8 @@ void ExchangeLayer::updataNpcGoodsUI()
 			box,
 			box,
 			CC_CALLBACK_1(ExchangeLayer::onNpcGoodsItem, this));
+		boxItem->setUserData(allNpcdata[i]);
 		boxItem->setTag(i);
-		boxItem->setUserData(&npcGoodsData[i]);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
@@ -449,15 +628,22 @@ void ExchangeLayer::updataNpcGoodsUI()
 		std::string name = StringUtils::format("pitem%d", i);
 		m_npcGoodsSrollView->addChild(menu, 0, name);
 
-		std::string str = StringUtils::format("ui/%s.png", tmpdata.strid.c_str());
+		std::string str = StringUtils::format("ui/%s.png", tmpdata->strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 
-		str = StringUtils::format("%d", tmpdata.count);
+		str = StringUtils::format("%d", tmpdata->count);
 		Label * reslbl = Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
+
+		if (i >= size0)
+		{
+			Sprite * whos = Sprite::createWithSpriteFrameName("ui/settingselect.png");
+			whos->setPosition(Vec2(box->getContentSize().width - whos->getContentSize().width / 2, box->getContentSize().height - whos->getContentSize().height / 2));
+			box->addChild(whos);
+		}
 	}
 }
 

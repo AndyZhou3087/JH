@@ -203,6 +203,30 @@ void GlobalData::loadAllResourceJsonData()
 		data.cname = v.GetString();
 		v = item["desc"];
 		data.desc = v.GetString();
+
+		v = item["val"];
+		data.val = atoi(v.GetString());
+
+		v = item["npcs"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& npsv = v[m];
+			std::string npcid = npsv.GetString();
+			if (npcid.length() > 1)
+				data.npc.push_back(npcid);
+		}
+
+		v = item["npcval"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& npsv = v[m];
+			std::string npcval = npsv.GetString();
+			if (npcval.length() > 0)
+				data.npcval.push_back(atof(npcval.c_str()));
+		}
+
 		map_allResource[data.strid]= data;
 
 	}

@@ -76,11 +76,7 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
 
-	for (unsigned int i = 0; i < tempResData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		m_scrollView->removeChildByName(name);
-	}
+	int size = tempResData.size();
 
 	int count = data->count - 1;
 	if (count <= 0)
@@ -122,6 +118,13 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 			data->count--;
 		}
 	}
+
+	for (int i = 0; i < size; i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		m_scrollView->removeChildByName(name);
+	}
+
 	saveTempData();
 	updata();
 }

@@ -639,14 +639,14 @@ std::string FightLayer::getGfFightStr()
 	int r2 = GlobalData::createRandomNum(4);
 
 	std::string gfstr = g_hero->getAtrByType(H_WG)->strid;
-	GFSkillData sdata = GlobalData::map_gfskills[g_hero->getAtrByType(H_WG)->strid];
-	int r3 = GlobalData::createRandomNum(sdata.snames.size());
-	std::string gfname = sdata.snames[r3];
+	GFSkillData ssdata = GlobalData::map_gfskills[g_hero->getAtrByType(H_WG)->strid];
+	int r3 = GlobalData::createRandomNum(ssdata.snames.size());
+	std::string gfsname = ssdata.snames[r3];
 	std::string	wordstr = CommonFuncs::gbk2utf(herousewgfight[r1][r2].c_str());
 	if (r1 == 0)
-		retstr = StringUtils::format(wordstr.c_str(), g_hero->getMyName().c_str(), gfname.c_str(), GlobalData::map_npcs[m_npcid].name);
+		retstr = StringUtils::format(wordstr.c_str(), g_hero->getMyName().c_str(), gfsname.c_str(), GlobalData::map_npcs[m_npcid].name);
 	else
-		retstr = StringUtils::format(wordstr.c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name, gfname.c_str(), gfname.c_str(), GlobalData::map_npcs[m_npcid].name);
+		retstr = StringUtils::format(wordstr.c_str(), g_hero->getMyName().c_str(), GlobalData::map_npcs[m_npcid].name, gfsname.c_str(), gfsname.c_str(), GlobalData::map_npcs[m_npcid].name);
 
 	return retstr;
 }

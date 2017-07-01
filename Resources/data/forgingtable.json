@@ -3,6 +3,7 @@
 {"id":"15","res":[4001,0],"blv":"1","actext":"制造","time":"10","type":"7","extype":"0","name":"木板"},
 {"id":"16","res":[4001,0],"blv":"1","actext":"制造","time":"10","type":"7","extype":"0","name":"木炭"},
 {"id":"17","res":[5003,0],"blv":"1","actext":"制造","time":"30","type":"7","extype":"0","name":"麻绳"},
+{"id":"80","res":[79005,0],"blv":"3","actext":"提炼","time":"50","type":"7","extype":"0","name":"银两"},
 {"id":"24","res":[1002,4001],"blv":"1","actext":"制造","time":"30","type":"8","extype":"1","name":"镰刀"},
 {"id":"25","res":[1002,4001],"blv":"1","actext":"制造","time":"30","type":"8","extype":"2","name":"斧子"},
 {"id":"26","res":[1002,4001],"blv":"1","actext":"制造","time":"30","type":"8","extype":"3","name":"十字镐"},

@@ -41,7 +41,7 @@ bool BuyDetailsLayer::init(int heroid)
 
 		std::string countstr = StringUtils::format("*%s", tmp2[2].c_str());
 		std::string idstr = tmp2[0];
-		goodsstr.append(GlobalData::map_allResource[idstr].cname);
+		goodsstr.append(GlobalData::map_allResource[idstr].cname.c_str());
 		goodsstr.append(countstr);
 		if (i < tmp.size()-1)
 			goodsstr.append(CommonFuncs::gbk2utf("，"));

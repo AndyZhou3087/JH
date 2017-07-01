@@ -358,11 +358,8 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
-	for (unsigned int i = 0; i < getRewardData.size(); i++)
-	{
-		std::string name = StringUtils::format("resitem%d", i);
-		this->removeChildByName(name);
-	}
+	int size = getRewardData.size();
+
 	int count = data->count - 1;
 	if (count <= 0)
 	{
@@ -402,6 +399,11 @@ void Winlayer::onRewardItem(cocos2d::Ref* pSender)
 		{
 			data->count--;
 		}
+	}
+	for (int i = 0; i < size; i++)
+	{
+		std::string name = StringUtils::format("resitem%d", i);
+		this->removeChildByName(name);
 	}
 	saveTempData();
 	updata();
