@@ -9,6 +9,7 @@
 #import "iosfunc.h"
 #include "MBProgressHUD.h"
 #import <UShareUI/UShareUI.h>
+#include "GlobalData.h"
 
 const char * getuuid()
 {
@@ -69,6 +70,36 @@ const void toast(char * info)
         [HUD release];
         //HUD = NULL;
     }];
+}
+
+void alterView() {
+    /*UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"评论" message:@"求求你给个好评吧！" delegate:nil cancelButtonTitle:@"拒绝" otherButtonTitles:@"下次再说", nil];
+     alert.alertViewStyle = UIAlertViewStyleDefault;
+     [alert show];*/
+    /*UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:@"求评论" delegate:nil cancelButtonTitle:@"残忍拒绝" destructiveButtonTitle:@"下次再说" otherButtonTitles:@"乐意接受", nil];
+     UIViewController * s = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+     [sheet showInView:];*/
+    UIViewController * s = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"大侠！帮个忙吧！" message:@"大侠！您一生行侠仗义，给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
+    //NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:@"玩的这么爽"];
+    //[hogan addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(0, 20)];
+    //[alert setValue:hogan forKey:@"attributedTitle"];
+    alert.popoverPresentationController.barButtonItem = s.navigationItem.leftBarButtonItem;
+    UIAlertAction * ac = [UIAlertAction actionWithTitle:@"好说好说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1243387739"]];
+        GlobalData::setNoComments(true);
+    }];
+    //[ac setValue:[UIColor greenColor] forKey:@"_titleTextColor"];
+    [alert addAction:ac];
+    [alert addAction:[UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    UIAlertAction * ac3 = [UIAlertAction actionWithTitle:@"懒得理你" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        GlobalData::setNoComments(true);
+    }];
+    [alert addAction:ac3];
+    [ac3 setValue:[UIColor grayColor] forKey:@"_titleTextColor"];
+    [s presentViewController:alert animated:YES completion:nil];
 }
 
 void makeNotification()

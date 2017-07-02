@@ -11,5 +11,6 @@ const char * getbundleid();
 const char * getvercode();
 void copytoclipboard(char * p);
 const void toast(char * info);
+void alterView();
 void makeNotification();
 void UMShare();

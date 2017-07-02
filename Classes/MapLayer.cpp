@@ -15,7 +15,7 @@
 #include "AnalyticUtil.h"
 #include "FightLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#include "UnityAdsMana.h"
+#include "iosfunc.h"
 #endif
 
 MapLayer* g_maplayer = NULL;

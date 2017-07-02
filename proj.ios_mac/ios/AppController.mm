@@ -27,6 +27,8 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import <Bugly/Bugly.h>
 
 @implementation AppController
 
@@ -37,6 +39,20 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+
+    [[UMSocialManager defaultManager] openLog:YES];
+    
+    // 获取友盟social版本号
+    NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
+    [UMSocialGlobal shareInstance].type = @"Cocos2d-x";
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"59264ff476661347e2000897"];
+    
+    //设置微信的appKey和appSecret
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx5efec62b94762a95" appSecret:@"1a350b5419cab863c736aa9c0853e23f" redirectURL:@"https://itunes.apple.com/cn/app/%E6%AD%A6%E6%9E%97%E7%BE%A4%E4%BE%A0%E4%BC%A0-%E9%AB%98%E8%87%AA%E7%94%B1%E5%BA%A6%E6%AD%A6%E4%BE%A0%E5%85%BB%E6%88%90%E6%B8%B8%E6%88%8F/id1243387739?mt=8"];
+    
+    //设置分享到QQ互联的appID
+//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"100424468"/*设置QQ平台//的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
 
     cocos2d::Application *app = cocos2d::Application::getInstance();
     app->initGLContextAttrs();
@@ -83,12 +99,68 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLViewImpl::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
+    
+    /*//notification
+    UIUserNotificationType types = UIUserNotificationTypeAlert |
+    UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey]) {
+        // 跳转代码
+        UILabel *redView = [[UILabel alloc] init];
+        redView.frame = CGRectMake(0, 0, 200, 300);
+        redView.numberOfLines = 0;
+        redView.font = [UIFont systemFontOfSize:12.0];
+        redView.backgroundColor = [UIColor redColor];
+        redView.text = [NSString stringWithFormat:@"%@", launchOptions];
+        [self.window.rootViewController.view addSubview:redView];
+    }
+     //*/
 
+    [Bugly startWithAppId:@"bb1608bd33"];
     app->run();
 
     return YES;
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(nonnull UILocalNotification *)notification {
+    //NSLog(@"noti:%@", notification);
+    if (application.applicationState == UIApplicationStateActive) {
+        NSString *content = [notification.userInfo objectForKey:@"alertBody"];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"武林群侠传通知" message:content preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:alertAction];
+        UIViewController * s = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+        [s presentViewController:alertController animated:YES completion:^(void){}];
+    }
+    else if (application.applicationState == UIApplicationStateInactive) {
+        /*UIView *redView = [[UIView alloc] init];
+        redView.frame = CGRectMake(0, 0, 100, 100);
+        redView.backgroundColor = [UIColor redColor];
+        [self.window.rootViewController.view addSubview:redView];*/
+    }
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    badge--;
+    badge = badge >= 0 ? badge : 0;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+    
+    NSArray *localNotifications = [UIApplication sharedApplication].scheduledLocalNotifications;
+    for (UILocalNotification *notification in localNotifications) {
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // SDK的回调
+    }
+    return result;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

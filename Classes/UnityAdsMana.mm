@@ -96,20 +96,24 @@ void alterView() {
     UIViewController * s = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     [sheet showInView:];*/
     UIViewController * s = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"请求" message:@"玩的这么爽，求求您给个五星好评吧！" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"大侠！帮个忙吧！" message:@"大侠！您一生行侠仗义，给个好评吧！" preferredStyle:UIAlertControllerStyleAlert];
     //NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:@"玩的这么爽"];
     //[hogan addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20.0] range:NSMakeRange(0, 20)];
     //[alert setValue:hogan forKey:@"attributedTitle"];
     alert.popoverPresentationController.barButtonItem = s.navigationItem.leftBarButtonItem;
-    [alert addAction:[UIAlertAction actionWithTitle:@"残忍拒绝" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * ac = [UIAlertAction actionWithTitle:@"好说好说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1243387739"]];
         GlobalData::setNoComments(true);
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    //[ac setValue:[UIColor greenColor] forKey:@"_titleTextColor"];
+    [alert addAction:ac];
+    [alert addAction:[UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"乐意接受" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/%E6%96%B0%E6%AC%A2%E4%B9%90%E8%BF%9E%E8%BF%9E%E7%9C%8B-qq%E7%BB%8F%E5%85%B8%E5%8D%95%E6%9C%BA%E5%AF%B9%E5%AF%B9%E7%A2%B02017/id1196569348?mt=8"]];
+    UIAlertAction * ac3 = [UIAlertAction actionWithTitle:@"懒得理你" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         GlobalData::setNoComments(true);
-    }]];
+    }];
+    [alert addAction:ac3];
+    [ac3 setValue:[UIColor grayColor] forKey:@"_titleTextColor"];
     [s presentViewController:alert animated:YES completion:nil];
 }
