@@ -6,7 +6,6 @@
 #include "MyPackage.h"
 #include "StorageRoom.h"
 
-bool ActivitScene::isShowing = false;
 ActivitScene::ActivitScene()
 {
 
@@ -15,14 +14,14 @@ ActivitScene::ActivitScene()
 
 ActivitScene::~ActivitScene()
 {
-	isShowing = false;
+	GlobalData::isPopingScene = false;
 }
 
 Scene* ActivitScene::createScene(std::string imagepath, std::string content)
 {
-	if (isShowing)
+	if (GlobalData::isPopingScene)
 		return NULL;
-	isShowing = true;
+	GlobalData::isPopingScene = true;
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 

@@ -35,6 +35,7 @@ private:
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void showTypeText(float dt);
 	void removeNpcWord(float dt);
 	void checkWordLblColor(std::string wordstr);
@@ -54,6 +55,8 @@ private:
 	int checkFightCount(std::string npcid);
 
 	std::string replaceSexWord(std::string dstr);
+
+	void sleepOver(Ref* pSender, Node* item);
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;
@@ -66,7 +69,6 @@ private:
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;
 	int m_plotindex;
-
 };
 #endif
 

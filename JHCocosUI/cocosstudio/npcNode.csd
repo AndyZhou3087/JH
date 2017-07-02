@@ -109,6 +109,39 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/npcrsi2.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="progressbg" ActionTag="339292738" VisibleForFrame="False" Tag="43" IconVisible="False" LeftMargin="-123.9993" RightMargin="-252.0007" TopMargin="28.0000" BottomMargin="-46.0000" ctype="SpriteObjectData">
+            <Size X="376.0000" Y="18.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="64.0007" Y="-37.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/buildprogressbg.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="loadingbar" ActionTag="-606451335" VisibleForFrame="False" Tag="42" IconVisible="False" LeftMargin="-124.9994" RightMargin="-251.0006" TopMargin="27.9999" BottomMargin="-45.9999" ProgressInfo="0" ctype="LoadingBarObjectData">
+            <Size X="376.0000" Y="18.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="63.0006" Y="-36.9999" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <ImageFileData Type="MarkedSubImage" Path="ui/buildprogressbar.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-265.5281" RightMargin="139.5281" TopMargin="22.6824" BottomMargin="-49.6824" FontSize="25" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="126.0000" Y="27.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="-265.5281" Y="-36.1824" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

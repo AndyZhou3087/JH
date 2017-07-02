@@ -457,6 +457,7 @@ public:
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
 	static std::vector<PlotMissionData> vec_BranchPlotMissionData;//支线剧情数据
 	static std::map<std::string, GFSkillData> map_gfskills;//招式数据
+	static bool isPopingScene;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

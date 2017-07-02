@@ -148,13 +148,13 @@
                 <FileData Type="MarkedSubImage" Path="ui/buildprogressbg.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="loadingbar" ActionTag="-1930167608" Tag="72" IconVisible="False" LeftMargin="115.0006" RightMargin="114.9994" TopMargin="84.9999" BottomMargin="15.0001" ProgressInfo="0" ctype="LoadingBarObjectData">
+              <AbstractNodeData Name="loadingbar" ActionTag="-1930167608" Tag="72" IconVisible="False" LeftMargin="114.0006" RightMargin="115.9994" TopMargin="84.9999" BottomMargin="15.0001" ProgressInfo="0" ctype="LoadingBarObjectData">
                 <Size X="376.0000" Y="18.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="303.0006" Y="24.0001" />
+                <Position X="302.0006" Y="24.0001" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.2034" />
+                <PrePosition X="0.4984" Y="0.2034" />
                 <PreSize X="0.6205" Y="0.1525" />
                 <ImageFileData Type="MarkedSubImage" Path="ui/buildprogressbar.png" Plist="uipacker.plist" />
               </AbstractNodeData>

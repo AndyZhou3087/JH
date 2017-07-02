@@ -15,6 +15,13 @@
           <Image Name="xiaoxiamijieju09.jpg" />
           <Image Name="xiaoxiamijieju10.jpg" />
         </Folder>
+        <Folder Name="end1_2">
+          <Image Name="xiaoxiamijieju11.jpg" />
+          <Image Name="xiaoxiamijieju12.png" />
+          <Image Name="xiaoxiamijieju13.png" />
+          <Image Name="xiaoxiamijieju14.png" />
+          <Image Name="xiaoxiamijieju15.png" />
+        </Folder>
         <Folder Name="story1_1">
           <Image Name="juqingmanhua01.png" />
           <Image Name="juqingmanhua02.png" />
@@ -148,6 +155,7 @@
           <Image Name="aqingjuqing25.png" />
         </Folder>
         <Project Name="end1_1.csd" Type="Layer" />
+        <Project Name="end1_2.csd" Type="Layer" />
         <Project Name="story1_1.csd" Type="Skeleton" />
         <Project Name="story1_2.csd" Type="Skeleton" />
         <Project Name="story2_1.csd" Type="Layer" />

@@ -233,18 +233,18 @@
             <FileData Type="Normal" Path="end1_1/xiaoxiamijieju05.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="xiaoxiamijieju08_8" ActionTag="1774064255" Tag="69" IconVisible="False" LeftMargin="725.0000" RightMargin="-255.0000" TopMargin="653.1433" BottomMargin="302.8567" ctype="SpriteObjectData">
+          <AbstractNodeData Name="xiaoxiamijieju08_8" ActionTag="1774064255" Tag="69" IconVisible="False" LeftMargin="470.4150" RightMargin="-0.4150" TopMargin="653.1433" BottomMargin="302.8567" ctype="SpriteObjectData">
             <Size X="250.0000" Y="324.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="850.0000" Y="464.8567" />
+            <Position X="595.4150" Y="464.8567" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.1806" Y="0.3632" />
+            <PrePosition X="0.8270" Y="0.3632" />
             <PreSize X="0.3472" Y="0.2531" />
             <FileData Type="Normal" Path="end1_1/xiaoxiamijieju08.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="xiaoxiamijieju06_6" ActionTag="-1425821201" Tag="67" IconVisible="False" LeftMargin="0.0097" RightMargin="205.9903" TopMargin="653.1440" BottomMargin="302.8560" ctype="SpriteObjectData">
+          <AbstractNodeData Name="xiaoxiamijieju06_6" ActionTag="-1425821201" Tag="67" IconVisible="False" LeftMargin="0.0097" RightMargin="205.9902" TopMargin="653.1440" BottomMargin="302.8560" ctype="SpriteObjectData">
             <Size X="514.0000" Y="324.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="257.0097" Y="464.8560" />
@@ -266,24 +266,24 @@
             <FileData Type="Normal" Path="end1_1/xiaoxiamijieju07.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="xiaoxiamijieju09_9" ActionTag="-1563697737" Tag="70" IconVisible="False" LeftMargin="-352.0000" RightMargin="720.0000" TopMargin="993.9322" BottomMargin="0.0678" ctype="SpriteObjectData">
+          <AbstractNodeData Name="xiaoxiamijieju09_9" ActionTag="-1563697737" Tag="70" IconVisible="False" LeftMargin="-0.4783" RightMargin="368.4783" TopMargin="993.9322" BottomMargin="0.0678" ctype="SpriteObjectData">
             <Size X="352.0000" Y="286.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-176.0000" Y="143.0678" />
+            <Position X="175.5217" Y="143.0678" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.2444" Y="0.1118" />
+            <PrePosition X="0.2438" Y="0.1118" />
             <PreSize X="0.4889" Y="0.2234" />
             <FileData Type="Normal" Path="end1_1/xiaoxiamijieju09.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="xiaoxiamijieju10_10" ActionTag="-1129106504" Tag="71" IconVisible="False" LeftMargin="721.0000" RightMargin="-359.0000" TopMargin="994.6263" BottomMargin="-0.6263" ctype="SpriteObjectData">
+          <AbstractNodeData Name="xiaoxiamijieju10_10" ActionTag="-1129106504" Tag="71" IconVisible="False" LeftMargin="685.0891" RightMargin="-323.0891" TopMargin="994.6263" BottomMargin="-0.6263" ctype="SpriteObjectData">
             <Size X="358.0000" Y="286.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="900.0000" Y="142.3737" />
+            <Position X="864.0891" Y="142.3737" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.2500" Y="0.1112" />
+            <PrePosition X="1.2001" Y="0.1112" />
             <PreSize X="0.4972" Y="0.2234" />
             <FileData Type="Normal" Path="end1_1/xiaoxiamijieju10.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />

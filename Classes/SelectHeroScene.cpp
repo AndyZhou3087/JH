@@ -226,7 +226,7 @@ void SelectHeroScene::enterNextScene()
 	std::string defaultStorageStr = GlobalData::getDefaultStorage(_lastSelect);
 	GameDataSave::getInstance()->setStorageData(defaultStorageStr);
 
-	Scene* scene = StoryScene::createScene();
+	Scene* scene = StoryScene::createScene(0);
 
 	Director::getInstance()->replaceScene(scene);
 }

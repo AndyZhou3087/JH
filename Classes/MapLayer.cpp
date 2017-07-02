@@ -14,6 +14,7 @@
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
 #include "FightLayer.h"
+#include "StoryScene.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -52,7 +53,7 @@ bool MapLayer::init()
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
-		mapname->setVisible(false);
+		mapname->setVisible(true);
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
 	}
@@ -424,6 +425,12 @@ float MapLayer::moveToDestTime(float distance)
 		}
 	}
 	return dt;
+}
+
+void MapLayer::showEndAnim(float dt)
+{
+	if (g_hero->getHeadID() == 1)
+		Director::getInstance()->pushScene(StoryScene::createScene(1));
 }
 
 void MapLayer::showNewerGuide(int step)

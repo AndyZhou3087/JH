@@ -40,6 +40,8 @@ bool GlobalData::hasBuy = false;
 int GlobalData::adsinterval = 10;
 long GlobalData::adschoose = 11111111;
 
+bool GlobalData::isPopingScene = false;
+
 GlobalData::GlobalData()
 {
 

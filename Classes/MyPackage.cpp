@@ -52,14 +52,15 @@ int MyPackage::add(PackageData pdata)
 	return 0;
 }
 
-void MyPackage::cutone(std::string strid)
+void MyPackage::cutone(std::string strid, int count)
 {
 	int index = 0;
 	for (index = MyPackage::getSize() - 1; index >= 0; index--)
 	{
 		if (strid.compare(MyPackage::vec_packages[index].strid) == 0)
 		{
-			if (--vec_packages[index].count <= 0)
+			vec_packages[index].count -= count;
+			if (vec_packages[index].count <= 0)
 			{
 				vec_packages.erase(vec_packages.begin() + index);
 			}
@@ -78,7 +79,8 @@ void MyPackage::cutone(PackageData pdata)
 	{
 		if (pdata.strid.compare(MyPackage::vec_packages[index].strid) == 0 && pdata.goodvalue == MyPackage::vec_packages[index].goodvalue)
 		{
-			if (--vec_packages[index].count <= 0)
+			vec_packages[index].count -= pdata.count;
+			if (vec_packages[index].count <= 0)
 			{
 				vec_packages.erase(vec_packages.begin() + index);
 			}

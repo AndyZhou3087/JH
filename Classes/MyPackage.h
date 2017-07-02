@@ -38,7 +38,7 @@ public:
 public:
 
 	static int add(PackageData pdata);
-	static void cutone(std::string strid);
+	static void cutone(std::string strid, int count = 1);
 	static void cutone(PackageData pdata);
 	static void takeoff();
 	static bool isFull(PackageData pdata);

@@ -146,15 +146,18 @@ void Hero::updateData(float dt)
 void Hero::sleep(int losttime, int hour)
 {
 	//按次恢复生命
-	sleephour = hour;
-	this->schedule(schedule_selector(Hero::sleepbystep), 0.2f, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
-	sleepLostPercent = 0.5f;
-
 	float delay = 0.0f;
-	if (losttime < TIMESCALE * ACTION_BAR_TIME)
-		delay = delay / TIMESCALE;
+	if (losttime > TIMESCALE * ACTION_BAR_TIME)
+		delay = losttime / TIMESCALE;
 	else
 		delay = ACTION_BAR_TIME;
+
+	float pertime = delay / (TIMESCALE* ACTION_BAR_TIME);
+	sleephour = hour;
+	this->schedule(schedule_selector(Hero::sleepbystep), pertime, TIMESCALE* ACTION_BAR_TIME - 1, 0.0f);
+	sleepLostPercent = 0.5f;
+
+
 	this->scheduleOnce(schedule_selector(Hero::sleepDone), delay);
 }
 

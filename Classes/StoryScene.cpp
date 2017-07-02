@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "GameDataSave.h"
 
+std::string storytype[] = { "story", "end" };
 StoryScene::StoryScene()
 {
 	m_wordlbl = NULL;
@@ -14,13 +15,13 @@ StoryScene::~StoryScene()
 {
 }
 
-Scene* StoryScene::createScene()
+Scene* StoryScene::createScene(int type)
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
 	// 'layer' is an autorelease object
-	auto layer = StoryScene::create();
+	auto layer = StoryScene::create(type);
 
 	// add layer as a child to scene
 	scene->addChild(layer);
@@ -29,13 +30,14 @@ Scene* StoryScene::createScene()
 	return scene;
 }
 
-bool StoryScene::init()
+bool StoryScene::init(int type)
 {
 	clickcount = 0;
+	m_type = type;
 	m_heroindex = GameDataSave::getInstance()->getHeroId();
-	std::string storystr = StringUtils::format("story%d_1.csb", m_heroindex);
+	std::string storystr = StringUtils::format("%s%d_1.csb", storytype[type].c_str(), m_heroindex);
 	m_csbnode = CSLoader::createNode(storystr);
-	if (m_heroindex == 1)
+	if (m_heroindex == 1 && type == 0)
 		m_csbnode->setPosition(Vec2(360, 640));
 	this->addChild(m_csbnode);
 
@@ -75,10 +77,10 @@ bool StoryScene::init()
 	return true;
 }
 
-StoryScene* StoryScene::create()
+StoryScene* StoryScene::create(int type)
 {
 	StoryScene *pRet = new StoryScene();
-	if (pRet && pRet->init())
+	if (pRet && pRet->init(type))
 	{
 		pRet->autorelease();
 	}
@@ -96,10 +98,10 @@ void StoryScene::delayShowNextStory(float dt)
 	if (m_wordlbl != NULL)
 		m_wordlbl->removeFromParentAndCleanup(true);
 
-	std::string storystr = StringUtils::format("story%d_2.csb", m_heroindex);
+	std::string storystr = StringUtils::format("%s%d_2.csb", storytype[m_type].c_str(), m_heroindex);
 
 	m_csbnode = CSLoader::createNode(storystr);
-	if (m_heroindex == 1)
+	if (m_heroindex == 1 && m_type == 0)
 		m_csbnode->setPosition(Vec2(360, 640));
 
 	this->addChild(m_csbnode);
@@ -121,6 +123,13 @@ void StoryScene::showClickText(float dt)
 }
 void StoryScene::showNextScene(float dt)
 {
-	auto transition = TransitionCrossFade::create(0.5f, GameScene::createScene());
-	Director::getInstance()->replaceScene(transition);
+	if (m_type == 0)
+	{
+		auto transition = TransitionCrossFade::create(0.5f, GameScene::createScene());
+		Director::getInstance()->replaceScene(transition);
+	}
+	else
+	{
+		Director::getInstance()->popScene();
+	}
 }

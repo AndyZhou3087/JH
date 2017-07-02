@@ -136,6 +136,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			g_maplayer->updataPlotMissionIcon(plottype);
 			if (unlockchapter > 0 && plottype == 0)
 				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+
+			if (GlobalData::getPlotMissionIndex() >= GlobalData::vec_PlotMissionData.size() - 1)
+			{
+				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.0f);
+			}
 		}
 	}
 

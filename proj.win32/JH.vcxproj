@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BuildingUILayer.cpp" />
     <ClCompile Include="..\Classes\BuyComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\BuyDetailsLayer.cpp" />
+    <ClCompile Include="..\Classes\CannotTouchLayer.cpp" />
     <ClCompile Include="..\Classes\ComfirmSaveLayer.cpp" />
     <ClCompile Include="..\Classes\CommonFuncs.cpp" />
     <ClCompile Include="..\Classes\Building.cpp" />
@@ -228,6 +229,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\BuildingUILayer.h" />
     <ClInclude Include="..\Classes\BuyComfirmLayer.h" />
     <ClInclude Include="..\Classes\BuyDetailsLayer.h" />
+    <ClInclude Include="..\Classes\CannotTouchLayer.h" />
     <ClInclude Include="..\Classes\ComfirmSaveLayer.h" />
     <ClInclude Include="..\Classes\CommonFuncs.h" />
     <ClInclude Include="..\Classes\Const.h" />

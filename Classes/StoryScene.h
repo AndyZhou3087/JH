@@ -14,11 +14,11 @@ public:
 	StoryScene();
 	~StoryScene();
 
-	virtual bool init();
-	static cocos2d::Scene* createScene();
+	virtual bool init(int type);
+	static cocos2d::Scene* createScene(int type);//0-开场动画，1-结束动画
 	
 private:
-	static StoryScene* create();
+	static StoryScene* create(int type);
 	void showClickText(float dt);
 	void delayShowNextStory(float dt);
 	void showNextScene(float dt);
@@ -29,6 +29,7 @@ private:
 	bool isCanClick;
 	int m_heroindex;
 	cocostudio::timeline::ActionTimeline* m_action;
+	int m_type;//0-开场动画，1-结束动画
 };
 #endif
 
