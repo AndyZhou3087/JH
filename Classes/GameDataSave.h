@@ -425,11 +425,27 @@ public:
 	****************************/
 	int getGfEndTime();
 
+	/****************************
+	获取随机交易数据(第一位游戏生存天数)
+	return 1-xx-xx-xx
+	*****************************/
+	std::string getExgCfgData();
+
+	/****************************
+	设置随机交易数据(第一位游戏生存天数)
+	@para 交易数据1-xx-xx-xx
+	*****************************/
+	void setExgCfgData(std::string strval);
+
 private:
 	/****************************
 	加上userid后的字符串
 	****************************/
 	std::string addUIDString(std::string val);
+
+
+
+
 private:
 	static GameDataSave* _Context;//类实例
 	static std::string userid;//uid

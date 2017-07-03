@@ -62,7 +62,43 @@ bool ExchangeLayer::init(std::string npcid)
 
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("myexgscroll");
 
-	std::vector<std::string> exchgres = GlobalData::map_npcs[npcid].exchgres;
+	std::vector<std::string> exchgres;
+	if (m_npcid.compare("n012") == 0)//韦小宝
+	{
+		std::string cfgstr = GlobalData::getExgCfgData();
+
+		bool isrand = true;
+		int liveday = g_nature->getPastDays();
+		if (cfgstr.length() > 0)
+		{
+			std::vector<std::string> tmp;
+			CommonFuncs::split(cfgstr, tmp, "-");
+
+			if (liveday == atoi(tmp[0].c_str()))
+			{
+				isrand = false;
+				for (int m = 1; m <= 3; m++)
+					exchgres.push_back(tmp[m]);
+			}
+		}
+
+		if (isrand)
+			randExchgRes(exchgres);
+
+		std::string savestr = StringUtils::format("%d-", liveday);
+
+		for (unsigned int n = 0; n < exchgres.size(); n++)
+		{
+			savestr.append(exchgres[n]);
+			savestr.append("-");
+		}
+		savestr = savestr.substr(0, savestr.length() - 1);
+		GlobalData::setExgCfgData(savestr);
+	}
+	else
+	{
+		exchgres = GlobalData::map_npcs[npcid].exchgres;
+	}
 
 	for (unsigned int i = 0; i < exchgres.size(); i++)
 	{
@@ -649,6 +685,45 @@ void ExchangeLayer::updataNpcGoodsUI()
 
 void ExchangeLayer::onExit()
 {
-
 	Layer::onExit();
+}
+
+void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
+{
+	std::map<int, std::vector<std::string>> map_gf_equip;
+	
+	std::map<std::string, WG_NGData>::iterator it;
+	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+	{
+		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		if (!g_hero->checkifHasGF(gfdata.id) && !GlobalData::tempHasgf(gfdata.id))
+			map_gf_equip[gfdata.qu].push_back(gfdata.id);
+	}
+
+	std::map<std::string, EquipData>::iterator ite;
+	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+	{
+		EquipData edata = GlobalData::map_equips[ite->first];
+
+		map_gf_equip[edata.qu].push_back(edata.id);
+	}
+
+	int rnd[] = { 40, 65, 80, 92, 100 };
+	for (int i = 0; i < 3; i++)
+	{
+		int r = GlobalData::createRandomNum(100);
+		unsigned int m = 0;
+		for (m = 0; m < map_gf_equip.size(); m++)
+		{
+			if (r < rnd[m])
+			{
+				break;
+			}
+		}
+		int size = map_gf_equip[m + 1].size();
+
+		int r1 = GlobalData::createRandomNum(size);
+		vec_exchgres.push_back(map_gf_equip[m + 1][r1]);
+
+	}
 }

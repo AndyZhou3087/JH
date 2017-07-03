@@ -425,6 +425,19 @@ public:
 	*****************************/
 	static void setMakeWarmConfig(std::string strval);
 
+	/****************************
+	获取随机交易数据(第一位游戏生存天数)
+	return 1-xx-xx-xx
+	*****************************/
+	static std::string getExgCfgData();
+
+	/****************************
+	设置随机交易数据(第一位游戏生存天数)
+	@para 交易数据1-xx-xx-xx
+	*****************************/
+	static void setExgCfgData(std::string strval);
+
+
     static void setNoAds(bool val);
     static bool getNoAds();
     

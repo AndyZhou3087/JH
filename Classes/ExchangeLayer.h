@@ -28,6 +28,7 @@ private:
 	void updateNpcGoods(PackageData data, int type);//type:0-是我的物品，1-npc的物品
 
 	void checkValue();
+	void randExchgRes(std::vector<std::string> &vec_exchgres);
 private:
 	cocos2d::ui::ScrollView* m_npcGoodsSrollView;
 	cocos2d::ui::ScrollView* m_myGoodsSrollView;

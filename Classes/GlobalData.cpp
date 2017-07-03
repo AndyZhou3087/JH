@@ -997,6 +997,16 @@ void GlobalData::setMakeWarmConfig(std::string strval)
 	GameDataSave::getInstance()->setWarmConfig(strval);
 }
 
+std::string GlobalData::getExgCfgData()
+{
+	return GameDataSave::getInstance()->getExgCfgData();
+}
+
+void GlobalData::setExgCfgData(std::string strval)
+{
+	GameDataSave::getInstance()->setExgCfgData(strval);
+}
+
 std::string GlobalData::addUidString(std::string val)
 {
     return uid + val;

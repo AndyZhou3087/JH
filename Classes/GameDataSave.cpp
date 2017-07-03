@@ -408,3 +408,13 @@ int GameDataSave::getGfEndTime()
 {
 	return loadIntDataByKey(addUIDString("gfexpetime"), 0);
 }
+
+std::string GameDataSave::getExgCfgData()
+{
+	return loadStringDataByKey(addUIDString("exgcfg"), "");
+}
+
+void GameDataSave::setExgCfgData(std::string strval)
+{
+	saveStringDataByKey(addUIDString("exgcfg"), strval);
+}
