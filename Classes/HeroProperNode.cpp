@@ -435,7 +435,6 @@ void HeroProperNode::onItem(Ref* pSender)
 
 void HeroProperNode::selectCarryData()
 {
-	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 	if (m_lastSelectedData != NULL)
 	{
 		if (m_lastSelectedData != m_select_udata)//是否再次点击
@@ -475,6 +474,7 @@ void HeroProperNode::selectCarryData()
 		}
 
 	}
+	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 
 	std::string str;
 
@@ -493,10 +493,6 @@ void HeroProperNode::selectCarryData()
 		str = StringUtils::format("ui/%s.png", m_select_udata->strid.c_str());
 	}
 
-
-	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-
 	if (m_select->isVisible())
 	{
 		takeon(m_select_atrype, m_select_udata);
@@ -505,6 +501,11 @@ void HeroProperNode::selectCarryData()
 	{
 		takeoff(m_select_atrype);
 	}
+
+	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+
 	m_lastSelectedData = m_select_udata;
 
 	updataMyPackageUI();

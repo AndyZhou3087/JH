@@ -84,7 +84,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	else if (type == ui::Widget::TouchEventType::MOVED)
 	{
 		Vec2 pos = node->convertToWorldSpace(this->getParent()->getPosition());
-		if (fabsf(pos.y - startPos.y) > 20)
+		if (fabsf(pos.y - startPos.y) > 50)
 			isDraging = true;
 	}
 	else if (type == ui::Widget::TouchEventType::ENDED)
