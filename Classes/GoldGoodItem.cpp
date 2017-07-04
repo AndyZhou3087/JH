@@ -49,7 +49,7 @@ bool GoldGoodsItem::init(GoodsData* gdata)
 	bgbtn->addTouchEventListener(CC_CALLBACK_2(GoldGoodsItem::onItem, this));
 	bgbtn->setSwallowTouches(false);
 
-	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)bgnode->getChildByName("buybtn");
+	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)csbnode->getChildByName("buybtn");
 	buybtn->addTouchEventListener(CC_CALLBACK_2(GoldGoodsItem::onBuyBtn, this));
 	buybtn->setSwallowTouches(false);
 	return true;
