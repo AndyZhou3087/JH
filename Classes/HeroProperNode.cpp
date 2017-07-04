@@ -475,16 +475,6 @@ void HeroProperNode::selectCarryData()
 
 	}
 
-	if (m_select->isVisible())
-	{
-		takeon(m_select_atrype, m_select_udata);
-	}
-	else
-	{
-		if (!takeoff(m_select_atrype))
-			return;
-	}
-
 	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 
 	std::string str;
@@ -502,6 +492,19 @@ void HeroProperNode::selectCarryData()
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", m_select_udata->strid.c_str());
+	}
+
+	if (m_select->isVisible())
+	{
+		takeon(m_select_atrype, m_select_udata);
+	}
+	else
+	{
+		if (!takeoff(m_select_atrype))
+		{
+			m_select->setVisible(!m_select->isVisible());
+			return;
+		}
 	}
 
 	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
