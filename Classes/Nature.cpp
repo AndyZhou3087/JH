@@ -124,7 +124,7 @@ void Nature::ChangeDayNight()
 
 void Nature::updateData(float dt)
 {
-	if (g_hero->getIsShoping())
+	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 
 	m_time += getTimeInterval();

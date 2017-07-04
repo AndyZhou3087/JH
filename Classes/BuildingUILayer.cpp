@@ -308,8 +308,20 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		int tag = node->getTag();
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF() && strcmp(m_build->data.name, "exerciseroom") != 0)
 		{
-			BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
-			g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+			int index = -1;
+			for (unsigned int i = 0; i < GlobalData::vec_goods.size(); i++)
+			{
+				if (GlobalData::vec_goods[i].icon.compare("72") == 0)
+				{
+					index = i;
+					break;
+				}
+			}
+			if (index >= 0)
+			{
+				BuyComfirmLayer* layer = BuyComfirmLayer::create(&GlobalData::vec_goods[index]);
+				Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
+			}
 			return;
 		}
 

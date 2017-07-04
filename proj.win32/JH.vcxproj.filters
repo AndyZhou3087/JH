@@ -150,9 +150,6 @@
     <ClCompile Include="..\Classes\DeathLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GoodsItem.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ShopLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -223,6 +220,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CannotTouchLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RmbGoodsItem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GoldGoodItem.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -371,9 +374,6 @@
     <ClInclude Include="..\Classes\DeathLayer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GoodsItem.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ShopLayer.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -444,6 +444,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CannotTouchLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RmbGoodsItem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GoldGoodsItem.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

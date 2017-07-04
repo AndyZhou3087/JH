@@ -186,12 +186,36 @@ typedef struct
 	std::vector<std::string> snames;//招式名称
 }GFSkillData;
 
+/****************************
+商城物品数据结构
+*****************************/
+typedef struct
+{
+	std::string icon;//显示ICON
+	std::string name;//显示名称
+	int price;//价格
+	int type;//类型1-元宝购买，0-人民币购买
+	std::string desc;//描述
+	std::vector<std::string> vec_res;//购买成功后获得的物品（礼包类）
+}GoodsData;
+
+
+/****************************
+游戏状态
+*****************************/
+typedef enum
+{
+	GAMESTART = 0,
+	GAMEPAUSE,
+	GAMEOVER
+}GameStatus;
+
 class GlobalData
 {
 public:
 	GlobalData();
 	~GlobalData();
-
+	static void init();
 public:
 	/****************************
 	解析建筑物数据
@@ -248,6 +272,11 @@ public:
 	解析武器防具数据
 	*****************************/
 	static void loadEquipJsonData();
+
+	/****************************
+	解析商城数据
+	*****************************/
+	static void loadShopData();
 
 	/****************************
 	读取保存的解锁角色数据
@@ -437,6 +466,17 @@ public:
 	*****************************/
 	static void setExgCfgData(std::string strval);
 
+	/****************************
+	获取金元宝数
+	return 金元宝数
+	*****************************/
+	static int getMyGoldCount();
+
+	/****************************
+	设置金元宝数
+	@para 金元宝数
+	*****************************/
+	static void setMyGoldCount(int count);
 
     static void setNoAds(bool val);
     static bool getNoAds();
@@ -470,10 +510,14 @@ public:
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
 	static std::vector<PlotMissionData> vec_BranchPlotMissionData;//支线剧情数据
 	static std::map<std::string, GFSkillData> map_gfskills;//招式数据
+	static std::vector<GoodsData> vec_goods;
 	static bool isPopingScene;
+
+	static GameStatus g_gameStatus;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
+	static int myGlodCount;
 
 	static std::vector<std::string> vec_saveids;//存档的id
     

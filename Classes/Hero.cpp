@@ -35,8 +35,6 @@ Hero::Hero()
 	sleepLostPercent = 1.0f;
 
 	m_pastmin = 0;
-
-	isshoping = false;
 }
 
 
@@ -54,7 +52,7 @@ bool Hero::init()
 
 void Hero::updateData(float dt)
 {
-	if (g_hero->getIsShoping())
+	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 	//12s，（游戏时间1小时更新一次）
 	m_pastmin += g_nature->getTimeInterval();
@@ -509,15 +507,4 @@ int Hero::getTotalAtck()
 
 	int tatk = int(fack + 0.5f);
 	return tatk;
-}
-
-bool Hero::getIsShoping()
-{
-	return isshoping;
-}
-
-
-void Hero::setIsShoping(bool val)
-{
-	isshoping = val;
 }

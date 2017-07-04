@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
-#include "GoodsItem.h"
+#include "GlobalData.h"
 #include "MyPackage.h"
 USING_NS_CC;
 
@@ -26,12 +26,13 @@ public:
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	static void loadShopData();
-	static void addBuyGoods();
-	static void updateDefaultStorage(PackageData pdata);
+	void refreshGoldCount(float dt);
 private:
-	static std::vector<GoodsData> vec_goods;
-	cocos2d::ui::ScrollView* m_scrollview;
+
+	cocos2d::ui::ScrollView* m_rmbScrollview;
+	cocos2d::ui::ScrollView* m_goldScrollview;
+	cocos2d::ui::Text* mygoldlbl;
+	Node* m_csbnode;
 	static int payindex;
 	static bool isPaying;
 };

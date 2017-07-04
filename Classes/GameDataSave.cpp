@@ -418,3 +418,13 @@ void GameDataSave::setExgCfgData(std::string strval)
 {
 	saveStringDataByKey(addUIDString("exgcfg"), strval);
 }
+
+int GameDataSave::getGoldCount()
+{
+	return loadIntDataByKey("gold", 0);
+}
+
+void GameDataSave::setGoldCount(int count)
+{
+	saveIntDataByKey("gold", count);
+}

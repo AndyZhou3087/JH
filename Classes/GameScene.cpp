@@ -84,9 +84,13 @@ bool GameScene::init()
 	//读取武功招式配置文件
 	GlobalData::loadGfskillData();
 
+	//读取商城数据
+	GlobalData::loadShopData();
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	GlobalData::g_gameStatus = GAMESTART;
 	//天气，季节数据
 	g_nature = Nature::create();
 	this->addChild(g_nature);
@@ -352,7 +356,7 @@ void GameScene::checkiflive(float dt)
 	{
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		topBar->stopLoseAnim();
-		Director::getInstance()->pause();
+		GlobalData::g_gameStatus = GAMEPAUSE;
 		ReviveLayer* layer = ReviveLayer::create();
 		g_gameLayer->addChild(layer, 10, "revivelayer");
 	}
@@ -362,7 +366,7 @@ void GameScene::heroRevive()
 {
 	//复活成功
 	g_hero->revive();
-	Director::getInstance()->resume();
+	GlobalData::g_gameStatus = GAMESTART;
 	if (g_maplayer != NULL && g_hero->getIsOut())
 		g_maplayer->heroResumeMoving();
 	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);

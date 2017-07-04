@@ -2,11 +2,12 @@
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "SoundManager.h"
+#include "GoldGoodsItem.h"
 #include "ShopLayer.h"
+#include "HintBox.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
 {
-	m_goodsIndex = 0;
 }
 
 
@@ -15,9 +16,9 @@ BuyComfirmLayer::~BuyComfirmLayer()
 
 }
 
-bool BuyComfirmLayer::init(int shopGoodsIndex)
+bool BuyComfirmLayer::init(GoodsData* gdata)
 {
-	m_goodsIndex = shopGoodsIndex;
+	m_gdata = gdata;
 	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 200));
 	this->addChild(color);
 
@@ -34,9 +35,9 @@ bool BuyComfirmLayer::init(int shopGoodsIndex)
 
 	cocos2d::ui::Text* desctext = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
 
-	if (m_goodsIndex == FSFGOODSID)
-		desc = "闭关中！没有分身符无法进行此操作。是否立即购买分身符？";
-
+	if (GlobalData::g_gameStatus == GAMESTART)
+		desc = "闭关中！没有分身符无法进行此操作。";
+	desc.append(StringUtils::format("%s%d%s%s%s", CommonFuncs::gbk2utf("是否立即花费").c_str(), m_gdata->price, CommonFuncs::gbk2utf("金元宝购买").c_str(), m_gdata->name.c_str(), CommonFuncs::gbk2utf("？").c_str()));
 	desctext->setString(desc);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -51,10 +52,10 @@ bool BuyComfirmLayer::init(int shopGoodsIndex)
 	return true;
 }
 
-BuyComfirmLayer* BuyComfirmLayer::create(int shopGoodsIndex)
+BuyComfirmLayer* BuyComfirmLayer::create(GoodsData* gdata)
 {
 	BuyComfirmLayer *pRet = new BuyComfirmLayer();
-	if (pRet && pRet->init(shopGoodsIndex))
+	if (pRet && pRet->init(gdata))
 	{
 		pRet->autorelease();
 	}
@@ -79,6 +80,23 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		ShopLayer::beginPay(FSFGOODSID);
+		if (GlobalData::getMyGoldCount() >= m_gdata->price)
+		{
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - m_gdata->price);
+			GoldGoodsItem::addBuyGoods(m_gdata);
+		}
+		else
+		{
+			if (GlobalData::g_gameStatus == GAMESTART)
+			{
+				Director::getInstance()->getRunningScene()->addChild(ShopLayer::create(), 1000);
+			}
+			else
+			{
+				Director::getInstance()->getRunningScene()->addChild(HintBox::create(CommonFuncs::gbk2utf("金元宝不足！！")), 1000);
+			}
+		}
+		this->removeFromParentAndCleanup(true);
 	}
 }

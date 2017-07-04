@@ -11,18 +11,16 @@
 USING_NS_UM_SOCIAL;
 #include "iosfunc.h"
 #endif
-#define REVIVEGOODSID 14
-bool ReviveLayer::isBuyRevive = false;
 
 ReviveLayer::ReviveLayer()
 {
-	isBuyRevive = false;
+
 }
 
 
 ReviveLayer::~ReviveLayer()
 {
-	isBuyRevive = false;
+
 }
 
 bool ReviveLayer::init()
@@ -85,22 +83,9 @@ bool ReviveLayer::init()
 	}
 #endif
 
-
-	revivecount = StorageRoom::getCountById("73");
-
-	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
-	{
-		if (MyPackage::vec_packages[i].strid.compare("73") == 0)
-		{
-			revivecount += MyPackage::vec_packages[i].count;
-			break;
-		}
-	}
-
-	std::string strcount = StringUtils::format("x%d", revivecount);
-
-	cocos2d::ui::Text* revivecountlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("revivecount");
-	revivecountlbl->setString(strcount);
+	m_revivecountlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("revivecount");
+	refreshReviveCount(0);
+	this->schedule(schedule_selector(ReviveLayer::refreshReviveCount), 1);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -188,7 +173,7 @@ void ReviveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			g_gameLayer->removeChildByName("fightlayer");
 			g_gameLayer->saveAllData();
 		}
-		Director::getInstance()->resume();
+		GlobalData::g_gameStatus = GAMESTART;
 		DeathLayer* layer = DeathLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(layer);
 	}
@@ -215,8 +200,7 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else
 		{
-			isBuyRevive = true;
-			ShopLayer::beginPay(REVIVEGOODSID);
+			Director::getInstance()->getRunningScene()->addChild(ShopLayer::create(), 1000);
 		}
 	}
 }
@@ -255,4 +239,20 @@ void ReviveLayer::doRevive()
 			}
 		}
 	}
+}
+
+void ReviveLayer::refreshReviveCount(float dt)
+{
+	revivecount = StorageRoom::getCountById("73");
+
+	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
+	{
+		if (MyPackage::vec_packages[i].strid.compare("73") == 0)
+		{
+			revivecount += MyPackage::vec_packages[i].count;
+			break;
+		}
+	}
+	std::string strcount = StringUtils::format("x%d", revivecount);
+	m_revivecountlbl->setString(strcount);
 }

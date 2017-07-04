@@ -30,6 +30,8 @@ std::vector<PlotMissionData> GlobalData::vec_BranchPlotMissionData;
 
 std::map<std::string, GFSkillData> GlobalData::map_gfskills;
 
+std::vector<GoodsData> GlobalData::vec_goods;
+
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -42,6 +44,10 @@ long GlobalData::adschoose = 11111111;
 
 bool GlobalData::isPopingScene = false;
 
+int GlobalData::myGlodCount = 0;
+
+GameStatus GlobalData::g_gameStatus = GAMEOVER;
+
 GlobalData::GlobalData()
 {
 
@@ -51,6 +57,11 @@ GlobalData::GlobalData()
 GlobalData::~GlobalData()
 {
 
+}
+
+void GlobalData::init()
+{
+	myGlodCount = GameDataSave::getInstance()->getGoldCount();
 }
 
 void GlobalData::loadBuildActionJSon(std::string buildname)
@@ -843,6 +854,38 @@ void GlobalData::setUnlockChapter(int val)
 		GameDataSave::getInstance()->setPlotUnlockChapter(val);
 }
 
+void GlobalData::loadShopData()
+{
+	vec_goods.clear();
+	rapidjson::Document doc = ReadJsonFile("data/shop.json");
+	rapidjson::Value& values = doc["gs"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		GoodsData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["icon"];
+		data.icon = v.GetString();
+
+		v = item["res"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			data.vec_res.push_back(v[m].GetString());
+		}
+		v = item["name"];
+		data.name = v.GetString();
+
+		v = item["type"];
+		data.type = atoi(v.GetString());
+
+		v = item["desc"];
+		data.desc = v.GetString();
+
+		v = item["price"];
+		data.price = atoi(v.GetString());
+		vec_goods.push_back(data);
+	}
+}
+
 int GlobalData::createRandomNum(int val)
 {
 	int syssec = GlobalData::getSysSecTime();
@@ -1005,6 +1048,17 @@ std::string GlobalData::getExgCfgData()
 void GlobalData::setExgCfgData(std::string strval)
 {
 	GameDataSave::getInstance()->setExgCfgData(strval);
+}
+
+int GlobalData::getMyGoldCount()
+{
+	return myGlodCount;
+}
+
+void GlobalData::setMyGoldCount(int count)
+{
+	myGlodCount = count;
+	GameDataSave::getInstance()->setGoldCount(count);
 }
 
 std::string GlobalData::addUidString(std::string val)

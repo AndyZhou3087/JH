@@ -157,6 +157,13 @@
           <Image Name="fighticon.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
+          <Image Name="gd0.png" />
+          <Image Name="gd1.png" />
+          <Image Name="gd2.png" />
+          <Image Name="gd3.png" />
+          <Image Name="gold.png" />
+          <Image Name="golditem.png" />
+          <Image Name="goldtextbox.png" />
           <Image Name="goodsbg.png" />
           <Image Name="goodssepline.png" />
           <Image Name="gp1.png" />
@@ -248,6 +255,7 @@
           <Image Name="mapmission1_0.png" />
           <Image Name="mapmission1_1.png" />
           <Image Name="medicinekit.png" />
+          <Image Name="mygoldbox.png" />
           <Image Name="n002.png" />
           <Image Name="n003.png" />
           <Image Name="normalbtn.png" />
@@ -416,7 +424,7 @@
         <Project Name="exerciseDoneLayer.csd" Type="Layer" />
         <Project Name="exgLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
-        <Project Name="goodsNode.csd" Type="Node" />
+        <Project Name="goldGoodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
         <Project Name="heroStateLayer.csd" Type="Layer" />
@@ -445,6 +453,7 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="rmbGoodsNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

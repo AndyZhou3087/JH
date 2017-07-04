@@ -77,6 +77,6 @@ void PauseLayer::onGoHome(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 void PauseLayer::removSelf()
 {
 	this->removeFromParentAndCleanup(true);
-	Director::getInstance()->resume();
+	GlobalData::g_gameStatus = GAMESTART;
 }
 

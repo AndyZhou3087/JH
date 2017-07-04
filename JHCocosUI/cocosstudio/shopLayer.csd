@@ -6,29 +6,15 @@
       <ObjectData Name="Layer" Tag="102" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="-2015733362" Tag="123" IconVisible="False" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="582" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="normalboxgb" ActionTag="-2015733362" Tag="123" IconVisible="False" LeftMargin="5.8162" RightMargin="-5.8162" TopMargin="0.0001" BottomMargin="-0.0001" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="582" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="1280.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="640.0000" />
+            <Position X="365.8162" Y="639.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
+            <PrePosition X="0.5081" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="images/selectherobg.jpg" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="1803526669" Tag="139" IconVisible="False" TopMargin="167.7372" BottomMargin="92.2629" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="720.0000" Y="1020.0000" />
-            <AnchorPoint />
-            <Position Y="92.2629" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition Y="0.0721" />
-            <PreSize X="1.0000" Y="0.7969" />
-            <SingleColor A="255" R="255" G="150" B="100" />
-            <FirstColor A="255" R="255" G="150" B="100" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="720" Height="1025" />
           </AbstractNodeData>
           <AbstractNodeData Name="qqtext" ActionTag="1329191533" Tag="183" IconVisible="False" LeftMargin="446.4944" RightMargin="147.5056" TopMargin="1233.3022" BottomMargin="21.6978" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="126.0000" Y="25.0000" />
@@ -52,7 +38,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="578.5243" RightMargin="14.4757" TopMargin="1257.5598" BottomMargin="20.4401" ctype="SpriteObjectData">
+          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="578.5243" RightMargin="14.4757" TopMargin="1257.5599" BottomMargin="20.4401" ctype="SpriteObjectData">
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="642.0243" Y="21.4401" />
@@ -63,7 +49,7 @@
             <FileData Type="MarkedSubImage" Path="ui/qqline0.png" Plist="uipacker.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shoptitle_1" ActionTag="275813972" Tag="87" IconVisible="False" BottomMargin="1108.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="shoptitle" ActionTag="275813972" Tag="87" IconVisible="False" BottomMargin="1108.0000" ctype="SpriteObjectData">
             <Size X="720.0000" Y="172.0000" />
             <AnchorPoint ScaleY="1.0000" />
             <Position Y="1280.0000" />
@@ -89,16 +75,112 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="hintdown" ActionTag="1629861499" Tag="192" IconVisible="False" LeftMargin="314.9994" RightMargin="315.0006" TopMargin="1214.8220" BottomMargin="35.1779" ctype="SpriteObjectData">
+          <AbstractNodeData Name="hintdown" ActionTag="1629861499" Tag="192" IconVisible="False" LeftMargin="314.9993" RightMargin="315.0007" TopMargin="1203.8225" BottomMargin="46.1775" ctype="SpriteObjectData">
             <Size X="90.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="359.9994" Y="50.1779" />
+            <Position X="359.9993" Y="61.1775" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.0392" />
+            <PrePosition X="0.5000" Y="0.0478" />
             <PreSize X="0.1250" Y="0.0234" />
             <FileData Type="MarkedSubImage" Path="ui/hintdown.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="goldbg" ActionTag="-1589980380" Tag="56" IconVisible="False" LeftMargin="9.9999" RightMargin="10.0001" TopMargin="197.8540" BottomMargin="762.1459" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
+            <Size X="700.0000" Y="320.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="359.9999" Y="922.1459" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.7204" />
+            <PreSize X="0.9722" Y="0.2500" />
+            <FileData Type="MarkedSubImage" Path="ui/saveitembg.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="goldtextbox" ActionTag="1155993220" Tag="64" IconVisible="False" LeftMargin="205.1326" RightMargin="238.8674" TopMargin="165.2441" BottomMargin="1042.7559" ctype="SpriteObjectData">
+            <Size X="276.0000" Y="72.0000" />
+            <Children>
+              <AbstractNodeData Name="text" ActionTag="1912312881" Tag="65" IconVisible="False" LeftMargin="64.5000" RightMargin="64.5000" TopMargin="8.5000" BottomMargin="8.5000" FontSize="50" LabelText="金元宝" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="147.0000" Y="55.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="138.0000" Y="36.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.5326" Y="0.7639" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="343.1326" Y="1078.7559" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4766" Y="0.8428" />
+            <PreSize X="0.3833" Y="0.0562" />
+            <FileData Type="MarkedSubImage" Path="ui/goldtextbox.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="rmbgoodsscroll" ActionTag="-95823977" Tag="66" IconVisible="False" LeftMargin="21.5795" RightMargin="28.4205" TopMargin="252.2170" BottomMargin="797.7829" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
+            <Size X="670.0000" Y="230.0000" />
+            <AnchorPoint />
+            <Position X="21.5795" Y="797.7829" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0300" Y="0.6233" />
+            <PreSize X="0.9306" Y="0.1797" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="670" Height="230" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="goldgoodsscroll" ActionTag="1803526669" Tag="139" IconVisible="False" LeftMargin="-0.0001" RightMargin="0.0001" TopMargin="506.7372" BottomMargin="88.2628" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="720.0000" Y="685.0000" />
+            <AnchorPoint />
+            <Position X="-0.0001" Y="88.2628" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0000" Y="0.0690" />
+            <PreSize X="1.0000" Y="0.5352" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="720" Height="1025" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="mygoldbox" ActionTag="708509975" Tag="73" IconVisible="False" LeftMargin="-0.2932" RightMargin="500.2932" TopMargin="-0.1792" BottomMargin="1235.1792" ctype="SpriteObjectData">
+            <Size X="220.0000" Y="45.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="109.7068" Y="1257.6792" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1524" Y="0.9826" />
+            <PreSize X="0.3056" Y="0.0352" />
+            <FileData Type="MarkedSubImage" Path="ui/mygoldbox.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="gold" ActionTag="83268908" Tag="74" IconVisible="False" LeftMargin="-0.4600" RightMargin="654.4600" TopMargin="4.8889" BottomMargin="1239.1111" ctype="SpriteObjectData">
+            <Size X="66.0000" Y="36.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="32.5400" Y="1257.1111" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0452" Y="0.9821" />
+            <PreSize X="0.0917" Y="0.0281" />
+            <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="mygoldlbl" ActionTag="-1104259580" Tag="75" IconVisible="False" LeftMargin="66.9030" RightMargin="637.0970" TopMargin="4.6779" BottomMargin="1242.3221" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="16.0000" Y="33.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="66.9030" Y="1258.8221" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0929" Y="0.9835" />
+            <PreSize X="0.0222" Y="0.0258" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

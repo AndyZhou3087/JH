@@ -351,6 +351,14 @@
       <FilePathData Path="ui/badbookshelf.png" />
       <FilePathData Path="ui/79.png" />
       <FilePathData Path="ui/80.png" />
+      <FilePathData Path="ui/gd0.png" />
+      <FilePathData Path="ui/gd1.png" />
+      <FilePathData Path="ui/gd2.png" />
+      <FilePathData Path="ui/gd3.png" />
+      <FilePathData Path="ui/gold.png" />
+      <FilePathData Path="ui/golditem.png" />
+      <FilePathData Path="ui/goldtextbox.png" />
+      <FilePathData Path="ui/mygoldbox.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

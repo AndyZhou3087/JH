@@ -82,7 +82,7 @@ void HeroStateUILayer::onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		Director::getInstance()->pause();
+		GlobalData::g_gameStatus = GAMEPAUSE;
 		this->addChild(PauseLayer::create(), 2);
 	}
 }

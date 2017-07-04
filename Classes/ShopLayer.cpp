@@ -1,6 +1,5 @@
 ﻿#include "ShopLayer.h"
 #include "Const.h"
-#include "GlobalData.h"
 #include "BuildingUILayer.h"
 #include "StorageRoom.h"
 #include "GameScene.h"
@@ -11,29 +10,26 @@
 #include "AnalyticUtil.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "RmbGoodsItem.h"
+#include "GoldGoodsItem.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #include "iosfunc.h"
 #endif
 
-std::vector<GoodsData> ShopLayer::vec_goods;
 int ShopLayer::payindex = -1;
 bool ShopLayer::isPaying = false;
 ShopLayer::ShopLayer()
 {
 	payindex = -1;
-	//isPaying = false;
-	vec_goods.clear();
-	g_hero->setIsShoping(true);
+	GlobalData::g_gameStatus = GAMEPAUSE;
 }
 
 
 ShopLayer::~ShopLayer()
 {
 	payindex = -1;
-	//isPaying = false;
-	vec_goods.clear();
-	g_hero->setIsShoping(false);
+	GlobalData::g_gameStatus = GAMESTART;
 }
 
 ShopLayer* ShopLayer::create()
@@ -56,39 +52,67 @@ bool ShopLayer::init()
 	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 150));
 	this->addChild(color);
 
-	Node* csbnode = CSLoader::createNode("shopLayer.csb");
-	this->addChild(csbnode);
+	m_csbnode = CSLoader::createNode("shopLayer.csb");
+	this->addChild(m_csbnode);
 	
-	loadShopData();
+	refreshGoldCount(0);
+
+	std::vector<GoodsData*> vec_rmbGoods;
+	std::vector<GoodsData*> vec_goldGoods;
+
+	int goodsize = GlobalData::vec_goods.size();
+
+	for (unsigned int i = 0; i < goodsize; i++)
+	{
+		GoodsData* gdata = &GlobalData::vec_goods[i];
+		if (gdata->type == 0)
+			vec_rmbGoods.push_back(gdata);
+		else
+			vec_goldGoods.push_back(gdata);
+	}
 
 
-	int goodsize = vec_goods.size();
-	int row = goodsize;
+	m_rmbScrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("rmbgoodsscroll");
+	m_rmbScrollview->setScrollBarEnabled(false);
+	m_rmbScrollview->setBounceEnabled(true);
 
+	int itemwidth = 160;
+	int innerwidth = itemwidth * vec_rmbGoods.size();
+	int contentwidth = m_rmbScrollview->getContentSize().width;
+	if (innerwidth < contentwidth)
+		innerwidth = contentwidth;
+	m_rmbScrollview->setInnerContainerSize(Size(innerwidth, m_rmbScrollview->getContentSize().height));
 
-	m_scrollview = (cocos2d::ui::ScrollView*)csbnode->getChildByName("ScrollView");
-	m_scrollview->setScrollBarEnabled(false);
-	m_scrollview->setBounceEnabled(true);
+	for (unsigned int i = 0; i < vec_rmbGoods.size(); i++)
+	{
+		RmbGoodsItem* node = RmbGoodsItem::create(vec_rmbGoods[i]);
+		node->setTag(4 + i);
+		m_rmbScrollview->addChild(node);
+		node->setPosition(Vec2(itemwidth / 2  + 10 + i * itemwidth, m_rmbScrollview->getContentSize().height/2));
+	}
+
+	m_goldScrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("goldgoodsscroll");
+	m_goldScrollview->setScrollBarEnabled(false);
+	m_goldScrollview->setBounceEnabled(true);
 
 	int itemheight = 205;
-	int innerheight = itemheight * row;
-	int contentheight = m_scrollview->getContentSize().height;
+	int innerheight = itemheight * vec_goldGoods.size();
+	int contentheight = m_goldScrollview->getContentSize().height;
 	if (innerheight < contentheight)
 		innerheight = contentheight;
-	m_scrollview->setInnerContainerSize(Size(600, innerheight));
+	m_goldScrollview->setInnerContainerSize(Size(m_goldScrollview->getContentSize().width, innerheight));
 
-	for (int i = 0; i < goodsize; i++)
+	for (unsigned int i = 0; i < vec_goldGoods.size(); i++)
 	{
-		GoodsItem* node = GoodsItem::create(&vec_goods[i]);
-		node->setTag(4 + i);
-		m_scrollview->addChild(node);
+		GoldGoodsItem* node = GoldGoodsItem::create(vec_goldGoods[i]);
+		m_goldScrollview->addChild(node);
 		node->setPosition(Vec2(360, innerheight - itemheight / 2 - i * itemheight));
 	}
 
-	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
+	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onBack, this));
 
-	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)csbnode->getChildByName("qq");
+	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)m_csbnode->getChildByName("qq");
 	qq->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -100,6 +124,8 @@ bool ShopLayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	this->schedule(schedule_selector(ShopLayer::refreshGoldCount), 1);
+	
 	return true;
 }
 
@@ -112,34 +138,7 @@ void ShopLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	}
 }
 
-void ShopLayer::loadShopData()
-{
-	rapidjson::Document doc = ReadJsonFile("data/shop.json");
-	rapidjson::Value& values = doc["gs"];
-	for (unsigned int i = 0; i < values.Size(); i++)
-	{
-		GoodsData data;
-		rapidjson::Value& item = values[i];
-		rapidjson::Value& v = item["icon"];
-		data.icon = v.GetString();
 
-		v = item["res"];
-		for (unsigned int m = 0; m < v.Size(); m++)
-		{
-			data.vec_res.push_back(v[m].GetString());
-		}
-		v = item["name"];
-		data.name = v.GetString();
-		v = item["desc"];
-		data.desc = v.GetString();
-
-		v = item["count"];
-		data.count = atoi(v.GetString());
-		v = item["price"];
-		data.price = atoi(v.GetString());
-		vec_goods.push_back(data);
-	}
-}
 
 void ShopLayer::beginPay(int index)
 {
@@ -162,7 +161,6 @@ void ShopLayer::setMessage(PYARET ret)
 {
 	if (ret == PAY_SUCC)
 	{
-		int shopgoodsszie = vec_goods.size();
 		if (payindex < 4) // 人物解锁
 		{
 			if (g_SelectHeroScene != NULL)
@@ -174,15 +172,13 @@ void ShopLayer::setMessage(PYARET ret)
 		}
 		else
 		{
-			addBuyGoods();
-			if (ReviveLayer::isBuyRevive)
-				ReviveLayer::doRevive();
+			//addBuyGoods();
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + goldcount[payindex - 4]);
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 #ifdef ANALYTICS
-			std::string heroname[] = { "bzyys", "bdlw", "bfsf", "bfh","bbasepkg", "badvpkg","bemergpkg", "bfoodpkg","bjhgspkg"};
-			AnalyticUtil::onEvent(heroname[payindex - 4].c_str());
+			std::string name[] = { "b6", "b12", "b30", "b68"};
+			AnalyticUtil::onEvent(name[payindex - 4].c_str());
 #endif
-			if (g_gameLayer->getChildByName("buycomfirmlayer") != NULL)
-				g_gameLayer->removeChildByName("buycomfirmlayer");
 		}
 #ifdef ANALYTICS
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);
@@ -191,109 +187,13 @@ void ShopLayer::setMessage(PYARET ret)
 	isPaying = false;
 }
 
-void ShopLayer::addBuyGoods()
+void ShopLayer::refreshGoldCount(float dt)
 {
-	int goodsindex = payindex - 4;
-	if (vec_goods.size() <= 0)
-		loadShopData();
-	std::vector<std::string> payRes = vec_goods[goodsindex].vec_res;
-	for (unsigned int i = 0; i < payRes.size(); i++)
-	{
-		int intRes = atoi(payRes[i].c_str());
-		if (intRes != 0)
-		{
-			bool isfind = false;
-			std::map<std::string, std::vector<BuildActionData>>::iterator it;
-			for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
-			{
-				std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
-
-				for (unsigned int m = 0; m < vec_bactData.size(); m++)
-				{
-					BuildActionData bdata = vec_bactData[m];
-					if (atoi(bdata.icon) == intRes / 1000)
-					{
-						isfind = true;
-						PackageData pdata;
-						pdata.strid = bdata.icon;
-						pdata.count = intRes % 1000;
-						pdata.type = bdata.type - 1;
-						StorageRoom::add(pdata);
-						break;
-					}
-				}
-				if (isfind)
-					break;
-			}
-			if (!isfind)
-			{
-				for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
-				{
-					ResData rdata = GlobalData::vec_resData[n];
-					int rint = atoi(rdata.strid.c_str());
-					if (rint == intRes / 1000)
-					{
-						PackageData pdata;
-						pdata.strid = rdata.strid;
-						pdata.count = intRes % 1000;
-						pdata.type = rdata.type - 1;
-						pdata.extype = rdata.actype;
-
-						if (rint >= 75 && rint <= 78)
-							updateDefaultStorage(pdata);
-						StorageRoom::add(pdata);
-						break;
-					}
-				}
-			}
-		}
-		else
-		{
-			bool isfind = false;
-			std::map<std::string, WG_NGData>::iterator it;
-			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
-			{
-				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (payRes[i].compare(gfdata.id) == 0)
-				{
-					isfind = true;
-					PackageData pdata;
-					pdata.strid = gfdata.id;
-					pdata.count = 1;
-					pdata.lv = 0;
-					pdata.type = gfdata.type - 1;
-					updateDefaultStorage(pdata);
-					if (!g_hero->checkifHasGF(payRes[i]))
-					{
-						StorageRoom::add(pdata);
-						break;
-					}
-				}
-			}
-
-			if (!isfind)
-			{
-				std::map<std::string, EquipData>::iterator ite;
-				for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
-				{
-					EquipData edata = GlobalData::map_equips[ite->first];
-					if (payRes[i].compare(edata.id) == 0)
-					{
-						PackageData pdata;
-						pdata.strid = edata.id;
-						pdata.count = 1;
-						pdata.type = edata.type - 1;
-						pdata.goodvalue = 100;
-						pdata.extype = edata.extype;
-						StorageRoom::add(pdata);
-						updateDefaultStorage(pdata);
-						break;
-					}
-				}
-			}
-		}
-	}
+	mygoldlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("mygoldlbl");
+	std::string countstr = StringUtils::format("%d", GlobalData::getMyGoldCount());
+	mygoldlbl->setString(countstr);
 }
+
 void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
@@ -304,50 +204,5 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		copytoclipboard((char*)qq->getString().c_str());
 #endif
 	}
-
-}
-
-void ShopLayer::updateDefaultStorage(PackageData pdata)
-{
-	vector<PackageData> vec_defaultStorage;
-	std::string datastr = GlobalData::getDefaultStorage(g_hero->getHeadID());
-
-	std::vector<std::string> vec_retstr;
-	CommonFuncs::split(datastr, vec_retstr, ";");
-	for (unsigned int i = 0; i < vec_retstr.size(); i++)
-	{
-		std::vector<std::string> tmp;
-		CommonFuncs::split(vec_retstr[i], tmp, "-");
-		PackageData data;
-		data.strid = tmp[0];
-		data.type = atoi(tmp[1].c_str());
-		data.count = atoi(tmp[2].c_str());
-		data.extype = atoi(tmp[3].c_str());
-		data.lv = atoi(tmp[4].c_str());
-		data.exp = atoi(tmp[5].c_str());
-		data.goodvalue = atoi(tmp[6].c_str());
-		vec_defaultStorage.push_back(data);
-	}
-
-	bool ishas = false;
-	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
-	{
-		if (vec_defaultStorage[i].strid.compare(pdata.strid) == 0)
-		{
-			ishas = true;
-			break;
-		}
-	}
-
-	if (!ishas)
-		vec_defaultStorage.push_back(pdata);
-
-	std::string str;
-	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
-	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue);
-		str.append(onestr);
-	}
-	GameDataSave::getInstance()->setModifyDefaultStorage(g_hero->getHeadID(), str.substr(0, str.length() - 1));
 
 }

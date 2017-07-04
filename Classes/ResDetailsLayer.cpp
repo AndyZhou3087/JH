@@ -9,6 +9,7 @@
 #include "BuyComfirmLayer.h"
 #include "Const.h"
 #include "GameDataSave.h"
+#include "ShopLayer.h"
 
 #define WINESTRID "23"
 #define GRASSRID "5"
@@ -122,6 +123,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 		if (pdata->strid.compare("70") == 0)
 		{
 			usebtn->setVisible(true);
+
 			m_okbtn->setPositionX(460);
 			std::string uselblstr = StringUtils::format("经验药水 x%d", StorageRoom::getCountById("70"));
 			uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
@@ -231,8 +233,20 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			if (GlobalData::isExercising() && !GlobalData::isHasFSF() && m_okbtn->getTitleText().compare(CommonFuncs::gbk2utf("使用")) == 0)
 			{
-				BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
-				g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+				int index = -1;
+				for (unsigned int i = 0; i < GlobalData::vec_goods.size(); i++)
+				{
+					if (GlobalData::vec_goods[i].icon.compare("72") == 0)
+					{
+						index = i;
+						break;
+					}
+				}
+				if (index >= 0)
+				{
+					BuyComfirmLayer* layer = BuyComfirmLayer::create(&GlobalData::vec_goods[index]);
+					Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
+				}
 				return;
 			}
 
@@ -338,6 +352,7 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		bool isUseOk = false;
 		if (m_packageData->strid.compare("71") == 0)
 		{
 			int count = StorageRoom::getCountById("71");
@@ -358,8 +373,8 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					GameDataSave::getInstance()->setGfEndTime(cursectime + 24 * 3600);
 					m_expendtime = cursectime + 24 * 3600;
 				}
+				isUseOk = true;
 			}
-
 		}
 		else if (m_packageData->strid.compare("70") == 0)
 		{
@@ -381,11 +396,18 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					GameDataSave::getInstance()->setHeroExpEndTime(cursectime + 24 * 3600);
 					m_expendtime = cursectime + 24 * 3600;
 				}
+				isUseOk = true;
 			}
 		}
-		StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
-		storageUI->updateResContent();
-		removSelf();
+
+		if (isUseOk)
+		{
+			updataLeftTime(0);
+			this->schedule(schedule_selector(ResDetailsLayer::updataLeftTime), 1);
+
+			StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
+			storageUI->updateResContent();
+		}
 	}
 }
 void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)

@@ -16,6 +16,7 @@
 #include "BuyComfirmLayer.h"
 #include "NewerGuideLayer.h"
 #include "SpecialHintLayer.h"
+#include "HintBox.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -398,8 +399,20 @@ void HeroProperNode::onItem(Ref* pSender)
 
 	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 	{
-		BuyComfirmLayer* layer = BuyComfirmLayer::create(FSFGOODSID);
-		g_gameLayer->addChild(layer, 4, "buycomfirmlayer");
+		int index = -1;
+		for (unsigned int i = 0; i < GlobalData::vec_goods.size(); i++)
+		{
+			if (GlobalData::vec_goods[i].icon.compare("72") == 0)
+			{
+				index = i;
+				break;
+			}
+		}
+		if (index >= 0)
+		{
+			BuyComfirmLayer* layer = BuyComfirmLayer::create(&GlobalData::vec_goods[index]);
+			Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
+		}
 		return;
 	}
 
@@ -443,7 +456,14 @@ void HeroProperNode::selectCarryData()
 				if (isout)
 				{
 					if (m_select->isVisible())
-						MyPackage::add(*m_lastSelectedData);
+					{
+						if (MyPackage::add(*m_lastSelectedData) < 0)
+						{
+							HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("背包已满！！"));
+							Director::getInstance()->getRunningScene()->addChild(hint, 4);
+							return;
+						}
+					}
 				}
 				else
 				{
@@ -548,7 +568,14 @@ void HeroProperNode::takeoff(HeroAtrType atrype)
 {
 	PackageData mydata = *g_hero->getAtrByType(atrype);
 	if (g_hero->getIsOut())
-		MyPackage::add(mydata);
+	{
+		if (MyPackage::add(mydata) < 0)
+		{
+			HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("背包已满！！"));
+			Director::getInstance()->getRunningScene()->addChild(hint, 4);
+			return;
+		}
+	}
 	else
 		StorageRoom::add(mydata);
 	g_hero->getAtrByType(atrype)->count = -1;

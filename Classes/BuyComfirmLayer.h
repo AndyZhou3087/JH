@@ -3,21 +3,20 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "GlobalData.h"
 USING_NS_CC;
 
-#define FSFGOODSID 13
 class BuyComfirmLayer :public Layer
 {
 public:
 	BuyComfirmLayer();
 	~BuyComfirmLayer();
 
-	bool init(int shopGoodsIndex);
-	static BuyComfirmLayer* create(int shopGoodsIndex);
+	bool init(GoodsData* gdata);
+	static BuyComfirmLayer* create(GoodsData* gdata);
 
 private:
-
-	int m_goodsIndex;
+	GoodsData* m_gdata;
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
