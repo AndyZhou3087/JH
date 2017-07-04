@@ -98,7 +98,8 @@ void alterView() {
         GlobalData::setNoComments(true);
     }];
     [alert addAction:ac3];
-    [ac3 setValue:[UIColor grayColor] forKey:@"_titleTextColor"];
+    if ( [[UIDevice currentDevice].systemVersion floatValue] >= 8.3)
+        [ac3 setValue:[UIColor grayColor] forKey:@"_titleTextColor"];
     [s presentViewController:alert animated:YES completion:nil];
 }
 
