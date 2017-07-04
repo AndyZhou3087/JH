@@ -11,6 +11,7 @@
 USING_NS_UM_SOCIAL;
 #include "iosfunc.h"
 #endif
+#define REVIVEGOLDCOUNT 60
 
 ReviveLayer::ReviveLayer()
 {
@@ -38,6 +39,45 @@ bool ReviveLayer::init()
 
 	cocos2d::ui::Button* revivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("revivebtn");
 	revivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onRevive, this));
+
+	m_revivedesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("revivecountlbl");
+
+	cocos2d::ui::Text* revivetxtlbl = (cocos2d::ui::Text*)revivebtn->getChildByName("text");
+	cocos2d::ui::Text* revivepricelbl = (cocos2d::ui::Text*)revivebtn->getChildByName("price");
+	cocos2d::ui::Widget* reviveicon = (cocos2d::ui::Widget*)revivebtn->getChildByName("priceicon");
+
+	revivecount = StorageRoom::getCountById("73");
+
+	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
+	{
+		if (MyPackage::vec_packages[i].strid.compare("73") == 0)
+		{
+			revivecount += MyPackage::vec_packages[i].count;
+			break;
+		}
+	}
+
+	if (revivecount > 0)
+	{
+		m_revivedesc->setVisible(true);
+		std::string strcount = StringUtils::format("复活药水x%d", revivecount);
+		m_revivedesc->setString(CommonFuncs::gbk2utf(strcount.c_str()));
+		revivepricelbl->setVisible(false);
+		reviveicon->setVisible(false);
+		revivetxtlbl->setPositionY(45);
+	}
+	else
+	{
+		m_revivedesc->setVisible(false);
+		this->schedule(schedule_selector(ReviveLayer::checkGoldCount), 1);
+		revivepricelbl->setVisible(true);
+		std::string pricestr = StringUtils::format("%d", REVIVEGOLDCOUNT);
+		revivepricelbl->setString(pricestr);
+		reviveicon->setVisible(true);
+		revivetxtlbl->setPositionY(50);
+	}
+
+
 #ifdef UMENG_SHARE
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
@@ -82,10 +122,6 @@ bool ReviveLayer::init()
 		sharetext->setVisible(false);
 	}
 #endif
-
-	m_revivecountlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("revivecount");
-	refreshReviveCount(0);
-	this->schedule(schedule_selector(ReviveLayer::refreshReviveCount), 1);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -200,7 +236,13 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else
 		{
-			Director::getInstance()->getRunningScene()->addChild(ShopLayer::create(), 1000);
+			if (GlobalData::getMyGoldCount() >= REVIVEGOLDCOUNT)
+			{
+				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - REVIVEGOLDCOUNT);
+				reviveOk();
+			}
+			else
+				Director::getInstance()->getRunningScene()->addChild(ShopLayer::create(), 1000);
 		}
 	}
 }
@@ -241,18 +283,13 @@ void ReviveLayer::doRevive()
 	}
 }
 
-void ReviveLayer::refreshReviveCount(float dt)
+void ReviveLayer::checkGoldCount(float dt)
 {
-	revivecount = StorageRoom::getCountById("73");
-
-	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
+	if (GlobalData::getMyGoldCount() < REVIVEGOLDCOUNT)
 	{
-		if (MyPackage::vec_packages[i].strid.compare("73") == 0)
-		{
-			revivecount += MyPackage::vec_packages[i].count;
-			break;
-		}
+		m_revivedesc->setVisible(true);
+		m_revivedesc->setString(CommonFuncs::gbk2utf("金元宝不足"));
 	}
-	std::string strcount = StringUtils::format("x%d", revivecount);
-	m_revivecountlbl->setString(strcount);
+	else
+		m_revivedesc->setVisible(false);
 }

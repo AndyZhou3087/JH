@@ -7,5 +7,24 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="activityLayer.csd" />
+          <FilePathData Path="actionNode.csd" />
+          <FilePathData Path="npcLayer.csd" />
+          <FilePathData Path="npcNode.csd" />
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="shopLayer.csd" />
+          <FilePathData Path="goldGoodsNode.csd" />
+          <FilePathData Path="rmbGoodsNode.csd" />
+          <FilePathData Path="bookshelfLayer.csd" />
+          <FilePathData Path="buyComfirmLayer.csd" />
+          <FilePathData Path="startLayer.csd" />
+          <FilePathData Path="reviveLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="reviveLayer.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

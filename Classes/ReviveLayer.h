@@ -16,16 +16,17 @@ public:
 	static void doRevive();
 	static void reviveOk();
 private:
-	int revivecount;
 	Node* m_csbnode;
-	cocos2d::ui::Text* m_revivecountlbl;
+	cocos2d::ui::Text* m_revivepricelbl;
+	cocos2d::ui::Text* m_revivedesc;
+	int revivecount;
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onShare(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static void shareCallback(int platform, int stCode, std::string& errorMsg);
-	void refreshReviveCount(float dt);
+	void checkGoldCount(float dt);
 };
 #endif
 

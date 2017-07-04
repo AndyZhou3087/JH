@@ -29,8 +29,56 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="revivebtn" ActionTag="-1740360797" Tag="47" IconVisible="False" LeftMargin="405.4145" RightMargin="164.5855" TopMargin="738.1982" BottomMargin="451.8018" TouchEnable="True" FontSize="40" ButtonText="复活" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="revivecountlbl" ActionTag="-1345363941" Tag="133" IconVisible="False" LeftMargin="411.5341" RightMargin="176.4659" TopMargin="718.9896" BottomMargin="530.0104" FontSize="28" LabelText="复活药水x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="132.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5797" ScaleY="0.5231" />
+            <Position X="488.0603" Y="546.2255" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.6779" Y="0.4267" />
+            <PreSize X="0.1833" Y="0.0242" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="revivebtn" ActionTag="-1740360797" Tag="47" IconVisible="False" LeftMargin="405.4145" RightMargin="164.5855" TopMargin="738.1982" BottomMargin="451.8018" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
+            <Children>
+              <AbstractNodeData Name="priceicon" ActionTag="2006020828" Tag="132" IconVisible="False" LeftMargin="54.7833" RightMargin="29.2167" TopMargin="50.0142" BottomMargin="3.9858" ctype="SpriteObjectData">
+                <Size X="66.0000" Y="36.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="87.7833" Y="21.9858" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5852" Y="0.2443" />
+                <PreSize X="0.4400" Y="0.4000" />
+                <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="price" ActionTag="1226021185" Tag="131" IconVisible="False" LeftMargin="48.6817" RightMargin="79.3183" TopMargin="55.2588" BottomMargin="13.7412" FontSize="21" LabelText="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="22.0000" Y="21.0000" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="70.6817" Y="24.2412" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="208" G="194" B="194" />
+                <PrePosition X="0.4712" Y="0.2693" />
+                <PreSize X="0.1467" Y="0.2333" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="text" ActionTag="1019780108" Tag="130" IconVisible="False" LeftMargin="32.8611" RightMargin="41.1389" TopMargin="17.9998" BottomMargin="28.0002" FontSize="40" LabelText="复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="76.0000" Y="44.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="70.8611" Y="50.0002" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4724" Y="0.5556" />
+                <PreSize X="0.5067" Y="0.4889" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.4145" Y="496.8018" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -58,30 +106,6 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="revivetext" ActionTag="628692703" Tag="145" IconVisible="False" LeftMargin="413.5190" RightMargin="199.4810" TopMargin="715.4668" BottomMargin="536.5332" FontSize="26" LabelText="复活药水" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="107.0000" Y="28.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="467.0190" Y="550.5332" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="254" G="4" B="4" />
-            <PrePosition X="0.6486" Y="0.4301" />
-            <PreSize X="0.1486" Y="0.0219" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="revivecount" ActionTag="76454667" Tag="146" IconVisible="False" LeftMargin="521.4922" RightMargin="167.5078" TopMargin="714.5781" BottomMargin="537.4219" FontSize="26" LabelText="x12" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="31.0000" Y="28.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="521.4922" Y="551.4219" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="254" G="4" B="4" />
-            <PrePosition X="0.7243" Y="0.4308" />
-            <PreSize X="0.0431" Y="0.0219" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
