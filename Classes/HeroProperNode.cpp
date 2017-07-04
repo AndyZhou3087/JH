@@ -474,6 +474,17 @@ void HeroProperNode::selectCarryData()
 		}
 
 	}
+
+	if (m_select->isVisible())
+	{
+		takeon(m_select_atrype, m_select_udata);
+	}
+	else
+	{
+		if (!takeoff(m_select_atrype))
+			return;
+	}
+
 	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 
 	std::string str;
@@ -491,15 +502,6 @@ void HeroProperNode::selectCarryData()
 	{
 		m_select->setVisible(true);
 		str = StringUtils::format("ui/%s.png", m_select_udata->strid.c_str());
-	}
-
-	if (m_select->isVisible())
-	{
-		takeon(m_select_atrype, m_select_udata);
-	}
-	else
-	{
-		takeoff(m_select_atrype);
 	}
 
 	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
@@ -565,7 +567,7 @@ void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
 	lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 }
 
-void HeroProperNode::takeoff(HeroAtrType atrype)
+bool HeroProperNode::takeoff(HeroAtrType atrype)
 {
 	PackageData mydata = *g_hero->getAtrByType(atrype);
 	if (g_hero->getIsOut())
@@ -574,7 +576,7 @@ void HeroProperNode::takeoff(HeroAtrType atrype)
 		{
 			HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("背包已满！！"));
 			Director::getInstance()->getRunningScene()->addChild(hint, 4);
-			return;
+			return false;
 		}
 	}
 	else
@@ -585,6 +587,7 @@ void HeroProperNode::takeoff(HeroAtrType atrype)
 	std::string str = "ui/buildsmall.png";
 	imgbtn[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	return true;
 }
 
 void HeroProperNode::removeitem()

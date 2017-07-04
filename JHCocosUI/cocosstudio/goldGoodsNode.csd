@@ -76,22 +76,6 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="buybtn" ActionTag="362216330" Tag="173" IconVisible="False" LeftMargin="476.1829" RightMargin="15.8171" TopMargin="47.1302" BottomMargin="64.8698" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="150.0000" Y="90.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="551.1829" Y="109.8698" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8585" Y="0.5439" />
-                <PreSize X="0.2336" Y="0.4455" />
-                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-                <TextColor A="255" R="255" G="255" B="255" />
-                <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
-                <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
-                <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -100,6 +84,22 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/saveitembg.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="buybtn" ActionTag="362216330" Tag="173" IconVisible="False" LeftMargin="153.3657" RightMargin="-303.3657" TopMargin="-55.0002" BottomMargin="-34.9998" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="228.3657" Y="10.0002" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

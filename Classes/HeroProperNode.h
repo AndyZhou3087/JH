@@ -93,8 +93,9 @@ private:
 	/****************************
 	卸下装备
 	@param 装备类型
+	@return 是否卸下成功，背包满了就失败
 	*****************************/
-	void takeoff(HeroAtrType atrype);
+	bool takeoff(HeroAtrType atrype);
 
 private:
 	Node* csbroot;

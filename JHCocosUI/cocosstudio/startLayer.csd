@@ -103,13 +103,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qq" ActionTag="-151597376" Tag="172" IconVisible="False" LeftMargin="148.0061" RightMargin="454.9939" TopMargin="1232.8245" BottomMargin="22.1756" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="qq" ActionTag="-151597376" Tag="172" IconVisible="False" LeftMargin="151.0060" RightMargin="451.9940" TopMargin="1232.8245" BottomMargin="22.1756" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="117.0000" Y="25.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="206.5061" Y="34.6756" />
+            <Position X="209.5060" Y="34.6756" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2868" Y="0.0271" />
+            <PrePosition X="0.2910" Y="0.0271" />
             <PreSize X="0.1625" Y="0.0195" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -118,7 +118,7 @@
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="207.1835" Y="21.9126" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="1.1000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2878" Y="0.0171" />
             <PreSize X="0.1764" Y="0.0016" />

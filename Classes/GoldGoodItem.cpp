@@ -84,7 +84,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	else if (type == ui::Widget::TouchEventType::MOVED)
 	{
 		Vec2 pos = node->convertToWorldSpace(this->getParent()->getPosition());
-		if (fabsf(pos.y - startPos.y) > 50)
+		if (fabsf(pos.y - startPos.y) > 20)
 			isDraging = true;
 	}
 	else if (type == ui::Widget::TouchEventType::ENDED)
@@ -93,7 +93,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			//购买
 			//addBuyGoods(m_goodData);
-
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 			BuyComfirmLayer* layer = BuyComfirmLayer::create(m_goodData);
 			Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
 #ifdef ANALYTICS
