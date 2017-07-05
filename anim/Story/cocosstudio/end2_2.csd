@@ -133,7 +133,7 @@
             <FileData Type="Normal" Path="end2-2/sanshaoyejieju16.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sanshaoyejieju17_3" ActionTag="349940011" Tag="58" IconVisible="False" LeftMargin="552.0145" RightMargin="129.9855" TopMargin="116.1112" BottomMargin="657.8888" ctype="SpriteObjectData">
+          <AbstractNodeData Name="sanshaoyejieju17_3" ActionTag="349940011" Alpha="119" Tag="58" IconVisible="False" LeftMargin="552.0145" RightMargin="129.9855" TopMargin="116.1112" BottomMargin="657.8888" ctype="SpriteObjectData">
             <Size X="38.0000" Y="506.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="571.0145" Y="910.8888" />
@@ -144,7 +144,7 @@
             <FileData Type="Normal" Path="end2-2/sanshaoyejieju17.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sanshaoyejieju18_4" ActionTag="-1534203020" Tag="59" IconVisible="False" LeftMargin="646.4507" RightMargin="36.5493" TopMargin="163.8540" BottomMargin="568.1460" ctype="SpriteObjectData">
+          <AbstractNodeData Name="sanshaoyejieju18_4" ActionTag="-1534203020" Alpha="0" Tag="59" IconVisible="False" LeftMargin="646.4507" RightMargin="36.5493" TopMargin="163.8540" BottomMargin="568.1460" ctype="SpriteObjectData">
             <Size X="37.0000" Y="548.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="664.9507" Y="842.1460" />
