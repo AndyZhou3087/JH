@@ -622,9 +622,6 @@ std::string GlobalData::getOriginLocalStorage(int heroindex)
 
 void GlobalData::setPlotMissionIndex(int val)
 {
-	int max = vec_PlotMissionData.size();
-	if (val >= max)
-		val = max - 1;
 	GameDataSave::getInstance()->setPlotMissionIndex(val);
 }
 
@@ -633,23 +630,33 @@ int GlobalData::getPlotMissionIndex()
 	//兼容上一版，已经到通关了，最大的INDEX溢出
 	int plotindex = GameDataSave::getInstance()->getPlotMissionIndex();
 	int max = vec_PlotMissionData.size();
+
 	if (plotindex >= max)
 		plotindex = max - 1;
+	//迭代2个版本后删除 start
+	if (vec_PlotMissionData[plotindex].dnpc.compare("n089") == 0 && vec_PlotMissionData[plotindex].status == M_DONE)
+	{
+		plotindex++;
+	}
+	if (plotindex >= max)
+		plotindex = max - 1;
+	//迭代2个版本后删除 end
 	return plotindex;
 }
 
 
 void GlobalData::setBranchPlotMissionIndex(int val)
 {
-	int max = vec_BranchPlotMissionData.size();
-	if (val >= max)
-		val = max - 1;
 	GameDataSave::getInstance()->setBranchPlotMissionIndex(val);
 }
 
 int GlobalData::getBranchPlotMissionIndex()
 {
-	return GameDataSave::getInstance()->getBranchPlotMissionIndex();
+	int plotindex = GameDataSave::getInstance()->getBranchPlotMissionIndex();
+	int max = vec_BranchPlotMissionData.size();
+	if (plotindex >= max)
+		plotindex = max - 1;
+	return plotindex;
 }
 
 void GlobalData::loadPlotMissionJsonData()
@@ -806,10 +813,22 @@ void GlobalData::updatePlotMissionStatus()
 		std::vector<std::string> tmp;
 		CommonFuncs::split(str, tmp, "-");
 
-		for (unsigned int i = 0; i < GlobalData::vec_PlotMissionData.size(); i++)
+		int msize = GlobalData::vec_PlotMissionData.size();
+		unsigned int i = 0;
+		for (i = 0; i < tmp.size(); i++)
 		{
 			GlobalData::vec_PlotMissionData[i].status = atoi(tmp[i].c_str());
 		}
+		int localsavesize = tmp.size();
+		if (msize > localsavesize)
+		{
+			int addcount = msize - tmp.size();
+			for (int m = 0; m < addcount; m++)
+			{
+				GlobalData::vec_PlotMissionData[i+m].status = M_NONE;
+			}
+		}
+
 	}
 }
 
@@ -833,10 +852,21 @@ void GlobalData::updateBranchPlotMissionStatus()
 	{
 		std::vector<std::string> tmp;
 		CommonFuncs::split(str, tmp, "-");
-
-		for (unsigned int i = 0; i < GlobalData::vec_BranchPlotMissionData.size(); i++)
+		int msize = GlobalData::vec_BranchPlotMissionData.size();
+		unsigned int i = 0;
+		for (i = 0; i < tmp.size(); i++)
 		{
 			GlobalData::vec_BranchPlotMissionData[i].status = atoi(tmp[i].c_str());
+		}
+
+		int localsavesize = tmp.size();
+		if (msize > localsavesize)
+		{
+			int addcount = msize - tmp.size();
+			for (int m = 0; m < addcount; m++)
+			{
+				GlobalData::vec_BranchPlotMissionData[i + m].status = M_NONE;
+			}
 		}
 	}
 }

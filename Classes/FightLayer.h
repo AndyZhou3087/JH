@@ -79,6 +79,7 @@ private:
 	****************************/
 	void fightRobber();
 
+	void nextFightNpc(float dt);
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件
@@ -87,6 +88,7 @@ private:
 	cocos2d::ui::Text* npchpvaluetext;//NCP血量控件
 	cocos2d::ui::LoadingBar* herohpbar;//角色血量进度条控件
 	cocos2d::ui::LoadingBar* npchpbar;//NPC血量进度条控件
+	cocos2d::ui::Text* npcnametxt;//NPC显示名字控件
 	int npchp;//NPC 血量
 	int npcmaxhp;// NPC 最大血量
 	int npcatk;//NPC 攻击值
@@ -95,6 +97,7 @@ private:
 	std::string m_npcid;//NPC ID
 	bool isecapeok;//是否逃跑成功
 	bool isUseWg;//是否使用外功
+	int continuefight;
 };
 #endif
 

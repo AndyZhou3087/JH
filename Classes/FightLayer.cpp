@@ -50,6 +50,16 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrnametxt->setString(GlobalData::map_maps[m_addrid].cname);
 
+	if (GlobalData::map_maps[m_addrid].npcs.size() == 10)
+	{
+		m_npcid = GlobalData::map_maps[m_addrid].npcs[0];
+		continuefight = 9;
+	}
+	else
+	{
+		continuefight = 0;
+	}
+
 	// NPC 图标
 	cocos2d::ui::ImageView* npcicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 
@@ -61,10 +71,9 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 		npcicon->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		npcicon->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	}
-
 	//NPC名称
-	cocos2d::ui::Text* npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
-	npcnametxt->setString(GlobalData::map_npcs[npcid].name);
+	npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
+	npcnametxt->setString(GlobalData::map_npcs[m_npcid].name);
 	
 	//角色名
 	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
@@ -83,11 +92,11 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
 	herohpbar->setPercent(herohppercent);
 
-	npcmaxhp = GlobalData::map_npcs[npcid].life;
+	npcmaxhp = GlobalData::map_npcs[m_npcid].life;
 	npchp = npcmaxhp;
 
-	npcatk = GlobalData::map_npcs[npcid].atk;
-	npcdf = GlobalData::map_npcs[npcid].df;
+	npcatk = GlobalData::map_npcs[m_npcid].atk;
+	npcdf = GlobalData::map_npcs[m_npcid].df;
 
 	//NPC血量显示
 	npchpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("npchpvaluetext");
@@ -231,10 +240,23 @@ void FightLayer::delayHeroFight(float dt)
 
 	if (npchp <= 0)// NPC dead 胜利
 	{
-		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+		if (continuefight <= 0)
+		{
+			this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+		}
+		else
+		{
+			m_npcid = GlobalData::map_maps[m_addrid].npcs[10 - continuefight];
+			continuefight--;
+			this->scheduleOnce(schedule_selector(FightLayer::nextFightNpc), 0.5f);
+		}
 		return;
+
 	}
-	this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
+	else
+	{
+		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
+	}
 }
 
 void FightLayer::delayBossFight(float dt)
@@ -657,4 +679,27 @@ void FightLayer::checkHeroLife(float dt)
 	herohpvaluetext->setString(hpstr);
 	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	herohpbar->setPercent(herohppercent);
+}
+
+void FightLayer::nextFightNpc(float dt)
+{
+	this->unschedule(schedule_selector(FightLayer::delayHeroFight));
+
+	npcnametxt->setString(GlobalData::map_npcs[m_npcid].name);
+
+	npcmaxhp = GlobalData::map_npcs[m_npcid].life;
+	npchp = npcmaxhp;
+
+	npcatk = GlobalData::map_npcs[m_npcid].atk;
+	npcdf = GlobalData::map_npcs[m_npcid].df;
+
+	//NPC血量显示
+	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	npchpvaluetext->setString(hpstr);
+
+	//NCP血量进度
+	int npchppercent = 100 * npchp / npcmaxhp;
+	npchpbar->setPercent(npchppercent);
+
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);
 }

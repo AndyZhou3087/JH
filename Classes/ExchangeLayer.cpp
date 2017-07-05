@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "NpcLayer.h"
 #include "HintBox.h"
+#include "MyMenu.h"
 
 ExchangeLayer::ExchangeLayer()
 {
@@ -59,9 +60,9 @@ bool ExchangeLayer::init(std::string npcid)
 	m_npcWordLbl = (cocos2d::ui::Text*)csbnode->getChildByName("npcword");
 	
 	m_npcGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("npcexgscroll");
-
+	m_npcGoodsSrollView->setScrollBarEnabled(false);
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("myexgscroll");
-
+	m_myGoodsSrollView->setScrollBarEnabled(false);
 	std::vector<std::string> exchgres;
 	if (m_npcid.compare("n012") == 0)//韦小宝
 	{
@@ -449,7 +450,8 @@ void ExchangeLayer::onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			{
 				MyPackage::vec_packages.push_back(npcExgData[i]);
 			}
-
+			isExgOk = true;
+			this->removeFromParentAndCleanup(true);
 		}
 	}
 }
@@ -492,9 +494,14 @@ void ExchangeLayer::checkValue()
 		if (npcval > myval)
 		{
 			m_exgbtn->setEnabled(false);
-			if (myval >= npcval * 2 / 3)
+			if (myval > npcval * 2 / 3)
 			{
 				m_npcWordLbl->setString(CommonFuncs::gbk2utf("还差了一点啊，再加点吧！"));
+				m_npcWordLbl->setTextColor(Color4B(204, 4, 4, 255));
+			}
+			else if (myval <= 0)
+			{
+				m_npcWordLbl->setString(CommonFuncs::gbk2utf("你在跟我开玩笑？想白拿？"));
 				m_npcWordLbl->setTextColor(Color4B(204, 4, 4, 255));
 			}
 			else
@@ -537,14 +544,14 @@ void ExchangeLayer::updataMyGoodsUI()
 
 	int row = size % 5 == 0 ? size / 5 : (size / 5 + 1);
 
-	int innerheight = m_myGoodsSrollView->getInnerContainerSize().height;
-	if (lastMyGoodsSrollViewHeight < 0)
+	int innerheight = row * 140;
+
+	if (lastMyGoodsSrollViewHeight != innerheight)
 	{
-		innerheight = row * 140;
+		lastMyGoodsSrollViewHeight = innerheight;
 		int contentheight = m_myGoodsSrollView->getContentSize().height;
 		if (innerheight < contentheight)
 			innerheight = contentheight;
-		lastMyGoodsSrollViewHeight = innerheight;
 		m_myGoodsSrollView->setInnerContainerSize(Size(m_myGoodsSrollView->getContentSize().width, innerheight));
 	}
 
@@ -581,8 +588,9 @@ void ExchangeLayer::updataMyGoodsUI()
 		boxItem->setUserData(allMydata[i]);
 		boxItem->setTag(i);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
-		Menu* menu = Menu::create();
+		MyMenu* menu = MyMenu::create();
 		menu->addChild(boxItem);
+		menu->setTouchlimit(m_myGoodsSrollView);
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("pitem%d", i);
 		m_myGoodsSrollView->addChild(menu, 0, name);
@@ -658,8 +666,10 @@ void ExchangeLayer::updataNpcGoodsUI()
 		boxItem->setUserData(allNpcdata[i]);
 		boxItem->setTag(i);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
-		Menu* menu = Menu::create();
+		MyMenu* menu = MyMenu::create();
 		menu->addChild(boxItem);
+		menu->setTouchlimit(m_npcGoodsSrollView);
+
 		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("pitem%d", i);
 		m_npcGoodsSrollView->addChild(menu, 0, name);

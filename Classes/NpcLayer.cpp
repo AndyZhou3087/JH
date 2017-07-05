@@ -147,6 +147,8 @@ bool NpcLayer::init(std::string addrid)
 			onExchange->setTag(10*i+2);
 			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 		}
+		if (ncpsize == 10)
+			onExchange->setVisible(false);
 	}
 
 	for (int i = 1; i >= 0;i--)
@@ -356,8 +358,32 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		else
 		{
 			MyPackage::cutone("80", lostval[actionIndex]);
+
+			CannotTouchLayer* layer = CannotTouchLayer::create();
+			g_gameLayer->addChild(layer, 5, "notouchlayer");
+
+			std::string itemname = GlobalData::map_maps[m_addrstr].npcs[itemindex];
+			Node* npcitem = m_scrollview->getChildByName(itemname);
+			cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
+			talkbtn->setVisible(false);
+
+			cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
+			onFight->setVisible(false);
+
+			cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
+			onExchange->setVisible(false);
+
+			cocos2d::ui::Widget* pbg = (cocos2d::ui::Widget*)npcitem->getChildByName("progressbg");
+			pbg->setVisible(true);
+			cocos2d::ui::LoadingBar* pbar = (cocos2d::ui::LoadingBar*)npcitem->getChildByName("loadingbar");
+			pbar->setVisible(true);
+
+			cocos2d::ui::Text* ptext = (cocos2d::ui::Text*)npcitem->getChildByName("actiontext");
+			ptext->setVisible(true);
+
 			if (actionIndex == 0)
 			{
+				ptext->setString(CommonFuncs::gbk2utf("吃饭中..."));
 				float hungervale = g_hero->getHungerValue();
 				int addvalue = 50;
 				if (addvalue + hungervale > g_hero->getMaxHungerValue())
@@ -367,29 +393,7 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			}
 			else if (actionIndex == 1)
 			{
-				CannotTouchLayer* layer = CannotTouchLayer::create();
-				g_gameLayer->addChild(layer, 5, "notouchlayer");
-
-				std::string itemname = GlobalData::map_maps[m_addrstr].npcs[itemindex];
-				Node* npcitem = m_scrollview->getChildByName(itemname);
-				cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
-				talkbtn->setVisible(false);
-
-				cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
-				onFight->setVisible(false);
-
-				cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
-				onExchange->setVisible(false);
-
-				cocos2d::ui::Widget* pbg = (cocos2d::ui::Widget*)npcitem->getChildByName("progressbg");
-				pbg->setVisible(true);
-				cocos2d::ui::LoadingBar* pbar = (cocos2d::ui::LoadingBar*)npcitem->getChildByName("loadingbar");
-				pbar->setVisible(true);
-
-				cocos2d::ui::Widget* ptext = (cocos2d::ui::LoadingBar*)npcitem->getChildByName("actiontext");
-				ptext->setVisible(true);
-
-				pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::sleepOver, this, npcitem)), NULL));
+				ptext->setString(CommonFuncs::gbk2utf("睡觉八小时"));
 				int exminute = 480;
 				g_nature->setTimeInterval(exminute * NORMAL_TIMEINTERVAL * 1.0f / (ACTION_BAR_TIME * TIMESCALE));
 				g_hero->sleep(TIMESCALE * ACTION_BAR_TIME, exminute / 60);
@@ -397,6 +401,7 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 			else if (actionIndex == 2)
 			{
+				ptext->setString(CommonFuncs::gbk2utf("疗伤中..."));
 				float outvalue = g_hero->getOutinjuryValue();
 				int addwvalue = 50;
 				if (addwvalue + outvalue > g_hero->getMaxOutinjuryValue())
@@ -410,12 +415,12 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 				else
 					g_hero->recoverInjury(addnvalue);
 			}
-			
+			pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::actionOver, this, npcitem)), NULL));
 		}
 	}
 }
 
-void NpcLayer::sleepOver(Ref* pSender, Node* item)
+void NpcLayer::actionOver(Ref* pSender, Node* item)
 {
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)item->getChildByName("talkbtn");
@@ -433,7 +438,7 @@ void NpcLayer::sleepOver(Ref* pSender, Node* item)
 	pbar->setPercent(0);
 	pbar->setVisible(false);
 
-	cocos2d::ui::Widget* ptext = (cocos2d::ui::LoadingBar*)item->getChildByName("actiontext");
+	cocos2d::ui::Widget* ptext = (cocos2d::ui::Widget*)item->getChildByName("actiontext");
 	ptext->setVisible(false);
 
 	g_gameLayer->removeChildByName("notouchlayer");
@@ -472,8 +477,6 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				vec_wordstr.push_back(wordstr);
 
 				wordstr = StringUtils::format("%s%s%s", g_hero->getMyName().c_str(), CommonFuncs::gbk2utf("：").c_str(), plotData->mywords[m].c_str());
-				if (g_hero->getHeadID() == 4)
-					wordstr = replaceSexWord(wordstr);
 				vec_wordstr.push_back(wordstr);
 			}
 			if (g_maplayer != NULL)
@@ -515,7 +518,7 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
 						}
 
-						if (GlobalData::getPlotMissionIndex() >= GlobalData::vec_PlotMissionData.size() - 1)
+						if (plotData->dnpc.compare("n089") == 0)
 						{
 							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.0f);
 						}

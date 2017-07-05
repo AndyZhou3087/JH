@@ -323,7 +323,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 		std::string dnpc = plotData->dnpc;
 		int mapnamecount = GlobalData::map_maps.size();
 
-		for (int i = 0; i < mapnamecount; i++)
+		for (int i = mapnamecount - 1; i >= 0; i--)
 		{
 			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
@@ -429,7 +429,7 @@ float MapLayer::moveToDestTime(float distance)
 
 void MapLayer::showEndAnim(float dt)
 {
-	if (g_hero->getHeadID() == 1)
+	if (g_hero->getHeadID() == 1 || g_hero->getHeadID() == 2)
 		Director::getInstance()->pushScene(StoryScene::createScene(1));
 }
 

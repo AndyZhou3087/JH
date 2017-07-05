@@ -77,7 +77,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcexgscroll" ActionTag="64995229" Tag="83" IconVisible="False" LeftMargin="34.3000" RightMargin="30.7000" TopMargin="647.7413" BottomMargin="352.2587" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="npcexgscroll" ActionTag="64995229" Tag="83" IconVisible="False" LeftMargin="34.3000" RightMargin="30.7000" TopMargin="647.7413" BottomMargin="352.2587" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="655.0000" Y="280.0000" />
             <AnchorPoint />
             <Position X="34.3000" Y="352.2587" />
@@ -130,7 +130,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="myexgscroll" ActionTag="1108144060" Tag="86" IconVisible="False" LeftMargin="34.3000" RightMargin="30.7000" TopMargin="1000.0000" BottomMargin="130.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="myexgscroll" ActionTag="1108144060" Tag="86" IconVisible="False" LeftMargin="34.3000" RightMargin="30.7000" TopMargin="1000.0000" BottomMargin="130.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="655.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="34.3000" Y="130.0000" />

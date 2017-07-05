@@ -132,8 +132,8 @@
           </AbstractNodeData>
           <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-265.5281" RightMargin="139.5281" TopMargin="22.6824" BottomMargin="-49.6824" FontSize="25" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="126.0000" Y="27.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="-265.5281" Y="-36.1824" />
+            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+            <Position X="-139.5281" Y="-36.1824" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />

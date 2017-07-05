@@ -56,7 +56,7 @@ private:
 
 	std::string replaceSexWord(std::string dstr);
 
-	void sleepOver(Ref* pSender, Node* item);
+	void actionOver(Ref* pSender, Node* item);
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;

@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="68" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
             <Size X="720.0000" Y="892.0000" />
             <Children>
               <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" ctype="SpriteObjectData">
