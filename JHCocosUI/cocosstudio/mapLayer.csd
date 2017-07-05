@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="68" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
             <Size X="720.0000" Y="892.0000" />
             <Children>
               <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" ctype="SpriteObjectData">
@@ -651,6 +651,16 @@
                     <PrePosition X="0.5878" Y="0.6995" />
                     <PreSize X="0.0515" Y="0.0444" />
                     <FileData Type="MarkedSubImage" Path="ui/m9-6.png" Plist="uipacker.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="m13-1" ActionTag="-1968279005" Tag="91" IconVisible="False" LeftMargin="726.0719" RightMargin="1133.9281" TopMargin="828.0592" BottomMargin="467.9408" TouchEnable="True" LeftEage="26" RightEage="26" TopEage="12" BottomEage="12" Scale9OriginX="26" Scale9OriginY="12" Scale9Width="88" Scale9Height="76" ctype="ImageViewObjectData">
+                    <Size X="140.0000" Y="100.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="796.0719" Y="517.9408" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.3980" Y="0.3710" />
+                    <PreSize X="0.0700" Y="0.0716" />
+                    <FileData Type="MarkedSubImage" Path="ui/m13-1.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />

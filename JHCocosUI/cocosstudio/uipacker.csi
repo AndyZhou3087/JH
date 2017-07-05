@@ -359,6 +359,7 @@
       <FilePathData Path="ui/golditem.png" />
       <FilePathData Path="ui/goldtextbox.png" />
       <FilePathData Path="ui/mygoldbox.png" />
+      <FilePathData Path="ui/m13-1.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

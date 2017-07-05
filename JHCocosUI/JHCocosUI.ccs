@@ -202,6 +202,7 @@
           <Image Name="m1-2.png" />
           <Image Name="m12-1.png" />
           <Image Name="m1-3.png" />
+          <Image Name="m13-1.png" />
           <Image Name="m1-4.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
@@ -439,6 +440,7 @@
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
+        <Project Name="rmbGoodsNode.csd" Type="Node" />
         <Project Name="savedNode.csd" Type="Node" />
         <Project Name="selectHeroLayer.csd" Type="Layer" />
         <Project Name="selectSaveComfirmLayer.csd" Type="Layer" />
@@ -453,7 +455,6 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="rmbGoodsNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>
