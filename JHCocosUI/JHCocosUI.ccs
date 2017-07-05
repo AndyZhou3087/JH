@@ -4,6 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="fonts">
+          <Fnt Name="critnum.fnt" />
           <TTF Name="STXINGKA.TTF" />
           <Fnt Name="topnum.fnt" />
         </Folder>
@@ -139,7 +140,9 @@
           <Image Name="bwine.png" />
           <Image Name="closebtn.png" />
           <Image Name="cooktable.png" />
+          <Image Name="crit.png" />
           <Image Name="disbtn.png" />
+          <Image Name="dodge.png" />
           <Image Name="e001.png" />
           <Image Name="e002.png" />
           <Image Name="e003.png" />

@@ -59,7 +59,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	if (m_npcid.compare("n001") == 0)//在路上碰到山贼
 		addrname->setString(CommonFuncs::gbk2utf("路上"));
-	
+
 	explbl = (cocos2d::ui::Text*)csbnode->getChildByName("explbl");
 	std::string lblstr = StringUtils::format("+%d", addHeroExp());
 	explbl->setString(lblstr);
@@ -84,7 +84,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	int curplot = GlobalData::getPlotMissionIndex();
 	PlotMissionData * plotdata = NULL;
 	int plottype = 0;
-	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
+
+	std::string fnpc = m_npcid;
+	if (GlobalData::map_maps[m_addrid].npcs.size() == 10)
+		fnpc = GlobalData::map_maps[m_addrid].npcs[0];
+	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(fnpc) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
 	{
 		plotdata = &GlobalData::vec_PlotMissionData[curplot];
 		plottype = 0;
@@ -134,7 +138,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		if (g_maplayer != NULL )
 		{
 			g_maplayer->updataPlotMissionIcon(plottype);
-			if (unlockchapter > 0 && plottype == 0)
+			if (unlockchapter > 0 && plottype == 0 && unlockchapter <= MAXCHAPTER)
 				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 
 			if (plotdata->dnpc.compare("n089") == 0)
@@ -421,6 +425,7 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 	Node* node = (Node*)pSender;
 	int index = node->getTag();
 	PackageData data = MyPackage::vec_packages[index];
+	data.count = 1;
 	unsigned int i = 0;
 	for (i = 0; i < getRewardData.size(); i++)
 	{
@@ -433,7 +438,6 @@ void Winlayer::onPackageItem(cocos2d::Ref* pSender)
 
 	if (i == getRewardData.size())
 	{
-		data.count = 1;
 		getRewardData.push_back(data);
 	}
 	saveTempData();

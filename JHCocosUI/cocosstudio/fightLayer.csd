@@ -202,6 +202,46 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="heroactimg" ActionTag="981613943" VisibleForFrame="False" Tag="135" IconVisible="False" LeftMargin="68.8025" RightMargin="520.1975" TopMargin="586.5908" BottomMargin="626.4092" LeftEage="43" RightEage="43" TopEage="22" BottomEage="22" Scale9OriginX="43" Scale9OriginY="22" Scale9Width="45" Scale9Height="23" ctype="ImageViewObjectData">
+            <Size X="131.0000" Y="67.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="134.3025" Y="659.9092" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1865" Y="0.5156" />
+            <PreSize X="0.1819" Y="0.0523" />
+            <FileData Type="MarkedSubImage" Path="ui/crit.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="npcactimg" ActionTag="306773715" VisibleForFrame="False" Tag="136" IconVisible="False" LeftMargin="457.0969" RightMargin="131.9031" TopMargin="586.5903" BottomMargin="626.4097" LeftEage="43" RightEage="43" TopEage="22" BottomEage="22" Scale9OriginX="43" Scale9OriginY="22" Scale9Width="45" Scale9Height="23" ctype="ImageViewObjectData">
+            <Size X="131.0000" Y="67.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="522.5969" Y="659.9097" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7258" Y="0.5156" />
+            <PreSize X="0.1819" Y="0.0523" />
+            <FileData Type="MarkedSubImage" Path="ui/crit.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="herocritfnt" ActionTag="1494077827" VisibleForFrame="False" Tag="137" IconVisible="False" LeftMargin="193.6092" RightMargin="473.3908" TopMargin="637.6540" BottomMargin="610.3460" LabelText="1000" ctype="TextBMFontObjectData">
+            <Size X="53.0000" Y="32.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="193.6092" Y="626.3460" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.2689" Y="0.4893" />
+            <PreSize X="0.0736" Y="0.0250" />
+            <LabelBMFontFile_CNB Type="Normal" Path="fonts/critnum.fnt" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="npccritfnt" ActionTag="-1194078380" VisibleForFrame="False" Tag="138" IconVisible="False" LeftMargin="585.2756" RightMargin="81.7244" TopMargin="637.6540" BottomMargin="610.3460" LabelText="1000" ctype="TextBMFontObjectData">
+            <Size X="53.0000" Y="32.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="585.2756" Y="626.3460" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8129" Y="0.4893" />
+            <PreSize X="0.0736" Y="0.0250" />
+            <LabelBMFontFile_CNB Type="Normal" Path="fonts/critnum.fnt" Plist="" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

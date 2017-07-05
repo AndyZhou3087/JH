@@ -26,6 +26,8 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	GameDataSave::purgeGameSave();
+	g_nature = NULL;
+	g_hero = NULL;
 	g_gameLayer = NULL;
 }
 
@@ -357,6 +359,12 @@ void GameScene::checkiflive(float dt)
 		this->unschedule(schedule_selector(GameScene::checkiflive));
 		topBar->stopLoseAnim();
 		GlobalData::g_gameStatus = GAMEPAUSE;
+		
+		if (g_hero->getIsOut() && g_maplayer != NULL)
+		{
+			g_maplayer->heroPauseMoving();
+		}
+
 		ReviveLayer* layer = ReviveLayer::create();
 		g_gameLayer->addChild(layer, 10, "revivelayer");
 	}

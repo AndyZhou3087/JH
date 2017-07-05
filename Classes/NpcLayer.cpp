@@ -512,7 +512,7 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 					if (g_maplayer != NULL)
 					{
 						g_maplayer->updataPlotMissionIcon(type);
-						if (unlockchapter > 0 && type == 0)
+						if (unlockchapter > 0 && type == 0 && unlockchapter <= MAXCHAPTER)
 						{
 							g_maplayer->updataPlotMissionIcon(1);
 							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
@@ -687,7 +687,18 @@ void NpcLayer::updatePlotUI(int type)
 			talkbtn->removeChildByName(dmissionname);
 		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
 		{
-			if (plotData->status == M_DOING)
+			bool ret = false;
+			if (plotData->mapid.length() > 0)
+			{
+				if (plotData->mapid.compare(m_addrstr) == 0)
+					ret = true;
+			}
+			else
+			{
+				ret = true;
+			}
+
+			if (plotData->status == M_DOING && ret)
 			{
 				std::string diconstr = StringUtils::format("ui/mapmission%d_1.png", type);
 				Sprite* dicon = Sprite::createWithSpriteFrameName(diconstr);

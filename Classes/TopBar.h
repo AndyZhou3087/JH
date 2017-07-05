@@ -57,6 +57,7 @@ private:
 	EWeather m_lastweather;
 	EDAYNIGTH m_lastDayOrNigth;
 	int m_lastpastLiveDay;
+	bool isHunter;
 };
 #endif
 

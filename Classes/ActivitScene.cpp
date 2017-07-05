@@ -59,6 +59,14 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		night->setPosition(image->getPosition());
 		this->addChild(night);
 	}
+	else if (imagepath.compare("images/insect.jpg") == 0)
+	{
+		tips->setString(CommonFuncs::gbk2utf("后山的三七、降真香、野菜、水果数量减半！"));
+	}
+	else if (imagepath.compare("images/hunter.jpg") == 0)
+	{
+		tips->setString(CommonFuncs::gbk2utf("最近上山打猎的人增多，兔子和狼都快被打没了！"));
+	}
 	else if (imagepath.compare("images/thieves.jpg") == 0)
 	{
 		tips->setVisible(false);

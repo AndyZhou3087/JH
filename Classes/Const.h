@@ -13,6 +13,7 @@
 #define UMENG_SHARE
 #endif
 
+#define MAXCHAPTER (13)
 
 static std::string acname[] = { "打猎", "采集", "砍伐", "挖掘" };
 static std::string acdesc[] = {"","你徒手采集", "你徒手劈树", "你徒手采矿"};

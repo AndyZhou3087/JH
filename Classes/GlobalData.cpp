@@ -5,6 +5,7 @@
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 #include "json.h"
+#include "Const.h"
 
 std::map<std::string, std::vector<BuildActionData>> GlobalData::map_buidACData;
 
@@ -350,6 +351,11 @@ void GlobalData::loadNpcJsonData()
 				data.words.push_back(str);
 		}
 
+		v = item["avoid"];
+		data.dodge = atof(v.GetString());
+
+		v = item["crit"];
+		data.crit = atof(v.GetString());
 
 		map_npcs[data.id] = data;
 	}
@@ -420,6 +426,16 @@ void GlobalData::loadHeroAtrJsonData()
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
 			data.vec_maxhp.push_back(v[j].GetInt());
+		}
+		v = vitem["crit"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_crit.push_back(v[j].GetDouble());
+		}
+		v = vitem["avoid"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_dodge.push_back(v[j].GetDouble());
 		}
 		map_heroAtr[data.id] = data;
 	}
@@ -680,15 +696,27 @@ void GlobalData::loadPlotMissionJsonData()
 		v = vitem["dnpc"];
 		data.dnpc = v.GetString();
 
+		if (vitem.HasMember("map"))
+		{
+			v = vitem["map"];
+			data.mapid = v.GetString();
+		}
+		else
+		{
+			data.mapid = "";
+		}
+
 		v = vitem["unlock"];
 		data.unlockchapter = atoi(v.GetString());
 
+		if (data.dnpc.compare("n089") == 0)
+		{
+			data.unlockchapter = 13;
+		}
 		v = vitem["t"];
 		data.type = atoi(v.GetString());
 
 		data.status = M_NONE;
-		data.isshowdnpc = false;
-		data.isshowsnpc = false;
 
 		v = vitem["word"];
 		for (unsigned int j = 0; j < v.Size(); j++)
@@ -753,8 +781,6 @@ void GlobalData::loadBranchPlotMissionJsonData()
 		data.type = atoi(v.GetString());
 
 		data.status = M_NONE;
-		data.isshowdnpc = false;
-		data.isshowsnpc = false;
 
 		v = vitem["word"];
 		for (unsigned int j = 0; j < v.Size(); j++)
@@ -873,7 +899,22 @@ void GlobalData::updateBranchPlotMissionStatus()
 
 int GlobalData::getUnlockChapter()
 {
-	return GameDataSave::getInstance()->getPlotUnlockChapter();
+	int c = GameDataSave::getInstance()->getPlotUnlockChapter();
+
+	int plotindex = GameDataSave::getInstance()->getPlotMissionIndex();
+	int max = vec_PlotMissionData.size();
+
+	if (plotindex >= max)
+		plotindex = max - 1;
+
+	if (vec_PlotMissionData[plotindex].dnpc.compare("n089") == 0 && vec_PlotMissionData[plotindex].status == M_DONE)
+	{
+		c = MAXCHAPTER;
+	}
+
+	if (c > MAXCHAPTER)
+		c = MAXCHAPTER;
+	return c;
 }
 
 void GlobalData::setUnlockChapter(int val)

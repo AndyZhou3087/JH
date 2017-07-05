@@ -179,7 +179,8 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		if (m_addrstr.compare("m1-1") == 0)//进入家
 		{
 			g_gameLayer->addChild(HomeLayer::create(), 1, "homelayer");
-
+			g_maplayer->removeFromParentAndCleanup(true);
+			g_maplayer = NULL;
 		}
 		else if (m_addrstr.compare("m1-2") == 0)//进入后山
 		{

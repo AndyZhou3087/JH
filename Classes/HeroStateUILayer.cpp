@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "PauseLayer.h"
 #include "GameDataSave.h"
+#include "MapLayer.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -83,6 +84,10 @@ void HeroStateUILayer::onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		GlobalData::g_gameStatus = GAMEPAUSE;
+		if (g_hero->getIsOut() && g_maplayer != NULL)
+		{
+			g_maplayer->heroPauseMoving();
+		}
 		this->addChild(PauseLayer::create(), 2);
 	}
 }

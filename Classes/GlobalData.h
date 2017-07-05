@@ -83,6 +83,8 @@ typedef struct
 	int exp;//经验值
 	int df;//防御
 	int lv;//npc等级
+	float crit;//暴击率
+	float dodge;//闪避率
 	std::vector<std::string> winres;//打败npc赢得奖励
 	std::vector<int> winresrnd;//打败npc出奖励的概率
 	std::vector<int> winrescount;//打多少次随机
@@ -97,10 +99,12 @@ typedef struct
 {
 	int id;
 	char name[32];
-	std::vector<int> vec_atk;
-	std::vector<int> vec_df;
-	std::vector<int> vec_exp;
-	std::vector<int> vec_maxhp;
+	std::vector<int> vec_atk;//攻击
+	std::vector<int> vec_df;//防御
+	std::vector<int> vec_exp;//经验值
+	std::vector<int> vec_maxhp;//最大生命值
+	std::vector<float> vec_crit;//暴击概率
+	std::vector<float> vec_dodge;//闪避概率
 }HeroAtrData;
 
 /****************************
@@ -173,8 +177,7 @@ typedef struct
 	int unlockchapter;//完成后解锁的章节
 	int status;//状态
 	int type;//对话0；需要战斗1
-	bool isshowsnpc;
-	bool isshowdnpc;
+	std::string mapid;//dnpc所在地图
 }PlotMissionData;
 
 /****************************

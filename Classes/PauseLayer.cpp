@@ -3,6 +3,8 @@
 #include "SoundManager.h"
 #include "StartScene.h"
 #include "CommonFuncs.h"
+#include "MapLayer.h"
+#include "GameScene.h"
 bool PauseLayer::init()
 {
 	
@@ -78,5 +80,7 @@ void PauseLayer::removSelf()
 {
 	this->removeFromParentAndCleanup(true);
 	GlobalData::g_gameStatus = GAMESTART;
+	if (g_maplayer != NULL && g_hero->getIsOut())
+		g_maplayer->heroResumeMoving();
 }
 

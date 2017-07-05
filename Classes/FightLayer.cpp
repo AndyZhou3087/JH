@@ -120,6 +120,12 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	m_fihgtScorll->setPosition(Vec2(360, 350));
 	csbnode->addChild(m_fihgtScorll);
 
+	heroactimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroactimg");
+	npcactimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcactimg");
+
+	herocritfnt = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("herocritfnt");
+	npccritfnt = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("npccritfnt");
+
 	if (npcid.compare("n001") != 0)
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
 	else
@@ -226,17 +232,48 @@ void FightLayer::delayHeroFight(float dt)
 	if (npchurt < intminack)
 		npchurt = intminack;
 
-	npchp -= npchurt;
+	isHeroAct = -1;
+	isNpcAct = - 1;
+	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 10;
+	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 10;
+	int r = GlobalData::createRandomNum(1000);
+	//if (r < critrnd)
+	//{
+	//	isHeroAct = 0;
+	//	npchurt *= 2;
+	//	std::string tmpstr = "ui/crit.png";
+	//	npcactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
+	//	npcactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
+	//	npcactimg->setVisible(true);
+	//	npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	//	tmpstr = StringUtils::format("%d", npchurt);
+	//	npccritfnt->setString(tmpstr);
+	//	npccritfnt->setVisible(true);
+	//	npccritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	//}
+	//else if (r < critrnd + npcdodgernd)
+	{
+		isNpcAct = 1;
+		std::string imgstr = "ui/dodge.png";
+		npcactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
+		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
+		npcactimg->setVisible(true);
+		npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	}
 
-	if (npchp < 0)
-		npchp = 0;
+	if (isNpcAct != 1)
+	{
+		npchp -= npchurt;
 
+		if (npchp < 0)
+			npchp = 0;
 
-	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
-	npchpvaluetext->setString(hpstr);
-	int npchppercent = 100 * npchp / npcmaxhp;
-	npchpbar->setPercent(npchppercent);
-	showFightWord(0, npchurt);
+		std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+		npchpvaluetext->setString(hpstr);
+		int npchppercent = 100 * npchp / npcmaxhp;
+		npchpbar->setPercent(npchppercent);
+		showFightWord(0, npchurt);
+	}
 
 	if (npchp <= 0)// NPC dead 胜利
 	{
@@ -250,8 +287,6 @@ void FightLayer::delayHeroFight(float dt)
 			continuefight--;
 			this->scheduleOnce(schedule_selector(FightLayer::nextFightNpc), 0.5f);
 		}
-		return;
-
 	}
 	else
 	{
@@ -275,15 +310,47 @@ void FightLayer::delayBossFight(float dt)
 
 	if (herohurt < intminack)
 		herohurt = intminack;
-	curheroHp -= herohurt;
+
+	isHeroAct = -1;
+	isNpcAct = -1;
+	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()] * 10;
+	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 10;
+	int r = GlobalData::createRandomNum(1000);
+	if (r < npccritrnd)
+	{
+		isNpcAct = 0;
+		herohurt *= 2;
+		std::string tmpstr = "ui/crit.png";
+		heroactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
+		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
+		heroactimg->setVisible(true);
+		heroactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		tmpstr = StringUtils::format("%d", herohurt);
+		herocritfnt->setString(tmpstr);
+		herocritfnt->setVisible(true);
+		herocritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	}
+	else if (r < npccritrnd + dodgernd)
+	{
+		isHeroAct = 1;
+		std::string imgstr = "ui/dodge.png";
+		heroactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
+		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
+		heroactimg->setVisible(true);
+		heroactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	}
+
+	if (isHeroAct != 1)
+	{
+		curheroHp -= herohurt;
+		showFightWord(1, herohurt);
+	}
 
 	if (curheroHp < 0.0f)
 		curheroHp = 0.0f;
+
 	g_hero->setLifeValue(curheroHp);
-
 	checkHeroLife(0);
-
-	showFightWord(1, herohurt);
 
 	if (g_hero->getLifeValue() > 0.0f)
 	{

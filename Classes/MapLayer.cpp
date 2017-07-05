@@ -143,23 +143,26 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 
 void MapLayer::heroPauseMoving()
 {
-	//g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
-	//m_herohead->pause();
+	if (g_nature != NULL)
+	{
+		g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
+		m_herohead->pause();
+	}
 }
 
 void MapLayer::heroResumeMoving()
 {
-	//if (ismoving)
-	//{
-	//	g_nature->setTimeInterval(TIMESCALE * 8);
-	//	m_herohead->resume();
-	//}
+	if (ismoving && g_nature != NULL)
+	{
+		g_nature->setTimeInterval(TIMESCALE * 8);
+		m_herohead->resume();
+	}
 }
 
 void MapLayer::showRobberFight(float dt)
 {
-	//heroPauseMoving();
-	//g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
+	heroPauseMoving();
+	g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
 }
 
 void MapLayer::showMoveToDest()
@@ -283,9 +286,9 @@ void MapLayer::updateUnlockChapter()
 
 void MapLayer::showUnlockLayer(float dt)
 {
+
 	Director::getInstance()->getRunningScene()->addChild(UnlockLayer::create(), 10);
 	updateUnlockChapter();
-
 #ifdef ANALYTICS
 	std::string unlockstr = StringUtils::format("u%d", GlobalData::getUnlockChapter());
 	AnalyticUtil::onEvent(unlockstr.c_str());
@@ -323,7 +326,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 		std::string dnpc = plotData->dnpc;
 		int mapnamecount = GlobalData::map_maps.size();
 
-		for (int i = mapnamecount - 1; i >= 0; i--)
+		for (int i = 0; i < mapnamecount; i++)
 		{
 			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
@@ -351,6 +354,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 				}
 			}
 		}
+		bool isfind = false;
 		for (int i = 0; i < mapnamecount; i++)
 		{
 			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
@@ -358,17 +362,31 @@ void MapLayer::updataPlotMissionIcon(int type)
 			{
 				if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 				{
-					if (plotData->status == M_DOING)
+					bool ret = false;
+					if (plotData->mapid.length() > 0)
 					{
-						m_dmissionIcon[type]->setVisible(true);
-						m_dmissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
-						m_dmissionIcon[type]->setPosition(mapname->getPosition());
+						if (plotData->mapid.compare(mapname->getName()) == 0)
+							ret = true;
 					}
 					else
 					{
-						m_dmissionIcon[type]->stopAllActions();
-						m_dmissionIcon[type]->setVisible(false);
+						ret = true;
 					}
+					if (ret)
+					{
+						if (plotData->status == M_DOING)
+						{
+							m_dmissionIcon[type]->setVisible(true);
+							m_dmissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
+							m_dmissionIcon[type]->setPosition(mapname->getPosition());
+						}
+						else
+						{
+							m_dmissionIcon[type]->stopAllActions();
+							m_dmissionIcon[type]->setVisible(false);
+						}
+					}
+
 				}
 			}
 		}

@@ -89,6 +89,11 @@ private:
 	cocos2d::ui::LoadingBar* herohpbar;//角色血量进度条控件
 	cocos2d::ui::LoadingBar* npchpbar;//NPC血量进度条控件
 	cocos2d::ui::Text* npcnametxt;//NPC显示名字控件
+	cocos2d::ui::ImageView* heroactimg;//角色暴击闪避图片
+	cocos2d::ui::ImageView* npcactimg;//NPC暴击闪避图片
+	cocos2d::ui::TextBMFont* herocritfnt;//角色暴击数字
+	cocos2d::ui::TextBMFont* npccritfnt;//NPC暴击数字
+
 	int npchp;//NPC 血量
 	int npcmaxhp;// NPC 最大血量
 	int npcatk;//NPC 攻击值
@@ -97,7 +102,10 @@ private:
 	std::string m_npcid;//NPC ID
 	bool isecapeok;//是否逃跑成功
 	bool isUseWg;//是否使用外功
-	int continuefight;
+	int continuefight;//连续打NPC个数
+	int isHeroAct;//0--暴击；1-闪避
+
+	int isNpcAct;//0--暴击；1-闪避
 };
 #endif
 

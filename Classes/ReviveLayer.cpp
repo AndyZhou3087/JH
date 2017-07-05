@@ -209,7 +209,6 @@ void ReviveLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			g_gameLayer->removeChildByName("fightlayer");
 			g_gameLayer->saveAllData();
 		}
-		GlobalData::g_gameStatus = GAMESTART;
 		DeathLayer* layer = DeathLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(layer);
 	}

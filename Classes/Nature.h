@@ -36,7 +36,8 @@ public:
 	CC_SYNTHESIZE(EDAYNIGTH, m_daynight, DayOrNight);
 	CC_SYNTHESIZE(int, m_pastdays, PastDays);
 	CC_SYNTHESIZE(float, m_timeinterval, TimeInterval);
-	CC_SYNTHESIZE(int, m_ismakewarm, IsMaKeWarm);
+	CC_SYNTHESIZE(bool, m_ismakewarm, IsMaKeWarm);
+	CC_SYNTHESIZE(bool, m_isshowinsect, IsShowInsect);
 	void ChangeWeather();
 	void ChangeReason();
 	void ChangeDayNight();

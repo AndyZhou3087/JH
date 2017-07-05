@@ -92,10 +92,10 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 void OutDoor::delayShowGOOut(float dt)
 {
 	this->removeFromParentAndCleanup(true);
-	g_hero->setIsOut(true);
 	g_maplayer = MapLayer::create();
 	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
 	g_gameLayer->removeChildByName("homelayer");
+	g_hero->setIsOut(true);
 }
 
 void OutDoor::updata()

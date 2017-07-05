@@ -13,6 +13,7 @@ TopBar::TopBar()
 {
 	pastmin = g_nature->getTime();
 	newerStep = 2;
+	isHunter = false;
 }
 
 
@@ -316,6 +317,51 @@ void TopBar::updataUI(float dt)
 	}
 	Scene* activityScene = NULL;
 
+	if (g_nature->getReason() == Autumn && !g_nature->getIsShowInsect())
+	{
+		int r = GlobalData::createRandomNum(100);
+		if (r < 10)
+		{
+			g_nature->setIsShowInsect(true);
+			activityScene = ActivitScene::createScene("images/insect.jpg", CommonFuncs::gbk2utf("蝗虫泛滥"));
+			for (unsigned int i = 0; i < GlobalData::vec_hillResid.size(); i++)
+			{
+				for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
+				{
+					ResData* data = &GlobalData::vec_resData[m];
+					int type = data->type - 1;
+					if (data->strid.compare(GlobalData::vec_hillResid[i]) == 0 && (type == FOOD || type == MEDICINAL))
+					{
+						int count = data->count % 2 == 0 ? data->count / 2 : (data->count / 2 + 1);
+						data->count = count;
+					}
+				}
+			}
+		}
+	}
+
+	if (g_nature->getPastDays() >= 1 && !g_nature->getIsShowInsect() && !isHunter)
+	{
+		int r = GlobalData::createRandomNum(100);
+		if (r < 10)
+		{
+			isHunter = true;
+			activityScene = ActivitScene::createScene("images/hunter.jpg", CommonFuncs::gbk2utf("猎人来啦"));
+			for (unsigned int i = 0; i < GlobalData::vec_hillResid.size(); i++)
+			{
+				for (unsigned int m = 0; m < GlobalData::vec_resData.size(); m++)
+				{
+					ResData* data = &GlobalData::vec_resData[m];
+					int type = data->type - 1;
+					if (data->strid.compare(GlobalData::vec_hillResid[i]) == 0 && (data->strid.compare("n002") == 0 || data->strid.compare("n003") == 0))
+					{
+						int count = data->count % 2 == 0 ? data->count / 2 : (data->count / 2 + 1);
+						data->count = count;
+					}
+				}
+			}
+		}
+	}
 	if (m_lastweather != g_nature->getWeather())
 	{
 		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
@@ -365,6 +411,8 @@ void TopBar::updataUI(float dt)
 		{
 			activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始..."));
 		}
+		g_nature->setIsShowInsect(false);
+		isHunter = false;
 	}
 
 	if (activityScene != NULL)
