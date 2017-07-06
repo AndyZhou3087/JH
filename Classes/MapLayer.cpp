@@ -324,14 +324,15 @@ void MapLayer::updataPlotMissionIcon(int type)
 	{
 		std::string snpc = plotData->snpc;
 		std::string dnpc = plotData->dnpc;
+
+
 		int mapnamecount = GlobalData::map_maps.size();
 
-		for (int i = 0; i < mapnamecount; i++)
+		if (plotData->mapid.length() > 0)
 		{
-			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
-			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+			for (unsigned int m = 0; m < GlobalData::map_maps[plotData->mapid].npcs.size(); m++)
 			{
-				if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
+				if (snpc.compare(GlobalData::map_maps[plotData->mapid].npcs.at(m)) == 0)
 				{
 					if (plotData->status == M_NONE)
 					{
@@ -341,7 +342,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 						}
 						else
 						{
-							m_smissionIcon[type]->setPosition(mapname->getPosition());
+							m_smissionIcon[type]->setPosition(m_mapbg->getChildByName(plotData->mapid)->getPosition());
 							m_smissionIcon[type]->setVisible(true);
 							m_smissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
 						}
@@ -350,6 +351,37 @@ void MapLayer::updataPlotMissionIcon(int type)
 					{
 						m_smissionIcon[type]->stopAllActions();
 						m_smissionIcon[type]->setVisible(false);
+					}
+				}
+			}
+		}
+		else
+		{
+			for (int i = mapnamecount - 1; i >= 0; i--)
+			{
+				cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+				for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+				{
+					if (snpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
+					{
+						if (plotData->status == M_NONE)
+						{
+							if (plotData->words.size() <= 0)
+							{
+								plotData->status = M_DOING;
+							}
+							else
+							{
+								m_smissionIcon[type]->setPosition(mapname->getPosition());
+								m_smissionIcon[type]->setVisible(true);
+								m_smissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
+							}
+						}
+						else
+						{
+							m_smissionIcon[type]->stopAllActions();
+							m_smissionIcon[type]->setVisible(false);
+						}
 					}
 				}
 			}

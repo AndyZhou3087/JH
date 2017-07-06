@@ -80,7 +80,7 @@ bool NpcLayer::init(std::string addrid)
 	m_scrollview->setInnerContainerSize(Size(650, innerheight));
 
 	cocos2d::ui::Widget* hintdown = (cocos2d::ui::Widget*)m_csbnode->getChildByName("hintdown");
-	if (ncpsize >= 3)
+	if (ncpsize > 3)
 	{
 		hintdown->runAction(RepeatForever::create(Blink::create(2, 2)));
 	}
@@ -509,7 +509,7 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 						if (unlockchapter > 0 && type == 0 && unlockchapter <= MAXCHAPTER)
 						{
 							g_maplayer->updataPlotMissionIcon(1);
-							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 3.0f);
+							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
 						}
 
 						if (plotData->dnpc.compare("n089") == 0)
