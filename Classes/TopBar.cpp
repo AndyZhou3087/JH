@@ -13,7 +13,7 @@ TopBar::TopBar()
 {
 	pastmin = g_nature->getTime();
 	newerStep = 2;
-	isHunter = false;
+	isHunter = true;
 }
 
 
@@ -316,8 +316,32 @@ void TopBar::updataUI(float dt)
 		GameDataSave::getInstance()->setNatureReason(g_nature->getReason());
 	}
 	Scene* activityScene = NULL;
+	bool isthieves = false;
+	if (g_nature->getPastDays() >= 1 && m_lastpastLiveDay != g_nature->getPastDays())
+	{
+		m_lastpastLiveDay = g_nature->getPastDays();
 
-	if (g_nature->getReason() == Autumn && !g_nature->getIsShowInsect())
+
+		if (g_hero->getIsOut())
+		{
+			int r = GlobalData::createRandomNum(100);
+			if (r < 10)
+				isthieves = true;
+		}
+		if (isthieves)
+		{
+			activityScene = ActivitScene::createScene("images/thieves.jpg", CommonFuncs::gbk2utf("盗贼到来，丢失以下物品..."));
+		}
+		else
+		{
+			activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始..."));
+		}
+
+		g_nature->setIsShowInsect(false);
+		isHunter = false;
+	}
+
+	if (g_nature->getReason() == Autumn && !g_nature->getIsShowInsect() && !isthieves)
 	{
 		int r = GlobalData::createRandomNum(100);
 		if (r < 10)
@@ -340,7 +364,7 @@ void TopBar::updataUI(float dt)
 		}
 	}
 
-	if (g_nature->getPastDays() >= 1 && !g_nature->getIsShowInsect() && !isHunter)
+	if (g_nature->getPastDays() >= 1 && !g_nature->getIsShowInsect() && !isHunter && !isthieves)
 	{
 		int r = GlobalData::createRandomNum(100);
 		if (r < 10)
@@ -390,29 +414,6 @@ void TopBar::updataUI(float dt)
 		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临..."));
 		//}
 		m_lastDayOrNigth = g_nature->getDayOrNight();
-	}
-
-	if (g_nature->getPastDays() >= 1 && m_lastpastLiveDay != g_nature->getPastDays())
-	{
-		m_lastpastLiveDay = g_nature->getPastDays();
-
-		bool isthieves = false;
-		if (g_hero->getIsOut())
-		{
-			int r = GlobalData::createRandomNum(100);
-			if (r < 10)
-				isthieves = true;
-		}
-		if (isthieves)
-		{
-			activityScene = ActivitScene::createScene("images/thieves.jpg", CommonFuncs::gbk2utf("盗贼到来，丢失以下物品..."));
-		}
-		else
-		{
-			activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("今夜很平静，新的一天开始..."));
-		}
-		g_nature->setIsShowInsect(false);
-		isHunter = false;
 	}
 
 	if (activityScene != NULL)

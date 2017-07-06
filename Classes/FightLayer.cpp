@@ -267,13 +267,13 @@ void FightLayer::delayHeroFight(float dt)
 
 		if (npchp < 0)
 			npchp = 0;
-
-		std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
-		npchpvaluetext->setString(hpstr);
-		int npchppercent = 100 * npchp / npcmaxhp;
-		npchpbar->setPercent(npchppercent);
-		showFightWord(0, npchurt);
 	}
+
+	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	npchpvaluetext->setString(hpstr);
+	int npchppercent = 100 * npchp / npcmaxhp;
+	npchpbar->setPercent(npchppercent);
+	showFightWord(0, npchurt);
 
 	if (npchp <= 0)// NPC dead 胜利
 	{
@@ -343,8 +343,9 @@ void FightLayer::delayBossFight(float dt)
 	if (isHeroAct != 1)
 	{
 		curheroHp -= herohurt;
-		showFightWord(1, herohurt);
 	}
+
+	showFightWord(1, herohurt);
 
 	if (curheroHp < 0.0f)
 		curheroHp = 0.0f;
@@ -505,6 +506,17 @@ void FightLayer::showFightWord(int type, int value)
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightworfword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
 		else if (m_npcid.compare("n002") == 0)
 			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(herofightRabbitword2[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, value);
+
+		if (isNpcAct == 1)//npc闪避
+		{
+			int dcount = sizeof(npcdodgedesc) / sizeof(npcdodgedesc[0]);
+			int dodgernd = GlobalData::createRandomNum(dcount);
+			herowordstr = StringUtils::format(CommonFuncs::gbk2utf(npcdodgedesc[dodgernd].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name);
+
+			if (m_npcid.compare("n003") == 0 || m_npcid.compare("n002") == 0)
+				herowordstr = StringUtils::format(CommonFuncs::gbk2utf(worfdodgedesc.c_str()).c_str(), GlobalData::map_npcs[m_npcid].name);
+		}
+
 		checkWordLblColor(herowordstr);
 
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_ATTACK);
@@ -554,6 +566,13 @@ void FightLayer::showFightWord(int type, int value)
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(worffight[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
 		else if (m_npcid.compare("n002") == 0)
 			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(rabbitfightword[0].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str(), value);
+
+		if (isHeroAct == 1)
+		{
+			int dcount = sizeof(herododgedesc) / sizeof(herododgedesc[0]);
+			int dodgernd = GlobalData::createRandomNum(dcount);
+			bosswordstr = StringUtils::format(CommonFuncs::gbk2utf(herododgedesc[dodgernd].c_str()).c_str(), GlobalData::map_npcs[m_npcid].name, g_hero->getMyName().c_str());
+		}
 		checkWordLblColor(bosswordstr);
 
 		isUseWg = false;

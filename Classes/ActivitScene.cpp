@@ -63,12 +63,12 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	else if (imagepath.compare("images/insect.jpg") == 0)
 	{
 		tips->setString(CommonFuncs::gbk2utf("后山的三七、降真香、野菜、水果数量减半！"));
-		distime = 4.0f;
+		distime = 3.0f;
 	}
 	else if (imagepath.compare("images/hunter.jpg") == 0)
 	{
 		tips->setString(CommonFuncs::gbk2utf("最近上山打猎的人增多，兔子和狼都快被打没了！"));
-		distime = 4.0f;
+		distime = 3.0f;
 	}
 	else if (imagepath.compare("images/thieves.jpg") == 0)
 	{
@@ -150,7 +150,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 
 				StorageRoom::use(tmpdata.strid, r1);
 			}
-			distime = 4.0f;
+			distime = 3.0f;
 		}
 		else
 		{

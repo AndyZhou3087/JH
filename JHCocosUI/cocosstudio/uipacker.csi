@@ -362,6 +362,7 @@
       <FilePathData Path="ui/m13-1.png" />
       <FilePathData Path="ui/crit.png" />
       <FilePathData Path="ui/dodge.png" />
+      <FilePathData Path="ui/80m.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>
