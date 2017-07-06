@@ -237,21 +237,21 @@ void FightLayer::delayHeroFight(float dt)
 	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 10;
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 10;
 	int r = GlobalData::createRandomNum(1000);
-	//if (r < critrnd)
-	//{
-	//	isHeroAct = 0;
-	//	npchurt *= 2;
-	//	std::string tmpstr = "ui/crit.png";
-	//	npcactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
-	//	npcactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
-	//	npcactimg->setVisible(true);
-	//	npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
-	//	tmpstr = StringUtils::format("%d", npchurt);
-	//	npccritfnt->setString(tmpstr);
-	//	npccritfnt->setVisible(true);
-	//	npccritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
-	//}
-	//else if (r < critrnd + npcdodgernd)
+	if (r < critrnd)
+	{
+		isHeroAct = 0;
+		npchurt *= 2;
+		std::string tmpstr = "ui/crit.png";
+		npcactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
+		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
+		npcactimg->setVisible(true);
+		npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		tmpstr = StringUtils::format("%d", npchurt);
+		npccritfnt->setString(tmpstr);
+		npccritfnt->setVisible(true);
+		npccritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+	}
+	else if (r < critrnd + npcdodgernd)
 	{
 		isNpcAct = 1;
 		std::string imgstr = "ui/dodge.png";
