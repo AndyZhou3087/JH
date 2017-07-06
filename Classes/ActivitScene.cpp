@@ -53,6 +53,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
 
+	float distime = 2.0f;
 	if (imagepath.compare("images/cday.jpg") == 0 && content.compare(CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")) == 0)
 	{
 		Sprite* night = Sprite::create("images/cdaynight.png");
@@ -62,10 +63,12 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	else if (imagepath.compare("images/insect.jpg") == 0)
 	{
 		tips->setString(CommonFuncs::gbk2utf("后山的三七、降真香、野菜、水果数量减半！"));
+		distime = 4.0f;
 	}
 	else if (imagepath.compare("images/hunter.jpg") == 0)
 	{
 		tips->setString(CommonFuncs::gbk2utf("最近上山打猎的人增多，兔子和狼都快被打没了！"));
+		distime = 4.0f;
 	}
 	else if (imagepath.compare("images/thieves.jpg") == 0)
 	{
@@ -147,6 +150,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 
 				StorageRoom::use(tmpdata.strid, r1);
 			}
+			distime = 4.0f;
 		}
 		else
 		{
@@ -155,7 +159,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 
 	}
 
-	this->scheduleOnce(schedule_selector(ActivitScene::popself), 2.0f);
+	this->scheduleOnce(schedule_selector(ActivitScene::popself), distime);
 	return true;
 }
 
