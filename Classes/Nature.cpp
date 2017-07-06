@@ -10,7 +10,7 @@ Nature::Nature()
 	m_timeinterval = NORMAL_TIMEINTERVAL;
 	m_daynight = Night;
 	m_ismakewarm = false;
-	m_isshowinsect = true;
+	m_isshowinsect = false;
 }
 
 Nature::~Nature()

@@ -4,6 +4,7 @@
 #include "GameDataSave.h"
 #include "GameScene.h"
 #include "CommonFuncs.h"
+#include "Const.h"
 bool SelectSaveComfirmLayer::init(int index)
 {
 	
@@ -20,6 +21,9 @@ bool SelectSaveComfirmLayer::init(int index)
 	okbtn->setTag(index);
 	cocos2d::ui::Button* cancelbtn = (cocos2d::ui::Button*)csbnode->getChildByName("cancelbtn");
 	cancelbtn->addTouchEventListener(CC_CALLBACK_2(SelectSaveComfirmLayer::onCancel, this));
+
+	cocos2d::ui::Text* nametxt = (cocos2d::ui::Text*)csbnode->getChildByName("name");
+	nametxt->setString(CommonFuncs::gbk2utf(heroname[index].c_str()));
 
 	cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("headimg");
 	std::string headstr = StringUtils::format("ui/tophero%d.png", index + 1);

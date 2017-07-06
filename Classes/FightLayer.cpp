@@ -10,6 +10,7 @@
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
 #include "MapLayer.h"
+#include "Shake.h"
 
 FightLayer::FightLayer()
 {
@@ -123,8 +124,8 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	heroactimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroactimg");
 	npcactimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcactimg");
 
-	herocritfnt = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("herocritfnt");
-	npccritfnt = (cocos2d::ui::TextBMFont*)csbnode->getChildByName("npccritfnt");
+	herocritfnt = (cocos2d::ui::TextBMFont*)heroactimg->getChildByName("herocritfnt");
+	npccritfnt = (cocos2d::ui::TextBMFont*)npcactimg->getChildByName("npccritfnt");
 
 	if (npcid.compare("n001") != 0)
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
@@ -245,11 +246,13 @@ void FightLayer::delayHeroFight(float dt)
 		npcactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
 		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
 		npcactimg->setVisible(true);
-		npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		npcactimg->setOpacity(200);
+		npcactimg->setScale(3);
+		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+		npcactimg->runAction(Sequence::create(ac1, DelayTime::create(1.0f), Hide::create(), NULL));
 		tmpstr = StringUtils::format("%d", npchurt);
 		npccritfnt->setString(tmpstr);
 		npccritfnt->setVisible(true);
-		npccritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
 	}
 	else if (r < critrnd + npcdodgernd)
 	{
@@ -258,7 +261,12 @@ void FightLayer::delayHeroFight(float dt)
 		npcactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
 		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
 		npcactimg->setVisible(true);
-		npcactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		npccritfnt->setVisible(false);
+		npcactimg->setOpacity(200);
+		npcactimg->setScale(3);
+		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+		npcactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
+
 	}
 
 	if (isNpcAct != 1)
@@ -324,11 +332,13 @@ void FightLayer::delayBossFight(float dt)
 		heroactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
 		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
 		heroactimg->setVisible(true);
-		heroactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		herocritfnt->setVisible(true);
+		heroactimg->setOpacity(200);
+		heroactimg->setScale(3);
+		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+		heroactimg->runAction(Sequence::create(ac1, DelayTime::create(1.0f), Hide::create(), NULL));
 		tmpstr = StringUtils::format("%d", herohurt);
 		herocritfnt->setString(tmpstr);
-		herocritfnt->setVisible(true);
-		herocritfnt->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
 	}
 	else if (r < npccritrnd + dodgernd)
 	{
@@ -337,7 +347,12 @@ void FightLayer::delayBossFight(float dt)
 		heroactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
 		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
 		heroactimg->setVisible(true);
-		heroactimg->runAction(Sequence::create(DelayTime::create(1.0f), Hide::create(), NULL));
+		herocritfnt->setVisible(false);
+		heroactimg->setOpacity(200);
+		heroactimg->setScale(3);
+		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+		heroactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
+
 	}
 
 	if (isHeroAct != 1)

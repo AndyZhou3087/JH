@@ -354,25 +354,36 @@ void MapLayer::updataPlotMissionIcon(int type)
 				}
 			}
 		}
-		bool isfind = false;
-		for (int i = 0; i < mapnamecount; i++)
+
+		if (plotData->mapid.length() > 0)
 		{
-			cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
-			for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+			for (unsigned int m = 0; m < GlobalData::map_maps[plotData->mapid].npcs.size(); m++)
 			{
-				if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
+				if (dnpc.compare(GlobalData::map_maps[plotData->mapid].npcs.at(m)) == 0)
 				{
-					bool ret = false;
-					if (plotData->mapid.length() > 0)
+					if (plotData->status == M_DOING)
 					{
-						if (plotData->mapid.compare(mapname->getName()) == 0)
-							ret = true;
+						m_dmissionIcon[type]->setVisible(true);
+						m_dmissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
+						m_dmissionIcon[type]->setPosition(m_mapbg->getChildByName(plotData->mapid)->getPosition());
 					}
 					else
 					{
-						ret = true;
+						m_dmissionIcon[type]->stopAllActions();
+						m_dmissionIcon[type]->setVisible(false);
 					}
-					if (ret)
+
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < mapnamecount; i++)
+			{
+				cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
+				for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)
+				{
+					if (dnpc.compare(GlobalData::map_maps[mapname->getName()].npcs.at(m)) == 0)
 					{
 						if (plotData->status == M_DOING)
 						{
@@ -385,8 +396,8 @@ void MapLayer::updataPlotMissionIcon(int type)
 							m_dmissionIcon[type]->stopAllActions();
 							m_dmissionIcon[type]->setVisible(false);
 						}
-					}
 
+					}
 				}
 			}
 		}

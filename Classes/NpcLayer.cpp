@@ -685,20 +685,22 @@ void NpcLayer::updatePlotUI(int type)
 
 		if (talkbtn->getChildByName(dmissionname) != NULL)
 			talkbtn->removeChildByName(dmissionname);
-		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
-		{
-			bool ret = false;
-			if (plotData->mapid.length() > 0)
-			{
-				if (plotData->mapid.compare(m_addrstr) == 0)
-					ret = true;
-			}
-			else
-			{
-				ret = true;
-			}
 
-			if (plotData->status == M_DOING && ret)
+		bool ret = false;
+		if (plotData->mapid.length() > 0)
+		{
+			if (plotData->mapid.compare(m_addrstr) == 0)
+				ret = true;
+		}
+		else
+		{
+			ret = true;
+		}
+
+		if (dnpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0 && ret)
+		{
+
+			if (plotData->status == M_DOING)
 			{
 				std::string diconstr = StringUtils::format("ui/mapmission%d_1.png", type);
 				Sprite* dicon = Sprite::createWithSpriteFrameName(diconstr);
