@@ -14,6 +14,8 @@
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
+
+int silvercost[] = { 1, 2, 2 };
 NpcLayer::NpcLayer()
 {
 	isShowWord = false;
@@ -338,7 +340,6 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		Node* node = (Node*)pSender;
 		int itemindex = node->getTag() / 10;
 		int actionIndex = node->getTag()%10;
-		int lostval[] = { 1, 2, 2 };
 		int silver = 0;
 
 		for (int i = 0; i < MyPackage::getSize(); i++)
@@ -350,15 +351,13 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			}
 		}
 
-		if (silver < lostval[actionIndex])
+		if (silver < silvercost[actionIndex])
 		{
 			HintBox* hintBox = HintBox::create(CommonFuncs::gbk2utf("我靠。。。银子没带够！！"));
 			addChild(hintBox);
 		}
 		else
 		{
-			MyPackage::cutone("80", lostval[actionIndex]);
-
 			CannotTouchLayer* layer = CannotTouchLayer::create();
 			g_gameLayer->addChild(layer, 5, "notouchlayer");
 
@@ -384,12 +383,6 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			if (actionIndex == 0)
 			{
 				ptext->setString(CommonFuncs::gbk2utf("吃饭中..."));
-				float hungervale = g_hero->getHungerValue();
-				int addvalue = 40;
-				if (addvalue + hungervale > g_hero->getMaxHungerValue())
-					g_hero->setHungerValue(g_hero->getMaxHungerValue());
-				else
-					g_hero->recoverHunger(addvalue);
 			}
 			else if (actionIndex == 1)
 			{
@@ -402,20 +395,34 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			else if (actionIndex == 2)
 			{
 				ptext->setString(CommonFuncs::gbk2utf("喝酒中..."));
-				float value = g_hero->getSpiritValue();
-				float addvalue = 40;
-				if (addvalue + value > g_hero->getMaxSpiritValue())
-					g_hero->setSpiritValue(g_hero->getMaxSpiritValue());
-				else
-					g_hero->setSpiritValue(addvalue + value);
 			}
-			pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::actionOver, this, npcitem)), NULL));
+			pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::actionOver, this, npcitem, actionIndex)), NULL));
 		}
 	}
 }
 
-void NpcLayer::actionOver(Ref* pSender, Node* item)
+void NpcLayer::actionOver(Ref* pSender, Node* item, int actionindex)
 {
+	MyPackage::cutone("80", silvercost[actionindex]);
+	if (actionindex == 0)
+	{
+		float hungervale = g_hero->getHungerValue();
+		int addvalue = 40;
+		if (addvalue + hungervale > g_hero->getMaxHungerValue())
+			g_hero->setHungerValue(g_hero->getMaxHungerValue());
+		else
+			g_hero->recoverHunger(addvalue);
+	}
+	else if (actionindex == 2)
+	{
+		float value = g_hero->getSpiritValue();
+		float addvalue = 40;
+		if (addvalue + value > g_hero->getMaxSpiritValue())
+			g_hero->setSpiritValue(g_hero->getMaxSpiritValue());
+		else
+			g_hero->setSpiritValue(addvalue + value);
+	}
+
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
 	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)item->getChildByName("talkbtn");
 	talkbtn->setVisible(true);
