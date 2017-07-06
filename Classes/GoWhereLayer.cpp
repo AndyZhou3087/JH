@@ -194,7 +194,7 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			std::string mapname = GlobalData::map_maps[m_addrstr].cname;
 			if (mapname.find(CommonFuncs::gbk2utf("客栈")) != std::string::npos)
 			{
-				g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，疗伤三两银子"), 25, Color3B(204, 4, 4));
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，喝酒二两银子"), 25, Color3B(204, 4, 4));
 			}
 		}
 		this->removeFromParentAndCleanup(true);

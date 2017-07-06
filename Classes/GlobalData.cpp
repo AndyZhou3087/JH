@@ -921,7 +921,7 @@ void GlobalData::setUnlockChapter(int val)
 {
 	int lastChapter = GlobalData::getUnlockChapter();
 
-	if (val > lastChapter)
+	if (val >= lastChapter)
 		GameDataSave::getInstance()->setPlotUnlockChapter(val);
 }
 

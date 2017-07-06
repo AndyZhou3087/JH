@@ -378,7 +378,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 		}
 		else
 		{
-			for (int i = 0; i < mapnamecount; i++)
+			for (int i = mapnamecount - 1; i >= 0; i--)
 			{
 				cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 				for (unsigned int m = 0; m < GlobalData::map_maps[mapname->getName()].npcs.size(); m++)

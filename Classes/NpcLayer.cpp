@@ -143,7 +143,7 @@ bool NpcLayer::init(std::string addrid)
 			onFight->setTag(10*i+1);
 			onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 			onExchange->setVisible(true);
-			onExchange->setTitleText(CommonFuncs::gbk2utf("疗伤"));
+			onExchange->setTitleText(CommonFuncs::gbk2utf("喝酒"));
 			onExchange->setTag(10*i+2);
 			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 		}
@@ -338,7 +338,7 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		Node* node = (Node*)pSender;
 		int itemindex = node->getTag() / 10;
 		int actionIndex = node->getTag()%10;
-		int lostval[] = { 1, 2, 3 };
+		int lostval[] = { 1, 2, 2 };
 		int silver = 0;
 
 		for (int i = 0; i < MyPackage::getSize(); i++)
@@ -385,7 +385,7 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			{
 				ptext->setString(CommonFuncs::gbk2utf("吃饭中..."));
 				float hungervale = g_hero->getHungerValue();
-				int addvalue = 50;
+				int addvalue = 40;
 				if (addvalue + hungervale > g_hero->getMaxHungerValue())
 					g_hero->setHungerValue(g_hero->getMaxHungerValue());
 				else
@@ -401,19 +401,13 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 
 			else if (actionIndex == 2)
 			{
-				ptext->setString(CommonFuncs::gbk2utf("疗伤中..."));
-				float outvalue = g_hero->getOutinjuryValue();
-				int addwvalue = 50;
-				if (addwvalue + outvalue > g_hero->getMaxOutinjuryValue())
-					g_hero->setOutinjuryValue(g_hero->getMaxOutinjuryValue());
+				ptext->setString(CommonFuncs::gbk2utf("喝酒中..."));
+				float value = g_hero->getSpiritValue();
+				float addvalue = 40;
+				if (addvalue + value > g_hero->getMaxSpiritValue())
+					g_hero->setSpiritValue(g_hero->getMaxSpiritValue());
 				else
-					g_hero->recoverOutjury(addwvalue);
-				int addnvalue = 50;
-				float invalue = g_hero->getInnerinjuryValue();
-				if (invalue + addnvalue > g_hero->getMaxInnerinjuryValue())
-					g_hero->setInnerinjuryValue(g_hero->getMaxInnerinjuryValue());
-				else
-					g_hero->recoverInjury(addnvalue);
+					g_hero->setSpiritValue(addvalue + value);
 			}
 			pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::actionOver, this, npcitem)), NULL));
 		}
