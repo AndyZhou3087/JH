@@ -653,6 +653,7 @@ void NpcLayer::updatePlotUI(int type)
 		std::string smissionname = StringUtils::format("m%d_0", type);
 		if (talkbtn->getChildByName(smissionname) != NULL)
 			talkbtn->removeChildByName(smissionname);
+
 		if (snpc.compare(GlobalData::map_maps[m_addrstr].npcs[i]) == 0)
 		{
 			if (plotData->status == M_NONE)
@@ -671,6 +672,13 @@ void NpcLayer::updatePlotUI(int type)
 				}
 			}
 		}
+	}
+
+	for (int i = 0; i < ncpsize; i++)
+	{
+		Node* npcitem = m_scrollview->getChildByName(GlobalData::map_maps[m_addrstr].npcs[i]);
+		cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
+		cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
 
 		std::string dmissionname = StringUtils::format("m%d_1", type);
 

@@ -26,9 +26,9 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	GameDataSave::purgeGameSave();
+	g_gameLayer = NULL;
 	g_nature = NULL;
 	g_hero = NULL;
-	g_gameLayer = NULL;
 }
 
 Scene* GameScene::createScene()

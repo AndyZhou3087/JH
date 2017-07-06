@@ -72,7 +72,7 @@ static std::string weatherEventText[] = { "晴：温度适宜，适合外出。"
 static std::string liveDayDesc = {"记录闯荡江湖的时间，以便制定合理的江湖计划。"};
 static std::string timeDesc = { "白天时间：6：00~18:00，黑夜时间：18：00~6：00。黑夜有一定几率触发特殊事件。" };
 static std::string tempeDesc = { "温度过高时会造成外伤发炎，温度过低时会加速生命值消耗。" };
-static std::string dayEventText[2] = {"新的一天开始了。", "黑夜来临，盗贼频繁出现。"};
+static std::string dayEventText[2] = {"天亮了。", "黑夜来临，盗贼频繁出现。"};
 	
 #endif
 

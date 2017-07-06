@@ -235,15 +235,16 @@ void HomeHill::showNewerGuide(int step)
 	}
 	else if (step == 28)
 	{
-		Node* resnode = scrollView->getChildByName("node3");
+		scrollView->jumpToPercentVertical(20);
+		Node* resnode = scrollView->getChildByName("node4");
 		resnode->getChildByName("actionbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
 
 	else if (step == 33 || step == 36)
 	{
-		scrollView->jumpToPercentVertical(55);
-		Node* resnode = scrollView->getChildByName("node6");
+		scrollView->jumpToPercentVertical(70);
+		Node* resnode = scrollView->getChildByName("node7");
 		resnode->getChildByName("actionbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
