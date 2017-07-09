@@ -531,6 +531,17 @@ void GlobalData::loadEquipJsonData()
 		data.extype = atoi(v.GetString());
 		v = item["qu"];
 		data.qu = atoi(v.GetString());
+
+		v = item["res"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			int val = v[m].GetInt();
+			if (val > 0)
+			{
+				std::string str = StringUtils::format("%d", val);
+				data.repair_res.push_back(str);
+			}
+		}
 		map_equips[data.id] = data;
 	}
 }

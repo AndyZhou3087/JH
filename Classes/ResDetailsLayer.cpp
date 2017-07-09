@@ -94,6 +94,19 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 	int count = StorageRoom::getCountById(pdata->strid);
+
+	if (whereClick == 1)
+	{
+		for (unsigned i = 0; i < MyPackage::vec_packages.size(); i++)
+		{
+			if (MyPackage::vec_packages[i].strid.compare(pdata->strid) == 0)
+			{
+				count += MyPackage::vec_packages[i].count;
+				break;
+			}
+		}
+	}
+
 	std::string countstr;
 
 	if (pdata->type == FOOD || pdata->type == MEDICINAL || pdata->type == RES_1)

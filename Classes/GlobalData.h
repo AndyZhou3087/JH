@@ -132,6 +132,7 @@ typedef struct
 	int df;
 	int extype;//扩展类型，区分棍，刀，剑
 	int qu;//品级
+	std::vector<std::string> repair_res;//修理需要的资源
 }EquipData;
 
 /****************************

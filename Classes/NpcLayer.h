@@ -36,6 +36,7 @@ private:
 	void onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onRepair(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void showTypeText(float dt);
 	void removeNpcWord(float dt);
 	void checkWordLblColor(std::string wordstr);

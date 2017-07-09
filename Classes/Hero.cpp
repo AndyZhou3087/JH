@@ -467,7 +467,7 @@ int Hero::getTotalDf()
 		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
 	}
 
-	if (g_hero->getAtrByType(H_ARMOR)->count > 0)
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0 && g_hero->getAtrByType(H_ARMOR)->goodvalue > 0)
 	{
 		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
@@ -483,7 +483,7 @@ int Hero::getTotalAtck()
 {
 	int weaponAtk = 0;
 	int wgAtk = 0;
-	if (g_hero->getAtrByType(H_WEAPON)->count > 0)
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0 && g_hero->getAtrByType(H_WEAPON)->goodvalue > 0)
 	{
 		std::string strid = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAtk = GlobalData::map_equips[strid].atk;
@@ -496,7 +496,7 @@ int Hero::getTotalAtck()
 	//攻击属性
 	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
 
-	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0)
+	if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WEAPON)->count > 0 && g_hero->getAtrByType(H_WEAPON)->goodvalue > 0)
 	{
 		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].extype == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
 		{

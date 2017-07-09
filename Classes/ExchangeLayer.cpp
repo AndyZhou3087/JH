@@ -53,9 +53,12 @@ bool ExchangeLayer::init(std::string npcid)
 	m_exgbtn->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onExg, this));
 	m_exgbtn->setEnabled(false);
 
-	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcgoodstext");
-	std::string namestr = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("的物品").c_str());
-	npcname->setString(namestr);
+	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
+	npcname->setString(GlobalData::map_npcs[npcid].name);
+
+	cocos2d::ui::Text* npcgoodstext = (cocos2d::ui::Text*)csbnode->getChildByName("npcgoodstext");
+	std::string goodstextstr = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("的物品").c_str());
+	npcgoodstext->setString(goodstextstr);
 
 	m_npcWordLbl = (cocos2d::ui::Text*)csbnode->getChildByName("npcword");
 	
@@ -166,7 +169,6 @@ bool ExchangeLayer::init(std::string npcid)
 					isfind = true;
 					data.strid = gfdata.id;
 					data.count = 1;
-					data.lv = 0;
 					data.type = gfdata.type - 1;
 					npcGoodsData.push_back(data);
 					break;

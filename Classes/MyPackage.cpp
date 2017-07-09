@@ -134,7 +134,7 @@ void MyPackage::save()
 	for (unsigned int i = 0; i < vec_packages.size(); i++)
 	{
 		//"%s-%d-%d-%d-%d;", sdata.strid.c_str(), sdata.type, sdata.count, sdata.extype, sdata.lv
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", vec_packages[i].strid.c_str(), vec_packages[i].type, vec_packages[i].count, vec_packages[i].extype, vec_packages[i].lv, vec_packages[i].exp, vec_packages[i].goodvalue);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", vec_packages[i].strid.c_str(), vec_packages[i].type, vec_packages[i].count, vec_packages[i].extype, vec_packages[i].lv, vec_packages[i].exp, vec_packages[i].goodvalue, vec_packages[i].slv, vec_packages[i].tqu);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setPackage(str.substr(0, str.length() - 1));
@@ -159,6 +159,11 @@ void MyPackage::load()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
+		if (tmp.size() >= 9)
+		{
+			data.slv = atoi(tmp[7].c_str());
+			data.tqu = atoi(tmp[8].c_str());
+		}
 		vec_packages.push_back(data);
 	}
 }

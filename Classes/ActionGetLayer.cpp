@@ -105,10 +105,6 @@ void ActionGetLayer::doAction(float dt)
 			data.strid = idstr;
 			data.type = mtype - 1;
 			data.count = 1;
-			data.lv = 0;
-			data.extype = 0;
-			data.exp = 0;
-			data.goodvalue = 100;
 			getResData.push_back(data);
 			isget = true;
 		}
@@ -434,6 +430,11 @@ void ActionGetLayer::loadTempData()
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
+		if (tmp.size() >= 9)
+		{
+			data.slv = atoi(tmp[7].c_str());
+			data.tqu = atoi(tmp[8].c_str());
+		}
 		tempResData.push_back(data);
 	}
 }
@@ -462,7 +463,7 @@ void ActionGetLayer::saveTempData()
 	std::string str;
 	for (unsigned int i = 0; i < allResData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue, allResData[i].slv, allResData[i].tqu);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));

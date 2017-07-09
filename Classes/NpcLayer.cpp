@@ -11,6 +11,7 @@
 #include "HintBox.h"
 #include "CannotTouchLayer.h"
 #include "MyActionProgressTimer.h"
+#include "RepairLayer.h"
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
@@ -148,6 +149,16 @@ bool NpcLayer::init(std::string addrid)
 			onExchange->setTitleText(CommonFuncs::gbk2utf("喝酒"));
 			onExchange->setTag(10*i+2);
 			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
+		}
+		else if (mdata.npcs[i].compare("n092") == 0)
+		{
+			onFight->setTitleText(CommonFuncs::gbk2utf("修理"));
+			onFight->setTag(1);
+			onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
+			onExchange->setVisible(true);
+			onExchange->setTitleText(CommonFuncs::gbk2utf("强化"));
+			onExchange->setTag(2);
+			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
 		}
 		if (ncpsize == 10)
 			onExchange->setVisible(false);
@@ -398,6 +409,18 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			}
 			pbar->runAction(Sequence::create(MyProgressTo::create(ACTION_BAR_TIME, 100), CallFuncN::create(CC_CALLBACK_1(NpcLayer::actionOver, this, npcitem, actionIndex)), NULL));
 		}
+	}
+}
+
+void NpcLayer::onRepair(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		Node* node = (Node*)pSender;
+		int tag = node->getTag();
+		RepairLayer* layer = RepairLayer::create(tag);
+		g_gameLayer->addChild(layer, 4);
 	}
 }
 
@@ -874,7 +897,7 @@ void NpcLayer::getWinRes(int type)
 				sepstr = "";
 			else
 				sepstr = ";";
-			std::string onestr = StringUtils::format("%s%s-%d-%d-%d-%d-%d-%d",sepstr.c_str(), tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue);
+			std::string onestr = StringUtils::format("%s%s-%d-%d-%d-%d-%d-%d-%d-%d", sepstr.c_str(), tempResData[i].strid.c_str(), tempResData[i].type, tempResData[i].count, tempResData[i].extype, tempResData[i].lv, tempResData[i].exp, tempResData[i].goodvalue, tempResData[i].slv, tempResData[i].tqu);
 			datastr.append(onestr);
 		}
 		GameDataSave::getInstance()->setTempStorage(m_addrstr, datastr);

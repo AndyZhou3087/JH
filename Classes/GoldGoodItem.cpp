@@ -226,6 +226,11 @@ void GoldGoodsItem::updateDefaultStorage(PackageData pdata)
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());
+		if (tmp.size() >= 9)
+		{
+			data.slv = atoi(tmp[7].c_str());
+			data.tqu = atoi(tmp[8].c_str());
+		}
 		vec_defaultStorage.push_back(data);
 	}
 
@@ -245,7 +250,7 @@ void GoldGoodsItem::updateDefaultStorage(PackageData pdata)
 	std::string str;
 	for (unsigned int i = 0; i < vec_defaultStorage.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue);
+		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", vec_defaultStorage[i].strid.c_str(), vec_defaultStorage[i].type, vec_defaultStorage[i].count, vec_defaultStorage[i].extype, vec_defaultStorage[i].lv, vec_defaultStorage[i].exp, vec_defaultStorage[i].goodvalue, vec_defaultStorage[i].slv, vec_defaultStorage[i].tqu);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setModifyDefaultStorage(g_hero->getHeadID(), str.substr(0, str.length() - 1));

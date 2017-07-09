@@ -503,9 +503,6 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			std::string idstr = StringUtils::format("%s", strid.c_str());
 			data.strid = idstr;
 			data.count = 1;
-			data.lv = 0;
-			data.exp = 0;
-			data.goodvalue = 100;
 			data.extype = vec_buildAcitonData.at(type - ACTION).extype;
 			StorageRoom::add(data);
 			//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));

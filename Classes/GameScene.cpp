@@ -11,6 +11,7 @@
 #include "NewerGuideLayer.h"
 #include "ActivitScene.h"
 #include "Const.h"
+#include "HeroProperNode.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -267,6 +268,11 @@ void GameScene::loadSavedHeroPropData()
 		sdata.lv = atoi(tmp2[4].c_str());
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());//耐久度
+		if (tmp2.size() >= 9)
+		{
+			sdata.slv = atoi(tmp2[7].c_str());//
+			sdata.tqu = atoi(tmp2[8].c_str());//
+		}
 		g_hero->setAtrByType((HeroAtrType)i, sdata);
 		//g_hero->set [sdata.type].push_back(sdata);
 	}
@@ -300,6 +306,8 @@ void GameScene::saveAllData()
 
 	//保存资源数据
 	GlobalData::saveResData();
+	//保存角色装备栏数据
+	HeroProperNode::saveData();
 }
 
 void GameScene::updata(float dt)

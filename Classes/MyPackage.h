@@ -16,6 +16,8 @@ typedef struct _PackageData
 	int extype;//用于区分采集1，砍伐2，挖掘工具3，其他类型为0
 	int exp;
 	int goodvalue;
+	int slv;//强化等级
+	int tqu;//锻造出来的品质
 	_PackageData()
 	{
 		strid = "";
@@ -25,6 +27,8 @@ typedef struct _PackageData
 		extype = 0;
 		exp = 0;
 		goodvalue = 100;
+		slv = 0;
+		tqu = 1;
 	}
 
 }PackageData;

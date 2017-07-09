@@ -42,6 +42,16 @@
                     <PreSize X="0.0635" Y="0.0301" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-3.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="m1-5" ActionTag="1297844122" Tag="97" IconVisible="False" LeftMargin="1113.4766" RightMargin="744.5234" TopMargin="1075.8809" BottomMargin="221.1192" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="112" Scale9Height="65" ctype="ImageViewObjectData">
+                    <Size X="142.0000" Y="99.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1184.4766" Y="270.6192" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5922" Y="0.1939" />
+                    <PreSize X="0.0710" Y="0.0709" />
+                    <FileData Type="MarkedSubImage" Path="ui/m1-5.png" Plist="uipacker.plist" />
+                  </AbstractNodeData>
                   <AbstractNodeData Name="m1-4" ActionTag="-859359489" Tag="16" IconVisible="False" LeftMargin="1243.6246" RightMargin="646.3754" TopMargin="620.0941" BottomMargin="729.9059" TouchEnable="True" LeftEage="41" RightEage="41" TopEage="13" BottomEage="13" Scale9OriginX="41" Scale9OriginY="13" Scale9Width="28" Scale9Height="20" ctype="ImageViewObjectData">
                     <Size X="110.0000" Y="46.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

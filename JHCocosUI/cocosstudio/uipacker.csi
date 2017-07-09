@@ -363,6 +363,13 @@
       <FilePathData Path="ui/crit.png" />
       <FilePathData Path="ui/dodge.png" />
       <FilePathData Path="ui/80m.png" />
+      <FilePathData Path="ui/m1-5.png" />
+      <FilePathData Path="ui/repairokquan.png" />
+      <FilePathData Path="ui/repairoktext.png" />
+      <FilePathData Path="ui/strengthfail.png" />
+      <FilePathData Path="ui/strengthoktext.png" />
+      <FilePathData Path="ui/81.png" />
+      <FilePathData Path="ui/82.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

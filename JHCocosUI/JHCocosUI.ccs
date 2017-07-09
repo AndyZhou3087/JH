@@ -17,6 +17,7 @@
           <Image Name="mapbg.jpg" />
           <Image Name="normalboxgb.png" />
           <Image Name="npctalkbg.png" />
+          <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
           <Image Name="selectherobg.jpg" />
           <Image Name="shero1.jpg" />
@@ -100,6 +101,8 @@
           <Image Name="8.png" />
           <Image Name="80.png" />
           <Image Name="80m.png" />
+          <Image Name="81.png" />
+          <Image Name="82.png" />
           <Image Name="9.png" />
           <Image Name="a001.png" />
           <Image Name="a002.png" />
@@ -208,6 +211,7 @@
           <Image Name="m1-3.png" />
           <Image Name="m13-1.png" />
           <Image Name="m1-4.png" />
+          <Image Name="m1-5.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
           <Image Name="m2-3.png" />
@@ -276,6 +280,8 @@
           <Image Name="qubox4.png" />
           <Image Name="qubox5.png" />
           <Image Name="redpoint.png" />
+          <Image Name="repairokquan.png" />
+          <Image Name="repairoktext.png" />
           <Image Name="resbox.png" />
           <Image Name="saveitembg.png" />
           <Image Name="sbed.png" />
@@ -299,6 +305,8 @@
           <Image Name="startbtndis.png" />
           <Image Name="storageroom.png" />
           <Image Name="storagesepline.png" />
+          <Image Name="strengthfail.png" />
+          <Image Name="strengthoktext.png" />
           <Image Name="swinemake.png" />
           <Image Name="swinetable.png" />
           <Image Name="syssmalltie.png" />
@@ -441,6 +449,8 @@
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="pauseLayer.csd" Type="Layer" />
+        <Project Name="repairLayer.csd" Type="Layer" />
+        <Project Name="repairOKLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
