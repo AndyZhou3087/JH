@@ -199,7 +199,7 @@ void MapLayer::showMoveToDest()
 	{
 		int sec = dt / (TIMESCALE * 8.0f);
 		int r = GlobalData::createRandomNum(100);
-		if (r < 50)
+		if (r < 5)
 		{
 			this->scheduleOnce(schedule_selector(MapLayer::showJump), sec - 0.5f);
 		}
