@@ -14,3 +14,4 @@ const void toast(char * info);
 void alterView();
 void makeNotification();
 void UMShare();
+const char * getDeviceIDInKeychain();

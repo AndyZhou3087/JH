@@ -21,14 +21,14 @@ int ShopLayer::payindex = -1;
 bool ShopLayer::isPaying = false;
 ShopLayer::ShopLayer()
 {
-	payindex = -1;
+
 	GlobalData::g_gameStatus = GAMEPAUSE;
 }
 
 
 ShopLayer::~ShopLayer()
 {
-	payindex = -1;
+
 	GlobalData::g_gameStatus = GAMESTART;
 }
 
