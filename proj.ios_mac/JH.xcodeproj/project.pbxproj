@@ -211,7 +211,6 @@
 		729772871F09DFBF001DC2B8 /* end1_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 729772831F09DFBF001DC2B8 /* end1_2.csb */; };
 		72B1D75B1F0F6F7600D73B31 /* LZKeychain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */; };
 		72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098A91F08C45F00FEABAB /* iosfunc.mm */; };
-		72D098B51F08CA1400FEABAB /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72D098B41F08CA1400FEABAB /* UMMobClick.framework */; };
 		72D098B81F08CA3100FEABAB /* MobClickCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098B71F08CA3000FEABAB /* MobClickCpp.mm */; };
 		72D5CAC01F0E1A21007A5D12 /* Shake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72D5CABE1F0E1A21007A5D12 /* Shake.cpp */; };
 		72E332C31F0BAADF00E61182 /* GoldGoodItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72E332BD1F0BAADF00E61182 /* GoldGoodItem.cpp */; };
@@ -568,7 +567,6 @@
 		72B1D7591F0F6F7600D73B31 /* LZKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZKeychain.h; sourceTree = "<group>"; };
 		72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LZKeychain.mm; sourceTree = "<group>"; };
 		72D098A91F08C45F00FEABAB /* iosfunc.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iosfunc.mm; sourceTree = "<group>"; };
-		72D098B41F08CA1400FEABAB /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		72D098B61F08CA3000FEABAB /* MobClickCpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickCpp.h; sourceTree = "<group>"; };
 		72D098B71F08CA3000FEABAB /* MobClickCpp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MobClickCpp.mm; sourceTree = "<group>"; };
 		72D5CABE1F0E1A21007A5D12 /* Shake.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shake.cpp; sourceTree = "<group>"; };
@@ -631,7 +629,6 @@
 				72777B261EFBD78400151A2B /* UMSocialCore.framework in Frameworks */,
 				72F8A48D1ED6B291007A5A65 /* libc++abi.tbd in Frameworks */,
 				72777B251EFBD78400151A2B /* libSocialWeChat.a in Frameworks */,
-				72D098B51F08CA1400FEABAB /* UMMobClick.framework in Frameworks */,
 				72F8A48B1ED6B1AB007A5A65 /* OpenAL.framework in Frameworks */,
 				72F8A4891ED6B137007A5A65 /* libxml2.tbd in Frameworks */,
 				72F8A4871ED6AF5D007A5A65 /* MessageUI.framework in Frameworks */,
@@ -730,7 +727,6 @@
 			children = (
 				72D098B61F08CA3000FEABAB /* MobClickCpp.h */,
 				72D098B71F08CA3000FEABAB /* MobClickCpp.mm */,
-				72D098B41F08CA1400FEABAB /* UMMobClick.framework */,
 				72754FEF1F04CE4700AFB4C4 /* Bugly.framework */,
 				72777B101EFBD78400151A2B /* SocialLibraries */,
 				72777B1A1EFBD78400151A2B /* UMSocialSDK */,
