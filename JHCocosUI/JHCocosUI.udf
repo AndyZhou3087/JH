@@ -7,21 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="unlockLayer.csd" />
-          <FilePathData Path="repairOKLayer.csd" />
-          <FilePathData Path="pauseLayer.csd" />
-          <FilePathData Path="repairLayer.csd" />
-          <FilePathData Path="resDetailsLayer.csd" />
-          <FilePathData Path="bookshelfLayer.csd" />
-          <FilePathData Path="bookDetailsLayer.csd" />
-          <FilePathData Path="exgLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="uipacker.csi" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

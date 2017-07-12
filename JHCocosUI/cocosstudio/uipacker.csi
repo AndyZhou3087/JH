@@ -370,6 +370,7 @@
       <FilePathData Path="ui/strengthoktext.png" />
       <FilePathData Path="ui/81.png" />
       <FilePathData Path="ui/82.png" />
+      <FilePathData Path="ui/dividetext.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

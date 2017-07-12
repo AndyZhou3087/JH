@@ -20,7 +20,6 @@ private:
 	static ActivitScene* create(std::string imagepath, std::string content);
 	void popself(float dt);
 	void getRndRes(float dt);
-	int getResType(std::string strid);
 
 private:
 };

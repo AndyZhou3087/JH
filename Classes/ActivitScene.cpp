@@ -164,10 +164,36 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		int rj = GlobalData::createRandomNum(100);
 		if (rj < 50)
 		{
-			image->loadTexture("images/jumpdeath.jpg", cocos2d::ui::TextureResType::LOCAL);
-			text->setString(CommonFuncs::gbk2utf("跳崖摔死"));
-			g_hero->setLifeValue(0);
-			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！根本不是人类所能承受的！！！你摔死了！！！"));
+			image->loadTexture("images/jumpnoting.jpg", cocos2d::ui::TextureResType::LOCAL);
+			text->setString(CommonFuncs::gbk2utf("跳崖摔伤"));
+			float val = g_hero->getInnerinjuryValue();
+			if (val < 50)
+				g_hero->setInnerinjuryValue(0);
+			else
+				g_hero->setInnerinjuryValue(val - 50);
+
+			val = g_hero->getOutinjuryValue();
+
+			if (val < 50)
+				g_hero->setOutinjuryValue(0);
+			else
+				g_hero->setOutinjuryValue(val - 50);
+
+			val = g_hero->getSpiritValue();
+
+			if (val < 50)
+				g_hero->setSpiritValue(0);
+			else
+				g_hero->setSpiritValue(val - 50);
+
+			val = g_hero->getHungerValue();
+			if (val < 50)
+				g_hero->setHungerValue(0);
+			else
+				g_hero->setHungerValue(val - 50);
+
+			g_hero->setLifeValue(g_hero->getLifeValue() * 0.5f);
+			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！受伤严重！！！"));
 			distime = 4.0f;
 		}
 		else
@@ -276,7 +302,7 @@ void ActivitScene::getRndRes(float dt)
 	{
 		PackageData data;
 		data.strid = vec_randRes[i];
-		data.type = getResType(data.strid);
+		data.type = GlobalData::getResType(data.strid);
 		data.count = 10;
 		vec_randData.push_back(data);
 	}
@@ -344,36 +370,4 @@ ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
 void ActivitScene::popself(float dt)
 {
 	Director::getInstance()->popScene();
-}
-
-int ActivitScene::getResType(std::string strid)
-{
-	bool isfind = false;
-	std::map<std::string, std::vector<BuildActionData>>::iterator it;
-	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
-	{
-		std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
-
-		for (unsigned int m = 0; m < vec_bactData.size(); m++)
-		{
-			BuildActionData bdata = vec_bactData[m];
-			if (strid.compare(bdata.icon) == 0)
-			{
-				isfind = true;
-				return bdata.type - 1;
-			}
-		}
-	}
-	if (!isfind)
-	{
-		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
-		{
-			ResData rdata = GlobalData::vec_resData[n];
-			if (strid.compare(rdata.strid) == 0)
-			{
-				return rdata.type - 1;
-			}
-		}
-	}
-	return 0;
 }

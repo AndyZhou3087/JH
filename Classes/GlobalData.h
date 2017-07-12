@@ -497,6 +497,12 @@ public:
 	*****************************/
 	static void setMyGoldCount(int count);
 
+	/****************************
+	获取资源列表中的类型
+	@return 类型
+	*****************************/
+	static int getResType(std::string strid);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     

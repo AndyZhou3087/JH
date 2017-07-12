@@ -1113,6 +1113,38 @@ bool GlobalData::tempHasGf_Equip(std::string strid)
 	return false;
 }
 
+int GlobalData::getResType(std::string strid)
+{
+	bool isfind = false;
+	std::map<std::string, std::vector<BuildActionData>>::iterator it;
+	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+	{
+		std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
+
+		for (unsigned int m = 0; m < vec_bactData.size(); m++)
+		{
+			BuildActionData bdata = vec_bactData[m];
+			if (strid.compare(bdata.icon) == 0)
+			{
+				isfind = true;
+				return bdata.type - 1;
+			}
+		}
+	}
+	if (!isfind)
+	{
+		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
+		{
+			ResData rdata = GlobalData::vec_resData[n];
+			if (strid.compare(rdata.strid) == 0)
+			{
+				return rdata.type - 1;
+			}
+		}
+	}
+	return 0;
+}
+
 int GlobalData::getShareDay()
 {
 	return GameDataSave::getInstance()->getShareDayOfYear();

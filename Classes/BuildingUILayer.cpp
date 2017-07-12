@@ -17,6 +17,7 @@
 #include "ExerciseDoneLayer.h"
 #include "BuyComfirmLayer.h"
 #include "BookShelfLayer.h"
+#include "DivideLayer.h"
 
 BuildingUILayer::BuildingUILayer()
 {
@@ -222,6 +223,12 @@ void BuildingUILayer::loadActionUi()
 		actbtn->setTag(ACTION + i);
 		actbtn->setTitleText(vec_buildAcitonData.at(i).actext);
 		vec_actionbtn.push_back(actbtn);
+		int type = vec_buildAcitonData.at(i).type - 1;
+		if (type == WEAPON || type == PROTECT_EQU)
+		{
+			if (g_hero->checkifHas(vec_buildAcitonData.at(i).icon))
+				actbtn->setTitleText(CommonFuncs::gbk2utf("分解"));
+		}
 
 		vec_progresstext.push_back((cocos2d::ui::Text*)item->getChildByName("progresstext"));
 
@@ -305,7 +312,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		Node* node = (Node*)pSender;
+		cocos2d::ui::Button* node = (cocos2d::ui::Button*)pSender;
 		int tag = node->getTag();
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF() && strcmp(m_build->data.name, "exerciseroom") != 0)
 		{
@@ -350,6 +357,26 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		}
 		else//操作
 		{
+			int actime = vec_buildAcitonData.at(tag - ACTION).actime;
+			int extime = vec_buildAcitonData.at(tag - ACTION).extime;
+
+			if (actime < TIMESCALE * ACTION_BAR_TIME)
+			{
+				m_build->setActionBarTime(actime / TIMESCALE);
+			}
+			else
+			{
+				m_build->setActionBarTime(ACTION_BAR_TIME);
+			}
+
+			if (node->getTitleText().compare(CommonFuncs::gbk2utf("分解")) == 0)
+			{
+				DivideLayer* layer = DivideLayer::create(&vec_buildAcitonData.at(tag - ACTION));
+				g_gameLayer->addChild(layer, 4);
+				vec_actionbar[tag - ACTION]->runAction(Sequence::create(MyProgressTo::create(m_build->getActionBarTime(), 100), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::ondivideSucc, this, (BACTIONTYPE)tag, layer)), NULL));
+				m_build->action(actime, extime);
+				return;
+			}
 			for (unsigned int m = 0; m < vec_buildAcitonData.at(tag - ACTION).res.size(); m++)
 			{
 				int restypecount = vec_buildAcitonData.at(tag - ACTION).res.at(m);
@@ -373,18 +400,6 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
 				vec_actionbtn[i]->setEnabled(false);
-
-			int actime = vec_buildAcitonData.at(tag - ACTION).actime;
-			int extime = vec_buildAcitonData.at(tag - ACTION).extime;
-
-			if (actime < TIMESCALE * ACTION_BAR_TIME)
-			{
-				m_build->setActionBarTime(actime / TIMESCALE);
-			}
-			else
-			{
-				m_build->setActionBarTime(ACTION_BAR_TIME);
-			}
 
 			if (strcmp(m_build->data.name, "exerciseroom") == 0)
 			{
@@ -440,6 +455,46 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			m_build->action(actime, extime);
 		}
 	}
+}
+
+void BuildingUILayer::ondivideSucc(Ref* pSender, BACTIONTYPE type, Node* divideLayer)
+{
+	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
+	vec_actionbar[type - ACTION]->setPercent(0);
+	vec_actionbtn[type - ACTION]->setTitleText(CommonFuncs::gbk2utf("锻造"));
+	DivideLayer* layer = (DivideLayer*)divideLayer;
+	layer->showContent();
+
+	
+	for (unsigned int m = 0; m < vec_buildAcitonData.at(type - ACTION).res.size(); m++)
+	{
+		int restypecount = vec_buildAcitonData.at(type - ACTION).res.at(m);
+		std::string strid = StringUtils::format("%d", restypecount / 1000);
+
+		PackageData data;
+		data.type = GlobalData::getResType(strid);
+		data.strid = strid;
+		data.count = restypecount%1000/2;
+		StorageRoom::add(data);
+	}
+	std::string strid = vec_buildAcitonData.at(type - ACTION).icon;
+	if (g_hero->getAtrByType(H_WEAPON)->count > 0 && g_hero->getAtrByType(H_WEAPON)->strid.compare(strid) == 0)
+	{
+		PackageData data;
+		data.count = -1;
+		g_hero->setAtrByType(H_WEAPON, data);
+	}
+	if (g_hero->getAtrByType(H_ARMOR)->count > 0 && g_hero->getAtrByType(H_ARMOR)->strid.compare(strid) == 0)
+	{
+		PackageData data;
+		data.count = -1;
+		g_hero->setAtrByType(H_ARMOR, data);
+	}
+	StorageRoom::use(strid);
+
+	updataActionRes();
+	updataBuildRes();
+
 }
 
 void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
@@ -728,9 +783,9 @@ void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widge
 void BuildingUILayer::showFinishHintText(std::string path)
 {
 	Sprite* bsprite = Sprite::createWithSpriteFrameName(path);
-	bsprite->runAction(Sequence::create(FadeOut::create(1.5f), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));
 	bsprite->setPosition(Vec2(360, 600));
 	this->addChild(bsprite);
+	bsprite->runAction(Sequence::create(FadeOut::create(1.5f), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));
 }
 
 void BuildingUILayer::finishAnim(Ref* pSender, Node* node)

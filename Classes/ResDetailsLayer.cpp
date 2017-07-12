@@ -71,6 +71,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 		cocos2d::ui::Text* slvlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvlbl");
 		std::string slvstr = StringUtils::format("+%d", pdata->slv);
+		slvlbl->setPositionX(resname->getPositionX() + resname->getContentSize().width/2 + 10);
 		slvlbl->setString(slvstr);
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
@@ -95,6 +96,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::Text* atkdftext = (cocos2d::ui::Text*)m_csbnode->getChildByName("atkdftext");
+
+	cocos2d::ui::Text* crittext = (cocos2d::ui::Text*)m_csbnode->getChildByName("crittext");
 
 	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 	int count = StorageRoom::getCountById(pdata->strid);
@@ -134,6 +137,18 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	{
 		int lv = pdata->lv + 1;
 		countstr = StringUtils::format("功法等级 %d/%d", lv, GlobalData::map_wgngs[pdata->strid].maxlv);
+
+		std::string critstr;
+		if (pdata->type == N_GONG)
+		{
+			critstr = StringUtils::format("闪避率增加%.4f%%", GlobalData::map_wgngs[pdata->strid].vec_dodge[pdata->lv]);
+			 
+		}
+		else
+		{
+			critstr = StringUtils::format("暴击率增加%.4f%%", GlobalData::map_wgngs[pdata->strid].vec_cirt[pdata->lv]);
+		}
+		crittext->setString(CommonFuncs::gbk2utf(critstr.c_str()));
 	}
 	else if (pdata->type == RES_2)
 	{

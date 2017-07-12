@@ -237,6 +237,9 @@
     <ClCompile Include="..\Classes\RepairOKLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\DivideLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -468,6 +471,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RepairOKLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DivideLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

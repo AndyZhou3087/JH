@@ -535,9 +535,23 @@ void TopBar::checkWxpMap()
 		else
 			++it;
 	}
-	
-
-	int rpos = GlobalData::createRandomNum(sizeof(wxbinmap) / sizeof(wxbinmap[0]));
-	GlobalData::setWxbMapPos(rpos);
-	GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
+	int wxbmapsize = sizeof(wxbinmap) / sizeof(wxbinmap[0]);
+	std::vector<std::string> vec_map;
+	for (int i = 0; i < wxbmapsize;i++)
+	{
+		std::vector<std::string> tmp;
+		CommonFuncs::split(wxbinmap[i], tmp, "-");
+		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
+		if (mapchapter <= GlobalData::getUnlockChapter())
+		{
+			vec_map.push_back(wxbinmap[i]);
+		}
+	}
+	int siez = vec_map.size();
+	if (vec_map.size() > 0)
+	{
+		int rpos = GlobalData::createRandomNum(siez);
+		GlobalData::setWxbMapPos(rpos);
+		GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
+	}
 }

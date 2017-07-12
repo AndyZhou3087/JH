@@ -146,6 +146,7 @@
           <Image Name="cooktable.png" />
           <Image Name="crit.png" />
           <Image Name="disbtn.png" />
+          <Image Name="dividetext.png" />
           <Image Name="dodge.png" />
           <Image Name="e001.png" />
           <Image Name="e002.png" />
@@ -469,6 +470,7 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="divedeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

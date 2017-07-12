@@ -163,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\CookTable.cpp" />
     <ClCompile Include="..\Classes\DataBase64.cpp" />
     <ClCompile Include="..\Classes\DeathLayer.cpp" />
+    <ClCompile Include="..\Classes\DivideLayer.cpp" />
     <ClCompile Include="..\Classes\ExchangeLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseCancelLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseDoneLayer.cpp" />
@@ -241,6 +242,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\CookTable.h" />
     <ClInclude Include="..\Classes\DataBase64.h" />
     <ClInclude Include="..\Classes\DeathLayer.h" />
+    <ClInclude Include="..\Classes\DivideLayer.h" />
     <ClInclude Include="..\Classes\ExchangeLayer.h" />
     <ClInclude Include="..\Classes\ExerciseCancelLayer.h" />
     <ClInclude Include="..\Classes\ExerciseDoneLayer.h" />

@@ -454,7 +454,7 @@ void FightLayer::showFightWord(int type, int value)
 
 			
 			int r = GlobalData::createRandomNum(100);
-			if (r < 80)
+			if (r < 40)
 			{
 				g_hero->getAtrByType(H_WEAPON)->goodvalue--;
 				if (g_hero->getAtrByType(H_WEAPON)->goodvalue <= 0)
@@ -549,7 +549,7 @@ void FightLayer::showFightWord(int type, int value)
 		{
 			int r = GlobalData::createRandomNum(100);
 			std::string astrid = g_hero->getAtrByType(H_ARMOR)->strid;
-			if (r < 80)
+			if (r < 40)
 			{
 				g_hero->getAtrByType(H_ARMOR)->goodvalue--;
 

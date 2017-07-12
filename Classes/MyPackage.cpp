@@ -85,11 +85,12 @@ void MyPackage::cutone(PackageData pdata)
 			{
 				vec_packages.erase(vec_packages.begin() + index);
 			}
+			save();
 			break;
 		}
 	}
 
-	save();
+
 }
 
 void MyPackage::takeoff()

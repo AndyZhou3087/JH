@@ -89,14 +89,27 @@ bool BookDetailsLayer::init(BookData* bookdata)
 	{
 		int maxlv = GlobalData::map_wgngs[bookdata->strid].maxlv;
 		maxlvstr = StringUtils::format("%d", maxlv);
+
+		cocos2d::ui::Text* crittext = (cocos2d::ui::Text*)m_csbnode->getChildByName("crittext");
+		crittext->setVisible(true);
+
+		cocos2d::ui::Text* critlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("critlbl");
+		critlbl->setVisible(true);
+		std::string critstr;
 		if (bookdata->type == W_GONG)
 		{
 			tmpstr = StringUtils::format("攻击力增加%d", GlobalData::map_wgngs[bookdata->strid].vec_bns[maxlv-1]);
+			crittext->setString(CommonFuncs::gbk2utf("最大暴击率："));
+			critstr = StringUtils::format("%.4f%%", GlobalData::map_wgngs[bookdata->strid].vec_cirt[maxlv - 1]);
 		}
 		else if (bookdata->type == N_GONG)
 		{
 			tmpstr = StringUtils::format("防御力增加%d", GlobalData::map_wgngs[bookdata->strid].vec_bns[maxlv - 1]);
+			crittext->setString(CommonFuncs::gbk2utf("最大闪避率："));
+			critstr = StringUtils::format("%.4f%%", GlobalData::map_wgngs[bookdata->strid].vec_dodge[maxlv - 1]);
 		}
+		critlbl->setTextColor(Color4B(204, 4, 4, 255));
+		critlbl->setString(critstr);
 	}
 	cocos2d::ui::Text* maxlv = (cocos2d::ui::Text*)m_csbnode->getChildByName("maxlv");
 	maxlv->setString(maxlvstr);

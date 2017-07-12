@@ -205,7 +205,6 @@ void NpcLayer::checkUpateNpc(float dt)
 	if (m_lastWxpPos != GlobalData::getWxbMapPos())
 	{
 		refreshNpcNode();
-		g_maplayer->updataPlotMissionIcon(0);
 		m_lastWxpPos = GlobalData::getWxbMapPos();
 	}
 }
