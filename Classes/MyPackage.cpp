@@ -2,6 +2,7 @@
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 #include "GlobalData.h"
+#include "StorageRoom.h"
 
 int MyPackage::max = 5;
 std::vector<PackageData> MyPackage::vec_packages;
@@ -164,6 +165,22 @@ void MyPackage::load()
 			data.slv = atoi(tmp[7].c_str());
 			data.tqu = atoi(tmp[8].c_str());
 		}
+
+		bool ishassame = false;
+		if (data.type == WEAPON || data.type == PROTECT_EQU)
+		{
+			std::vector<PackageData>::iterator it;
+			for (it = StorageRoom::map_storageData[data.type].begin(); it != StorageRoom::map_storageData[data.type].end();it++)
+			{
+				if (it->strid.compare(data.strid) == 0)
+				{
+					it->goodvalue += data.goodvalue;
+					ishassame = true;
+				}
+			}
+		}
+		if (ishassame)
+			continue;
 		vec_packages.push_back(data);
 	}
 }

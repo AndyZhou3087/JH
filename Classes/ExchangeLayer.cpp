@@ -61,11 +61,34 @@ bool ExchangeLayer::init(std::string npcid)
 	npcgoodstext->setString(goodstextstr);
 
 	m_npcWordLbl = (cocos2d::ui::Text*)csbnode->getChildByName("npcword");
-	
+	m_desc = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
+	m_desc->setVisible(false);
 	m_npcGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("npcexgscroll");
 	m_npcGoodsSrollView->setScrollBarEnabled(false);
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("myexgscroll");
 	m_myGoodsSrollView->setScrollBarEnabled(false);
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	this->scheduleOnce(schedule_selector(ExchangeLayer::delayShowExgData), 0.2f);
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	return true;
+}
+
+void ExchangeLayer::onEnterTransitionDidFinish()
+{
+	Layer::onEnterTransitionDidFinish();
+}
+
+void ExchangeLayer::delayShowExgData(float dt)
+{
 	std::vector<std::string> exchgres;
 	if (m_npcid.compare("n012") == 0)//韦小宝
 	{
@@ -87,7 +110,10 @@ bool ExchangeLayer::init(std::string npcid)
 		}
 
 		if (isrand)
+		{
+			m_desc->setVisible(true);
 			randExchgRes(exchgres);
+		}
 
 		std::string savestr = StringUtils::format("%d-", liveday);
 
@@ -101,13 +127,13 @@ bool ExchangeLayer::init(std::string npcid)
 	}
 	else
 	{
-		exchgres = GlobalData::map_npcs[npcid].exchgres;
+		exchgres = GlobalData::map_npcs[m_npcid].exchgres;
 	}
 
 	for (unsigned int i = 0; i < exchgres.size(); i++)
 	{
 		int res = atoi(exchgres[i].c_str());
-		
+
 		if (res != 0)
 		{
 			PackageData data;
@@ -164,7 +190,7 @@ bool ExchangeLayer::init(std::string npcid)
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (exchgres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(exchgres[i]) && !GlobalData::tempHasgf(exchgres[i]))
+				if (exchgres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(exchgres[i]) && !GlobalData::tempHasGf_Equip(exchgres[i]))
 				{
 					isfind = true;
 					data.strid = gfdata.id;
@@ -200,25 +226,10 @@ bool ExchangeLayer::init(std::string npcid)
 	{
 		myGoodsData.push_back(MyPackage::vec_packages[i]);
 	}
-
+	m_desc->setVisible(false);
 	updata();
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [=](Touch *touch, Event *event)
-	{
-		return true;
-	};
 
-	listener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-	return true;
 }
-
-void ExchangeLayer::onEnterTransitionDidFinish()
-{
-	Layer::onEnterTransitionDidFinish();
-}
-
 
 void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref* pSender)
 {
@@ -702,40 +713,47 @@ void ExchangeLayer::onExit()
 
 void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 {
-	std::map<int, std::vector<std::string>> map_gf_equip;
-	
+
+	std::vector<std::string> vec_temp;
 	std::map<std::string, WG_NGData>::iterator it;
 	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
 		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-		if (!g_hero->checkifHasGF(gfdata.id) && !GlobalData::tempHasgf(gfdata.id))
-			map_gf_equip[gfdata.qu].push_back(gfdata.id);
+		if (!g_hero->checkifHasGF_Equip(gfdata.id))
+			vec_temp.push_back(gfdata.id);
 	}
 
 	std::map<std::string, EquipData>::iterator ite;
 	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 	{
 		EquipData edata = GlobalData::map_equips[ite->first];
-
-		map_gf_equip[edata.qu].push_back(edata.id);
+		if (!g_hero->checkifHasGF_Equip(edata.id))
+			vec_temp.push_back(edata.id);
+	}
+	std::vector<std::string> vec_randRes;
+	for (unsigned int i = 0; i < vec_temp.size(); i++)
+	{
+		if (!GlobalData::tempHasGf_Equip(vec_temp[i]))
+			vec_randRes.push_back(vec_temp[i]);
 	}
 
-	int rnd[] = { 40, 65, 80, 92, 100 };
+	std::vector<int> vec_resid;
+	for (int i = 1; i <= 23; i++)
+	{
+		vec_resid.push_back(i);
+	}
+	vec_resid.push_back(80);
+
+	for (unsigned int i = 0; i < vec_resid.size(); i++)
+	{
+		std::string str = StringUtils::format("%d", vec_resid[i] * 1000 + 10);
+		vec_randRes.push_back(str);
+	}
+
+	srand(GlobalData::getSysSecTime());
+	std::random_shuffle(vec_randRes.begin(), vec_randRes.end());
 	for (int i = 0; i < 3; i++)
 	{
-		int r = GlobalData::createRandomNum(100);
-		unsigned int m = 0;
-		for (m = 0; m < map_gf_equip.size(); m++)
-		{
-			if (r < rnd[m])
-			{
-				break;
-			}
-		}
-		int size = map_gf_equip[m + 1].size();
-
-		int r1 = GlobalData::createRandomNum(size);
-		vec_exchgres.push_back(map_gf_equip[m + 1][r1]);
-
+		vec_exchgres.push_back(vec_randRes[i]);
 	}
 }

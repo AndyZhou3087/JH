@@ -74,7 +74,36 @@ bool NpcLayer::init(std::string addrid)
 	m_scrollview->setScrollBarEnabled(false);
 	m_scrollview->setBounceEnabled(true);
 
+	m_lastWxpPos = GlobalData::getWxbMapPos();
+
+	refreshNpcNode();
+
+	m_talkScroll = UIScroll::create(610.0f, 250);
+	m_talkScroll->setPosition(Vec2(360, 652));
+	addChild(m_talkScroll);
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
+	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.2f);
+	this->schedule(schedule_selector(NpcLayer::checkUpateNpc), 1.0f);
+	return true;
+}
+
+void NpcLayer::refreshNpcNode()
+{
+	MapData mdata = GlobalData::map_maps[m_addrstr];
 	int ncpsize = mdata.npcs.size();
+
+	m_scrollview->removeAllChildrenWithCleanup(true);
+
 	int itemheight = 153;
 	int innerheight = itemheight * ncpsize;
 	int contentheight = m_scrollview->getContentSize().height;
@@ -89,6 +118,7 @@ bool NpcLayer::init(std::string addrid)
 	}
 	else
 	{
+		hintdown->stopAllActions();
 		hintdown->setVisible(false);
 	}
 
@@ -140,14 +170,14 @@ bool NpcLayer::init(std::string addrid)
 		if (mdata.npcs[i].compare("n009") == 0)
 		{
 			talkbtn->setTitleText(CommonFuncs::gbk2utf("吃饭"));
-			talkbtn->setTag( 10 * i);
+			talkbtn->setTag(10 * i);
 			talkbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 			onFight->setTitleText(CommonFuncs::gbk2utf("睡觉"));
-			onFight->setTag(10*i+1);
+			onFight->setTag(10 * i + 1);
 			onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 			onExchange->setVisible(true);
 			onExchange->setTitleText(CommonFuncs::gbk2utf("喝酒"));
-			onExchange->setTag(10*i+2);
+			onExchange->setTag(10 * i + 2);
 			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
 		}
 		else if (mdata.npcs[i].compare("n092") == 0)
@@ -164,26 +194,20 @@ bool NpcLayer::init(std::string addrid)
 			onExchange->setVisible(false);
 	}
 
-	for (int i = 1; i >= 0;i--)
-		updatePlotUI(i);
-
-
-	m_talkScroll = UIScroll::create(610.0f, 250);
-	m_talkScroll->setPosition(Vec2(360, 652));
-	addChild(m_talkScroll);
-
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	for (int i = 1; i >= 0; i--)
 	{
-		return true;
-	};
+		updatePlotUI(i);
+	}
+}
 
-	listener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
-	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.2f);
-	return true;
+void NpcLayer::checkUpateNpc(float dt)
+{
+	if (m_lastWxpPos != GlobalData::getWxbMapPos())
+	{
+		refreshNpcNode();
+		g_maplayer->updataPlotMissionIcon(0);
+		m_lastWxpPos = GlobalData::getWxbMapPos();
+	}
 }
 
 void NpcLayer::onEnterTransitionDidFinish()
@@ -849,7 +873,7 @@ void NpcLayer::getWinRes(int type)
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]) && !GlobalData::tempHasgf(winres[i]))
+				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(winres[i]) && !GlobalData::tempHasGf_Equip(winres[i]))
 				{
 					isfind = true;
 					data.strid = gfdata.id;

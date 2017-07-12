@@ -135,7 +135,7 @@ bool GameScene::init()
 	
 	this->schedule(schedule_selector(GameScene::updata), 1.0f);
 	this->schedule(schedule_selector(GameScene::timerSaveData), 5.0f);
-	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
+	this->schedule(schedule_selector(GameScene::checkiflive), 0.1f);
 	
 	//处理制暖
 	std::string warmConfigStr = GlobalData::getMakeWarmConfig();
@@ -246,6 +246,8 @@ void GameScene::loadSaveHeroData()
 	GlobalData::loadResData();
 	//读取保存的角色属性数据
 	loadSavedHeroPropData();
+
+	getWxbMap();
 }
 
 void GameScene::loadSavedHeroPropData()
@@ -272,6 +274,21 @@ void GameScene::loadSavedHeroPropData()
 		{
 			sdata.slv = atoi(tmp2[7].c_str());//
 			sdata.tqu = atoi(tmp2[8].c_str());//
+		}
+
+		if (sdata.type == WEAPON || sdata.type == PROTECT_EQU)
+		{
+			std::vector<PackageData>::iterator it;
+			for (it = StorageRoom::map_storageData[sdata.type].begin(); it != StorageRoom::map_storageData[sdata.type].end();)
+			{
+				if (it->strid.compare(sdata.strid) == 0)
+				{
+					sdata.goodvalue += it->goodvalue;
+					it = StorageRoom::map_storageData[sdata.type].erase(it);
+				}
+				else
+					++it;
+			}
 		}
 		g_hero->setAtrByType((HeroAtrType)i, sdata);
 		//g_hero->set [sdata.type].push_back(sdata);
@@ -385,7 +402,7 @@ void GameScene::heroRevive()
 	GlobalData::g_gameStatus = GAMESTART;
 	if (g_maplayer != NULL && g_hero->getIsOut())
 		g_maplayer->heroResumeMoving();
-	this->schedule(schedule_selector(GameScene::checkiflive), 1.0f);
+	this->schedule(schedule_selector(GameScene::checkiflive), 0.1f);
 }
 
 void GameScene::delayShowOutScence(float dt)
@@ -396,6 +413,13 @@ void GameScene::delayShowOutScence(float dt)
 		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
 	}
+}
+
+void GameScene::getWxbMap()
+{
+	int pos = GameDataSave::getInstance()->getWxbMapPos();
+	GlobalData::setWxbMapPos(pos);
+	GlobalData::map_maps[wxbinmap[pos]].npcs.push_back("n012");
 }
 
 void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)

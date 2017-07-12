@@ -242,29 +242,41 @@ void Hero::revive()
 }
 
 //功法每种只能有一本，不能重复
-bool Hero::checkifHasGF(std::string gfid)
+bool Hero::checkifHasGF_Equip(std::string gfeid)
 {
 	//装备栏是否有
-	if ((getAtrByType(H_WG)->count > 0 && getAtrByType(H_WG)->strid.compare(gfid) == 0) || (getAtrByType(H_NG)->count > 0 && getAtrByType(H_NG)->strid.compare(gfid) == 0))
+	if ((getAtrByType(H_WG)->count > 0 && getAtrByType(H_WG)->strid.compare(gfeid) == 0) || (getAtrByType(H_NG)->count > 0 && getAtrByType(H_NG)->strid.compare(gfeid) == 0) || (getAtrByType(H_WEAPON)->count > 0 && getAtrByType(H_WEAPON)->strid.compare(gfeid) == 0) || (getAtrByType(H_ARMOR)->count > 0 && getAtrByType(H_ARMOR)->strid.compare(gfeid) == 0))
 		return true;
 	else
 	{
 		//背包中是否有
 		for (int i = 0; i < MyPackage::getSize(); i++)
 		{
-			if (MyPackage::vec_packages[i].strid.compare(gfid) == 0)
+			if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
 				return true;
 		}
 		//仓库中是否有
 		for (unsigned i = 0; i < StorageRoom::map_storageData[N_GONG].size(); i++)
 		{
-			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfid) == 0)
+			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfeid) == 0)
 				return true;
 		}
 
 		for (unsigned i = 0; i < StorageRoom::map_storageData[W_GONG].size(); i++)
 		{
-			if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfid) == 0)
+			if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfeid) == 0)
+				return true;
+		}
+
+		for (unsigned i = 0; i < StorageRoom::map_storageData[WEAPON].size(); i++)
+		{
+			if (StorageRoom::map_storageData[WEAPON][i].strid.compare(gfeid) == 0)
+				return true;
+		}
+
+		for (unsigned i = 0; i < StorageRoom::map_storageData[PROTECT_EQU].size(); i++)
+		{
+			if (StorageRoom::map_storageData[PROTECT_EQU][i].strid.compare(gfeid) == 0)
 				return true;
 		}
 	}
@@ -461,6 +473,7 @@ int Hero::getTotalDf()
 {
 	int adf = 0;
 	int ngdf = 0;
+	float slvdf = 0.0f;//强化等级加防
 	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
@@ -471,10 +484,12 @@ int Hero::getTotalDf()
 	{
 		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
+		int slv = g_hero->getAtrByType(H_ARMOR)->slv;
+		slvdf = adf * slv * 1.0f / 100.0f;
 	}
 	//防御属性
 	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
-
+	fdf += slvdf;
 	adf = int(fdf + 0.5f);
 	return adf;
 }
@@ -483,10 +498,13 @@ int Hero::getTotalAtck()
 {
 	int weaponAtk = 0;
 	int wgAtk = 0;
+	float slvAtk = 0.0f;//强化等级加攻
 	if (g_hero->getAtrByType(H_WEAPON)->count > 0 && g_hero->getAtrByType(H_WEAPON)->goodvalue > 0)
 	{
 		std::string strid = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAtk = GlobalData::map_equips[strid].atk;
+		int slv = g_hero->getAtrByType(H_WEAPON)->slv;
+		slvAtk = weaponAtk * slv * 1.0f / 100.0f;
 	}
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
@@ -504,7 +522,7 @@ int Hero::getTotalAtck()
 			fack += back;
 		}
 	}
-
+	fack += slvAtk;
 	int tatk = int(fack + 0.5f);
 	return tatk;
 }

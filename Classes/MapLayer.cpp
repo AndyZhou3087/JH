@@ -165,6 +165,13 @@ void MapLayer::showRobberFight(float dt)
 	g_gameLayer->addChild(FightLayer::create(m_addrname, "n001"), 5, "fightlayer");
 }
 
+void MapLayer::showJump(float dt)
+{
+	heroPauseMoving();
+
+	g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ONWAY_JUMP), 2);
+}
+
 void MapLayer::showMoveToDest()
 {
 	ismoving = true;
@@ -187,6 +194,16 @@ void MapLayer::showMoveToDest()
 	//		this->scheduleOnce(schedule_selector(MapLayer::showRobberFight), r1);
 	//	}
 	//}
+
+	if (GlobalData::map_maps[m_addrname].isCliff)
+	{
+		int sec = dt / (TIMESCALE * 8.0f);
+		int r = GlobalData::createRandomNum(100);
+		if (r < 50)
+		{
+			this->scheduleOnce(schedule_selector(MapLayer::showJump), sec - 0.5f);
+		}
+	}
 }
 
 void MapLayer::Arrive()

@@ -68,6 +68,10 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	if (pdata->type == WEAPON || pdata->type == PROTECT_EQU)
 	{
 		qu = GlobalData::map_equips[pdata->strid].qu;
+
+		cocos2d::ui::Text* slvlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvlbl");
+		std::string slvstr = StringUtils::format("+%d", pdata->slv);
+		slvlbl->setString(slvstr);
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{

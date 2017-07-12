@@ -48,6 +48,7 @@ bool GlobalData::isPopingScene = false;
 int GlobalData::myGlodCount = 0;
 
 GameStatus GlobalData::g_gameStatus = GAMEOVER;
+int GlobalData::wxbmapos = 0;
 
 GlobalData::GlobalData()
 {
@@ -286,6 +287,10 @@ void GlobalData::loadMapJsonData()
 		v = item["desc"];
 		data.desc = v.GetString();
 
+		v = item["qy"];
+		int iscliff = atoi(v.GetString());
+		data.isCliff = iscliff == 1 ? true : false;
+
 		map_maps[data.strid] = data;
 
 	}
@@ -467,6 +472,13 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_exp.push_back(v[j].GetInt());
 		}
+
+		v = vitem["crit"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_cirt.push_back(v[j].GetDouble());
+		}
+
 		data.type = W_GONG + 1;
 		v = vitem["qu"];
 		data.qu = atoi(v.GetString());
@@ -500,6 +512,11 @@ void GlobalData::loadWG_NGJsonData()
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
 			data.vec_exp.push_back(v[j].GetInt());
+		}
+		v = vitem["avoid"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_dodge.push_back(v[j].GetDouble());
 		}
 		data.type = N_GONG + 1;
 		data.extype = 0;
@@ -1069,10 +1086,8 @@ void GlobalData::loadGfskillData()
 	}
 }
 
-bool GlobalData::tempHasgf(std::string strid)
+bool GlobalData::tempHasGf_Equip(std::string strid)
 {
-	std::vector<std::string> tempResId;
-
 	std::map<std::string, MapData>::iterator it;
 
 	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
@@ -1088,15 +1103,12 @@ bool GlobalData::tempHasgf(std::string strid)
 			{
 				std::vector<std::string> tmp;
 				CommonFuncs::split(vec_retstr[i], tmp, "-");
-				tempResId.push_back(tmp[0]);
+				std::string tmpstrid = tmp[0];
+				int tmptype = atoi(tmp[1].c_str());
+				if ((tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU) && strid.compare(tmpstrid) == 0)
+					return true;
 			}
 		}
-	}
-
-	for (unsigned int i = 0; i < tempResId.size(); i++)
-	{
-		if (tempResId[i].compare(strid) == 0)
-			return true;
 	}
 	return false;
 }
@@ -1130,6 +1142,18 @@ std::string GlobalData::getExgCfgData()
 void GlobalData::setExgCfgData(std::string strval)
 {
 	GameDataSave::getInstance()->setExgCfgData(strval);
+}
+
+void GlobalData::setWxbMapPos(int pos)
+{
+	wxbmapos = pos;
+	GameDataSave::getInstance()->setWxbMapPos(wxbmapos);
+}
+
+
+int GlobalData::getWxbMapPos()
+{
+	return wxbmapos;
 }
 
 int GlobalData::getMyGoldCount()

@@ -175,7 +175,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 					pdata.lv = 0;
 					pdata.type = gfdata.type - 1;
 					updateDefaultStorage(pdata);
-					if (!g_hero->checkifHasGF(payRes[i]) && !GlobalData::tempHasgf(payRes[i]))
+					if (!g_hero->checkifHasGF_Equip(payRes[i]) && !GlobalData::tempHasGf_Equip(payRes[i]))
 					{
 						StorageRoom::add(pdata);
 						break;

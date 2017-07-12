@@ -42,6 +42,9 @@ private:
 	void checkWordLblColor(std::string wordstr);
 	void fastShowWord();
 	void onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void checkUpateNpc(float dt);
+	void refreshNpcNode();
 	/****************************
 	新手引导
 	*****************************/
@@ -70,6 +73,7 @@ private:
 	std::vector<std::string> vec_wordstr;
 	int m_wordindex;
 	int m_plotindex;
+	int m_lastWxpPos;
 };
 #endif
 

@@ -46,9 +46,6 @@ private:
 	cocos2d::ui::ImageView* spirit;
 	cocos2d::ui::ImageView* life;
 
-private:
-	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void updataUI(float dt);
 	int m_lastinnerinjury;
 	int m_lastoutinjury;
 	int m_lasthunger;
@@ -58,6 +55,11 @@ private:
 	EDAYNIGTH m_lastDayOrNigth;
 	int m_lastpastLiveDay;
 	bool isHunter;
+
+private:
+	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void updataUI(float dt);
+	void checkWxpMap();
 };
 #endif
 

@@ -68,6 +68,7 @@ typedef struct
 	char cname[32];//地点显示名字
 	char tpngname[10];//地点类型
 	std::string desc;//地点描述
+	bool isCliff;//是否遇到悬崖
 }MapData;
 
 /****************************
@@ -116,6 +117,8 @@ typedef struct
 	int maxlv;
 	std::vector<int> vec_bns;//外功--加攻或者内功--加防
 	std::vector<int> vec_exp;
+	std::vector<float> vec_cirt;
+	std::vector<float> vec_dodge;
 	int type;//类型StorageType
 	int qu;//品级
 	int extype;//1：棍 2：刀 3：剑
@@ -431,10 +434,10 @@ public:
 	static void loadGfskillData();
 
 	/****************************
-	临时存放地是否有功法
+	临时存放地是否有功法，装备
 	@return false:没有，yes：有
 	*****************************/
-	static bool tempHasgf(std::string strid);
+	static bool tempHasGf_Equip(std::string strid);
 
 	/****************************
 	获取分享的日期，只记录天数（一年中的天数）
@@ -469,6 +472,18 @@ public:
 	@para 交易数据1-xx-xx-xx
 	*****************************/
 	static void setExgCfgData(std::string strval);
+
+	/****************************
+	设置韦小宝随机地图位置
+	@para 地图位置3个客栈随机
+	*****************************/
+	static void setWxbMapPos(int pos);
+
+	/****************************
+	获取韦小宝随机地图位置
+	@para 地图位置
+	*****************************/
+	static int getWxbMapPos();
 
 	/****************************
 	获取金元宝数
@@ -522,6 +537,7 @@ private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
 	static int myGlodCount;
+	static int wxbmapos;
 
 	static std::vector<std::string> vec_saveids;//存档的id
     

@@ -145,6 +145,8 @@ private:
 	std::vector<cocos2d::ui::Button*> vec_categoryBtn;//锻造台分类按钮
 	std::vector<BuildActionData> vec_buildAcitonData;//建筑物操作的数据
 	int lastCategoryindex;
+	bool isDraging;
+	Vec2 startPos;
 };
 #endif
 

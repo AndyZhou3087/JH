@@ -321,6 +321,7 @@ void TopBar::updataUI(float dt)
 	{
 		m_lastpastLiveDay = g_nature->getPastDays();
 
+		checkWxpMap();
 		if (g_nature->getReason() == Autumn && !g_nature->getIsShowInsect())
 		{
 			int r = GlobalData::createRandomNum(100);
@@ -522,4 +523,21 @@ void TopBar::showNewerGuide(int step)
 		if (homelayer != NULL)
 			homelayer->showNewerGuide(step);
 	}
+}
+
+void TopBar::checkWxpMap()
+{
+	std::vector<std::string>::iterator it;
+	for (it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.begin(); it != GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.end();)
+	{
+		if (it->compare("n012") == 0)
+			it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.erase(it);
+		else
+			++it;
+	}
+	
+
+	int rpos = GlobalData::createRandomNum(sizeof(wxbinmap) / sizeof(wxbinmap[0]));
+	GlobalData::setWxbMapPos(rpos);
+	GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
 }

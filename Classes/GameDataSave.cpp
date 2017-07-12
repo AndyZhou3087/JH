@@ -419,6 +419,17 @@ void GameDataSave::setExgCfgData(std::string strval)
 	saveStringDataByKey(addUIDString("exgcfg"), strval);
 }
 
+void GameDataSave::setWxbMapPos(int val)
+{
+	saveIntDataByKey(addUIDString("wxbmap"), val);
+}
+
+
+int GameDataSave::getWxbMapPos()
+{
+	return loadIntDataByKey(addUIDString("wxbmap"), 0);
+}
+
 int GameDataSave::getGoldCount()
 {
 	return loadIntDataByKey("gold", 0);

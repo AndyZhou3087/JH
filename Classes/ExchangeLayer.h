@@ -29,11 +29,14 @@ private:
 
 	void checkValue();
 	void randExchgRes(std::vector<std::string> &vec_exchgres);
+
+	void delayShowExgData(float dt);
 private:
 	cocos2d::ui::ScrollView* m_npcGoodsSrollView;
 	cocos2d::ui::ScrollView* m_myGoodsSrollView;
 	cocos2d::ui::Widget* m_exgbtn;
 	cocos2d::ui::Text* m_npcWordLbl;
+	cocos2d::ui::Text* m_desc;
 	int lastMyGoodsSrollViewHeight;
 	int lastNpcGoodsSrollViewHeight;
 	std::string m_npcid;

@@ -16,8 +16,11 @@
           <FilePathData Path="pauseLayer.csd" />
           <FilePathData Path="repairLayer.csd" />
           <FilePathData Path="resDetailsLayer.csd" />
+          <FilePathData Path="bookshelfLayer.csd" />
+          <FilePathData Path="bookDetailsLayer.csd" />
+          <FilePathData Path="exgLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="resDetailsLayer.csd" />
+        <ActiveDocument Path="uipacker.csi" />
       </Value>
     </Item>
   </Properties>

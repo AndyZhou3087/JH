@@ -64,7 +64,7 @@ public:
 	void heroResumeMoving();
 
 	/****************************
-	恢复赶路
+	山贼战斗
 	*****************************/
 	void showRobberFight(float dt);
 
@@ -72,6 +72,11 @@ public:
 	显示通过动画
 	*****************************/
 	void showEndAnim(float dt);
+
+	/****************************
+	跳崖界面
+	*****************************/
+	void showJump(float dt);
 
 private:
 

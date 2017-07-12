@@ -5,6 +5,7 @@
 #include "GlobalData.h"
 #include "MyPackage.h"
 #include "StorageRoom.h"
+#include "GameScene.h"
 
 ActivitScene::ActivitScene()
 {
@@ -158,9 +159,171 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		}
 
 	}
+	else if (imagepath.compare("images/findtreasure.jpg") == 0)
+	{
+		int rj = GlobalData::createRandomNum(100);
+		if (rj < 50)
+		{
+			image->loadTexture("images/jumpdeath.jpg", cocos2d::ui::TextureResType::LOCAL);
+			text->setString(CommonFuncs::gbk2utf("跳崖摔死"));
+			g_hero->setLifeValue(0);
+			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！根本不是人类所能承受的！！！你摔死了！！！"));
+			distime = 4.0f;
+		}
+		else
+		{
+			int rf = GlobalData::createRandomNum(100);
+			if (rf < 20)
+			{
+				image->loadTexture("images/jumpnoting.jpg", cocos2d::ui::TextureResType::LOCAL);
+				text->setString(CommonFuncs::gbk2utf("一无所获"));
+				tips->setString(CommonFuncs::gbk2utf("这次白跳了，什么都没有，发光的只不过时一个破石头在反光。"));
+				distime = 3.0f;
+			}
+			else
+			{
+				this->scheduleOnce(schedule_selector(ActivitScene::getRndRes), 0.2f);
+				//text->setString(CommonFuncs::gbk2utf("机缘巧合"));
+				tips->setString(CommonFuncs::gbk2utf("果然没有白白冒险，没想到这悬崖下别有洞天！你获得了以下物品："));
+				tips->setPositionY(text->getPositionY() + 20);
+				return true;
+			}
+		}
+	}
 
 	this->scheduleOnce(schedule_selector(ActivitScene::popself), distime);
 	return true;
+}
+
+void ActivitScene::getRndRes(float dt)
+{
+	std::vector<std::string> vec_tempgf;
+	std::vector<std::string> vec_tempequip;
+	std::vector<PackageData> vec_randData;
+	std::map<std::string, WG_NGData>::iterator it;
+	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+	{
+		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		if (!g_hero->checkifHasGF_Equip(gfdata.id) && gfdata.qu >= 4)
+			vec_tempgf.push_back(gfdata.id);
+	}
+
+	std::map<std::string, EquipData>::iterator ite;
+	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+	{
+		EquipData edata = GlobalData::map_equips[ite->first];
+		if (!g_hero->checkifHasGF_Equip(edata.id) && edata.qu >= 4)
+			vec_tempequip.push_back(edata.id);
+	}
+	std::vector<std::string> vec_randRes;
+	int r = GlobalData::createRandomNum(100);
+	if (r < 40)
+	{
+		for (unsigned int i = 0; i < vec_tempgf.size(); i++)
+		{
+			if (!GlobalData::tempHasGf_Equip(vec_tempgf[i]))
+			{
+				vec_randRes.push_back(vec_tempgf[i]);
+			}
+		}
+		if (vec_randRes.size() > 0)
+		{
+			r = GlobalData::createRandomNum(vec_randRes.size());
+			PackageData data;
+			data.strid = vec_randRes[r];
+			data.type = GlobalData::map_wgngs[data.strid].type - 1;
+			data.count = 1;
+			vec_randData.push_back(data);
+		}
+	}
+
+	vec_randRes.clear();
+
+	int r1 = GlobalData::createRandomNum(100);
+	if (r1 < 40)
+	{
+		for (unsigned int i = 0; i < vec_tempequip.size(); i++)
+		{
+			if (!GlobalData::tempHasGf_Equip(vec_tempequip[i]))
+				vec_randRes.push_back(vec_tempequip[i]);
+		}
+		if (vec_randRes.size() > 0)
+		{
+			r1 = GlobalData::createRandomNum(vec_randRes.size());
+
+			PackageData data;
+			data.strid = vec_randRes[r];
+			data.type = GlobalData::map_wgngs[data.strid].type - 1;
+			data.count = 1;
+			vec_randData.push_back(data);
+		}
+	}
+
+	vec_randRes.clear();
+
+	std::vector<std::string> vec_resid;
+	for (int i = 1; i <= 23; i++)
+	{
+		std::string strid = StringUtils::format("%d", i);
+		vec_randRes.push_back(strid);
+	}
+	vec_randRes.push_back("80");
+
+	srand(GlobalData::getSysSecTime());
+	std::random_shuffle(vec_randRes.begin(), vec_randRes.end());
+	int r3 = GlobalData::createRandomNum(3) + 1;
+	for (int i = 0; i < r3; i++)
+	{
+		PackageData data;
+		data.strid = vec_randRes[i];
+		data.type = getResType(data.strid);
+		data.count = 10;
+		vec_randData.push_back(data);
+	}
+
+	int startx[] = { 360, 300, 240, 180, 120 };
+	int spacex[] = { 120, 120, 120, 120, 120 };
+
+	int datasize = vec_randData.size();
+	for (int i = 0; i < datasize; i++)
+	{
+		std::string boxstr = "ui/buildsmall.png";
+		PackageData tmpdata = vec_randData[i];
+		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+		}
+		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
+		{
+			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+		}
+
+		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
+		box->setPosition(Vec2(startx[datasize - 1] + i*spacex[datasize - 1], 130));
+		this->addChild(box);
+
+		std::string str = StringUtils::format("ui/%s.png", tmpdata.strid.c_str());
+		Sprite* res = Sprite::createWithSpriteFrameName(str);
+		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().width / 2));
+		box->addChild(res);
+		box->setScale(0.6f);
+
+		Label * namelbl = Label::createWithTTF(GlobalData::map_allResource[tmpdata.strid].cname, "fonts/STXINGKA.TTF", 25);
+		namelbl->setColor(Color3B(255, 255, 255));
+		namelbl->setPosition(Vec2(box->getPositionX(), 75));
+		this->addChild(namelbl);
+
+		std::string strcount = StringUtils::format("x%d", tmpdata.count);
+		Label * coutlbl = Label::createWithSystemFont(strcount, "", 25);
+		coutlbl->setAnchorPoint(Vec2(0, 0.5f));
+		coutlbl->setColor(Color3B(255, 255, 255));
+		coutlbl->setPosition(Vec2(box->getPositionX() + 40, 100));
+		this->addChild(coutlbl);
+
+		StorageRoom::add(tmpdata);
+	}
+
+	this->scheduleOnce(schedule_selector(ActivitScene::popself), 4.0f);
 }
 
 ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
@@ -181,5 +344,37 @@ ActivitScene* ActivitScene::create(std::string imagepath, std::string content)
 void ActivitScene::popself(float dt)
 {
 	Director::getInstance()->popScene();
+}
+
+int ActivitScene::getResType(std::string strid)
+{
+	bool isfind = false;
+	std::map<std::string, std::vector<BuildActionData>>::iterator it;
+	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+	{
+		std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
+
+		for (unsigned int m = 0; m < vec_bactData.size(); m++)
+		{
+			BuildActionData bdata = vec_bactData[m];
+			if (strid.compare(bdata.icon) == 0)
+			{
+				isfind = true;
+				return bdata.type - 1;
+			}
+		}
+	}
+	if (!isfind)
+	{
+		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
+		{
+			ResData rdata = GlobalData::vec_resData[n];
+			if (strid.compare(rdata.strid) == 0)
+			{
+				return rdata.type - 1;
+			}
+		}
+	}
+	return -1;
 }
 

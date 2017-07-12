@@ -79,11 +79,32 @@ void StorageRoom::loadStorageData()
 
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());
+
 		if (tmp2.size() >= 9)
 		{
 			sdata.slv = atoi(tmp2[7].c_str());
 			sdata.tqu = atoi(tmp2[8].c_str());
 		}
+
+		bool ishassame = false;
+		if (sdata.type == WEAPON || sdata.type == PROTECT_EQU)
+		{
+			std::vector<PackageData>::iterator it;
+			for (it = map_storageData[sdata.type].begin(); it != map_storageData[sdata.type].end(); it++)
+			{
+				if (it->strid.compare(sdata.strid) == 0)
+				{
+					it->goodvalue += sdata.goodvalue;
+					if (it->goodvalue > 1000)
+						it->goodvalue = 1000;
+					ishassame = true;
+				}
+			}
+		}
+
+		if (ishassame)
+			continue;
+
 		map_storageData[sdata.type].push_back(sdata);
 	}
 

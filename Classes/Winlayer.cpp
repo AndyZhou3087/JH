@@ -240,7 +240,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 				for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 				{
 					WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-					if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF(winres[i]) && !GlobalData::tempHasgf(winres[i]))
+					if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(winres[i]) && !GlobalData::tempHasGf_Equip(winres[i]))
 					{
 						isfind = true;
 						data.strid = gfdata.id;

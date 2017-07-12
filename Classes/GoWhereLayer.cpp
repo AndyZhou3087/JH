@@ -11,6 +11,7 @@
 #include "SoundManager.h"
 #include "GameDataSave.h"
 #include "NewerGuideLayer.h"
+#include "ActivitScene.h"
 
 GoWhereLayer::GoWhereLayer()
 {
@@ -104,7 +105,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 		fast->setVisible(true);
 		fasttitle->setVisible(true);
 	}
-	else
+	else if (type == ARRIVE)
 	{
 		closebtn->setVisible(false);
 		m_gobtn->setVisible(false);
@@ -117,6 +118,21 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 			m_stbtn->setVisible(false);
 			m_enterbtn->setPositionX(360);
 		}
+	}
+	else if (type == ONWAY_JUMP)
+	{
+		closebtn->setVisible(true);
+		closebtn->setTitleText(CommonFuncs::gbk2utf("不跳"));
+		m_gobtn->setVisible(false);
+		m_stbtn->setVisible(false);
+		m_enterbtn->setVisible(true);
+		m_enterbtn->setTitleText(CommonFuncs::gbk2utf("跳入"));
+		fast->setVisible(false);
+		fasttitle->setVisible(false);
+		title->setString(CommonFuncs::gbk2utf("奇遇"));
+		desc->setString(CommonFuncs::gbk2utf("发现悬崖下面紫光闪耀，好像藏着什么好东西，你想下去一探究竟，少侠还请三思，崖下白骨露野，跳下去多半会一命呜呼！"));
+		std::string str = StringUtils::format("images/%s.jpg", "t008");
+		typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 	}
 	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -137,6 +153,8 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 void GoWhereLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
+	if (m_type == ONWAY_JUMP)
+		g_maplayer->heroPauseMoving();
 }
 
 void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -144,6 +162,10 @@ void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		if (m_type == ONWAY_JUMP)
+		{
+			g_maplayer->heroResumeMoving();
+		}
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -187,14 +209,27 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			if (g_gameLayer != NULL)
 				g_gameLayer->addChild(HomeHill::create(), 2, "homehill");
 		}
-		else//进入NPC
+		else
 		{
-			if (g_gameLayer != NULL)
-				g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2, "npclayer");
-			std::string mapname = GlobalData::map_maps[m_addrstr].cname;
-			if (mapname.find(CommonFuncs::gbk2utf("客栈")) != std::string::npos)
+			if (m_type == ONWAY_JUMP)
 			{
-				g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，喝酒二两银子"), 25, Color3B(204, 4, 4));
+				Scene* activityScene = ActivitScene::createScene("images/findtreasure.jpg", CommonFuncs::gbk2utf(""));
+				if (activityScene != NULL)
+				{
+					Director::getInstance()->pushScene(activityScene);
+					this->removeFromParentAndCleanup(true);
+				}
+				return;
+			}
+			else//进入NPC
+			{
+				if (g_gameLayer != NULL)
+					g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2, "npclayer");
+				std::string mapname = GlobalData::map_maps[m_addrstr].cname;
+				if (mapname.find(CommonFuncs::gbk2utf("客栈")) != std::string::npos)
+				{
+					g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，喝酒二两银子"), 25, Color3B(204, 4, 4));
+				}
 			}
 		}
 		this->removeFromParentAndCleanup(true);

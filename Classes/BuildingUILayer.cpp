@@ -215,6 +215,7 @@ void BuildingUILayer::loadActionUi()
 		/*建筑物操作的显示ICON*/
 		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
 		icon->setTag(10000 * (i + 1));//点击按钮TAG来区分10000以上 
+		icon->setSwallowTouches(false);
 
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		actbtn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onAction, this));
@@ -624,6 +625,7 @@ void BuildingUILayer::updataActionRes()
 						resitem->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
 						resitem->setTag((i + 1) * 100 + m); //点击按钮TAG来区分100以上
 						resitem->setVisible(true);
+						resitem->setSwallowTouches(false);
 
 						str = StringUtils::format("ui/%d.png", restypecount / 1000);//资源图标
 						Sprite* res = Sprite::createWithSpriteFrameName(str);
@@ -670,31 +672,46 @@ void BuildingUILayer::updataActionRes()
 
 void BuildingUILayer::onResDetails(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	if (type == ui::Widget::TouchEventType::ENDED)
+	Node* node = (Node*)pSender;
+	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		isDraging = false;
+		startPos = node->convertToWorldSpace(this->getParent()->getPosition());
+	}
+	else if (type == ui::Widget::TouchEventType::MOVED)
+	{
+		Vec2 pos = node->convertToWorldSpace(this->getParent()->getPosition());
+		if (fabsf(pos.y - startPos.y) > 20)
+			isDraging = true;
+	}
+	else if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		if (!isDraging)
+		{
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
-		Node* node = (Node*)pSender;
-		int tag = node->getTag();
-		std::string strid;
-		int intresid = 0;
-		if (tag >= 100 && tag < 10000)//小图标资源
-		{
-			intresid = vec_buildAcitonData[tag / 100 - 1].res[tag % 100];
-			strid = StringUtils::format("%d", intresid / 1000);
-	
+			Node* node = (Node*)pSender;
+			int tag = node->getTag();
+			std::string strid;
+			int intresid = 0;
+			if (tag >= 100 && tag < 10000)//小图标资源
+			{
+				intresid = vec_buildAcitonData[tag / 100 - 1].res[tag % 100];
+				strid = StringUtils::format("%d", intresid / 1000);
+
+			}
+			else if (tag >= 10000)//需要合成的
+			{
+				strid = vec_buildAcitonData[tag / 10000 - 1].icon;
+			}
+			else//建筑物需要的资源
+			{
+				intresid = m_build->data.Res[m_build->data.level][tag];
+				strid = StringUtils::format("%d", intresid / 1000);
+			}
+			ResDetailsLayer::whereClick = 1;
+			this->addChild(ResDetailsLayer::createByResId(strid));
 		}
-		else if (tag >= 10000)//需要合成的
-		{
-			strid = vec_buildAcitonData[tag / 10000 - 1].icon;
-		}
-		else//建筑物需要的资源
-		{
-			intresid = m_build->data.Res[m_build->data.level][tag];
-			strid = StringUtils::format("%d", intresid / 1000);
-		}
-		ResDetailsLayer::whereClick = 1;
-		this->addChild(ResDetailsLayer::createByResId(strid));
 	}
 }
 

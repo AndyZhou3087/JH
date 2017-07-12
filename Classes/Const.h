@@ -71,4 +71,6 @@ static std::string tipswords[] = { "精神的愉悦可以让你的做任何事�
 static std::string exersiceDesc = "建议退出游戏前闭关，闭关期间无法进行其它行为（拥有分身符可同时）。闭关时间为现实时间，请选择合理时间进行闭关！";
 static std::string qudesc[] = { "入门", "一流", "上乘", "传世", "绝世" };
 static cocos2d::Color4B qucolor[] = { cocos2d::Color4B(76, 54, 51, 255), cocos2d::Color4B(27, 141, 0, 255), cocos2d::Color4B(27, 84, 155, 255), cocos2d::Color4B(171, 34, 210, 255), cocos2d::Color4B(216, 151, 82, 255) };
+static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"}; 
+
 #endif // _H_CONST_H_

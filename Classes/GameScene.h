@@ -82,6 +82,11 @@ private:
 	定时保存数据
 	*****************************/
 	void timerSaveData(float dt);
+
+	/****************************
+	韦小宝地图位置，随机生成3个客栈
+	*****************************/
+	void getWxbMap();
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据

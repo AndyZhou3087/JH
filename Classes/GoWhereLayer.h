@@ -15,7 +15,8 @@ USING_NS_CC;
 typedef enum
 {
 	GOWHERE = 0,//准备去
-	ARRIVE//到达
+	ARRIVE,//到达
+	ONWAY_JUMP//中途奇遇（跳崖）
 }WHERELAYER_TYPE;
 
 class GoWhereLayer :public Layer
