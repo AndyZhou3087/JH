@@ -375,6 +375,5 @@ int ActivitScene::getResType(std::string strid)
 			}
 		}
 	}
-	return -1;
+	return 0;
 }
-
