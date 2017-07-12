@@ -6,9 +6,11 @@
 #include "SettingLayer.h"
 #include "SoundManager.h"
 #include "SelectSaveLayer.h"
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
+
 USING_NS_CC;
 
 StartScene::StartScene()

@@ -10,6 +10,7 @@
 #include "MBProgressHUD.h"
 #import <UShareUI/UShareUI.h>
 #include "GlobalData.h"
+#import "LZKeychain.h"
 
 const char * getuuid()
 {
@@ -142,3 +143,10 @@ void UMShare()
         // 根据获取的platformType确定所选平台进行下一步操作
     }];
 }
+
+const char * getDeviceIDInKeychain()
+{
+    NSString * uuid = [LZKeychain getDeviceIDInKeychain];
+    return [uuid UTF8String];
+}
+
