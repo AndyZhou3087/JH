@@ -161,7 +161,7 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		wherelbl->setMaxLineWidth(350);
 		wherelbl->setString(wherestr);
 		wherelbl->setColor(Color3B(0, 0, 0));
-		wherelbl->setPosition(Vec2(250, 512));
+		wherelbl->setPosition(m_csbnode->getChildByName("where")->getPosition());
 		m_csbnode->addChild(wherelbl);
 		//NPC名称颜色 红色
 		std::map<std::string, NpcData>::iterator it;

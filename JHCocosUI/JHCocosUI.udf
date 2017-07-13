@@ -16,6 +16,7 @@
           <FilePathData Path="pauseLayer.csd" />
           <FilePathData Path="repairLayer.csd" />
           <FilePathData Path="resDetailsLayer.csd" />
+          <FilePathData Path="bookDetailsLayer.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="resDetailsLayer.csd" />
       </Value>

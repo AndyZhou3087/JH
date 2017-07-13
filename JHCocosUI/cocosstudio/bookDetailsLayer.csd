@@ -150,7 +150,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="status" ActionTag="-2122048772" Tag="84" IconVisible="False" LeftMargin="203.9101" RightMargin="441.0898" TopMargin="755.8921" BottomMargin="497.1079" FontSize="25" LabelText="未拥有" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="status" ActionTag="-2122048772" Tag="84" IconVisible="False" LeftMargin="203.9101" RightMargin="441.0899" TopMargin="755.8921" BottomMargin="497.1079" FontSize="25" LabelText="未拥有" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="75.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="203.9101" Y="510.6079" />

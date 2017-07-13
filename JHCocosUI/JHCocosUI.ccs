@@ -434,6 +434,7 @@
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
         <Project Name="comfirmSaveLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
+        <Project Name="divedeLayer.csd" Type="Layer" />
         <Project Name="exerciseCancelLayer.csd" Type="Layer" />
         <Project Name="exerciseDoneLayer.csd" Type="Layer" />
         <Project Name="exgLayer.csd" Type="Layer" />
@@ -470,7 +471,6 @@
         <PlistInfo Name="uipacker.csi" Type="Plist" />
         <Project Name="unlockLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="divedeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

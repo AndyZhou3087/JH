@@ -90,10 +90,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="atkdftext" ActionTag="1602764032" Tag="24" IconVisible="False" LeftMargin="359.9999" RightMargin="360.0001" TopMargin="612.0475" BottomMargin="667.9525" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="atkdftext" ActionTag="1602764032" Tag="24" IconVisible="False" LeftMargin="359.9999" RightMargin="360.0001" TopMargin="612.0500" BottomMargin="667.9500" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="359.9999" Y="667.9525" />
+            <Position X="359.9999" Y="667.9500" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5218" />
@@ -187,6 +187,18 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5218" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="slvatk" ActionTag="-602568148" VisibleForFrame="False" Tag="35" IconVisible="False" LeftMargin="410.0000" RightMargin="310.0000" TopMargin="612.0000" BottomMargin="668.0000" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="410.0000" Y="668.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="216" G="151" B="82" />
+            <PrePosition X="0.5694" Y="0.5219" />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

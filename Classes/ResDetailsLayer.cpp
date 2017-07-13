@@ -100,6 +100,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	cocos2d::ui::Text* crittext = (cocos2d::ui::Text*)m_csbnode->getChildByName("crittext");
 
 	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
+	cocos2d::ui::Text* slvatk = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvatk");
+
 	int count = StorageRoom::getCountById(pdata->strid);
 
 	if (whereClick == 1)
@@ -122,16 +124,51 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	{
 		countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
 		std::string tmpstr;
+		std::string sstr;
 		if (pdata->type == WEAPON)
 		{
-			tmpstr = StringUtils::format("攻击力增加%d", GlobalData::map_equips[pdata->strid].atk);
+			int eatk = GlobalData::map_equips[pdata->strid].atk;
+			tmpstr = StringUtils::format("攻击力增加%d", eatk);
+
+			int slv = 0;
+			for (unsigned i = 0; i < StorageRoom::map_storageData[WEAPON].size(); i++)
+			{
+				if (StorageRoom::map_storageData[WEAPON][i].strid.compare(pdata->strid) == 0)
+				{
+					slv = StorageRoom::map_storageData[WEAPON][i].slv;
+					break;
+				}
+			}
+			int satk = eatk * slv * 1.0f * 2 / 100.0f;
+
+			sstr = StringUtils::format("+%d", satk);
+			slvatk->setVisible(true);
 		}
 		else if (pdata->type == PROTECT_EQU)
 		{
-			tmpstr = StringUtils::format("防御力增加%d", GlobalData::map_equips[pdata->strid].df);
+			int pdf = GlobalData::map_equips[pdata->strid].df;
+			tmpstr = StringUtils::format("防御力增加%d", pdf);
+
+			int slv = 0;
+			for (unsigned i = 0; i < StorageRoom::map_storageData[PROTECT_EQU].size(); i++)
+			{
+				if (StorageRoom::map_storageData[PROTECT_EQU][i].strid.compare(pdata->strid) == 0)
+				{
+					slv = StorageRoom::map_storageData[PROTECT_EQU][i].slv;
+					break;
+				}
+			}
+			int sdf = pdf * slv * 1.0f * 2 / 100.0f;
+
+			sstr = StringUtils::format("+%d", sdf);
+			slvatk->setVisible(true);
 		}
 		if (tmpstr.length() > 0)
 			atkdftext->setString(CommonFuncs::gbk2utf(tmpstr.c_str()));
+
+		slvatk->setPositionX(atkdftext->getPositionX() + atkdftext->getContentSize().width/2 + 5);
+		slvatk->setString(sstr);
+			
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{

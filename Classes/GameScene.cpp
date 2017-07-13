@@ -281,7 +281,7 @@ void GameScene::loadSavedHeroPropData()
 			std::vector<PackageData>::iterator it;
 			for (it = StorageRoom::map_storageData[sdata.type].begin(); it != StorageRoom::map_storageData[sdata.type].end();)
 			{
-				if (it->strid.compare(sdata.strid) == 0)
+				if (it->strid.compare(sdata.strid) == 0 && sdata.count > 0)
 				{
 					sdata.goodvalue += it->goodvalue;
 					it = StorageRoom::map_storageData[sdata.type].erase(it);
