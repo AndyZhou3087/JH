@@ -296,6 +296,10 @@ void RepairLayer::onRepairItem(cocos2d::Ref* pSender)
 			resIsEnough = false;
 			needResCountLbl[resImgStartIndex + i]->setTextColor(Color4B(204, 4, 5, 255));
 		}
+		else
+		{
+			needResCountLbl[resImgStartIndex + i]->setTextColor(Color4B(255, 255, 255, 255));
+		}
 		needResCountLbl[resImgStartIndex + i]->setString(str);
 	}
 	m_actionBtn->setEnabled(true);

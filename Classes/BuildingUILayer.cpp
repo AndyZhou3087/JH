@@ -549,6 +549,12 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 		if (m_build->data.level < m_build->data.maxlevel)
 			buildbtn->setEnabled(true);
 
+		int stype = vec_buildAcitonData.at(type - ACTION).type - 1;
+		if (stype == WEAPON || stype == PROTECT_EQU)
+		{
+			vec_actionbtn[type - ACTION]->setTitleText(CommonFuncs::gbk2utf("分解"));
+		}
+
 		vec_actionbar[type - ACTION]->setPercent(0);
 		std::string strid = vec_buildAcitonData.at(type - ACTION).icon;
 		//是否是产出新的物品，（睡觉和暖炉不会产出新的物品 icon以“0-”开头，其他建筑物的操作或产出新的物品，eg:制作烤肉）
