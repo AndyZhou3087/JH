@@ -493,7 +493,7 @@ void ExchangeLayer::checkValue()
 	for (unsigned int i = 0; i < npcExgData.size(); i++)
 	{
 		std::string resid = npcExgData[i].strid;
-		int val = GlobalData::map_allResource[resid].val;
+		int val = GlobalData::map_allResource[resid].val * npcExgData[i].count;
 		npcval += val;
 	}
 
