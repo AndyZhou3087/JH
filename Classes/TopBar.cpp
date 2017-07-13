@@ -8,6 +8,7 @@
 #include "Const.h"
 #include "ActivitScene.h"
 #include "HomeLayer.h"
+#include "MapLayer.h"
 
 TopBar::TopBar()
 {
@@ -551,6 +552,8 @@ void TopBar::checkWxpMap()
 	if (vec_map.size() > 0)
 	{
 		int rpos = GlobalData::createRandomNum(siez);
+		if (GlobalData::getWxbMapPos() != rpos)
+			g_maplayer->updataPlotMissionIcon(0);
 		GlobalData::setWxbMapPos(rpos);
 		GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
 	}

@@ -311,6 +311,14 @@ void MapLayer::showUnlockLayer(float dt)
 	AnalyticUtil::onEvent(unlockstr.c_str());
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	this->scheduleOnce(schedule_selector(MapLayer::delayShowComments), 2.0f);
+#endif
+
+}
+
+void MapLayer::delayShowComments(float dt)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	if (!GlobalData::getNoComments())
 		alterView();
 #endif

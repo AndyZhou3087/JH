@@ -139,11 +139,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		{
 			g_maplayer->updataPlotMissionIcon(plottype);
 			if (unlockchapter > 0 && plottype == 0 && unlockchapter <= MAXCHAPTER)
-				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 1.0f);
 
 			if (plotdata->dnpc.compare("n089") == 0)
 			{
-				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.0f);
+				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.5f);
 			}
 		}
 	}

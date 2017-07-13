@@ -562,12 +562,12 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 						if (unlockchapter > 0 && type == 0 && unlockchapter <= MAXCHAPTER)
 						{
 							g_maplayer->updataPlotMissionIcon(1);
-							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 0.5f);
+							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 1.0f);
 						}
 
 						if (plotData->dnpc.compare("n089") == 0)
 						{
-							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.0f);
+							g_maplayer->scheduleOnce(schedule_selector(MapLayer::showEndAnim), 1.5f);
 						}
 					}
 
