@@ -552,10 +552,11 @@ void TopBar::checkNpcRandMap()
 	if (vec_map.size() > 0)
 	{
 		int rpos = GlobalData::createRandomNum(siez);
-		if (GlobalData::getWxbMapPos() != rpos)
-			g_maplayer->updataPlotMissionIcon(0);
+		int lastpos = GlobalData::getWxbMapPos();
 		GlobalData::setWxbMapPos(rpos);
 		GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
+		if (lastpos != rpos)
+			g_maplayer->updataPlotMissionIcon(0);
 	}
 
 	for (it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.begin(); it != GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.end();)
