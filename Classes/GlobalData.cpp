@@ -990,7 +990,7 @@ int GlobalData::createRandomNum(int val)
 {
 	int syssec = GlobalData::getSysSecTime();
 	int static randNum = 0;
-	randNum += 3600;
+	randNum += 3600 * 24;
 	syssec += randNum;
 	if (syssec < 0 || randNum < 0)
 	{

@@ -528,14 +528,6 @@ void TopBar::showNewerGuide(int step)
 
 void TopBar::checkNpcRandMap()
 {
-	std::vector<std::string>::iterator it;
-	for (it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.begin(); it != GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.end();)
-	{
-		if (it->compare("n012") == 0)
-			it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.erase(it);
-		else
-			++it;
-	}
 	int wxbmapsize = sizeof(wxbinmap) / sizeof(wxbinmap[0]);
 	std::vector<std::string> vec_map;
 	for (int i = 0; i < wxbmapsize;i++)
@@ -553,24 +545,37 @@ void TopBar::checkNpcRandMap()
 	{
 		int rpos = GlobalData::createRandomNum(siez);
 		int lastpos = GlobalData::getWxbMapPos();
-		GlobalData::setWxbMapPos(rpos);
-		GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
-		if (lastpos != rpos)
-			g_maplayer->updataPlotMissionIcon(0);
-	}
 
-	for (it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.begin(); it != GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.end();)
-	{
-		if (it->compare("n091") == 0)
-			it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.erase(it);
-		else
-			++it;
+		if (lastpos != rpos)
+		{
+			std::vector<std::string>::iterator it;
+			for (it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.begin(); it != GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.end();)
+			{
+				if (it->compare("n012") == 0)
+					it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.erase(it);
+				else
+					++it;
+			}
+			GlobalData::setWxbMapPos(rpos);
+			GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
+
+			g_maplayer->updataPlotMissionIcon(0);
+		}
 	}
 
 	int dgqbmapsize = sizeof(dgqbinmap) / sizeof(dgqbinmap[0]);
 	int r1 = GlobalData::createRandomNum(dgqbmapsize);
 	if (GlobalData::getDgqbMapPos() != r1)
 	{
+		std::vector<std::string>::iterator it;
+		for (it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.begin(); it != GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.end();)
+		{
+			if (it->compare("n091") == 0)
+				it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.erase(it);
+			else
+				++it;
+		}
+
 		GlobalData::setDgqbMapPos(r1);
 		GlobalData::map_maps[dgqbinmap[r1]].npcs.push_back("n091");
 	}

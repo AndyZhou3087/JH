@@ -235,11 +235,11 @@ void FightLayer::delayHeroFight(float dt)
 
 	isHeroAct = -1;
 	isNpcAct = - 1;
-	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 10000;
+	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 100;
 	if (g_hero->getAtrByType(H_WG)->count > 0)
-		critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].vec_cirt[g_hero->getAtrByType(H_WG)->lv] * 10000;
-	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 10000;
-	int r = GlobalData::createRandomNum(1000000);
+		critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].vec_cirt[g_hero->getAtrByType(H_WG)->lv] * 100;
+	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
+	int r = GlobalData::createRandomNum(10000);
 	if (r < critrnd)
 	{
 		isHeroAct = 0;
@@ -323,12 +323,12 @@ void FightLayer::delayBossFight(float dt)
 
 	isHeroAct = -1;
 	isNpcAct = -1;
-	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()] * 10000;
+	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()] * 100;
 
 	if (g_hero->getAtrByType(H_NG)->count > 0)
-		dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].vec_dodge[g_hero->getAtrByType(H_NG)->lv] * 10000;
-	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 10000;
-	int r = GlobalData::createRandomNum(1000000);
+		dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].vec_dodge[g_hero->getAtrByType(H_NG)->lv] * 100;
+	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
+	int r = GlobalData::createRandomNum(10000);
 	if (r < npccritrnd)
 	{
 		isNpcAct = 0;
