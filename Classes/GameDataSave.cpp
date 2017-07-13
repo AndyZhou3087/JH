@@ -424,10 +424,19 @@ void GameDataSave::setWxbMapPos(int val)
 	saveIntDataByKey(addUIDString("wxbmap"), val);
 }
 
-
 int GameDataSave::getWxbMapPos()
 {
 	return loadIntDataByKey(addUIDString("wxbmap"), 0);
+}
+
+void GameDataSave::setDgqbMapPos(int val)
+{
+	saveIntDataByKey(addUIDString("dgqbmap"), val);
+}
+
+int GameDataSave::getDgqbMapPos()
+{
+	return loadIntDataByKey(addUIDString("dgqbmap"), 0);
 }
 
 int GameDataSave::getGoldCount()

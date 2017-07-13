@@ -73,4 +73,5 @@ static std::string qudesc[] = { "入门", "一流", "上乘", "传世", "绝世"
 static cocos2d::Color4B qucolor[] = { cocos2d::Color4B(76, 54, 51, 255), cocos2d::Color4B(27, 141, 0, 255), cocos2d::Color4B(27, 84, 155, 255), cocos2d::Color4B(171, 34, 210, 255), cocos2d::Color4B(216, 151, 82, 255) };
 static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"}; 
 
+static std::string dgqbinmap[] = { "m7-3", "m3-4", "m4-9", "m6-3", "m7-12", "m2-3", "m7-8", "m10-1", "m11-3" };
 #endif // _H_CONST_H_

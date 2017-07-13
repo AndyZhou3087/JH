@@ -84,9 +84,9 @@ private:
 	void timerSaveData(float dt);
 
 	/****************************
-	韦小宝地图位置，随机生成3个客栈
+	韦小宝和独孤求败地图位置
 	*****************************/
-	void getWxbMap();
+	void getNpcRandMap();
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据

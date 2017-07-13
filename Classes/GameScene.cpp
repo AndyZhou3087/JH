@@ -247,7 +247,7 @@ void GameScene::loadSaveHeroData()
 	//读取保存的角色属性数据
 	loadSavedHeroPropData();
 
-	getWxbMap();
+	getNpcRandMap();
 }
 
 void GameScene::loadSavedHeroPropData()
@@ -415,11 +415,15 @@ void GameScene::delayShowOutScence(float dt)
 	}
 }
 
-void GameScene::getWxbMap()
+void GameScene::getNpcRandMap()
 {
 	int pos = GameDataSave::getInstance()->getWxbMapPos();
 	GlobalData::setWxbMapPos(pos);
 	GlobalData::map_maps[wxbinmap[pos]].npcs.push_back("n012");
+
+	pos = GameDataSave::getInstance()->getDgqbMapPos();
+	GlobalData::setDgqbMapPos(pos);
+	GlobalData::map_maps[dgqbinmap[pos]].npcs.push_back("n091");
 }
 
 void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)

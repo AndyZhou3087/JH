@@ -486,6 +486,18 @@ public:
 	static int getWxbMapPos();
 
 	/****************************
+	设置独孤求败随机地图位置
+	@para 地图位置
+	*****************************/
+	static void setDgqbMapPos(int pos);
+
+	/****************************
+	获取独孤求败随机地图位置
+	@para 地图位置
+	*****************************/
+	static int getDgqbMapPos();
+
+	/****************************
 	获取金元宝数
 	return 金元宝数
 	*****************************/
@@ -544,6 +556,7 @@ private:
 	static std::string uid;//
 	static int myGlodCount;
 	static int wxbmapos;
+	static int dgqbmapos;
 
 	static std::vector<std::string> vec_saveids;//存档的id
     

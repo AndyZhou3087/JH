@@ -148,6 +148,19 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 	}
 
+	if (m_addrid.compare("m13-1") == 0)
+	{
+		winres.clear();
+		int rcount = GlobalData::createRandomNum(6) + 5;
+		std::string rstr = StringUtils::format("%d", 81 * 1000 + rcount);
+		winres.push_back(rstr);
+		for (unsigned int i = 0; i < winres.size(); i++)
+		{
+			winresrnd.clear();
+			winresrnd.push_back(100);
+		}
+	}
+
 	int winressize = winres.size();
 	if (winressize <= 0)
 		m_getallbtn->setEnabled(false);

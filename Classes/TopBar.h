@@ -59,7 +59,7 @@ private:
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updataUI(float dt);
-	void checkWxpMap();
+	void checkNpcRandMap();
 };
 #endif
 

@@ -322,7 +322,7 @@ void TopBar::updataUI(float dt)
 	{
 		m_lastpastLiveDay = g_nature->getPastDays();
 
-		checkWxpMap();
+		checkNpcRandMap();
 		if (g_nature->getReason() == Autumn && !g_nature->getIsShowInsect())
 		{
 			int r = GlobalData::createRandomNum(100);
@@ -526,7 +526,7 @@ void TopBar::showNewerGuide(int step)
 	}
 }
 
-void TopBar::checkWxpMap()
+void TopBar::checkNpcRandMap()
 {
 	std::vector<std::string>::iterator it;
 	for (it = GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.begin(); it != GlobalData::map_maps[wxbinmap[GlobalData::getWxbMapPos()]].npcs.end();)
@@ -556,5 +556,21 @@ void TopBar::checkWxpMap()
 			g_maplayer->updataPlotMissionIcon(0);
 		GlobalData::setWxbMapPos(rpos);
 		GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
+	}
+
+	for (it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.begin(); it != GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.end();)
+	{
+		if (it->compare("n091") == 0)
+			it = GlobalData::map_maps[dgqbinmap[GlobalData::getDgqbMapPos()]].npcs.erase(it);
+		else
+			++it;
+	}
+
+	int dgqbmapsize = sizeof(dgqbinmap) / sizeof(dgqbinmap[0]);
+	int r1 = GlobalData::createRandomNum(dgqbmapsize);
+	if (GlobalData::getDgqbMapPos() != r1)
+	{
+		GlobalData::setDgqbMapPos(r1);
+		GlobalData::map_maps[dgqbinmap[r1]].npcs.push_back("n091");
 	}
 }

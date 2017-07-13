@@ -75,6 +75,7 @@ bool NpcLayer::init(std::string addrid)
 	m_scrollview->setBounceEnabled(true);
 
 	m_lastWxpPos = GlobalData::getWxbMapPos();
+	m_lastDgqbPos = GlobalData::getDgqbMapPos();
 
 	refreshNpcNode();
 
@@ -206,6 +207,11 @@ void NpcLayer::checkUpateNpc(float dt)
 	{
 		refreshNpcNode();
 		m_lastWxpPos = GlobalData::getWxbMapPos();
+	}
+	if (m_lastDgqbPos != GlobalData::getDgqbMapPos())
+	{
+		refreshNpcNode();
+		m_lastDgqbPos = GlobalData::getDgqbMapPos();
 	}
 }
 

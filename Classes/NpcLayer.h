@@ -74,6 +74,7 @@ private:
 	int m_wordindex;
 	int m_plotindex;
 	int m_lastWxpPos;
+	int m_lastDgqbPos;
 };
 #endif
 

@@ -49,6 +49,7 @@ int GlobalData::myGlodCount = 0;
 
 GameStatus GlobalData::g_gameStatus = GAMEOVER;
 int GlobalData::wxbmapos = 0;
+int GlobalData::dgqbmapos = 0;
 
 GlobalData::GlobalData()
 {
@@ -989,8 +990,13 @@ int GlobalData::createRandomNum(int val)
 {
 	int syssec = GlobalData::getSysSecTime();
 	int static randNum = 0;
-	randNum += 100;
+	randNum += 3600;
 	syssec += randNum;
+	if (syssec < 0 || randNum < 0)
+	{
+		syssec = 0;
+		randNum = 0;
+	}
 	srand(syssec);
 	int r = rand() % val;
 	return r;
@@ -1179,13 +1185,24 @@ void GlobalData::setExgCfgData(std::string strval)
 void GlobalData::setWxbMapPos(int pos)
 {
 	wxbmapos = pos;
-	GameDataSave::getInstance()->setWxbMapPos(wxbmapos);
+	GameDataSave::getInstance()->setWxbMapPos(pos);
 }
 
 
 int GlobalData::getWxbMapPos()
 {
 	return wxbmapos;
+}
+
+void GlobalData::setDgqbMapPos(int pos)
+{
+	dgqbmapos = pos;
+	GameDataSave::getInstance()->setDgqbMapPos(pos);
+}
+
+int GlobalData::getDgqbMapPos()
+{
+	return dgqbmapos;
 }
 
 int GlobalData::getMyGoldCount()
