@@ -168,7 +168,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			else
 			{
 				GlobalData::map_npcs[npcid].winrescount[i]++;
-				if (GlobalData::map_npcs[npcid].winrescount[i] < 5)
+				if (GlobalData::map_npcs[npcid].winrescount[i] < 3)
 					r = 200;
 				else
 				{
