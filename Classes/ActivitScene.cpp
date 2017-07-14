@@ -164,7 +164,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		int rj = GlobalData::createRandomNum(100);
 		if (rj < 30)
 		{
-			image->loadTexture("images/jumpnoting.jpg", cocos2d::ui::TextureResType::LOCAL);
+			image->loadTexture("images/jumphurt.jpg", cocos2d::ui::TextureResType::LOCAL);
 			text->setString(CommonFuncs::gbk2utf("跳崖摔伤"));
 			float val = g_hero->getInnerinjuryValue();
 			if (val < 30)
@@ -201,7 +201,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 			int rf = GlobalData::createRandomNum(100);
 			if (rf < 20)
 			{
-				image->loadTexture("images/jumpnoting.jpg", cocos2d::ui::TextureResType::LOCAL);
+				image->loadTexture("images/jumpnothing.jpg", cocos2d::ui::TextureResType::LOCAL);
 				text->setString(CommonFuncs::gbk2utf("一无所获"));
 				tips->setString(CommonFuncs::gbk2utf("这次白跳了，什么都没有，发光的只不过时一个破石头在反光。"));
 				distime = 3.0f;
