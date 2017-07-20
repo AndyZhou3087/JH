@@ -53,7 +53,7 @@ bool MapLayer::init()
 		cocos2d::ui::Widget* mapname = (cocos2d::ui::Widget*)m_mapbg->getChildren().at(i);
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
-		mapname->setVisible(false);
+		mapname->setVisible(true);
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
 	}

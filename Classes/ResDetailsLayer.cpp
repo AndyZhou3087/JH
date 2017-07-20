@@ -102,6 +102,8 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 	cocos2d::ui::Text* slvatk = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvatk");
 
+	cocos2d::ui::Text* skilltext = (cocos2d::ui::Text*)m_csbnode->getChildByName("skilltext");
+
 	int count = StorageRoom::getCountById(pdata->strid);
 
 	if (whereClick == 1)
@@ -186,6 +188,14 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			critstr = StringUtils::format("暴击率增加%.4f%%", GlobalData::map_wgngs[pdata->strid].vec_cirt[pdata->lv]);
 		}
 		crittext->setString(CommonFuncs::gbk2utf(critstr.c_str()));
+
+		int skilltype = GlobalData::map_wgngs[pdata->strid].skilltype;
+		if (skilltype > S_SNONE)
+		{
+			std::string skilldesc = StringUtils::format(GlobalData::map_gfskills[skilltype].desc.c_str(), GlobalData::map_wgngs[pdata->strid].vec_skrnd[pdata->lv], GlobalData::map_wgngs[pdata->strid].skilleffect);
+			std::string skillstr = StringUtils::format("%s%s(%s)", CommonFuncs::gbk2utf("技能：").c_str(), GlobalData::map_gfskills[skilltype].name.c_str(), skilldesc.c_str());
+			skilltext->setString(skillstr);
+		}
 	}
 	else if (pdata->type == RES_2)
 	{

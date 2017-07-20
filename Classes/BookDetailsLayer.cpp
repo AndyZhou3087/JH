@@ -95,6 +95,9 @@ bool BookDetailsLayer::init(BookData* bookdata)
 
 		cocos2d::ui::Text* critlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("critlbl");
 		critlbl->setVisible(true);
+
+		cocos2d::ui::Text* skilltext = (cocos2d::ui::Text*)m_csbnode->getChildByName("skilltext");
+
 		std::string critstr;
 		if (bookdata->type == W_GONG)
 		{
@@ -110,6 +113,14 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		}
 		critlbl->setTextColor(Color4B(204, 4, 4, 255));
 		critlbl->setString(critstr);
+		int skilltype = GlobalData::map_wgngs[bookdata->strid].skilltype;
+		if (skilltype > S_SNONE)
+		{
+			std::string sstr = StringUtils::format("%s%s",CommonFuncs::gbk2utf("技能：").c_str(), GlobalData::map_gfskills[skilltype].name.c_str());
+			skilltext->setVisible(true);
+			skilltext->setString(sstr);
+		}
+
 	}
 	cocos2d::ui::Text* maxlv = (cocos2d::ui::Text*)m_csbnode->getChildByName("maxlv");
 	maxlv->setString(maxlvstr);

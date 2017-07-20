@@ -133,6 +133,21 @@ public:
 	CC_SYNTHESIZE(H_SEX, m_sex, Sex);
 
 	/****************************
+	总攻击加成百分比
+	*****************************/
+	CC_SYNTHESIZE(float, m_totalAtkBonusPercent, TotalAtkBonusPercent);
+
+	/****************************
+	总防御加成百分比
+	*****************************/
+	CC_SYNTHESIZE(float, m_totalDfBonusPercent, TotalDfBonusPercent);
+
+	/****************************
+	是否武道大会挑战
+	*****************************/
+	CC_SYNTHESIZE(bool, m_isWDChallenge, IsWDChallenge);
+
+	/****************************
 	获取角色攻击
 	*****************************/
 	int getAtkValue();

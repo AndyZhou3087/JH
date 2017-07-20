@@ -96,13 +96,13 @@
             <FileData Type="MarkedSubImage" Path="ui/storagesepline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="57519552" Tag="217" IconVisible="False" LeftMargin="136.1343" RightMargin="433.8657" TopMargin="1151.1660" BottomMargin="38.8340" TouchEnable="True" FontSize="40" ButtonText="返回" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="57519552" Tag="217" IconVisible="False" LeftMargin="114.1354" RightMargin="455.8646" TopMargin="1141.1658" BottomMargin="48.8342" TouchEnable="True" FontSize="40" ButtonText="返回" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="211.1343" Y="83.8340" />
+            <Position X="189.1354" Y="93.8342" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2932" Y="0.0655" />
+            <PrePosition X="0.2627" Y="0.0733" />
             <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -112,13 +112,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="allgetbtn" ActionTag="1008343823" Tag="215" IconVisible="False" LeftMargin="420.4542" RightMargin="149.5458" TopMargin="1151.1660" BottomMargin="38.8340" TouchEnable="True" FontSize="30" ButtonText="全部拾取" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="allgetbtn" ActionTag="1008343823" Tag="215" IconVisible="False" LeftMargin="453.4568" RightMargin="116.5432" TopMargin="1141.1658" BottomMargin="48.8342" TouchEnable="True" FontSize="30" ButtonText="全部拾取" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="495.4542" Y="83.8340" />
+            <Position X="528.4568" Y="93.8342" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6881" Y="0.0655" />
+            <PrePosition X="0.7340" Y="0.0733" />
             <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -181,6 +181,22 @@
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4097" Y="0.4270" />
             <PreSize X="0.0667" Y="0.0180" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="continuebtn" ActionTag="-801450230" Tag="44" IconVisible="False" LeftMargin="283.7961" RightMargin="286.2039" TopMargin="1140.6084" BottomMargin="49.3916" TouchEnable="True" FontSize="30" ButtonText="继续挑战" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="90.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="358.7961" Y="94.3916" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4983" Y="0.0737" />
+            <PreSize X="0.2083" Y="0.0703" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

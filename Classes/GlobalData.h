@@ -119,6 +119,9 @@ typedef struct
 	std::vector<int> vec_exp;
 	std::vector<float> vec_cirt;
 	std::vector<float> vec_dodge;
+	std::vector<float> vec_skrnd;//释放技能随机数
+	int skilltype;//技能类型
+	int skilleffect;//技能影响
 	int type;//类型StorageType
 	int qu;//品级
 	int extype;//1：棍 2：刀 3：剑
@@ -167,6 +170,22 @@ typedef enum
 }MissionStatus;
 
 /****************************
+招式类型
+*****************************/
+typedef enum
+{
+	S_SNONE = 0,
+	S_SKILL_1,//血流成河
+	S_SKILL_2,//动弹不得
+	S_SKILL_3,//乘胜追击
+	S_SKILL_4,//致命打击
+	S_SKILL_5,//香风毒雾
+	S_SKILL_6,//铜墙铁壁
+	S_SKILL_7,//敲骨吸髓
+	S_SKILL_8//浮云惊龙
+}SkillType;
+
+/****************************
 剧情数据
 *****************************/
 typedef struct
@@ -191,6 +210,17 @@ typedef struct
 {
 	std::string id;//ID
 	std::vector<std::string> snames;//招式名称
+}GFTrickData;
+
+/****************************
+技能数据
+*****************************/
+typedef struct
+{
+	std::string id;//ID
+	std::string name;//
+	std::string desc;
+	int leftval;
 }GFSkillData;
 
 /****************************
@@ -216,6 +246,15 @@ typedef enum
 	GAMEPAUSE,
 	GAMEOVER
 }GameStatus;
+
+/****************************
+武道大会奖励数据
+*****************************/
+typedef struct
+{
+	std::vector<std::string> vec_winres;
+	std::vector<int> vec_winrnd;
+}ChallengeRewardData;
 
 class GlobalData
 {
@@ -431,6 +470,11 @@ public:
 	/****************************
 	解析招式数据
 	*****************************/
+	static void loadGftrickData();
+
+	/****************************
+	解析技能数据
+	*****************************/
 	static void loadGfskillData();
 
 	/****************************
@@ -515,6 +559,12 @@ public:
 	*****************************/
 	static int getResType(std::string strid);
 
+	/****************************
+	获取武道大会奖励数据
+	
+	*****************************/
+	static void loadChallengeRewardData();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -546,8 +596,11 @@ public:
 	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;//建筑物数据
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
 	static std::vector<PlotMissionData> vec_BranchPlotMissionData;//支线剧情数据
-	static std::map<std::string, GFSkillData> map_gfskills;//招式数据
+	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
+	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
+
+	static std::map<std::string, ChallengeRewardData> map_challengeReward;
 	static bool isPopingScene;
 
 	static GameStatus g_gameStatus;

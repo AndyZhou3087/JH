@@ -12,6 +12,7 @@
 #include "HomeHill.h"
 #include "NewerGuideLayer.h"
 #include "AnalyticUtil.h"
+#include "FightLayer.h"
 
 Winlayer::Winlayer()
 {
@@ -48,7 +49,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	m_addrid = addrid;
 	m_npcid = npcid;
 
-	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
 	m_backbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onBack, this));
 
 	m_getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
@@ -150,14 +151,17 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	if (m_addrid.compare("m13-1") == 0)
 	{
-		winres.clear();
-		int rcount = GlobalData::createRandomNum(6) + 5;
-		std::string rstr = StringUtils::format("%d", 81 * 1000 + rcount);
-		winres.push_back(rstr);
+		m_backbtn->setTitleText(CommonFuncs::gbk2utf("退出挑战"));
+		m_backbtn->setTitleFontSize(30);
+		cocos2d::ui::Button * continuebtn = (cocos2d::ui::Button*)csbnode->getChildByName("continuebtn");
+		continuebtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onContinue, this));
+		continuebtn->setVisible(true);
+
+		winres = GlobalData::map_challengeReward[npcid].vec_winres;
 		for (unsigned int i = 0; i < winres.size(); i++)
 		{
 			winresrnd.clear();
-			winresrnd.push_back(100);
+			winresrnd.push_back(GlobalData::map_challengeReward[npcid].vec_winrnd[i]);
 		}
 	}
 
@@ -479,6 +483,19 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 			else if (NewerGuideLayer::checkifNewerGuide(39))
 				homehill->showNewerGuide(39);
 		}
+		this->removeFromParentAndCleanup(true);
+	}
+}
+
+void Winlayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
+		if (fightlayer != NULL)
+			fightlayer->continueChallenge();
+
 		this->removeFromParentAndCleanup(true);
 	}
 }

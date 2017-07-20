@@ -12,6 +12,7 @@
 #include "GameDataSave.h"
 #include "NewerGuideLayer.h"
 #include "ActivitScene.h"
+#include "SepcialNpcLayer.h"
 
 GoWhereLayer::GoWhereLayer()
 {
@@ -223,12 +224,20 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			}
 			else//进入NPC
 			{
-				if (g_gameLayer != NULL)
-					g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2, "npclayer");
-				std::string mapname = GlobalData::map_maps[m_addrstr].cname;
-				if (mapname.find(CommonFuncs::gbk2utf("客栈")) != std::string::npos)
+				if (m_addrstr.compare("m13-1") == 0)
 				{
-					g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，喝酒二两银子"), 25, Color3B(204, 4, 4));
+					if (g_gameLayer != NULL)
+						g_gameLayer->addChild(SepcialNpcLayer::create(m_addrstr), 2, "npclayer");
+				}
+				else
+				{
+					if (g_gameLayer != NULL)
+						g_gameLayer->addChild(NpcLayer::create(m_addrstr), 2, "npclayer");
+					std::string mapname = GlobalData::map_maps[m_addrstr].cname;
+					if (mapname.find(CommonFuncs::gbk2utf("客栈")) != std::string::npos)
+					{
+						g_uiScroll->addEventText(CommonFuncs::gbk2utf("小二：客官里面请，吃饭一两银子，睡觉二两银子，喝酒二两银子"), 25, Color3B(204, 4, 4));
+					}
 				}
 			}
 		}

@@ -124,6 +124,9 @@
           <Image Name="a018.png" />
           <Image Name="a019.png" />
           <Image Name="a020.png" />
+          <Image Name="addatkicon.png" />
+          <Image Name="adddficon.png" />
+          <Image Name="addlifeicon.png" />
           <Image Name="atrselected.png" />
           <Image Name="backbtn.png" />
           <Image Name="backstartbtn.png" />
@@ -171,6 +174,7 @@
           <Image Name="gd3.png" />
           <Image Name="gold.png" />
           <Image Name="golditem.png" />
+          <Image Name="golditemselect.png" />
           <Image Name="goldtextbox.png" />
           <Image Name="goodsbg.png" />
           <Image Name="goodssepline.png" />
@@ -297,6 +301,14 @@
           <Image Name="shareicon.png" />
           <Image Name="shopbtn.png" />
           <Image Name="shopsepline.png" />
+          <Image Name="skill1text.png" />
+          <Image Name="skill2text.png" />
+          <Image Name="skill3text.png" />
+          <Image Name="skill4text.png" />
+          <Image Name="skill5text.png" />
+          <Image Name="skill6text.png" />
+          <Image Name="skill7text.png" />
+          <Image Name="skill8text.png" />
           <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
           <Image Name="ssepline.jpg" />
@@ -432,6 +444,7 @@
         <Project Name="buildingDetailsLayer.csd" Type="Layer" />
         <Project Name="buyComfirmLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
+        <Project Name="challengeCountLayer.csd" Type="Layer" />
         <Project Name="comfirmSaveLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
         <Project Name="divedeLayer.csd" Type="Layer" />
@@ -464,6 +477,7 @@
         <Project Name="sepcialLayer.csd" Type="Layer" />
         <Project Name="settingLayer.csd" Type="Layer" />
         <Project Name="shopLayer.csd" Type="Layer" />
+        <Project Name="specialNpcLayer.csd" Type="Layer" />
         <Project Name="startLayer.csd" Type="Layer" />
         <Project Name="sysSmallLayer.csd" Type="Layer" />
         <Project Name="tempStorageLayer.csd" Type="Scene" />

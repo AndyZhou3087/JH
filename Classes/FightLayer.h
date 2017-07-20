@@ -7,6 +7,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "UIScroll.h"
+#include "Hero.h"
 USING_NS_CC;
 class FightLayer :public Layer
 {
@@ -22,6 +23,33 @@ public:
 	bool init(std::string addrname, std::string npcid);
 	virtual void onEnterTransitionDidFinish();
 	static FightLayer* create(std::string addrid, std::string npcid);
+
+	/****************************
+	继续战斗
+	****************************/
+	void continueChallenge();
+
+	/****************************
+	挑战下一个NPC
+	****************************/
+	void updateFightNextNpc();
+
+	/****************************
+	展示胜点属性界面
+	****************************/
+	void showChallengeCountLayer(bool isRevive);
+
+	/****************************
+	角色攻击
+	定时器执行
+	****************************/
+	void delayHeroFight(float dt);
+
+	/****************************
+	武道大会死亡后复活继续挑战
+	****************************/
+	void reviveContinueChallege();
+
 private:
 	/****************************
 	逃跑按钮回调
@@ -32,12 +60,6 @@ private:
 	战斗按钮回调
 	****************************/
 	void onFihgt(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-
-	/****************************
-	角色攻击
-	定时器执行
-	****************************/
-	void delayHeroFight(float dt);
 
 	/****************************
 	NPC 回击
@@ -75,11 +97,50 @@ private:
 	void checkHeroLife(float dt);
 
 	/****************************
-	与山战斗
+	更新NPC生命值
+	****************************/
+	void updateNpcLife();
+
+	/****************************
+	与山贼战斗
 	****************************/
 	void fightRobber();
 
+	/****************************
+	多个NPC战斗,继续下一个
+	****************************/
 	void nextFightNpc(float dt);
+
+	/****************************
+	检查技能
+	****************************/
+	int checkSkill(HeroAtrType gftype);
+
+	/****************************
+	NPC 死亡
+	****************************/
+	void npcDie();
+
+	/****************************
+	获得NPC收到的伤害值
+	****************************/
+	int getNpcHurt();
+
+	/****************************
+	技能连击
+	****************************/
+	void skillComboAtk(float dt);
+
+	/****************************
+	显示角色位置文字动画
+	****************************/
+	void showHeroTextAmin(std::string filename);
+
+	/****************************
+	显示NPC位置文字动画
+	****************************/
+	void showNpcTextAmin(std::string filename);
+
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件
@@ -103,6 +164,8 @@ private:
 	bool isecapeok;//是否逃跑成功
 	bool isUseWg;//是否使用外功
 	int continuefight;//连续打NPC个数
+	int winnpcount;//打赢NPC个数
+	int winProperCount;//胜点
 	int isHeroAct;//0--暴击；1-闪避
 
 	int isNpcAct;//0--暴击；1-闪避

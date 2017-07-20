@@ -85,10 +85,16 @@ bool GameScene::init()
 	GlobalData::loadBranchPlotMissionJsonData();
 
 	//读取武功招式配置文件
+	GlobalData::loadGftrickData();
+
+	//读取技能配置文件
 	GlobalData::loadGfskillData();
 
 	//读取商城数据
 	GlobalData::loadShopData();
+
+	//加载武道大会挑战奖励数据
+	GlobalData::loadChallengeRewardData();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();

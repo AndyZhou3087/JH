@@ -35,6 +35,10 @@ Hero::Hero()
 	sleepLostPercent = 1.0f;
 
 	m_pastmin = 0;
+
+	m_totalAtkBonusPercent = 0.0f;
+	m_totalDfBonusPercent = 0.0f;
+	m_isWDChallenge = false;
 }
 
 
@@ -490,7 +494,7 @@ int Hero::getTotalDf()
 	//防御属性
 	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
 	fdf += slvdf;
-	adf = int(fdf + 0.5f);
+	adf = int(fdf*(1 + m_totalDfBonusPercent) + 0.5f);
 	return adf;
 }
 
@@ -523,6 +527,6 @@ int Hero::getTotalAtck()
 		}
 	}
 	fack += slvAtk;
-	int tatk = int(fack + 0.5f);
+	int tatk = int(fack*(1 + m_totalAtkBonusPercent) + 0.5f);
 	return tatk;
 }

@@ -29,9 +29,13 @@ std::vector<PlotMissionData> GlobalData::vec_PlotMissionData;
 
 std::vector<PlotMissionData> GlobalData::vec_BranchPlotMissionData;
 
-std::map<std::string, GFSkillData> GlobalData::map_gfskills;
+std::map<std::string, GFTrickData> GlobalData::map_gftricks;
+
+std::map<int, GFSkillData> GlobalData::map_gfskills;
 
 std::vector<GoodsData> GlobalData::vec_goods;
+
+std::map<std::string, ChallengeRewardData> GlobalData::map_challengeReward;
 
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
@@ -356,7 +360,6 @@ void GlobalData::loadNpcJsonData()
 			if (str.length() > 0)
 				data.words.push_back(str);
 		}
-
 		v = item["avoid"];
 		data.dodge = atof(v.GetString());
 
@@ -480,6 +483,18 @@ void GlobalData::loadWG_NGJsonData()
 			data.vec_cirt.push_back(v[j].GetDouble());
 		}
 
+		v = vitem["skrnd"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_skrnd.push_back(v[j].GetDouble());
+		}
+
+		v = vitem["sk"];
+		data.skilltype = atoi(v.GetString());
+
+		v = vitem["skef"];
+		data.skilleffect = atoi(v.GetString());
+
 		data.type = W_GONG + 1;
 		v = vitem["qu"];
 		data.qu = atoi(v.GetString());
@@ -519,6 +534,19 @@ void GlobalData::loadWG_NGJsonData()
 		{
 			data.vec_dodge.push_back(v[j].GetDouble());
 		}
+
+		v = vitem["skrnd"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			data.vec_skrnd.push_back(v[j].GetDouble());
+		}
+
+		v = vitem["sk"];
+		data.skilltype = atoi(v.GetString());
+
+		v = vitem["skef"];
+		data.skilleffect = atoi(v.GetString());
+
 		data.type = N_GONG + 1;
 		data.extype = 0;
 		v = vitem["qu"];
@@ -1069,15 +1097,15 @@ bool GlobalData::isHasFSF()
 	return false;
 }
 
-void GlobalData::loadGfskillData()
+void GlobalData::loadGftrickData()
 {
-	map_gfskills.clear();
-	rapidjson::Document doc = ReadJsonFile("data/gfskill.json");
+	map_gftricks.clear();
+	rapidjson::Document doc = ReadJsonFile("data/gftrick.json");
 	rapidjson::Value& values = doc["s"];
 	for (unsigned int i = 0; i < values.Size(); i++)
 	{
 		rapidjson::Value& vitem = values[i];
-		GFSkillData data;
+		GFTrickData data;
 		rapidjson::Value& v = vitem["id"];
 		data.id = v.GetString();
 
@@ -1088,7 +1116,30 @@ void GlobalData::loadGfskillData()
 			data.snames.push_back(str);
 		}
 
-		map_gfskills[data.id] = data;
+		map_gftricks[data.id] = data;
+	}
+}
+
+void GlobalData::loadGfskillData()
+{
+	map_gfskills.clear();
+	rapidjson::Document doc = ReadJsonFile("data/skill.json");
+	rapidjson::Value& values = doc["sk"];
+	for (unsigned int i = 0; i < values.Size(); i++)
+	{
+		rapidjson::Value& vitem = values[i];
+		GFSkillData data;
+
+		rapidjson::Value& v = vitem["name"];
+		data.name = v.GetString();
+		v = vitem["id"];
+		data.id = v.GetString();
+
+		v = vitem["desc"];
+		data.desc = v.GetString();
+		data.leftval = 0;
+		int intid = atoi(data.id.c_str());
+		map_gfskills[intid] = data;
 	}
 }
 
@@ -1150,6 +1201,40 @@ int GlobalData::getResType(std::string strid)
 	}
 	return 0;
 }
+
+void GlobalData::loadChallengeRewardData()
+{
+	map_challengeReward.clear();
+	rapidjson::Document doc = ReadJsonFile("data/challengereward.json");
+	rapidjson::Value& values = doc["rs"];
+	for (unsigned int i = 0; i < values.Size(); i++)//npc数组
+	{
+		ChallengeRewardData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["npc"];
+		std::string npcid = v.GetString();
+
+		v = item["winres"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			std::string str = v[m].GetString();
+			if (str.length() > 1)
+				data.vec_winres.push_back(str);
+		}
+		v = item["winresrnd"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			std::string str = v[m].GetString();
+			int rnd = atoi(str.c_str());
+			if (str.length() > 0 && rnd > 0)
+			{
+				data.vec_winrnd.push_back(rnd);
+			}
+		}
+		map_challengeReward[npcid] = data;
+	}
+}
+
 
 int GlobalData::getShareDay()
 {

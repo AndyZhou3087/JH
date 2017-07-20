@@ -28,6 +28,7 @@ public:
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updata();
 	void onRewardItem(cocos2d::Ref* pSender);
 	void onPackageItem(cocos2d::Ref* pSender);
@@ -44,7 +45,7 @@ private:
 	std::vector<PackageData> tempResData;
 	cocos2d::ui::Text* explbl;
 	cocos2d::ui::Text* gfexplbl;
-	cocos2d::ui::Widget* m_backbtn;
+	cocos2d::ui::Button* m_backbtn;
 	cocos2d::ui::Button* m_getallbtn;
 };
 #endif

@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "ShopLayer.h"
 #include "Const.h"
+#include "FightLayer.h"
 
 #ifdef UMENG_SHARE
 #include "UmengShare/Common/CCUMSocialSDK.h"
@@ -251,9 +252,17 @@ void ReviveLayer::reviveOk()
 	if (g_gameLayer != NULL)
 	{
 		g_gameLayer->removeChildByName("revivelayer");
-		g_gameLayer->removeChildByName("fightlayer");
+		if (!g_hero->getIsWDChallenge())
+			g_gameLayer->removeChildByName("fightlayer");
 
 		g_gameLayer->heroRevive();
+
+		if (g_gameLayer->getChildByName("challengecountlayer") == NULL)
+		{
+			FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
+			if (fightlayer != NULL)
+				fightlayer->showChallengeCountLayer(true);
+		}
 	}
 }
 void ReviveLayer::doRevive()

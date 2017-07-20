@@ -371,6 +371,18 @@
       <FilePathData Path="ui/81.png" />
       <FilePathData Path="ui/82.png" />
       <FilePathData Path="ui/dividetext.png" />
+      <FilePathData Path="ui/addatkicon.png" />
+      <FilePathData Path="ui/adddficon.png" />
+      <FilePathData Path="ui/addlifeicon.png" />
+      <FilePathData Path="ui/golditemselect.png" />
+      <FilePathData Path="ui/skill1text.png" />
+      <FilePathData Path="ui/skill2text.png" />
+      <FilePathData Path="ui/skill3text.png" />
+      <FilePathData Path="ui/skill4text.png" />
+      <FilePathData Path="ui/skill5text.png" />
+      <FilePathData Path="ui/skill6text.png" />
+      <FilePathData Path="ui/skill7text.png" />
+      <FilePathData Path="ui/skill8text.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

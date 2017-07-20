@@ -11,16 +11,25 @@
 #include "AnalyticUtil.h"
 #include "MapLayer.h"
 #include "Shake.h"
+#include "ChallengeCountLayer.h"
 
 FightLayer::FightLayer()
 {
 	isecapeok = false;
 	isUseWg = false;
+	winnpcount = 0;
+	winProperCount = 0;
 }
 
 
 FightLayer::~FightLayer()
 {
+	if (g_hero != NULL)
+	{
+		g_hero->setTotalAtkBonusPercent(0.0f);
+		g_hero->setTotalDfBonusPercent(0.0f);
+		g_hero->setIsWDChallenge(false);
+	}
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
 }
 
@@ -51,10 +60,11 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrnametxt->setString(GlobalData::map_maps[m_addrid].cname);
 
-	if (GlobalData::map_maps[m_addrid].npcs.size() == 10)
+	if (GlobalData::map_maps[m_addrid].npcs.size() >= 10)
 	{
+		g_hero->setIsWDChallenge(true);
 		m_npcid = GlobalData::map_maps[m_addrid].npcs[0];
-		continuefight = 9;
+		continuefight = GlobalData::map_maps[m_addrid].npcs.size() - 1;
 	}
 	else
 	{
@@ -220,11 +230,14 @@ void FightLayer::fightRobber()
 	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.5f);
 }
 
-void FightLayer::delayHeroFight(float dt)
+void FightLayer::npcDie()
 {
-	if (isecapeok)//逃跑成功
-		return;
 
+	this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+}
+
+int FightLayer::getNpcHurt()
+{
 	int heroCurAck = g_hero->getTotalAtck();
 
 	int npchurt = heroCurAck - npcdf;
@@ -233,11 +246,43 @@ void FightLayer::delayHeroFight(float dt)
 	if (npchurt < intminack)
 		npchurt = intminack;
 
+	return npchurt;
+}
+
+void FightLayer::skillComboAtk(float dt)
+{
+	int skilltype = checkSkill(H_WG);
+	int count = GlobalData::map_gfskills[skilltype].leftval;
+	npchp -= getNpcHurt() * count / 10;
+	GlobalData::map_gfskills[skilltype].leftval--;
+	if (npchp < 0)
+		npchp = 0;
+	updateNpcLife();
+	if (npchp <= 0)// NPC dead 胜利
+	{
+		this->unschedule(schedule_selector(FightLayer::skillComboAtk));
+		npcDie();
+	}
+}
+
+void FightLayer::delayHeroFight(float dt)
+{
+	if (isecapeok)//逃跑成功
+		return;
+
+	int npchurt = getNpcHurt();
+
 	isHeroAct = -1;
 	isNpcAct = - 1;
 	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 100;
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 		critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].vec_cirt[g_hero->getAtrByType(H_WG)->lv] * 100;
+
+	if (checkSkill(H_WG) == S_SKILL_4)
+	{
+		critrnd += GlobalData::map_gfskills[S_SKILL_4].leftval * 100;
+	}
+
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
 	int r = GlobalData::createRandomNum(10000);
 	if (r < critrnd)
@@ -274,32 +319,26 @@ void FightLayer::delayHeroFight(float dt)
 	if (isNpcAct != 1)
 	{
 		npchp -= npchurt;
-
 		if (npchp < 0)
 			npchp = 0;
 	}
 
-	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
-	npchpvaluetext->setString(hpstr);
-	int npchppercent = 100 * npchp / npcmaxhp;
-	npchpbar->setPercent(npchppercent);
+	updateNpcLife();
+
 	showFightWord(0, npchurt);
 
 	if (npchp <= 0)// NPC dead 胜利
 	{
-		if (continuefight <= 0)
-		{
-			this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
-		}
-		else
-		{
-			m_npcid = GlobalData::map_maps[m_addrid].npcs[10 - continuefight];
-			continuefight--;
-			this->scheduleOnce(schedule_selector(FightLayer::nextFightNpc), 0.5f);
-		}
+		npcDie();
 	}
 	else
 	{
+		if (checkSkill(H_WG) == S_SKILL_3)
+		{
+			int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
+			this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
+		}
+
 		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
 	}
 }
@@ -321,12 +360,58 @@ void FightLayer::delayBossFight(float dt)
 	if (herohurt < intminack)
 		herohurt = intminack;
 
+	if (isNpcAct != 1)
+	{
+		int skilltype = checkSkill(H_WG);
+		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
+		{
+			npchp -= getNpcHurt() * 3 / 10;
+			updateNpcLife();
+			GlobalData::map_gfskills[skilltype].leftval--;
+			if (npchp <= 0)
+			{
+				npcDie();
+				return;
+			}
+		}
+		else if (skilltype == S_SKILL_2)
+		{
+			GlobalData::map_gfskills[skilltype].leftval--;
+			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+			return;
+		}
+
+		skilltype = checkSkill(H_NG);
+		if (skilltype == S_SKILL_6)
+			herohurt = herohurt * (100 - GlobalData::map_gfskills[skilltype].leftval) / 100;
+		else if (skilltype == S_SKILL_7)
+		{
+			int npclosthp = npchp * GlobalData::map_gfskills[skilltype].leftval / 100;
+			npchp -= npclosthp;
+			updateNpcLife();
+			g_hero->setLifeValue(curheroHp + npclosthp);
+			checkHeroLife(0);
+			if (npchp <= 0)
+			{
+				npcDie();
+				return;
+			}
+		}
+	}
+
+
 	isHeroAct = -1;
 	isNpcAct = -1;
 	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()] * 100;
 
 	if (g_hero->getAtrByType(H_NG)->count > 0)
 		dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].vec_dodge[g_hero->getAtrByType(H_NG)->lv] * 100;
+
+	if (checkSkill(H_NG) == S_SKILL_8)
+	{
+		dodgernd += GlobalData::map_gfskills[S_SKILL_8].leftval * 100;
+	}
+
 	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
 	int r = GlobalData::createRandomNum(10000);
 	if (r < npccritrnd)
@@ -413,10 +498,24 @@ void FightLayer::delayBossFight(float dt)
 
 void FightLayer::delayShowWinLayer(float dt)
 {
+	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+	m_escapebtn->setTag(1);
+
 	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(layer, 10, "Winlayer");
-	this->removeFromParentAndCleanup(true);
+
+	if (continuefight > 0)
+	{
+		winnpcount++;
+		winProperCount++;
+		int totalnpc = GlobalData::map_maps[m_addrid].npcs.size();
+		m_npcid = GlobalData::map_maps[m_addrid].npcs[totalnpc - continuefight];
+		continuefight--;
+	}
+
+	if (m_addrid.compare("m13-1") != 0)
+		this->removeFromParentAndCleanup(true);
 }
 
 void FightLayer::showFightWord(int type, int value)
@@ -702,12 +801,12 @@ void FightLayer::checkWordLblColor(std::string wordstr)
 	}
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
-		GFSkillData gfskilldata = GlobalData::map_gfskills[g_hero->getAtrByType(H_WG)->strid];
-		int mygfskillsize = gfskilldata.snames.size();
+		GFTrickData gftrickdata = GlobalData::map_gftricks[g_hero->getAtrByType(H_WG)->strid];
+		int mygftricksize = gftrickdata.snames.size();
 		
-		for (int n = 0; n < mygfskillsize; n++)
+		for (int n = 0; n < mygftricksize; n++)
 		{
-			std::string gfname = gfskilldata.snames[n];
+			std::string gfname = gftrickdata.snames[n];
 			std::size_t findpos;
 			std::string temp = wordstr;
 			while (1){
@@ -767,7 +866,7 @@ std::string FightLayer::getGfFightStr()
 	int r2 = GlobalData::createRandomNum(4);
 
 	std::string gfstr = g_hero->getAtrByType(H_WG)->strid;
-	GFSkillData ssdata = GlobalData::map_gfskills[g_hero->getAtrByType(H_WG)->strid];
+	GFTrickData ssdata = GlobalData::map_gftricks[g_hero->getAtrByType(H_WG)->strid];
 	int r3 = GlobalData::createRandomNum(ssdata.snames.size());
 	std::string gfsname = ssdata.snames[r3];
 	std::string	wordstr = CommonFuncs::gbk2utf(herousewgfight[r1][r2].c_str());
@@ -787,6 +886,17 @@ void FightLayer::checkHeroLife(float dt)
 	herohpbar->setPercent(herohppercent);
 }
 
+void FightLayer::updateNpcLife()
+{
+	//NPC血量显示
+	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
+	npchpvaluetext->setString(hpstr);
+
+	//NCP血量进度
+	int npchppercent = 100 * npchp / npcmaxhp;
+	npchpbar->setPercent(npchppercent);
+}
+
 void FightLayer::nextFightNpc(float dt)
 {
 	this->unschedule(schedule_selector(FightLayer::delayHeroFight));
@@ -799,13 +909,111 @@ void FightLayer::nextFightNpc(float dt)
 	npcatk = GlobalData::map_npcs[m_npcid].atk;
 	npcdf = GlobalData::map_npcs[m_npcid].df;
 
-	//NPC血量显示
-	std::string hpstr = StringUtils::format("%d/%d", npchp, npcmaxhp);
-	npchpvaluetext->setString(hpstr);
+	updateNpcLife();
 
-	//NCP血量进度
-	int npchppercent = 100 * npchp / npcmaxhp;
-	npchpbar->setPercent(npchppercent);
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+}
 
-	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);
+void FightLayer::continueChallenge()
+{
+	if (winnpcount % 3 == 0)
+	{
+		m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+		m_escapebtn->setTag(1);
+		showChallengeCountLayer(false);
+	}
+	else
+	{
+		updateFightNextNpc();
+	}
+}
+
+void FightLayer::updateFightNextNpc()
+{
+	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
+	m_escapebtn->setTag(0);
+	checkHeroLife(0);
+	this->scheduleOnce(schedule_selector(FightLayer::nextFightNpc), 0.5f);
+}
+
+void FightLayer::reviveContinueChallege()
+{
+	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
+	m_escapebtn->setTag(0);
+	checkHeroLife(0);
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+}
+
+void FightLayer::showChallengeCountLayer(bool isRevive)
+{
+	ChallengeCountLayer* layer = ChallengeCountLayer::create(&winProperCount, winnpcount, isRevive);
+	g_gameLayer->addChild(layer, 4, "challengecountlayer");
+}
+
+int FightLayer::checkSkill(HeroAtrType gftype)
+{
+	int ret = S_SNONE;
+	if (g_hero->getAtrByType(gftype)->count > 0)
+	{
+		int lv = g_hero->getAtrByType(gftype)->lv;
+		std::string gfstr = g_hero->getAtrByType(gftype)->strid;
+		int stype = GlobalData::map_wgngs[gfstr].skilltype;
+		if (GlobalData::map_gfskills[stype].leftval > 0)
+		{
+			ret =  stype;
+		}
+		else
+		{
+			if (stype > S_SNONE)
+			{
+				int rand = GlobalData::map_wgngs[gfstr].vec_skrnd[lv] * 100;
+				int r = GlobalData::createRandomNum(10000);
+				if (r < rand)
+				{
+					if (stype != S_SKILL_3 && stype != S_SKILL_4 && stype != S_SKILL_6 && stype != S_SKILL_7 && stype != S_SKILL_8)
+						GlobalData::map_gfskills[stype].leftval = GlobalData::map_wgngs[gfstr].skilleffect;
+					ret = stype;
+				}
+			}
+		}
+	}
+
+	if (ret >= S_SKILL_1 && ret <= S_SKILL_5)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", ret);
+		showNpcTextAmin(str);
+	}
+	else if (ret >= S_SKILL_6 && ret <= S_SKILL_8)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", ret);
+		showHeroTextAmin(str);
+	}
+	return ret;
+
+}
+
+void FightLayer::showHeroTextAmin(std::string filename)
+{
+	heroactimg->loadTexture(filename, cocos2d::ui::TextureResType::PLIST);
+	heroactimg->setContentSize(Sprite::createWithSpriteFrameName(filename)->getContentSize());
+	heroactimg->setVisible(true);
+	herocritfnt->setVisible(false);
+	heroactimg->setOpacity(200);
+	heroactimg->setScale(3);
+	ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+	heroactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
+	herocritfnt->setVisible(false);
+}
+
+
+void FightLayer::showNpcTextAmin(std::string filename)
+{
+	npcactimg->loadTexture(filename, cocos2d::ui::TextureResType::PLIST);
+	npcactimg->setContentSize(Sprite::createWithSpriteFrameName(filename)->getContentSize());
+	npcactimg->setVisible(true);
+	npcactimg->setOpacity(200);
+	npcactimg->setScale(3);
+	ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
+	npcactimg->runAction(Sequence::create(ac1, DelayTime::create(1.0f), Hide::create(), NULL));
+	npccritfnt->setVisible(false);
 }
