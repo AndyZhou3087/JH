@@ -23,6 +23,8 @@ MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
 	ismoving = false;
+	if (g_hero != NULL)
+		g_hero->setIsMoving(false);
 	m_isDraging = false;
 	m_distance = 0.0f;
 }
@@ -31,6 +33,8 @@ MapLayer::MapLayer()
 MapLayer::~MapLayer()
 {
 	ismoving = false;
+	if (g_hero != NULL)
+		g_hero->setIsMoving(false);
 }
 
 bool MapLayer::init()
@@ -175,6 +179,7 @@ void MapLayer::showJump(float dt)
 void MapLayer::showMoveToDest()
 {
 	ismoving = true;
+	g_hero->setIsMoving(true);
 	g_nature->setTimeInterval(TIMESCALE * 8);
 
 	float dt = moveToDestTime(m_distance);
@@ -268,6 +273,7 @@ void MapLayer::Arrive()
 void MapLayer::finishMove(float dt)
 {
 	ismoving = false;
+	g_hero->setIsMoving(false);
 }
 
 void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

@@ -300,6 +300,9 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 
 void TopBar::updataUI(float dt)
 {
+	if (GlobalData::g_gameStatus != GAMESTART)
+		return;
+
 	std::string str;
 	pastmin += g_nature->getTimeInterval();
 	if (pastmin >= 1440.0f)

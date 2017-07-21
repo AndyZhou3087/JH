@@ -39,6 +39,7 @@ Hero::Hero()
 	m_totalAtkBonusPercent = 0.0f;
 	m_totalDfBonusPercent = 0.0f;
 	m_isWDChallenge = false;
+	m_isMoving = false;
 }
 
 
@@ -58,6 +59,7 @@ void Hero::updateData(float dt)
 {
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
+
 	//12s，（游戏时间1小时更新一次）
 	m_pastmin += g_nature->getTimeInterval();
 

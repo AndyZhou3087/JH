@@ -86,7 +86,7 @@
             <FileData Type="MarkedSubImage" Path="ui/hintdown.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goldbg" ActionTag="-1589980380" Tag="56" IconVisible="False" LeftMargin="9.9999" RightMargin="10.0001" TopMargin="197.8540" BottomMargin="762.1459" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="goldbg" ActionTag="-1589980380" Tag="56" IconVisible="False" LeftMargin="9.9999" RightMargin="10.0001" TopMargin="197.8541" BottomMargin="762.1459" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
             <Size X="700.0000" Y="320.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9999" Y="922.1459" />
@@ -121,7 +121,7 @@
             <FileData Type="MarkedSubImage" Path="ui/goldtextbox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rmbgoodsscroll" ActionTag="-95823977" Tag="66" IconVisible="False" LeftMargin="21.5795" RightMargin="28.4205" TopMargin="252.2170" BottomMargin="797.7829" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="rmbgoodsscroll" ActionTag="-95823977" Tag="66" IconVisible="False" LeftMargin="21.5795" RightMargin="28.4205" TopMargin="252.2170" BottomMargin="797.7829" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
             <Size X="670.0000" Y="230.0000" />
             <AnchorPoint />
             <Position X="21.5795" Y="797.7829" />

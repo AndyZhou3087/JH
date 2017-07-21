@@ -148,6 +148,11 @@ public:
 	CC_SYNTHESIZE(bool, m_isWDChallenge, IsWDChallenge);
 
 	/****************************
+	是否在移动
+	*****************************/
+	CC_SYNTHESIZE(bool, m_isMoving, IsMoving);
+
+	/****************************
 	获取角色攻击
 	*****************************/
 	int getAtkValue();

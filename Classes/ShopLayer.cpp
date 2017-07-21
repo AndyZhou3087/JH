@@ -21,8 +21,6 @@ int ShopLayer::payindex = -1;
 bool ShopLayer::isPaying = false;
 ShopLayer::ShopLayer()
 {
-
-	GlobalData::g_gameStatus = GAMEPAUSE;
 }
 
 
@@ -54,7 +52,7 @@ bool ShopLayer::init()
 
 	m_csbnode = CSLoader::createNode("shopLayer.csb");
 	this->addChild(m_csbnode);
-	
+
 	refreshGoldCount(0);
 
 	std::vector<GoodsData*> vec_rmbGoods;
@@ -125,7 +123,7 @@ bool ShopLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->schedule(schedule_selector(ShopLayer::refreshGoldCount), 1);
-	
+	this->schedule(schedule_selector(ShopLayer::checkGameStatus), 0.1f);
 	return true;
 }
 
@@ -192,6 +190,19 @@ void ShopLayer::refreshGoldCount(float dt)
 	mygoldlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("mygoldlbl");
 	std::string countstr = StringUtils::format("%d", GlobalData::getMyGoldCount());
 	mygoldlbl->setString(countstr);
+}
+
+void ShopLayer::checkGameStatus(float dt)
+{
+	if (g_hero->getIsMoving())
+	{
+		GlobalData::g_gameStatus = GAMESTART;
+	}
+	else
+	{
+		if (GlobalData::g_gameStatus == GAMESTART)
+			GlobalData::g_gameStatus = GAMEPAUSE;
+	}
 }
 
 void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

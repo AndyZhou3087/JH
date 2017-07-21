@@ -335,6 +335,9 @@ void GameScene::saveAllData()
 
 void GameScene::updata(float dt)
 {
+	if (GlobalData::g_gameStatus != GAMESTART)
+		return;
+
 	//更新资源列表数据
 	for (unsigned int i = 0; i < GlobalData::vec_hillResid.size(); i++)
 	{
