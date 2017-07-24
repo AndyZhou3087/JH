@@ -220,6 +220,7 @@ typedef struct
 	std::string id;//ID
 	std::string name;//
 	std::string desc;
+	std::string desc1;//书架描述
 	int leftval;
 }GFSkillData;
 

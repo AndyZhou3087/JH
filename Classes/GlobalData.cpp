@@ -1137,6 +1137,10 @@ void GlobalData::loadGfskillData()
 
 		v = vitem["desc"];
 		data.desc = v.GetString();
+
+		v = vitem["desc1"];
+		data.desc1 = v.GetString();
+
 		data.leftval = 0;
 		int intid = atoi(data.id.c_str());
 		map_gfskills[intid] = data;

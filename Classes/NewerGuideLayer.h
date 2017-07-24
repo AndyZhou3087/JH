@@ -23,7 +23,6 @@ private:
 private:
 	void showAnim(Vec2 pos);
 	Vec2 starPos;
-	bool m_isDraging;
 
 };
 extern NewerGuideLayer* g_NewerGuideLayer;

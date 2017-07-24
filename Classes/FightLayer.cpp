@@ -253,7 +253,8 @@ void FightLayer::skillComboAtk(float dt)
 {
 	int skilltype = checkSkill(H_WG);
 	int count = GlobalData::map_gfskills[skilltype].leftval;
-	npchp -= getNpcHurt() * count / 10;
+	int c = getNpcHurt();
+	npchp -= c * count / 10;
 	GlobalData::map_gfskills[skilltype].leftval--;
 	if (npchp < 0)
 		npchp = 0;
@@ -336,7 +337,8 @@ void FightLayer::delayHeroFight(float dt)
 		if (checkSkill(H_WG) == S_SKILL_3)
 		{
 			int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
-			this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
+			if (count > 0)
+				this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
 		}
 
 		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
@@ -970,7 +972,7 @@ int FightLayer::checkSkill(HeroAtrType gftype)
 				int r = GlobalData::createRandomNum(10000);
 				if (r < rand)
 				{
-					if (stype != S_SKILL_3 && stype != S_SKILL_4 && stype != S_SKILL_6 && stype != S_SKILL_7 && stype != S_SKILL_8)
+					if (stype != S_SKILL_4 && stype != S_SKILL_6 && stype != S_SKILL_7 && stype != S_SKILL_8)
 						GlobalData::map_gfskills[stype].leftval = GlobalData::map_wgngs[gfstr].skilleffect;
 					ret = stype;
 				}

@@ -44,6 +44,23 @@
           <Image Name="sanshaoyejieju17.png" />
           <Image Name="sanshaoyejieju18.png" />
         </Folder>
+        <Folder Name="end3-1">
+          <Image Name="jiangxiaobaijieju01.jpg" />
+          <Image Name="jiangxiaobaijieju02.jpg" />
+          <Image Name="jiangxiaobaijieju03.png" />
+          <Image Name="jiangxiaobaijieju04.jpg" />
+          <Image Name="jiangxiaobaijieju05.png" />
+          <Image Name="jiangxiaobaijieju06.jpg" />
+          <Image Name="jiangxiaobaijieju07.jpg" />
+          <Image Name="jiangxiaobaijieju08.png" />
+          <Image Name="jiangxiaobaijieju09.png" />
+        </Folder>
+        <Folder Name="end3-2">
+          <Image Name="jiangxiaobaijieju10.jpg" />
+          <Image Name="jiangxiaobaijieju11.png" />
+          <Image Name="jiangxiaobaijieju12.png" />
+          <Image Name="jiangxiaobaijieju13.png" />
+        </Folder>
         <Folder Name="story1_1">
           <Image Name="juqingmanhua01.png" />
           <Image Name="juqingmanhua02.png" />
@@ -180,6 +197,8 @@
         <Project Name="end1_2.csd" Type="Layer" />
         <Project Name="end2_1.csd" Type="Layer" />
         <Project Name="end2_2.csd" Type="Layer" />
+        <Project Name="end3-1.csd" Type="Layer" />
+        <Project Name="end3-2.csd" Type="Layer" />
         <Project Name="story1_1.csd" Type="Skeleton" />
         <Project Name="story1_2.csd" Type="Skeleton" />
         <Project Name="story2_1.csd" Type="Layer" />

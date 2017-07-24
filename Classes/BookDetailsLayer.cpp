@@ -97,6 +97,8 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		critlbl->setVisible(true);
 
 		cocos2d::ui::Text* skilltext = (cocos2d::ui::Text*)m_csbnode->getChildByName("skilltext");
+		cocos2d::ui::Text* skillname = (cocos2d::ui::Text*)m_csbnode->getChildByName("skillname");
+		cocos2d::ui::Text* skilldesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("skilldesc");
 
 		std::string critstr;
 		if (bookdata->type == W_GONG)
@@ -116,9 +118,11 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		int skilltype = GlobalData::map_wgngs[bookdata->strid].skilltype;
 		if (skilltype > S_SNONE)
 		{
-			std::string sstr = StringUtils::format("%s%s",CommonFuncs::gbk2utf("技能：").c_str(), GlobalData::map_gfskills[skilltype].name.c_str());
 			skilltext->setVisible(true);
-			skilltext->setString(sstr);
+			skillname->setString(GlobalData::map_gfskills[skilltype].name);
+			std::string sdesc = skilldesc->getString();
+			sdesc.append(GlobalData::map_gfskills[skilltype].desc1);
+			skilldesc->setString(sdesc);
 		}
 
 	}

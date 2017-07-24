@@ -24,7 +24,7 @@ std::string descText[] = {"在这里可查看建造所需要的资源", "点击�
 NewerGuideLayer* g_NewerGuideLayer = NULL;
 NewerGuideLayer::NewerGuideLayer()
 {
-	m_isDraging = false;
+
 }
 NewerGuideLayer::~NewerGuideLayer()
 {
@@ -105,7 +105,6 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
-		m_isDraging = false;
 		Vec2 point = Director::getInstance()->convertToGL(touch->getLocationInView());//获得当前触摸的坐标 
 		starPos = touch->getLocation();
 		if (stencilNodes.size() > 0)
@@ -116,7 +115,9 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 			auto rect = Rect(vec.x - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width / 2, vec.y - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height/2, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height);
 			if (rect.containsPoint(point))//如果触点处于rect中  
 			{
+				GameDataSave::getInstance()->setIsNewerGuide(step, 0);
 				listener->setSwallowTouches(false);
+				this->removeFromParentAndCleanup(true);
 			}
 			else
 			{
@@ -127,35 +128,8 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		{
 			listener->setSwallowTouches(true);
 		}
+
 		return true;
-	};
-
-	listener->onTouchEnded = [=](Touch *touch, Event *event)
-	{
-		if (m_isDraging)
-			return;
-		if (stencilNodes.size() > 0)
-		{
-			auto point = Director::getInstance()->convertToGL(touch->getLocationInView());//获得当前触摸的坐标  
-			Vec2 vec = stencilNodes[stencilNodes.size() - 1]->getParent()->convertToWorldSpace(stencilNodes[stencilNodes.size() - 1]->getPosition());
-
-			auto rect = Rect(vec.x - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width / 2, vec.y - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height / 2, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height);
-			if (rect.containsPoint(point))//如果触点处于rect中  
-			{
-				this->removeFromParentAndCleanup(true);
-			}
-		}
-		else
-		{
-			this->removeFromParentAndCleanup(true);
-		}
-		GameDataSave::getInstance()->setIsNewerGuide(step, 0);
-	};
-
-	listener->onTouchMoved = [=](Touch *touch, Event *event)
-	{
-		if (fabsf(starPos.x - touch->getLocation().x) > 10 || fabsf(starPos.y - touch->getLocation().y) > 10)
-			m_isDraging = true;
 	};
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);

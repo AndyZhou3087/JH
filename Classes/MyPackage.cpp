@@ -176,6 +176,10 @@ void MyPackage::load()
 				if (it->strid.compare(data.strid) == 0)
 				{
 					it->goodvalue += data.goodvalue;
+					if (it->slv < data.slv)
+						it->slv = data.slv;
+					if (it->lv < data.lv)
+						it->lv = data.lv;
 					ishassame = true;
 				}
 			}

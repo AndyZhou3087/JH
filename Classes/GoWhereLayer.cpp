@@ -258,11 +258,11 @@ void GoWhereLayer::checkRedPoint(float dt)
 void GoWhereLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 21 || step == 41)
+	if ((step == 21 || step == 41) && m_type == GOWHERE)
 		nodes.push_back(m_gobtn);
-	else if (step == 22 || step == 42)
+	else if ((step == 22 || step == 42) && m_type == ARRIVE)
 		nodes.push_back(m_enterbtn);	
-	else if (step == 51)
+	else if (step == 51 && m_type == ARRIVE)
 		nodes.push_back(m_stbtn);
 	g_gameLayer->showNewerGuide(step, nodes);
 }

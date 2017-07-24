@@ -6,23 +6,23 @@
       <ObjectData Name="Layer" Tag="66" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="bg" ActionTag="550694555" Tag="78" IconVisible="False" LeftMargin="78.5000" RightMargin="78.5000" TopMargin="275.0000" BottomMargin="275.0000" Scale9Enable="True" LeftEage="172" RightEage="172" TopEage="183" BottomEage="183" Scale9OriginX="172" Scale9OriginY="183" Scale9Width="179" Scale9Height="190" ctype="ImageViewObjectData">
-            <Size X="563.0000" Y="730.0000" />
+          <AbstractNodeData Name="bg" ActionTag="550694555" Tag="78" IconVisible="False" LeftMargin="78.5000" RightMargin="78.5000" TopMargin="250.0000" BottomMargin="250.0000" Scale9Enable="True" LeftEage="172" RightEage="172" TopEage="183" BottomEage="183" Scale9OriginX="172" Scale9OriginY="183" Scale9Width="179" Scale9Height="190" ctype="ImageViewObjectData">
+            <Size X="563.0000" Y="780.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="640.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.7819" Y="0.5703" />
+            <PreSize X="0.7819" Y="0.6094" />
             <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="okbtn" ActionTag="-1194362744" Tag="77" IconVisible="False" LeftMargin="284.9993" RightMargin="285.0007" TopMargin="875.0005" BottomMargin="314.9995" TouchEnable="True" FontSize="40" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="okbtn" ActionTag="-1194362744" Tag="77" IconVisible="False" LeftMargin="284.9993" RightMargin="285.0007" TopMargin="889.0005" BottomMargin="300.9995" TouchEnable="True" FontSize="40" ButtonText="确定" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="359.9993" Y="359.9995" />
+            <Position X="359.9993" Y="345.9995" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.2812" />
+            <PrePosition X="0.5000" Y="0.2703" />
             <PreSize X="0.2083" Y="0.0703" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
@@ -210,14 +210,38 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skilltext" ActionTag="-43068099" VisibleForFrame="False" Tag="107" IconVisible="False" LeftMargin="130.0043" RightMargin="589.9957" TopMargin="847.7210" BottomMargin="432.2790" FontSize="25" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="0.0000" Y="0.0000" />
+          <AbstractNodeData Name="skilltext" ActionTag="-43068099" VisibleForFrame="False" Tag="107" IconVisible="False" LeftMargin="130.0000" RightMargin="527.0000" TopMargin="834.2200" BottomMargin="418.7800" FontSize="25" LabelText="技能：" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="63.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="130.0043" Y="432.2790" />
+            <Position X="130.0000" Y="432.2800" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.1806" Y="0.3377" />
+            <PreSize X="0.0875" Y="0.0211" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="skillname" ActionTag="1788782145" Tag="36" IconVisible="False" LeftMargin="200.0000" RightMargin="520.0000" TopMargin="847.7200" BottomMargin="432.2800" FontSize="25" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="200.0000" Y="432.2800" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="27" G="141" B="0" />
+            <PrePosition X="0.2778" Y="0.3377" />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="skilldesc" ActionTag="-286290673" Tag="37" IconVisible="False" LeftMargin="130.0000" RightMargin="130.0000" TopMargin="834.7200" BottomMargin="393.2800" IsCustomSize="True" FontSize="25" LabelText="                            " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="460.0000" Y="52.0000" />
+            <AnchorPoint ScaleY="1.0000" />
+            <Position X="130.0000" Y="445.2800" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.1806" Y="0.3479" />
+            <PreSize X="0.6389" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

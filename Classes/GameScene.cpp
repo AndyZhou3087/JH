@@ -290,6 +290,10 @@ void GameScene::loadSavedHeroPropData()
 				if (it->strid.compare(sdata.strid) == 0 && sdata.count > 0)
 				{
 					sdata.goodvalue += it->goodvalue;
+					if (it->slv < sdata.slv)
+						it->slv = sdata.slv;
+					if (it->lv < sdata.lv)
+						it->lv = sdata.lv;
 					it = StorageRoom::map_storageData[sdata.type].erase(it);
 				}
 				else

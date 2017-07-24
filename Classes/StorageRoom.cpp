@@ -97,6 +97,10 @@ void StorageRoom::loadStorageData()
 					it->goodvalue += sdata.goodvalue;
 					if (it->goodvalue > 1000)
 						it->goodvalue = 1000;
+					if (it->slv < sdata.slv)
+						it->slv = sdata.slv;
+					if (it->lv < sdata.lv)
+						it->lv = sdata.lv;
 					ishassame = true;
 				}
 			}

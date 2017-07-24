@@ -336,14 +336,15 @@ void RepairLayer::showAnim()
 
 int RepairLayer::getMyPackageResCount(std::string strid)
 {
+	int count = 0;
 	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
 	{
 		if (MyPackage::vec_packages[i].strid.compare(strid) == 0)
 		{
-			return MyPackage::vec_packages[i].count;
+			count += MyPackage::vec_packages[i].count;
 		}
 	}
-	return 0;
+	return count;
 }
 
 void RepairLayer::finishAnim(Ref* pSender)
@@ -356,7 +357,8 @@ void RepairLayer::finishAnim(Ref* pSender)
 	}
 	
 	PackageData* data = (PackageData*)repairResImg->getUserData();
-	data->goodvalue = 100;
+	if (data->goodvalue < 100)
+		data->goodvalue = 100;
 	if (m_type == 2)
 	{
 		int r = GlobalData::createRandomNum(100);
