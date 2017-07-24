@@ -38,7 +38,6 @@ bool BuyDetailsLayer::init(int heroid)
 	{
 		std::vector<std::string> tmp2;
 		CommonFuncs::split(tmp[i], tmp2, "-");
-
 		std::string countstr = StringUtils::format("*%s", tmp2[2].c_str());
 		std::string idstr = tmp2[0];
 		goodsstr.append(GlobalData::map_allResource[idstr].cname.c_str());

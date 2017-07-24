@@ -666,7 +666,10 @@ void HeroProperNode::showNewerGuide(int step)
 	{
 		resItemNode = m_scrollView->getChildByName("resitem0");
 		if (resItemNode != NULL)
-			nodes.push_back(resItemNode->getChildren().at(0));
+		{
+			if (resItemNode->getChildrenCount() > 0)
+				nodes.push_back(resItemNode->getChildren().at(0));
+		}
 		if (NewerGuideLayer::checkifNewerGuide(step))
 			m_scrollView->setEnabled(false);
 	}

@@ -52,6 +52,10 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	{
 		return false;
 	}
+	//layer 点击事件，屏蔽下层事件
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->setSwallowTouches(true);
+
 	m_step = step;
 	if (stencilNodes.size() > 0)
 	{
@@ -101,8 +105,6 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		textbox->addChild(wordlbl);
 	}
 
-	//layer 点击事件，屏蔽下层事件
-	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		Vec2 point = Director::getInstance()->convertToGL(touch->getLocationInView());//获得当前触摸的坐标 

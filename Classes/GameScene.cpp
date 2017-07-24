@@ -55,8 +55,6 @@ bool GameScene::init()
         return false;
     }
 
-	GlobalData::loadAllResourceJsonData();
-
 	//读取资源配置文件
 	GlobalData::loadResJsonData();
 
@@ -445,7 +443,7 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 	{
 		m_newerStep = step;
 		m_newerNode = nodes;
-		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.2f);
+		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.1f);
 	}
 }
 
