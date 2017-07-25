@@ -138,7 +138,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	npccritfnt = (cocos2d::ui::TextBMFont*)npcactimg->getChildByName("npccritfnt");
 
 	if (npcid.compare("n001") != 0)
-		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.8f);//0.8s，hero->npc
+		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.0f);//1.0s，hero->npc
 	else
 	{
 		addrnametxt->setString(CommonFuncs::gbk2utf("路上"));
@@ -183,7 +183,7 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		if (node->getTag() == 0)
 		{
 			int r = GlobalData::createRandomNum(100);
-			if (r > 50)
+			if (r < GlobalData::map_npcs[m_npcid].escapernd)
 			{
 				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("逃跑成功！"));
 				addChild(hbox);
@@ -229,7 +229,7 @@ void FightLayer::fightRobber()
 {
 	m_fightbtn->setEnabled(false);
 	this->unschedule(schedule_selector(FightLayer::checkHeroLife));
-	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 0.5f);
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.0f);
 }
 
 void FightLayer::npcDie()
@@ -253,11 +253,10 @@ int FightLayer::getNpcHurt()
 
 void FightLayer::skillComboAtk(float dt)
 {
-	int skilltype = checkSkill(H_WG);
-	int count = GlobalData::map_gfskills[skilltype].leftval;
+	int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
 	int c = getNpcHurt();
 	npchp -= c * count / 10;
-	GlobalData::map_gfskills[skilltype].leftval--;
+	GlobalData::map_gfskills[S_SKILL_3].leftval--;
 	if (npchp < 0)
 		npchp = 0;
 	updateNpcLife();
@@ -283,6 +282,7 @@ void FightLayer::delayHeroFight(float dt)
 
 	if (checkSkill(H_WG) == S_SKILL_4)
 	{
+		showSkill(S_SKILL_4);
 		critrnd += GlobalData::map_gfskills[S_SKILL_4].leftval * 100;
 	}
 
@@ -340,10 +340,13 @@ void FightLayer::delayHeroFight(float dt)
 		{
 			int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
 			if (count > 0)
+			{
+				showSkill(S_SKILL_3);
 				this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
+			}
 		}
 
-		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.2f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
+		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.5f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
 	}
 }
 
@@ -369,6 +372,7 @@ void FightLayer::delayBossFight(float dt)
 		int skilltype = checkSkill(H_WG);
 		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
 		{
+			showSkill(skilltype);
 			npchp -= getNpcHurt() * 3 / 10;
 			updateNpcLife();
 			GlobalData::map_gfskills[skilltype].leftval--;
@@ -380,16 +384,21 @@ void FightLayer::delayBossFight(float dt)
 		}
 		else if (skilltype == S_SKILL_2)
 		{
+			showSkill(skilltype);
 			GlobalData::map_gfskills[skilltype].leftval--;
-			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 			return;
 		}
 
 		skilltype = checkSkill(H_NG);
 		if (skilltype == S_SKILL_6)
+		{
+			showSkill(skilltype);
 			herohurt = herohurt * (100 - GlobalData::map_gfskills[skilltype].leftval) / 100;
+		}
 		else if (skilltype == S_SKILL_7)
 		{
+			showSkill(skilltype);
 			int npclosthp = npchp * GlobalData::map_gfskills[skilltype].leftval / 100;
 			npchp -= npclosthp;
 			updateNpcLife();
@@ -413,6 +422,7 @@ void FightLayer::delayBossFight(float dt)
 
 	if (checkSkill(H_NG) == S_SKILL_8)
 	{
+		showSkill(S_SKILL_8);
 		dodgernd += GlobalData::map_gfskills[S_SKILL_8].leftval * 100;
 	}
 
@@ -464,7 +474,7 @@ void FightLayer::delayBossFight(float dt)
 
 	if (g_hero->getLifeValue() > 0.0f)
 	{
-		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 
 		float f1maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()] * 0.05f;
 		if (herohurt >= (int)f1maxlife)//受到大于10%伤害
@@ -915,7 +925,7 @@ void FightLayer::nextFightNpc(float dt)
 
 	updateNpcLife();
 
-	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 }
 
 void FightLayer::continueChallenge()
@@ -945,7 +955,7 @@ void FightLayer::reviveContinueChallege()
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
 	m_escapebtn->setTag(0);
 	checkHeroLife(0);
-	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.2f);
+	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 }
 
 void FightLayer::showChallengeCountLayer(bool isRevive)
@@ -982,18 +992,22 @@ int FightLayer::checkSkill(HeroAtrType gftype)
 		}
 	}
 
-	if (ret >= S_SKILL_1 && ret <= S_SKILL_5)
-	{
-		std::string str = StringUtils::format("ui/skill%dtext.png", ret);
-		showNpcTextAmin(str);
-	}
-	else if (ret >= S_SKILL_6 && ret <= S_SKILL_8)
-	{
-		std::string str = StringUtils::format("ui/skill%dtext.png", ret);
-		showHeroTextAmin(str);
-	}
 	return ret;
 
+}
+
+void FightLayer::showSkill(int skilltype)
+{
+	if (skilltype >= S_SKILL_1 && skilltype <= S_SKILL_5)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", skilltype);
+		showNpcTextAmin(str);
+	}
+	else if (skilltype >= S_SKILL_6 && skilltype <= S_SKILL_8)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", skilltype);
+		showHeroTextAmin(str);
+	}
 }
 
 void FightLayer::showHeroTextAmin(std::string filename)
@@ -1005,7 +1019,7 @@ void FightLayer::showHeroTextAmin(std::string filename)
 	heroactimg->setOpacity(200);
 	heroactimg->setScale(3);
 	ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
-	heroactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
+	heroactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.6f), Hide::create(), NULL));
 	herocritfnt->setVisible(false);
 }
 
@@ -1018,6 +1032,6 @@ void FightLayer::showNpcTextAmin(std::string filename)
 	npcactimg->setOpacity(200);
 	npcactimg->setScale(3);
 	ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
-	npcactimg->runAction(Sequence::create(ac1, DelayTime::create(1.0f), Hide::create(), NULL));
+	npcactimg->runAction(Sequence::create(ac1, DelayTime::create(0.8f), Hide::create(), NULL));
 	npccritfnt->setVisible(false);
 }

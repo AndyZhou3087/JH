@@ -328,6 +328,10 @@ void GlobalData::loadNpcJsonData()
 		v = item["lv"];
 		data.lv = atoi(v.GetString());
 
+		v = item["es"];
+		data.escapernd = atoi(v.GetString());
+		
+
 		v = item["winres"];
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{

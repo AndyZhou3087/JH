@@ -117,6 +117,11 @@ private:
 	int checkSkill(HeroAtrType gftype);
 
 	/****************************
+	显示技能
+	****************************/
+	void showSkill(int skilltype);
+
+	/****************************
 	NPC 死亡
 	****************************/
 	void npcDie();

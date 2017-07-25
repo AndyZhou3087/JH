@@ -86,6 +86,7 @@ typedef struct
 	int lv;//npc等级
 	float crit;//暴击率
 	float dodge;//闪避率
+	int escapernd;//逃跑成功概率
 	std::vector<std::string> winres;//打败npc赢得奖励
 	std::vector<int> winresrnd;//打败npc出奖励的概率
 	std::vector<int> winrescount;//打多少次随机

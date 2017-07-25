@@ -140,14 +140,14 @@ void NpcLayer::refreshNpcNode()
 		std::string rsistr;
 		if (count > 0)
 		{
-			if (count <= 3)
+			if (count <= 10)
 				rsistr = "ui/npcrsi0.png";
 			else
 				rsistr = "ui/npcrsi1.png";
 		}
 		else
 		{
-			if (count >= -3)
+			if (count >= -10)
 				rsistr = "ui/npcrsi2.png";
 			else
 				rsistr = "ui/npcrsi1.png";
