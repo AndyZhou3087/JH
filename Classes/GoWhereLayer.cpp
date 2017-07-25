@@ -60,7 +60,9 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	//距离 ，换算成时间
 	cocos2d::ui::Text* fast = (cocos2d::ui::Text*)csbnode->getChildByName("fast");
 
-	float fmin =g_maplayer->moveToDestTime(distance);
+    float fmin = 0.0f;
+    if (g_maplayer != NULL)
+        g_maplayer->moveToDestTime(distance);
 
 	int minute = (int)fmin;
 	std::string faststr;
@@ -154,7 +156,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 void GoWhereLayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	if (m_type == ONWAY_JUMP)
+	if (m_type == ONWAY_JUMP && g_maplayer != NULL)
 		g_maplayer->heroPauseMoving();
 }
 
@@ -163,7 +165,7 @@ void GoWhereLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (m_type == ONWAY_JUMP)
+		if (m_type == ONWAY_JUMP && g_maplayer != NULL)
 		{
 			g_maplayer->heroResumeMoving();
 		}

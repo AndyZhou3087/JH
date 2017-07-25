@@ -561,8 +561,8 @@ void TopBar::checkNpcRandMap()
 			}
 			GlobalData::setWxbMapPos(rpos);
 			GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
-
-			g_maplayer->updataPlotMissionIcon(0);
+            if (g_maplayer != NULL)
+                g_maplayer->updataPlotMissionIcon(0);
 		}
 	}
 

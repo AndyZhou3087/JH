@@ -168,7 +168,8 @@ void FightLayer::onEnterTransitionDidFinish()
 	Layer::onEnterTransitionDidFinish();
 	if (m_npcid.compare("n001") == 0)
 	{
-		g_maplayer->heroPauseMoving();
+        if (g_maplayer != NULL)
+            g_maplayer->heroPauseMoving();
 	}
 
 }
@@ -202,7 +203,8 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			m_escapebtn->setTag(1);
 			if (isecapeok && m_npcid.compare("n001") == 0)//山贼
 			{
-				g_maplayer->heroResumeMoving();
+                if (g_maplayer != NULL)
+                    g_maplayer->heroResumeMoving();
 				this->removeFromParentAndCleanup(true);
 			}
 		}

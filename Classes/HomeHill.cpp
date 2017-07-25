@@ -137,7 +137,8 @@ void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
+        if (g_maplayer != NULL)
+            g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 		this->removeFromParentAndCleanup(true);
 	}
 }
