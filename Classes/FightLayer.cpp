@@ -19,6 +19,7 @@ FightLayer::FightLayer()
 	isUseWg = false;
 	winnpcount = 0;
 	winProperCount = 0;
+	npcisdead = false;
 }
 
 
@@ -234,7 +235,11 @@ void FightLayer::fightRobber()
 
 void FightLayer::npcDie()
 {
-	this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+	if (!npcisdead)
+	{
+		npcisdead = true;
+		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+	}
 }
 
 int FightLayer::getNpcHurt()
@@ -518,6 +523,8 @@ void FightLayer::delayShowWinLayer(float dt)
 	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(layer, 10, "Winlayer");
+
+	npcisdead = false;
 
 	if (continuefight > 0)
 	{

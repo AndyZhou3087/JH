@@ -16,36 +16,36 @@
             <PreSize X="1.0000" Y="0.8594" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="51.8632" RightMargin="434.1368" TopMargin="270.3212" BottomMargin="919.6788" ctype="SpriteObjectData">
+          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="51.8632" RightMargin="434.1368" TopMargin="264.3212" BottomMargin="925.6788" ctype="SpriteObjectData">
             <Size X="234.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="168.8632" Y="964.6788" />
+            <Position X="168.8632" Y="970.6788" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2345" Y="0.7537" />
+            <PrePosition X="0.2345" Y="0.7583" />
             <PreSize X="0.3250" Y="0.0703" />
             <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1802100088" Tag="31" IconVisible="False" LeftMargin="131.3839" RightMargin="467.6161" TopMargin="280.3166" BottomMargin="953.6834" FontSize="42" LabelText="欧冶子" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="-1802100088" Tag="31" IconVisible="False" LeftMargin="131.3839" RightMargin="467.6161" TopMargin="274.3165" BottomMargin="959.6835" FontSize="42" LabelText="欧冶子" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="121.0000" Y="46.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="131.3839" Y="976.6834" />
+            <Position X="131.3839" Y="982.6835" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.1825" Y="0.7630" />
+            <PrePosition X="0.1825" Y="0.7677" />
             <PreSize X="0.1681" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="-659262914" Tag="33" IconVisible="False" LeftMargin="533.4502" RightMargin="36.5498" TopMargin="258.2206" BottomMargin="931.7794" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="-659262914" Tag="33" IconVisible="False" LeftMargin="533.4502" RightMargin="36.5498" TopMargin="252.2206" BottomMargin="937.7794" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="608.4502" Y="976.7794" />
+            <Position X="608.4502" Y="982.7794" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8451" Y="0.7631" />
+            <PrePosition X="0.8451" Y="0.7678" />
             <PreSize X="0.2083" Y="0.0703" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
@@ -226,6 +226,18 @@
             <PreSize X="0.4139" Y="0.2062" />
             <FileData Type="MarkedSubImage" Path="ui/strengthfail.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="desc" ActionTag="2003148900" Tag="88" IconVisible="False" LeftMargin="71.5001" RightMargin="71.4999" TopMargin="349.0659" BottomMargin="899.9341" FontSize="28" LabelText="十级以上强化失败时武器会消失，请慎重考虑！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="577.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="360.0001" Y="915.4341" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.5000" Y="0.7152" />
+            <PreSize X="0.8014" Y="0.0242" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

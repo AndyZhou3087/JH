@@ -29,7 +29,6 @@ private:
 
 	void onStorageItem(cocos2d::Ref* pSender);
 	void onPackageItem(cocos2d::Ref* pSender);
-	void delayShowGOOut(float dt);
 private:
 	std::vector<PackageData*> allStorageData;
 	HeroProperNode* m_heroproper;

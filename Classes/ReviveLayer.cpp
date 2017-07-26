@@ -252,7 +252,7 @@ void ReviveLayer::reviveOk()
 	if (g_gameLayer != NULL)
 	{
 		g_gameLayer->removeChildByName("revivelayer");
-		if (!g_hero->getIsWDChallenge())
+		if (g_hero != NULL && !g_hero->getIsWDChallenge())
 			g_gameLayer->removeChildByName("fightlayer");
 
 		g_gameLayer->heroRevive();

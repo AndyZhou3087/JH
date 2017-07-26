@@ -127,7 +127,7 @@ void Nature::updateData(float dt)
 {
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
-	if (g_hero->getIsWDChallenge())
+	if (g_hero != NULL && g_hero->getIsWDChallenge())
 		return;
 
 	m_time += getTimeInterval();

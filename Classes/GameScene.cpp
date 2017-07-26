@@ -429,6 +429,15 @@ void GameScene::delayShowOutScence(float dt)
 		auto transition = TransitionCrossFade::create(0.5f, scene);
 		Director::getInstance()->pushScene(transition);
 	}
+	this->scheduleOnce(schedule_selector(GameScene::showGOOut), 0.1f);
+}
+
+void GameScene::showGOOut(float dt)
+{
+	g_maplayer = MapLayer::create();
+	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
+	g_gameLayer->removeChildByName("homelayer");
+	g_hero->setIsOut(true);
 }
 
 void GameScene::getNpcRandMap()

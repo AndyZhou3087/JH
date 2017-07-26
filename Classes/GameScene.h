@@ -46,6 +46,11 @@ public:
 	*****************************/
 	void delayShowOutScence(float dt);
 
+	/****************************
+	出门
+	*****************************/
+	void showGOOut(float dt);
+
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家

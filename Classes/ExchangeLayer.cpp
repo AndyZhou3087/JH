@@ -565,7 +565,8 @@ void ExchangeLayer::updataMyGoodsUI()
 		allMydata.push_back(&npcExgData[i]);
 	}
 
-	for (unsigned int i = 0; i < allMydata.size(); i++)
+	int allsize = allMydata.size();
+	for (int i = 0; i < allsize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData* tmpdata = allMydata[i];
@@ -643,7 +644,8 @@ void ExchangeLayer::updataNpcGoodsUI()
 		allNpcdata.push_back(&myExgData[i]);
 	}
 
-	for (unsigned int i = 0; i < allNpcdata.size(); i++)
+	int allsize = allNpcdata.size();
+	for (int i = 0; i < allsize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData *tmpdata = allNpcdata[i];

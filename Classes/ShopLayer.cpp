@@ -60,7 +60,7 @@ bool ShopLayer::init()
 
 	int goodsize = GlobalData::vec_goods.size();
 
-	for (unsigned int i = 0; i < goodsize; i++)
+	for (int i = 0; i < goodsize; i++)
 	{
 		GoodsData* gdata = &GlobalData::vec_goods[i];
 		if (gdata->type == 0)
