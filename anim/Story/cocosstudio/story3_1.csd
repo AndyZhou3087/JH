@@ -501,7 +501,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.8613" />
             <PreSize X="1.0000" Y="0.2781" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing01.jpg" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing01.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing02_2" ActionTag="-1663600177" Tag="52" IconVisible="False" LeftMargin="490.4752" RightMargin="106.5248" TopMargin="4.1993" BottomMargin="1067.8007" ctype="SpriteObjectData">
@@ -512,7 +512,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7666" Y="0.9155" />
             <PreSize X="0.1708" Y="0.1625" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing02.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing02.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing03_3" ActionTag="-475493003" Tag="53" IconVisible="False" LeftMargin="0.7020" RightMargin="482.2980" TopMargin="132.4358" BottomMargin="1015.5642" ctype="SpriteObjectData">
@@ -523,7 +523,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1656" Y="0.8450" />
             <PreSize X="0.3292" Y="0.1031" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing03.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing03.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing04_4" ActionTag="-934156068" Tag="54" IconVisible="False" LeftMargin="517.6508" RightMargin="-0.6508" TopMargin="112.3274" BottomMargin="952.6726" ctype="SpriteObjectData">
@@ -534,7 +534,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8599" Y="0.8283" />
             <PreSize X="0.2819" Y="0.1680" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing04.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing04.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing05_5" ActionTag="-1755853717" Tag="55" IconVisible="False" LeftMargin="0.0331" RightMargin="383.9669" TopMargin="370.9153" BottomMargin="649.0847" ctype="SpriteObjectData">
@@ -545,7 +545,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2334" Y="0.6087" />
             <PreSize X="0.4667" Y="0.2031" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing05.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing05.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing06_6" ActionTag="-271927605" Tag="56" IconVisible="False" LeftMargin="232.1915" RightMargin="217.8085" TopMargin="370.6628" BottomMargin="649.3372" ctype="SpriteObjectData">
@@ -556,7 +556,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5100" Y="0.6089" />
             <PreSize X="0.3750" Y="0.2031" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing06.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing06.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing07_7" ActionTag="-463193919" Tag="57" IconVisible="False" LeftMargin="438.5076" RightMargin="-0.5076" TopMargin="370.5866" BottomMargin="649.4134" ctype="SpriteObjectData">
@@ -567,7 +567,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8049" Y="0.6089" />
             <PreSize X="0.3917" Y="0.2031" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing07.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing07.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing08_8" ActionTag="-306169130" Tag="58" IconVisible="False" LeftMargin="1.5339" RightMargin="534.4661" TopMargin="646.0894" BottomMargin="319.9106" ctype="SpriteObjectData">
@@ -578,7 +578,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1299" Y="0.3726" />
             <PreSize X="0.2556" Y="0.2453" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing08.jpg" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing08.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing09_9" ActionTag="450721471" Tag="59" IconVisible="False" LeftMargin="109.5405" RightMargin="528.4595" TopMargin="661.7021" BottomMargin="443.2979" ctype="SpriteObjectData">
@@ -589,7 +589,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2091" Y="0.4147" />
             <PreSize X="0.1139" Y="0.1367" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing09.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing09.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing10_10" ActionTag="-1033186130" Tag="60" IconVisible="False" LeftMargin="191.0818" RightMargin="-0.0818" TopMargin="646.1339" BottomMargin="319.8661" ctype="SpriteObjectData">
@@ -600,7 +600,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6328" Y="0.3726" />
             <PreSize X="0.7347" Y="0.2453" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing10.jpg" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing10.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing11_11" ActionTag="-1745674347" Tag="61" IconVisible="False" LeftMargin="186.3767" RightMargin="393.6233" TopMargin="730.0070" BottomMargin="330.9930" ctype="SpriteObjectData">
@@ -611,7 +611,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3561" Y="0.3441" />
             <PreSize X="0.1944" Y="0.1711" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing11.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing11.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing12_12" ActionTag="1910746464" Tag="62" IconVisible="False" LeftMargin="592.1630" RightMargin="-1.1630" TopMargin="577.0396" BottomMargin="483.9604" ctype="SpriteObjectData">
@@ -622,7 +622,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9120" Y="0.4636" />
             <PreSize X="0.1792" Y="0.1711" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing12.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing12.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing13_13" ActionTag="-913278542" Tag="63" IconVisible="False" LeftMargin="453.0375" RightMargin="120.9625" TopMargin="774.7159" BottomMargin="318.2841" ctype="SpriteObjectData">
@@ -633,7 +633,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7306" Y="0.3217" />
             <PreSize X="0.2028" Y="0.1461" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing13.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing13.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing14_14" ActionTag="1331007033" Tag="64" IconVisible="False" LeftMargin="-0.4605" RightMargin="374.4605" TopMargin="974.2028" BottomMargin="-0.2027" ctype="SpriteObjectData">
@@ -644,7 +644,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2396" Y="0.1194" />
             <PreSize X="0.4806" Y="0.2391" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing14.jpg" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing14.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing15_15" ActionTag="1729997982" Tag="65" IconVisible="False" LeftMargin="351.0695" RightMargin="-0.0695" TopMargin="974.2997" BottomMargin="-0.2997" ctype="SpriteObjectData">
@@ -655,7 +655,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7438" Y="0.1193" />
             <PreSize X="0.5125" Y="0.2391" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing15.jpg" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing15.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijuqing16_16" ActionTag="-268439618" Tag="66" IconVisible="False" LeftMargin="267.5508" RightMargin="252.4492" TopMargin="1014.3268" BottomMargin="1.6732" ctype="SpriteObjectData">
@@ -666,7 +666,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5105" Y="0.1044" />
             <PreSize X="0.2778" Y="0.2062" />
-            <FileData Type="Normal" Path="story3-1/jiangxiaobaijuqing16.png" Plist="" />
+            <FileData Type="Normal" Path="story3_1/jiangxiaobaijuqing16.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

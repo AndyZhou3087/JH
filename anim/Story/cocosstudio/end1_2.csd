@@ -160,7 +160,7 @@
             <FileData Type="Normal" Path="end1_2/xiaoxiamijieju14.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="xiaoxiamijieju15_5" ActionTag="-912915340" Alpha="0" Tag="50" IconVisible="False" LeftMargin="592.1016" RightMargin="84.8984" TopMargin="100.1653" BottomMargin="620.8348" ctype="SpriteObjectData">
+          <AbstractNodeData Name="xiaoxiamijieju15_5" ActionTag="-912915340" Tag="50" IconVisible="False" LeftMargin="592.1016" RightMargin="84.8984" TopMargin="100.1653" BottomMargin="620.8348" ctype="SpriteObjectData">
             <Size X="43.0000" Y="559.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="613.6016" Y="900.3348" />

@@ -69,10 +69,13 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	{
 		qu = GlobalData::map_equips[pdata->strid].qu;
 
-		cocos2d::ui::Text* slvlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvlbl");
-		std::string slvstr = StringUtils::format("+%d", pdata->slv);
-		slvlbl->setPositionX(resname->getPositionX() + resname->getContentSize().width/2 + 10);
-		slvlbl->setString(slvstr);
+		if (pdata->slv > 0)
+		{
+			cocos2d::ui::Text* slvlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvlbl");
+			std::string slvstr = StringUtils::format("+%d", pdata->slv);
+			slvlbl->setPositionX(resname->getPositionX() + resname->getContentSize().width / 2 + 10);
+			slvlbl->setString(slvstr);
+		}
 	}
 	else if (pdata->type == N_GONG || pdata->type == W_GONG)
 	{
@@ -124,7 +127,9 @@ bool ResDetailsLayer::init(PackageData* pdata)
 		countstr = StringUtils::format("库存%d", count);
 	else if (pdata->type == WEAPON || pdata->type == PROTECT_EQU || pdata->type == TOOLS)
 	{
-		countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
+		if (g_hero->checkifHasGF_Equip(pdata->strid))
+			countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
+
 		std::string tmpstr;
 		std::string sstr;
 		if (pdata->type == WEAPON)
@@ -143,8 +148,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			}
 			int satk = eatk * slv * 1.0f * 2 / 100.0f;
 
-			sstr = StringUtils::format("+%d", satk);
-			slvatk->setVisible(true);
+			if (satk > 0)
+			{
+				sstr = StringUtils::format("+%d", satk);
+				slvatk->setVisible(true);
+			}
 		}
 		else if (pdata->type == PROTECT_EQU)
 		{
@@ -161,9 +169,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 				}
 			}
 			int sdf = pdf * slv * 1.0f * 2 / 100.0f;
-
-			sstr = StringUtils::format("+%d", sdf);
-			slvatk->setVisible(true);
+			if (sdf > 0)
+			{
+				sstr = StringUtils::format("+%d", sdf);
+				slvatk->setVisible(true);
+			}
 		}
 		if (tmpstr.length() > 0)
 			atkdftext->setString(CommonFuncs::gbk2utf(tmpstr.c_str()));
@@ -278,17 +288,26 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 	}
 	if (!isInRes)
 	{
-		std::map<std::string, std::vector<BuildActionData>>::iterator it;
-		for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+		PackageData* pdata = g_hero->getGF_Equip(resid);
+		if (pdata != NULL)
 		{
-			for (unsigned int i = 0; i < GlobalData::map_buidACData[it->first].size(); i++)
+			isInRes = true;
+			sdata = *pdata;
+		}
+		else
+		{
+			std::map<std::string, std::vector<BuildActionData>>::iterator it;
+			for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
 			{
-				if (resid.compare(GlobalData::map_buidACData[it->first][i].icon) == 0)
+				for (unsigned int i = 0; i < GlobalData::map_buidACData[it->first].size(); i++)
 				{
-					isInRes = true;
-					sdata.strid = resid;
-					sdata.type = GlobalData::map_buidACData[it->first][i].type - 1;
-					break;
+					if (resid.compare(GlobalData::map_buidACData[it->first][i].icon) == 0)
+					{
+						isInRes = true;
+						sdata.strid = resid;
+						sdata.type = GlobalData::map_buidACData[it->first][i].type - 1;
+						break;
+					}
 				}
 			}
 		}

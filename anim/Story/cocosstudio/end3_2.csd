@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="end3-2" Type="Layer" ID="12b936de-c3d1-485f-b3fa-859c254a65b0" Version="3.10.0.0" />
+  <PropertyGroup Name="end3_2" Type="Layer" ID="12b936de-c3d1-485f-b3fa-859c254a65b0" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="110" Speed="0.5000">
@@ -119,7 +119,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5031" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="end3-2/jiangxiaobaijieju10.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_2/jiangxiaobaijieju10.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijieju11_2" ActionTag="-611363828" Tag="46" IconVisible="False" LeftMargin="75.8572" RightMargin="606.1428" TopMargin="16.6952" BottomMargin="815.3048" ctype="SpriteObjectData">
@@ -130,7 +130,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1317" Y="0.8120" />
             <PreSize X="0.0528" Y="0.3500" />
-            <FileData Type="Normal" Path="end3-2/jiangxiaobaijieju11.png" Plist="" />
+            <FileData Type="Normal" Path="end3_2/jiangxiaobaijieju11.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijieju12_3" ActionTag="1957845004" Tag="47" IconVisible="False" LeftMargin="148.1418" RightMargin="534.8582" TopMargin="60.5690" BottomMargin="586.4310" ctype="SpriteObjectData">
@@ -141,10 +141,10 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2314" Y="0.7054" />
             <PreSize X="0.0514" Y="0.4945" />
-            <FileData Type="Normal" Path="end3-2/jiangxiaobaijieju12.png" Plist="" />
+            <FileData Type="Normal" Path="end3_2/jiangxiaobaijieju12.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju13_4" ActionTag="1548738057" Alpha="0" Tag="48" IconVisible="False" LeftMargin="230.3585" RightMargin="451.6415" TopMargin="37.7709" BottomMargin="754.2291" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju13_4" ActionTag="1548738057" Tag="48" IconVisible="False" LeftMargin="230.3585" RightMargin="451.6415" TopMargin="37.7709" BottomMargin="754.2291" ctype="SpriteObjectData">
             <Size X="38.0000" Y="488.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="249.3585" Y="998.2291" />
@@ -152,7 +152,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3463" Y="0.7799" />
             <PreSize X="0.0528" Y="0.3812" />
-            <FileData Type="Normal" Path="end3-2/jiangxiaobaijieju13.png" Plist="" />
+            <FileData Type="Normal" Path="end3_2/jiangxiaobaijieju13.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

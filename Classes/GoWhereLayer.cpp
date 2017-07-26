@@ -62,7 +62,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 
     float fmin = 0.0f;
     if (g_maplayer != NULL)
-        g_maplayer->moveToDestTime(distance);
+		fmin = g_maplayer->moveToDestTime(distance);
 
 	int minute = (int)fmin;
 	std::string faststr;

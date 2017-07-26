@@ -211,6 +211,12 @@ public:
 	bool checkifHasGF_Equip(std::string gfeid);
 
 	/****************************
+	根据功法ID获取拥有的功法，武器，防具
+	@param 功法ID
+	*****************************/
+	PackageData* getGF_Equip(std::string gfeid);
+
+	/****************************
 	是否有功法或者装备，
 	根据ID查找是否已经拥有
 	@param ID

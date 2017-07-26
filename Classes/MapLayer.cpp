@@ -525,8 +525,7 @@ float MapLayer::moveToDestTime(float distance)
 
 void MapLayer::showEndAnim(float dt)
 {
-	if (g_hero->getHeadID() == 1 || g_hero->getHeadID() == 2 || g_hero->getHeadID() == 3)
-		Director::getInstance()->pushScene(StoryScene::createScene(1));
+	Director::getInstance()->pushScene(StoryScene::createScene(1));
 }
 
 void MapLayer::showNewerGuide(int step)

@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="end3-1" Type="Layer" ID="d3732056-f6e2-4886-9081-d6fa966e109f" Version="3.10.0.0" />
+  <PropertyGroup Name="end3_1" Type="Layer" ID="d3732056-f6e2-4886-9081-d6fa966e109f" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="183" Speed="0.5000">
@@ -199,7 +199,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.8783" />
             <PreSize X="1.0000" Y="0.2422" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju01.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju01.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijieju02_2" ActionTag="-812761493" Tag="41" IconVisible="False" LeftMargin="0.8789" RightMargin="457.1211" TopMargin="326.4740" BottomMargin="649.5260" ctype="SpriteObjectData">
@@ -210,7 +210,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1832" Y="0.6262" />
             <PreSize X="0.3639" Y="0.2375" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju02.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju02.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijieju03_3" ActionTag="-248797500" Tag="42" IconVisible="False" LeftMargin="131.9617" RightMargin="453.0383" TopMargin="332.2748" BottomMargin="728.7252" ctype="SpriteObjectData">
@@ -221,7 +221,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2770" Y="0.6549" />
             <PreSize X="0.1875" Y="0.1711" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju03.png" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju03.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="jiangxiaobaijieju04_4" ActionTag="547906277" Tag="43" IconVisible="False" LeftMargin="273.8933" RightMargin="-0.8933" TopMargin="326.4728" BottomMargin="649.5272" ctype="SpriteObjectData">
@@ -232,10 +232,10 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6908" Y="0.6262" />
             <PreSize X="0.6208" Y="0.2375" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju04.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju04.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju05_5" ActionTag="-102543345" Tag="44" IconVisible="False" LeftMargin="571.8809" RightMargin="13.1191" TopMargin="406.6124" BottomMargin="654.3876" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju05_5" ActionTag="-102543345" Alpha="0" Tag="44" IconVisible="False" LeftMargin="571.8809" RightMargin="13.1191" TopMargin="406.6124" BottomMargin="654.3876" ctype="SpriteObjectData">
             <Size X="135.0000" Y="219.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="639.3809" Y="763.8876" />
@@ -243,32 +243,32 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.8880" Y="0.5968" />
             <PreSize X="0.1875" Y="0.1711" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju05.png" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju05.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju06_6" ActionTag="-2010789374" Tag="45" IconVisible="False" LeftMargin="0.0007" RightMargin="-0.0007" TopMargin="647.3395" BottomMargin="308.6605" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju06_6" ActionTag="-2010789374" Tag="45" IconVisible="False" LeftMargin="-720.0000" RightMargin="720.0000" TopMargin="647.3395" BottomMargin="308.6605" ctype="SpriteObjectData">
             <Size X="720.0000" Y="324.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0007" Y="470.6605" />
+            <Position X="-360.0000" Y="470.6605" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.3677" />
+            <PrePosition X="-0.5000" Y="0.3677" />
             <PreSize X="1.0000" Y="0.2531" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju06.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju06.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju07_7" ActionTag="1738014945" Tag="46" IconVisible="False" TopMargin="989.2498" BottomMargin="-0.2498" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju07_7" ActionTag="1738014945" Tag="46" IconVisible="False" LeftMargin="-720.0000" RightMargin="720.0000" TopMargin="989.2498" BottomMargin="-0.2498" ctype="SpriteObjectData">
             <Size X="720.0000" Y="291.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="145.2502" />
+            <Position X="-360.0000" Y="145.2502" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1135" />
+            <PrePosition X="-0.5000" Y="0.1135" />
             <PreSize X="1.0000" Y="0.2273" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju07.jpg" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju07.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju08_8" ActionTag="84724587" Tag="47" IconVisible="False" LeftMargin="23.6860" RightMargin="456.3140" TopMargin="978.5458" BottomMargin="11.4542" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju08_8" ActionTag="84724587" Alpha="0" Tag="47" IconVisible="False" LeftMargin="23.6860" RightMargin="456.3140" TopMargin="978.5458" BottomMargin="11.4542" ctype="SpriteObjectData">
             <Size X="240.0000" Y="290.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="143.6860" Y="156.4542" />
@@ -276,10 +276,10 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1996" Y="0.1222" />
             <PreSize X="0.3333" Y="0.2266" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju08.png" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju08.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="jiangxiaobaijieju09_9" ActionTag="475260141" Alpha="70" Tag="48" IconVisible="False" LeftMargin="583.4647" RightMargin="1.5353" TopMargin="988.4615" BottomMargin="72.5385" ctype="SpriteObjectData">
+          <AbstractNodeData Name="jiangxiaobaijieju09_9" ActionTag="475260141" Alpha="0" Tag="48" IconVisible="False" LeftMargin="583.4647" RightMargin="1.5353" TopMargin="988.4615" BottomMargin="72.5385" ctype="SpriteObjectData">
             <Size X="135.0000" Y="219.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="650.9647" Y="182.0385" />
@@ -287,7 +287,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9041" Y="0.1422" />
             <PreSize X="0.1875" Y="0.1711" />
-            <FileData Type="Normal" Path="end3-1/jiangxiaobaijieju09.png" Plist="" />
+            <FileData Type="Normal" Path="end3_1/jiangxiaobaijieju09.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

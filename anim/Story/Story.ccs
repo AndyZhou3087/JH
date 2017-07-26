@@ -38,13 +38,13 @@
           <Image Name="sanshaoyejieju13.png" />
           <Image Name="sanshaoyejieju14.png" />
         </Folder>
-        <Folder Name="end2-2">
+        <Folder Name="end2_2">
           <Image Name="sanshaoyejieju15.jpg" />
           <Image Name="sanshaoyejieju16.png" />
           <Image Name="sanshaoyejieju17.png" />
           <Image Name="sanshaoyejieju18.png" />
         </Folder>
-        <Folder Name="end3-1">
+        <Folder Name="end3_1">
           <Image Name="jiangxiaobaijieju01.jpg" />
           <Image Name="jiangxiaobaijieju02.jpg" />
           <Image Name="jiangxiaobaijieju03.png" />
@@ -55,11 +55,27 @@
           <Image Name="jiangxiaobaijieju08.png" />
           <Image Name="jiangxiaobaijieju09.png" />
         </Folder>
-        <Folder Name="end3-2">
+        <Folder Name="end3_2">
           <Image Name="jiangxiaobaijieju10.jpg" />
           <Image Name="jiangxiaobaijieju11.png" />
           <Image Name="jiangxiaobaijieju12.png" />
           <Image Name="jiangxiaobaijieju13.png" />
+        </Folder>
+        <Folder Name="end4_1">
+          <Image Name="aqingjieju01.jpg" />
+          <Image Name="aqingjieju02.png" />
+          <Image Name="aqingjieju03.png" />
+          <Image Name="aqingjieju04.png" />
+          <Image Name="aqingjieju05.png" />
+          <Image Name="aqingjieju06.png" />
+          <Image Name="aqingjieju07.png" />
+          <Image Name="aqingjieju08.png" />
+          <Image Name="aqingjieju09.png" />
+          <Image Name="aqingjieju10.png" />
+          <Image Name="aqingjieju11.jpg" />
+        </Folder>
+        <Folder Name="end4_2">
+          <Image Name="aqingjieju12.jpg" />
         </Folder>
         <Folder Name="story1_1">
           <Image Name="juqingmanhua01.png" />
@@ -146,7 +162,7 @@
           <Image Name="jiangxiaobaijuqing30.png" />
           <Image Name="jiangxiaobaijuqing31.png" />
         </Folder>
-        <Folder Name="story3-1">
+        <Folder Name="story3_1">
           <Image Name="jiangxiaobaijuqing01.jpg" />
           <Image Name="jiangxiaobaijuqing02.png" />
           <Image Name="jiangxiaobaijuqing03.png" />
@@ -197,8 +213,10 @@
         <Project Name="end1_2.csd" Type="Layer" />
         <Project Name="end2_1.csd" Type="Layer" />
         <Project Name="end2_2.csd" Type="Layer" />
-        <Project Name="end3-1.csd" Type="Layer" />
-        <Project Name="end3-2.csd" Type="Layer" />
+        <Project Name="end3_1.csd" Type="Layer" />
+        <Project Name="end3_2.csd" Type="Layer" />
+        <Project Name="end4_1.csd" Type="Layer" />
+        <Project Name="end4_2.csd" Type="Layer" />
         <Project Name="story1_1.csd" Type="Skeleton" />
         <Project Name="story1_2.csd" Type="Skeleton" />
         <Project Name="story2_1.csd" Type="Layer" />

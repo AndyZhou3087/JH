@@ -45,7 +45,8 @@ bool StoryScene::init(int type)
 	m_csbnode->runAction(m_action);
 	m_action->gotoFrameAndPlay(0, false);
 
-	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.5f);
+	float delaytime = m_action->getEndFrame()*1.0f / (m_action->getTimeSpeed() * 60);
+	this->scheduleOnce(schedule_selector(StoryScene::showClickText), delaytime + 1.0f);
 
 		////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -109,7 +110,8 @@ void StoryScene::delayShowNextStory(float dt)
 	m_action = CSLoader::createTimeline(storystr);
 	m_csbnode->runAction(m_action);
 	m_action->gotoFrameAndPlay(0, false);
-	this->scheduleOnce(schedule_selector(StoryScene::showClickText), 10.0f);
+	float delaytime = m_action->getEndFrame()*1.0f / (m_action->getTimeSpeed() * 60);
+	this->scheduleOnce(schedule_selector(StoryScene::showClickText), delaytime + 1.0f);
 }
 
 void StoryScene::showClickText(float dt)

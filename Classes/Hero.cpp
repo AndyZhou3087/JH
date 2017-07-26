@@ -250,43 +250,66 @@ void Hero::revive()
 //功法每种只能有一本，不能重复
 bool Hero::checkifHasGF_Equip(std::string gfeid)
 {
+	HeroAtrType heroproptype[] = { H_WG, H_NG, H_ARMOR, H_WEAPON };
+
 	//装备栏是否有
-	if ((getAtrByType(H_WG)->count > 0 && getAtrByType(H_WG)->strid.compare(gfeid) == 0) || (getAtrByType(H_NG)->count > 0 && getAtrByType(H_NG)->strid.compare(gfeid) == 0) || (getAtrByType(H_WEAPON)->count > 0 && getAtrByType(H_WEAPON)->strid.compare(gfeid) == 0) || (getAtrByType(H_ARMOR)->count > 0 && getAtrByType(H_ARMOR)->strid.compare(gfeid) == 0))
-		return true;
-	else
+	for (int i = 0; i < sizeof(heroproptype) / sizeof(heroproptype[0]); i++)
 	{
-		//背包中是否有
-		for (int i = 0; i < MyPackage::getSize(); i++)
-		{
-			if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
-				return true;
-		}
-		//仓库中是否有
-		for (unsigned i = 0; i < StorageRoom::map_storageData[N_GONG].size(); i++)
-		{
-			if (StorageRoom::map_storageData[N_GONG][i].strid.compare(gfeid) == 0)
-				return true;
-		}
+		if (getAtrByType(heroproptype[i])->count > 0 && getAtrByType(heroproptype[i])->strid.compare(gfeid) == 0)
+			return true;
+	}
 
-		for (unsigned i = 0; i < StorageRoom::map_storageData[W_GONG].size(); i++)
-		{
-			if (StorageRoom::map_storageData[W_GONG][i].strid.compare(gfeid) == 0)
-				return true;
-		}
+	//背包中是否有
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
+			return true;
+	}
+	//仓库中是否有
+	StorageType storagetype[] = { N_GONG, W_GONG, WEAPON, PROTECT_EQU };
 
-		for (unsigned i = 0; i < StorageRoom::map_storageData[WEAPON].size(); i++)
+	for (int m = 0; m < sizeof(storagetype) / sizeof(storagetype[0]); m++)
+	{
+		StorageType stype = storagetype[m];
+		for (unsigned i = 0; i < StorageRoom::map_storageData[stype].size(); i++)
 		{
-			if (StorageRoom::map_storageData[WEAPON][i].strid.compare(gfeid) == 0)
-				return true;
-		}
-
-		for (unsigned i = 0; i < StorageRoom::map_storageData[PROTECT_EQU].size(); i++)
-		{
-			if (StorageRoom::map_storageData[PROTECT_EQU][i].strid.compare(gfeid) == 0)
+			if (StorageRoom::map_storageData[stype][i].strid.compare(gfeid) == 0)
 				return true;
 		}
 	}
 	return false;
+}
+
+PackageData* Hero::getGF_Equip(std::string gfeid)
+{
+	HeroAtrType heroproptype[] = { H_WG, H_NG, H_ARMOR, H_WEAPON };
+
+	for (int i = 0; i < sizeof(heroproptype) / sizeof(heroproptype[0]); i++)
+	{
+		if (getAtrByType(heroproptype[i])->count > 0 && getAtrByType(heroproptype[i])->strid.compare(gfeid) == 0)
+			return getAtrByType(heroproptype[i]);
+	}
+
+	//背包中是否有
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
+			return &MyPackage::vec_packages[i];
+	}
+	//仓库中是否有
+	StorageType storagetype[] = { N_GONG, W_GONG, WEAPON, PROTECT_EQU};
+
+	for (int m = 0; m < sizeof(storagetype) / sizeof(storagetype[0]); m++)
+	{
+		StorageType stype = storagetype[m];
+		for (unsigned i = 0; i < StorageRoom::map_storageData[stype].size(); i++)
+		{
+			if (StorageRoom::map_storageData[stype][i].strid.compare(gfeid) == 0)
+				return &StorageRoom::map_storageData[stype][i];
+		}
+	}
+
+	return NULL;
 }
 
 bool Hero::checkifHas(std::string strid)

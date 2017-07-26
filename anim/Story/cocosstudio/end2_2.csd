@@ -119,7 +119,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="end2-2/sanshaoyejieju15.jpg" Plist="" />
+            <FileData Type="Normal" Path="end2_2/sanshaoyejieju15.jpg" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="sanshaoyejieju16_2" ActionTag="-624957537" Tag="57" IconVisible="False" LeftMargin="484.4407" RightMargin="197.5593" TopMargin="53.1213" BottomMargin="878.8787" ctype="SpriteObjectData">
@@ -130,7 +130,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6992" Y="0.8226" />
             <PreSize X="0.0528" Y="0.2719" />
-            <FileData Type="Normal" Path="end2-2/sanshaoyejieju16.png" Plist="" />
+            <FileData Type="Normal" Path="end2_2/sanshaoyejieju16.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="sanshaoyejieju17_3" ActionTag="349940011" Alpha="119" Tag="58" IconVisible="False" LeftMargin="552.0145" RightMargin="129.9855" TopMargin="116.1112" BottomMargin="657.8888" ctype="SpriteObjectData">
@@ -141,7 +141,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7931" Y="0.7116" />
             <PreSize X="0.0528" Y="0.3953" />
-            <FileData Type="Normal" Path="end2-2/sanshaoyejieju17.png" Plist="" />
+            <FileData Type="Normal" Path="end2_2/sanshaoyejieju17.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="sanshaoyejieju18_4" ActionTag="-1534203020" Alpha="0" Tag="59" IconVisible="False" LeftMargin="646.4507" RightMargin="36.5493" TopMargin="163.8540" BottomMargin="568.1460" ctype="SpriteObjectData">
@@ -152,7 +152,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9235" Y="0.6579" />
             <PreSize X="0.0514" Y="0.4281" />
-            <FileData Type="Normal" Path="end2-2/sanshaoyejieju18.png" Plist="" />
+            <FileData Type="Normal" Path="end2_2/sanshaoyejieju18.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
