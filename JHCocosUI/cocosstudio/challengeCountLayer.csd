@@ -334,17 +334,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="FileNode_2" ActionTag="643157842" Tag="153" IconVisible="True" LeftMargin="360.0000" RightMargin="360.0000" TopMargin="217.0000" BottomMargin="1063.0000" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint />
-            <Position X="360.0000" Y="1063.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8305" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="topBarNode.csd" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="heroimg" Visible="False" ActionTag="-1783912591" Tag="183" IconVisible="False" LeftMargin="-10.5000" RightMargin="549.5000" BottomMargin="1042.0000" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="heroimg" ActionTag="-1783912591" Tag="183" IconVisible="False" LeftMargin="-10.5000" RightMargin="549.5000" BottomMargin="1042.0000" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
             <Size X="181.0000" Y="238.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="80.0000" Y="1161.0000" />
