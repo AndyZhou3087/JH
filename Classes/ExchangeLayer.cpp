@@ -212,7 +212,6 @@ void ExchangeLayer::delayShowExgData(float dt)
 						data.strid = edata.id;
 						data.count = 1;
 						data.type = edata.type - 1;
-						data.goodvalue = 100;
 						data.extype = edata.extype;
 						npcGoodsData.push_back(data);
 						break;
@@ -243,15 +242,8 @@ void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref* pSender)
 	int count = data->count - 1;
 	int datatag = node->getTag();
 
-	PackageData pdata;
-	pdata.type = data->type;
-	pdata.strid = data->strid;
-	pdata.lv = data->lv;
-	pdata.extype = data->extype;
+	PackageData pdata = *data;
 	pdata.count = 1;
-	pdata.exp = data->exp;
-	pdata.goodvalue = data->goodvalue;
-
 	if (count <= 0)
 	{
 
@@ -385,14 +377,9 @@ void ExchangeLayer::onMyGoodsItem(cocos2d::Ref* pSender)
 	int datatag = node->getTag();
 	int count = data->count - 1;
 
-	PackageData pdata;
-	pdata.type = data->type;
-	pdata.strid = data->strid;
-	pdata.lv = data->lv;
-	pdata.extype = data->extype;
+	PackageData pdata = *data;
 	pdata.count = 1;
-	pdata.exp = data->exp;
-	pdata.goodvalue = data->goodvalue;
+
 
 	if (count <= 0)
 	{

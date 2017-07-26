@@ -25,6 +25,7 @@ private:
 	bool m_isRevive;
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onHeroimg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 };

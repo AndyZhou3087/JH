@@ -278,8 +278,8 @@ void ActivitScene::getRndRes(float dt)
 			r1 = GlobalData::createRandomNum(vec_randRes.size());
 
 			PackageData data;
-			data.strid = vec_randRes[r];
-			data.type = GlobalData::map_wgngs[data.strid].type - 1;
+			data.strid = vec_randRes[r1];
+			data.type = GlobalData::map_equips[data.strid].type - 1;
 			data.count = 1;
 			vec_randData.push_back(data);
 		}

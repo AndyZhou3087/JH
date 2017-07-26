@@ -123,11 +123,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	std::string countstr;
 
-	if (pdata->type == FOOD || pdata->type == MEDICINAL || pdata->type == RES_1)
+	if (pdata->type == FOOD || pdata->type == MEDICINAL || pdata->type == RES_1 || pdata->type == RES_2)
 		countstr = StringUtils::format("库存%d", count);
 	else if (pdata->type == WEAPON || pdata->type == PROTECT_EQU || pdata->type == TOOLS)
 	{
-		if (g_hero->checkifHasGF_Equip(pdata->strid))
+		if (g_hero->getMeHas(pdata->strid) != NULL)
 			countstr = StringUtils::format("耐久度%d%%", pdata->goodvalue);
 
 		std::string tmpstr;
@@ -138,13 +138,11 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			tmpstr = StringUtils::format("攻击力增加%d", eatk);
 
 			int slv = 0;
-			for (unsigned i = 0; i < StorageRoom::map_storageData[WEAPON].size(); i++)
+
+			PackageData* hasdata = g_hero->getMeHas(pdata->strid);
+			if (hasdata != NULL)
 			{
-				if (StorageRoom::map_storageData[WEAPON][i].strid.compare(pdata->strid) == 0)
-				{
-					slv = StorageRoom::map_storageData[WEAPON][i].slv;
-					break;
-				}
+				slv = hasdata->slv;
 			}
 			int satk = eatk * slv * 1.0f * 2 / 100.0f;
 
@@ -160,13 +158,10 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			tmpstr = StringUtils::format("防御力增加%d", pdf);
 
 			int slv = 0;
-			for (unsigned i = 0; i < StorageRoom::map_storageData[PROTECT_EQU].size(); i++)
+			PackageData* hasdata = g_hero->getMeHas(pdata->strid);
+			if (hasdata != NULL)
 			{
-				if (StorageRoom::map_storageData[PROTECT_EQU][i].strid.compare(pdata->strid) == 0)
-				{
-					slv = StorageRoom::map_storageData[PROTECT_EQU][i].slv;
-					break;
-				}
+				slv = hasdata->slv;
 			}
 			int sdf = pdf * slv * 1.0f * 2 / 100.0f;
 			if (sdf > 0)
@@ -288,7 +283,7 @@ ResDetailsLayer* ResDetailsLayer::createByResId(std::string resid)
 	}
 	if (!isInRes)
 	{
-		PackageData* pdata = g_hero->getGF_Equip(resid);
+		PackageData* pdata = g_hero->getMeHas(resid);
 		if (pdata != NULL)
 		{
 			isInRes = true;

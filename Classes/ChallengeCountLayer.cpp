@@ -4,6 +4,7 @@
 #include "SoundManager.h"
 #include "HintBox.h"
 #include "FightLayer.h"
+#include "HeroStateUILayer.h"
 
 int usecount[] = { 1, 3, 5, 7, 8, 10, 13, 15, 18, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
 ChallengeCountLayer::ChallengeCountLayer()
@@ -26,6 +27,12 @@ bool ChallengeCountLayer::init(int* wincount, int winnpccount, bool isRevive)
 
 	Node* csbnode = CSLoader::createNode("challengeCountLayer.csb");
 	this->addChild(csbnode);
+
+	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroimg");
+	heroimg->addTouchEventListener(CC_CALLBACK_2(ChallengeCountLayer::onHeroimg, this));
+	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getHeadID());
+	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
+	heroimg->setContentSize(Sprite::createWithSpriteFrameName(heroidstr)->getContentSize());
 
 	cocos2d::ui::Button* cancelbtn = (cocos2d::ui::Button*)csbnode->getChildByName("cancelbtn");
 	cancelbtn->addTouchEventListener(CC_CALLBACK_2(ChallengeCountLayer::onCancel, this));
@@ -86,6 +93,14 @@ ChallengeCountLayer* ChallengeCountLayer::create(int* wincount, int winnpccount,
 	return pRet;
 }
 
+void ChallengeCountLayer::onHeroimg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		g_gameLayer->addChild(HeroStateUILayer::create(), 4, "HeroStateUILayer");
+	}
+}
+
 void ChallengeCountLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);
@@ -96,6 +111,7 @@ void ChallengeCountLayer::onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 
 	}
 }
+
 void ChallengeCountLayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);

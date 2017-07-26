@@ -303,6 +303,30 @@ void TopBar::updataUI(float dt)
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 
+	if (g_hero->getIsWDChallenge())
+	{
+		outinjuryBar->setPercentage(g_hero->getOutinjuryValue());
+		innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
+		lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+
+		if (m_lastinnerinjury != (int)g_hero->getInnerinjuryValue())
+		{
+			innerinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(1.3f, 2), Hide::create(), NULL));
+			m_lastinnerinjury = (int)g_hero->getInnerinjuryValue();
+		}
+		if (m_lastoutinjury != (int)g_hero->getOutinjuryValue())
+		{
+			outinjuryRed->runAction(Sequence::create(Show::create(), Blink::create(1.3f, 2), Hide::create(), NULL));
+			m_lastoutinjury = (int)g_hero->getOutinjuryValue();
+		}
+		if (m_lastlife != (int)g_hero->getLifeValue())
+		{
+			lifeRed->runAction(Sequence::create(Show::create(), Blink::create(1.3f, 2), Hide::create(), NULL));
+			m_lastlife = (int)g_hero->getLifeValue();
+		}
+		return;
+	}
+
 	std::string str;
 	pastmin += g_nature->getTimeInterval();
 	if (pastmin >= 1440.0f)
@@ -446,27 +470,27 @@ void TopBar::updataUI(float dt)
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
 
-	if (m_lastinnerinjury > (int)g_hero->getInnerinjuryValue())
+	if (m_lastinnerinjury != (int)g_hero->getInnerinjuryValue())
 	{
 		innerinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastinnerinjury = (int)g_hero->getInnerinjuryValue();
 	}
-	if (m_lastoutinjury > (int)g_hero->getOutinjuryValue())
+	if (m_lastoutinjury != (int)g_hero->getOutinjuryValue())
 	{
 		outinjuryRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastoutinjury = (int)g_hero->getOutinjuryValue();
 	}
-	if (m_lasthunger > (int)g_hero->getHungerValue())
+	if (m_lasthunger != (int)g_hero->getHungerValue())
 	{
 		hungerRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lasthunger = (int)g_hero->getHungerValue();
 	}
-	if (m_lastspirit > (int)g_hero->getSpiritValue())
+	if (m_lastspirit != (int)g_hero->getSpiritValue())
 	{
 		spiritRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastspirit = (int)g_hero->getSpiritValue();
 	}
-	if (m_lastlife > (int)g_hero->getLifeValue())
+	if (m_lastlife != (int)g_hero->getLifeValue())
 	{
 		lifeRed->runAction(Sequence::create(DelayTime::create(GlobalData::createRandomNum(1)), Show::create(), Blink::create(2.0f, 3), Hide::create(), NULL));
 		m_lastlife = (int)g_hero->getLifeValue();

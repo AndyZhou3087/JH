@@ -221,7 +221,7 @@ public:
 	根据ID查找是否已经拥有
 	@param ID
 	*****************************/
-	bool checkifHas(std::string strid);
+	PackageData* getMeHas(std::string strid);
 
 	/****************************
 	检查最大值属性

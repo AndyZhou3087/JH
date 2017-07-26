@@ -71,91 +71,101 @@ void GlobalData::init()
 	myGlodCount = GameDataSave::getInstance()->getGoldCount();
 }
 
-void GlobalData::loadBuildActionJSon(std::string buildname)
+void GlobalData::loadBuildActionJSon()
 {
-	map_buidACData[buildname].clear();
-	std::string jsonfilename = StringUtils::format("data/%s.json", buildname.c_str());
-	rapidjson::Document doc = ReadJsonFile(jsonfilename);
-	rapidjson::Value& bc = doc["bc"];
-	for (unsigned int i = 0; i < bc.Size(); i++)//建筑物数组
+	map_buidACData.clear();
+
+	rapidjson::Document doc = ReadJsonFile("data/buildings.json");
+	rapidjson::Value& allBuilds = doc["b"];
+	for (unsigned int i = 0; i < allBuilds.Size(); i++)
 	{
-		BuildActionData data;
-		rapidjson::Value& jsonvalue = bc[i];
-		if (jsonvalue.IsObject())
+		rapidjson::Value& oneBuild = allBuilds[i];
+		rapidjson::Value& oneitem = oneBuild["name"];
+		std::string buildname = oneitem.GetString();
+
+		std::string jsonfilename = StringUtils::format("data/%s.json", buildname.c_str());
+		rapidjson::Document doc = ReadJsonFile(jsonfilename);
+		rapidjson::Value& bc = doc["bc"];
+		for (unsigned int i = 0; i < bc.Size(); i++)//建筑物数组
 		{
-			rapidjson::Value& value = jsonvalue["id"];
-			strcpy(data.icon, value.GetString());
-
-			value = jsonvalue["blv"];
-			data.blv = atoi(value.GetString());
-
-			value = jsonvalue["time"];
-			data.actime = atoi(value.GetString());
-
-			if (jsonvalue.HasMember("extime"))
+			BuildActionData data;
+			rapidjson::Value& jsonvalue = bc[i];
+			if (jsonvalue.IsObject())
 			{
-				value = jsonvalue["extime"];
-				data.extime = atoi(value.GetString());
-			}
-			else
-				data.extime = 0;
+				rapidjson::Value& value = jsonvalue["id"];
+				strcpy(data.icon, value.GetString());
 
-			if (jsonvalue.HasMember("type"))
-			{
-				value = jsonvalue["type"];
-				data.type = atoi(value.GetString());
-			}
-			else
-				data.type = -1;
+				value = jsonvalue["blv"];
+				data.blv = atoi(value.GetString());
 
-			value = jsonvalue["actext"];
-			strcpy(data.actext, value.GetString());
+				value = jsonvalue["time"];
+				data.actime = atoi(value.GetString());
 
-			if (jsonvalue.HasMember("ep"))
-			{
-				value = jsonvalue["ep"];
-
-				for (unsigned int m = 0; m < value.Size(); m++)
+				if (jsonvalue.HasMember("extime"))
 				{
-					data.ep.push_back(value[m].GetInt());
+					value = jsonvalue["extime"];
+					data.extime = atoi(value.GetString());
 				}
-			}
+				else
+					data.extime = 0;
 
-			if (jsonvalue.HasMember("extype"))
-			{
-				value = jsonvalue["extype"];
-				data.extype = atoi(value.GetString());
-			}
-			else
-				data.extype = 0;
+				if (jsonvalue.HasMember("type"))
+				{
+					value = jsonvalue["type"];
+					data.type = atoi(value.GetString());
+				}
+				else
+					data.type = -1;
 
-			value = jsonvalue["res"];
-			for (unsigned int i = 0; i < value.Size(); i++)
-			{
-				int tmp = value[i].GetInt();
-				if (tmp > 0)
-					data.res.push_back(value[i].GetInt());
-			}
-			if (jsonvalue.HasMember("name"))
-			{
-				value = jsonvalue["name"];
-				data.cname = value.GetString();
-			}
-			else
-			{
-				data.cname = "";
-			}
-			if (jsonvalue.HasMember("desc"))
-			{
-				value = jsonvalue["desc"];
-				data.desc = value.GetString();
-			}
-			else
-			{
-				data.desc = "";
-			}
+				value = jsonvalue["actext"];
+				strcpy(data.actext, value.GetString());
 
-			map_buidACData[buildname].push_back(data);
+				if (jsonvalue.HasMember("ep"))
+				{
+					value = jsonvalue["ep"];
+
+					for (unsigned int m = 0; m < value.Size(); m++)
+					{
+						data.ep.push_back(value[m].GetInt());
+					}
+				}
+
+				if (jsonvalue.HasMember("extype"))
+				{
+					value = jsonvalue["extype"];
+					data.extype = atoi(value.GetString());
+				}
+				else
+					data.extype = 0;
+
+				value = jsonvalue["res"];
+				for (unsigned int i = 0; i < value.Size(); i++)
+				{
+					int tmp = value[i].GetInt();
+					if (tmp > 0)
+						data.res.push_back(value[i].GetInt());
+				}
+				if (jsonvalue.HasMember("name"))
+				{
+					value = jsonvalue["name"];
+					data.cname = value.GetString();
+				}
+				else
+				{
+					data.cname = "";
+				}
+				if (jsonvalue.HasMember("desc"))
+				{
+					value = jsonvalue["desc"];
+					data.desc = value.GetString();
+				}
+				else
+				{
+					data.desc = "";
+				}
+
+				map_buidACData[buildname].push_back(data);
+			}
 		}
 	}
 }

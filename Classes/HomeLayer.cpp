@@ -243,7 +243,6 @@ void HomeLayer::loadJsonData()
 	{
 		rapidjson::Value& oneBuild = allBuilds[i];
 		Vec_Buildings[i]->parseData(oneBuild);
-		GlobalData::loadBuildActionJSon(Vec_Buildings[i]->data.name);
 	}
 }
 

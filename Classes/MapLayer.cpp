@@ -58,7 +58,7 @@ bool MapLayer::init()
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		mapname->setVisible(true);
+		mapname->setVisible(false);
 #else
 		mapname->setVisible(false);
 #endif
@@ -228,13 +228,20 @@ void MapLayer::Arrive()
 		if (npcsize > 0)
 		{
 			npcnames.append(CommonFuncs::gbk2utf("这里有"));
-			for (int i = 0; i < npcsize; i++)
+			if (m_addrname.compare("m13-1") == 0)
 			{
-				npcnames.append(GlobalData::map_npcs[GlobalData::map_maps[m_addrname].npcs[i]].name);
-				if (i == npcsize - 1)
-					npcnames.append(CommonFuncs::gbk2utf("。"));
-				else
-					npcnames.append(CommonFuncs::gbk2utf("，"));
+				npcnames.append(CommonFuncs::gbk2utf("江湖各大高手。"));
+			}
+			else
+			{
+				for (int i = 0; i < npcsize; i++)
+				{
+					npcnames.append(GlobalData::map_npcs[GlobalData::map_maps[m_addrname].npcs[i]].name);
+					if (i == npcsize - 1)
+						npcnames.append(CommonFuncs::gbk2utf("。"));
+					else
+						npcnames.append(CommonFuncs::gbk2utf("，"));
+				}
 			}
 		}
 

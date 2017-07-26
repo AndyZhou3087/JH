@@ -136,7 +136,7 @@ bool BookDetailsLayer::init(BookData* bookdata)
 
 	cocos2d::ui::Text* status = (cocos2d::ui::Text*)m_csbnode->getChildByName("status");
 
-	if (g_hero->checkifHas(bookdata->strid))
+	if (g_hero->getMeHas(bookdata->strid) != NULL)
 	{
 		tmpstr = "已拥有";
 		status->setTextColor(Color4B(27, 141, 0, 255));

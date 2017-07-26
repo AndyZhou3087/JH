@@ -883,7 +883,6 @@ void NpcLayer::getWinRes(int type)
 					isfind = true;
 					data.strid = gfdata.id;
 					data.count = 1;
-					data.lv = 0;
 					data.type = gfdata.type - 1;
 					addret = MyPackage::add(data);
 					break;
@@ -901,7 +900,6 @@ void NpcLayer::getWinRes(int type)
 						data.strid = edata.id;
 						data.count = 1;
 						data.type = edata.type - 1;
-						data.goodvalue = 100;
 						data.extype = edata.extype;
 						addret = MyPackage::add(data);
 						break;

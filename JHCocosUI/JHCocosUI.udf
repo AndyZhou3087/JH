@@ -23,8 +23,9 @@
           <FilePathData Path="bookDetailsLayer.csd" />
           <FilePathData Path="resDetailsLayer.csd" />
           <FilePathData Path="shopLayer.csd" />
+          <FilePathData Path="topBarNode.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="resDetailsLayer.csd" />
+        <ActiveDocument Path="challengeCountLayer.csd" />
       </Value>
     </Item>
   </Properties>

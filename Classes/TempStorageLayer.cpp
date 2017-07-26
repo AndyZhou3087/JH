@@ -86,14 +86,8 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 		{
 			if (it->strid.compare(data->strid) == 0)
 			{
-				PackageData pdata;
-				pdata.type = data->type;
-				pdata.strid = data->strid;
+				PackageData pdata = *data;
 				pdata.count = 1;
-				pdata.lv = data->lv;
-				pdata.extype = data->extype;
-				pdata.exp = data->exp;
-				pdata.goodvalue = data->goodvalue;
 				if (MyPackage::add(pdata) == 0)
 				{
 					data->count--;
@@ -105,14 +99,8 @@ void TempStorageLayer::onRewardItem(cocos2d::Ref* pSender)
 	}
 	else
 	{
-		PackageData pdata;
-		pdata.type = data->type;
-		pdata.strid = data->strid;
+		PackageData pdata = *data;
 		pdata.count = 1;
-		pdata.lv = data->lv;
-		pdata.extype = data->extype;
-		pdata.exp = data->exp;
-		pdata.goodvalue = data->goodvalue;
 		if (MyPackage::add(pdata) == 0)
 		{
 			data->count--;

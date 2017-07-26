@@ -198,7 +198,7 @@ void BookShelfLayer::updateContent(int category)
 				namelbl->setPosition(Vec2(box->getContentSize().width / 2, -17));
 				box->addChild(namelbl);
 
-				if (!g_hero->checkifHas(datastrid))
+				if (g_hero->getMeHas(datastrid) == NULL)
 				{
 					std::vector<Node*> vec_graynode;
 					vec_graynode.push_back(box);

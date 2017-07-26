@@ -269,7 +269,7 @@ public:
 	解析建筑物数据
 	@param 建筑物名称
 	*****************************/
-	static void loadBuildActionJSon(std::string buildname);
+	static void loadBuildActionJSon();
 
 	/****************************
 	解析所有资源详细描述数据

@@ -54,6 +54,8 @@ bool GameScene::init()
     {
         return false;
     }
+	//读取每个建筑配置文件
+	GlobalData::loadBuildActionJSon();
 
 	//读取资源配置文件
 	GlobalData::loadResJsonData();
@@ -338,6 +340,9 @@ void GameScene::saveAllData()
 void GameScene::updata(float dt)
 {
 	if (GlobalData::g_gameStatus != GAMESTART)
+		return;
+
+	if (g_hero != NULL && g_hero->getIsWDChallenge())
 		return;
 
 	//更新资源列表数据

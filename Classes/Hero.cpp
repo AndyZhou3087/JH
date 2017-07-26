@@ -60,6 +60,9 @@ void Hero::updateData(float dt)
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 
+	if (m_isWDChallenge)
+		return;
+
 	//12s，（游戏时间1小时更新一次）
 	m_pastmin += g_nature->getTimeInterval();
 
@@ -75,8 +78,6 @@ void Hero::updateData(float dt)
 		//闭关没有分身符不扣属性消耗， 有分身符要扣
 		if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 			return;
-
-
 
 		if (m_outinjury < SeriousOutinjury)//严重外伤，内伤3倍下降
 		{
@@ -312,21 +313,21 @@ PackageData* Hero::getGF_Equip(std::string gfeid)
 	return NULL;
 }
 
-bool Hero::checkifHas(std::string strid)
+PackageData* Hero::getMeHas(std::string strid)
 {
 	//装备栏是否有
 	for (int i = H_WEAPON; i < H_MAX; i++)
 	{
 		if (getAtrByType((HeroAtrType)i)->count > 0 && getAtrByType((HeroAtrType)i)->strid.compare(strid) == 0)
 		{
-			return true;
+			return getAtrByType((HeroAtrType)i);
 		}
 	}
 	//背包中是否有
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
 		if (MyPackage::vec_packages[i].strid.compare(strid) == 0)
-			return true;
+			return &MyPackage::vec_packages[i];
 	}
 	//仓库中是否有
 
@@ -338,10 +339,10 @@ bool Hero::checkifHas(std::string strid)
 		{
 			PackageData sdata = StorageRoom::map_storageData[it->first][j];
 			if (sdata.strid.compare(strid) == 0)
-				return true;
+				return &StorageRoom::map_storageData[it->first][j];
 		}
 	}
-	return false;
+	return NULL;
 }
 
 void Hero::checkMaxVaule(float dt)

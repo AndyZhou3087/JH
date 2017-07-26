@@ -27,10 +27,10 @@
             <FileData Type="Normal" Path="images/topbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroimg" ActionTag="-514659789" Tag="4" IconVisible="False" LeftMargin="-372.8527" RightMargin="191.8527" TopMargin="-217.0007" BottomMargin="-20.9993" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="heroimg" ActionTag="-514659789" Tag="4" IconVisible="False" LeftMargin="-370.5000" RightMargin="189.5000" TopMargin="-217.0000" BottomMargin="-21.0000" TouchEnable="True" LeftEage="59" RightEage="59" TopEage="78" BottomEage="78" Scale9OriginX="59" Scale9OriginY="78" Scale9Width="63" Scale9Height="82" ctype="ImageViewObjectData">
             <Size X="181.0000" Y="238.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-282.3527" Y="98.0007" />
+            <Position X="-280.0000" Y="98.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

@@ -234,7 +234,6 @@ void FightLayer::fightRobber()
 
 void FightLayer::npcDie()
 {
-
 	this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
 }
 
@@ -513,6 +512,7 @@ void FightLayer::delayBossFight(float dt)
 void FightLayer::delayShowWinLayer(float dt)
 {
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+	m_escapebtn->setEnabled(true);
 	m_escapebtn->setTag(1);
 
 	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
@@ -933,6 +933,7 @@ void FightLayer::continueChallenge()
 	if (winnpcount % 3 == 0)
 	{
 		m_escapebtn->setTitleText(CommonFuncs::gbk2utf("返回"));
+		m_escapebtn->setEnabled(true);
 		m_escapebtn->setTag(1);
 		showChallengeCountLayer(false);
 	}
@@ -945,6 +946,7 @@ void FightLayer::continueChallenge()
 void FightLayer::updateFightNextNpc()
 {
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
+	m_escapebtn->setEnabled(true);
 	m_escapebtn->setTag(0);
 	checkHeroLife(0);
 	this->scheduleOnce(schedule_selector(FightLayer::nextFightNpc), 0.5f);
@@ -953,6 +955,7 @@ void FightLayer::updateFightNextNpc()
 void FightLayer::reviveContinueChallege()
 {
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
+	m_escapebtn->setEnabled(true);
 	m_escapebtn->setTag(0);
 	checkHeroLife(0);
 	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
