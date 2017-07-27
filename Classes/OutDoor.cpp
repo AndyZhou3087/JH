@@ -85,8 +85,6 @@ void OutDoor::onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType t
 		m_outbtn->setEnabled(false);
 		this->removeFromParentAndCleanup(true);
 		g_gameLayer->scheduleOnce(schedule_selector(GameScene::delayShowOutScence), 0.02f);
-        if (g_maplayer != NULL)
-            g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.3f);
 	}
 }
 

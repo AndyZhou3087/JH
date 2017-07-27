@@ -156,6 +156,12 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		cocos2d::ui::Button * continuebtn = (cocos2d::ui::Button*)csbnode->getChildByName("continuebtn");
 		continuebtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onContinue, this));
 		continuebtn->setVisible(true);
+		int npcsize = GlobalData::map_maps[m_addrid].npcs.size();
+		if (npcid.compare(GlobalData::map_maps[m_addrid].npcs[npcsize - 1]) == 0)
+		{
+			continuebtn->setVisible(false);
+			m_backbtn->setTitleText(CommonFuncs::gbk2utf("完成"));
+		}
 
 		winres = GlobalData::map_challengeReward[npcid].vec_winres;
 		for (unsigned int i = 0; i < winres.size(); i++)

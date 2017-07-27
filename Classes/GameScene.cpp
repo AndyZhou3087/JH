@@ -439,6 +439,8 @@ void GameScene::showGOOut(float dt)
 	g_gameLayer->addChild(g_maplayer, 1, "maplayer");
 	g_gameLayer->removeChildByName("homelayer");
 	g_hero->setIsOut(true);
+	if (g_maplayer != NULL)
+		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 }
 
 void GameScene::getNpcRandMap()
