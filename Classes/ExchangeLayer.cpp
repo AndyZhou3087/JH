@@ -62,7 +62,6 @@ bool ExchangeLayer::init(std::string npcid)
 
 	m_npcWordLbl = (cocos2d::ui::Text*)csbnode->getChildByName("npcword");
 	m_desc = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
-	m_desc->setVisible(false);
 	m_npcGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("npcexgscroll");
 	m_npcGoodsSrollView->setScrollBarEnabled(false);
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("myexgscroll");
@@ -703,13 +702,13 @@ void ExchangeLayer::onExit()
 void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 {
 
-	std::vector<std::string> vec_temp;
+	std::map<int,std::vector<std::string>> map_temp;
 	std::map<std::string, WG_NGData>::iterator it;
 	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
 		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
 		if (!g_hero->checkifHasGF_Equip(gfdata.id))
-			vec_temp.push_back(gfdata.id);
+			map_temp[gfdata.qu].push_back(gfdata.id);
 	}
 
 	std::map<std::string, EquipData>::iterator ite;
@@ -717,13 +716,18 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 	{
 		EquipData edata = GlobalData::map_equips[ite->first];
 		if (!g_hero->checkifHasGF_Equip(edata.id))
-			vec_temp.push_back(edata.id);
+			map_temp[edata.qu].push_back(edata.id);
 	}
-	std::vector<std::string> vec_randRes;
-	for (unsigned int i = 0; i < vec_temp.size(); i++)
+	std::map<int, std::vector<std::string>> map_res;
+	std::map<int, std::vector<std::string>>::iterator rit;
+	for (rit = map_temp.begin(); rit != map_temp.end(); ++rit)
 	{
-		if (!GlobalData::tempHasGf_Equip(vec_temp[i]))
-			vec_randRes.push_back(vec_temp[i]);
+		for (unsigned int i = 0; i < map_temp[rit->first].size(); i++)
+		{
+			std::string tmpstr = map_temp[rit->first][i];
+			if (!GlobalData::tempHasGf_Equip(tmpstr))
+				map_res[rit->first].push_back(tmpstr);
+		}
 	}
 
 	std::vector<int> vec_resid;
@@ -733,16 +737,41 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 	}
 	vec_resid.push_back(80);
 
+	std::vector<std::string> vec_res;
 	for (unsigned int i = 0; i < vec_resid.size(); i++)
 	{
 		std::string str = StringUtils::format("%d", vec_resid[i] * 1000 + 10);
-		vec_randRes.push_back(str);
+		map_res[1].push_back(str);
+		vec_res.push_back(str);
 	}
 
-	srand(GlobalData::getSysSecTime());
-	std::random_shuffle(vec_randRes.begin(), vec_randRes.end());
+	int randnum[] = {40,70,85,95,100};
+
+
 	for (int i = 0; i < 3; i++)
 	{
-		vec_exchgres.push_back(vec_randRes[i]);
+		int r = GlobalData::createRandomNum(100);
+		int m = 0;
+		for (m = 0; m < 5; m++)
+		{
+			if (r < randnum[m])
+			{
+				int size = map_res[m + 1].size();
+				if (size > 0)
+				{
+					int r1 = GlobalData::createRandomNum(size);
+					vec_exchgres.push_back(map_res[m + 1][r1]);
+					map_res[m + 1].erase(map_res[m + 1].begin() + r1);
+				}
+				else
+				{
+					int size0 = vec_res.size();
+					int r1 = GlobalData::createRandomNum(size0);
+					vec_exchgres.push_back(vec_res[r1]);
+				}
+				break;
+			}
+
+		}
 	}
 }

@@ -154,6 +154,10 @@ private:
 	cocos2d::ui::Text* npchpvaluetext;//NCP血量控件
 	cocos2d::ui::LoadingBar* herohpbar;//角色血量进度条控件
 	cocos2d::ui::LoadingBar* npchpbar;//NPC血量进度条控件
+
+	cocos2d::ui::LoadingBar* herohpbar2;//角色血量进度条控件
+	cocos2d::ui::LoadingBar* npchpbar2;//NPC血量进度条控件
+
 	cocos2d::ui::Text* npcnametxt;//NPC显示名字控件
 	cocos2d::ui::ImageView* heroactimg;//角色暴击闪避图片
 	cocos2d::ui::ImageView* npcactimg;//NPC暴击闪避图片
@@ -174,7 +178,6 @@ private:
 	int isHeroAct;//0--暴击；1-闪避
 
 	int isNpcAct;//0--暴击；1-闪避
-	bool npcisdead;
 };
 #endif
 

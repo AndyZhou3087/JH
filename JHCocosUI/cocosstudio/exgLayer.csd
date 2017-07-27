@@ -156,14 +156,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="106111017" Tag="29" IconVisible="False" LeftMargin="236.0000" RightMargin="236.0000" TopMargin="790.1810" BottomMargin="443.8189" FontSize="42" LabelText="数据加载中..." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="248.0000" Y="46.0000" />
+          <AbstractNodeData Name="desc" ActionTag="106111017" Tag="29" IconVisible="False" LeftMargin="128.8725" RightMargin="413.1275" TopMargin="679.5433" BottomMargin="567.4567" FontSize="30" LabelText="物品准备中..." ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="178.0000" Y="33.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="466.8189" />
+            <Position X="217.8725" Y="583.9567" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.5000" Y="0.3647" />
-            <PreSize X="0.3444" Y="0.0359" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.3026" Y="0.4562" />
+            <PreSize X="0.2472" Y="0.0258" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

@@ -12,6 +12,7 @@
 #include "MapLayer.h"
 #include "Shake.h"
 #include "ChallengeCountLayer.h"
+#include "MyActionProgressTimer.h"
 
 FightLayer::FightLayer()
 {
@@ -19,7 +20,6 @@ FightLayer::FightLayer()
 	isUseWg = false;
 	winnpcount = 0;
 	winProperCount = 0;
-	npcisdead = false;
 }
 
 
@@ -104,6 +104,9 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	herohpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar");
 	herohpbar->setPercent(herohppercent);
 
+	herohpbar2 = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("herohpbar2");
+	herohpbar2->setPercent(herohppercent);
+
 	npcmaxhp = GlobalData::map_npcs[m_npcid].life;
 	npchp = npcmaxhp;
 
@@ -119,6 +122,9 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	int npchppercent = 100 * npchp / npcmaxhp;
 	npchpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("npchpbar");
 	npchpbar->setPercent(npchppercent);
+
+	npchpbar2 = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("npchpbar2");
+	npchpbar2->setPercent(npchppercent);
 
 	//逃跑按钮
 	m_escapebtn = (cocos2d::ui::Button*)csbnode->getChildByName("escapebtn");
@@ -235,11 +241,7 @@ void FightLayer::fightRobber()
 
 void FightLayer::npcDie()
 {
-	if (!npcisdead)
-	{
-		npcisdead = true;
-		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
-	}
+	this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
 }
 
 int FightLayer::getNpcHurt()
@@ -261,14 +263,13 @@ void FightLayer::skillComboAtk(float dt)
 	int c = getNpcHurt();
 	npchp -= c * count / 10;
 	GlobalData::map_gfskills[S_SKILL_3].leftval--;
-	if (npchp < 0)
-		npchp = 0;
-	updateNpcLife();
-	if (npchp <= 0)// NPC dead 胜利
+
+	if (npchp <= 0)
 	{
+		npchp = 0;
 		this->unschedule(schedule_selector(FightLayer::skillComboAtk));
-		npcDie();
 	}
+	updateNpcLife();
 }
 
 void FightLayer::delayHeroFight(float dt)
@@ -349,7 +350,6 @@ void FightLayer::delayHeroFight(float dt)
 				this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
 			}
 		}
-
 		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.5f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
 	}
 }
@@ -373,6 +373,12 @@ void FightLayer::delayBossFight(float dt)
 
 	if (isNpcAct != 1)
 	{
+		if (npchp <= 0)
+		{
+			npcDie();
+			return;
+		}
+
 		int skilltype = checkSkill(H_WG);
 		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
 		{
@@ -414,6 +420,7 @@ void FightLayer::delayBossFight(float dt)
 				return;
 			}
 		}
+		
 	}
 
 
@@ -523,8 +530,6 @@ void FightLayer::delayShowWinLayer(float dt)
 	Winlayer* layer = Winlayer::create(m_addrid, m_npcid);
 	if (g_gameLayer != NULL)
 		g_gameLayer->addChild(layer, 10, "Winlayer");
-
-	npcisdead = false;
 
 	if (continuefight > 0)
 	{
@@ -905,6 +910,9 @@ void FightLayer::checkHeroLife(float dt)
 	herohpvaluetext->setString(hpstr);
 	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
 	herohpbar->setPercent(herohppercent);
+
+	MyProgressTo * fromto = MyProgressTo::create(0.5f, herohppercent);
+	herohpbar2->runAction(fromto);
 }
 
 void FightLayer::updateNpcLife()
@@ -916,6 +924,8 @@ void FightLayer::updateNpcLife()
 	//NCP血量进度
 	int npchppercent = 100 * npchp / npcmaxhp;
 	npchpbar->setPercent(npchppercent);
+	MyProgressTo * to = MyProgressTo::create(0.5f, npchppercent);
+	npchpbar2->runAction(to);
 }
 
 void FightLayer::nextFightNpc(float dt)

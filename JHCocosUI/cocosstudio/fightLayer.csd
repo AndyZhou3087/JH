@@ -144,6 +144,16 @@
             <FileData Type="MarkedSubImage" Path="ui/fighthpbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="herohpbar2" ActionTag="911209076" Tag="44" IconVisible="False" LeftMargin="54.0000" RightMargin="434.0000" TopMargin="666.0000" BottomMargin="596.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="232.0000" Y="18.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="170.0000" Y="605.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.2361" Y="0.4727" />
+            <PreSize X="0.3222" Y="0.0141" />
+            <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar2.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
           <AbstractNodeData Name="herohpbar" ActionTag="-919271343" Tag="133" IconVisible="False" LeftMargin="53.9970" RightMargin="434.0030" TopMargin="666.0005" BottomMargin="595.9995" ctype="LoadingBarObjectData">
             <Size X="232.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -153,6 +163,16 @@
             <PrePosition X="0.2361" Y="0.4727" />
             <PreSize X="0.3222" Y="0.0141" />
             <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="npchpbar2" ActionTag="1626967728" Tag="45" IconVisible="False" LeftMargin="444.0000" RightMargin="44.0000" TopMargin="666.0000" BottomMargin="596.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="232.0000" Y="18.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="560.0000" Y="605.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7778" Y="0.4727" />
+            <PreSize X="0.3222" Y="0.0141" />
+            <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar2.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="npchpbar" ActionTag="679541159" Tag="134" IconVisible="False" LeftMargin="444.0000" RightMargin="44.0000" TopMargin="666.0000" BottomMargin="596.0000" ctype="LoadingBarObjectData">
             <Size X="232.0000" Y="18.0000" />

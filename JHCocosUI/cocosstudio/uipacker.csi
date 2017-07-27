@@ -383,6 +383,7 @@
       <FilePathData Path="ui/skill6text.png" />
       <FilePathData Path="ui/skill7text.png" />
       <FilePathData Path="ui/skill8text.png" />
+      <FilePathData Path="ui/fighthpbar2.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

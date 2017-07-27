@@ -415,6 +415,7 @@ void GameScene::heroRevive()
 {
 	//复活成功
 	g_hero->revive();
+	topBar->stopLoseAnim();
 	GlobalData::g_gameStatus = GAMESTART;
 	if (g_maplayer != NULL && g_hero->getIsOut())
 		g_maplayer->heroResumeMoving();
