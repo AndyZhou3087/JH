@@ -6,7 +6,7 @@
 #include "FightLayer.h"
 #include "HeroStateUILayer.h"
 
-int usecount[] = { 1, 3, 5, 7, 8, 10, 13, 15, 18, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
+int usecount[] = { 1, 1, 3, 3, 5, 5, 7, 7, 8, 8, 10, 10, 13, 13, 15, 15, 18, 18, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
 ChallengeCountLayer::ChallengeCountLayer()
 {
 	lastclickindex = -1;
