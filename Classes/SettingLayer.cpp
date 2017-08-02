@@ -1,12 +1,14 @@
 ﻿#include "SettingLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
+#include "GlobalData.h"
+#include "GameDataSave.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #endif
 SettingLayer::SettingLayer()
 {
-
+	clicktitlecount = 0;
 }
 
 
@@ -25,8 +27,11 @@ bool SettingLayer::init()
 	Node* csbnode = CSLoader::createNode("settingLayer.csb");
 	this->addChild(csbnode);
 
+	cocos2d::ui::Text* title = (cocos2d::ui::Text*)csbnode->getChildByName("title");
+	title->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onTitle, this));
+
 	//关闭按钮
-	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
+	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onBack, this));
 	backbtn->setVisible(true);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -44,16 +49,20 @@ bool SettingLayer::init()
 
 	updateSoundStatus();
 
+	cocos2d::ui::Text* idlbl = (cocos2d::ui::Text*)csbnode->getChildByName("id");
+	idlbl->setString(GlobalData::getMyID());
+
+	cocos2d::ui::TextField* name = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
+	name->setString(GlobalData::getMyNickName());
+	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
+
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		return true;
 	};
-	listener->onTouchEnded = [=](Touch *touch, Event *event)
-	{
-		this->removeFromParentAndCleanup(true);
-	};
+
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	return true;
@@ -114,3 +123,35 @@ void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	}
 }
 #endif
+
+void SettingLayer::onTitle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		clicktitlecount++;
+		if (clicktitlecount > 5 && !GameDataSave::getInstance()->getIsJustData())
+		{
+			GameDataSave::getInstance()->setIsJustData(true);
+		}
+	}
+}
+
+
+void SettingLayer::textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventType type)
+{
+	switch (type)
+	{
+	case cocos2d::ui::TextField::EventType::ATTACH_WITH_IME:
+	{
+		cocos2d::ui::TextField * textField = dynamic_cast<cocos2d::ui::TextField*>(pSender);
+		std::string str = textField->getString();
+	}
+			break;
+		case cocos2d::ui::TextField::EventType::DETACH_WITH_IME:
+			break;
+		case cocos2d::ui::TextField::EventType::INSERT_TEXT:
+			break;
+		case cocos2d::ui::TextField::EventType::DELETE_BACKWARD:
+			break;
+	}
+}

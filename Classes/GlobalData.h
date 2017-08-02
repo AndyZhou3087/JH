@@ -527,7 +527,7 @@ public:
 
 	/****************************
 	获取韦小宝随机地图位置
-	@para 地图位置
+	@return 地图位置
 	*****************************/
 	static int getWxbMapPos();
 
@@ -539,9 +539,21 @@ public:
 
 	/****************************
 	获取独孤求败随机地图位置
-	@para 地图位置
+	@return 地图位置
 	*****************************/
 	static int getDgqbMapPos();
+
+	/****************************
+	设置复活次数
+	@para 次数
+	*****************************/
+	static void setReviveCount(int val);
+
+	/****************************
+	获取复活次数
+	@return 次数
+	*****************************/
+	static int getReviveCount();
 
 	/****************************
 	获取金元宝数
@@ -556,16 +568,47 @@ public:
 	static void setMyGoldCount(int count);
 
 	/****************************
-	获取资源列表中的类型
+	获取资源类型
 	@return 类型
 	*****************************/
 	static int getResType(std::string strid);
 
+
+	/****************************
+	获取资源扩展类型
+	@return 类型
+	*****************************/
+	static int getResExType(std::string strid);
+
 	/****************************
 	获取武道大会奖励数据
-	
 	*****************************/
 	static void loadChallengeRewardData();
+
+	/****************************
+	获取设备唯一ID
+	*****************************/
+	static std::string UUID();
+
+	/****************************
+	获取id
+	*****************************/
+	static std::string getMyID();
+
+	/****************************
+	设置ID
+	*****************************/
+	static void setMyID(std::string str);
+
+	/****************************
+	获取昵称
+	*****************************/
+	static std::string getMyNickName();
+
+	/****************************
+	设置昵称
+	*****************************/
+	static void setMyNickName(std::string str);
 
     static void setNoAds(bool val);
     static bool getNoAds();

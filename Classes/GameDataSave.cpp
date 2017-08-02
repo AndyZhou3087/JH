@@ -253,6 +253,11 @@ std::string GameDataSave::getUserId()
 void GameDataSave::setUserId(std::string val)
 {
 	userid = val;
+}
+
+void GameDataSave::saveUserId(std::string val)
+{
+	setUserId(val);
 	saveStringDataByKey("uid", val);
 }
 
@@ -439,6 +444,16 @@ int GameDataSave::getDgqbMapPos()
 	return loadIntDataByKey(addUIDString("dgqbmap"), 0);
 }
 
+void GameDataSave::setReviveCount(int val)
+{
+	saveIntDataByKey(addUIDString("revivecount"), val);
+}
+
+int GameDataSave::getReviveCount()
+{
+	return loadIntDataByKey(addUIDString("revivecount"), 1);
+}
+
 int GameDataSave::getGoldCount()
 {
 	return loadIntDataByKey("gold", 0);
@@ -447,4 +462,57 @@ int GameDataSave::getGoldCount()
 void GameDataSave::setGoldCount(int count)
 {
 	saveIntDataByKey("gold", count);
+}
+
+bool GameDataSave::getIsPostAllData()
+{
+	int ret = loadIntDataByKey("postallok", 0);
+	return ret == 1 ? true : false;
+}
+
+void GameDataSave::setIsPostAllData(bool val)
+{
+	saveIntDataByKey("postallok", val?1:0);
+}
+
+bool GameDataSave::getIsFirstInstall()
+{
+	int ret = loadIntDataByKey("firstintall", 1);
+	return ret == 1 ? true : false;
+}
+
+void GameDataSave::setIsFirstInstall(bool val)
+{
+	saveIntDataByKey("firstintall", val ? 1 : 0);
+}
+
+bool GameDataSave::getIsJustData()
+{
+	int ret = loadIntDataByKey("isjust", 0);
+	return ret == 1 ? true : false;
+}
+
+void GameDataSave::setIsJustData(bool val)
+{
+	saveIntDataByKey("isjust", val ? 1 : 0);
+}
+
+std::string GameDataSave::getMyID()
+{
+	return loadStringDataByKey("id", "");
+}
+
+void GameDataSave::setMyID(std::string str)
+{
+	saveStringDataByKey("id", str);
+}
+
+std::string GameDataSave::getMyNickName()
+{
+	return loadStringDataByKey("nickname", "");
+}
+
+void GameDataSave::setMyNickName(std::string str)
+{
+	saveStringDataByKey("nickname", str);
 }

@@ -6,6 +6,8 @@
 #include "SettingLayer.h"
 #include "SoundManager.h"
 #include "SelectSaveLayer.h"
+#include "WaitingProgress.h"
+#include "GameDataSave.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -61,16 +63,20 @@ bool StartScene::init()
 	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)csbnode->getChildByName("qq");
 	qq->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
 
-	cocos2d::ui::Widget* continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
-	continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
+	m_continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
+	m_continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
 	std::string uid = GlobalData::getUId();
 
-	continuebtn->setEnabled(uid.length() <= 0?false:true);
+	m_continuebtn->setEnabled(uid.length() <= 0 ? false : true);
 
 	cocos2d::ui::Widget* setbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("setbtn");
 	setbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onSet, this));
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);
+
+
+	this->scheduleOnce(schedule_selector(StartScene::checkServerData), 0.2f);
+	
     return true;
 }
 
@@ -126,6 +132,7 @@ void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender; 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -133,4 +140,53 @@ void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 #endif
 	}
 
+}
+
+void StartScene::checkServerData(float dt)
+{
+	if (GlobalData::getUId().length() > 0)
+	{
+		if (!GameDataSave::getInstance()->getIsPostAllData())
+		{
+			WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
+			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+
+			ServerDataSwap::getInstance()->setDelegate(this);
+			ServerDataSwap::getInstance()->postAllData();
+		}
+	}
+	else
+	{
+		WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::getInstance()->setDelegate(this);
+		ServerDataSwap::getInstance()->getAllData();
+	}
+
+	if (GameDataSave::getInstance()->getIsJustData())
+	{
+		ServerDataSwap::getInstance()->setDelegate(NULL);
+		ServerDataSwap::getInstance()->propadjust();
+	}
+}
+
+void StartScene::onSuccess()
+{
+	GameDataSave::getInstance()->setIsPostAllData(true);
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
+
+	if (GameDataSave::getInstance()->getHeroLV() >= 1)
+	{
+		for (int i = 0; i < 50; i++)
+		{
+			GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+		}
+	}
+	GlobalData::init();
+}
+
+void StartScene::onErr()
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }

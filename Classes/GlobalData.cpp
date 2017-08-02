@@ -7,6 +7,10 @@
 #include "json.h"
 #include "Const.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "iosfunc.h"
+#endif
+
 std::map<std::string, std::vector<BuildActionData>> GlobalData::map_buidACData;
 
 std::map<std::string, AllResource> GlobalData::map_allResource;
@@ -400,15 +404,27 @@ void GlobalData::loadResData()
 {
 	//解析保存的资源数据
 	std::string datastr = GameDataSave::getInstance()->getResData();
-	std::vector<std::string> vec_retstr;
-	CommonFuncs::split(datastr, vec_retstr, ";");
-	for (unsigned int i = 0; i < vec_retstr.size(); i++)
+	if (datastr.length() > 0)
 	{
-		std::vector<std::string> tmp;
-		CommonFuncs::split(vec_retstr[i], tmp, "-");
-		vec_resData[i].count = atoi(tmp[0].c_str());
-		vec_resData[i].pastmin = atoi(tmp[1].c_str());
-		vec_resData[i].waittime = atof(tmp[2].c_str());
+		std::vector<std::string> vec_retstr;
+		CommonFuncs::split(datastr, vec_retstr, ";");
+		for (unsigned int i = 0; i < vec_retstr.size(); i++)
+		{
+			std::vector<std::string> tmp;
+			CommonFuncs::split(vec_retstr[i], tmp, "-");
+			vec_resData[i].count = atoi(tmp[0].c_str());
+			vec_resData[i].pastmin = atoi(tmp[1].c_str());
+			vec_resData[i].waittime = atof(tmp[2].c_str());
+		}
+	}
+	else
+	{
+		for (unsigned int i = 0; i < vec_resData.size(); i++)
+		{
+			vec_resData[i].count = vec_resData[i].max;
+			vec_resData[i].pastmin = 0.0f;
+			vec_resData[i].waittime = 0.0f;
+		}
 	}
 }
 
@@ -675,7 +691,7 @@ std::string GlobalData::getUId()
 void GlobalData::setUId(std::string struid)
 {
 	uid = struid;
-	GameDataSave::getInstance()->setUserId(struid);
+	GameDataSave::getInstance()->saveUserId(struid);
 }
 
 std::string GlobalData::getDefaultStorage(int heroindex)
@@ -1217,6 +1233,80 @@ int GlobalData::getResType(std::string strid)
 			}
 		}
 	}
+
+	if (!isfind)
+	{
+		std::map<std::string, WG_NGData>::iterator it;
+		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+		{
+			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+			return gfdata.type - 1;
+		}
+	}
+
+	if (!isfind)
+	{
+		std::map<std::string, EquipData>::iterator ite;
+		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+		{
+			EquipData edata = GlobalData::map_equips[ite->first];
+			return edata.type - 1;
+		}
+	}
+
+	return 0;
+}
+
+int GlobalData::getResExType(std::string strid)
+{
+	bool isfind = false;
+	std::map<std::string, std::vector<BuildActionData>>::iterator it;
+	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
+	{
+		std::vector<BuildActionData> vec_bactData = GlobalData::map_buidACData[it->first];
+
+		for (unsigned int m = 0; m < vec_bactData.size(); m++)
+		{
+			BuildActionData bdata = vec_bactData[m];
+			if (strid.compare(bdata.icon) == 0)
+			{
+				isfind = true;
+				return bdata.extype;
+			}
+		}
+	}
+	if (!isfind)
+	{
+		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
+		{
+			ResData rdata = GlobalData::vec_resData[n];
+			if (strid.compare(rdata.strid) == 0)
+			{
+				return rdata.actype;
+			}
+		}
+	}
+
+	if (!isfind)
+	{
+		std::map<std::string, WG_NGData>::iterator it;
+		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+		{
+			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+			return gfdata.extype;
+		}
+	}
+
+	if (!isfind)
+	{
+		std::map<std::string, EquipData>::iterator ite;
+		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+		{
+			EquipData edata = GlobalData::map_equips[ite->first];
+			return edata.extype;
+		}
+	}
+
 	return 0;
 }
 
@@ -1308,6 +1398,16 @@ int GlobalData::getDgqbMapPos()
 	return dgqbmapos;
 }
 
+void GlobalData::setReviveCount(int val)
+{
+	GameDataSave::getInstance()->setReviveCount(val);
+}
+
+int GlobalData::getReviveCount()
+{
+	GameDataSave::getInstance()->getReviveCount();
+}
+
 int GlobalData::getMyGoldCount()
 {
 	return myGlodCount;
@@ -1319,9 +1419,40 @@ void GlobalData::setMyGoldCount(int count)
 	GameDataSave::getInstance()->setGoldCount(count);
 }
 
+std::string GlobalData::getMyID()
+{
+	return GameDataSave::getInstance()->getMyID();
+}
+
+void GlobalData::setMyID(std::string str)
+{
+	GameDataSave::getInstance()->setMyID(str);
+}
+
+std::string GlobalData::getMyNickName()
+{
+	return GameDataSave::getInstance()->getMyNickName();
+}
+
+void GlobalData::setMyNickName(std::string str)
+{
+	GameDataSave::getInstance()->setMyNickName(str);
+}
+
 std::string GlobalData::addUidString(std::string val)
 {
     return uid + val;
+}
+
+std::string GlobalData::UUID()
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	return getDeviceIDInKeychain();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	return "qwe";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#endif
+
 }
 
 void GlobalData::setNoAds(bool val)

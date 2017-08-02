@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "GameDataSave.h"
 #include "BuyComfirmLayer.h"
+#include "Const.h"
 
 GoldGoodsItem::GoldGoodsItem()
 {
@@ -105,7 +106,6 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	}
 }
 
-
 void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 {
 	std::vector<std::string> payRes = gdata->vec_res;
@@ -130,6 +130,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 						pdata.strid = bdata.icon;
 						pdata.count = intRes % 1000;
 						pdata.type = bdata.type - 1;
+						pdata.extype = bdata.extype;
 						StorageRoom::add(pdata);
 						break;
 					}
@@ -152,7 +153,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 						pdata.extype = rdata.actype;
 
 						if (rint >= 75 && rint <= 78)
-							updateDefaultStorage(pdata);
+							updateDefaultStorage(pdata, g_hero->getHeadID());
 						StorageRoom::add(pdata);
 						break;
 					}
@@ -174,7 +175,8 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 					pdata.count = 1;
 					pdata.lv = 0;
 					pdata.type = gfdata.type - 1;
-					updateDefaultStorage(pdata);
+					pdata.extype = gfdata.extype;
+					updateDefaultStorage(pdata,g_hero->getHeadID());
 					if (!g_hero->checkifHasGF_Equip(payRes[i]) && !GlobalData::tempHasGf_Equip(payRes[i]))
 					{
 						StorageRoom::add(pdata);
@@ -197,7 +199,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 						pdata.type = edata.type - 1;
 						pdata.goodvalue = 100;
 						pdata.extype = edata.extype;
-						updateDefaultStorage(pdata);
+						updateDefaultStorage(pdata, g_hero->getHeadID());
 						if (!g_hero->checkifHasGF_Equip(payRes[i]) && !GlobalData::tempHasGf_Equip(payRes[i]))
 						{
 							StorageRoom::add(pdata);
@@ -210,10 +212,10 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 	}
 }
 
-void GoldGoodsItem::updateDefaultStorage(PackageData pdata)
+void GoldGoodsItem::updateDefaultStorage(PackageData pdata, int heroindex)
 {
 	std::vector<PackageData> vec_defaultStorage;
-	std::string datastr = GlobalData::getDefaultStorage(g_hero->getHeadID());
+	std::string datastr = GlobalData::getDefaultStorage(heroindex);
 
 	std::vector<std::string> vec_retstr;
 	CommonFuncs::split(datastr, vec_retstr, ";");

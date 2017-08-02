@@ -74,7 +74,7 @@ void StorageRoom::loadStorageData()
 			sdata.type = N_GONG;
 
 		sdata.count = atoi(tmp2[2].c_str());
-		sdata.extype = atoi(tmp2[3].c_str());
+		sdata.extype = GlobalData::getResExType(sdata.strid);//atoi(tmp2[3].c_str());
 		sdata.lv = atoi(tmp2[4].c_str());
 
 		sdata.exp = atoi(tmp2[5].c_str());

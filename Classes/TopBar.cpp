@@ -9,6 +9,7 @@
 #include "ActivitScene.h"
 #include "HomeLayer.h"
 #include "MapLayer.h"
+#include "NewerGuideLayer.h"
 
 TopBar::TopBar()
 {
@@ -186,6 +187,13 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* cnode = (Node*)pSender;
 		SysSmallBox* sbox = NULL;
+
+		if (g_NewerGuideLayer != NULL)
+		{
+			g_NewerGuideLayer->removeFromParentAndCleanup(true);
+			g_NewerGuideLayer = NULL;
+		}
+
 		if (cnode->getName().compare("hero") == 0)
 		{
 			g_gameLayer->addChild(HeroStateUILayer::create(), 4, "HeroStateUILayer");

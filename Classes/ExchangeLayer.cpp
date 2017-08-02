@@ -168,6 +168,7 @@ void ExchangeLayer::delayShowExgData(float dt)
 							data.strid = bdata.icon;
 							data.count = res % 1000;
 							data.type = bdata.type - 1;
+							data.extype = bdata.extype;
 							break;
 						}
 					}
@@ -195,6 +196,7 @@ void ExchangeLayer::delayShowExgData(float dt)
 					data.strid = gfdata.id;
 					data.count = 1;
 					data.type = gfdata.type - 1;
+					data.extype = gfdata.extype;
 					npcGoodsData.push_back(data);
 					break;
 				}

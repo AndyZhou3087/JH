@@ -38,9 +38,15 @@ private:
 	ios 恢复购买按钮
 	****************************/
 	void onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void textFieldEvent(cocos2d::Ref *pSender, cocos2d::ui::TextField::EventType type);
+
+	void onTitle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
 private:
 	cocos2d::ui::CheckBox* m_soundCheckBox;//checkbox控件
 	cocos2d::ui::Text* m_soundOnOffText;//点击checkbox的文件说明控件 “开”,“关”
+	int clicktitlecount;
 };
 #endif
 

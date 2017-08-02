@@ -217,7 +217,7 @@ public:
 	PackageData* getGF_Equip(std::string gfeid);
 
 	/****************************
-	是否有功法或者装备，
+	是否有物品，
 	根据ID查找是否已经拥有
 	@param ID
 	*****************************/

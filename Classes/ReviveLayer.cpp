@@ -12,7 +12,6 @@
 USING_NS_UM_SOCIAL;
 #include "iosfunc.h"
 #endif
-#define REVIVEGOLDCOUNT 60
 
 ReviveLayer::ReviveLayer()
 {
@@ -236,9 +235,15 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else
 		{
-			if (GlobalData::getMyGoldCount() >= REVIVEGOLDCOUNT)
+			int revivecount = GlobalData::getReviveCount();
+			int revivegold = revivecount * 20;
+			if (GlobalData::getMyGoldCount() >= revivegold)
 			{
-				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - REVIVEGOLDCOUNT);
+				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - revivegold);
+				revivecount++;
+				if (revivecount > 6)
+					revivecount = 6;
+				GlobalData::setReviveCount(revivecount);
 				reviveOk();
 			}
 			else

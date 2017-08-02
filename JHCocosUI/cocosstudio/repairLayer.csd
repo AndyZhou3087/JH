@@ -39,13 +39,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="-659262914" Tag="33" IconVisible="False" LeftMargin="533.4502" RightMargin="36.5498" TopMargin="252.2206" BottomMargin="937.7794" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="-659262914" Tag="33" IconVisible="False" LeftMargin="545.4504" RightMargin="24.5496" TopMargin="252.2206" BottomMargin="937.7794" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="608.4502" Y="982.7794" />
+            <Position X="620.4504" Y="982.7794" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8451" Y="0.7678" />
+            <PrePosition X="0.8617" Y="0.7678" />
             <PreSize X="0.2083" Y="0.0703" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
@@ -227,14 +227,14 @@
             <FileData Type="MarkedSubImage" Path="ui/strengthfail.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="2003148900" VisibleForFrame="False" Tag="88" IconVisible="False" LeftMargin="71.5001" RightMargin="71.4999" TopMargin="349.0659" BottomMargin="899.9341" FontSize="28" LabelText="十级以上强化失败时武器会消失，请慎重考虑！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="577.0000" Y="31.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0001" Y="915.4341" />
+          <AbstractNodeData Name="desc" ActionTag="2003148900" Tag="88" IconVisible="False" LeftMargin="257.0073" RightMargin="162.9927" TopMargin="266.8796" BottomMargin="951.1204" IsCustomSize="True" FontSize="28" LabelText="十级以上强化失败时武器会消失，请慎重考虑！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="300.0000" Y="62.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="257.0073" Y="982.1204" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition X="0.5000" Y="0.7152" />
-            <PreSize X="0.8014" Y="0.0242" />
+            <PrePosition X="0.3570" Y="0.7673" />
+            <PreSize X="0.4167" Y="0.0484" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

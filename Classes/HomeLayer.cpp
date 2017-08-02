@@ -206,6 +206,7 @@ bool HomeLayer::init()
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_HOME);
 
 	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.2f);
+
 	return true;
 }
 

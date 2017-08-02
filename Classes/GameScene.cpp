@@ -54,11 +54,6 @@ bool GameScene::init()
     {
         return false;
     }
-	//读取每个建筑配置文件
-	GlobalData::loadBuildActionJSon();
-
-	//读取资源配置文件
-	GlobalData::loadResJsonData();
 
 	//读取后山资源列表配置文件
 	GlobalData::loadHillResJsonData();
@@ -68,21 +63,6 @@ bool GameScene::init()
 
 	//读取NPC配置文件
 	GlobalData::loadNpcJsonData();
-
-	//读取角色配置文件
-	GlobalData::loadHeroAtrJsonData();
-
-	//读取内功，外功配置文件
-	GlobalData::loadWG_NGJsonData();
-
-	//读取武器防具配置文件
-	GlobalData::loadEquipJsonData();
-
-	//读取剧情配置文件
-	GlobalData::loadPlotMissionJsonData();
-
-	//读取支线剧情配置文件
-	GlobalData::loadBranchPlotMissionJsonData();
 
 	//读取武功招式配置文件
 	GlobalData::loadGftrickData();
@@ -164,6 +144,7 @@ bool GameScene::init()
 			GlobalData::setMakeWarmConfig("");
 		}
 	}
+
     return true;
 }
 
@@ -272,7 +253,7 @@ void GameScene::loadSavedHeroPropData()
 		sdata.strid = tmp2[0];
 		sdata.type = atoi(tmp2[1].c_str());
 		sdata.count = atoi(tmp2[2].c_str());
-		sdata.extype = atoi(tmp2[3].c_str());
+		sdata.extype = GlobalData::getResExType(sdata.strid);//atoi(tmp2[3].c_str());
 		sdata.lv = atoi(tmp2[4].c_str());
 		sdata.exp = atoi(tmp2[5].c_str());
 		sdata.goodvalue = atoi(tmp2[6].c_str());//耐久度

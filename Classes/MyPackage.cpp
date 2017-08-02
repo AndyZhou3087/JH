@@ -157,7 +157,7 @@ void MyPackage::load()
 		data.strid = tmp[0];
 		data.type = atoi(tmp[1].c_str());
 		data.count = atoi(tmp[2].c_str());
-		data.extype = atoi(tmp[3].c_str());
+		data.extype = GlobalData::getResExType(data.strid);//atoi(tmp[3].c_str());
 		data.lv = atoi(tmp[4].c_str());
 		data.exp = atoi(tmp[5].c_str());
 		data.goodvalue = atoi(tmp[6].c_str());

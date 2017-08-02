@@ -111,15 +111,19 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		starPos = touch->getLocation();
 		if (stencilNodes.size() > 0)
 		{
-			
 			Vec2 vec = stencilNodes[stencilNodes.size() - 1]->getParent()->convertToWorldSpace(stencilNodes[stencilNodes.size() - 1]->getPosition());
 
 			auto rect = Rect(vec.x - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width / 2, vec.y - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height/2, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height);
 			if (rect.containsPoint(point))//如果触点处于rect中  
 			{
 				GameDataSave::getInstance()->setIsNewerGuide(step, 0);
-				listener->setSwallowTouches(false);
-				this->removeFromParentAndCleanup(true);
+
+				listener->setSwallowTouches(false); 
+
+				if (!(step >= 2 && step <= 10 || (step >= 13 && step <= 17)))
+				{
+					this->removeFromParentAndCleanup(true);
+				}
 			}
 			else
 			{
@@ -133,6 +137,22 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 
 		return true;
 	};
+
+	//listener->onTouchEnded = [=](Touch *touch, Event *event)
+	//{
+	//	if (stencilNodes.size() > 0 && (step >= 3 && step <= 11))
+	//	{
+	//		auto point = Director::getInstance()->convertToGL(touch->getLocationInView());
+	//		Vec2 vec = stencilNodes[stencilNodes.size() - 1]->getParent()->convertToWorldSpace(stencilNodes[stencilNodes.size() - 1]->getPosition());
+	//		auto rect = Rect(vec.x - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width / 2, vec.y - stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height / 2, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.width, stencilNodes[stencilNodes.size() - 1]->getBoundingBox().size.height);
+	//		if (rect.containsPoint(point))
+	//		{
+	//			this->removeFromParentAndCleanup(true);
+	//		}
+	//		GameDataSave::getInstance()->setIsNewerGuide(step, 0);
+	//	}
+
+	//};
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 

@@ -242,6 +242,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 								data.strid = bdata.icon;
 								data.count = res % 1000;
 								data.type = bdata.type - 1;
+								data.extype = bdata.extype;
 								break;
 							}
 						}
@@ -270,6 +271,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 						data.count = 1;
 						data.lv = 0;
 						data.type = gfdata.type - 1;
+						data.extype = gfdata.extype;
 						getRewardData.push_back(data);
 						break;
 					}

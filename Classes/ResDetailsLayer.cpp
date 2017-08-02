@@ -202,7 +202,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			skilltext->setString(skillstr);
 		}
 	}
-	else if (pdata->type == RES_2)
+	if (pdata->type == RES_2)
 	{
 		if (pdata->strid.compare("70") == 0)
 		{

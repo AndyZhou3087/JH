@@ -1,0 +1,44 @@
+/********************************************************************
+*服务器数据交互
+*********************************************************************/
+#ifndef __SERVERDATASWAP__
+#define __SERVERDATASWAP__
+#include "cocos2d.h"
+
+class ServerDataDelegateProtocol;
+
+class ServerDataSwap
+{
+public:
+	ServerDataSwap();
+	~ServerDataSwap();
+	static ServerDataSwap* getInstance();
+
+	void postOneData(std::string userid, int tag = 0);
+	void postAllData();
+	void getAllData();
+	void propadjust();
+	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
+private:
+	static ServerDataSwap* _serverDataSwap;
+	static ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
+private:
+	static void httpPostOneDataCB(std::string retdata, int code, std::string tag);
+	static void httpGetAllDataCB(std::string retdata, int code, std::string tag);
+	static void httpPropadJustDataCB(std::string retdata, int code, std::string tag);
+};
+
+class ServerDataDelegateProtocol
+{
+public:
+	virtual ~ServerDataDelegateProtocol(){};
+
+	/**
+	* @brief 数据成功
+	*/
+	virtual void onSuccess() {};
+
+	virtual void onErr() {};
+};
+
+#endif

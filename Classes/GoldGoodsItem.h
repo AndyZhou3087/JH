@@ -21,6 +21,7 @@ public:
 	virtual bool init(GoodsData* gdata);
 	static GoldGoodsItem* create(GoodsData* gdata);
 	static void addBuyGoods(GoodsData* gdata);
+	static void updateDefaultStorage(PackageData pdata, int heroindex);
 private:
 	cocos2d::ui::ImageView* icon;
 	cocos2d::ui::Text* nameTxt;
@@ -28,7 +29,7 @@ private:
 	cocos2d::ui::Text* priceTxt;
 	bool isDraging;
 	Vec2 startPos;
-	static void updateDefaultStorage(PackageData pdata);
+
 	GoodsData* m_goodData;
 private:
 

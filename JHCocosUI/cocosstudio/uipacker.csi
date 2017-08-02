@@ -384,6 +384,11 @@
       <FilePathData Path="ui/skill7text.png" />
       <FilePathData Path="ui/skill8text.png" />
       <FilePathData Path="ui/fighthpbar2.png" />
+      <FilePathData Path="ui/waitingbg.png" />
+      <FilePathData Path="ui/waitingprogress.png" />
+      <FilePathData Path="ui/setmodifybtn.png" />
+      <FilePathData Path="ui/setnicknamebox.png" />
+      <FilePathData Path="ui/settingsep.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

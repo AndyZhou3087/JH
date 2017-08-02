@@ -184,6 +184,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HintBox.cpp" />
     <ClCompile Include="..\Classes\HomeHill.cpp" />
     <ClCompile Include="..\Classes\HomeLayer.cpp" />
+    <ClCompile Include="..\Classes\HttpUtil.cpp" />
     <ClCompile Include="..\Classes\json.cpp" />
     <ClCompile Include="..\Classes\MapLayer.cpp" />
     <ClCompile Include="..\Classes\MedicineKit.cpp" />
@@ -204,6 +205,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\SelectSaveComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\SelectSaveLayer.cpp" />
     <ClCompile Include="..\Classes\SepcialNpcLayer.cpp" />
+    <ClCompile Include="..\Classes\ServerDataSwap.cpp" />
     <ClCompile Include="..\Classes\SettingLayer.cpp" />
     <ClCompile Include="..\Classes\Shake.cpp" />
     <ClCompile Include="..\Classes\ShopLayer.cpp" />
@@ -218,6 +220,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\TopBar.cpp" />
     <ClCompile Include="..\Classes\UIScroll.cpp" />
     <ClCompile Include="..\Classes\UnlockLayer.cpp" />
+    <ClCompile Include="..\Classes\WaitingProgress.cpp" />
     <ClCompile Include="..\Classes\WineMaker.cpp" />
     <ClCompile Include="..\Classes\WineTable.cpp" />
     <ClCompile Include="..\Classes\Winlayer.cpp" />
@@ -265,6 +268,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HintBox.h" />
     <ClInclude Include="..\Classes\HomeHill.h" />
     <ClInclude Include="..\Classes\HomeLayer.h" />
+    <ClInclude Include="..\Classes\HttpUtil.h" />
     <ClInclude Include="..\Classes\json.h" />
     <ClInclude Include="..\Classes\MapLayer.h" />
     <ClInclude Include="..\Classes\MedicineKit.h" />
@@ -285,6 +289,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\SelectSaveComfirmLayer.h" />
     <ClInclude Include="..\Classes\SelectSaveLayer.h" />
     <ClInclude Include="..\Classes\SepcialNpcLayer.h" />
+    <ClInclude Include="..\Classes\ServerDataSwap.h" />
     <ClInclude Include="..\Classes\SettingLayer.h" />
     <ClInclude Include="..\Classes\Shake.h" />
     <ClInclude Include="..\Classes\ShopLayer.h" />
@@ -300,6 +305,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\UIScroll.h" />
     <ClInclude Include="..\Classes\UnlockLayer.h" />
     <ClInclude Include="..\Classes\Utility.h" />
+    <ClInclude Include="..\Classes\WaitingProgress.h" />
     <ClInclude Include="..\Classes\WineMaker.h" />
     <ClInclude Include="..\Classes\WineTable.h" />
     <ClInclude Include="..\Classes\Winlayer.h" />

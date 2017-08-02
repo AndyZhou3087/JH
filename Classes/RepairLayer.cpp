@@ -15,7 +15,7 @@ RepairLayer::RepairLayer()
 	resIsEnough = true;
 	useluckstone = 0;
 	succrnd = 100;
-	clickindex = 0;
+	clickindex = -1;
 }
 
 
@@ -181,11 +181,11 @@ void RepairLayer::onRepairItem(cocos2d::Ref* pSender)
 			this->addChild(hint);
 			return;
 		}
+		if (useluckstone >= pdata->count)
+			return;
+
 		useluckstone++;
-		if (useluckstone > pdata->count)
-		{
-			useluckstone = pdata->count;
-		}
+
 		succrandtext->setVisible(true);;
 		succrnd += 5;
 		if (succrnd > 100)

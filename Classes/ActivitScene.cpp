@@ -258,6 +258,7 @@ void ActivitScene::getRndRes(float dt)
 			PackageData data;
 			data.strid = vec_randRes[r];
 			data.type = GlobalData::map_wgngs[data.strid].type - 1;
+			data.extype = GlobalData::map_wgngs[data.strid].extype;
 			data.count = 1;
 			vec_randData.push_back(data);
 		}
@@ -280,6 +281,7 @@ void ActivitScene::getRndRes(float dt)
 			PackageData data;
 			data.strid = vec_randRes[r1];
 			data.type = GlobalData::map_equips[data.strid].type - 1;
+			data.extype = GlobalData::map_equips[data.strid].extype;
 			data.count = 1;
 			vec_randData.push_back(data);
 		}

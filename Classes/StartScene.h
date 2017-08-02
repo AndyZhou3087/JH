@@ -3,8 +3,8 @@
 
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
-
-class StartScene : public cocos2d::Layer
+#include "ServerDataSwap.h"
+class StartScene : public cocos2d::Layer, public ServerDataDelegateProtocol
 {
 public:
 	StartScene();
@@ -13,7 +13,8 @@ public:
 
 	virtual void onExit();
     virtual bool init();
-    
+	void onSuccess();
+	void onErr();
 	CREATE_FUNC(StartScene);
 
 private:
@@ -23,7 +24,8 @@ private:
 	void onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
-
+	void checkServerData(float dt);
+	cocos2d::ui::Widget* m_continuebtn;
 
 };
 

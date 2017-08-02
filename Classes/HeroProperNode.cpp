@@ -166,6 +166,11 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		if (lastclickindex == tag && heroselectbg->isVisible())
 			return;
 
+		if (g_NewerGuideLayer != NULL)
+		{
+			g_NewerGuideLayer->removeFromParentAndCleanup(true);
+			g_NewerGuideLayer = NULL;
+		}
 		removeitem();
 		showSelectFrame(Atrytpe[tag]);
 
@@ -396,6 +401,12 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 void HeroProperNode::onItem(Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+
+	if (g_NewerGuideLayer != NULL)
+	{
+		g_NewerGuideLayer->removeFromParentAndCleanup(true);
+		g_NewerGuideLayer = NULL;
+	}
 
 	if (GlobalData::isExercising() && !GlobalData::isHasFSF())
 	{

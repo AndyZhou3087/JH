@@ -3,6 +3,7 @@
 #include "SoundManager.h"
 #include "Const.h"
 #include "GameScene.h"
+#include "ServerDataSwap.h"
 #ifdef ANALYTICS
 #include "MobClickCpp.h"
 #endif
@@ -86,7 +87,29 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
 	GlobalData::init();
+	//
 	GlobalData::loadAllResourceJsonData();
+	//读取角色配置文件
+	GlobalData::loadHeroAtrJsonData();
+
+	//读取每个建筑配置文件
+	GlobalData::loadBuildActionJSon();
+
+	//读取资源配置文件
+	GlobalData::loadResJsonData();
+
+	//读取内功，外功配置文件
+	GlobalData::loadWG_NGJsonData();
+
+	//读取武器防具配置文件
+	GlobalData::loadEquipJsonData();
+
+	//读取剧情配置文件
+	GlobalData::loadPlotMissionJsonData();
+
+	//读取支线剧情配置文件
+	GlobalData::loadBranchPlotMissionJsonData();
+
 #if defined(CC_PLATFORM_IOS) && defined(ANALYTICS)
     MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
 #endif
@@ -116,6 +139,8 @@ void AppDelegate::applicationDidEnterBackground() {
 	
 	if (g_gameLayer != NULL)
 		g_gameLayer->saveAllData();
+
+	ServerDataSwap::getInstance()->postOneData(GlobalData::getUId());
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
