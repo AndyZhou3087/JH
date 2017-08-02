@@ -9,7 +9,7 @@
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 
-class SettingLayer :public Layer
+class SettingLayer :public Layer, public cocos2d::ui::EditBoxDelegate
 {
 public:
 	SettingLayer();
@@ -42,6 +42,14 @@ private:
 	void textFieldEvent(cocos2d::Ref *pSender, cocos2d::ui::TextField::EventType type);
 
 	void onTitle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
+
+	void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
+
+	void editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text);
+
+	void editBoxReturn(cocos2d::ui::EditBox *editBox);
 
 private:
 	cocos2d::ui::CheckBox* m_soundCheckBox;//checkbox控件

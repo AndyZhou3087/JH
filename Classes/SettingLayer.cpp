@@ -55,6 +55,19 @@ bool SettingLayer::init()
 	cocos2d::ui::TextField* name = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
 	name->setString(GlobalData::getMyNickName());
 	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
+	name->setVisible(false);
+
+	cocos2d::ui::EditBox* editName = cocos2d::ui::EditBox::create(Size(380, 40), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
+	editName->setPosition(Point(230, 875));
+	editName->setAnchorPoint(Vec2(0, 0.5));
+	editName->setFontColor(Color3B::BLACK);
+	editName->setPlaceHolder("请输入昵称:");
+	editName->setPlaceholderFontColor(Color3B::WHITE);
+	editName->setMaxLength(14);
+	editName->setText(GlobalData::getMyNickName().c_str());
+	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);
+	editName->setDelegate(this);
+	csbnode->addChild(editName);
 
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -154,4 +167,27 @@ void SettingLayer::textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventTy
 		case cocos2d::ui::TextField::EventType::DELETE_BACKWARD:
 			break;
 	}
+}
+
+
+void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
+{
+
+}
+
+void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
+{
+	if (editBox->getTag() == 0)
+	{
+		//std::string myname = GlobalData::getMyName();
+	}
+}
+
+void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
+{
+}
+
+void SettingLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
+{
+
 }
