@@ -131,13 +131,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="idtext" ActionTag="425895819" Tag="119" IconVisible="False" LeftMargin="123.5497" RightMargin="498.4503" TopMargin="464.9996" BottomMargin="771.0004" FontSize="40" LabelText="编号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="idtext" ActionTag="425895819" Tag="119" IconVisible="False" LeftMargin="120.7509" RightMargin="501.2491" TopMargin="464.9996" BottomMargin="771.0004" FontSize="40" LabelText="编号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="98.0000" Y="44.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="172.5497" Y="793.0004" />
+            <Position X="169.7509" Y="793.0004" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2397" Y="0.6195" />
+            <PrePosition X="0.2358" Y="0.6195" />
             <PreSize X="0.1361" Y="0.0344" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -154,24 +154,24 @@
             <FileData Type="MarkedSubImage" Path="ui/setnicknamebox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="999271047" Tag="120" IconVisible="False" LeftMargin="235.0000" RightMargin="105.0000" TopMargin="384.9999" BottomMargin="855.0001" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入昵称" MaxLengthEnable="True" MaxLengthText="9" ctype="TextFieldObjectData">
+          <AbstractNodeData Name="name" ActionTag="999271047" Tag="120" IconVisible="False" LeftMargin="225.0000" RightMargin="115.0000" TopMargin="384.9999" BottomMargin="855.0001" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入昵称" MaxLengthEnable="True" MaxLengthText="9" ctype="TextFieldObjectData">
             <Size X="380.0000" Y="40.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="235.0000" Y="875.0001" />
+            <Position X="225.0000" Y="875.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3264" Y="0.6836" />
+            <PrePosition X="0.3125" Y="0.6836" />
             <PreSize X="0.5278" Y="0.0313" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="235.0000" RightMargin="278.0000" TopMargin="460.4960" BottomMargin="774.5040" FontSize="45" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="207.0000" Y="45.0000" />
+          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="225.0000" RightMargin="315.0000" TopMargin="463.9996" BottomMargin="776.0004" FontSize="40" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="180.0000" Y="40.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="235.0000" Y="797.0040" />
+            <Position X="225.0000" Y="796.0004" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3264" Y="0.6227" />
-            <PreSize X="0.2875" Y="0.0352" />
+            <PrePosition X="0.3125" Y="0.6219" />
+            <PreSize X="0.2500" Y="0.0313" />
             <FontResource Type="Default" Path="" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

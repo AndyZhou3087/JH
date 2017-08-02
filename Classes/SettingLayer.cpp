@@ -58,11 +58,11 @@ bool SettingLayer::init()
 	name->setVisible(false);
 
 	cocos2d::ui::EditBox* editName = cocos2d::ui::EditBox::create(Size(380, 45), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
-	editName->setPosition(Point(230, 875));
+	editName->setPosition(Point(225, 875));
 	editName->setAnchorPoint(Vec2(0, 0.5));
 	editName->setFontColor(Color3B::BLACK);
 	editName->setPlaceHolder("请输入昵称:");
-	editName->setPlaceholderFontSize(45);
+	editName->setPlaceholderFontSize(38);
 	editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
 	editName->setPlaceholderFontColor(Color3B::WHITE);
 	editName->setMaxLength(14);
