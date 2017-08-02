@@ -7,6 +7,7 @@
 #include "GameDataSave.h"
 #include "BuyComfirmLayer.h"
 #include "Const.h"
+#include "AnalyticUtil.h"
 
 GoldGoodsItem::GoldGoodsItem()
 {
@@ -99,7 +100,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
 #ifdef ANALYTICS
 			std::string name = StringUtils::format("b%s", m_goodData->icon.c_str());
-			AnalyticUtil::onEvent(name);
+			AnalyticUtil::onEvent(name.c_str());
 #endif
 		}
 		isDraging = false;

@@ -50,8 +50,20 @@
 		720AB2F31F0CD7B600CF23A5 /* end2_1 in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2EF1F0CD7B600CF23A5 /* end2_1 */; };
 		720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F01F0CD7B600CF23A5 /* end2_1.csb */; };
 		720AB2F51F0CD7B600CF23A5 /* end2_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F11F0CD7B600CF23A5 /* end2_2.csb */; };
-		720AB2F61F0CD7B600CF23A5 /* end2-2 in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F21F0CD7B600CF23A5 /* end2-2 */; };
 		721CBB2C1EFCBB0A0077B495 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721CBB2B1EFCBB0A0077B495 /* GameController.framework */; };
+		722286A41F31C48300EE46A4 /* HttpUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7222869E1F31C48300EE46A4 /* HttpUtil.cpp */; };
+		722286A51F31C48300EE46A4 /* ServerDataSwap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */; };
+		722286A61F31C48300EE46A4 /* WaitingProgress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722286A21F31C48300EE46A4 /* WaitingProgress.cpp */; };
+		72229CD01F283991001272D3 /* end3_1 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CC81F283991001272D3 /* end3_1 */; };
+		72229CD11F283991001272D3 /* end3_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72229CC91F283991001272D3 /* end3_1.csb */; };
+		72229CD21F283991001272D3 /* end3_2 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCA1F283991001272D3 /* end3_2 */; };
+		72229CD31F283991001272D3 /* end3_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCB1F283991001272D3 /* end3_2.csb */; };
+		72229CD41F283991001272D3 /* end4_1 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCC1F283991001272D3 /* end4_1 */; };
+		72229CD51F283991001272D3 /* end4_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCD1F283991001272D3 /* end4_1.csb */; };
+		72229CD61F283991001272D3 /* end4_2 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCE1F283991001272D3 /* end4_2 */; };
+		72229CD71F283991001272D3 /* end4_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCF1F283991001272D3 /* end4_2.csb */; };
+		72229CD91F2839CA001272D3 /* end2_2 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CD81F2839CA001272D3 /* end2_2 */; };
+		72229CDB1F2839F6001272D3 /* story3_1 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CDA1F2839F6001272D3 /* story3_1 */; };
 		723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */; };
 		7239471A1EF2384A0093E725 /* ExerciseDoneLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */; };
 		7239471B1EF2384A0093E725 /* PauseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947171EF2384A0093E725 /* PauseLayer.cpp */; };
@@ -83,7 +95,6 @@
 		72630BD91EFA77FD000516CE /* story3_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72630BD71EFA77FD000516CE /* story3_1.csb */; };
 		72630BDA1EFA77FD000516CE /* story3_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72630BD81EFA77FD000516CE /* story3_2.csb */; };
 		72630BDD1EFA7810000516CE /* story3_2 in Resources */ = {isa = PBXBuildFile; fileRef = 72630BDB1EFA7810000516CE /* story3_2 */; };
-		72630BDE1EFA7810000516CE /* story3-1 in Resources */ = {isa = PBXBuildFile; fileRef = 72630BDC1EFA7810000516CE /* story3-1 */; };
 		7271A07A1EE63D90005B980F /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7271A0771EE63D90005B980F /* Default-Landscape~ipad.png */; };
 		7271A07B1EE63D90005B980F /* Icon-87.png in Resources */ = {isa = PBXBuildFile; fileRef = 7271A0781EE63D90005B980F /* Icon-87.png */; };
 		7271A07C1EE63D90005B980F /* Icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7271A0791EE63D90005B980F /* Icon-180.png */; };
@@ -213,10 +224,6 @@
 		729772861F09DFBF001DC2B8 /* end1_2 in Resources */ = {isa = PBXBuildFile; fileRef = 729772821F09DFBF001DC2B8 /* end1_2 */; };
 		729772871F09DFBF001DC2B8 /* end1_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 729772831F09DFBF001DC2B8 /* end1_2.csb */; };
 		72B1D75B1F0F6F7600D73B31 /* LZKeychain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */; };
-		72D042291F25D7DC0039B75A /* end3-1 in Resources */ = {isa = PBXBuildFile; fileRef = 72D042251F25D7DC0039B75A /* end3-1 */; };
-		72D0422A1F25D7DC0039B75A /* end3-1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72D042261F25D7DC0039B75A /* end3-1.csb */; };
-		72D0422B1F25D7DC0039B75A /* end3-2 in Resources */ = {isa = PBXBuildFile; fileRef = 72D042271F25D7DC0039B75A /* end3-2 */; };
-		72D0422C1F25D7DC0039B75A /* end3-2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72D042281F25D7DC0039B75A /* end3-2.csb */; };
 		72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098A91F08C45F00FEABAB /* iosfunc.mm */; };
 		72D098B81F08CA3100FEABAB /* MobClickCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098B71F08CA3000FEABAB /* MobClickCpp.mm */; };
 		72D5CAC01F0E1A21007A5D12 /* Shake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72D5CABE1F0E1A21007A5D12 /* Shake.cpp */; };
@@ -340,8 +347,23 @@
 		720AB2EF1F0CD7B600CF23A5 /* end2_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end2_1; sourceTree = "<group>"; };
 		720AB2F01F0CD7B600CF23A5 /* end2_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_1.csb; sourceTree = "<group>"; };
 		720AB2F11F0CD7B600CF23A5 /* end2_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_2.csb; sourceTree = "<group>"; };
-		720AB2F21F0CD7B600CF23A5 /* end2-2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "end2-2"; sourceTree = "<group>"; };
 		721CBB2B1EFCBB0A0077B495 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		7222869E1F31C48300EE46A4 /* HttpUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpUtil.cpp; sourceTree = "<group>"; };
+		7222869F1F31C48300EE46A4 /* HttpUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtil.h; sourceTree = "<group>"; };
+		722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerDataSwap.cpp; sourceTree = "<group>"; };
+		722286A11F31C48300EE46A4 /* ServerDataSwap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerDataSwap.h; sourceTree = "<group>"; };
+		722286A21F31C48300EE46A4 /* WaitingProgress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitingProgress.cpp; sourceTree = "<group>"; };
+		722286A31F31C48300EE46A4 /* WaitingProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitingProgress.h; sourceTree = "<group>"; };
+		72229CC81F283991001272D3 /* end3_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end3_1; sourceTree = "<group>"; };
+		72229CC91F283991001272D3 /* end3_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end3_1.csb; sourceTree = "<group>"; };
+		72229CCA1F283991001272D3 /* end3_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end3_2; sourceTree = "<group>"; };
+		72229CCB1F283991001272D3 /* end3_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end3_2.csb; sourceTree = "<group>"; };
+		72229CCC1F283991001272D3 /* end4_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end4_1; sourceTree = "<group>"; };
+		72229CCD1F283991001272D3 /* end4_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end4_1.csb; sourceTree = "<group>"; };
+		72229CCE1F283991001272D3 /* end4_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end4_2; sourceTree = "<group>"; };
+		72229CCF1F283991001272D3 /* end4_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end4_2.csb; sourceTree = "<group>"; };
+		72229CD81F2839CA001272D3 /* end2_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end2_2; sourceTree = "<group>"; };
+		72229CDA1F2839F6001272D3 /* story3_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story3_1; sourceTree = "<group>"; };
 		723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyComfirmLayer.cpp; sourceTree = "<group>"; };
 		723947141EF2384A0093E725 /* BuyComfirmLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyComfirmLayer.h; sourceTree = "<group>"; };
 		723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExerciseDoneLayer.cpp; sourceTree = "<group>"; };
@@ -381,7 +403,6 @@
 		72630BD71EFA77FD000516CE /* story3_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = story3_1.csb; sourceTree = "<group>"; };
 		72630BD81EFA77FD000516CE /* story3_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = story3_2.csb; sourceTree = "<group>"; };
 		72630BDB1EFA7810000516CE /* story3_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story3_2; sourceTree = "<group>"; };
-		72630BDC1EFA7810000516CE /* story3-1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "story3-1"; sourceTree = "<group>"; };
 		7271A0771EE63D90005B980F /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		7271A0781EE63D90005B980F /* Icon-87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-87.png"; sourceTree = "<group>"; };
 		7271A0791EE63D90005B980F /* Icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-180.png"; sourceTree = "<group>"; };
@@ -581,10 +602,6 @@
 		729772831F09DFBF001DC2B8 /* end1_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end1_2.csb; sourceTree = "<group>"; };
 		72B1D7591F0F6F7600D73B31 /* LZKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZKeychain.h; sourceTree = "<group>"; };
 		72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LZKeychain.mm; sourceTree = "<group>"; };
-		72D042251F25D7DC0039B75A /* end3-1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "end3-1"; sourceTree = "<group>"; };
-		72D042261F25D7DC0039B75A /* end3-1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "end3-1.csb"; sourceTree = "<group>"; };
-		72D042271F25D7DC0039B75A /* end3-2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "end3-2"; sourceTree = "<group>"; };
-		72D042281F25D7DC0039B75A /* end3-2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = "end3-2.csb"; sourceTree = "<group>"; };
 		72D098A91F08C45F00FEABAB /* iosfunc.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iosfunc.mm; sourceTree = "<group>"; };
 		72D098B61F08CA3000FEABAB /* MobClickCpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickCpp.h; sourceTree = "<group>"; };
 		72D098B71F08CA3000FEABAB /* MobClickCpp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MobClickCpp.mm; sourceTree = "<group>"; };
@@ -843,12 +860,16 @@
 				729772831F09DFBF001DC2B8 /* end1_2.csb */,
 				720AB2EF1F0CD7B600CF23A5 /* end2_1 */,
 				720AB2F01F0CD7B600CF23A5 /* end2_1.csb */,
+				72229CD81F2839CA001272D3 /* end2_2 */,
 				720AB2F11F0CD7B600CF23A5 /* end2_2.csb */,
-				720AB2F21F0CD7B600CF23A5 /* end2-2 */,
-				72D042251F25D7DC0039B75A /* end3-1 */,
-				72D042261F25D7DC0039B75A /* end3-1.csb */,
-				72D042271F25D7DC0039B75A /* end3-2 */,
-				72D042281F25D7DC0039B75A /* end3-2.csb */,
+				72229CC81F283991001272D3 /* end3_1 */,
+				72229CC91F283991001272D3 /* end3_1.csb */,
+				72229CCA1F283991001272D3 /* end3_2 */,
+				72229CCB1F283991001272D3 /* end3_2.csb */,
+				72229CCC1F283991001272D3 /* end4_1 */,
+				72229CCD1F283991001272D3 /* end4_1.csb */,
+				72229CCE1F283991001272D3 /* end4_2 */,
+				72229CCF1F283991001272D3 /* end4_2.csb */,
 				7293E0941EE7BAFA009AC1A2 /* exerciseCancelLayer.csb */,
 				723947341EF2386D0093E725 /* exerciseDoneLayer.csb */,
 				72573ACF1F08AD28005DF2F6 /* exgLayer.csb */,
@@ -893,10 +914,10 @@
 				723EBFDF1EF37FF000642589 /* story2_1.csb */,
 				723EC0351EF3800E00642589 /* story2_2 */,
 				723EBFF11EF37FF000642589 /* story2_2.csb */,
+				72229CDA1F2839F6001272D3 /* story3_1 */,
 				72630BD71EFA77FD000516CE /* story3_1.csb */,
 				72630BDB1EFA7810000516CE /* story3_2 */,
 				72630BD81EFA77FD000516CE /* story3_2.csb */,
-				72630BDC1EFA7810000516CE /* story3-1 */,
 				723CF5EF1F020CA600509BFE /* story4_1 */,
 				723CF5F31F020CB500509BFE /* story4_1.csb */,
 				723CF5F01F020CA600509BFE /* story4_2 */,
@@ -916,6 +937,12 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7222869E1F31C48300EE46A4 /* HttpUtil.cpp */,
+				7222869F1F31C48300EE46A4 /* HttpUtil.h */,
+				722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */,
+				722286A11F31C48300EE46A4 /* ServerDataSwap.h */,
+				722286A21F31C48300EE46A4 /* WaitingProgress.cpp */,
+				722286A31F31C48300EE46A4 /* WaitingProgress.h */,
 				72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */,
 				72868FE01ED568B000D06B0F /* ActionGetLayer.h */,
 				72868FE11ED568B000D06B0F /* ActivitScene.cpp */,
@@ -1320,24 +1347,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72229CD61F283991001272D3 /* end4_2 in Resources */,
+				72229CD01F283991001272D3 /* end3_1 in Resources */,
 				728691B41ED56CC800D06B0F /* actionNode.csb in Resources */,
 				728691CC1ED56CC800D06B0F /* resNode.csb in Resources */,
 				729772841F09DFBF001DC2B8 /* end1_1 in Resources */,
 				72754FED1F04CCA000AFB4C4 /* gray.fsh in Resources */,
 				7239479F1EF2386D0093E725 /* buyComfirmLayer.csb in Resources */,
 				729772861F09DFBF001DC2B8 /* end1_2 in Resources */,
-				72D042291F25D7DC0039B75A /* end3-1 in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				72F4D13F1F21A0C800D9D752 /* specialNpcLayer.csb in Resources */,
 				720AB2F31F0CD7B600CF23A5 /* end2_1 in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
-				720AB2F61F0CD7B600CF23A5 /* end2-2 in Resources */,
 				728691B91ED56CC800D06B0F /* comfirmSaveLayer.csb in Resources */,
 				728691C01ED56CC800D06B0F /* goWhereLayer.csb in Resources */,
 				728691BC1ED56CC800D06B0F /* Default in Resources */,
 				728691C21ED56CC800D06B0F /* heroStateLayer.csb in Resources */,
+				72229CD91F2839CA001272D3 /* end2_2 in Resources */,
 				723947B51EF2386D0093E725 /* exerciseDoneLayer.csb in Resources */,
 				728691CF1ED56CC800D06B0F /* selectHeroLayer.csb in Resources */,
+				72229CD71F283991001272D3 /* end4_2.csb in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				728691C81ED56CC800D06B0F /* npcLayer.csb in Resources */,
 				723EC0101EF37FF000642589 /* story1_2.csb in Resources */,
@@ -1346,13 +1375,14 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				72777B2A1EFBD78400151A2B /* UMSocialSDKResources.bundle in Resources */,
 				725CB9E01F15F3E900D2509A /* repairOKLayer.csb in Resources */,
-				72630BDE1EFA7810000516CE /* story3-1 in Resources */,
 				728691BB1ED56CC800D06B0F /* deathLayer.csb in Resources */,
 				723EC0391EF3800E00642589 /* story2_2 in Resources */,
 				728691C11ED56CC800D06B0F /* heroAttribNode.csb in Resources */,
 				728692091ED5972700D06B0F /* uipacker.png in Resources */,
+				72229CDB1F2839F6001272D3 /* story3_1 in Resources */,
 				728691D21ED56CC800D06B0F /* settingLayer.csb in Resources */,
 				7286920B1ED5973E00D06B0F /* uipacker.plist in Resources */,
+				72229CD11F283991001272D3 /* end3_1.csb in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				723EC0381EF3800E00642589 /* story2_1 in Resources */,
 				723CF5F51F020CB500509BFE /* story4_1.csb in Resources */,
@@ -1362,8 +1392,11 @@
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				72F4D13E1F21A0C800D9D752 /* challengeCountLayer.csb in Resources */,
 				729772851F09DFBF001DC2B8 /* end1_1.csb in Resources */,
+				72229CD21F283991001272D3 /* end3_2 in Resources */,
 				725CB9DF1F15F3E900D2509A /* repairLayer.csb in Resources */,
+				72229CD31F283991001272D3 /* end3_2.csb in Resources */,
 				720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */,
+				72229CD51F283991001272D3 /* end4_1.csb in Resources */,
 				728691C51ED56CC800D06B0F /* homeLayer.csb in Resources */,
 				728691CD1ED56CC800D06B0F /* reviveLayer.csb in Resources */,
 				723CF5F21F020CA600509BFE /* story4_2 in Resources */,
@@ -1380,6 +1413,7 @@
 				723EC0201EF37FF000642589 /* story2_1.csb in Resources */,
 				72777B281EFBD78400151A2B /* UMSocialSDKPromptResources.bundle in Resources */,
 				7271A07B1EE63D90005B980F /* Icon-87.png in Resources */,
+				72229CD41F283991001272D3 /* end4_1 in Resources */,
 				728691D41ED56CC800D06B0F /* sounds in Resources */,
 				728691D01ED56CC800D06B0F /* selectSaveComfirmLayer.csb in Resources */,
 				728691C41ED56CC800D06B0F /* homeHillLayer.csb in Resources */,
@@ -1391,11 +1425,9 @@
 				728691BA1ED56CC800D06B0F /* data in Resources */,
 				728691B71ED56CC800D06B0F /* buildingDetailsLayer.csb in Resources */,
 				728691B51ED56CC800D06B0F /* activityLayer.csb in Resources */,
-				72D0422B1F25D7DC0039B75A /* end3-2 in Resources */,
 				728691BE1ED56CC800D06B0F /* fonts in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				72573AD01F08AD28005DF2F6 /* exgLayer.csb in Resources */,
-				72D0422C1F25D7DC0039B75A /* end3-2.csb in Resources */,
 				72E332C91F0BAAFA00E61182 /* goldGoodsNode.csb in Resources */,
 				723947ED1EF2386D0093E725 /* pauseLayer.csb in Resources */,
 				723CF5F61F020CB500509BFE /* story4_2.csb in Resources */,
@@ -1424,7 +1456,6 @@
 				728691D11ED56CC800D06B0F /* selectSavedLayer.csb in Resources */,
 				72754FEE1F04CCA000AFB4C4 /* gray.vsh in Resources */,
 				723EC0311EF37FF000642589 /* story2_2.csb in Resources */,
-				72D0422A1F25D7DC0039B75A /* end3-1.csb in Resources */,
 				72754FE81F048A1F00AFB4C4 /* bookDetailsLayer.csb in Resources */,
 				728691E01ED56CC800D06B0F /* winLayer.csb in Resources */,
 				728691DC1ED56CC800D06B0F /* topBarNode.csb in Resources */,
@@ -1450,6 +1481,7 @@
 				7286905E1ED568B000D06B0F /* Furnace.cpp in Sources */,
 				728690771ED568B000D06B0F /* SettingLayer.cpp in Sources */,
 				728690791ED568B000D06B0F /* SoundManager.cpp in Sources */,
+				722286A51F31C48300EE46A4 /* ServerDataSwap.cpp in Sources */,
 				728690641ED568B000D06B0F /* Hero.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				7286905D1ED568B000D06B0F /* Forgingtable.cpp in Sources */,
@@ -1473,6 +1505,7 @@
 				728690851ED568B000D06B0F /* Winlayer.cpp in Sources */,
 				728690831ED568B000D06B0F /* WineMaker.cpp in Sources */,
 				7297727F1F09DFA6001DC2B8 /* CannotTouchLayer.cpp in Sources */,
+				722286A41F31C48300EE46A4 /* HttpUtil.cpp in Sources */,
 				72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */,
 				723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */,
 				728690691ED568B000D06B0F /* HomeLayer.cpp in Sources */,
@@ -1529,6 +1562,7 @@
 				728690811ED568B000D06B0F /* UIScroll.cpp in Sources */,
 				72777B391EFBDC3900151A2B /* UmSocialControllerIOS.mm in Sources */,
 				728690511ED568B000D06B0F /* Bed.cpp in Sources */,
+				722286A61F31C48300EE46A4 /* WaitingProgress.cpp in Sources */,
 				728690841ED568B000D06B0F /* WineTable.cpp in Sources */,
 				728690551ED568B000D06B0F /* BuyDetailsLayer.cpp in Sources */,
 				725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */,

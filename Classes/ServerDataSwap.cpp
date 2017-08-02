@@ -126,7 +126,8 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 		rapidjson::Value& oneitem = oneBuild["name"];
 		std::string buildname = oneitem.GetString();
 		int blv = GameDataSave::getInstance()->getBuildLV(buildname);
-		writedoc.AddMember(rapidjson::Value(buildname.c_str(), allocator), blv, allocator);
+        std::string blvstr = StringUtils::format("%d", blv);
+		writedoc.AddMember(rapidjson::Value(buildname.c_str(), allocator), rapidjson::Value(blvstr.c_str(), allocator), allocator);
 	}
 	
 	rapidjson::Value dataArray(rapidjson::kArrayType);
@@ -183,7 +184,8 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 						val = lv;
 					}
 				}
-				object.AddMember(rapidjson::Value(jsonkey.c_str(), allocator), val, allocator);
+                std::string valstr = StringUtils::format("%d", val);
+				object.AddMember(rapidjson::Value(jsonkey.c_str(), allocator), rapidjson::Value(valstr.c_str(), allocator), allocator);
 			}
 		}
 		dataArray.PushBack(object, allocator);
