@@ -139,6 +139,7 @@ void NpcLayer::refreshNpcNode()
 			Node* npcitem = CSLoader::createNode("npcNode.csb");
 			npcitem->setPosition(Vec2(m_scrollview->getContentSize().width / 2, innerheight - i * itemheight - itemheight / 2));
 			std::string childname = StringUtils::format("npcnode%d", i);
+			npcitem->setTag(i);
 			m_scrollview->addChild(npcitem, 0, childname);
 
 			cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
@@ -341,7 +342,8 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;
-		std::string npcid = node->getParent()->getName();
+		int tag = node->getParent()->getTag();
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[tag];
 
 		std::string protectword;
 		

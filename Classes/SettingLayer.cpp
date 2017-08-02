@@ -57,11 +57,13 @@ bool SettingLayer::init()
 	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
 	name->setVisible(false);
 
-	cocos2d::ui::EditBox* editName = cocos2d::ui::EditBox::create(Size(380, 40), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
+	cocos2d::ui::EditBox* editName = cocos2d::ui::EditBox::create(Size(380, 45), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
 	editName->setPosition(Point(230, 875));
 	editName->setAnchorPoint(Vec2(0, 0.5));
 	editName->setFontColor(Color3B::BLACK);
 	editName->setPlaceHolder("请输入昵称:");
+	editName->setPlaceholderFontSize(45);
+	editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
 	editName->setPlaceholderFontColor(Color3B::WHITE);
 	editName->setMaxLength(14);
 	editName->setText(GlobalData::getMyNickName().c_str());
@@ -177,10 +179,7 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-	if (editBox->getTag() == 0)
-	{
-		//std::string myname = GlobalData::getMyName();
-	}
+	GlobalData::setMyNickName(editBox->getText());
 }
 
 void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
