@@ -154,23 +154,23 @@
             <FileData Type="MarkedSubImage" Path="ui/setnicknamebox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="999271047" Tag="120" IconVisible="False" LeftMargin="235.8779" RightMargin="106.1221" TopMargin="382.3043" BottomMargin="857.6957" TouchEnable="True" FontSize="40" IsCustomSize="True" LabelText="" PlaceHolderText="请输入昵称" MaxLengthEnable="True" MaxLengthText="9" ctype="TextFieldObjectData">
-            <Size X="378.0000" Y="40.0000" />
+          <AbstractNodeData Name="name" ActionTag="999271047" Tag="120" IconVisible="False" LeftMargin="232.8780" RightMargin="142.1221" TopMargin="384.3044" BottomMargin="855.6956" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入昵称" MaxLengthEnable="True" MaxLengthText="9" ctype="TextFieldObjectData">
+            <Size X="345.0000" Y="40.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="235.8779" Y="877.6957" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="101" G="96" B="96" />
-            <PrePosition X="0.3276" Y="0.6857" />
-            <PreSize X="0.5250" Y="0.0313" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="252.8813" RightMargin="308.1187" TopMargin="463.9961" BottomMargin="772.0039" FontSize="40" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="159.0000" Y="44.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="252.8813" Y="794.0039" />
+            <Position X="232.8780" Y="875.6956" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3512" Y="0.6203" />
+            <PrePosition X="0.3234" Y="0.6841" />
+            <PreSize X="0.4792" Y="0.0313" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="236.8814" RightMargin="324.1186" TopMargin="463.9960" BottomMargin="772.0040" FontSize="40" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="159.0000" Y="44.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="236.8814" Y="794.0040" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.3290" Y="0.6203" />
             <PreSize X="0.2208" Y="0.0344" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -185,6 +185,17 @@
             <PrePosition X="0.5000" Y="0.5188" />
             <PreSize X="0.8611" Y="0.0086" />
             <FileData Type="MarkedSubImage" Path="ui/settingsep.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="setmodifybtn" ActionTag="-1861556151" Tag="132" IconVisible="False" LeftMargin="578.0245" RightMargin="97.9755" TopMargin="376.5420" BottomMargin="847.4580" ctype="SpriteObjectData">
+            <Size X="44.0000" Y="56.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="600.0245" Y="875.4580" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8334" Y="0.6840" />
+            <PreSize X="0.0611" Y="0.0437" />
+            <FileData Type="MarkedSubImage" Path="ui/setmodifybtn.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

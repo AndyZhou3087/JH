@@ -48,6 +48,8 @@ bool ReviveLayer::init()
 
 	revivecount = StorageRoom::getCountById("73");
 
+	needgold = GlobalData::getReviveCount() * 20;
+
 	for (unsigned int i = 0; i < MyPackage::vec_packages.size(); i++)
 	{
 		if (MyPackage::vec_packages[i].strid.compare("73") == 0)
@@ -71,7 +73,7 @@ bool ReviveLayer::init()
 		m_revivedesc->setVisible(false);
 		this->schedule(schedule_selector(ReviveLayer::checkGoldCount), 1);
 		revivepricelbl->setVisible(true);
-		std::string pricestr = StringUtils::format("%d", REVIVEGOLDCOUNT);
+		std::string pricestr = StringUtils::format("%d", needgold);
 		revivepricelbl->setString(pricestr);
 		reviveicon->setVisible(true);
 		revivetxtlbl->setPositionY(50);
@@ -235,15 +237,14 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else
 		{
-			int revivecount = GlobalData::getReviveCount();
+			int rcount = GlobalData::getReviveCount();
 			int revivegold = revivecount * 20;
 			if (GlobalData::getMyGoldCount() >= revivegold)
 			{
 				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - revivegold);
-				revivecount++;
-				if (revivecount > 6)
-					revivecount = 6;
-				GlobalData::setReviveCount(revivecount);
+				if (++rcount > 6)
+					rcount = 6;
+				GlobalData::setReviveCount(rcount);
 				reviveOk();
 			}
 			else
@@ -298,7 +299,7 @@ void ReviveLayer::doRevive()
 
 void ReviveLayer::checkGoldCount(float dt)
 {
-	if (GlobalData::getMyGoldCount() < REVIVEGOLDCOUNT)
+	if (GlobalData::getMyGoldCount() < needgold)
 	{
 		m_revivedesc->setVisible(true);
 		m_revivedesc->setString(CommonFuncs::gbk2utf("金元宝不足"));

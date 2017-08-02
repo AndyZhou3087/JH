@@ -1405,7 +1405,7 @@ void GlobalData::setReviveCount(int val)
 
 int GlobalData::getReviveCount()
 {
-	GameDataSave::getInstance()->getReviveCount();
+	return GameDataSave::getInstance()->getReviveCount();
 }
 
 int GlobalData::getMyGoldCount()

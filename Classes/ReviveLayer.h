@@ -27,6 +27,7 @@ private:
 	void onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static void shareCallback(int platform, int stCode, std::string& errorMsg);
 	void checkGoldCount(float dt);
+	int needgold;
 };
 #endif
 
