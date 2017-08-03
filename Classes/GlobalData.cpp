@@ -1206,7 +1206,6 @@ bool GlobalData::tempHasGf_Equip(std::string strid)
 
 int GlobalData::getResType(std::string strid)
 {
-	bool isfind = false;
 	std::map<std::string, std::vector<BuildActionData>>::iterator it;
 	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
 	{
@@ -1217,46 +1216,37 @@ int GlobalData::getResType(std::string strid)
 			BuildActionData bdata = vec_bactData[m];
 			if (strid.compare(bdata.icon) == 0)
 			{
-				isfind = true;
 				return bdata.type - 1;
 			}
 		}
 	}
-	if (!isfind)
+
+	for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
 	{
-		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
+		ResData rdata = GlobalData::vec_resData[n];
+		if (strid.compare(rdata.strid) == 0)
 		{
-			ResData rdata = GlobalData::vec_resData[n];
-			if (strid.compare(rdata.strid) == 0)
-			{
-				return rdata.type - 1;
-			}
+			return rdata.type - 1;
 		}
 	}
 
-	if (!isfind)
+	std::map<std::string, WG_NGData>::iterator it;
+	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
-		std::map<std::string, WG_NGData>::iterator it;
-		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		if (strid.compare(gfdata.id) == 0)
 		{
-			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-			if (strid.compare(gfdata.id) == 0)
-			{
-				return gfdata.type - 1;
-			}
+			return gfdata.type - 1;
 		}
 	}
 
-	if (!isfind)
+	std::map<std::string, EquipData>::iterator ite;
+	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 	{
-		std::map<std::string, EquipData>::iterator ite;
-		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+		EquipData edata = GlobalData::map_equips[ite->first];
+		if (strid.compare(edata.id) == 0)
 		{
-			EquipData edata = GlobalData::map_equips[ite->first];
-			if (strid.compare(edata.id) == 0)
-			{
-				return edata.type - 1;
-			}
+			return edata.type - 1;
 		}
 	}
 
@@ -1265,7 +1255,6 @@ int GlobalData::getResType(std::string strid)
 
 int GlobalData::getResExType(std::string strid)
 {
-	bool isfind = false;
 	std::map<std::string, std::vector<BuildActionData>>::iterator it;
 	for (it = GlobalData::map_buidACData.begin(); it != GlobalData::map_buidACData.end(); ++it)
 	{
@@ -1276,46 +1265,37 @@ int GlobalData::getResExType(std::string strid)
 			BuildActionData bdata = vec_bactData[m];
 			if (strid.compare(bdata.icon) == 0)
 			{
-				isfind = true;
 				return bdata.extype;
 			}
 		}
 	}
-	if (!isfind)
+
+	for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
 	{
-		for (unsigned int n = 0; n < GlobalData::vec_resData.size(); n++)
+		ResData rdata = GlobalData::vec_resData[n];
+		if (strid.compare(rdata.strid) == 0)
 		{
-			ResData rdata = GlobalData::vec_resData[n];
-			if (strid.compare(rdata.strid) == 0)
-			{
-				return rdata.actype;
-			}
+			return rdata.actype;
 		}
 	}
 
-	if (!isfind)
+	std::map<std::string, WG_NGData>::iterator it;
+	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
-		std::map<std::string, WG_NGData>::iterator it;
-		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		if (strid.compare(gfdata.id) == 0)
 		{
-			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-			if (strid.compare(gfdata.id) == 0)
-			{
-				return gfdata.extype;
-			}
+			return gfdata.extype;
 		}
 	}
 
-	if (!isfind)
+	std::map<std::string, EquipData>::iterator ite;
+	for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 	{
-		std::map<std::string, EquipData>::iterator ite;
-		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
+		EquipData edata = GlobalData::map_equips[ite->first];
+		if (strid.compare(edata.id) == 0)
 		{
-			EquipData edata = GlobalData::map_equips[ite->first];
-			if (strid.compare(edata.id) == 0)
-			{
-				return edata.extype;
-			}
+			return edata.extype;
 		}
 	}
 
