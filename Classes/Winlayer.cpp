@@ -107,9 +107,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		plotdata->status = M_DONE;
 
 		winres = plotdata->rewords;
+		winresrnd.clear();
 		for (unsigned int i = 0; i < winres.size(); i++)
 		{
-			winresrnd.clear();
 			winresrnd.push_back(100);
 		}
 		int unlockchapter = 0;
@@ -149,6 +149,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 	}
 
+	bool iswd = false;
 	if (m_addrid.compare("m13-1") == 0)
 	{
 		m_backbtn->setTitleText(CommonFuncs::gbk2utf("退出挑战"));
@@ -164,11 +165,12 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 
 		winres = GlobalData::map_challengeReward[npcid].vec_winres;
+		winresrnd.clear();
 		for (unsigned int i = 0; i < winres.size(); i++)
 		{
-			winresrnd.clear();
 			winresrnd.push_back(GlobalData::map_challengeReward[npcid].vec_winrnd[i]);
 		}
+		iswd = true;
 	}
 
 	int winressize = winres.size();
@@ -181,7 +183,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 		int r = 0;
 		int winrnd = winresrnd[i];
-		if (winrnd < 10)
+		if (winrnd < 10 && !iswd)
 		{
 			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
 			{
