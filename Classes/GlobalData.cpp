@@ -1325,7 +1325,7 @@ void GlobalData::loadChallengeRewardData()
 		for (unsigned int m = 0; m < v.Size(); m++)
 		{
 			std::string str = v[m].GetString();
-			float rnd = atof(str.c_str());
+			float rnd = atoi(str.c_str());
 			if (str.length() > 0 && rnd > 0)
 			{
 				data.vec_winrnd.push_back(rnd);
