@@ -40,6 +40,7 @@ public:
 	CC_SYNTHESIZE(bool, m_isshowinsect, IsShowInsect);
 	void ChangeWeather();
 	void ChangeReason();
+	void ChangeTemperature();
 	void ChangeDayNight();
 
 	virtual bool init();
@@ -47,7 +48,7 @@ public:
 	CREATE_FUNC(Nature);
 
 	void makewarm(int extime);
-	void makewarmover(float dt);
+	void makewarmover();
 
 public:
 	int static ReasonCDays;//季节切换天数
@@ -55,6 +56,9 @@ public:
 	int changeWeatherRandow;//生成的天气变化的小时
 private:
 	void updateData(float dt);
+private:
+	int m_warmtime;
+	float m_warmstarttime;
 };
 static int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
 static int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, { -20, 0 } };
