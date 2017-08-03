@@ -88,6 +88,6 @@ void SepcialNpcLayer::onFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		}
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, "n005"), 4, "fightlayer");
-		this->removeFromParentAndCleanup(true);
+		//this->removeFromParentAndCleanup(true);
 	}
 }

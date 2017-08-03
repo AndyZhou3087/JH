@@ -513,6 +513,27 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 		{
 			GameDataSave::getInstance()->setIsJustData(false);
 
+			if (doc.HasMember("coin"))
+			{
+				rapidjson::Value& coindata = doc["coin"];
+				int addcount = atoi(coindata.GetString());
+				int curcount = GameDataSave::getInstance()->getGoldCount();
+				GameDataSave::getInstance()->setGoldCount(curcount + addcount);
+			}
+
+			if (doc.HasMember("hunlock"))
+			{
+				rapidjson::Value& hunlockdata = doc["hunlock"];
+				int hunlock = atoi(hunlockdata.GetString());
+
+				for (int k = 0; k < 4; k++)
+				{
+					int val = hunlock & (1 << k);
+					val = val >> k;
+					GlobalData::setUnlockHero(k, val == 1 ? true : false);
+				}
+			}
+
 			if (!doc.HasMember("data"))
 				return;
 

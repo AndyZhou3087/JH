@@ -567,7 +567,7 @@ void MapLayer::rain()
 	removeWeatherPaticle();
 	ParticleRain *rain = ParticleRain::create();
 	rain->setScale(5);
-	rain->setTotalParticles(900);
+	rain->setTotalParticles(1500);
 	rain->setPosition(Vec2(360, 1400));
 	rain->setTextureWithRect(Director::getInstance()->getTextureCache()->addImage("particle/rain.png"), Rect(0, 0, 96, 96));
 	this->addChild(rain, 1000, "rain");
