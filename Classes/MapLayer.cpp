@@ -58,7 +58,7 @@ bool MapLayer::init()
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		mapname->setVisible(false);
+		mapname->setVisible(true);
 #else
 		mapname->setVisible(false);
 #endif

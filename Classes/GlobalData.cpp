@@ -1230,10 +1230,10 @@ int GlobalData::getResType(std::string strid)
 		}
 	}
 
-	std::map<std::string, WG_NGData>::iterator it;
-	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+	std::map<std::string, WG_NGData>::iterator itf;
+	for (itf = GlobalData::map_wgngs.begin(); itf != GlobalData::map_wgngs.end(); ++itf)
 	{
-		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		WG_NGData gfdata = GlobalData::map_wgngs[itf->first];
 		if (strid.compare(gfdata.id) == 0)
 		{
 			return gfdata.type - 1;
@@ -1279,10 +1279,10 @@ int GlobalData::getResExType(std::string strid)
 		}
 	}
 
-	std::map<std::string, WG_NGData>::iterator it;
-	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
+	std::map<std::string, WG_NGData>::iterator itf;
+	for (itf = GlobalData::map_wgngs.begin(); itf != GlobalData::map_wgngs.end(); ++itf)
 	{
-		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
+		WG_NGData gfdata = GlobalData::map_wgngs[itf->first];
 		if (strid.compare(gfdata.id) == 0)
 		{
 			return gfdata.extype;
