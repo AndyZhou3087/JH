@@ -1240,7 +1240,10 @@ int GlobalData::getResType(std::string strid)
 		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 		{
 			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-			return gfdata.type - 1;
+			if (strid.compare(gfdata.id) == 0)
+			{
+				return gfdata.type - 1;
+			}
 		}
 	}
 
@@ -1250,7 +1253,10 @@ int GlobalData::getResType(std::string strid)
 		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 		{
 			EquipData edata = GlobalData::map_equips[ite->first];
-			return edata.type - 1;
+			if (strid.compare(edata.id) == 0)
+			{
+				return edata.type - 1;
+			}
 		}
 	}
 
@@ -1293,7 +1299,10 @@ int GlobalData::getResExType(std::string strid)
 		for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 		{
 			WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-			return gfdata.extype;
+			if (strid.compare(gfdata.id) == 0)
+			{
+				return gfdata.extype;
+			}
 		}
 	}
 
@@ -1303,7 +1312,10 @@ int GlobalData::getResExType(std::string strid)
 		for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 		{
 			EquipData edata = GlobalData::map_equips[ite->first];
-			return edata.extype;
+			if (strid.compare(edata.id) == 0)
+			{
+				return edata.extype;
+			}
 		}
 	}
 
