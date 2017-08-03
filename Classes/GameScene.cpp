@@ -135,8 +135,9 @@ bool GameScene::init()
 		if (curtimemin - startwarmtime < warmtime)
 		{
 			g_nature->setIsMaKeWarm(true);
-			int leftmin = warmtime - (curtimemin - startwarmtime);
-			g_nature->scheduleOnce(schedule_selector(Nature::makewarmover), leftmin*1.0f / TIMESCALE);
+			float wpasttime = curtimemin - startwarmtime;
+			g_nature->setWarmtime(warmtime);
+			g_nature->setWarmpasttime(wpasttime);
 		}
 		else
 		{

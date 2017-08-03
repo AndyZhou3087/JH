@@ -38,6 +38,9 @@ public:
 	CC_SYNTHESIZE(float, m_timeinterval, TimeInterval);
 	CC_SYNTHESIZE(bool, m_ismakewarm, IsMaKeWarm);
 	CC_SYNTHESIZE(bool, m_isshowinsect, IsShowInsect);
+	CC_SYNTHESIZE(int, m_warmtime, Warmtime);
+	CC_SYNTHESIZE(float, m_warmpasttime, Warmpasttime);
+
 	void ChangeWeather();
 	void ChangeReason();
 	void ChangeTemperature();
@@ -57,8 +60,7 @@ public:
 private:
 	void updateData(float dt);
 private:
-	int m_warmtime;
-	float m_warmstarttime;
+
 };
 static int WeatherWeight[][4] = { { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 40, 62, 100, 100 }, { 20, 40, 60, 100 } };
 static int tempeRange[][2] = { { 10, 20 }, { 15, 25 }, { 5, 15 }, { -20, 0 } };

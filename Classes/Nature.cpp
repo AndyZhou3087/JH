@@ -12,7 +12,7 @@ Nature::Nature()
 	m_ismakewarm = false;
 	m_isshowinsect = false;
 	m_warmtime = 0;
-	m_warmstarttime = 0.0f;
+	m_warmpasttime = 0.0f;
 }
 
 Nature::~Nature()
@@ -84,7 +84,7 @@ void Nature::makewarm(int extime)
 {
 	setIsMaKeWarm(true);
 	setTemperature(m_temperature + 15);
-	m_warmstarttime = 0.0f;
+	m_warmpasttime = 0.0f;
 	m_warmtime = extime;
 	//this->scheduleOnce(schedule_selector(Nature::makewarmover), extime / TIMESCALE);
 
@@ -96,7 +96,7 @@ void Nature::makewarmover()
 {
 	//取暖时间到
 	setIsMaKeWarm(false);
-	m_warmstarttime = 0.0f;
+	m_warmpasttime = 0.0f;
 	setTemperature(m_temperature - 15);
 	GlobalData::setMakeWarmConfig("");
 }
@@ -156,9 +156,9 @@ void Nature::updateData(float dt)
 	if (m_ismakewarm)
 	{
 		//制暖时间
-		m_warmstarttime += getTimeInterval();
+		m_warmpasttime += getTimeInterval();
 
-		if (m_warmstarttime >= m_warmtime)//之前时间到结束
+		if (m_warmpasttime >= m_warmtime)//之前时间到结束
 		{
 			makewarmover();
 		}
