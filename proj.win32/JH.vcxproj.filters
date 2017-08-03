@@ -255,6 +255,9 @@
     <ClCompile Include="..\Classes\WaitingProgress.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MyParticle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -504,6 +507,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WaitingProgress.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MyParticle.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

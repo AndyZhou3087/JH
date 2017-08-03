@@ -191,6 +191,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MyActionProgressTimer.cpp" />
     <ClCompile Include="..\Classes\MyMenu.cpp" />
     <ClCompile Include="..\Classes\MyPackage.cpp" />
+    <ClCompile Include="..\Classes\MyParticle.cpp" />
     <ClCompile Include="..\Classes\Nature.cpp" />
     <ClCompile Include="..\Classes\NewerGuideLayer.cpp" />
     <ClCompile Include="..\Classes\NpcLayer.cpp" />
@@ -275,6 +276,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MyActionProgressTimer.h" />
     <ClInclude Include="..\Classes\MyMenu.h" />
     <ClInclude Include="..\Classes\MyPackage.h" />
+    <ClInclude Include="..\Classes\MyParticle.h" />
     <ClInclude Include="..\Classes\Nature.h" />
     <ClInclude Include="..\Classes\NewerGuideLayer.h" />
     <ClInclude Include="..\Classes\NpcLayer.h" />

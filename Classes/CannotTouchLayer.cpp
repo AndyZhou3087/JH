@@ -12,7 +12,7 @@ CannotTouchLayer::~CannotTouchLayer()
 
 bool CannotTouchLayer::init()
 {
-	LayerColor* color = LayerColor::create(Color4B(0, 0, 0, 10));
+	LayerColor* color = LayerColor::create(Color4B(0, 0, 0, 0));
 	this->addChild(color);
 
 

@@ -435,11 +435,21 @@ void TopBar::updataUI(float dt)
 		if (g_nature->getWeather() == Rainy)
 		{
 			activityScene = ActivitScene::createScene("images/cweatherrain.jpg", CommonFuncs::gbk2utf("下雨了..."));
+			if (g_maplayer != NULL)
+				g_maplayer->rain();
 		}
 		else if (g_nature->getWeather() == Snowy)
 		{
 			activityScene = ActivitScene::createScene("images/cweathersnow.jpg", CommonFuncs::gbk2utf("下雪了..."));
+			if (g_maplayer != NULL)
+				g_maplayer->snow();
 		}
+		else
+		{
+			if (g_maplayer != NULL)
+				g_maplayer->removeWeatherPaticle();
+		}
+
 		m_lastweather = g_nature->getWeather();
 	}
 

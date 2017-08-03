@@ -118,6 +118,15 @@ bool MapLayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	if (g_nature != NULL)
+	{
+		if (g_nature->getWeather() == Rainy)
+			rain();
+		else if (g_nature->getWeather() == Snowy)
+			snow();
+		else
+			removeWeatherPaticle();
+	}
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_MAP);
 
 	return true;
@@ -551,4 +560,31 @@ void MapLayer::showNewerGuide(int step)
 		nodes.push_back(m_mapbg->getChildByName("m1-4"));
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void MapLayer::rain()
+{
+	removeWeatherPaticle();
+	ParticleRain *rain = ParticleRain::create();
+	rain->setScale(5);
+	rain->setTotalParticles(900);
+	rain->setPosition(Vec2(360, 1400));
+	rain->setTextureWithRect(Director::getInstance()->getTextureCache()->addImage("particle/rain.png"), Rect(0, 0, 96, 96));
+	this->addChild(rain, 1000, "rain");
+}
+
+void MapLayer::snow()
+{
+	removeWeatherPaticle();
+	ParticleSnow *snow = ParticleSnow::create();
+	snow->setSpeed(100);
+	snow->setPosition(Vec2(360, 1400));
+	snow->setTextureWithRect(Director::getInstance()->getTextureCache()->addImage("particle/snow.png"), Rect(0, 0, 32, 32));
+	this->addChild(snow, 1000, "snow");
+}
+
+void MapLayer::removeWeatherPaticle()
+{
+	this->removeChildByName("rain");
+	this->removeChildByName("snow");
 }

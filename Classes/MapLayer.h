@@ -83,6 +83,12 @@ public:
 	*****************************/
 	void showJump(float dt);
 
+	void rain();
+
+	void snow();
+
+	void removeWeatherPaticle();
+
 private:
 
 	/****************************
