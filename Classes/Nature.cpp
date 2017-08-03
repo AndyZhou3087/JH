@@ -11,6 +11,8 @@ Nature::Nature()
 	m_daynight = Night;
 	m_ismakewarm = false;
 	m_isshowinsect = false;
+	m_warmtime = 0;
+	m_warmstarttime = 0.0f;
 }
 
 Nature::~Nature()
@@ -71,11 +73,7 @@ void Nature::ChangeReason()
 	if (r != m_reason)
 	{
 		setReason(r);
-		int maxr = tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1;
-		int  t = tempeRange[m_reason][0] + GlobalData::createRandomNum(maxr);
-		if (m_ismakewarm)
-			t += 15;
-		setTemperature(t);
+		ChangeTemperature();
 
 		g_uiScroll->addEventText(CommonFuncs::gbk2utf(reasonEventText[r].c_str()));
 	}
@@ -85,17 +83,21 @@ void Nature::ChangeReason()
 void Nature::makewarm(int extime)
 {
 	setIsMaKeWarm(true);
-	setTemperature(g_nature->getTemperature() + 15);
-	this->scheduleOnce(schedule_selector(Nature::makewarmover), extime / TIMESCALE);
+	setTemperature(m_temperature + 15);
+	m_warmstarttime = 0.0f;
+	m_warmtime = extime;
+	//this->scheduleOnce(schedule_selector(Nature::makewarmover), extime / TIMESCALE);
+
 	std::string str = StringUtils::format("%d-%d", m_pastdays * 24 * 60 + (int)m_time, extime);
 	GlobalData::setMakeWarmConfig(str);
 }
 
-void Nature::makewarmover(float dt)
+void Nature::makewarmover()
 {
 	//取暖时间到
 	setIsMaKeWarm(false);
-	setTemperature(g_nature->getTemperature() - 15);
+	m_warmstarttime = 0.0f;
+	setTemperature(m_temperature - 15);
 	GlobalData::setMakeWarmConfig("");
 }
 
@@ -117,10 +119,21 @@ void Nature::ChangeDayNight()
 		if (m_daynight == Night)
 		{
 			setDayOrNight(Day);
-			setTemperature(m_temperature + 5);
+			//setTemperature(m_temperature + 5);
+			ChangeTemperature();
+
 			g_uiScroll->addEventText(CommonFuncs::gbk2utf(dayEventText[0].c_str()));
 		}
 	}
+}
+
+void Nature::ChangeTemperature()
+{
+	int maxr = tempeRange[m_reason][1] - tempeRange[m_reason][0] + 1;
+	int  t = tempeRange[m_reason][0] + GlobalData::createRandomNum(maxr);
+	if (m_ismakewarm)
+		t += 15;
+	setTemperature(t);
 }
 
 void Nature::updateData(float dt)
@@ -131,6 +144,7 @@ void Nature::updateData(float dt)
 		return;
 
 	m_time += getTimeInterval();
+
 	if (m_time >= 1440.0f)
 	{
 		m_pastdays++;
@@ -138,6 +152,16 @@ void Nature::updateData(float dt)
 		changeWeatherCount = 0;
 		changeWeatherRandow = GlobalData::createRandomNum(24) + 1;
 		ChangeReason();
+	}
+	if (m_ismakewarm)
+	{
+		//制暖时间
+		m_warmstarttime += getTimeInterval();
+
+		if (m_warmstarttime >= m_warmtime)//之前时间到结束
+		{
+			makewarmover();
+		}
 	}
 	//产生随机数
 	int inttime = (int)m_time;
