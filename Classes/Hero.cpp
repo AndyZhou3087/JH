@@ -515,7 +515,7 @@ int Hero::getTotalDf()
 		std::string aname = g_hero->getAtrByType(H_ARMOR)->strid;
 		adf = GlobalData::map_equips[aname].df;
 		int slv = g_hero->getAtrByType(H_ARMOR)->slv;
-		slvdf = slv * (slv + adf / 10) + adf;
+		slvdf = slv * (slv + adf / 10);
 	}
 	//防御属性
 	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
@@ -534,7 +534,7 @@ int Hero::getTotalAtck()
 		std::string strid = g_hero->getAtrByType(H_WEAPON)->strid;
 		weaponAtk = GlobalData::map_equips[strid].atk;
 		int slv = g_hero->getAtrByType(H_WEAPON)->slv;
-		slvAtk = slv * (slv + weaponAtk / 10) + weaponAtk;
+		slvAtk = slv * (slv + weaponAtk / 10);
 	}
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
