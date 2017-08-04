@@ -56,17 +56,27 @@ int MyPackage::add(PackageData pdata)
 void MyPackage::cutone(std::string strid, int count)
 {
 	int index = 0;
-	for (index = MyPackage::getSize() - 1; index >= 0; index--)
+	int cutcount = count;
+	std::vector<PackageData>::reverse_iterator it;
+	for (it = vec_packages.rbegin(); it != vec_packages.rend();)
 	{
-		if (strid.compare(MyPackage::vec_packages[index].strid) == 0)
+		if (strid.compare(it->strid) == 0)
 		{
-			vec_packages[index].count -= count;
-			if (vec_packages[index].count <= 0)
+			it->count -= cutcount;
+			if (it->count <= 0)
 			{
-				vec_packages.erase(vec_packages.begin() + index);
+				cutcount = -it->count;
+				it = std::vector<PackageData>::reverse_iterator(vec_packages.erase((++it).base()));
+				if (cutcount == 0)
+					break;
 			}
-			break;
+			else
+			{
+				break;
+			}
 		}
+		else
+			++it;
 	}
 
 	save();
@@ -76,21 +86,31 @@ void MyPackage::cutone(std::string strid, int count)
 void MyPackage::cutone(PackageData pdata)
 {
 	int index = 0;
-	for (index = MyPackage::getSize() - 1; index >= 0; index--)
+	int cutcount = pdata.count;
+
+	std::vector<PackageData>::reverse_iterator it;
+	for (it = vec_packages.rbegin(); it != vec_packages.rend();)
 	{
-		if (pdata.strid.compare(MyPackage::vec_packages[index].strid) == 0 && pdata.goodvalue == MyPackage::vec_packages[index].goodvalue)
+		if (pdata.strid.compare(it->strid) == 0 && pdata.goodvalue == it->goodvalue)
 		{
-			vec_packages[index].count -= pdata.count;
-			if (vec_packages[index].count <= 0)
+			it->count -= cutcount;
+			if (it->count <= 0)
 			{
-				vec_packages.erase(vec_packages.begin() + index);
+				cutcount = -it->count;
+				it = std::vector<PackageData>::reverse_iterator(vec_packages.erase((++it).base()));
+				if (cutcount == 0)
+					break;
 			}
-			save();
-			break;
+			else
+			{
+				break;
+			}
 		}
+		else
+			++it;
 	}
 
-
+	save();
 }
 
 void MyPackage::takeoff()
