@@ -513,27 +513,6 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 		{
 			GameDataSave::getInstance()->setIsJustData(false);
 
-			if (doc.HasMember("coin"))
-			{
-				rapidjson::Value& coindata = doc["coin"];
-				int addcount = atoi(coindata.GetString());
-				int curcount = GameDataSave::getInstance()->getGoldCount();
-				GameDataSave::getInstance()->setGoldCount(curcount + addcount);
-			}
-
-			if (doc.HasMember("hunlock"))
-			{
-				rapidjson::Value& hunlockdata = doc["hunlock"];
-				int hunlock = atoi(hunlockdata.GetString());
-
-				for (int k = 0; k < 4; k++)
-				{
-					int val = hunlock & (1 << k);
-					val = val >> k;
-					GlobalData::setUnlockHero(k, val == 1 ? true : false);
-				}
-			}
-
 			if (!doc.HasMember("data"))
 				return;
 
@@ -543,18 +522,40 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 			{
 				rapidjson::Value& item = dataArray[m];
 
-				rapidjson::Value& v = item["type"];
+				rapidjson::Value& v = item["propid"];
+				std::string strid = v.GetString();
+
+				v = item["amount"];
+				int val = atoi(v.GetString());
+
+				if (strid.compare("coin") == 0)
+				{
+					int curcount = GameDataSave::getInstance()->getGoldCount();
+					GameDataSave::getInstance()->setGoldCount(curcount + val);
+					GlobalData::init();
+					continue;
+				}
+
+				if (strid.compare("hunlock") == 0)
+				{
+					int hunlock = val;
+
+					for (int k = 0; k < 4; k++)
+					{
+						int val = hunlock & (1 << k);
+						val = val >> k;
+						GlobalData::setUnlockHero(k, val == 1 ? true : false);
+					}
+					continue;
+				}
+
+				v = item["type"];
 				int heroid = atoi(v.GetString());
 				std::vector<std::string> vec_ids = GlobalData::getSaveListId();
 				std::string uid = vec_ids[heroid - 1];
 				if (uid.length() > 0)
 				{
 					GameDataSave::getInstance()->setUserId(uid);
-					v = item["propid"];
-					std::string strid = v.GetString();
-
-					v = item["amount"];
-					int val = atoi(v.GetString());
 
 					std::string strval = GameDataSave::getInstance()->getStorageData();
 					std::vector<std::string> tmp;
