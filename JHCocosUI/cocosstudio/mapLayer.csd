@@ -2,7 +2,32 @@
   <PropertyGroup Name="mapLayer" Type="Layer" ID="c2eef4ea-8ca9-416a-8206-2550ef75107b" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="0" Speed="1.0000" />
+      <Animation Duration="5" Speed="1.0000">
+        <Timeline ActionTag="1263559421" Property="Position">
+          <PointFrame FrameIndex="0" X="38.9826" Y="78.1359">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="5" X="30.0000" Y="110.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1263559421" Property="Scale">
+          <ScaleFrame FrameIndex="0" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="5" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="1263559421" Property="RotationSkew">
+          <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="5" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+      </Animation>
       <ObjectData Name="Layer" Tag="68" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
@@ -12,13 +37,26 @@
               <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" ctype="SpriteObjectData">
                 <Size X="2000.0000" Y="1396.0000" />
                 <Children>
-                  <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9766" RightMargin="471.0234" TopMargin="995.8808" BottomMargin="315.1192" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9771" RightMargin="471.0229" TopMargin="994.6161" BottomMargin="316.3839" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
                     <Size X="57.0000" Y="85.0000" />
+                    <Children>
+                      <AbstractNodeData Name="vulture" ActionTag="1263559421" Tag="76" IconVisible="False" LeftMargin="10.0000" RightMargin="7.0000" TopMargin="-45.0000" BottomMargin="90.0000" ctype="SpriteObjectData">
+                        <Size X="40.0000" Y="40.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="30.0000" Y="110.0000" />
+                        <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.5263" Y="1.2941" />
+                        <PreSize X="0.7018" Y="0.4706" />
+                        <FileData Type="MarkedSubImage" Path="ui/vulture1.png" Plist="uipacker.plist" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                    </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1500.4766" Y="357.6192" />
+                    <Position X="1500.4771" Y="358.8839" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.7502" Y="0.2562" />
+                    <PrePosition X="0.7502" Y="0.2571" />
                     <PreSize X="0.0285" Y="0.0609" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-1.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
@@ -708,6 +746,22 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/shopbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/shopbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/shopbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" LeftMargin="0.0000" RightMargin="618.0000" TopMargin="427.0000" BottomMargin="747.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="72" Scale9Height="84" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="102.0000" Y="106.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="51.0000" Y="800.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0708" Y="0.6250" />
+            <PreSize X="0.1417" Y="0.0828" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

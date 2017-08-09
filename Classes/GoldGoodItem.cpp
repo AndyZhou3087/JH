@@ -8,6 +8,7 @@
 #include "BuyComfirmLayer.h"
 #include "Const.h"
 #include "AnalyticUtil.h"
+#include "MapLayer.h"
 
 GoldGoodsItem::GoldGoodsItem()
 {
@@ -155,6 +156,10 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 
 						if (rint >= 75 && rint <= 78)
 							updateDefaultStorage(pdata, g_hero->getHeadID());
+
+						if (rint == 83)
+							g_maplayer->vultureAnim();
+
 						StorageRoom::add(pdata);
 						break;
 					}

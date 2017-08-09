@@ -258,6 +258,15 @@
     <ClCompile Include="..\Classes\MyParticle.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\VipGoodsItem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VipShopLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GetVipRewardLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -510,6 +519,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MyParticle.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VipGoodsItem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VipShopLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GetVipRewardLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -186,7 +186,7 @@ void StartScene::onSuccess()
 	GlobalData::init();
 }
 
-void StartScene::onErr()
+void StartScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }

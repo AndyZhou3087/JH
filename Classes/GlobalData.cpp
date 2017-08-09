@@ -39,6 +39,8 @@ std::map<int, GFSkillData> GlobalData::map_gfskills;
 
 std::vector<GoodsData> GlobalData::vec_goods;
 
+std::vector<std::string> GlobalData::vec_buyVipIds;
+
 std::map<std::string, ChallengeRewardData> GlobalData::map_challengeReward;
 
 bool GlobalData::unlockhero[4] = {true, false, false, false};
@@ -1124,6 +1126,20 @@ bool GlobalData::isHasFSF()
 			return true;
 		}
 	}
+	return false;
+}
+
+bool GlobalData::isHasVulture()
+{
+	for (unsigned int m = 0; m < StorageRoom::map_storageData[RES_2].size(); m++)
+	{
+		PackageData* pData = &StorageRoom::map_storageData[RES_2][m];
+		if (pData->strid.compare("83") == 0 && pData->count > 0)
+		{
+			return true;
+		}
+	}
+	
 	return false;
 }
 

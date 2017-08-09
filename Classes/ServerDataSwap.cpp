@@ -222,6 +222,40 @@ void ServerDataSwap::propadjust()
 	
 }
 
+void ServerDataSwap::modifyNickName(std::string nickname)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_updateusername?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&name=");
+	url.append(nickname);
+	HttpUtil::getInstance()->doData(url, httpModifyNickNameCB);
+}
+
+void ServerDataSwap::vipSuccNotice(std::string gid)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_buynotify?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&goodsid=");
+	url.append(gid);
+	HttpUtil::getInstance()->doData(url);
+}
+
+void ServerDataSwap::vipIsOn()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_takemonthlycard?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httpVipIsOnCB);
+}
+
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
 {
 	if (code == 0)
@@ -249,7 +283,7 @@ void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::strin
 	{
 		if (m_pDelegateProtocol != NULL)
 		{
-			m_pDelegateProtocol->onErr();
+			m_pDelegateProtocol->onErr(-1);
 		}
 	}
 }
@@ -500,7 +534,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 	if (m_pDelegateProtocol != NULL)
 	{
-		m_pDelegateProtocol->onErr();
+		m_pDelegateProtocol->onErr(-1);
 	}
 }
 
@@ -638,6 +672,75 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 
 		}
 	}
+}
 
+
+
+
+void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::string tag)
+{
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			rapidjson::Value& reval = doc["ret"];
+			int ret = reval.GetInt();
+			if (ret == 0)
+			{
+				if (m_pDelegateProtocol != NULL)
+					m_pDelegateProtocol->onSuccess();
+			}
+			else
+			{
+				if (m_pDelegateProtocol != NULL)
+					m_pDelegateProtocol->onErr(ret);
+			}
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+}
+
+void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string tag)
+{
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			for (rapidjson::Value::ConstMemberIterator iter = doc.MemberBegin(); iter != doc.MemberEnd(); ++iter)
+			{
+				std::string strid = iter->name.GetString();
+
+				if (strid.compare(0, 3, "vip") == 0)
+				{
+					int val = iter->value.GetInt();
+					if (val > 0)
+					{
+						GlobalData::vec_buyVipIds.push_back(strid);
+					}
+				}
+			}
+
+			if (GlobalData::vec_buyVipIds.size() > 0)
+			{
+				if (m_pDelegateProtocol != NULL)
+					m_pDelegateProtocol->onSuccess();
+			}
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
 }
 

@@ -389,6 +389,20 @@
       <FilePathData Path="ui/setmodifybtn.png" />
       <FilePathData Path="ui/setnicknamebox.png" />
       <FilePathData Path="ui/settingsep.png" />
+      <FilePathData Path="ui/83.png" />
+      <FilePathData Path="ui/vulture1.png" />
+      <FilePathData Path="ui/vulture2.png" />
+      <FilePathData Path="ui/vulture3.png" />
+      <FilePathData Path="ui/vulture4.png" />
+      <FilePathData Path="ui/vulture5.png" />
+      <FilePathData Path="ui/vulture6.png" />
+      <FilePathData Path="ui/vulture7.png" />
+      <FilePathData Path="ui/vip1.png" />
+      <FilePathData Path="ui/vip2.png" />
+      <FilePathData Path="ui/vip3.png" />
+      <FilePathData Path="ui/vipbtn.png" />
+      <FilePathData Path="ui/vipshoptitle.png" />
+      <FilePathData Path="ui/viptitle.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

@@ -11,7 +11,8 @@
 #include "TopBar.h"
 #include "Nature.h"
 #include "Hero.h"
-class GameScene : public cocos2d::Layer
+#include "ServerDataSwap.h"
+class GameScene : public cocos2d::Layer, public ServerDataDelegateProtocol
 {
 public:
 	GameScene();
@@ -92,6 +93,12 @@ private:
 	韦小宝和独孤求败地图位置
 	*****************************/
 	void getNpcRandMap();
+
+	/****************************
+	VIP奖励回调
+	*****************************/
+	void onSuccess();
+	void onErr(int errcode);
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据

@@ -6,6 +6,9 @@
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #endif
+#include "HintBox.h"
+#include "CommonFuncs.h"
+
 SettingLayer::SettingLayer()
 {
 	clicktitlecount = 0;
@@ -179,7 +182,10 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-	GlobalData::setMyNickName(editBox->getText());
+	//GlobalData::setMyNickName(editBox->getText());
+	editnamestring = editBox->getText();
+	ServerDataSwap::getInstance()->setDelegate(this);
+	ServerDataSwap::getInstance()->modifyNickName(editBox->getText());
 }
 
 void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
@@ -188,5 +194,29 @@ void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::
 
 void SettingLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
 {
+
+}
+
+void SettingLayer::onSuccess()
+{
+	GlobalData::setMyNickName(editnamestring);
+}
+
+void SettingLayer::onErr(int errcode)
+{
+	HintBox* hintbox;
+	if (errcode == 2)
+	{
+		hintbox = HintBox::create(CommonFuncs::gbk2utf("抱歉！输入中包含敏感关键字，修改失败！"));
+	}
+	else if (errcode == 3)
+	{
+		hintbox = HintBox::create(CommonFuncs::gbk2utf("抱歉！该昵称已存在，大侠换一个吧！"));
+	}
+	else
+	{
+		hintbox = HintBox::create(CommonFuncs::gbk2utf("网络异常，修改失败！"));
+	}
+	this->addChild(hintbox);
 
 }

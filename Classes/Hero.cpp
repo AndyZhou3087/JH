@@ -64,7 +64,8 @@ void Hero::updateData(float dt)
 		return;
 
 	//12s，（游戏时间1小时更新一次）
-	m_pastmin += g_nature->getTimeInterval();
+	if (g_nature != NULL)
+		m_pastmin += g_nature->getTimeInterval();
 
 	if (m_pastmin >= 60)
 	{
@@ -548,7 +549,7 @@ int Hero::getTotalAtck()
 	{
 		if (GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].extype == GlobalData::map_equips[g_hero->getAtrByType(H_WEAPON)->strid].extype)
 		{
-			float back = fack * 0.1f;
+			float back = fack * 0.05f;
 			fack += back;
 		}
 	}

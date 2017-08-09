@@ -89,6 +89,11 @@ public:
 
 	void removeWeatherPaticle();
 
+	/****************************
+	雕动画
+	*****************************/
+	void vultureAnim();
+
 private:
 
 	/****************************
@@ -100,6 +105,11 @@ private:
 	点击商城按钮回调
 	*****************************/
 	void onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	点击VIP商城按钮回调
+	*****************************/
+	void onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
 	到达目的地
@@ -130,6 +140,7 @@ private:
 	int m_startClickX;
 	int m_startClickY;
 	bool m_isDraging;
+	cocos2d::ui::Widget* m_vulture;
 };
 extern MapLayer* g_maplayer;//全局地图层
 #endif

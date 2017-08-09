@@ -82,6 +82,7 @@ void RmbGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	{
 		if (!isDraging)
 		{
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 			//购买
 			ShopLayer::beginPay(this->getTag());
 		}

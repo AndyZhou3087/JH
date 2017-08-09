@@ -610,6 +610,11 @@ public:
 	*****************************/
 	static void setMyNickName(std::string str);
 
+	/****************************
+	是否有神雕
+	*****************************/
+	static bool isHasVulture();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -644,6 +649,8 @@ public:
 	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
 	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
+
+	static std::vector<std::string> vec_buyVipIds;
 
 	static std::map<std::string, ChallengeRewardData> map_challengeReward;
 	static bool isPopingScene;

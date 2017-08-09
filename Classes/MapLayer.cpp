@@ -15,6 +15,7 @@
 #include "AnalyticUtil.h"
 #include "FightLayer.h"
 #include "StoryScene.h"
+#include "VipShopLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -99,6 +100,16 @@ bool MapLayer::init()
 
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("shopbtn");
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onShop, this));
+
+
+	cocos2d::ui::Widget* vipbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("vipbtn");
+	vipbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onVipShop, this));
+
+	m_vulture = (cocos2d::ui::Widget*)m_mapbg->getChildByName("m1-1")->getChildByName("vulture");
+	m_vulture->setVisible(false);
+
+	if (GlobalData::isHasVulture())
+		vultureAnim();
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -302,7 +313,17 @@ void MapLayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		ShopLayer* shopLayer = ShopLayer::create();
-		Director::getInstance()->getRunningScene()->addChild(shopLayer);
+		g_gameLayer->addChild(shopLayer, 5);
+	}
+}
+
+void MapLayer::onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		VipShopLayer* shopLayer = VipShopLayer::create();
+		g_gameLayer->addChild(shopLayer, 5);
 	}
 }
 
@@ -587,4 +608,33 @@ void MapLayer::removeWeatherPaticle()
 {
 	this->removeChildByName("rain");
 	this->removeChildByName("snow");
+}
+
+void MapLayer::vultureAnim()
+{
+	m_vulture->stopAllActions();
+	m_vulture->setVisible(true);
+
+	auto animation = Animation::create();
+	for (int i = 1; i < 7; i++)
+	{
+		char szName[100] = { 0 };
+		sprintf(szName, "ui/vulture%d.png", i);
+		SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
+		animation->addSpriteFrame(frame);
+	}
+	animation->setDelayPerUnit(0.1f);
+	//animation->setRestoreOriginalFrame(true);
+
+	auto action = Animate::create(animation);
+	PointArray *arrayPoint = PointArray::create(5);
+	arrayPoint->addControlPoint(Vec2(30, 110));
+	arrayPoint->addControlPoint(Vec2(55, 90));
+	arrayPoint->addControlPoint(Vec2(30, 70));
+	arrayPoint->addControlPoint(Vec2(10,90));
+	arrayPoint->addControlPoint(Vec2(30, 110));
+	ActionInterval *forward = CCCardinalSplineTo::create(arrayPoint->count(), arrayPoint, 0);
+	m_vulture->runAction(RepeatForever::create(forward));
+	m_vulture->runAction(RepeatForever::create(action));
+	//m_vulture->runAction(Sequence::create(action, action->reverse(), NULL));
 }

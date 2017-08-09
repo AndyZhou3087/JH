@@ -7,9 +7,10 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "ServerDataSwap.h"
 USING_NS_CC;
 
-class SettingLayer :public Layer, public cocos2d::ui::EditBoxDelegate
+class SettingLayer :public Layer, public cocos2d::ui::EditBoxDelegate, public ServerDataDelegateProtocol
 {
 public:
 	SettingLayer();
@@ -51,10 +52,14 @@ private:
 
 	void editBoxReturn(cocos2d::ui::EditBox *editBox);
 
+	void onSuccess();
+	void onErr(int errcode);
+
 private:
 	cocos2d::ui::CheckBox* m_soundCheckBox;//checkbox控件
 	cocos2d::ui::Text* m_soundOnOffText;//点击checkbox的文件说明控件 “开”,“关”
 	int clicktitlecount;
+	std::string editnamestring;
 };
 #endif
 

@@ -18,6 +18,9 @@ public:
 	void postAllData();
 	void getAllData();
 	void propadjust();
+	void modifyNickName(std::string nickname);
+	void vipSuccNotice(std::string gid);
+	void vipIsOn();
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
 private:
 	static ServerDataSwap* _serverDataSwap;
@@ -26,6 +29,8 @@ private:
 	static void httpPostOneDataCB(std::string retdata, int code, std::string tag);
 	static void httpGetAllDataCB(std::string retdata, int code, std::string tag);
 	static void httpPropadJustDataCB(std::string retdata, int code, std::string tag);
+	static void httpModifyNickNameCB(std::string retdata, int code, std::string tag);
+	static void httpVipIsOnCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol
@@ -38,7 +43,7 @@ public:
 	*/
 	virtual void onSuccess() {};
 
-	virtual void onErr() {};
+	virtual void onErr(int errcode) {};
 };
 
 #endif

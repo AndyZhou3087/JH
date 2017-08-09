@@ -14,7 +14,7 @@ public:
 	virtual void onExit();
     virtual bool init();
 	void onSuccess();
-	void onErr();
+	void onErr(int errcode);
 	CREATE_FUNC(StartScene);
 
 private:

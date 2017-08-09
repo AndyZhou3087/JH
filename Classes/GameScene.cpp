@@ -13,6 +13,7 @@
 #include "Const.h"
 #include "HeroProperNode.h"
 #include "MyParticle.h"
+#include "GetVipRewardLayer.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -146,7 +147,8 @@ bool GameScene::init()
 			GlobalData::setMakeWarmConfig("");
 		}
 	}
-
+	ServerDataSwap::getInstance()->setDelegate(this);
+	ServerDataSwap::getInstance()->vipIsOn();
     return true;
 }
 
@@ -455,4 +457,18 @@ void GameScene::delayShowNewerGuide(float dt)
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(g_NewerGuideLayer, 10);
 	}
+}
+
+void GameScene::onSuccess()
+{
+	GetVipRewardLayer* layer = GetVipRewardLayer::create();
+	if (g_gameLayer != NULL)
+		g_gameLayer->addChild(layer, 10);
+
+
+}
+
+void GameScene::onErr(int errcode)
+{
+
 }

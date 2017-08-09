@@ -27,7 +27,6 @@ private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void refreshGoldCount(float dt);
-	void checkGameStatus(float dt);
 private:
 
 	cocos2d::ui::ScrollView* m_rmbScrollview;

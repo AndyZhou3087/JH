@@ -12,6 +12,9 @@
 #include "CommonFuncs.h"
 #include "RmbGoodsItem.h"
 #include "GoldGoodsItem.h"
+#include "GetVipRewardLayer.h"
+#include "MapLayer.h"
+#include "ServerDataSwap.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #include "iosfunc.h"
@@ -28,6 +31,10 @@ ShopLayer::~ShopLayer()
 {
 
 	GlobalData::g_gameStatus = GAMESTART;
+	if (g_hero != NULL && g_hero->getIsMoving())
+	{
+		g_maplayer->heroResumeMoving();
+	}
 }
 
 ShopLayer* ShopLayer::create()
@@ -65,7 +72,7 @@ bool ShopLayer::init()
 		GoodsData* gdata = &GlobalData::vec_goods[i];
 		if (gdata->type == 0)
 			vec_rmbGoods.push_back(gdata);
-		else
+		else if (gdata->type == 1)
 			vec_goldGoods.push_back(gdata);
 	}
 
@@ -84,7 +91,8 @@ bool ShopLayer::init()
 	for (unsigned int i = 0; i < vec_rmbGoods.size(); i++)
 	{
 		RmbGoodsItem* node = RmbGoodsItem::create(vec_rmbGoods[i]);
-		node->setTag(4 + i);
+
+		node->setTag(sizeof(heroprice) / sizeof(heroprice[0]) + i);
 		m_rmbScrollview->addChild(node);
 		node->setPosition(Vec2(itemwidth / 2  + 10 + i * itemwidth, m_rmbScrollview->getContentSize().height/2));
 	}
@@ -122,8 +130,15 @@ bool ShopLayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	if (GlobalData::g_gameStatus == GAMESTART)
+		GlobalData::g_gameStatus = GAMEPAUSE;
+
+	if (g_hero != NULL && g_hero->getIsMoving())
+	{
+		g_maplayer->heroPauseMoving();
+	}
+
 	this->schedule(schedule_selector(ShopLayer::refreshGoldCount), 1);
-	this->schedule(schedule_selector(ShopLayer::checkGameStatus), 0.1f);
 	return true;
 }
 
@@ -159,7 +174,10 @@ void ShopLayer::setMessage(PYARET ret)
 {
 	if (ret == PAY_SUCC)
 	{
-		if (payindex < 4) // 人物解锁
+		int herocount = sizeof(heroprice) / sizeof(heroprice[0]);
+		int golditemcount = sizeof(goldcount) / sizeof(goldcount[0]);
+		int vipcount = sizeof(vipgoldcount) / sizeof(vipgoldcount[0]);
+		if (payindex < herocount) // 人物解锁
 		{
 			if (g_SelectHeroScene != NULL)
 				g_SelectHeroScene->unlockSucc(payindex);
@@ -168,15 +186,25 @@ void ShopLayer::setMessage(PYARET ret)
 			AnalyticUtil::onEvent(heroname[payindex].c_str());
 #endif
 		}
-		else
+		else if (payindex < herocount + golditemcount)//买元宝
 		{
 			//addBuyGoods();
-			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + goldcount[payindex - 4]);
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + goldcount[payindex - herocount]);
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 #ifdef ANALYTICS
 			std::string name[] = { "b6", "b12", "b30", "b68"};
 			AnalyticUtil::onEvent(name[payindex - 4].c_str());
 #endif
+		}
+		else if (payindex < herocount + golditemcount + vipcount)//买VIP
+		{
+			GlobalData::vec_buyVipIds.push_back(GlobalData::vec_goods[payindex - herocount].icon);
+
+			ServerDataSwap::getInstance()->setDelegate(NULL);
+			ServerDataSwap::getInstance()->vipSuccNotice(GlobalData::vec_goods[payindex - herocount].icon);
+			GetVipRewardLayer* layer = GetVipRewardLayer::create();
+			if(g_gameLayer != NULL)
+				g_gameLayer->addChild(layer, 10);
 		}
 #ifdef ANALYTICS
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);
@@ -190,19 +218,6 @@ void ShopLayer::refreshGoldCount(float dt)
 	mygoldlbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("mygoldlbl");
 	std::string countstr = StringUtils::format("%d", GlobalData::getMyGoldCount());
 	mygoldlbl->setString(countstr);
-}
-
-void ShopLayer::checkGameStatus(float dt)
-{
-	if (g_hero->getIsMoving())
-	{
-		GlobalData::g_gameStatus = GAMESTART;
-	}
-	else
-	{
-		if (GlobalData::g_gameStatus == GAMESTART)
-			GlobalData::g_gameStatus = GAMEPAUSE;
-	}
 }
 
 void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)

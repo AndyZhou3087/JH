@@ -16,14 +16,14 @@
             <PreSize X="1.0000" Y="0.6313" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text" ActionTag="-1022397713" Tag="24" IconVisible="False" LeftMargin="360.0000" RightMargin="360.0000" TopMargin="1050.0000" BottomMargin="230.0000" FontSize="40" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="0.0000" Y="0.0000" />
+          <AbstractNodeData Name="text" ActionTag="-1022397713" Tag="24" IconVisible="False" LeftMargin="35.0000" RightMargin="35.0000" TopMargin="1030.0007" BottomMargin="161.9992" IsCustomSize="True" FontSize="40" LabelText="" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="650.0000" Y="88.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="230.0000" />
+            <Position X="360.0000" Y="205.9992" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1797" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PrePosition X="0.5000" Y="0.1609" />
+            <PreSize X="0.9028" Y="0.0688" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

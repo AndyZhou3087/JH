@@ -409,7 +409,7 @@ void TopBar::updataUI(float dt)
 			if (g_hero->getIsOut())
 			{
 				int r = GlobalData::createRandomNum(100);
-				if (r < 10)
+				if (r < 100)
 					isthieves = true;
 			}
 			if (isthieves)
