@@ -1553,7 +1553,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "qwe";
+	return "qwerqqw";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 

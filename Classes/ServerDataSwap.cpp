@@ -329,14 +329,18 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 				rapidjson::Value& coindata = doc["costcoin"];
 				GameDataSave::getInstance()->setUseGold(atoi(coindata.GetString()));
 			}
-			rapidjson::Value& hunlockdata = doc["hunlock"];
-			int hunlock = atoi(hunlockdata.GetString());
-
-			for (int k = 0; k < 4; k++)
+			int hunlock = 1;
+			if (doc.HasMember("hunlock"))
 			{
-				int val = hunlock & (1 << k);
-				val = val >> k;
-				GlobalData::setUnlockHero(k, val == 1 ? true : false);
+				rapidjson::Value& hunlockdata = doc["hunlock"];
+				hunlock = atoi(hunlockdata.GetString());
+
+				for (int k = 0; k < 4; k++)
+				{
+					int val = hunlock & (1 << k);
+					val = val >> k;
+					GlobalData::setUnlockHero(k, val == 1 ? true : false);
+				}
 			}
 
 			if (doc.HasMember("data"))

@@ -829,7 +829,8 @@ void BuildingUILayer::showNewerGuide(int step)
 
 void BuildingUILayer::delayShowNewerGuide(float dt)
 {
-	if (NewerGuideLayer::checkifNewerGuide(1))
+	
+	if (NewerGuideLayer::checkifNewerGuide(1) && strcmp(m_build->data.name, "bed") == 0 && m_build->data.level <= 0)
 		showNewerGuide(1);
 	else if (NewerGuideLayer::checkifNewerGuide(44))
 		showNewerGuide(44);
