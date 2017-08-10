@@ -5,18 +5,18 @@
 +(NSString *)getDeviceIDInKeychain
 {
     NSString *getUDIDInKeychain = (NSString *)[LZKeychain load:KEY_UDID_INSTEAD];
-    NSLog(@"从keychain中获取到的 UDID_INSTEAD %@",getUDIDInKeychain);
+    //NSLog(@"从keychain中获取到的 UDID_INSTEAD %@",getUDIDInKeychain);
     if (!getUDIDInKeychain ||[getUDIDInKeychain isEqualToString:@""]||[getUDIDInKeychain isKindOfClass:[NSNull class]]) {
         CFUUIDRef puuid = CFUUIDCreate( nil );
         CFStringRef uuidString = CFUUIDCreateString( nil, puuid );
         NSString * result = (NSString *)CFBridgingRelease(CFStringCreateCopy( NULL, uuidString));
         CFRelease(puuid);
         CFRelease(uuidString);
-        NSLog(@"\n \n \n _____重新存储 UUID _____\n \n \n  %@",result);
+        //NSLog(@"\n \n \n _____重新存储 UUID _____\n \n \n  %@",result);
         [LZKeychain save:KEY_UDID_INSTEAD data:result];
         getUDIDInKeychain = (NSString *)[LZKeychain load:KEY_UDID_INSTEAD];
     }
-    NSLog(@"最终 ———— UDID_INSTEAD %@",getUDIDInKeychain);
+   //NSLog(@"最终 ———— UDID_INSTEAD %@",getUDIDInKeychain);
     return getUDIDInKeychain;
 }
 

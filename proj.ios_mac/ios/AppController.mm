@@ -40,7 +40,7 @@ static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
-    [[UMSocialManager defaultManager] openLog:YES];
+    [[UMSocialManager defaultManager] openLog:NO];
     
     // 获取友盟social版本号
     NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);

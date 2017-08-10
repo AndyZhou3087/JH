@@ -50,6 +50,8 @@
 		720AB2F31F0CD7B600CF23A5 /* end2_1 in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2EF1F0CD7B600CF23A5 /* end2_1 */; };
 		720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F01F0CD7B600CF23A5 /* end2_1.csb */; };
 		720AB2F51F0CD7B600CF23A5 /* end2_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F11F0CD7B600CF23A5 /* end2_2.csb */; };
+		72154F341F3C49C200EBD358 /* TimeGiftLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72154F321F3C49C200EBD358 /* TimeGiftLayer.cpp */; };
+		72154F361F3C49D600EBD358 /* timeGfitLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72154F351F3C49D600EBD358 /* timeGfitLayer.csb */; };
 		721CBB2C1EFCBB0A0077B495 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721CBB2B1EFCBB0A0077B495 /* GameController.framework */; };
 		722286A41F31C48300EE46A4 /* HttpUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7222869E1F31C48300EE46A4 /* HttpUtil.cpp */; };
 		722286A51F31C48300EE46A4 /* ServerDataSwap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */; };
@@ -64,12 +66,20 @@
 		72229CD71F283991001272D3 /* end4_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72229CCF1F283991001272D3 /* end4_2.csb */; };
 		72229CD91F2839CA001272D3 /* end2_2 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CD81F2839CA001272D3 /* end2_2 */; };
 		72229CDB1F2839F6001272D3 /* story3_1 in Resources */ = {isa = PBXBuildFile; fileRef = 72229CDA1F2839F6001272D3 /* story3_1 */; };
+		722FA8B21F3B256B00904816 /* GetVipRewardLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722FA8AC1F3B256B00904816 /* GetVipRewardLayer.cpp */; };
+		722FA8B31F3B256B00904816 /* VipGoodsItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722FA8AE1F3B256B00904816 /* VipGoodsItem.cpp */; };
+		722FA8B41F3B256B00904816 /* VipShopLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 722FA8B01F3B256B00904816 /* VipShopLayer.cpp */; };
+		722FA8B81F3B258900904816 /* getVipRewardLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B51F3B258900904816 /* getVipRewardLayer.csb */; };
+		722FA8B91F3B258900904816 /* vipGoodsNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B61F3B258900904816 /* vipGoodsNode.csb */; };
+		722FA8BA1F3B258900904816 /* vipShopLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B71F3B258900904816 /* vipShopLayer.csb */; };
 		723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */; };
 		7239471A1EF2384A0093E725 /* ExerciseDoneLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */; };
 		7239471B1EF2384A0093E725 /* PauseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947171EF2384A0093E725 /* PauseLayer.cpp */; };
 		7239479F1EF2386D0093E725 /* buyComfirmLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 7239471C1EF2386D0093E725 /* buyComfirmLayer.csb */; };
 		723947B51EF2386D0093E725 /* exerciseDoneLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 723947341EF2386D0093E725 /* exerciseDoneLayer.csb */; };
 		723947ED1EF2386D0093E725 /* pauseLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 7239476F1EF2386D0093E725 /* pauseLayer.csb */; };
+		723B9F0E1F332794000E3B18 /* MyParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723B9F0C1F332794000E3B18 /* MyParticle.cpp */; };
+		723B9F101F3327C0000E3B18 /* particle in Resources */ = {isa = PBXBuildFile; fileRef = 723B9F0F1F3327C0000E3B18 /* particle */; };
 		723CF5EE1F020C8300509BFE /* BookShelf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723CF5EC1F020C8300509BFE /* BookShelf.cpp */; };
 		723CF5F11F020CA600509BFE /* story4_1 in Resources */ = {isa = PBXBuildFile; fileRef = 723CF5EF1F020CA600509BFE /* story4_1 */; };
 		723CF5F21F020CA600509BFE /* story4_2 in Resources */ = {isa = PBXBuildFile; fileRef = 723CF5F01F020CA600509BFE /* story4_2 */; };
@@ -347,6 +357,9 @@
 		720AB2EF1F0CD7B600CF23A5 /* end2_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end2_1; sourceTree = "<group>"; };
 		720AB2F01F0CD7B600CF23A5 /* end2_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_1.csb; sourceTree = "<group>"; };
 		720AB2F11F0CD7B600CF23A5 /* end2_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_2.csb; sourceTree = "<group>"; };
+		72154F321F3C49C200EBD358 /* TimeGiftLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeGiftLayer.cpp; sourceTree = "<group>"; };
+		72154F331F3C49C200EBD358 /* TimeGiftLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeGiftLayer.h; sourceTree = "<group>"; };
+		72154F351F3C49D600EBD358 /* timeGfitLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = timeGfitLayer.csb; sourceTree = "<group>"; };
 		721CBB2B1EFCBB0A0077B495 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		7222869E1F31C48300EE46A4 /* HttpUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpUtil.cpp; sourceTree = "<group>"; };
 		7222869F1F31C48300EE46A4 /* HttpUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtil.h; sourceTree = "<group>"; };
@@ -364,6 +377,15 @@
 		72229CCF1F283991001272D3 /* end4_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end4_2.csb; sourceTree = "<group>"; };
 		72229CD81F2839CA001272D3 /* end2_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end2_2; sourceTree = "<group>"; };
 		72229CDA1F2839F6001272D3 /* story3_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story3_1; sourceTree = "<group>"; };
+		722FA8AC1F3B256B00904816 /* GetVipRewardLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GetVipRewardLayer.cpp; sourceTree = "<group>"; };
+		722FA8AD1F3B256B00904816 /* GetVipRewardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetVipRewardLayer.h; sourceTree = "<group>"; };
+		722FA8AE1F3B256B00904816 /* VipGoodsItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VipGoodsItem.cpp; sourceTree = "<group>"; };
+		722FA8AF1F3B256B00904816 /* VipGoodsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipGoodsItem.h; sourceTree = "<group>"; };
+		722FA8B01F3B256B00904816 /* VipShopLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VipShopLayer.cpp; sourceTree = "<group>"; };
+		722FA8B11F3B256B00904816 /* VipShopLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VipShopLayer.h; sourceTree = "<group>"; };
+		722FA8B51F3B258900904816 /* getVipRewardLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = getVipRewardLayer.csb; sourceTree = "<group>"; };
+		722FA8B61F3B258900904816 /* vipGoodsNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vipGoodsNode.csb; sourceTree = "<group>"; };
+		722FA8B71F3B258900904816 /* vipShopLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vipShopLayer.csb; sourceTree = "<group>"; };
 		723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyComfirmLayer.cpp; sourceTree = "<group>"; };
 		723947141EF2384A0093E725 /* BuyComfirmLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyComfirmLayer.h; sourceTree = "<group>"; };
 		723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExerciseDoneLayer.cpp; sourceTree = "<group>"; };
@@ -373,6 +395,9 @@
 		7239471C1EF2386D0093E725 /* buyComfirmLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = buyComfirmLayer.csb; sourceTree = "<group>"; };
 		723947341EF2386D0093E725 /* exerciseDoneLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = exerciseDoneLayer.csb; sourceTree = "<group>"; };
 		7239476F1EF2386D0093E725 /* pauseLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = pauseLayer.csb; sourceTree = "<group>"; };
+		723B9F0C1F332794000E3B18 /* MyParticle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyParticle.cpp; sourceTree = "<group>"; };
+		723B9F0D1F332794000E3B18 /* MyParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyParticle.h; sourceTree = "<group>"; };
+		723B9F0F1F3327C0000E3B18 /* particle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = particle; sourceTree = "<group>"; };
 		723CF5EC1F020C8300509BFE /* BookShelf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BookShelf.cpp; sourceTree = "<group>"; };
 		723CF5ED1F020C8300509BFE /* BookShelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookShelf.h; sourceTree = "<group>"; };
 		723CF5EF1F020CA600509BFE /* story4_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story4_1; sourceTree = "<group>"; };
@@ -875,6 +900,7 @@
 				72573ACF1F08AD28005DF2F6 /* exgLayer.csb */,
 				7286918F1ED56CC800D06B0F /* fightLayer.csb */,
 				728691901ED56CC800D06B0F /* fonts */,
+				722FA8B51F3B258900904816 /* getVipRewardLayer.csb */,
 				72E332C61F0BAAFA00E61182 /* goldGoodsNode.csb */,
 				728691921ED56CC800D06B0F /* goWhereLayer.csb */,
 				72754FEB1F04CCA000AFB4C4 /* gray.fsh */,
@@ -889,6 +915,7 @@
 				7286919A1ED56CC800D06B0F /* npcLayer.csb */,
 				7286919B1ED56CC800D06B0F /* npcNode.csb */,
 				7286919C1ED56CC800D06B0F /* outDoorLayer.csb */,
+				723B9F0F1F3327C0000E3B18 /* particle */,
 				7239476F1EF2386D0093E725 /* pauseLayer.csb */,
 				725CB9DD1F15F3E900D2509A /* repairLayer.csb */,
 				725CB9DE1F15F3E900D2509A /* repairOKLayer.csb */,
@@ -924,10 +951,13 @@
 				723CF5F41F020CB500509BFE /* story4_2.csb */,
 				728691AC1ED56CC800D06B0F /* sysSmallLayer.csb */,
 				728691AD1ED56CC800D06B0F /* tempStorageLayer.csb */,
+				72154F351F3C49D600EBD358 /* timeGfitLayer.csb */,
 				728691AE1ED56CC800D06B0F /* topBarNode.csb */,
 				7286920A1ED5973E00D06B0F /* uipacker.plist */,
 				728692081ED5972700D06B0F /* uipacker.png */,
 				728691B11ED56CC800D06B0F /* unlockLayer.csb */,
+				722FA8B61F3B258900904816 /* vipGoodsNode.csb */,
+				722FA8B71F3B258900904816 /* vipShopLayer.csb */,
 				728691B21ED56CC800D06B0F /* winLayer.csb */,
 			);
 			name = Resources;
@@ -937,12 +967,6 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7222869E1F31C48300EE46A4 /* HttpUtil.cpp */,
-				7222869F1F31C48300EE46A4 /* HttpUtil.h */,
-				722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */,
-				722286A11F31C48300EE46A4 /* ServerDataSwap.h */,
-				722286A21F31C48300EE46A4 /* WaitingProgress.cpp */,
-				722286A31F31C48300EE46A4 /* WaitingProgress.h */,
 				72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */,
 				72868FE01ED568B000D06B0F /* ActionGetLayer.h */,
 				72868FE11ED568B000D06B0F /* ActivitScene.cpp */,
@@ -1006,6 +1030,8 @@
 				728690011ED568B000D06B0F /* GameDataSave.h */,
 				728690021ED568B000D06B0F /* GameScene.cpp */,
 				728690031ED568B000D06B0F /* GameScene.h */,
+				722FA8AC1F3B256B00904816 /* GetVipRewardLayer.cpp */,
+				722FA8AD1F3B256B00904816 /* GetVipRewardLayer.h */,
 				728690041ED568B000D06B0F /* GlobalData.cpp */,
 				728690051ED568B000D06B0F /* GlobalData.h */,
 				72E332BD1F0BAADF00E61182 /* GoldGoodItem.cpp */,
@@ -1024,6 +1050,8 @@
 				728690131ED568B000D06B0F /* HomeHill.h */,
 				728690141ED568B000D06B0F /* HomeLayer.cpp */,
 				728690151ED568B000D06B0F /* HomeLayer.h */,
+				7222869E1F31C48300EE46A4 /* HttpUtil.cpp */,
+				7222869F1F31C48300EE46A4 /* HttpUtil.h */,
 				72F8A4441ED6851E007A5A65 /* iosfunc.h */,
 				72D098A91F08C45F00FEABAB /* iosfunc.mm */,
 				72F8A4461ED6851E007A5A65 /* IOSPurchase.h */,
@@ -1046,6 +1074,8 @@
 				727267F71EE15920007F036A /* MyMenu.h */,
 				7286901E1ED568B000D06B0F /* MyPackage.cpp */,
 				7286901F1ED568B000D06B0F /* MyPackage.h */,
+				723B9F0C1F332794000E3B18 /* MyParticle.cpp */,
+				723B9F0D1F332794000E3B18 /* MyParticle.h */,
 				728690201ED568B000D06B0F /* Nature.cpp */,
 				728690211ED568B000D06B0F /* Nature.h */,
 				727267F81EE15920007F036A /* NewerGuideLayer.cpp */,
@@ -1074,6 +1104,8 @@
 				7286902F1ED568B000D06B0F /* SelectSaveLayer.h */,
 				72F4D1381F21A0AC00D9D752 /* SepcialNpcLayer.cpp */,
 				72F4D1391F21A0AC00D9D752 /* SepcialNpcLayer.h */,
+				722286A01F31C48300EE46A4 /* ServerDataSwap.cpp */,
+				722286A11F31C48300EE46A4 /* ServerDataSwap.h */,
 				728690301ED568B000D06B0F /* SettingLayer.cpp */,
 				728690311ED568B000D06B0F /* SettingLayer.h */,
 				72D5CABE1F0E1A21007A5D12 /* Shake.cpp */,
@@ -1096,6 +1128,8 @@
 				7286903F1ED568B000D06B0F /* SysSmallBox.h */,
 				728690401ED568B000D06B0F /* TempStorageLayer.cpp */,
 				728690411ED568B000D06B0F /* TempStorageLayer.h */,
+				72154F321F3C49C200EBD358 /* TimeGiftLayer.cpp */,
+				72154F331F3C49C200EBD358 /* TimeGiftLayer.h */,
 				728690421ED568B000D06B0F /* TopBar.cpp */,
 				728690431ED568B000D06B0F /* TopBar.h */,
 				728690441ED568B000D06B0F /* UIScroll.cpp */,
@@ -1104,6 +1138,12 @@
 				728690461ED568B000D06B0F /* UnlockLayer.cpp */,
 				728690471ED568B000D06B0F /* UnlockLayer.h */,
 				728690481ED568B000D06B0F /* Utility.h */,
+				722FA8AE1F3B256B00904816 /* VipGoodsItem.cpp */,
+				722FA8AF1F3B256B00904816 /* VipGoodsItem.h */,
+				722FA8B01F3B256B00904816 /* VipShopLayer.cpp */,
+				722FA8B11F3B256B00904816 /* VipShopLayer.h */,
+				722286A21F31C48300EE46A4 /* WaitingProgress.cpp */,
+				722286A31F31C48300EE46A4 /* WaitingProgress.h */,
 				728690491ED568B000D06B0F /* WineMaker.cpp */,
 				7286904A1ED568B000D06B0F /* WineMaker.h */,
 				7286904B1ED568B000D06B0F /* WineTable.cpp */,
@@ -1348,6 +1388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72229CD61F283991001272D3 /* end4_2 in Resources */,
+				722FA8B81F3B258900904816 /* getVipRewardLayer.csb in Resources */,
 				72229CD01F283991001272D3 /* end3_1 in Resources */,
 				728691B41ED56CC800D06B0F /* actionNode.csb in Resources */,
 				728691CC1ED56CC800D06B0F /* resNode.csb in Resources */,
@@ -1364,6 +1405,7 @@
 				728691BC1ED56CC800D06B0F /* Default in Resources */,
 				728691C21ED56CC800D06B0F /* heroStateLayer.csb in Resources */,
 				72229CD91F2839CA001272D3 /* end2_2 in Resources */,
+				722FA8BA1F3B258900904816 /* vipShopLayer.csb in Resources */,
 				723947B51EF2386D0093E725 /* exerciseDoneLayer.csb in Resources */,
 				728691CF1ED56CC800D06B0F /* selectHeroLayer.csb in Resources */,
 				72229CD71F283991001272D3 /* end4_2.csb in Resources */,
@@ -1394,6 +1436,7 @@
 				729772851F09DFBF001DC2B8 /* end1_1.csb in Resources */,
 				72229CD21F283991001272D3 /* end3_2 in Resources */,
 				725CB9DF1F15F3E900D2509A /* repairLayer.csb in Resources */,
+				72154F361F3C49D600EBD358 /* timeGfitLayer.csb in Resources */,
 				72229CD31F283991001272D3 /* end3_2.csb in Resources */,
 				720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */,
 				72229CD51F283991001272D3 /* end4_1.csb in Resources */,
@@ -1405,6 +1448,7 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				728691CB1ED56CC800D06B0F /* resDetailsLayer.csb in Resources */,
 				72630BDA1EFA77FD000516CE /* story3_2.csb in Resources */,
+				722FA8B91F3B258900904816 /* vipGoodsNode.csb in Resources */,
 				720AB2F51F0CD7B600CF23A5 /* end2_2.csb in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				72E332CA1F0BAAFA00E61182 /* images in Resources */,
@@ -1451,6 +1495,7 @@
 				723EC0021EF37FF000642589 /* story1_1.csb in Resources */,
 				7271A07A1EE63D90005B980F /* Default-Landscape~ipad.png in Resources */,
 				72630BD91EFA77FD000516CE /* story3_1.csb in Resources */,
+				723B9F101F3327C0000E3B18 /* particle in Resources */,
 				728691C31ED56CC800D06B0F /* hintLayer.csb in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				728691D11ED56CC800D06B0F /* selectSavedLayer.csb in Resources */,
@@ -1523,6 +1568,7 @@
 				72573ACE1F08AD0D005DF2F6 /* ExchangeLayer.cpp in Sources */,
 				725CB9DC1F15F3C200D2509A /* RepairOKLayer.cpp in Sources */,
 				728690631ED568B000D06B0F /* GoWhereLayer.cpp in Sources */,
+				723B9F0E1F332794000E3B18 /* MyParticle.cpp in Sources */,
 				72F4D13B1F21A0AC00D9D752 /* SepcialNpcLayer.cpp in Sources */,
 				7286906F1ED568B000D06B0F /* Nature.cpp in Sources */,
 				728690701ED568B000D06B0F /* NpcLayer.cpp in Sources */,
@@ -1530,6 +1576,7 @@
 				72754FE21F048A0800AFB4C4 /* BookDetailsLayer.cpp in Sources */,
 				72754FE31F048A0800AFB4C4 /* BookShelfLayer.cpp in Sources */,
 				7286905F1ED568B000D06B0F /* GameDataSave.cpp in Sources */,
+				722FA8B41F3B256B00904816 /* VipShopLayer.cpp in Sources */,
 				7286907A1ED568B000D06B0F /* StartScene.cpp in Sources */,
 				727267FB1EE15920007F036A /* NewerGuideLayer.cpp in Sources */,
 				72E332C31F0BAADF00E61182 /* GoldGoodItem.cpp in Sources */,
@@ -1560,13 +1607,16 @@
 				728690501ED568B000D06B0F /* ActivitScene.cpp in Sources */,
 				7239471B1EF2384A0093E725 /* PauseLayer.cpp in Sources */,
 				728690811ED568B000D06B0F /* UIScroll.cpp in Sources */,
+				722FA8B31F3B256B00904816 /* VipGoodsItem.cpp in Sources */,
 				72777B391EFBDC3900151A2B /* UmSocialControllerIOS.mm in Sources */,
 				728690511ED568B000D06B0F /* Bed.cpp in Sources */,
 				722286A61F31C48300EE46A4 /* WaitingProgress.cpp in Sources */,
+				72154F341F3C49C200EBD358 /* TimeGiftLayer.cpp in Sources */,
 				728690841ED568B000D06B0F /* WineTable.cpp in Sources */,
 				728690551ED568B000D06B0F /* BuyDetailsLayer.cpp in Sources */,
 				725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */,
 				7286907C1ED568B000D06B0F /* StorageUILayer.cpp in Sources */,
+				722FA8B21F3B256B00904816 /* GetVipRewardLayer.cpp in Sources */,
 				728690731ED568B000D06B0F /* ReviveLayer.cpp in Sources */,
 				728690711ED568B000D06B0F /* OutDoor.cpp in Sources */,
 			);
