@@ -343,202 +343,202 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 			if (doc.HasMember("data"))
             {
-			for (unsigned int m = 0; m < dataArray.Size(); m++)
-			{
-				rapidjson::Value& item = dataArray[m];
-
-				rapidjson::Value& v = item["localid"];
-				std::string localuid = v.GetString();
-
-				GameDataSave::getInstance()->setUserId(localuid);
-
-				v = item["type"];
-				int type = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroId(type);
-
-				vec_saveid[type-1] = localuid;
-
-				v = item["exp"];
-				int exp = atoi(v.GetString());
-				int lv = 0;
-				int size = GlobalData::map_heroAtr[type].vec_exp.size();
-				for (int i = 0; i < size; i++)
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
 				{
-					if (exp > GlobalData::map_heroAtr[type].vec_exp[i])
+					rapidjson::Value& item = dataArray[m];
+
+					rapidjson::Value& v = item["localid"];
+					std::string localuid = v.GetString();
+
+					GameDataSave::getInstance()->setUserId(localuid);
+
+					v = item["type"];
+					int type = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroId(type);
+
+					vec_saveid[type-1] = localuid;
+
+					v = item["exp"];
+					int exp = atoi(v.GetString());
+					int lv = 0;
+					int size = GlobalData::map_heroAtr[type].vec_exp.size();
+					for (int i = 0; i < size; i++)
 					{
-						lv = i;
-						exp = exp - GlobalData::map_heroAtr[type].vec_exp[i];
-					}
-					else
-					{
-						break;
-					}
-				}
-				if (lv >= size)
-				{
-					lv = size - 1;
-					exp = GlobalData::map_heroAtr[type].vec_exp[lv];
-				}
-
-				GameDataSave::getInstance()->setHeroLV(lv); 
-				GameDataSave::getInstance()->setHeroExp(exp);
-
-				v = item["hungry"];
-				int hungry = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroHunger(hungry);
-
-				v = item["innerhurt"];
-				int innerhurt = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroInnerinjury(innerhurt);
-
-				v = item["outerhurt"];
-				int outerhurt = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroOutinjury(outerhurt);
-
-				v = item["life"];
-				int life = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroLife(life);
-
-				v = item["days"];
-				int days = atoi(v.GetString());
-				GameDataSave::getInstance()->setLiveDays(days);
-
-				v = item["mood"];
-				int spirit = atoi(v.GetString());
-				GameDataSave::getInstance()->setHeroSpirit(spirit);
-
-				v = item["task"];
-				int task = atoi(v.GetString());
-				GameDataSave::getInstance()->setPlotMissionIndex(task);
-
-				std::string str;
-				int pdatasize = GlobalData::vec_PlotMissionData.size();
-				for (int i = 0; i < pdatasize; i++)
-				{
-					std::string tmpstr;
-					if (i < task)
-						tmpstr = "2-";
-					else
-						tmpstr = "0-";
-					str.append(tmpstr);
-				}
-				GameDataSave::getInstance()->setPlotMissionStatus(str.substr(0, str.length() - 1));
-
-				v = item["btask"];
-				int btask = atoi(v.GetString());
-				GameDataSave::getInstance()->setBranchPlotMissionIndex(btask);
-
-				std::string bstr;
-				int bpdatasize = GlobalData::vec_BranchPlotMissionData.size();
-				for (int i = 0; i < bpdatasize; i++)
-				{
-					std::string tmpstr;
-					if (i < btask)
-						tmpstr = "2-";
-					else
-						tmpstr = "0-";
-					bstr.append(tmpstr);
-				}
-				GameDataSave::getInstance()->setBranchPlotMissionStatus(bstr.substr(0, bstr.length() - 1));
-
-				v = item["unlock"];
-				int unlock = atoi(v.GetString());
-				GameDataSave::getInstance()->setPlotUnlockChapter(unlock);
-
-				rapidjson::Document doc = ReadJsonFile("data/buildings.json");
-				rapidjson::Value& allBuilds = doc["b"];
-				for (unsigned int i = 0; i < allBuilds.Size(); i++)
-				{
-					rapidjson::Value& oneBuild = allBuilds[i];
-					rapidjson::Value& oneitem = oneBuild["name"];
-					std::string buildname = oneitem.GetString();
-					v = item[buildname.c_str()];
-					int blv = atoi(v.GetString());
-					GameDataSave::getInstance()->setBuildLV(buildname, blv);
-				}
-
-				v = item["holding"];
-				
-				for (unsigned int n = 0; n < v.Size(); n++)
-				{
-					rapidjson::Value& hv = v[n];
-					rapidjson::Value& resv = hv["flag"];
-					int flag = atoi(resv.GetString());
-					std::string str;
-					for (rapidjson::Value::ConstMemberIterator iter = hv.MemberBegin(); iter != hv.MemberEnd(); ++iter)
-					{
-						std::string strid = iter->name.GetString();
-
-						if (strid.compare("flag") != 0)
+						if (exp > GlobalData::map_heroAtr[type].vec_exp[i])
 						{
-							int val = atoi(iter->value.GetString());
-							int goodvalue = 100;
-							int lv = 0;
-							int tqu = 1;
-							int slv = 0;
-							int count = 0;
-							if (strid.compare(0, 1, "r") == 0)
+							lv = i;
+							exp = exp - GlobalData::map_heroAtr[type].vec_exp[i];
+						}
+						else
+						{
+							break;
+						}
+					}
+					if (lv >= size)
+					{
+						lv = size - 1;
+						exp = GlobalData::map_heroAtr[type].vec_exp[lv];
+					}
+
+					GameDataSave::getInstance()->setHeroLV(lv); 
+					GameDataSave::getInstance()->setHeroExp(exp);
+
+					v = item["hungry"];
+					int hungry = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroHunger(hungry);
+
+					v = item["innerhurt"];
+					int innerhurt = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroInnerinjury(innerhurt);
+
+					v = item["outerhurt"];
+					int outerhurt = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroOutinjury(outerhurt);
+
+					v = item["life"];
+					int life = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroLife(life);
+
+					v = item["days"];
+					int days = atoi(v.GetString());
+					GameDataSave::getInstance()->setLiveDays(days);
+
+					v = item["mood"];
+					int spirit = atoi(v.GetString());
+					GameDataSave::getInstance()->setHeroSpirit(spirit);
+
+					v = item["task"];
+					int task = atoi(v.GetString());
+					GameDataSave::getInstance()->setPlotMissionIndex(task);
+
+					std::string str;
+					int pdatasize = GlobalData::vec_PlotMissionData.size();
+					for (int i = 0; i < pdatasize; i++)
+					{
+						std::string tmpstr;
+						if (i < task)
+							tmpstr = "2-";
+						else
+							tmpstr = "0-";
+						str.append(tmpstr);
+					}
+					GameDataSave::getInstance()->setPlotMissionStatus(str.substr(0, str.length() - 1));
+
+					v = item["btask"];
+					int btask = atoi(v.GetString());
+					GameDataSave::getInstance()->setBranchPlotMissionIndex(btask);
+
+					std::string bstr;
+					int bpdatasize = GlobalData::vec_BranchPlotMissionData.size();
+					for (int i = 0; i < bpdatasize; i++)
+					{
+						std::string tmpstr;
+						if (i < btask)
+							tmpstr = "2-";
+						else
+							tmpstr = "0-";
+						bstr.append(tmpstr);
+					}
+					GameDataSave::getInstance()->setBranchPlotMissionStatus(bstr.substr(0, bstr.length() - 1));
+
+					v = item["unlock"];
+					int unlock = atoi(v.GetString());
+					GameDataSave::getInstance()->setPlotUnlockChapter(unlock);
+
+					rapidjson::Document doc = ReadJsonFile("data/buildings.json");
+					rapidjson::Value& allBuilds = doc["b"];
+					for (unsigned int i = 0; i < allBuilds.Size(); i++)
+					{
+						rapidjson::Value& oneBuild = allBuilds[i];
+						rapidjson::Value& oneitem = oneBuild["name"];
+						std::string buildname = oneitem.GetString();
+						v = item[buildname.c_str()];
+						int blv = atoi(v.GetString());
+						GameDataSave::getInstance()->setBuildLV(buildname, blv);
+					}
+
+					v = item["holding"];
+				
+					for (unsigned int n = 0; n < v.Size(); n++)
+					{
+						rapidjson::Value& hv = v[n];
+						rapidjson::Value& resv = hv["flag"];
+						int flag = atoi(resv.GetString());
+						std::string str;
+						for (rapidjson::Value::ConstMemberIterator iter = hv.MemberBegin(); iter != hv.MemberEnd(); ++iter)
+						{
+							std::string strid = iter->name.GetString();
+
+							if (strid.compare("flag") != 0)
 							{
-								strid = strid.substr(1);
-								count = val;
-							}
-							else
-							{
-								if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
+								int val = atoi(iter->value.GetString());
+								int goodvalue = 100;
+								int lv = 0;
+								int tqu = 1;
+								int slv = 0;
+								int count = 0;
+								if (strid.compare(0, 1, "r") == 0)
 								{
-									goodvalue = val % 1000;
-									slv = goodvalue / 1000;
+									strid = strid.substr(1);
+									count = val;
 								}
 								else
 								{
-									lv = val;
-								}
-								count = 1;
-							}
-							std::string tempstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", strid.c_str(), GlobalData::getResType(strid), count, GlobalData::getResExType(strid), lv, 0, goodvalue, slv, tqu);
-							str.append(tempstr);
-						}
-					}
-					if (str.length() > 1)
-					{
-						str = str.substr(0, str.length() - 1);
-						if (flag == 1)
-							GameDataSave::getInstance()->setStorageData(str);
-						else if (flag == 2)
-						{
-							GameDataSave::getInstance()->setPackage(str);
-						}
-						else if (flag == 3)
-						{
-							const std::string prestr[] = { "a", "24", "25", "26", "w", "x", "e","7"};
-							std::vector<std::string> tmp;
-							CommonFuncs::split(str, tmp, ";");
-							str.clear();
-							for (int c = 0; c < 8; c++)
-							{
-								int len = prestr[c].length();
-								bool isfind = false;
-								for (unsigned int k = 0; k < tmp.size(); k++)
-								{
-									if (prestr[c].compare(0, len, tmp[k], 0, len) == 0)
+									if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
 									{
-										isfind = true;
-										str.append(tmp[k]);
-										str.append(";");
-										break;
+										goodvalue = val % 1000;
+										slv = goodvalue / 1000;
+									}
+									else
+									{
+										lv = val;
+									}
+									count = 1;
+								}
+								std::string tempstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", strid.c_str(), GlobalData::getResType(strid), count, GlobalData::getResExType(strid), lv, 0, goodvalue, slv, tqu);
+								str.append(tempstr);
+							}
+						}
+						if (str.length() > 1)
+						{
+							str = str.substr(0, str.length() - 1);
+							if (flag == 1)
+								GameDataSave::getInstance()->setStorageData(str);
+							else if (flag == 2)
+							{
+								GameDataSave::getInstance()->setPackage(str);
+							}
+							else if (flag == 3)
+							{
+								const std::string prestr[] = { "a", "24", "25", "26", "w", "x", "e","7"};
+								std::vector<std::string> tmp;
+								CommonFuncs::split(str, tmp, ";");
+								str.clear();
+								for (int c = 0; c < 8; c++)
+								{
+									int len = prestr[c].length();
+									bool isfind = false;
+									for (unsigned int k = 0; k < tmp.size(); k++)
+									{
+										if (prestr[c].compare(0, len, tmp[k], 0, len) == 0)
+										{
+											isfind = true;
+											str.append(tmp[k]);
+											str.append(";");
+											break;
+										}
+									}
+									if (!isfind)
+									{
+										str.append("-0-0-0-0-0-100-0-1;");
 									}
 								}
-								if (!isfind)
-								{
-									str.append("-0-0-0-0-0-100-0-1;");
-								}
+								GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));
 							}
-							GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));
 						}
 					}
-				}
 
-			}
+				}
             }
 
 			GlobalData::setSaveListId(vec_saveid);
