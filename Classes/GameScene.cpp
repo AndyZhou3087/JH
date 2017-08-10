@@ -448,7 +448,8 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 	{
 		m_newerStep = step;
 		m_newerNode = nodes;
-		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.1f);
+		delayShowNewerGuide(0);
+		//this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.1f);
 	}
 }
 
