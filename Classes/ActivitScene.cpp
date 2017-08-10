@@ -90,7 +90,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	else if (imagepath.compare("images/findtreasure.jpg") == 0)
 	{
 		int rj = GlobalData::createRandomNum(100);
-		if (rj < 30)
+		if (rj < 50)
 		{
 			image->loadTexture("images/jumphurt.jpg", cocos2d::ui::TextureResType::LOCAL);
 			m_text->setString(CommonFuncs::gbk2utf("跳崖摔伤"));
@@ -123,16 +123,22 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 			g_hero->setLifeValue(g_hero->getLifeValue() * 0.7f);
 			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！受伤严重！！！"));
 			distime = 4.0f;
+#ifdef ANALYTICS
+			AnalyticUtil::onEvent("jumphurt");
+#endif
 		}
 		else
 		{
 			int rf = GlobalData::createRandomNum(100);
-			if (rf < 20)
+			if (rf < 50)
 			{
 				image->loadTexture("images/jumpnothing.jpg", cocos2d::ui::TextureResType::LOCAL);
 				m_text->setString(CommonFuncs::gbk2utf("一无所获"));
 				tips->setString(CommonFuncs::gbk2utf("这次白跳了，什么都没有，发光的只不过时一个破石头在反光。"));
 				distime = 4.0f;
+#ifdef ANALYTICS
+				AnalyticUtil::onEvent("jumpnoting");
+#endif
 			}
 			else
 			{
@@ -140,6 +146,11 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 				//text->setString(CommonFuncs::gbk2utf("机缘巧合"));
 				tips->setString(CommonFuncs::gbk2utf("果然没有白白冒险，没想到这悬崖下别有洞天！你获得了以下物品："));
 				tips->setPositionY(m_text->getPositionY() + 20);
+
+#ifdef ANALYTICS
+				AnalyticUtil::onEvent("jumpget");
+#endif
+
 				return true;
 			}
 		}
@@ -485,6 +496,23 @@ void ActivitScene::saveTempResData()
 	{
 		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", map_tempdata[m_tempmapid][i].strid.c_str(), map_tempdata[m_tempmapid][i].type, map_tempdata[m_tempmapid][i].count, map_tempdata[m_tempmapid][i].extype, map_tempdata[m_tempmapid][i].lv, map_tempdata[m_tempmapid][i].exp, map_tempdata[m_tempmapid][i].goodvalue, map_tempdata[m_tempmapid][i].slv, map_tempdata[m_tempmapid][i].tqu);
 		str.append(onestr);
+
+		int tmptype = map_tempdata[m_tempmapid][i].type;
+		std::string tmpstrid = map_tempdata[m_tempmapid][i].strid;
+		if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
+		{
+			bool isfind = false;
+			for (unsigned int n = 0; n < GlobalData::vec_tempGf_Equip.size(); n++)
+			{
+				if (GlobalData::vec_tempGf_Equip[n].compare(tmpstrid) == 0)
+				{
+					isfind = true;
+					break;
+				}
+			}
+			if (!isfind)
+				GlobalData::vec_tempGf_Equip.push_back(tmpstrid);
+		}
 	}
 	GameDataSave::getInstance()->setTempStorage(m_tempmapid, str.substr(0, str.length() - 1));
 }

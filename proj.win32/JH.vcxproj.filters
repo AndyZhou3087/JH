@@ -267,6 +267,9 @@
     <ClCompile Include="..\Classes\GetVipRewardLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TimeGiftLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -528,6 +531,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GetVipRewardLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TimeGiftLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

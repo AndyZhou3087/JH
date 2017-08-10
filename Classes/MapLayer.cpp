@@ -16,6 +16,7 @@
 #include "FightLayer.h"
 #include "StoryScene.h"
 #include "VipShopLayer.h"
+#include "TimeGiftLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -104,6 +105,15 @@ bool MapLayer::init()
 
 	cocos2d::ui::Widget* vipbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("vipbtn");
 	vipbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onVipShop, this));
+
+	m_timegiftbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("timegiftbtn");
+	m_timegiftbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
+	m_timegiftbtn->setVisible(false);
+
+	m_tgiftlefttimelbl = (cocos2d::ui::Text*)m_timegiftbtn->getChildByName("lefttimelbl");
+
+	checkTimeGift(0);
+	this->schedule(schedule_selector(MapLayer::checkTimeGift), 1.0f);
 
 	m_vulture = (cocos2d::ui::Widget*)m_mapbg->getChildByName("m1-1")->getChildByName("vulture");
 	m_vulture->setVisible(false);
@@ -324,6 +334,16 @@ void MapLayer::onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventT
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		VipShopLayer* shopLayer = VipShopLayer::create();
 		g_gameLayer->addChild(shopLayer, 5);
+	}
+}
+
+void MapLayer::onTimeGift(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		TimeGiftLayer* giftLayer = TimeGiftLayer::create(TIMEGIFT);
+		g_gameLayer->addChild(giftLayer, 5, "gift");
 	}
 }
 
@@ -637,4 +657,22 @@ void MapLayer::vultureAnim()
 	m_vulture->runAction(RepeatForever::create(forward));
 	m_vulture->runAction(RepeatForever::create(action));
 	//m_vulture->runAction(Sequence::create(action, action->reverse(), NULL));
+}
+
+void MapLayer::checkTimeGift(float dt)
+{
+	int lefttime = GlobalData::getTimeGiftLeftTime();
+	if (lefttime > 0 && !GlobalData::getIsBuyTimeGift())
+	{
+		m_timegiftbtn->setVisible(true);
+		int hour = lefttime / 3600;
+		int min = lefttime % 3600 / 60;
+		int sec = lefttime % 3600 % 60;
+		std::string timestr = StringUtils::format("%02d:%02d:%02d", hour,min,sec);
+		m_tgiftlefttimelbl->setString(timestr);
+	}
+	else
+	{
+		m_timegiftbtn->setVisible(false);
+	}
 }

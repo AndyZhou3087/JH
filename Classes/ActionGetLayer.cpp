@@ -455,6 +455,22 @@ void ActionGetLayer::saveTempData()
 	{
 		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", allResData[i].strid.c_str(), allResData[i].type, allResData[i].count, allResData[i].extype, allResData[i].lv, allResData[i].exp, allResData[i].goodvalue, allResData[i].slv, allResData[i].tqu);
 		str.append(onestr);
+		int tmptype = allResData[i].type;
+		std::string tmpstrid = allResData[i].strid;
+		if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
+		{
+			bool isfind = false;
+			for (unsigned int n = 0; n < GlobalData::vec_tempGf_Equip.size(); n++)
+			{
+				if (GlobalData::vec_tempGf_Equip[n].compare(tmpstrid) == 0)
+				{
+					isfind = true;
+					break;
+				}
+			}
+			if (!isfind)
+				GlobalData::vec_tempGf_Equip.push_back(tmpstrid);
+		}
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));
 }

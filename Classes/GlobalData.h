@@ -615,6 +615,51 @@ public:
 	*****************************/
 	static bool isHasVulture();
 
+	/****************************
+	获取限时礼包剩余时间
+	*****************************/
+	static int getTimeGiftLeftTime();
+
+	/****************************
+	设置限时礼包剩余时间
+	*****************************/
+	static void setTimeGiftLeftTime(int val);
+
+	/****************************
+	设置是否买限时礼包
+	*****************************/
+	static void setIsBuyTimeGift(bool val);
+
+	/****************************
+	获取是否买限时礼包
+	*****************************/
+	static bool getIsBuyTimeGift();
+
+	/****************************
+	设置免费复活次数
+	*****************************/
+	static void setFreeReviveCount(int val);
+
+	/****************************
+	获取免费复活次数
+	*****************************/
+	static int getFreeReviveCount();
+
+	/****************************
+	设置用过金元宝的数量
+	*****************************/
+	static void setUseGold(int val);
+
+	/****************************
+	获取用过金元宝的数量
+	*****************************/
+	static int getUseGold();
+
+	/****************************
+	获取临时存放的功法武器
+	*****************************/
+	static void loadTempGF_EquipData();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -652,6 +697,8 @@ public:
 
 	static std::vector<std::string> vec_buyVipIds;
 
+	static std::vector<std::string> vec_tempGf_Equip;
+
 	static std::map<std::string, ChallengeRewardData> map_challengeReward;
 	static bool isPopingScene;
 
@@ -668,6 +715,9 @@ private:
     static bool hasBuy;
     static int adsinterval;
     static long adschoose;
+	static int timegiftlefttime;
+	static bool isBuyTimeGift;
+	static int freeReviveCount;
     static std::string addUidString(std::string val);
 };
 #endif

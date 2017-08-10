@@ -60,9 +60,9 @@ static int heroprice[] = { 0, 6, 12, 30 };
 
 static int buyprice[] = { 0, 6, 12, 30, 6, 12, 30, 68};
 
-static std::string payCode[] = { "", "wx010", "wx011", "wx013", "wx018", "wx019", "wx020", "wx021", "wx022", "wx023","wx024"};
-static int goldcount[] = {60, 140, 400, 1360};
-static int vipgoldcount[] = { 10, 30, 60 };
+static std::string payCode[] = { "", "wx010", "wx011", "wx013", "wx018", "wx019", "wx020", "wx021", "wx022", "wx023","wx024","wx025"};
+static int goldcount[] = {60, 140, 400, 1080};
+static int vipgoldcount[] = { 10, 20, 50 };
 static std::string tipswords[] = { "精神的愉悦可以让你的做任何事情都事半功倍", "重复性的工作只会让你的精神越来越抑郁", "饥饿会让你的战斗力直线下降，所以战斗前一定要吃饱饭！", "每个武林中人都有属于自己的独门武功，去打败他们获得武功吧！",
 "自身的强大才是真正的强大，武器只是让你强上加强的一种工具", "受伤严重时使用对应的药物即可恢复", "受伤严重时会影响你的武力发挥，并让你的生命状态降低", "闭关打坐的时间越长获得的经验值越高",
 "后山上有可供你活下去的各种资源，合理的利用可以让你的生活更好", "后山的狼和兔子是个练基本功的好对手", "不要尝试去挑战比你强的对手，后果会很严重！", "没有最强的武器，只有最强的人！",
@@ -75,4 +75,11 @@ static cocos2d::Color4B qucolor[] = { cocos2d::Color4B(76, 54, 51, 255), cocos2d
 static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"}; 
 
 static std::string dgqbinmap[] = { "m7-3", "m3-4", "m4-9", "m6-3", "m7-12", "m2-3", "m7-8", "m10-1", "m11-3" };
+
+typedef enum
+{
+	TIMEGIFT = sizeof(heroprice) / sizeof(heroprice[0]) + sizeof(goldcount) / sizeof(goldcount[0]) + sizeof(vipgoldcount) / sizeof(vipgoldcount[0]),
+	GIFTMAX
+
+}GIFTTYPE;
 #endif // _H_CONST_H_

@@ -239,6 +239,8 @@ void GameScene::loadSaveHeroData()
 	loadSavedHeroPropData();
 
 	getNpcRandMap();
+
+	GlobalData::loadTempGF_EquipData();
 }
 
 void GameScene::loadSavedHeroPropData()
@@ -324,6 +326,7 @@ void GameScene::saveAllData()
 
 void GameScene::updata(float dt)
 {
+	GlobalData::setTimeGiftLeftTime(GlobalData::getTimeGiftLeftTime() - 1);
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 
@@ -461,11 +464,12 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
-	GetVipRewardLayer* layer = GetVipRewardLayer::create();
-	if (g_gameLayer != NULL)
-		g_gameLayer->addChild(layer, 10);
-
-
+	if (GlobalData::vec_buyVipIds.size() > 0)
+	{
+		GetVipRewardLayer* layer = GetVipRewardLayer::create();
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(layer, 10);
+	}
 }
 
 void GameScene::onErr(int errcode)

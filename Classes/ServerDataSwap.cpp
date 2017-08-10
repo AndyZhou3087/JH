@@ -256,6 +256,16 @@ void ServerDataSwap::vipIsOn()
 	HttpUtil::getInstance()->doData(url, httpVipIsOnCB);
 }
 
+void ServerDataSwap::updateFreeReviveCount(int count)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_usefreelife?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url);
+}
+
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
 {
 	if (code == 0)
@@ -394,7 +404,8 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 				GameDataSave::getInstance()->setPlotMissionIndex(task);
 
 				std::string str;
-				for (unsigned int i = 0; i < GlobalData::vec_PlotMissionData.size(); i++)
+				int pdatasize = GlobalData::vec_PlotMissionData.size();
+				for (int i = 0; i < pdatasize; i++)
 				{
 					std::string tmpstr;
 					if (i < task)
@@ -410,7 +421,8 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 				GameDataSave::getInstance()->setBranchPlotMissionIndex(btask);
 
 				std::string bstr;
-				for (unsigned int i = 0; i < GlobalData::vec_BranchPlotMissionData.size(); i++)
+				int bpdatasize = GlobalData::vec_BranchPlotMissionData.size();
+				for (int i = 0; i < bpdatasize; i++)
 				{
 					std::string tmpstr;
 					if (i < btask)
@@ -728,11 +740,14 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				}
 			}
 
-			if (GlobalData::vec_buyVipIds.size() > 0)
-			{
-				if (m_pDelegateProtocol != NULL)
-					m_pDelegateProtocol->onSuccess();
-			}
+			rapidjson::Value& retval = doc["timegift"];
+			GlobalData::setTimeGiftLeftTime(retval.GetInt());
+
+			retval = doc["freelife"];
+			GlobalData::setFreeReviveCount(retval.GetInt());
+
+			if (m_pDelegateProtocol != NULL)
+				m_pDelegateProtocol->onSuccess();
 		}
 	}
 	else

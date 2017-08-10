@@ -40,13 +40,13 @@
                   <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9771" RightMargin="471.0229" TopMargin="994.6161" BottomMargin="316.3839" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
                     <Size X="57.0000" Y="85.0000" />
                     <Children>
-                      <AbstractNodeData Name="vulture" ActionTag="1263559421" Tag="76" IconVisible="False" LeftMargin="10.0000" RightMargin="7.0000" TopMargin="-45.0000" BottomMargin="90.0000" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="vulture" ActionTag="1263559421" Tag="76" IconVisible="False" LeftMargin="18.9826" RightMargin="-1.9826" TopMargin="-13.1359" BottomMargin="58.1359" ctype="SpriteObjectData">
                         <Size X="40.0000" Y="40.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                        <Position X="30.0000" Y="110.0000" />
+                        <Position X="38.9826" Y="78.1359" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
-                        <PrePosition X="0.5263" Y="1.2941" />
+                        <PrePosition X="0.6839" Y="0.9192" />
                         <PreSize X="0.7018" Y="0.4706" />
                         <FileData Type="MarkedSubImage" Path="ui/vulture1.png" Plist="uipacker.plist" />
                         <BlendFunc Src="1" Dst="771" />
@@ -749,7 +749,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" LeftMargin="0.0000" RightMargin="618.0000" TopMargin="427.0000" BottomMargin="747.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="72" Scale9Height="84" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" RightMargin="618.0000" TopMargin="427.0000" BottomMargin="747.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="72" Scale9Height="84" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="102.0000" Y="106.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="51.0000" Y="800.0000" />
@@ -762,6 +762,46 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="timegiftbtn" ActionTag="-993240752" Tag="78" IconVisible="False" LeftMargin="1.0009" RightMargin="604.9991" TopMargin="557.5891" BottomMargin="608.4109" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="84" Scale9Height="92" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="114.0000" Y="114.0000" />
+            <Children>
+              <AbstractNodeData Name="tgiftlefttimebox" ActionTag="-797934312" Tag="79" IconVisible="False" LeftMargin="2.0003" RightMargin="15.9997" TopMargin="99.7489" BottomMargin="-17.7489" ctype="SpriteObjectData">
+                <Size X="96.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.0003" Y="-1.7489" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4386" Y="-0.0153" />
+                <PreSize X="0.8421" Y="0.2807" />
+                <FileData Type="MarkedSubImage" Path="ui/tgiftlefttimebox.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="lefttimelbl" ActionTag="-2053231312" Tag="81" IconVisible="False" LeftMargin="8.5004" RightMargin="24.4996" TopMargin="107.0967" BottomMargin="-10.0967" FontSize="17" LabelText="992:50:60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="81.0000" Y="17.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="49.0004" Y="-1.5967" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4298" Y="-0.0140" />
+                <PreSize X="0.7105" Y="0.1491" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="58.0009" Y="665.4109" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0806" Y="0.5199" />
+            <PreSize X="0.1583" Y="0.0891" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

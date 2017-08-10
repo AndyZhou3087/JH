@@ -219,6 +219,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\StoryScene.cpp" />
     <ClCompile Include="..\Classes\SysSmallBox.cpp" />
     <ClCompile Include="..\Classes\TempStorageLayer.cpp" />
+    <ClCompile Include="..\Classes\TimeGiftLayer.cpp" />
     <ClCompile Include="..\Classes\TopBar.cpp" />
     <ClCompile Include="..\Classes\UIScroll.cpp" />
     <ClCompile Include="..\Classes\UnlockLayer.cpp" />
@@ -307,6 +308,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\StoryScene.h" />
     <ClInclude Include="..\Classes\SysSmallBox.h" />
     <ClInclude Include="..\Classes\TempStorageLayer.h" />
+    <ClInclude Include="..\Classes\TimeGiftLayer.h" />
     <ClInclude Include="..\Classes\TopBar.h" />
     <ClInclude Include="..\Classes\UIScroll.h" />
     <ClInclude Include="..\Classes\UnlockLayer.h" />

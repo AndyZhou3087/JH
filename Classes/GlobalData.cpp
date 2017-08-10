@@ -61,6 +61,14 @@ GameStatus GlobalData::g_gameStatus = GAMEOVER;
 int GlobalData::wxbmapos = 0;
 int GlobalData::dgqbmapos = 0;
 
+int GlobalData::timegiftlefttime = 0;
+
+bool GlobalData::isBuyTimeGift = false;
+
+int GlobalData::freeReviveCount = 0;
+
+std::vector<std::string> GlobalData::vec_tempGf_Equip;
+
 GlobalData::GlobalData()
 {
 
@@ -75,6 +83,7 @@ GlobalData::~GlobalData()
 void GlobalData::init()
 {
 	myGlodCount = GameDataSave::getInstance()->getGoldCount();
+	isBuyTimeGift = GameDataSave::getInstance()->getIsBuyTimeGift();
 }
 
 void GlobalData::loadBuildActionJSon()
@@ -1195,28 +1204,34 @@ void GlobalData::loadGfskillData()
 
 bool GlobalData::tempHasGf_Equip(std::string strid)
 {
-	std::map<std::string, MapData>::iterator it;
+	//std::map<std::string, MapData>::iterator it;
 
-	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	//for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	//{
+	//	std::string mapid = GlobalData::map_maps[it->first].strid;
+
+	//	std::string datastr = GameDataSave::getInstance()->getTempStorage(mapid);
+	//	if (datastr.length() > 0)
+	//	{
+	//		std::vector<std::string> vec_retstr;
+	//		CommonFuncs::split(datastr, vec_retstr, ";");
+	//		for (unsigned int i = 0; i < vec_retstr.size(); i++)
+	//		{
+	//			std::vector<std::string> tmp;
+	//			CommonFuncs::split(vec_retstr[i], tmp, "-");
+	//			std::string tmpstrid = tmp[0];
+	//			int tmptype = atoi(tmp[1].c_str());
+	//			if ((tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU) && strid.compare(tmpstrid) == 0)
+	//				return true;
+	//		}
+	//	}
+	//}
+	for (unsigned int i = 0; i < GlobalData::vec_tempGf_Equip.size(); i++)
 	{
-		std::string mapid = GlobalData::map_maps[it->first].strid;
-
-		std::string datastr = GameDataSave::getInstance()->getTempStorage(mapid);
-		if (datastr.length() > 0)
-		{
-			std::vector<std::string> vec_retstr;
-			CommonFuncs::split(datastr, vec_retstr, ";");
-			for (unsigned int i = 0; i < vec_retstr.size(); i++)
-			{
-				std::vector<std::string> tmp;
-				CommonFuncs::split(vec_retstr[i], tmp, "-");
-				std::string tmpstrid = tmp[0];
-				int tmptype = atoi(tmp[1].c_str());
-				if ((tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU) && strid.compare(tmpstrid) == 0)
-					return true;
-			}
-		}
+		if (GlobalData::vec_tempGf_Equip[i].compare(strid) == 0)
+			return true;
 	}
+
 	return false;
 }
 
@@ -1351,6 +1366,44 @@ void GlobalData::loadChallengeRewardData()
 	}
 }
 
+void GlobalData::loadTempGF_EquipData()
+{
+	vec_tempGf_Equip.clear();
+	std::map<std::string, MapData>::iterator it;
+
+	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
+	{
+		std::string mapid = GlobalData::map_maps[it->first].strid;
+
+		std::string datastr = GameDataSave::getInstance()->getTempStorage(mapid);
+		if (datastr.length() > 0)
+		{
+			std::vector<std::string> vec_retstr;
+			CommonFuncs::split(datastr, vec_retstr, ";");
+			for (unsigned int i = 0; i < vec_retstr.size(); i++)
+			{
+				std::vector<std::string> tmp;
+				CommonFuncs::split(vec_retstr[i], tmp, "-");
+				std::string tmpstrid = tmp[0];
+				int tmptype = atoi(tmp[1].c_str());
+				if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
+				{
+					bool isfind = false;
+					for (unsigned int n = 0; n < vec_tempGf_Equip.size(); n++)
+					{
+						if (vec_tempGf_Equip[n].compare(tmpstrid) == 0)
+						{
+							isfind = true;
+							break;
+						}
+					}
+					if (!isfind)
+						vec_tempGf_Equip.push_back(tmpstrid);
+				}
+			}
+		}
+	}
+}
 
 int GlobalData::getShareDay()
 {
@@ -1445,6 +1498,49 @@ std::string GlobalData::getMyNickName()
 void GlobalData::setMyNickName(std::string str)
 {
 	GameDataSave::getInstance()->setMyNickName(str);
+}
+
+int GlobalData::getTimeGiftLeftTime()
+{
+	return timegiftlefttime;
+}
+
+void GlobalData::setTimeGiftLeftTime(int val)
+{
+	timegiftlefttime = val;
+}
+
+
+void GlobalData::setIsBuyTimeGift(bool val)
+{
+	isBuyTimeGift = val;
+	GameDataSave::getInstance()->setIsBuyTimeGift(val);
+	
+}
+
+bool GlobalData::getIsBuyTimeGift()
+{
+	return isBuyTimeGift;
+}
+
+void GlobalData::setFreeReviveCount(int val)
+{
+	freeReviveCount = val;
+}
+
+int GlobalData::getFreeReviveCount()
+{
+	return freeReviveCount;
+}
+
+void GlobalData::setUseGold(int val)
+{
+	GameDataSave::getInstance()->setUseGold(val);
+}
+
+int GlobalData::getUseGold()
+{
+	return GameDataSave::getInstance()->getUseGold();
 }
 
 std::string GlobalData::addUidString(std::string val)

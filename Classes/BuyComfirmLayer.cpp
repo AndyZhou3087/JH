@@ -85,6 +85,8 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - m_gdata->price);
 			GoldGoodsItem::addBuyGoods(m_gdata);
+			int usegold = GlobalData::getUseGold() + m_gdata->price;
+			GlobalData::setUseGold(usegold);
 		}
 		else
 		{

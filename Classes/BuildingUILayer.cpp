@@ -228,6 +228,10 @@ void BuildingUILayer::loadActionUi()
 		{
 			if (g_hero->getGF_Equip(vec_buildAcitonData.at(i).icon) != NULL)
 				actbtn->setTitleText(CommonFuncs::gbk2utf("分解"));
+			else if (GlobalData::tempHasGf_Equip(vec_buildAcitonData.at(i).icon))
+			{
+				actbtn->setTitleText(CommonFuncs::gbk2utf("已有"));
+			}
 		}
 
 		vec_progresstext.push_back((cocos2d::ui::Text*)item->getChildByName("progresstext"));
@@ -367,6 +371,13 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 			else
 			{
 				m_build->setActionBarTime(ACTION_BAR_TIME);
+			}
+
+			if (node->getTitleText().compare(CommonFuncs::gbk2utf("已有")) == 0)
+			{
+				HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("其它地点临时存放点有此物品!"));
+				this->addChild(layer);
+				return;
 			}
 
 			if (node->getTitleText().compare(CommonFuncs::gbk2utf("分解")) == 0)

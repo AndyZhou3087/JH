@@ -144,7 +144,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			{
 				slv = hasdata->slv;
 			}
-			int satk = eatk * slv * 1.0f * 2 / 100.0f;
+			int satk = slv * (slv + eatk / 10);
 
 			if (satk > 0)
 			{
@@ -163,7 +163,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			{
 				slv = hasdata->slv;
 			}
-			int sdf = pdf * slv * 1.0f * 2 / 100.0f;
+			int sdf = slv * (slv + pdf / 10);
 			if (sdf > 0)
 			{
 				sstr = StringUtils::format("+%d", sdf);

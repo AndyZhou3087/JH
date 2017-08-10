@@ -516,3 +516,24 @@ void GameDataSave::setMyNickName(std::string str)
 {
 	saveStringDataByKey("nickname", str);
 }
+
+bool GameDataSave::getIsBuyTimeGift()
+{
+	int ret = loadIntDataByKey("buytimegift", 0);
+	return ret == 1 ? true : false;
+}
+
+void GameDataSave::setIsBuyTimeGift(bool val)
+{
+	saveIntDataByKey("buytimegift", val ? 1 : 0);
+}
+
+void GameDataSave::setUseGold(int val)
+{
+	saveIntDataByKey("usegold", val);
+}
+
+int GameDataSave::getUseGold()
+{
+	return loadIntDataByKey("usegold", 0);
+}

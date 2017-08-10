@@ -403,6 +403,10 @@
       <FilePathData Path="ui/vipbtn.png" />
       <FilePathData Path="ui/vipshoptitle.png" />
       <FilePathData Path="ui/viptitle.png" />
+      <FilePathData Path="ui/tgiftlefttimebox.png" />
+      <FilePathData Path="ui/timegiftbtn.png" />
+      <FilePathData Path="ui/timegiftpricebox.png" />
+      <FilePathData Path="ui/timegifttitle.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

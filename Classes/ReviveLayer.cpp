@@ -79,7 +79,6 @@ bool ReviveLayer::init()
 		revivetxtlbl->setPositionY(50);
 	}
 
-
 #ifdef UMENG_SHARE
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
@@ -87,7 +86,7 @@ bool ReviveLayer::init()
 	cocos2d::ui::Button* sharebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("sharebtn");
 	sharebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onShare, this));
 
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay())
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getReviveCount() > 0)
 	{
 		closebtn->setVisible(true);
 		cancelbtn->setVisible(false);
@@ -108,7 +107,7 @@ bool ReviveLayer::init()
 	cocos2d::ui::Button* freeRevivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("freerevivebtn");
 	freeRevivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onFreeRevive, this));
 
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay())
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getReviveCount() > 0)
 	{
 		closebtn->setVisible(true);
 		cancelbtn->setVisible(false);
@@ -189,6 +188,9 @@ void ReviveLayer::shareCallback(int platform, int stCode, string& errorMsg) {
 
 		reviveOk();
 		GlobalData::setShareDay(GlobalData::getDayOfYear());
+		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
+		ServerDataSwap::getInstance()->setDelegate(NULL);
+		ServerDataSwap::getInstance()->updateFreeReviveCount(GlobalData::getFreeReviveCount());
 	}
 	else if (stCode == -1) {
 		result = "分享取消";
@@ -222,7 +224,12 @@ void ReviveLayer::onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		reviveOk();
+
 		GlobalData::setShareDay(GlobalData::getDayOfYear());
+
+		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
+		ServerDataSwap::getInstance()->setDelegate(NULL);
+		ServerDataSwap::getInstance()->updateFreeReviveCount(GlobalData::getFreeReviveCount());
 	}
 }
 
@@ -245,6 +252,8 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 				if (++rcount > 6)
 					rcount = 6;
 				GlobalData::setReviveCount(rcount);
+				int usegold = GlobalData::getUseGold() + revivegold;
+				GlobalData::setUseGold(usegold);
 				reviveOk();
 			}
 			else

@@ -96,10 +96,12 @@ bool GetVipRewardLayer::init()
 
 		std::string resstr;
 		std::string strcount;
+		std::string namstr;
 		if (i == 0)
 		{
 			resstr = "ui/gd0.png";
 			strcount = StringUtils::format("x%d", rgoldcount);
+			namstr = CommonFuncs::gbk2utf("金元宝");
 		}
 		else
 		{
@@ -107,14 +109,23 @@ bool GetVipRewardLayer::init()
 			int intresid = atoi(resid.c_str());
 			resstr = StringUtils::format("ui/%d.png", intresid / 1000);
 			strcount = StringUtils::format("x%d", intresid % 1000);
+			std::string ridstr = StringUtils::format("%d", intresid / 1000);
+			namstr = GlobalData::map_allResource[ridstr].cname;
 		}
 		Sprite* res = Sprite::createWithSpriteFrameName(resstr);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().width / 2));
 		box->addChild(res);
-		Label * coutlbl = Label::createWithSystemFont(strcount, "", 38);
-		coutlbl->setColor(Color3B(0, 0, 0));
-		coutlbl->setPosition(Vec2(box->getPositionX(), 530));
+
+		Label * coutlbl = Label::createWithSystemFont(strcount, "", 25);
+		coutlbl->setAnchorPoint(Vec2(1, 0.5));
+		coutlbl->setColor(Color3B(255, 255, 255));
+		coutlbl->setPosition(Vec2(box->getPositionX() + box->getContentSize().width / 2 - 10, 580));
 		this->addChild(coutlbl);
+
+		Label * namelbl = Label::createWithTTF(namstr, "fonts/STXINGKA.TTF", 26);
+		namelbl->setColor(Color3B(0, 0, 0));
+		namelbl->setPosition(Vec2(box->getPositionX(), 530));
+		this->addChild(namelbl);
 	}
 
 	GlobalData::vec_buyVipIds.clear();

@@ -112,6 +112,11 @@ private:
 	void onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	点击限时礼包按钮回调
+	*****************************/
+	void onTimeGift(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();
@@ -126,6 +131,8 @@ private:
 	*****************************/
 	void finishMove(float dt);
 
+	void checkTimeGift(float dt);
+
 private:
 	float m_distance;//达到目的地的像素距离
 	Vec2 m_destPos;//目的地像素坐标
@@ -137,6 +144,8 @@ private:
 	Sprite* m_dmissionIcon[2];//接任务的图标
 	Vec2 m_heroPos;//角色头像位置
 	cocos2d::ui::ScrollView* m_mapscroll;//地图
+	cocos2d::ui::Text* m_tgiftlefttimelbl;
+	cocos2d::ui::Widget* m_timegiftbtn;
 	int m_startClickX;
 	int m_startClickY;
 	bool m_isDraging;

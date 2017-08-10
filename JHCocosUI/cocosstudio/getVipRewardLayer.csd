@@ -17,7 +17,7 @@
             <FileData Type="Normal" Path="images/vipbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="viptitle" ActionTag="738307879" Tag="88" IconVisible="False" LeftMargin="248.9998" RightMargin="249.0002" TopMargin="243.6171" BottomMargin="975.3829" ctype="SpriteObjectData">
+          <AbstractNodeData Name="viptitle" ActionTag="738307879" Tag="88" IconVisible="False" LeftMargin="248.9998" RightMargin="249.0002" TopMargin="243.6172" BottomMargin="975.3829" ctype="SpriteObjectData">
             <Size X="222.0000" Y="61.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="1005.8829" />

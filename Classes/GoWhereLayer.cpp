@@ -136,6 +136,9 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 		desc->setString(CommonFuncs::gbk2utf("发现悬崖下面紫光闪耀，好像藏着什么好东西，你想下去一探究竟，少侠还请三思，崖下白骨露野，跳下去多半会一命呜呼！"));
 		std::string str = StringUtils::format("images/%s.jpg", "t008");
 		typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+#ifdef ANALYTICS
+		AnalyticUtil::onEvent("showjump");
+#endif
 	}
 	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();

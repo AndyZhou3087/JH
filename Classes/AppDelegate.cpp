@@ -140,6 +140,7 @@ void AppDelegate::applicationDidEnterBackground() {
 	if (g_gameLayer != NULL)
 		g_gameLayer->saveAllData();
 
+	ServerDataSwap::getInstance()->setDelegate(NULL);
 	ServerDataSwap::getInstance()->postOneData(GlobalData::getUId());
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
@@ -153,6 +154,11 @@ void AppDelegate::applicationWillEnterForeground() {
 #else
 	SoundManager::getInstance()->resumeBackMusic();
 #endif
+	if (g_gameLayer != NULL)
+	{
+		ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
+		ServerDataSwap::getInstance()->vipIsOn();
+	}
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

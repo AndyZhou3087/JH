@@ -193,7 +193,7 @@ void ShopLayer::setMessage(PYARET ret)
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 #ifdef ANALYTICS
 			std::string name[] = { "b6", "b12", "b30", "b68"};
-			AnalyticUtil::onEvent(name[payindex - 4].c_str());
+			AnalyticUtil::onEvent(name[payindex - herocount].c_str());
 #endif
 		}
 		else if (payindex < herocount + golditemcount + vipcount)//买VIP
@@ -205,6 +205,25 @@ void ShopLayer::setMessage(PYARET ret)
 			GetVipRewardLayer* layer = GetVipRewardLayer::create();
 			if(g_gameLayer != NULL)
 				g_gameLayer->addChild(layer, 10);
+
+#ifdef ANALYTICS
+			std::string name[] = { "byk6", "byk30", "byk68"};
+			AnalyticUtil::onEvent(name[payindex - herocount - golditemcount].c_str());
+#endif
+		}
+		else if (payindex == TIMEGIFT)
+		{
+			if (g_gameLayer != NULL)
+			{
+				g_gameLayer->removeChildByName("gift");
+			}
+			GlobalData::setIsBuyTimeGift(true);
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + 100);
+			GoldGoodsItem::addBuyGoods(&GlobalData::vec_goods[payindex - herocount]);
+
+#ifdef ANALYTICS
+			AnalyticUtil::onEvent("timegift");
+#endif
 		}
 #ifdef ANALYTICS
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);

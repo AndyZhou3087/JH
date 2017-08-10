@@ -21,6 +21,7 @@ public:
 	void modifyNickName(std::string nickname);
 	void vipSuccNotice(std::string gid);
 	void vipIsOn();
+	void updateFreeReviveCount(int count);
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
 private:
 	static ServerDataSwap* _serverDataSwap;
