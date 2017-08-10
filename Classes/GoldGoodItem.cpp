@@ -158,7 +158,10 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 							updateDefaultStorage(pdata, g_hero->getHeadID());
 
 						if (rint == 83)
-							g_maplayer->vultureAnim();
+                        {
+                            if (g_maplayer != NULL)
+                                g_maplayer->vultureAnim();
+                        }
 
 						StorageRoom::add(pdata);
 						break;
