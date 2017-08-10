@@ -7,6 +7,7 @@
 #include "StorageRoom.h"
 #include "GameScene.h"
 #include "GameDataSave.h"
+#include "AnalyticUtil.h"
 
 ActivitScene::ActivitScene()
 {
