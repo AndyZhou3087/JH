@@ -13,6 +13,7 @@
 #include "NewerGuideLayer.h"
 #include "ActivitScene.h"
 #include "SepcialNpcLayer.h"
+#include "AnalyticUtil.h"
 
 GoWhereLayer::GoWhereLayer()
 {
