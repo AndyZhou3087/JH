@@ -41,13 +41,60 @@ bool VipGoodsItem::init(GoodsData* gdata)
 	icon->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 
 	nameTxt->setString(gdata->name);
-	descTxt->setString(gdata->desc);
+	//descTxt->setString(gdata->desc);
 	std::string pricestr = StringUtils::format("%d元", gdata->price);
 	priceTxt->setString(CommonFuncs::gbk2utf(pricestr.c_str()));
 
 	cocos2d::ui::Button* bgbtn = (cocos2d::ui::Button*)csbnode->getChildByName("itembg");//整块节点击
 	bgbtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onItem, this));
 	bgbtn->setSwallowTouches(false);
+
+	int golditemcount = sizeof(goldcount) / sizeof(goldcount[0]);
+	int index = 0;
+	for (unsigned int i = 0; i < GlobalData::vec_goods.size(); i++)
+	{
+		if (GlobalData::vec_goods[i].icon.compare(m_goodData->icon) == 0)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	int rgoldcount = vipgoldcount[index - golditemcount];
+
+	std::vector<std::string> vec_rewardres = m_goodData->vec_res;
+
+	int startx = -100;
+	int spacex = 68;
+	int starty = 58;
+
+	int ressize = vec_rewardres.size() + 1;
+	for (int i = 0; i < ressize; i++)
+	{
+		std::string resstr;
+		std::string strcount;
+		if (i == 0)
+		{
+			resstr = "ui/gd0.png";
+			strcount = StringUtils::format("x%d", rgoldcount);
+		}
+		else
+		{
+			std::string resid = vec_rewardres[i - 1];
+			int intresid = atoi(resid.c_str());
+			resstr = StringUtils::format("ui/%d.png", intresid / 1000);
+			strcount = StringUtils::format("x%d", intresid % 1000);
+		}
+		Sprite* res = Sprite::createWithSpriteFrameName(resstr);
+		res->setScale(0.6f);
+		res->setPosition(Vec2(startx + i*spacex, starty));
+		this->addChild(res);
+
+		Label * coutlbl = Label::createWithSystemFont(strcount, "", 21);
+		coutlbl->setColor(Color3B(0, 0, 0));
+		coutlbl->setPosition(Vec2(res->getPositionX(), 20));
+		this->addChild(coutlbl);
+	}
 
 	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)csbnode->getChildByName("buybtn");
 	buybtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onBuyBtn, this));

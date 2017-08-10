@@ -349,12 +349,14 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 				rapidjson::Value& v = item["localid"];
 				std::string localuid = v.GetString();
-				vec_saveid[m] = localuid;
+
 				GameDataSave::getInstance()->setUserId(localuid);
 
 				v = item["type"];
 				int type = atoi(v.GetString());
 				GameDataSave::getInstance()->setHeroId(type);
+
+				vec_saveid[type-1] = localuid;
 
 				v = item["exp"];
 				int exp = atoi(v.GetString());

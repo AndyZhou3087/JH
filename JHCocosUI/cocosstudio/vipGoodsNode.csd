@@ -53,14 +53,14 @@
                 <PreSize X="0.1651" Y="0.5248" />
                 <FileData Type="MarkedSubImage" Path="ui/vip1.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc" ActionTag="437115070" Tag="134" IconVisible="False" LeftMargin="150.1028" RightMargin="181.8972" TopMargin="64.1516" BottomMargin="37.8484" IsCustomSize="True" FontSize="25" LabelText="享受30天每日20元宝，肉汤、酒各一个福利" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="310.0000" Y="100.0000" />
+              <AbstractNodeData Name="desc" ActionTag="437115070" Tag="134" IconVisible="False" LeftMargin="141.0096" RightMargin="100.9904" TopMargin="150.4225" BottomMargin="26.5775" IsCustomSize="True" FontSize="23" LabelText="购买后每日登录即可领取，持续30天" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="400.0000" Y="25.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="150.1028" Y="87.8484" />
+                <Position X="141.0096" Y="39.0775" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.2338" Y="0.4349" />
-                <PreSize X="0.4829" Y="0.4950" />
+                <PrePosition X="0.2196" Y="0.1935" />
+                <PreSize X="0.6231" Y="0.1238" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
