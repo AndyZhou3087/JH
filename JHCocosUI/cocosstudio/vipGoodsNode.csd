@@ -74,10 +74,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/saveitembg.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="buybtn" ActionTag="1104593421" Tag="127" IconVisible="False" LeftMargin="153.3657" RightMargin="-303.3657" TopMargin="-55.0002" BottomMargin="-34.9998" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="buybtn" ActionTag="1104593421" Tag="127" IconVisible="False" LeftMargin="153.3657" RightMargin="-303.3657" TopMargin="-55.0000" BottomMargin="-35.0000" TouchEnable="True" FontSize="40" ButtonText="购买" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="228.3657" Y="10.0002" />
+            <Position X="228.3657" Y="10.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
