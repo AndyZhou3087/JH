@@ -341,8 +341,8 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 			rapidjson::Value& dataArray = doc["data"];
 
-			if (!doc.HasMember("data"))
-				return;
+			if (doc.HasMember("data"))
+            {
 			for (unsigned int m = 0; m < dataArray.Size(); m++)
 			{
 				rapidjson::Value& item = dataArray[m];
@@ -539,6 +539,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 				}
 
 			}
+            }
 
 			GlobalData::setSaveListId(vec_saveid);
 			if (vec_saveid.size() > 0)
@@ -548,7 +549,6 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 			{
 				m_pDelegateProtocol->onSuccess();
 			}
-			return;
 		}
 	}
 
