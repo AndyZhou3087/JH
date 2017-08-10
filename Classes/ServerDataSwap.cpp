@@ -339,10 +339,9 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 				GlobalData::setUnlockHero(k, val == 1 ? true : false);
 			}
 
-			rapidjson::Value& dataArray = doc["data"];
-
 			if (doc.HasMember("data"))
             {
+				rapidjson::Value& dataArray = doc["data"];
 				for (unsigned int m = 0; m < dataArray.Size(); m++)
 				{
 					rapidjson::Value& item = dataArray[m];
