@@ -85,8 +85,9 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 
 	writedoc.AddMember("hunlock", herounlock, allocator);
 	int coin = GameDataSave::getInstance()->getGoldCount();
+	int usecoin = GameDataSave::getInstance()->getUseGold();
 	writedoc.AddMember("coin", coin, allocator);
-
+	writedoc.AddMember("costcoin", usecoin, allocator);
 	GameDataSave::getInstance()->setUserId(userid);
 
 	int type = GameDataSave::getInstance()->getHeroId();
@@ -322,6 +323,11 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 			{
 				rapidjson::Value& coindata = doc["coin"];
 				GameDataSave::getInstance()->setGoldCount(atoi(coindata.GetString()));
+			}
+			if (doc.HasMember("costcoin"))
+			{
+				rapidjson::Value& coindata = doc["costcoin"];
+				GameDataSave::getInstance()->setUseGold(atoi(coindata.GetString()));
 			}
 			rapidjson::Value& hunlockdata = doc["hunlock"];
 			int hunlock = atoi(hunlockdata.GetString());
@@ -740,11 +746,17 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				}
 			}
 
-			rapidjson::Value& retval = doc["timegift"];
-			GlobalData::setTimeGiftLeftTime(retval.GetInt());
+			if (doc.HasMember("timegift"))
+			{
+				rapidjson::Value& retval = doc["timegift"];
+				GlobalData::setTimeGiftLeftTime(retval.GetInt());
+			}
 
-			retval = doc["freelife"];
-			GlobalData::setFreeReviveCount(retval.GetInt());
+			if (doc.HasMember("freelife"))
+			{
+				rapidjson::Value& retval = doc["freelife"];
+				GlobalData::setFreeReviveCount(retval.GetInt());
+			}
 
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();

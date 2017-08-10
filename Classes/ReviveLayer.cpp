@@ -245,7 +245,7 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		else
 		{
 			int rcount = GlobalData::getReviveCount();
-			int revivegold = revivecount * 20;
+			int revivegold = rcount * 20;
 			if (GlobalData::getMyGoldCount() >= revivegold)
 			{
 				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - revivegold);
