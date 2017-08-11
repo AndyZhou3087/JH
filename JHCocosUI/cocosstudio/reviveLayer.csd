@@ -29,7 +29,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="revivecountlbl" ActionTag="-1345363941" Tag="133" IconVisible="False" LeftMargin="411.5341" RightMargin="176.4659" TopMargin="718.9896" BottomMargin="530.0104" FontSize="28" LabelText="复活药水x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="revivecountlbl" ActionTag="-1345363941" Tag="133" IconVisible="False" LeftMargin="411.5399" RightMargin="176.4601" TopMargin="718.9906" BottomMargin="530.0094" FontSize="28" LabelText="复活药水x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="132.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5797" ScaleY="0.5231" />
             <Position X="488.0603" Y="546.2255" />
@@ -125,14 +125,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sharetext" ActionTag="-969405136" VisibleForFrame="False" Tag="172" IconVisible="False" LeftMargin="171.4998" RightMargin="171.5002" TopMargin="837.3569" BottomMargin="414.6431" FontSize="26" LabelText="（分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="377.0000" Y="28.0000" />
+          <AbstractNodeData Name="sharetext" ActionTag="-969405136" VisibleForFrame="False" Tag="172" IconVisible="False" LeftMargin="145.4998" RightMargin="145.5002" TopMargin="837.3569" BottomMargin="414.6431" FontSize="26" LabelText="（每日分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="429.0000" Y="28.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="428.6431" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.3349" />
-            <PreSize X="0.5236" Y="0.0219" />
+            <PreSize X="0.5958" Y="0.0219" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
