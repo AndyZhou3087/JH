@@ -64,7 +64,7 @@ bool SettingLayer::init()
 	editName->setPosition(Point(225, 875));
 	editName->setAnchorPoint(Vec2(0, 0.5));
 	editName->setFontColor(Color3B::BLACK);
-	editName->setPlaceHolder("请输入昵称:");
+	editName->setPlaceHolder(CommonFuncs::gbk2utf("请输入昵称:").c_str());
 	editName->setPlaceholderFontSize(30);
 	editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
 	editName->setPlaceholderFontColor(Color3B::WHITE);
