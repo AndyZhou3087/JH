@@ -96,32 +96,41 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 			image->loadTexture("images/jumphurt.jpg", cocos2d::ui::TextureResType::LOCAL);
 			m_text->setString(CommonFuncs::gbk2utf("跳崖摔伤"));
 			float val = g_hero->getInnerinjuryValue();
-			if (val < 30)
+			int herolv = g_hero->getLVValue();
+			int lossval = 0;
+			if (herolv < 50)
+				lossval = 80;
+			else if (herolv < 80)
+				lossval = 50;
+			else
+				lossval = 30;
+
+			if (val < lossval)
 				g_hero->setInnerinjuryValue(0);
 			else
-				g_hero->setInnerinjuryValue(val - 30);
+				g_hero->setInnerinjuryValue(val - lossval);
 
 			val = g_hero->getOutinjuryValue();
 
-			if (val < 30)
+			if (val < lossval)
 				g_hero->setOutinjuryValue(0);
 			else
-				g_hero->setOutinjuryValue(val - 30);
+				g_hero->setOutinjuryValue(val - lossval);
 
 			val = g_hero->getSpiritValue();
 
-			if (val < 30)
+			if (val < lossval)
 				g_hero->setSpiritValue(0);
 			else
-				g_hero->setSpiritValue(val - 30);
+				g_hero->setSpiritValue(val - lossval);
 
 			val = g_hero->getHungerValue();
-			if (val < 30)
+			if (val < lossval)
 				g_hero->setHungerValue(0);
 			else
-				g_hero->setHungerValue(val - 30);
+				g_hero->setHungerValue(val - lossval);
 
-			g_hero->setLifeValue(g_hero->getLifeValue() * 0.7f);
+			g_hero->setLifeValue(g_hero->getLifeValue() * lossval/100.0f);
 			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！受伤严重！！！"));
 			distime = 4.0f;
 #ifdef ANALYTICS
