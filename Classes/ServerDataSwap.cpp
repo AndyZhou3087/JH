@@ -199,7 +199,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	url.append(HTTPURL);
 	url.append("wx_savealldata");
 	std::string tagstr = StringUtils::format("%d", tag);
-	HttpUtil::getInstance()->doData(url, httpPostOneDataCB, "", POST, postdata, tagstr);
+    HttpUtil::getInstance()->doData(url, httpPostOneDataCB, "", POST, postdata, tagstr);
 }
 
 void ServerDataSwap::getAllData()
