@@ -183,13 +183,7 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-<<<<<<< HEAD
-	//GlobalData::setMyNickName(editBox->getText());
-	editnamestring = editBox->getText();
-    
-=======
 	GlobalData::setMyNickName(editBox->getText());
->>>>>>> 6b036208d3b3f9b78edb20fe3f1d85f9923b3079
 	ServerDataSwap::getInstance()->setDelegate(this);
 	ServerDataSwap::getInstance()->modifyNickName(editBox->getText());
 }
@@ -224,11 +218,7 @@ void SettingLayer::onErr(int errcode)
 		hintbox = HintBox::create(CommonFuncs::gbk2utf("网络异常，修改失败！"));
 	}
 	this->addChild(hintbox);
-<<<<<<< HEAD
 
-}
-=======
 	GlobalData::setMyNickName(mynamestr);
 	m_editName->setText(mynamestr.c_str());
 }
->>>>>>> 6b036208d3b3f9b78edb20fe3f1d85f9923b3079
