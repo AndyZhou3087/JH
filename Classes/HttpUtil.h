@@ -1,4 +1,4 @@
-#ifndef __HTTPUTIL_H__
+ï»¿#ifndef __HTTPUTIL_H__
 #define __HTTPUTIL_H__
 #include "cocos2d.h"
 #include "extensions/cocos-ext.h"
@@ -17,7 +17,7 @@ class HttpUtil: public Ref
 {
 public:
 	static HttpUtil* getInstance();
-	void doData(std::string url, HTTPCOMPLETE_CALLBACK http_cb = NULL, std::string filename = ""/*Êı¾İĞ´ÈëÎÄ¼ş£¬²»ĞèÒªĞ´ÎÄ¼ş´«""*/, HTTPTYPE method = GET, std::string postdata = "", std::string tag = "");
+	void doData(std::string url, HTTPCOMPLETE_CALLBACK http_cb = NULL, std::string filename = ""/*æ•°æ®å†™å…¥æ–‡ä»¶ï¼Œä¸éœ€è¦å†™æ–‡ä»¶ä¼ ""*/, HTTPTYPE method = GET, std::string postdata = "", std::string tag = "");
 private:
 
 	HTTPCOMPLETE_CALLBACK m_httpcallback;

@@ -1,4 +1,4 @@
-#include "HttpUtil.h"
+ï»¿#include "HttpUtil.h"
 
 HttpUtil::HttpUtil()
 {
@@ -47,7 +47,7 @@ void HttpUtil::onHttpRequestCompleted(cocos2d::network::HttpClient *sender, coco
 	std::string retdata;
 	int retcode = 0;
 	HttpResponse* response = (HttpResponse*)resp;
-	//    ÅÐ¶ÏÊÇ·ñÏìÓ¦³É¹¦
+	//    åˆ¤æ–­æ˜¯å¦å“åº”æˆåŠŸ
 	if (!response->isSucceed())
 	{
 		retcode = -1;
@@ -71,13 +71,13 @@ void HttpUtil::onHttpRequestCompleted(cocos2d::network::HttpClient *sender, coco
 			retdata += '\0';
 		}
 
-		// Êý¾Ý×ª´æÎÄ¼þ
+		// æ•°æ®è½¬å­˜æ–‡ä»¶
 		if (m_filename.length() > 0 && buffer != NULL)
 		{
 			std::string path = FileUtils::getInstance()->getWritablePath() + m_filename;
 			std::string data(buffer->begin(), buffer->end());
 
-			//±£´æµ½±¾µØÎÄ¼þ
+			//ä¿å­˜åˆ°æœ¬åœ°æ–‡ä»¶
 			//log("path: %s", path.c_str());
 			FILE *fp = fopen(path.c_str(), "wb+");
 			fwrite(data.c_str(), 1, buffer->size(), fp);
