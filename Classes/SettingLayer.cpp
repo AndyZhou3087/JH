@@ -60,20 +60,21 @@ bool SettingLayer::init()
 	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
 	name->setVisible(false);
 
-	cocos2d::ui::EditBox* editName = cocos2d::ui::EditBox::create(Size(380, 44), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
-	editName->setPosition(Point(225, 875));
-	editName->setAnchorPoint(Vec2(0, 0.5));
-	editName->setFontColor(Color3B::BLACK);
-	editName->setPlaceHolder(CommonFuncs::gbk2utf("请输入昵称:").c_str());
-	editName->setPlaceholderFontSize(30);
-	editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
-	editName->setPlaceholderFontColor(Color3B::WHITE);
-	editName->setMaxLength(12);
-	editName->setText(GlobalData::getMyNickName().c_str());
+	m_editName = cocos2d::ui::EditBox::create(Size(380, 44), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
+	m_editName->setPosition(Point(225, 875));
+	m_editName->setAnchorPoint(Vec2(0, 0.5));
+	m_editName->setFontColor(Color3B::BLACK);
+	m_editName->setPlaceHolder(CommonFuncs::gbk2utf("请输入昵称:").c_str());
+	m_editName->setPlaceholderFontSize(30);
+	m_editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
+	m_editName->setPlaceholderFontColor(Color3B::WHITE);
+	m_editName->setMaxLength(12);
+	m_editName->setText(GlobalData::getMyNickName().c_str());
 	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);
-	editName->setDelegate(this);
-	csbnode->addChild(editName);
+	m_editName->setDelegate(this);
+	csbnode->addChild(m_editName);
 
+	mynamestr = GlobalData::getMyNickName();
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -182,8 +183,7 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-	//GlobalData::setMyNickName(editBox->getText());
-	editnamestring = editBox->getText();
+	GlobalData::setMyNickName(editBox->getText());
 	ServerDataSwap::getInstance()->setDelegate(this);
 	ServerDataSwap::getInstance()->modifyNickName(editBox->getText());
 }
@@ -199,7 +199,7 @@ void SettingLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
 
 void SettingLayer::onSuccess()
 {
-	GlobalData::setMyNickName(editnamestring);
+	
 }
 
 void SettingLayer::onErr(int errcode)
@@ -218,5 +218,6 @@ void SettingLayer::onErr(int errcode)
 		hintbox = HintBox::create(CommonFuncs::gbk2utf("网络异常，修改失败！"));
 	}
 	this->addChild(hintbox);
-
+	GlobalData::setMyNickName(mynamestr);
+	m_editName->setText(mynamestr.c_str());
 }

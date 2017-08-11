@@ -65,16 +65,12 @@ int CommonFuncs::code_convert(const char *from_charset, const char *to_charset, 
 	if (cd == 0) return -1;
 	if (iconv(cd, pin, &inlen, pout, &outlen) == -1) return -1;
 	iconv_close(cd);
-
-	/*
-	#else
+#else
 	if (iconv(cd, &inbuf, &inlen, &outbuf, &outlen) == -1)
 	{
 		iconv_close(cd);
 		return  - 1;
 	}
-	*/
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	
 #endif
 	return 0;
