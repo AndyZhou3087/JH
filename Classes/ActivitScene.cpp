@@ -56,7 +56,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
 
-	float distime = 4.0f;
+	float distime = 3.5f;
 	if (imagepath.compare("images/cday.jpg") == 0 && content.compare(CommonFuncs::gbk2utf("今夜很平静，新的一天开始...")) == 0)
 	{
 		Sprite* night = Sprite::create("images/cdaynight.png");
@@ -79,12 +79,12 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		if (!GlobalData::isHasVulture())
 		{
 			this->scheduleOnce(schedule_selector(ActivitScene::checkstoleData), 0.1f);
-			distime = 4.0f;
+			distime = 3.5f;
 		}
 		else
 		{
 			m_text->setString(CommonFuncs::gbk2utf("盗贼前来偷窃，被看门雕及时发现，避免了不必要的损失！"));
-			distime = 4.0f;
+			distime = 3.5f;
 		}
 
 	}
@@ -132,7 +132,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 
 			g_hero->setLifeValue(g_hero->getLifeValue() * lossval/100.0f);
 			tips->setString(CommonFuncs::gbk2utf("没想到这个悬崖这么高！！！受伤严重！！！"));
-			distime = 4.0f;
+			distime = 3.0f;
 #ifdef ANALYTICS
 			AnalyticUtil::onEvent("jumphurt");
 #endif
@@ -145,7 +145,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 				image->loadTexture("images/jumpnothing.jpg", cocos2d::ui::TextureResType::LOCAL);
 				m_text->setString(CommonFuncs::gbk2utf("一无所获"));
 				tips->setString(CommonFuncs::gbk2utf("这次白跳了，什么都没有，发光的只不过时一个破石头在反光。"));
-				distime = 4.0f;
+				distime = 3.0f;
 #ifdef ANALYTICS
 				AnalyticUtil::onEvent("jumpnoting");
 #endif
