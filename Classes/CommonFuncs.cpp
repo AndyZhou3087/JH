@@ -55,22 +55,26 @@ std::string CommonFuncs::replace_all(std::string & s, std::string const & t, std
 
 int CommonFuncs::code_convert(const char *from_charset, const char *to_charset, const char *inbuf, size_t inlen, char *outbuf, size_t outlen)
 {
+
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	iconv_t cd;
 	const char *temp = inbuf;
 	const char **pin = &temp;
 	char **pout = &outbuf;
 	memset(outbuf, 0, outlen);
-	cd = iconv_open(to_charset, from_charset);
+    cd = iconv_open(to_charset, from_charset);
 	if (cd == 0) return -1;
 	if (iconv(cd, pin, &inlen, pout, &outlen) == -1) return -1;
 	iconv_close(cd);
 #else
-	if (iconv(cd, &inbuf, &inlen, &outbuf, &outlen) == -1)
-	{
-		iconv_close(cd);
-		return  - 1;
-	}
+//    iconv_t cd;
+//    cd = iconv_open(to_charset, from_charset);
+//	if (iconv(cd, &inbuf, &inlen, &outbuf, &outlen) == -1)
+//	{
+//		iconv_close(cd);
+//		return  - 1;
+//	}
 	
 #endif
 	return 0;

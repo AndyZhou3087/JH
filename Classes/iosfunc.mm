@@ -150,3 +150,10 @@ const char * getDeviceIDInKeychain()
     return [uuid UTF8String];
 }
 
+const char* gbkToUTF8(const char * p) {
+    //把char*转换成OC的NSString
+    NSString *nsstr = [[NSString alloc] initWithCString:p encoding:NSUTF8StringEncoding];
+    NSString *utf8str = [nsstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [utf8str UTF8String];
+}
+

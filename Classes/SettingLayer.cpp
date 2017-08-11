@@ -5,9 +5,11 @@
 #include "GameDataSave.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
+#include "iosfunc.h"
 #endif
 #include "HintBox.h"
 #include "CommonFuncs.h"
+#include "WaitingProgress.h"
 
 SettingLayer::SettingLayer()
 {
@@ -55,8 +57,10 @@ bool SettingLayer::init()
 	cocos2d::ui::Text* idlbl = (cocos2d::ui::Text*)csbnode->getChildByName("id");
 	idlbl->setString(GlobalData::getMyID());
 
+    mynamestr = GlobalData::getMyNickName();
+    
 	cocos2d::ui::TextField* name = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
-	name->setString(GlobalData::getMyNickName());
+	name->setString(mynamestr);
 	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
 	name->setVisible(false);
 
@@ -69,12 +73,12 @@ bool SettingLayer::init()
 	m_editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
 	m_editName->setPlaceholderFontColor(Color3B::WHITE);
 	m_editName->setMaxLength(12);
-	m_editName->setText(GlobalData::getMyNickName().c_str());
+	m_editName->setText(mynamestr.c_str());
 	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);
 	m_editName->setDelegate(this);
 	csbnode->addChild(m_editName);
 
-	mynamestr = GlobalData::getMyNickName();
+
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -183,9 +187,17 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-	GlobalData::setMyNickName(editBox->getText());
+    editboxstr = editBox->getText();
+    std::string utf8str = editboxstr;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    utf8str = gbkToUTF8(editboxstr.c_str());
+#endif
+    
+    WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+    Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+    
 	ServerDataSwap::getInstance()->setDelegate(this);
-	ServerDataSwap::getInstance()->modifyNickName(editBox->getText());
+    ServerDataSwap::getInstance()->modifyNickName(utf8str);
 }
 
 void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
@@ -199,11 +211,14 @@ void SettingLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
 
 void SettingLayer::onSuccess()
 {
-	
+
+    GlobalData::setMyNickName(editboxstr);
+    Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }
 
 void SettingLayer::onErr(int errcode)
 {
+    Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	HintBox* hintbox;
 	if (errcode == 2)
 	{
@@ -219,6 +234,6 @@ void SettingLayer::onErr(int errcode)
 	}
 	this->addChild(hintbox);
 
-	GlobalData::setMyNickName(mynamestr);
 	m_editName->setText(mynamestr.c_str());
+
 }

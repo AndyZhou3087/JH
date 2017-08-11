@@ -15,3 +15,4 @@ void alterView();
 void makeNotification();
 void UMShare();
 const char * getDeviceIDInKeychain();
+const char* gbkToUTF8(const char * p);

@@ -61,6 +61,7 @@ private:
 	cocos2d::ui::EditBox* m_editName;
 	int clicktitlecount;
 	std::string mynamestr;
+    std::string editboxstr;
 };
 #endif
 

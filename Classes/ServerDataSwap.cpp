@@ -720,6 +720,14 @@ void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::st
 					m_pDelegateProtocol->onErr(ret);
 			}
 		}
+        else
+        {
+            if (m_pDelegateProtocol != NULL)
+            {
+                m_pDelegateProtocol->onErr(-1);
+            }
+        }
+        
 	}
 	else
 	{
