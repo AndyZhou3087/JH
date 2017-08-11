@@ -58,8 +58,9 @@ private:
 private:
 	cocos2d::ui::CheckBox* m_soundCheckBox;//checkbox控件
 	cocos2d::ui::Text* m_soundOnOffText;//点击checkbox的文件说明控件 “开”,“关”
+	cocos2d::ui::EditBox* m_editName;
 	int clicktitlecount;
-	std::string editnamestring;
+	std::string mynamestr;
 };
 #endif
 
