@@ -388,7 +388,7 @@ public:
 	/****************************
 	解析剧情ID
 	*****************************/
-	static void loadPlotMissionJsonData();
+	static void loadPlotMissionJsonData(int herotype);
 
 	/****************************
 	保存剧情状态

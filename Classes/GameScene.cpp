@@ -93,6 +93,12 @@ bool GameScene::init()
 
 	loadSaveHeroData();
 
+	//读取剧情配置文件
+	GlobalData::loadPlotMissionJsonData(g_hero->getHeadID());
+
+	//读取支线剧情配置文件
+	GlobalData::loadBranchPlotMissionJsonData();
+
 	//角色目前在哪个地点，第一次进入家
 	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
 	if (addrstr.compare("m1-1") == 0)//家
@@ -448,7 +454,7 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 	{
 		m_newerStep = step;
 		m_newerNode = nodes;
-		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide), 0.1f);
+		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide),0.05f);
 	}
 }
 

@@ -414,6 +414,8 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 					int task = atoi(v.GetString());
 					GameDataSave::getInstance()->setPlotMissionIndex(task);
 
+					GlobalData::loadPlotMissionJsonData(type);
+
 					std::string str;
 					int pdatasize = GlobalData::vec_PlotMissionData.size();
 					for (int i = 0; i < pdatasize; i++)
@@ -430,6 +432,8 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 					v = item["btask"];
 					int btask = atoi(v.GetString());
 					GameDataSave::getInstance()->setBranchPlotMissionIndex(btask);
+
+					GlobalData::loadBranchPlotMissionJsonData();
 
 					std::string bstr;
 					int bpdatasize = GlobalData::vec_BranchPlotMissionData.size();

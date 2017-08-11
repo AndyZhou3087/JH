@@ -773,11 +773,10 @@ int GlobalData::getBranchPlotMissionIndex()
 	return plotindex;
 }
 
-void GlobalData::loadPlotMissionJsonData()
+void GlobalData::loadPlotMissionJsonData(int herotype)
 {
 	vec_PlotMissionData.clear();
-	int heroindex = GameDataSave::getInstance()->getHeroId();
-	std::string plotfilename = StringUtils::format("data/plotmission%d.json", heroindex);
+	std::string plotfilename = StringUtils::format("data/plotmission%d.json", herotype);
 
 	rapidjson::Document doc = ReadJsonFile(plotfilename);
 	rapidjson::Value& values = doc["m"];

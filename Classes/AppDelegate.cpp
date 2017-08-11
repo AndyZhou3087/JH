@@ -104,12 +104,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//读取武器防具配置文件
 	GlobalData::loadEquipJsonData();
 
-	//读取剧情配置文件
-	GlobalData::loadPlotMissionJsonData();
-
-	//读取支线剧情配置文件
-	GlobalData::loadBranchPlotMissionJsonData();
-
 #if defined(CC_PLATFORM_IOS) && defined(ANALYTICS)
     MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
 #endif
