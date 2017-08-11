@@ -5,6 +5,7 @@
 #include "GoldGoodsItem.h"
 #include "ShopLayer.h"
 #include "HintBox.h"
+#include "StorageUILayer.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
 {
@@ -87,6 +88,10 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			GoldGoodsItem::addBuyGoods(m_gdata);
 			int usegold = GlobalData::getUseGold() + m_gdata->price;
 			GlobalData::setUseGold(usegold);
+
+			StorageUILayer* storageUI = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
+			if (storageUI != NULL)
+				storageUI->updateResContent();
 		}
 		else
 		{

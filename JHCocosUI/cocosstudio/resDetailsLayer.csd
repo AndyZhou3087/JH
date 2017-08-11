@@ -156,13 +156,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lefttime" ActionTag="-1017780230" VisibleForFrame="False" Tag="200" IconVisible="False" LeftMargin="360.0002" RightMargin="359.9998" TopMargin="760.0000" BottomMargin="520.0000" FontSize="25" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="lefttime" ActionTag="-1017780230" VisibleForFrame="False" Tag="200" IconVisible="False" LeftMargin="360.0002" RightMargin="359.9998" TopMargin="763.0000" BottomMargin="517.0000" FontSize="25" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0002" Y="520.0000" />
+            <Position X="360.0002" Y="517.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition X="0.5000" Y="0.4063" />
+            <PrePosition X="0.5000" Y="0.4039" />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

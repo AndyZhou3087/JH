@@ -445,7 +445,7 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		bool isUseOk = false;
+		cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 		if (m_packageData->strid.compare("71") == 0)
 		{
 			int count = StorageRoom::getCountById("71");
@@ -454,6 +454,8 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				StorageRoom::use("71");
 				std::string uselblstr = StringUtils::format("大力丸 x%d", count - 1);
 				uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
+				std::string leftstr = StringUtils::format("库存%d", count - 1);
+				valuelbl->setString(CommonFuncs::gbk2utf(leftstr.c_str()));
 				int gfetime = GameDataSave::getInstance()->getGfEndTime();
 				int cursectime = GlobalData::getSysSecTime();
 				if (cursectime <= gfetime)
@@ -466,7 +468,11 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					GameDataSave::getInstance()->setGfEndTime(cursectime + 24 * 3600);
 					m_expendtime = cursectime + 24 * 3600;
 				}
-				isUseOk = true;
+				updateUI();
+			}
+			if (count - 1 <= 0)
+			{
+				this->removeFromParentAndCleanup(true);
 			}
 		}
 		else if (m_packageData->strid.compare("70") == 0)
@@ -477,6 +483,10 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				StorageRoom::use("70");
 				std::string uselblstr = StringUtils::format("经验药水 x%d", count - 1);
 				uselbl->setString(CommonFuncs::gbk2utf(uselblstr.c_str()));
+
+				std::string leftstr = StringUtils::format("库存%d", count - 1);
+				valuelbl->setString(CommonFuncs::gbk2utf(leftstr.c_str()));
+
 				int heorexpetime = GameDataSave::getInstance()->getHeroExpEndTime();
 				int cursectime = GlobalData::getSysSecTime();
 				if (GlobalData::getSysSecTime() <= heorexpetime)
@@ -489,20 +499,25 @@ void ResDetailsLayer::onUse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					GameDataSave::getInstance()->setHeroExpEndTime(cursectime + 24 * 3600);
 					m_expendtime = cursectime + 24 * 3600;
 				}
-				isUseOk = true;
+				updateUI();
 			}
-		}
-
-		if (isUseOk)
-		{
-			updataLeftTime(0);
-			this->schedule(schedule_selector(ResDetailsLayer::updataLeftTime), 1);
-
-			StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
-			storageUI->updateResContent();
+			if (count - 1 <= 0)
+			{
+				this->removeFromParentAndCleanup(true);
+			}
 		}
 	}
 }
+
+void ResDetailsLayer::updateUI()
+{
+	updataLeftTime(0);
+	this->schedule(schedule_selector(ResDetailsLayer::updataLeftTime), 1);
+
+	StorageUILayer* storageUI = (StorageUILayer*)this->getParent();
+	storageUI->updateResContent();
+}
+
 void ResDetailsLayer::recoveInjuryValue(int addwvalue, int addnvalue)
 {
 	float outvalue = g_hero->getOutinjuryValue();

@@ -28,7 +28,7 @@ private:
 	void updateHorseData(int addvalue);
 
 	void updataLeftTime(float dt);
-
+	void updateUI();
 private:
 	PackageData* m_packageData;
 	cocos2d::ui::Text* uselbl;
