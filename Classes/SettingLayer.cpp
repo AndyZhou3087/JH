@@ -184,6 +184,7 @@ void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
 	//GlobalData::setMyNickName(editBox->getText());
 	editnamestring = editBox->getText();
+    
 	ServerDataSwap::getInstance()->setDelegate(this);
 	ServerDataSwap::getInstance()->modifyNickName(editBox->getText());
 }
