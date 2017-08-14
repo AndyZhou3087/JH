@@ -10,7 +10,7 @@
 
 #include <string>
 
-std::string saveData(unsigned char const* , unsigned int len);
+std::string encryptData(unsigned char const*, unsigned int len);
 std::string parseData(std::string const& s);
 
 #endif // _H_DATABASE64_H_

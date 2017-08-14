@@ -188,6 +188,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HttpUtil.cpp" />
     <ClCompile Include="..\Classes\json.cpp" />
     <ClCompile Include="..\Classes\MapLayer.cpp" />
+    <ClCompile Include="..\Classes\MD5.cpp" />
     <ClCompile Include="..\Classes\MedicineKit.cpp" />
     <ClCompile Include="..\Classes\MyActionProgressTimer.cpp" />
     <ClCompile Include="..\Classes\MyMenu.cpp" />
@@ -277,6 +278,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HttpUtil.h" />
     <ClInclude Include="..\Classes\json.h" />
     <ClInclude Include="..\Classes\MapLayer.h" />
+    <ClInclude Include="..\Classes\MD5.h" />
     <ClInclude Include="..\Classes\MedicineKit.h" />
     <ClInclude Include="..\Classes\MyActionProgressTimer.h" />
     <ClInclude Include="..\Classes\MyMenu.h" />

@@ -494,7 +494,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 									if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
 									{
 										goodvalue = val % 1000;
-										slv = goodvalue / 1000;
+										slv = val / 1000;
 									}
 									else
 									{
@@ -567,136 +567,154 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::string tag)
 {
+	int retult = -1;
 	if (code == 0)
 	{
 		rapidjson::Document doc;
 		if (JsonReader(retdata, doc))
 		{
-			GameDataSave::getInstance()->setIsJustData(false);
-
-			if (!doc.HasMember("data"))
-				return;
-
-			rapidjson::Value& dataArray = doc["data"];
-
-			for (unsigned int m = 0; m < dataArray.Size(); m++)
+			if (doc.HasMember("data"))
 			{
-				rapidjson::Value& item = dataArray[m];
+				rapidjson::Value& dataArray = doc["data"];
 
-				rapidjson::Value& v = item["propid"];
-				std::string strid = v.GetString();
-
-				v = item["amount"];
-				int val = atoi(v.GetString());
-
-				if (strid.compare("coin") == 0)
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
 				{
-					int curcount = GameDataSave::getInstance()->getGoldCount();
-					GameDataSave::getInstance()->setGoldCount(curcount + val);
-					GlobalData::init();
-					continue;
-				}
+					rapidjson::Value& item = dataArray[m];
 
-				if (strid.compare("hunlock") == 0)
-				{
-					int hunlock = val;
+					rapidjson::Value& v = item["propid"];
+					std::string strid = v.GetString();
 
-					for (int k = 0; k < 4; k++)
+					v = item["amount"];
+					int val = atoi(v.GetString());
+
+					if (strid.compare("coin") == 0)
 					{
-						int val = hunlock & (1 << k);
-						val = val >> k;
-						GlobalData::setUnlockHero(k, val == 1 ? true : false);
+						int curcount = GameDataSave::getInstance()->getGoldCount();
+						GameDataSave::getInstance()->setGoldCount(curcount + val);
+						GlobalData::init();
+						continue;
 					}
-					continue;
-				}
 
-				v = item["type"];
-				int heroid = atoi(v.GetString());
-				std::vector<std::string> vec_ids = GlobalData::getSaveListId();
-				std::string uid = vec_ids[heroid - 1];
-				if (uid.length() > 0)
-				{
-					GameDataSave::getInstance()->setUserId(uid);
-
-					std::string strval = GameDataSave::getInstance()->getStorageData();
-					std::vector<std::string> tmp;
-					CommonFuncs::split(strval, tmp, ";");
-					std::string retstr;
-					bool isfind = false;
-					for (unsigned int i = 0; i < tmp.size(); i++)
+					if (strid.compare("hunlock") == 0)
 					{
-						std::vector<std::string> tmp2;
-						CommonFuncs::split(tmp[i], tmp2, "-");
+						int hunlock = val;
 
-						std::string id = tmp2[0];
-						int type = atoi(tmp2[1].c_str());
-
-						int count = atoi(tmp2[2].c_str());
-						int extype = GlobalData::getResExType(id);
-						int lv = atoi(tmp2[4].c_str());
-
-						int exp = atoi(tmp2[5].c_str());
-						int goodvalue = atoi(tmp2[6].c_str());
-						int slv = 0;
-						int tqu = 1;
-						if (tmp2.size() >= 9)
+						for (int k = 0; k < 4; k++)
 						{
-							slv = atoi(tmp2[7].c_str());
-							tqu = atoi(tmp2[8].c_str());
+							int val = hunlock & (1 << k);
+							val = val >> k;
+							GlobalData::setUnlockHero(k, val == 1 ? true : false);
 						}
-						if (strid.compare(id) == 0)
+						continue;
+					}
+
+					v = item["type"];
+					int heroid = atoi(v.GetString());
+					if (heroid > 0)
+					{
+						std::vector<std::string> vec_ids = GlobalData::getSaveListId();
+						std::string uid = vec_ids[heroid - 1];
+						if (uid.length() > 0)
 						{
-							isfind = true;
-							if (atoi(strid.c_str()) > 0)
-								count += val;
-							else
+							GameDataSave::getInstance()->setUserId(uid);
+
+							std::string strval = GameDataSave::getInstance()->getStorageData();
+							std::vector<std::string> tmp;
+							CommonFuncs::split(strval, tmp, ";");
+							std::string retstr;
+							bool isfind = false;
+							for (unsigned int i = 0; i < tmp.size(); i++)
 							{
-								if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
+								std::vector<std::string> tmp2;
+								CommonFuncs::split(tmp[i], tmp2, "-");
+
+								std::string id = tmp2[0];
+								int type = atoi(tmp2[1].c_str());
+
+								int count = atoi(tmp2[2].c_str());
+								int extype = GlobalData::getResExType(id);
+								int lv = atoi(tmp2[4].c_str());
+
+								int exp = atoi(tmp2[5].c_str());
+								int goodvalue = atoi(tmp2[6].c_str());
+								int slv = 0;
+								int tqu = 1;
+								if (tmp2.size() >= 9)
 								{
-									goodvalue = val % 1000;
-									slv = goodvalue / 1000;
+									slv = atoi(tmp2[7].c_str());
+									tqu = atoi(tmp2[8].c_str());
 								}
+								if (strid.compare(id) == 0)
+								{
+									isfind = true;
+									if (atoi(strid.c_str()) > 0)
+										count += val;
+									else
+									{
+										if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
+										{
+											goodvalue = val % 1000;
+											slv = val / 1000;
+										}
+										else
+										{
+											lv = val;
+										}
+										count = 1;
+									}
+								}
+								std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", id.c_str(), type, count, extype, lv, exp, goodvalue, slv, tqu);
+								retstr.append(idstr);
+
+							}
+							if (!isfind)
+							{
+								int count = 0;
+								int goodvalue = 100;
+								int lv = 0;
+								int slv = 0;
+								if (atoi(strid.c_str()) > 0)
+									count = val;
 								else
 								{
-									lv = val;
+									if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
+									{
+										goodvalue = val % 1000;
+										slv = val / 1000;
+									}
+									else
+									{
+										lv = val;
+									}
+									count = 1;
 								}
-								count = 1;
+								std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", strid.c_str(), GlobalData::getResType(strid), count, GlobalData::getResExType(strid), lv, 0, goodvalue, slv, 1);
+								retstr.append(idstr);
 							}
-						}
-						std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", id.c_str(), type, count, extype, lv, exp, goodvalue, slv, tqu);
-						retstr.append(idstr);
-	
-					}
-					if (!isfind)
-					{
-						int count = 0;
-						int goodvalue = 100;
-						int lv = 0;
-						int slv = 0;
-						if (atoi(strid.c_str()) > 0)
-							count = val;
-						else
-						{
-							if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
-							{
-								goodvalue = val % 1000;
-								slv = goodvalue / 1000;
-							}
-							else
-							{
-								lv = val;
-							}
-							count = 1;
-						}
-						std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", strid.c_str(), GlobalData::getResType(strid), count, GlobalData::getResExType(strid), lv, 0, goodvalue, slv, 1);
-						retstr.append(idstr);
-					}
 
-					if (retstr.length() > 0)
-						GameDataSave::getInstance()->setStorageData(retstr.substr(0, retstr.length() - 1));
+							if (retstr.length() > 0)
+								GameDataSave::getInstance()->setStorageData(retstr.substr(0, retstr.length() - 1));
+						}
+					}
 				}
+				retult = 0;
 			}
-
+			else
+				retult = -2;
+		}
+	}
+	if (retult == 0)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(retult);
 		}
 	}
 }

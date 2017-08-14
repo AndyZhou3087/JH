@@ -486,17 +486,6 @@ void GameDataSave::setIsFirstInstall(bool val)
 	saveIntDataByKey("firstintall", val ? 1 : 0);
 }
 
-bool GameDataSave::getIsJustData()
-{
-	int ret = loadIntDataByKey("isjust", 0);
-	return ret == 1 ? true : false;
-}
-
-void GameDataSave::setIsJustData(bool val)
-{
-	saveIntDataByKey("isjust", val ? 1 : 0);
-}
-
 std::string GameDataSave::getMyID()
 {
 	return loadStringDataByKey("id", "");

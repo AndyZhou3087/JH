@@ -16,7 +16,7 @@ inline void saveStringDataByKey(string key, string sValue = ""){
 	char buffer[32];
 	sprintf(buffer, "%s", key.c_str());
 #if encrypt_data
-	string sKey = saveData(reinterpret_cast<const unsigned char*>(sValue.c_str()), sValue.length());
+	string sKey = encryptData(reinterpret_cast<const unsigned char*>(sValue.c_str()), sValue.length());
 #else
 	string sKey = sValue;
 #endif

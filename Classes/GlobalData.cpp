@@ -69,6 +69,13 @@ int GlobalData::freeReviveCount = 0;
 
 std::vector<std::string> GlobalData::vec_tempGf_Equip;
 
+int GlobalData::MD5MyGoldCoun = 0;
+int GlobalData::MD5CostGlodCount = 0;
+int GlobalData::MD5FreeReviveCount = 0;
+int GlobalData::MD5HeroLv = 0;
+int GlobalData::MD5LiveDays = 0;
+
+
 GlobalData::GlobalData()
 {
 
@@ -1556,6 +1563,56 @@ std::string GlobalData::UUID()
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 
+}
+
+int GlobalData::getMD5MyGoldCount()
+{
+	return MD5MyGoldCoun;
+}
+
+void GlobalData::setMD5MyGoldCount(int val)
+{
+	MD5MyGoldCoun = val;
+}
+
+int GlobalData::getMD5CostGlodCount()
+{
+	return MD5CostGlodCount;
+}
+
+void GlobalData::setMD5CostGlodCount(int val)
+{
+	MD5CostGlodCount = val;
+}
+
+int GlobalData::getMD5FreeReviveCount()
+{
+	return MD5FreeReviveCount;
+}
+
+void GlobalData::setMD5FreeReviveCount(int val)
+{
+	MD5FreeReviveCount = val;
+}
+
+int GlobalData::getMD5HeroLv()
+{
+	return MD5HeroLv;
+}
+
+void GlobalData::setMD5HeroLv(int val)
+{
+	MD5HeroLv = val;
+}
+
+int GlobalData::getMD5LiveDays()
+{
+	return MD5LiveDays;
+}
+
+void GlobalData::setMD5LiveDays(int val)
+{
+	MD5LiveDays = val;
 }
 
 void GlobalData::setNoAds(bool val)

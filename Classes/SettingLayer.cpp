@@ -13,7 +13,6 @@
 
 SettingLayer::SettingLayer()
 {
-	clicktitlecount = 0;
 }
 
 
@@ -31,9 +30,6 @@ bool SettingLayer::init()
 	//加载csb文件
 	Node* csbnode = CSLoader::createNode("settingLayer.csb");
 	this->addChild(csbnode);
-
-	cocos2d::ui::Text* title = (cocos2d::ui::Text*)csbnode->getChildByName("title");
-	title->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onTitle, this));
 
 	//关闭按钮
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
@@ -146,19 +142,6 @@ void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	}
 }
 #endif
-
-void SettingLayer::onTitle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
-{
-	if (type == ui::Widget::TouchEventType::ENDED)
-	{
-		clicktitlecount++;
-		if (clicktitlecount > 5 && !GameDataSave::getInstance()->getIsJustData())
-		{
-			GameDataSave::getInstance()->setIsJustData(true);
-		}
-	}
-}
-
 
 void SettingLayer::textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventType type)
 {

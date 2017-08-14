@@ -8,6 +8,7 @@
 #include "SelectSaveLayer.h"
 #include "WaitingProgress.h"
 #include "GameDataSave.h"
+#include "HintBox.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -72,11 +73,18 @@ bool StartScene::init()
 	cocos2d::ui::Widget* setbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("setbtn");
 	setbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onSet, this));
 
+	cocos2d::ui::ImageView* logo = (cocos2d::ui::ImageView*)csbnode->getChildByName("logo");
+	logo->addTouchEventListener(CC_CALLBACK_2(StartScene::onLogo, this));
+
+	clicklogocount = 0;
+
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);
 
 
-	this->scheduleOnce(schedule_selector(StartScene::checkServerData), 0.2f);
+	this->scheduleOnce(schedule_selector(StartScene::checkServerData), 0.1f);
 	
+
+
     return true;
 }
 
@@ -162,31 +170,58 @@ void StartScene::checkServerData(float dt)
 		ServerDataSwap::getInstance()->setDelegate(this);
 		ServerDataSwap::getInstance()->getAllData();
 	}
+}
 
-	if (GameDataSave::getInstance()->getIsJustData())
+void StartScene::onLogo(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		ServerDataSwap::getInstance()->setDelegate(NULL);
-		ServerDataSwap::getInstance()->propadjust();
+		clicklogocount++;
+		if (clicklogocount == 5)
+		{
+			WaitingProgress* waitbox = WaitingProgress::create("数据处理中...");
+			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+			ServerDataSwap::getInstance()->setDelegate(this);
+			ServerDataSwap::getInstance()->propadjust();
+		}
 	}
 }
 
 void StartScene::onSuccess()
 {
-	GameDataSave::getInstance()->setIsPostAllData(true);
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
 
-	if (GameDataSave::getInstance()->getHeroLV() >= 1)
+	if (clicklogocount >= 5)
 	{
-		for (int i = 0; i < 50; i++)
-		{
-			GameDataSave::getInstance()->setIsNewerGuide(i, 0);
-		}
+		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("数据处理完毕，请确认。感谢您的支持！"));
+		this->addChild(hbox);
 	}
-	GlobalData::init();
+	else
+	{
+		GameDataSave::getInstance()->setIsPostAllData(true);
+
+		m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
+
+		if (GameDataSave::getInstance()->getHeroLV() >= 1)
+		{
+			for (int i = 0; i < 50; i++)
+			{
+				GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+			}
+		}
+		GlobalData::init();
+	}
 }
 
 void StartScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (clicklogocount >= 5)
+	{
+		std::string descstr = "请与客服联系，稍后重试！";
+		if (errcode == -2)
+			descstr = "没有数据，请与客服确认！";
+		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(descstr.c_str()));
+		this->addChild(hbox);
+	}
 }

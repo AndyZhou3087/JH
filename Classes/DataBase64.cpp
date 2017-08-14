@@ -17,7 +17,7 @@ static inline bool baseData(unsigned char c) {
     return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
-std::string saveData(unsigned char const* bytes_to_encode, unsigned int in_len) {
+std::string encryptData(unsigned char const* bytes_to_encode, unsigned int in_len) {
     std::string ret;
     int i = 0;
     int j = 0;

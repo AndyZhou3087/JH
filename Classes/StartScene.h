@@ -23,10 +23,11 @@ private:
 	void onLoadSaved(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onLogo(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
 	void checkServerData(float dt);
 	cocos2d::ui::Widget* m_continuebtn;
-
+	int clicklogocount;
 };
 
 #endif

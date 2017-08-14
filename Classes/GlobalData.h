@@ -660,6 +660,23 @@ public:
 	*****************************/
 	static void loadTempGF_EquipData();
 
+	/****************************
+	防作弊数据start
+	*****************************/
+	static int getMD5MyGoldCount();
+	static void setMD5MyGoldCount(int val);
+	static int getMD5CostGlodCount();
+	static void setMD5CostGlodCount(int val);
+	static int getMD5FreeReviveCount();
+	static void setMD5FreeReviveCount(int val);
+	static int getMD5HeroLv();
+	static void setMD5HeroLv(int val);
+	static int getMD5LiveDays();
+	static void setMD5LiveDays(int val);
+
+	/****************************
+	防作弊数据end
+	*****************************/
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -709,6 +726,12 @@ private:
 	static int myGlodCount;
 	static int wxbmapos;
 	static int dgqbmapos;
+
+	static int MD5MyGoldCoun;
+	static int MD5CostGlodCount;
+	static int MD5FreeReviveCount;
+	static int MD5HeroLv;
+	static int MD5LiveDays;
 
 	static std::vector<std::string> vec_saveids;//存档的id
     
