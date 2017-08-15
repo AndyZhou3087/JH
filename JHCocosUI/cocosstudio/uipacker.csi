@@ -407,6 +407,12 @@
       <FilePathData Path="ui/timegiftbtn.png" />
       <FilePathData Path="ui/timegiftpricebox.png" />
       <FilePathData Path="ui/timegifttitle.png" />
+      <FilePathData Path="ui/fheartbg.png" />
+      <FilePathData Path="ui/fheart1.png" />
+      <FilePathData Path="ui/fheart0.png" />
+      <FilePathData Path="ui/n004.png" />
+      <FilePathData Path="ui/npcheadbox.png" />
+      <FilePathData Path="ui/npcbtn1.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

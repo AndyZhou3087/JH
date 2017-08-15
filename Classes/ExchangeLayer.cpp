@@ -451,6 +451,7 @@ void ExchangeLayer::onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			{
 				MyPackage::vec_packages.push_back(npcExgData[i]);
 			}
+			MyPackage::save();
 			isExgOk = true;
 			this->removeFromParentAndCleanup(true);
 		}

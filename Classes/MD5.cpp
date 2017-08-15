@@ -361,3 +361,13 @@ std::string md5(const std::string str)
 
 	return md5.hexdigest();
 }
+
+std::string md5(int val)
+{
+	char bufstr[35];
+	sprintf(bufstr, "wx%d", val);
+	bufstr[34] = 0;
+	MD5 md5 = MD5(bufstr);
+
+	return md5.hexdigest();
+}

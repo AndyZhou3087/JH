@@ -12,6 +12,7 @@
 #include "CannotTouchLayer.h"
 #include "MyActionProgressTimer.h"
 #include "RepairLayer.h"
+#include "GiveLayer.h"
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
@@ -103,7 +104,7 @@ void NpcLayer::refreshNpcNode()
 	MapData mdata = GlobalData::map_maps[m_addrstr];
 	int ncpsize = mdata.npcs.size();
 
-	int itemheight = 153;
+	int itemheight = 200;
 	int innerheight = itemheight * ncpsize;
 	int contentheight = m_scrollview->getContentSize().height;
 	if (innerheight < contentheight)
@@ -111,7 +112,7 @@ void NpcLayer::refreshNpcNode()
 	m_scrollview->setInnerContainerSize(Size(650, innerheight));
 
 	cocos2d::ui::Widget* hintdown = (cocos2d::ui::Widget*)m_csbnode->getChildByName("hintdown");
-	if (ncpsize > 3)
+	if (ncpsize > 2)
 	{
 		hintdown->runAction(RepeatForever::create(Blink::create(2, 2)));
 	}
@@ -146,7 +147,6 @@ void NpcLayer::refreshNpcNode()
 			npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
 
 			cocos2d::ui::ImageView* npcrsi = (cocos2d::ui::ImageView*)npcitem->getChildByName("npcrsi");
-			npcrsi->setPositionX(npcname->getPositionX() + npcname->getContentSize().width + 25);
 
 			int count = checkFightCount(mdata.npcs[i]);
 
@@ -172,42 +172,61 @@ void NpcLayer::refreshNpcNode()
 			talkbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemTalk, this));
 			talkbtn->setTag(i);
 
-			cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
-			onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFight, this));
+			cocos2d::ui::Button* fightbtn = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
+			fightbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFight, this));
 
-			cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
-			onExchange->setTag(i);
-			onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemExchange, this));
+			cocos2d::ui::Button* masterbtn = (cocos2d::ui::Button*)npcitem->getChildByName("msterbtn");
+			masterbtn->setTag(i);
+			masterbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemMaster, this));
+
+			cocos2d::ui::Button* friendbtn = (cocos2d::ui::Button*)npcitem->getChildByName("friendbtn");
+			friendbtn->setTag(i);
+			friendbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFriend, this));
+
+			cocos2d::ui::Button* givebtn = (cocos2d::ui::Button*)npcitem->getChildByName("givebtn");
+			givebtn->setTag(i);
+			givebtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemGive, this));
+
+			cocos2d::ui::Button* exchangebtn = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
+			exchangebtn->setTag(i);
+			exchangebtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemExchange, this));
 			if (GlobalData::map_npcs[mdata.npcs[i]].exchgres.size() <= 0)
-				onExchange->setVisible(false);
+				exchangebtn->setVisible(false);
 
 			if (mdata.npcs[i].compare("n009") == 0)
 			{
 				talkbtn->setTitleText(CommonFuncs::gbk2utf("吃饭"));
 				talkbtn->setTag(10 * i);
 				talkbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
-				onFight->setTitleText(CommonFuncs::gbk2utf("睡觉"));
-				onFight->setTag(10 * i + 1);
-				onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
-				onExchange->setVisible(true);
-				onExchange->setTitleText(CommonFuncs::gbk2utf("喝酒"));
-				onExchange->setTag(10 * i + 2);
-				onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
+				fightbtn->setTitleText(CommonFuncs::gbk2utf("睡觉"));
+				fightbtn->setTag(10 * i + 1);
+				fightbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
+				masterbtn->setVisible(true);
+				masterbtn->setTitleText(CommonFuncs::gbk2utf("喝酒"));
+				masterbtn->setTag(10 * i + 2);
+				masterbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onHostelAction, this));
+				friendbtn->setVisible(false);
+				givebtn->setVisible(false);
+				exchangebtn->setVisible(false);
 			}
 			else if (mdata.npcs[i].compare("n092") == 0)
 			{
-				onFight->setTitleText(CommonFuncs::gbk2utf("修理"));
-				onFight->setTag(1);
-				onFight->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
-				onExchange->setVisible(true);
-				onExchange->setTitleText(CommonFuncs::gbk2utf("强化"));
-				onExchange->setTag(2);
-				onExchange->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
+				fightbtn->setTitleText(CommonFuncs::gbk2utf("修理"));
+				fightbtn->setTag(1);
+				fightbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
+				masterbtn->setVisible(true);
+				masterbtn->setTitleText(CommonFuncs::gbk2utf("强化"));
+				masterbtn->setTag(2);
+				masterbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onRepair, this));
+				friendbtn->setVisible(false);
+				givebtn->setVisible(false);
+				exchangebtn->setVisible(false);
 			}
-			if (ncpsize == 10)
-				onExchange->setVisible(false);
 		}
 	}
+
+	reFreshFriendly();
+
 	for (int i = 1; i >= 0; i--)
 	{
 		updatePlotUI(i);
@@ -374,6 +393,37 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
 	}
 }
+
+
+void NpcLayer::onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+
+	}
+}
+
+void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+	}
+}
+
+void NpcLayer::onItemGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		Node* node = (Node*)pSender;
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[node->getTag()];
+		Layer* layer = GiveLayer::create(npcid);
+		this->addChild(layer);
+	}
+}
+
 
 void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
@@ -1037,4 +1087,37 @@ std::string NpcLayer::replaceSexWord(std::string dstr)
 		retstr = CommonFuncs::replace_all(dstr, CommonFuncs::gbk2utf(replacestr[i].c_str()), CommonFuncs::gbk2utf(areplacestr[i].c_str()));
 	}
 	return retstr;
+}
+
+void NpcLayer::reFreshFriendly()
+{
+	int npcitemcount = m_scrollview->getChildrenCount();
+	for (int i = 0; i < npcitemcount; i++)
+	{
+		std::string childname = StringUtils::format("npcnode%d", i);
+		Node* npcitemnode = m_scrollview->getChildByName(childname);
+		int friendly = GlobalData::map_myfriendly[GlobalData::map_maps[m_addrstr].npcs[i]];
+		int maxfriendly = GlobalData::map_NPCFriendData[GlobalData::map_maps[m_addrstr].npcs[i]].maxfriendly;
+		if (friendly > maxfriendly)
+			friendly = maxfriendly;
+
+		int per = maxfriendly / 5;
+		int count = friendly/per;
+
+		for (int m = 0; m < 5; m++)
+		{
+			std::string barstr = StringUtils::format("fbar_%d", m);
+			cocos2d::ui::LoadingBar* friendbar = (cocos2d::ui::LoadingBar*)npcitemnode->getChildByName(barstr);
+			if (m < count)
+			{
+				friendbar->setPercent(100);
+			}
+			else if (m == count)
+			{
+				float percent = friendly % per * 100.0f / per;
+				friendbar->setPercent(percent);
+			}
+		}
+
+	}
 }

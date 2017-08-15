@@ -7,30 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="repairOKLayer.csd" />
-          <FilePathData Path="repairLayer.csd" />
-          <FilePathData Path="settingLayer.csd" />
-          <FilePathData Path="outDoorLayer.csd" />
-          <FilePathData Path="homeHillLayer.csd" />
-          <FilePathData Path="specialNpcLayer.csd" />
-          <FilePathData Path="activityLayer.csd" />
-          <FilePathData Path="mapLayer.csd" />
-          <FilePathData Path="goldGoodsNode.csd" />
-          <FilePathData Path="rmbGoodsNode.csd" />
-          <FilePathData Path="vipGoodsNode.csd" />
-          <FilePathData Path="goWhereLayer.csd" />
-          <FilePathData Path="vipShopLayer.csd" />
-          <FilePathData Path="getVipRewardLayer.csd" />
-          <FilePathData Path="reviveLayer.csd" />
-          <FilePathData Path="resDetailsLayer.csd" />
-          <FilePathData Path="startLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="startLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

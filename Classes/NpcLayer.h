@@ -30,11 +30,21 @@ public:
 	*****************************/
 	bool doCheckPlotMisson(int type, NpcData npcdata);
 
+	/****************************
+	更新好友度
+	*****************************/
+	void reFreshFriendly();
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	void onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onItemGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
 	void onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRepair(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void showTypeText(float dt);

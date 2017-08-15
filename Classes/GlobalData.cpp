@@ -6,6 +6,7 @@
 #include "CommonFuncs.h"
 #include "json.h"
 #include "Const.h"
+#include "MD5.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -42,7 +43,9 @@ std::vector<GoodsData> GlobalData::vec_goods;
 std::vector<std::string> GlobalData::vec_buyVipIds;
 
 std::map<std::string, ChallengeRewardData> GlobalData::map_challengeReward;
+std::map<std::string, int> GlobalData::map_myfriendly;
 
+std::map<std::string, NPCFriendData> GlobalData::map_NPCFriendData;
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -69,12 +72,12 @@ int GlobalData::freeReviveCount = 0;
 
 std::vector<std::string> GlobalData::vec_tempGf_Equip;
 
-int GlobalData::MD5MyGoldCoun = 0;
-int GlobalData::MD5CostGlodCount = 0;
-int GlobalData::MD5FreeReviveCount = 0;
-int GlobalData::MD5HeroLv = 0;
-int GlobalData::MD5LiveDays = 0;
-
+std::string GlobalData::MD5MyGoldCount;
+std::string GlobalData::MD5CostGlodCount;
+std::string GlobalData::MD5FreeReviveCount;
+std::string GlobalData::MD5HeroLv;
+std::string GlobalData::MD5LiveDays;
+bool GlobalData::dataIsModified = false;
 
 GlobalData::GlobalData()
 {
@@ -90,6 +93,7 @@ GlobalData::~GlobalData()
 void GlobalData::init()
 {
 	myGlodCount = GameDataSave::getInstance()->getGoldCount();
+	MD5MyGoldCount = md5(myGlodCount);
 	isBuyTimeGift = GameDataSave::getInstance()->getIsBuyTimeGift();
 }
 
@@ -1482,7 +1486,13 @@ int GlobalData::getMyGoldCount()
 
 void GlobalData::setMyGoldCount(int count)
 {
+	if (MD5MyGoldCount.compare(md5(myGlodCount)) != 0)
+	{
+		dataIsModified = true;
+		return;
+	}
 	myGlodCount = count;
+	MD5MyGoldCount = md5(myGlodCount);
 	GameDataSave::getInstance()->setGoldCount(count);
 }
 
@@ -1549,6 +1559,89 @@ int GlobalData::getUseGold()
 	return GameDataSave::getInstance()->getUseGold();
 }
 
+void GlobalData::loadFriendly()
+{
+	map_myfriendly.clear();
+	std::string datastr = GameDataSave::getInstance()->getFriendly();
+
+	if (datastr.length() > 0)
+	{
+		std::vector<std::string> vec_retstr;
+		CommonFuncs::split(datastr, vec_retstr, ";");
+		for (unsigned int i = 0; i < vec_retstr.size(); i++)
+		{
+			std::vector<std::string> tmp;
+			CommonFuncs::split(vec_retstr[i], tmp, "-");
+			map_myfriendly[tmp[0]] = atoi(tmp[1].c_str());
+		}
+	}
+}
+
+
+void GlobalData::saveFriendly()
+{
+	std::string str;
+	std::map<std::string, int>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string onestr = StringUtils::format("%s-%d", it->first.c_str(), GlobalData::map_myfriendly[it->first]);
+		str.append(onestr);
+		str.append(";");
+	}
+	GameDataSave::getInstance()->setFriendly(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::loadNpcFriendJsonData()
+{
+
+	map_NPCFriendData.clear();
+	rapidjson::Document doc = ReadJsonFile("data/friend.json");
+	rapidjson::Value& values = doc["f"];
+	for (unsigned int i = 0; i < values.Size(); i++)//一级资源数组
+	{
+		NPCFriendData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["npcid"];
+		std::string npcid = v.GetString();
+
+		v = item["max"];
+		data.maxfriendly = atoi(v.GetString());
+
+		v = item["need"];
+		data.needfriendly = atoi(v.GetString());
+		//v = item["cname"];
+		//data.cname = v.GetString();
+		//v = item["desc"];
+		//data.desc = v.GetString();
+
+		//v = item["val"];
+		//data.val = atoi(v.GetString());
+
+		//v = item["npcs"];
+
+		//for (unsigned int m = 0; m < v.Size(); m++)
+		//{
+		//	rapidjson::Value& npsv = v[m];
+		//	std::string npcid = npsv.GetString();
+		//	if (npcid.length() > 1)
+		//		data.npc.push_back(npcid);
+		//}
+
+		//v = item["npcval"];
+
+		//for (unsigned int m = 0; m < v.Size(); m++)
+		//{
+		//	rapidjson::Value& npsv = v[m];
+		//	std::string npcval = npsv.GetString();
+		//	if (npcval.length() > 0)
+		//		data.npcval.push_back(atof(npcval.c_str()));
+		//}
+
+		map_NPCFriendData[npcid] = data;
+
+	}
+}
+
 std::string GlobalData::addUidString(std::string val)
 {
     return uid + val;
@@ -1565,17 +1658,17 @@ std::string GlobalData::UUID()
 
 }
 
-int GlobalData::getMD5MyGoldCount()
+std::string GlobalData::getMD5MyGoldCount()
 {
-	return MD5MyGoldCoun;
+	return MD5MyGoldCount;
 }
 
 void GlobalData::setMD5MyGoldCount(int val)
 {
-	MD5MyGoldCoun = val;
+	MD5MyGoldCount = val;
 }
 
-int GlobalData::getMD5CostGlodCount()
+std::string GlobalData::getMD5CostGlodCount()
 {
 	return MD5CostGlodCount;
 }
@@ -1585,7 +1678,7 @@ void GlobalData::setMD5CostGlodCount(int val)
 	MD5CostGlodCount = val;
 }
 
-int GlobalData::getMD5FreeReviveCount()
+std::string GlobalData::getMD5FreeReviveCount()
 {
 	return MD5FreeReviveCount;
 }
@@ -1595,7 +1688,7 @@ void GlobalData::setMD5FreeReviveCount(int val)
 	MD5FreeReviveCount = val;
 }
 
-int GlobalData::getMD5HeroLv()
+std::string GlobalData::getMD5HeroLv()
 {
 	return MD5HeroLv;
 }
@@ -1605,7 +1698,7 @@ void GlobalData::setMD5HeroLv(int val)
 	MD5HeroLv = val;
 }
 
-int GlobalData::getMD5LiveDays()
+std::string GlobalData::getMD5LiveDays()
 {
 	return MD5LiveDays;
 }

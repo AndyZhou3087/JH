@@ -526,3 +526,13 @@ int GameDataSave::getUseGold()
 {
 	return loadIntDataByKey("usegold", 0);
 }
+
+std::string GameDataSave::getFriendly()
+{
+	return loadStringDataByKey(addUIDString("friendly"), "");
+}
+
+void GameDataSave::setFriendly(std::string str)
+{
+	saveStringDataByKey(addUIDString("friendly"), str);
+}

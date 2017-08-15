@@ -165,6 +165,9 @@
           <Image Name="e010.png" />
           <Image Name="exerciseroom.png" />
           <Image Name="fence.png" />
+          <Image Name="fheartbg.png" />
+          <Image Name="fheart1.png" />
+          <Image Name="fheart0.png" />
           <Image Name="fighthpbar.png" />
           <Image Name="fighthpbar2.png" />
           <Image Name="fighthpbg.png" />
@@ -275,7 +278,10 @@
           <Image Name="mygoldbox.png" />
           <Image Name="n002.png" />
           <Image Name="n003.png" />
+          <Image Name="n004.png" />
           <Image Name="normalbtn.png" />
+          <Image Name="npcbtn1.png" />
+          <Image Name="npcheadbox.png" />
           <Image Name="npcicon.png" />
           <Image Name="npcrsi0.png" />
           <Image Name="npcrsi1.png" />
@@ -514,6 +520,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="giveLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

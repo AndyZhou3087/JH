@@ -258,6 +258,16 @@ typedef struct
 	std::vector<int> vec_winrnd;
 }ChallengeRewardData;
 
+
+/****************************
+NPC好友数据
+*****************************/
+typedef struct
+{
+	int maxfriendly;
+	int needfriendly;
+}NPCFriendData;
+
 class GlobalData
 {
 public:
@@ -663,20 +673,36 @@ public:
 	/****************************
 	防作弊数据start
 	*****************************/
-	static int getMD5MyGoldCount();
+	static std::string getMD5MyGoldCount();
 	static void setMD5MyGoldCount(int val);
-	static int getMD5CostGlodCount();
+	static std::string getMD5CostGlodCount();
 	static void setMD5CostGlodCount(int val);
-	static int getMD5FreeReviveCount();
+	static std::string getMD5FreeReviveCount();
 	static void setMD5FreeReviveCount(int val);
-	static int getMD5HeroLv();
+	static std::string getMD5HeroLv();
 	static void setMD5HeroLv(int val);
-	static int getMD5LiveDays();
+	static std::string getMD5LiveDays();
 	static void setMD5LiveDays(int val);
 
 	/****************************
 	防作弊数据end
 	*****************************/
+
+	/****************************
+	加载保存的好友度
+	*****************************/
+	static void loadFriendly();
+
+	/****************************
+	保存好友度
+	*****************************/
+	static void saveFriendly();
+
+	/****************************
+	解析NPC好友数据
+	*****************************/
+	static void loadNpcFriendJsonData();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -711,15 +737,19 @@ public:
 	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
 	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
+	static std::map<std::string, int> map_myfriendly;//技能数据
 
 	static std::vector<std::string> vec_buyVipIds;
 
 	static std::vector<std::string> vec_tempGf_Equip;
 
 	static std::map<std::string, ChallengeRewardData> map_challengeReward;
+
+	static std::map<std::string, NPCFriendData> map_NPCFriendData;
 	static bool isPopingScene;
 
 	static GameStatus g_gameStatus;
+	static bool dataIsModified;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
@@ -727,11 +757,11 @@ private:
 	static int wxbmapos;
 	static int dgqbmapos;
 
-	static int MD5MyGoldCoun;
-	static int MD5CostGlodCount;
-	static int MD5FreeReviveCount;
-	static int MD5HeroLv;
-	static int MD5LiveDays;
+	static std::string MD5MyGoldCount;
+	static std::string MD5CostGlodCount;
+	static std::string MD5FreeReviveCount;
+	static std::string MD5HeroLv;
+	static std::string MD5LiveDays;
 
 	static std::vector<std::string> vec_saveids;//存档的id
     

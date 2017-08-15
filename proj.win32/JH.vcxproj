@@ -176,6 +176,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GameDataSave.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\GetVipRewardLayer.cpp" />
+    <ClCompile Include="..\Classes\GiveLayer.cpp" />
     <ClCompile Include="..\Classes\GlobalData.cpp" />
     <ClCompile Include="..\Classes\GoldGoodItem.cpp" />
     <ClCompile Include="..\Classes\GoWhereLayer.cpp" />
@@ -266,6 +267,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GameDataSave.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\GetVipRewardLayer.h" />
+    <ClInclude Include="..\Classes\GiveLayer.h" />
     <ClInclude Include="..\Classes\GlobalData.h" />
     <ClInclude Include="..\Classes\GoldGoodsItem.h" />
     <ClInclude Include="..\Classes\GoWhereLayer.h" />
