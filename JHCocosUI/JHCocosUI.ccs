@@ -135,6 +135,7 @@
           <Image Name="badbookshelf.png" />
           <Image Name="badfurnace.png" />
           <Image Name="bed.png" />
+          <Image Name="bigbgclosebtn.png" />
           <Image Name="blank.png" />
           <Image Name="bookshelf.png" />
           <Image Name="builditem.png" />
@@ -165,9 +166,9 @@
           <Image Name="e010.png" />
           <Image Name="exerciseroom.png" />
           <Image Name="fence.png" />
-          <Image Name="fheartbg.png" />
-          <Image Name="fheart1.png" />
           <Image Name="fheart0.png" />
+          <Image Name="fheart1.png" />
+          <Image Name="fheartbg.png" />
           <Image Name="fighthpbar.png" />
           <Image Name="fighthpbar2.png" />
           <Image Name="fighthpbg.png" />
@@ -223,6 +224,7 @@
           <Image Name="m13-1.png" />
           <Image Name="m1-4.png" />
           <Image Name="m1-5.png" />
+          <Image Name="m1-6.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
           <Image Name="m2-3.png" />
@@ -283,6 +285,9 @@
           <Image Name="npcbtn1.png" />
           <Image Name="npcheadbox.png" />
           <Image Name="npcicon.png" />
+          <Image Name="npcprope0.png" />
+          <Image Name="npcprope1.png" />
+          <Image Name="npcprope2.png" />
           <Image Name="npcrsi0.png" />
           <Image Name="npcrsi1.png" />
           <Image Name="npcrsi2.png" />
@@ -294,6 +299,10 @@
           <Image Name="qubox4.png" />
           <Image Name="qubox5.png" />
           <Image Name="redpoint.png" />
+          <Image Name="relationheadbox.png" />
+          <Image Name="relationtextbox.png" />
+          <Image Name="relationtitle.png" />
+          <Image Name="relationtitlebox.png" />
           <Image Name="repairokquan.png" />
           <Image Name="repairoktext.png" />
           <Image Name="resbox.png" />
@@ -484,6 +493,7 @@
         <Project Name="exgLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="getVipRewardLayer.csd" Type="Layer" />
+        <Project Name="giveLayer.csd" Type="Layer" />
         <Project Name="goldGoodsNode.csd" Type="Node" />
         <Project Name="goWhereLayer.csd" Type="Layer" />
         <Project Name="heroAttribNode.csd" Type="Node" />
@@ -520,7 +530,8 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="giveLayer.csd" Type="Layer" />
+        <Project Name="relationLayer.csd" Type="Layer" />
+        <Project Name="relationNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

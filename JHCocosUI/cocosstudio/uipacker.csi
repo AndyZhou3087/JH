@@ -413,6 +413,15 @@
       <FilePathData Path="ui/n004.png" />
       <FilePathData Path="ui/npcheadbox.png" />
       <FilePathData Path="ui/npcbtn1.png" />
+      <FilePathData Path="ui/m1-6.png" />
+      <FilePathData Path="ui/npcprope0.png" />
+      <FilePathData Path="ui/npcprope1.png" />
+      <FilePathData Path="ui/npcprope2.png" />
+      <FilePathData Path="ui/relationheadbox.png" />
+      <FilePathData Path="ui/relationtextbox.png" />
+      <FilePathData Path="ui/relationtitlebox.png" />
+      <FilePathData Path="ui/bigbgclosebtn.png" />
+      <FilePathData Path="ui/relationtitle.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

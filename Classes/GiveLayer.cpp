@@ -58,7 +58,7 @@ bool GiveLayer::init(std::string npcid)
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("mygoodsscroll");
 	m_myGoodsSrollView->setScrollBarEnabled(false);
 
-	friendly = GlobalData::map_myfriendly[m_npcid];
+	friendly = GlobalData::map_myfriendly[m_npcid].friendly;
 	friendlylbl = (cocos2d::ui::Text*)csbnode->getChildByName("friendly");
 
 	std::string friendstr = StringUtils::format("%d", friendly);
@@ -194,11 +194,11 @@ void GiveLayer::onGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			MyPackage::vec_packages.push_back(myGoodsData[i]);
 		}
-		GlobalData::map_myfriendly[m_npcid] = friendly + giveval;
+		GlobalData::map_myfriendly[m_npcid].friendly = friendly + giveval;
 		GlobalData::saveFriendly();
 		MyPackage::save();
 		NpcLayer* npclayer = (NpcLayer*)this->getParent();
-		npclayer->reFreshFriendly();
+		npclayer->reFreshFriendlyUI();
 		this->removeFromParentAndCleanup(true);
 	}
 }

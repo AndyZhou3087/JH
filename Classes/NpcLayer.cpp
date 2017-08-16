@@ -109,7 +109,7 @@ void NpcLayer::refreshNpcNode()
 	int contentheight = m_scrollview->getContentSize().height;
 	if (innerheight < contentheight)
 		innerheight = contentheight;
-	m_scrollview->setInnerContainerSize(Size(650, innerheight));
+	m_scrollview->setInnerContainerSize(Size(m_scrollview->getContentSize().width, innerheight));
 
 	cocos2d::ui::Widget* hintdown = (cocos2d::ui::Widget*)m_csbnode->getChildByName("hintdown");
 	if (ncpsize > 2)
@@ -183,6 +183,21 @@ void NpcLayer::refreshNpcNode()
 			friendbtn->setTag(i);
 			friendbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFriend, this));
 
+			int relation = GlobalData::map_myfriendly[mdata.npcs[i]].relation;
+			if (relation == F_MASTEROUT)
+			{
+				masterbtn->setTitleText(CommonFuncs::gbk2utf("出师"));
+				masterbtn->setEnabled(false);
+			}
+			else if (relation == F_FRIEND)
+			{
+				friendbtn->setTitleText(CommonFuncs::gbk2utf("绝交"));
+			}
+			else if (relation == F_MASTER)
+			{
+				masterbtn->setTitleText(CommonFuncs::gbk2utf("出师"));
+			}
+
 			cocos2d::ui::Button* givebtn = (cocos2d::ui::Button*)npcitem->getChildByName("givebtn");
 			givebtn->setTag(i);
 			givebtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemGive, this));
@@ -225,7 +240,7 @@ void NpcLayer::refreshNpcNode()
 		}
 	}
 
-	reFreshFriendly();
+	reFreshFriendlyUI();
 
 	for (int i = 1; i >= 0; i--)
 	{
@@ -391,6 +406,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
+		updateFriendly(npcid);
 	}
 }
 
@@ -400,6 +416,37 @@ void NpcLayer::onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		cocos2d::ui::Button* btn = (cocos2d::ui::Button*)pSender;
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[btn->getTag()];
+		if (btn->getTitleText().compare(CommonFuncs::gbk2utf("拜师")) == 0)
+		{
+			if (GlobalData::map_myfriendly[npcid].relation == F_FRIEND)
+			{
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你我关系这么好，我怎么能当你的师傅呢！"), 25, Color3B(204, 4, 4));
+				return;
+			}
+			int friendly = GlobalData::map_myfriendly[npcid].friendly;
+			int needfriendly = GlobalData::map_NPCMasterData[npcid].needfriendly;
+			if (friendly >= needfriendly)
+			{
+				GlobalData::map_myfriendly[npcid].relation = F_MASTER;
+				GlobalData::saveFriendly();
+				std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("拜入").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("门下！一日为师，终生为父！").c_str());
+				g_uiScroll->addEventText(desc, 25, Color3B(27, 141, 0));
+				btn->setTitleText(CommonFuncs::gbk2utf("出师"));
+			}
+			else
+			{
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("师徒缘分未到！"), 25, Color3B(204, 4, 4));
+			}
+
+		}
+		else
+		{
+			GlobalData::isFightMaster = true;
+			FightLayer* fightlayer = FightLayer::create(m_addrstr, npcid);
+			this->addChild(fightlayer);
+		}
 
 	}
 }
@@ -409,6 +456,40 @@ void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		cocos2d::ui::Button* btn = (cocos2d::ui::Button*)pSender;
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[btn->getTag()];
+		if (btn->getTitleText().compare(CommonFuncs::gbk2utf("结交")) == 0)
+		{
+			if (GlobalData::map_myfriendly[npcid].relation == F_MASTER)
+			{
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("逆徒！还想跟为师称兄道弟？！"), 25, Color3B(204, 4, 4));
+				return;
+			}
+
+			int friendly = GlobalData::map_myfriendly[npcid].friendly;
+			int needfriendly = GlobalData::map_NPCFriendData[npcid].needfriendly;
+			if (friendly >= needfriendly)
+			{
+				GlobalData::map_myfriendly[npcid].relation = F_FRIEND;
+				GlobalData::saveFriendly();
+				std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("与").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("成为好友！").c_str());
+				g_uiScroll->addEventText(desc, 25, Color3B(27, 141, 0));
+				btn->setTitleText(CommonFuncs::gbk2utf("绝交"));
+			}
+			else
+			{
+				g_uiScroll->addEventText(CommonFuncs::gbk2utf("咱们两个不是很熟，就不要走的太近了！"), 25, Color3B(204, 4, 4));
+			}
+
+		}
+		else
+		{
+			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
+			GlobalData::saveFriendly();
+			btn->setTitleText(CommonFuncs::gbk2utf("结交"));
+			GlobalData::map_myfriendly[npcid].friendly = 0;
+			updateFriendly(npcid);
+		}
 	}
 }
 
@@ -1089,17 +1170,20 @@ std::string NpcLayer::replaceSexWord(std::string dstr)
 	return retstr;
 }
 
-void NpcLayer::reFreshFriendly()
+void NpcLayer::reFreshFriendlyUI()
 {
 	int npcitemcount = m_scrollview->getChildrenCount();
 	for (int i = 0; i < npcitemcount; i++)
 	{
 		std::string childname = StringUtils::format("npcnode%d", i);
 		Node* npcitemnode = m_scrollview->getChildByName(childname);
-		int friendly = GlobalData::map_myfriendly[GlobalData::map_maps[m_addrstr].npcs[i]];
-		int maxfriendly = GlobalData::map_NPCFriendData[GlobalData::map_maps[m_addrstr].npcs[i]].maxfriendly;
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[i];
+		int friendly = GlobalData::map_myfriendly[npcid].friendly;
+		int maxfriendly = GlobalData::map_NPCFriendData[npcid].maxfriendly;
 		if (friendly > maxfriendly)
 			friendly = maxfriendly;
+		else if (friendly < -maxfriendly)
+			friendly = -maxfriendly;
 
 		int per = maxfriendly / 5;
 		int count = friendly/per;
@@ -1108,16 +1192,90 @@ void NpcLayer::reFreshFriendly()
 		{
 			std::string barstr = StringUtils::format("fbar_%d", m);
 			cocos2d::ui::LoadingBar* friendbar = (cocos2d::ui::LoadingBar*)npcitemnode->getChildByName(barstr);
+
+			if (friendly < 0)
+			{
+				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::TextureResType::PLIST);
+			}
+			else
+			{
+				friendbar->loadTexture("ui/fheart1.png", cocos2d::ui::TextureResType::PLIST);
+			}
 			if (m < count)
 			{
 				friendbar->setPercent(100);
 			}
 			else if (m == count)
 			{
-				float percent = friendly % per * 100.0f / per;
+				float percent = fabs(friendly % per * 100.0f / per);
 				friendbar->setPercent(percent);
 			}
 		}
 
 	}
+}
+
+void NpcLayer::reFreshRelationUI()
+{
+	int npcitemcount = m_scrollview->getChildrenCount();
+	for (int i = 0; i < npcitemcount; i++)
+	{
+		std::string childname = StringUtils::format("npcnode%d", i);
+		Node* npcitemnode = m_scrollview->getChildByName(childname);
+		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[i];
+
+		cocos2d::ui::Button* masterbtn = (cocos2d::ui::Button*)npcitemnode->getChildByName("msterbtn");
+		cocos2d::ui::Button* friendbtn = (cocos2d::ui::Button*)npcitemnode->getChildByName("friendbtn");
+		int relation = GlobalData::map_myfriendly[npcid].relation;
+		if (relation == F_MASTEROUT)
+		{
+			masterbtn->setEnabled(false);
+			masterbtn->setTitleText(CommonFuncs::gbk2utf("出师"));
+		}
+		else if (relation == F_NOMAR)
+		{
+			friendbtn->setTitleText(CommonFuncs::gbk2utf("结交"));
+			masterbtn->setTitleText(CommonFuncs::gbk2utf("拜师"));
+		}
+		else if (relation == F_FRIEND)
+		{
+			friendbtn->setTitleText(CommonFuncs::gbk2utf("绝交"));
+		}
+		else if (relation == F_MASTER)
+		{
+			masterbtn->setTitleText(CommonFuncs::gbk2utf("出师"));
+		}
+
+	}
+}
+
+void NpcLayer::updateFriendly(std::string npcid)
+{
+	GlobalData::map_myfriendly[npcid].friendly -= 5;
+	int friendly = GlobalData::map_myfriendly[npcid].friendly;
+	int needfriendly = GlobalData::map_NPCMasterData[npcid].needfriendly;
+	int masterfriendly = GlobalData::map_NPCMasterData[npcid].needfriendly;
+	if (friendly < needfriendly)
+	{
+		if (GlobalData::map_myfriendly[npcid].relation == F_FRIEND)
+		{
+			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
+			std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("与").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("关系恶化，不再是朋友！").c_str());
+			g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+			GlobalData::map_myfriendly[npcid].friendly = 0;
+		}
+	}
+	if (friendly < masterfriendly)
+	{
+		if (GlobalData::map_myfriendly[npcid].relation == F_MASTER)
+		{
+			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
+			std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("不懂尊师重道，被").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("逐出师门！").c_str());
+			g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+			GlobalData::map_myfriendly[npcid].friendly = 0;
+		}
+	}
+	GlobalData::saveFriendly();
+	reFreshFriendlyUI();
+	reFreshRelationUI();
 }

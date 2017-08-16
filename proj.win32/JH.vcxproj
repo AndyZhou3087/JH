@@ -200,6 +200,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\NpcLayer.cpp" />
     <ClCompile Include="..\Classes\OutDoor.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
+    <ClCompile Include="..\Classes\RelationLayer.cpp" />
     <ClCompile Include="..\Classes\RepairLayer.cpp" />
     <ClCompile Include="..\Classes\RepairOKLayer.cpp" />
     <ClCompile Include="..\Classes\ResDetailsLayer.cpp" />
@@ -291,6 +292,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\NpcLayer.h" />
     <ClInclude Include="..\Classes\OutDoor.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
+    <ClInclude Include="..\Classes\RelationLayer.h" />
     <ClInclude Include="..\Classes\RepairLayer.h" />
     <ClInclude Include="..\Classes\RepairOKLayer.h" />
     <ClInclude Include="..\Classes\ResDetailsLayer.h" />

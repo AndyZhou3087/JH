@@ -187,6 +187,8 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		Node* node = (Node*)pSender;
+		GlobalData::isFightMaster = false;
+
 		if (node->getTag() == 0)
 		{
 			int r = GlobalData::createRandomNum(100);

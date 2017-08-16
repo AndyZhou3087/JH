@@ -31,9 +31,19 @@ public:
 	bool doCheckPlotMisson(int type, NpcData npcdata);
 
 	/****************************
+	更新好友度ui
+	*****************************/
+	void reFreshFriendlyUI();
+
+	/****************************
+	更新好友关系UI
+	*****************************/
+	void reFreshRelationUI();
+
+	/****************************
 	更新好友度
 	*****************************/
-	void reFreshFriendly();
+	void updateFriendly(std::string npcid);
 
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

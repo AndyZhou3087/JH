@@ -302,6 +302,18 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	}
 	updata();
 	updataLV();
+
+	if (GlobalData::isFightMaster)
+	{
+		GlobalData::map_myfriendly[m_npcid].relation = F_MASTEROUT;
+		GlobalData::saveFriendly();
+		GlobalData::isFightMaster = false;
+		NpcLayer* npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
+		if (npclayer != NULL)
+			npclayer->reFreshRelationUI();
+		std::string desc = StringUtils::format("%s%s%s", GlobalData::map_npcs[m_npcid].name, CommonFuncs::gbk2utf("：青出于蓝而胜于蓝。"), CommonFuncs::gbk2utf("为师没什么能教你了！").c_str());
+		g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+	}
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -739,7 +751,8 @@ void Winlayer::showNewerGuide(int step)
 	if (step == 34)
 	{
 		Node* resnode = this->getChildByName("resitem0");
-		nodes.push_back(resnode->getChildren().at(0));
+		if (resnode != NULL)
+			nodes.push_back(resnode->getChildren().at(0));
 	}
 	else if (step == 35 || step == 38)
 	{
@@ -749,7 +762,8 @@ void Winlayer::showNewerGuide(int step)
 	{
 		nodes.push_back(m_getallbtn);
 	}
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (nodes.size() > 0)
+		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 

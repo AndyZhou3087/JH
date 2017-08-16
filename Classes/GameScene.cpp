@@ -248,6 +248,7 @@ void GameScene::loadSaveHeroData()
 
 	GlobalData::loadTempGF_EquipData();
 	GlobalData::loadNpcFriendJsonData();
+	GlobalData::loadNpcMasterJsonData();
 	GlobalData::loadFriendly();
 }
 

@@ -43,9 +43,12 @@ std::vector<GoodsData> GlobalData::vec_goods;
 std::vector<std::string> GlobalData::vec_buyVipIds;
 
 std::map<std::string, ChallengeRewardData> GlobalData::map_challengeReward;
-std::map<std::string, int> GlobalData::map_myfriendly;
+std::map<std::string, FriendlyData> GlobalData::map_myfriendly;
 
 std::map<std::string, NPCFriendData> GlobalData::map_NPCFriendData;
+
+std::map<std::string, NPCMasterData> GlobalData::map_NPCMasterData;
+
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -78,6 +81,8 @@ std::string GlobalData::MD5FreeReviveCount;
 std::string GlobalData::MD5HeroLv;
 std::string GlobalData::MD5LiveDays;
 bool GlobalData::dataIsModified = false;
+
+bool GlobalData::isFightMaster = false;
 
 GlobalData::GlobalData()
 {
@@ -1572,7 +1577,8 @@ void GlobalData::loadFriendly()
 		{
 			std::vector<std::string> tmp;
 			CommonFuncs::split(vec_retstr[i], tmp, "-");
-			map_myfriendly[tmp[0]] = atoi(tmp[1].c_str());
+			map_myfriendly[tmp[0]].friendly = atoi(tmp[1].c_str());
+			map_myfriendly[tmp[0]].relation = atoi(tmp[2].c_str());
 		}
 	}
 }
@@ -1581,12 +1587,17 @@ void GlobalData::loadFriendly()
 void GlobalData::saveFriendly()
 {
 	std::string str;
-	std::map<std::string, int>::iterator it;
+	std::map<std::string, FriendlyData>::iterator it;
 	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
 	{
-		std::string onestr = StringUtils::format("%s-%d", it->first.c_str(), GlobalData::map_myfriendly[it->first]);
-		str.append(onestr);
-		str.append(";");
+		int friendly = GlobalData::map_myfriendly[it->first].friendly;
+		int relation = GlobalData::map_myfriendly[it->first].relation;
+		if (friendly != 0 && relation > 0)
+		{
+			std::string onestr = StringUtils::format("%s-%d-%d", it->first.c_str(), friendly, relation);
+			str.append(onestr);
+			str.append(";");
+		}
 	}
 	GameDataSave::getInstance()->setFriendly(str.substr(0, str.length() - 1));
 }
@@ -1638,6 +1649,53 @@ void GlobalData::loadNpcFriendJsonData()
 		//}
 
 		map_NPCFriendData[npcid] = data;
+
+	}
+}
+void GlobalData::loadNpcMasterJsonData()
+{
+
+	map_NPCMasterData.clear();
+	rapidjson::Document doc = ReadJsonFile("data/master.json");
+	rapidjson::Value& values = doc["ms"];
+	for (unsigned int i = 0; i < values.Size(); i++)//一级资源数组
+	{
+		NPCMasterData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["npcid"];
+		std::string npcid = v.GetString();
+
+		v = item["need"];
+		data.needfriendly = atoi(v.GetString());
+		//v = item["cname"];
+		//data.cname = v.GetString();
+		//v = item["desc"];
+		//data.desc = v.GetString();
+
+		//v = item["val"];
+		//data.val = atoi(v.GetString());
+
+		//v = item["npcs"];
+
+		//for (unsigned int m = 0; m < v.Size(); m++)
+		//{
+		//	rapidjson::Value& npsv = v[m];
+		//	std::string npcid = npsv.GetString();
+		//	if (npcid.length() > 1)
+		//		data.npc.push_back(npcid);
+		//}
+
+		//v = item["npcval"];
+
+		//for (unsigned int m = 0; m < v.Size(); m++)
+		//{
+		//	rapidjson::Value& npsv = v[m];
+		//	std::string npcval = npsv.GetString();
+		//	if (npcval.length() > 0)
+		//		data.npcval.push_back(atof(npcval.c_str()));
+		//}
+
+		map_NPCMasterData[npcid] = data;
 
 	}
 }

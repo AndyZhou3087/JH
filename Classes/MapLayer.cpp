@@ -17,6 +17,7 @@
 #include "StoryScene.h"
 #include "VipShopLayer.h"
 #include "TimeGiftLayer.h"
+#include "RelationLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -165,16 +166,25 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 
 		Node* node = (Node*)pSender;
 		m_addrname = node->getName();
-		m_destPos = node->getPosition();
-		m_distance = fabsf(m_heroPos.distance(m_destPos));
-		WHERELAYER_TYPE type = ARRIVE;
-		if (m_distance <= 1.0f)
-			type = ARRIVE;
-		else
-			type = GOWHERE;
 
-		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(GoWhereLayer::create(m_addrname, type, m_distance), 2);
+		if (m_addrname.compare("m1-6") == 0)
+		{
+			RelationLayer* relationlayer = RelationLayer::create();
+			g_gameLayer->addChild(relationlayer,5);
+		}
+		else
+		{
+			m_destPos = node->getPosition();
+			m_distance = fabsf(m_heroPos.distance(m_destPos));
+			WHERELAYER_TYPE type = ARRIVE;
+			if (m_distance <= 1.0f)
+				type = ARRIVE;
+			else
+				type = GOWHERE;
+
+			if (g_gameLayer != NULL)
+				g_gameLayer->addChild(GoWhereLayer::create(m_addrname, type, m_distance), 2);
+		}
 
 	}
 }

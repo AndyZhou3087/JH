@@ -258,6 +258,30 @@ typedef struct
 	std::vector<int> vec_winrnd;
 }ChallengeRewardData;
 
+/****************************
+好友度数据
+*****************************/
+typedef struct _FriendlyData
+{
+	int friendly;
+	int relation;
+	_FriendlyData()
+	{
+		friendly = 0;
+		relation = 0;
+	}
+}FriendlyData;
+
+/****************************
+好友关系
+*****************************/
+typedef enum
+{
+	F_NOMAR = 0,
+	F_FRIEND,
+	F_MASTER,
+	F_MASTEROUT
+}FriendType;
 
 /****************************
 NPC好友数据
@@ -267,6 +291,14 @@ typedef struct
 	int maxfriendly;
 	int needfriendly;
 }NPCFriendData;
+
+/****************************
+NPC师徒数据
+*****************************/
+typedef struct
+{
+	int needfriendly;
+}NPCMasterData;
 
 class GlobalData
 {
@@ -703,6 +735,11 @@ public:
 	*****************************/
 	static void loadNpcFriendJsonData();
 
+	/****************************
+	解析NPC师徒数据
+	*****************************/
+	static void loadNpcMasterJsonData();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -737,7 +774,7 @@ public:
 	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
 	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
-	static std::map<std::string, int> map_myfriendly;//技能数据
+	static std::map<std::string, FriendlyData> map_myfriendly;//技能数据
 
 	static std::vector<std::string> vec_buyVipIds;
 
@@ -746,10 +783,14 @@ public:
 	static std::map<std::string, ChallengeRewardData> map_challengeReward;
 
 	static std::map<std::string, NPCFriendData> map_NPCFriendData;
+
+	static std::map<std::string, NPCMasterData> map_NPCMasterData;
+
 	static bool isPopingScene;
 
 	static GameStatus g_gameStatus;
 	static bool dataIsModified;
+	static bool isFightMaster;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
