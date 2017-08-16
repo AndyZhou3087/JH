@@ -311,7 +311,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		NpcLayer* npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
 		if (npclayer != NULL)
 			npclayer->reFreshRelationUI();
-		std::string desc = StringUtils::format("%s%s%s", GlobalData::map_npcs[m_npcid].name, CommonFuncs::gbk2utf("：青出于蓝而胜于蓝。"), CommonFuncs::gbk2utf("为师没什么能教你了！").c_str());
+		std::string desc = StringUtils::format("%s%s%s", GlobalData::map_npcs[m_npcid].name, CommonFuncs::gbk2utf("：青出于蓝而胜于蓝。").c_str(), CommonFuncs::gbk2utf("为师没什么能教你了！").c_str());
 		g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
 	}
 	auto listener = EventListenerTouchOneByOne::create();
