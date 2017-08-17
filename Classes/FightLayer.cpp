@@ -939,7 +939,7 @@ std::string FightLayer::getGfFightStr()
 
 void FightLayer::checkHeroLife(float dt)
 {
-	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
 	herohpvaluetext->setString(hpstr);
 	float herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
 	herohpbar->setPercent(herohppercent);
