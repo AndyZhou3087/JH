@@ -244,7 +244,7 @@ void SysSmallBox::updataUI(float dt)
 	}
 	if (mType == LIFE)
 	{
-		std::string livevaluestr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+		std::string livevaluestr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
 		title1Txt->setString(CommonFuncs::gbk2utf(livevaluestr.c_str()));
 	}
 }

@@ -152,7 +152,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	herostatus[7]->setString(CommonFuncs::gbk2utf("一般"));
 
 	//生命值属性
-	std::string str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), g_hero->getMaxLifeValue());
+	std::string str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
 	herostatus[8]->setString(str);
 
 
