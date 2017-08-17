@@ -459,7 +459,7 @@ void TopBar::updataUI(float dt)
 		if (g_nature->getDayOrNight() == Day)
 		{
 			int r = GlobalData::createRandomNum(100);
-			//if (r < 10)
+			if (r < 10)
 			{
 				int r1 = GlobalData::createRandomNum(100);
 				int type = r1 < 50 ? 0 : 1;
