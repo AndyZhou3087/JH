@@ -313,7 +313,7 @@ typedef struct
 	float critpercent;
 	float hppercent;
 	std::vector<std::string> vec_gfid;
-	std::vector<int> vec_gfbonus;
+	std::vector<float> vec_gfbonus;
 }NPCMasterData;
 
 class GlobalData

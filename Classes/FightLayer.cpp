@@ -400,6 +400,8 @@ void FightLayer::delayBossFight(float dt)
 		{
 			showSkill(skilltype);
 			npchp -= getNpcHurt() * 3 / 10;
+			if (npchp < 0)
+				npchp = 0;
 			updateNpcLife();
 			GlobalData::map_gfskills[skilltype].leftval--;
 			if (npchp <= 0)
@@ -427,6 +429,8 @@ void FightLayer::delayBossFight(float dt)
 			showSkill(skilltype);
 			int npclosthp = npchp * GlobalData::map_gfskills[skilltype].leftval / 100;
 			npchp -= npclosthp;
+			if (npchp < 0)
+				npchp = 0;
 			updateNpcLife();
 			g_hero->setLifeValue(curheroHp + npclosthp);
 			checkHeroLife(0);

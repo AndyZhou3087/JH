@@ -1716,8 +1716,8 @@ void GlobalData::loadNpcMasterJsonData()
 		{
 			rapidjson::Value& resv = v[m];
 			std::string resval = resv.GetString();
-			if (resval.compare("0") != 0)
-				data.vec_gfbonus.push_back(atoi(resval.c_str()));
+			if (resval.length() > 0 && resval.compare("0") != 0)
+				data.vec_gfbonus.push_back(atof(resval.c_str()));
 		}
 
 		map_NPCMasterData[npcid] = data;
