@@ -78,6 +78,11 @@ bool GameScene::init()
 	//加载武道大会挑战奖励数据
 	GlobalData::loadChallengeRewardData();
 
+	GlobalData::loadTempGF_EquipData();
+	GlobalData::loadNpcFriendJsonData();
+	GlobalData::loadNpcMasterJsonData();
+	GlobalData::loadFriendly();
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -245,11 +250,6 @@ void GameScene::loadSaveHeroData()
 	loadSavedHeroPropData();
 
 	getNpcRandMap();
-
-	GlobalData::loadTempGF_EquipData();
-	GlobalData::loadNpcFriendJsonData();
-	GlobalData::loadNpcMasterJsonData();
-	GlobalData::loadFriendly();
 }
 
 void GameScene::loadSavedHeroPropData()

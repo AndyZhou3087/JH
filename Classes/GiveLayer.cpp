@@ -50,6 +50,10 @@ bool GiveLayer::init(std::string npcid)
 	m_givebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("givebtn");
 	m_givebtn->addTouchEventListener(CC_CALLBACK_2(GiveLayer::onGive, this));
 
+	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+
 	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcname->setString(GlobalData::map_npcs[npcid].name);
 

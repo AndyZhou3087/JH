@@ -72,17 +72,15 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 		continuefight = 0;
 	}
 
-	// NPC 图标
-	cocos2d::ui::ImageView* npcicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+	cocos2d::ui::ImageView* heroicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroicon");
+	std::string heroiconstr = StringUtils::format("ui/fhero%d.png", g_hero->getHeadID());
+	heroicon->loadTexture(heroiconstr, cocos2d::ui::TextureResType::PLIST);
 
-	//兔子和狼换一下
-	std::string str = StringUtils::format("ui/%s.png", npcid.c_str());
-	SpriteFrame* sf = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
-	if (sf != NULL)
-	{
-		npcicon->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-		npcicon->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-	}
+	// NPC 图标
+	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+
 	//NPC名称
 	npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcnametxt->setString(GlobalData::map_npcs[m_npcid].name);
@@ -91,7 +89,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
 	heronametxt->setString(g_hero->getMyName());
 
-	int maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
+	int maxlife = g_hero->getMaxLifeValue();;
 	//角色血量显示
 	herohpvaluetext = (cocos2d::ui::Text*)csbnode->getChildByName("herohpvaluetext");
 	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), maxlife);
@@ -293,6 +291,22 @@ void FightLayer::delayHeroFight(float dt)
 		critrnd += GlobalData::map_gfskills[S_SKILL_4].leftval * 100;
 	}
 
+	int friendcritrnd = 0;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			friendcritrnd += GlobalData::map_NPCFriendData[nid].critpercent * 100;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			friendcritrnd += GlobalData::map_NPCMasterData[nid].critpercent * 100;
+		}
+	}
+	critrnd += friendcritrnd;
+
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
 	int r = GlobalData::createRandomNum(10000);
 	if (r < critrnd)
@@ -439,6 +453,23 @@ void FightLayer::delayBossFight(float dt)
 		dodgernd += GlobalData::map_gfskills[S_SKILL_8].leftval * 100;
 	}
 
+	int frienddogdernd = 0;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			frienddogdernd += GlobalData::map_NPCFriendData[nid].dodgepercent * 100;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			frienddogdernd += GlobalData::map_NPCMasterData[nid].dodgepercent * 100;
+		}
+	}
+	dodgernd += frienddogdernd;
+
+
 	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
 	int r = GlobalData::createRandomNum(10000);
 	if (r < npccritrnd)
@@ -489,7 +520,7 @@ void FightLayer::delayBossFight(float dt)
 	{
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 
-		float f1maxlife = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()] * 0.05f;
+		float f1maxlife = g_hero->getMaxLifeValue() * 0.05f;
 		if (herohurt >= (int)f1maxlife)//受到大于10%伤害
 		{
 			int r = GlobalData::createRandomNum(100);
@@ -908,9 +939,9 @@ std::string FightLayer::getGfFightStr()
 
 void FightLayer::checkHeroLife(float dt)
 {
-	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 	herohpvaluetext->setString(hpstr);
-	float herohppercent = 100 * g_hero->getLifeValue() / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()];
+	float herohppercent = 100 * g_hero->getLifeValue() / g_hero->getMaxLifeValue();
 	herohpbar->setPercent(herohppercent);
 
 	MyProgressTo * fromto = MyProgressTo::create(0.5f, herohppercent);

@@ -53,6 +53,10 @@ bool ExchangeLayer::init(std::string npcid)
 	m_exgbtn->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onExg, this));
 	m_exgbtn->setEnabled(false);
 
+	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+
 	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcname->setString(GlobalData::map_npcs[npcid].name);
 

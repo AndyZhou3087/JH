@@ -279,6 +279,9 @@
     <ClCompile Include="..\Classes\RelationLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FriendExgScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -552,6 +555,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RelationLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FriendExgScene.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

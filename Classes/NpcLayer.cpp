@@ -143,6 +143,10 @@ void NpcLayer::refreshNpcNode()
 			npcitem->setTag(i);
 			m_scrollview->addChild(npcitem, 0, childname);
 
+			cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)npcitem->getChildByName("npcicon");
+			std::string npcheadstr = StringUtils::format("ui/%s.png", mdata.npcs[i].c_str());
+			npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+
 			cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
 			npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
 
@@ -183,7 +187,10 @@ void NpcLayer::refreshNpcNode()
 			friendbtn->setTag(i);
 			friendbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemFriend, this));
 
-			int relation = GlobalData::map_myfriendly[mdata.npcs[i]].relation;
+			int relation = F_NOMAR;
+			if (GlobalData::map_myfriendly.find(mdata.npcs[i]) != GlobalData::map_myfriendly.end())
+				relation = GlobalData::map_myfriendly[mdata.npcs[i]].relation;
+
 			if (relation == F_MASTEROUT)
 			{
 				masterbtn->setTitleText(CommonFuncs::gbk2utf("出师"));
@@ -420,15 +427,71 @@ void NpcLayer::onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[btn->getTag()];
 		if (btn->getTitleText().compare(CommonFuncs::gbk2utf("拜师")) == 0)
 		{
-			if (GlobalData::map_myfriendly[npcid].relation == F_FRIEND)
+			int friendly = 0;
+			int relation = F_NOMAR;
+			
+			if (GlobalData::map_myfriendly.find(npcid) != GlobalData::map_myfriendly.end())
+			{
+				friendly = GlobalData::map_myfriendly[npcid].friendly;
+				relation = GlobalData::map_myfriendly[npcid].relation;
+			}
+			if (relation == F_FRIEND)
 			{
 				g_uiScroll->addEventText(CommonFuncs::gbk2utf("你我关系这么好，我怎么能当你的师傅呢！"), 25, Color3B(204, 4, 4));
 				return;
 			}
-			int friendly = GlobalData::map_myfriendly[npcid].friendly;
+
+			std::map<std::string, FriendlyData>::iterator mit;
+			for (mit = GlobalData::map_myfriendly.begin(); mit != GlobalData::map_myfriendly.end(); ++mit)
+			{
+				if (GlobalData::map_myfriendly[mit->first].relation == F_MASTER)
+				{
+					std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你已拜入").c_str(), GlobalData::map_npcs[mit->first].name, CommonFuncs::gbk2utf("门下！请回吧！").c_str());
+					g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
+					return;
+				}
+			}
+
 			int needfriendly = GlobalData::map_NPCMasterData[npcid].needfriendly;
 			if (friendly >= needfriendly)
 			{
+				bool ishasenemy = false;
+				std::string e_npcnamstr;
+				std::vector<std::string> e_npc = GlobalData::map_NPCFriendData[npcid].vec_enemynpc;
+				std::map<std::string, FriendlyData>::iterator it;
+				for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+				{
+					std::string nid = it->first;
+
+					for (unsigned int m = 0; m < e_npc.size(); m++)
+					{
+						if (nid.compare(e_npc[m]) == 0 && GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+						{
+							GlobalData::map_myfriendly[nid].friendly = 0;
+							GlobalData::map_myfriendly[nid].relation = F_NOMAR;
+							e_npcnamstr.append(GlobalData::map_npcs[nid].name);
+							e_npcnamstr.append(CommonFuncs::gbk2utf("、"));
+							ishasenemy = true;
+						}
+					}
+				}
+
+				if (ishasenemy)
+				{
+
+					GlobalData::map_myfriendly[npcid].friendly = 0;
+					GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
+					e_npcnamstr = e_npcnamstr.substr(0, e_npcnamstr.length() - 3);
+					std::string desc = StringUtils::format("%s%s%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("发现你与").c_str(), e_npcnamstr.c_str(), CommonFuncs::gbk2utf("的关系，他们发现你是这种三头两面的人，纷纷离你而去！").c_str());
+					HintBox* hbox = HintBox::create(desc);
+					this->addChild(hbox);
+					GlobalData::saveFriendly();
+					reFreshFriendlyUI();
+					reFreshRelationUI();
+
+					return;
+				}
+
 				GlobalData::map_myfriendly[npcid].relation = F_MASTER;
 				GlobalData::saveFriendly();
 				std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("拜入").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("门下！一日为师，终生为父！").c_str());
@@ -460,16 +523,61 @@ void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[btn->getTag()];
 		if (btn->getTitleText().compare(CommonFuncs::gbk2utf("结交")) == 0)
 		{
-			if (GlobalData::map_myfriendly[npcid].relation == F_MASTER)
+			int friendly = 0;
+			int relation = F_NOMAR;
+
+			if (GlobalData::map_myfriendly.find(npcid) != GlobalData::map_myfriendly.end())
+			{
+				friendly = GlobalData::map_myfriendly[npcid].friendly;
+				relation = GlobalData::map_myfriendly[npcid].relation;
+			}
+
+			if (relation == F_MASTER)
 			{
 				g_uiScroll->addEventText(CommonFuncs::gbk2utf("逆徒！还想跟为师称兄道弟？！"), 25, Color3B(204, 4, 4));
 				return;
 			}
 
-			int friendly = GlobalData::map_myfriendly[npcid].friendly;
 			int needfriendly = GlobalData::map_NPCFriendData[npcid].needfriendly;
 			if (friendly >= needfriendly)
 			{
+				bool ishasenemy = false;
+				std::string e_npcnamstr;
+				std::vector<std::string> e_npc = GlobalData::map_NPCFriendData[npcid].vec_enemynpc;
+				std::map<std::string, FriendlyData>::iterator it;
+				for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+				{
+					std::string nid = it->first;
+					
+					for (unsigned int m = 0; m < e_npc.size(); m++)
+					{
+						if (nid.compare(e_npc[m]) == 0 && (GlobalData::map_myfriendly[nid].relation == F_FRIEND || GlobalData::map_myfriendly[nid].relation == F_MASTER))
+						{
+							GlobalData::map_myfriendly[nid].friendly = 0;
+							GlobalData::map_myfriendly[nid].relation = F_NOMAR;
+							e_npcnamstr.append(GlobalData::map_npcs[nid].name);
+							e_npcnamstr.append(CommonFuncs::gbk2utf("、"));
+							ishasenemy = true;
+						}
+					}
+				}
+
+				if (ishasenemy)
+				{
+
+					GlobalData::map_myfriendly[npcid].friendly = 0;
+					GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
+					e_npcnamstr = e_npcnamstr.substr(0, e_npcnamstr.length() - 3);
+					std::string desc = StringUtils::format("%s%s%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("发现你与").c_str(), e_npcnamstr.c_str(), CommonFuncs::gbk2utf("的关系，他们发现你是这种三头两面的人，纷纷离你而去！").c_str());
+					HintBox* hbox = HintBox::create(desc);
+					this->addChild(hbox);
+					GlobalData::saveFriendly();
+					reFreshFriendlyUI();
+					reFreshRelationUI();
+
+					return;
+				}
+
 				GlobalData::map_myfriendly[npcid].relation = F_FRIEND;
 				GlobalData::saveFriendly();
 				std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("与").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("成为好友！").c_str());
@@ -1178,7 +1286,13 @@ void NpcLayer::reFreshFriendlyUI()
 		std::string childname = StringUtils::format("npcnode%d", i);
 		Node* npcitemnode = m_scrollview->getChildByName(childname);
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[i];
-		int friendly = GlobalData::map_myfriendly[npcid].friendly;
+
+		int friendly = 0;
+		if (GlobalData::map_myfriendly.find(npcid) != GlobalData::map_myfriendly.end())
+		{
+			friendly = GlobalData::map_myfriendly[npcid].friendly;
+		}
+
 		int maxfriendly = GlobalData::map_NPCFriendData[npcid].maxfriendly;
 		if (friendly > maxfriendly)
 			friendly = maxfriendly;
@@ -1192,7 +1306,7 @@ void NpcLayer::reFreshFriendlyUI()
 		{
 			std::string barstr = StringUtils::format("fbar_%d", m);
 			cocos2d::ui::LoadingBar* friendbar = (cocos2d::ui::LoadingBar*)npcitemnode->getChildByName(barstr);
-
+			friendbar->setPercent(0);
 			if (friendly < 0)
 			{
 				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::TextureResType::PLIST);
@@ -1226,7 +1340,14 @@ void NpcLayer::reFreshRelationUI()
 
 		cocos2d::ui::Button* masterbtn = (cocos2d::ui::Button*)npcitemnode->getChildByName("msterbtn");
 		cocos2d::ui::Button* friendbtn = (cocos2d::ui::Button*)npcitemnode->getChildByName("friendbtn");
-		int relation = GlobalData::map_myfriendly[npcid].relation;
+
+		int relation = F_NOMAR;
+
+		if (GlobalData::map_myfriendly.find(npcid) != GlobalData::map_myfriendly.end())
+		{
+			relation = GlobalData::map_myfriendly[npcid].relation;
+		}
+
 		if (relation == F_MASTEROUT)
 		{
 			masterbtn->setEnabled(false);

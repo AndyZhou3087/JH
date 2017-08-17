@@ -170,10 +170,10 @@ void Hero::sleep(int losttime, int hour)
 void Hero::sleepbystep(float dt)
 {
 	//每次恢复的生命值
-	m_life += GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * sleephour * 0.1f * liferecoverpercent / (TIMESCALE* ACTION_BAR_TIME);
-	if (m_life > getMaxLifeValue())
+	m_life += getMaxLifeValue() * sleephour * 0.1f * liferecoverpercent / (TIMESCALE* ACTION_BAR_TIME);
+	if (m_life > getRecoverLifeMaxValue())
 	{
-		m_life = getMaxLifeValue();
+		m_life = getRecoverLifeMaxValue();
 		this->unschedule(schedule_selector(Hero::sleepbystep));
 	}
 }
@@ -211,6 +211,27 @@ int Hero::getDfValue()
 }
 
 float Hero::getMaxLifeValue()
+{
+	float friendhppercent = 0.0f;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			friendhppercent += GlobalData::map_NPCFriendData[nid].hppercent / 100;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			friendhppercent += GlobalData::map_NPCMasterData[nid].hppercent / 100;
+		}
+	}
+	float flife = GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * 1.0f;
+	flife += flife*friendhppercent;
+	return flife;
+}
+
+float Hero::getRecoverLifeMaxValue()
 {
 	float flife = maxlifepercent * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
 	return flife;
@@ -475,8 +496,8 @@ void Hero::checkMaxVaule(float dt)
 
 	maxlifepercent = mlife;
 
-	if (m_life > getMaxLifeValue())
-		setLifeValue(getMaxLifeValue());
+	if (m_life > getRecoverLifeMaxValue())
+		setLifeValue(getRecoverLifeMaxValue());
 
 	setAtkPercent(matk);
 	setDfPercent(mdf);
@@ -505,10 +526,41 @@ int Hero::getTotalDf()
 	int adf = 0;
 	int ngdf = 0;
 	float slvdf = 0.0f;//强化等级加防
+
+	float frienddfpercent = 0.0f;
+	std::string masternpc;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			frienddfpercent += GlobalData::map_NPCFriendData[nid].dfpercent / 100;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			frienddfpercent += GlobalData::map_NPCMasterData[nid].dfpercent / 100;
+			masternpc = nid;
+		}
+	}
+
 	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
 		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
+
+		if (masternpc.length() > 0)
+		{
+			for (unsigned int i = 0; i < GlobalData::map_NPCMasterData[masternpc].vec_gfid.size(); i++)
+			{
+				if (gfname.compare(GlobalData::map_NPCMasterData[masternpc].vec_gfid[i]) == 0)
+				{
+					int msbdf = ngdf * GlobalData::map_NPCMasterData[masternpc].vec_gfbonus[i] / 100;
+					ngdf += msbdf;
+					break;
+				}
+			}
+		}
 	}
 
 	if (g_hero->getAtrByType(H_ARMOR)->count > 0 && g_hero->getAtrByType(H_ARMOR)->goodvalue > 0)
@@ -521,7 +573,12 @@ int Hero::getTotalDf()
 	//防御属性
 	float fdf = g_hero->getDfPercent() *(g_hero->getDfValue() + ngdf + adf);
 	fdf += slvdf;
-	adf = int(fdf*(1 + m_totalDfBonusPercent) + 0.5f);
+
+	fdf += fdf*m_totalDfBonusPercent;
+
+
+	fdf += fdf*frienddfpercent;
+	adf = int(fdf + 0.5f);
 	return adf;
 }
 
@@ -537,11 +594,42 @@ int Hero::getTotalAtck()
 		int slv = g_hero->getAtrByType(H_WEAPON)->slv;
 		slvAtk = slv * (slv + weaponAtk / 10);
 	}
+
+	float friendatkpercent = 0.0f;
+	std::string masternpc;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			friendatkpercent += GlobalData::map_NPCFriendData[nid].atkpercent / 100;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			friendatkpercent += GlobalData::map_NPCMasterData[nid].atkpercent / 100;
+			masternpc = nid;
+		}
+	}
+
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+		if (masternpc.length() > 0)
+		{
+			for (unsigned int i = 0; i < GlobalData::map_NPCMasterData[masternpc].vec_gfid.size(); i++)
+			{
+				if (strid.compare(GlobalData::map_NPCMasterData[masternpc].vec_gfid[i]) == 0)
+				{
+					int msbatk = wgAtk * GlobalData::map_NPCMasterData[masternpc].vec_gfbonus[i] / 100;
+					wgAtk += msbatk;
+					break;
+				}
+			}
+		}
 	}
+
 	//攻击属性
 	float fack = g_hero->getAtkPercent() * (g_hero->getAtkValue() + weaponAtk + wgAtk);
 
@@ -554,6 +642,11 @@ int Hero::getTotalAtck()
 		}
 	}
 	fack += slvAtk;
-	int tatk = int(fack*(1 + m_totalAtkBonusPercent) + 0.5f);
+
+	fack += fack* m_totalAtkBonusPercent;
+
+	fack += fack* friendatkpercent;
+
+	int tatk = int(fack + 0.5f);
 	return tatk;
 }

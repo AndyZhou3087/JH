@@ -31,24 +31,23 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="223876476" Tag="74" IconVisible="False" LeftMargin="77.4078" RightMargin="408.5922" TopMargin="483.0809" BottomMargin="706.9191" ctype="SpriteObjectData">
-            <Size X="234.0000" Y="90.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="1830302741" Tag="242" IconVisible="False" LeftMargin="65.0000" RightMargin="535.0000" TopMargin="475.0000" BottomMargin="685.0000" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="52" Scale9Height="62" ctype="ImageViewObjectData">
+            <Size X="120.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="194.4078" Y="751.9191" />
+            <Position X="125.0000" Y="745.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2700" Y="0.5874" />
-            <PreSize X="0.3250" Y="0.0703" />
-            <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
+            <PrePosition X="0.1736" Y="0.5820" />
+            <PreSize X="0.1667" Y="0.0938" />
+            <FileData Type="MarkedSubImage" Path="ui/n004.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="366009900" Tag="73" IconVisible="False" LeftMargin="161.9272" RightMargin="430.0728" TopMargin="490.0797" BottomMargin="743.9203" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="366009900" Tag="73" IconVisible="False" LeftMargin="195.6000" RightMargin="396.4000" TopMargin="525.0082" BottomMargin="708.9918" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="46.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="161.9272" Y="766.9203" />
+            <Position X="195.6000" Y="731.9918" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2249" Y="0.5992" />
+            <PrePosition X="0.2717" Y="0.5719" />
             <PreSize X="0.1778" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

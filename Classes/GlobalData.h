@@ -290,6 +290,15 @@ typedef struct
 {
 	int maxfriendly;
 	int needfriendly;
+	std::vector<std::string> vec_enemynpc;
+	float atkpercent;
+	float dfpercent;
+	float dodgepercent;
+	float critpercent;
+	float hppercent;
+
+	std::vector<int> vec_giveres;
+	std::vector<int> vec_askres;
 }NPCFriendData;
 
 /****************************
@@ -298,6 +307,13 @@ NPC师徒数据
 typedef struct
 {
 	int needfriendly;
+	float atkpercent;
+	float dfpercent;
+	float dodgepercent;
+	float critpercent;
+	float hppercent;
+	std::vector<std::string> vec_gfid;
+	std::vector<int> vec_gfbonus;
 }NPCMasterData;
 
 class GlobalData

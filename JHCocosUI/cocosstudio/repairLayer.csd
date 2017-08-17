@@ -16,24 +16,24 @@
             <PreSize X="1.0000" Y="0.8594" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="51.8632" RightMargin="434.1368" TopMargin="264.3212" BottomMargin="925.6788" ctype="SpriteObjectData">
-            <Size X="234.0000" Y="90.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="27.8697" RightMargin="572.1303" TopMargin="254.3181" BottomMargin="905.6818" ctype="SpriteObjectData">
+            <Size X="120.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="168.8632" Y="970.6788" />
+            <Position X="87.8697" Y="965.6818" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2345" Y="0.7583" />
-            <PreSize X="0.3250" Y="0.0703" />
-            <FileData Type="MarkedSubImage" Path="ui/npcicon.png" Plist="uipacker.plist" />
+            <PrePosition X="0.1220" Y="0.7544" />
+            <PreSize X="0.1667" Y="0.0938" />
+            <FileData Type="MarkedSubImage" Path="ui/n092.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1802100088" Tag="31" IconVisible="False" LeftMargin="131.3839" RightMargin="467.6161" TopMargin="274.3165" BottomMargin="959.6835" FontSize="42" LabelText="欧冶子" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="npcname" ActionTag="-1802100088" Tag="31" IconVisible="False" LeftMargin="116.3844" RightMargin="482.6156" TopMargin="277.3162" BottomMargin="956.6838" FontSize="42" LabelText="欧冶子" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="121.0000" Y="46.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="131.3839" Y="982.6835" />
+            <Position X="116.3844" Y="979.6838" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.1825" Y="0.7677" />
+            <PrePosition X="0.1616" Y="0.7654" />
             <PreSize X="0.1681" Y="0.0359" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

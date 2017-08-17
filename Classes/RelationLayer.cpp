@@ -11,7 +11,7 @@ RelationLayer::RelationLayer()
 
 RelationLayer::~RelationLayer()
 {
-
+	GlobalData::g_gameStatus = GAMESTART;
 }
 
 
@@ -47,6 +47,7 @@ bool RelationLayer::init()
 	m_loadlbl->setPosition(Vec2(320, 600));
 	this->addChild(m_loadlbl);
 
+	GlobalData::g_gameStatus = GAMEPAUSE;
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -95,8 +96,8 @@ void RelationLayer::delayShowData(float dt)
 		srollView->addChild(nodeitem);
 
 		cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)nodeitem->getChildByName("head");
-		//std::string headstr = StringUtils::format("%d.png", npcid);
-		//headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		std::string headstr = StringUtils::format("ui/%s.png", npcid.c_str());
+		headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
 
 		cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)nodeitem->getChildByName("name");
 		npcname->setString(GlobalData::map_npcs[npcid].name);

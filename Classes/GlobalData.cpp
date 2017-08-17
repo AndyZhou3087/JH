@@ -1604,7 +1604,6 @@ void GlobalData::saveFriendly()
 
 void GlobalData::loadNpcFriendJsonData()
 {
-
 	map_NPCFriendData.clear();
 	rapidjson::Document doc = ReadJsonFile("data/friend.json");
 	rapidjson::Value& values = doc["f"];
@@ -1620,33 +1619,51 @@ void GlobalData::loadNpcFriendJsonData()
 
 		v = item["need"];
 		data.needfriendly = atoi(v.GetString());
-		//v = item["cname"];
-		//data.cname = v.GetString();
-		//v = item["desc"];
-		//data.desc = v.GetString();
 
-		//v = item["val"];
-		//data.val = atoi(v.GetString());
+		v = item["atk"];
+		data.atkpercent = atof(v.GetString());
 
-		//v = item["npcs"];
+		v = item["df"];
+		data.dfpercent = atof(v.GetString());
 
-		//for (unsigned int m = 0; m < v.Size(); m++)
-		//{
-		//	rapidjson::Value& npsv = v[m];
-		//	std::string npcid = npsv.GetString();
-		//	if (npcid.length() > 1)
-		//		data.npc.push_back(npcid);
-		//}
+		v = item["avoid"];
+		data.dodgepercent = atof(v.GetString());
 
-		//v = item["npcval"];
+		v = item["crit"];
+		data.critpercent = atof(v.GetString());
 
-		//for (unsigned int m = 0; m < v.Size(); m++)
-		//{
-		//	rapidjson::Value& npsv = v[m];
-		//	std::string npcval = npsv.GetString();
-		//	if (npcval.length() > 0)
-		//		data.npcval.push_back(atof(npcval.c_str()));
-		//}
+		v = item["hp"];
+		data.hppercent = atof(v.GetString());
+
+		v = item["enemynpc"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& npsv = v[m];
+			std::string npcid = npsv.GetString();
+			if (npcid.length() > 1)
+				data.vec_enemynpc.push_back(npcid);
+		}
+
+		v = item["res"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.length() > 1)
+				data.vec_giveres.push_back(atoi(resval.c_str()));
+		}
+
+		v = item["nres"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.length() > 1)
+				data.vec_askres.push_back(atoi(resval.c_str()));
+		}
 
 		map_NPCFriendData[npcid] = data;
 
@@ -1667,33 +1684,41 @@ void GlobalData::loadNpcMasterJsonData()
 
 		v = item["need"];
 		data.needfriendly = atoi(v.GetString());
-		//v = item["cname"];
-		//data.cname = v.GetString();
-		//v = item["desc"];
-		//data.desc = v.GetString();
 
-		//v = item["val"];
-		//data.val = atoi(v.GetString());
+		v = item["atk"];
+		data.atkpercent = atof(v.GetString());
 
-		//v = item["npcs"];
+		v = item["df"];
+		data.dfpercent = atof(v.GetString());
 
-		//for (unsigned int m = 0; m < v.Size(); m++)
-		//{
-		//	rapidjson::Value& npsv = v[m];
-		//	std::string npcid = npsv.GetString();
-		//	if (npcid.length() > 1)
-		//		data.npc.push_back(npcid);
-		//}
+		v = item["avoid"];
+		data.dodgepercent = atof(v.GetString());
 
-		//v = item["npcval"];
+		v = item["crit"];
+		data.critpercent = atof(v.GetString());
 
-		//for (unsigned int m = 0; m < v.Size(); m++)
-		//{
-		//	rapidjson::Value& npsv = v[m];
-		//	std::string npcval = npsv.GetString();
-		//	if (npcval.length() > 0)
-		//		data.npcval.push_back(atof(npcval.c_str()));
-		//}
+		v = item["hp"];
+		data.hppercent = atof(v.GetString());
+
+		v = item["gfid"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.length() > 1)
+				data.vec_gfid.push_back(resval);
+		}
+
+		v = item["bonus"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.compare("0") != 0)
+				data.vec_gfbonus.push_back(atoi(resval.c_str()));
+		}
 
 		map_NPCMasterData[npcid] = data;
 

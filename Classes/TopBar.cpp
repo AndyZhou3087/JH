@@ -10,6 +10,7 @@
 #include "HomeLayer.h"
 #include "MapLayer.h"
 #include "NewerGuideLayer.h"
+#include "FriendExgScene.h"
 
 TopBar::TopBar()
 {
@@ -149,7 +150,7 @@ bool TopBar::init()
 	lifeBar->setType(ProgressTimer::Type::BAR);
 	lifeBar->setBarChangeRate(Vec2(0, 1));
 	lifeBar->setMidpoint(Vec2(0, 0));
-	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
 	lifeBar->setPosition(life->getPosition());
 	csbnode->addChild(lifeBar);
 	outinjuryRed = (cocos2d::ui::Widget*)csbnode->getChildByName("topoutinjuryred");
@@ -298,7 +299,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		else if (cnode->getName().compare("life") == 0)
 		{
 			std::string str = "生命";
-			std::string livevaluestr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+			std::string livevaluestr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), g_hero->getMaxLifeValue());
 			sbox = SysSmallBox::create(BoxType::LIFE, "ui/toplifebg.png", str, livevaluestr, lifedesc);
 		}
 		if (sbox != NULL)
@@ -315,7 +316,7 @@ void TopBar::updataUI(float dt)
 	{
 		outinjuryBar->setPercentage(g_hero->getOutinjuryValue());
 		innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
-		lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+		lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
 
 		if (m_lastinnerinjury != (int)g_hero->getInnerinjuryValue())
 		{
@@ -394,7 +395,7 @@ void TopBar::updataUI(float dt)
 					{
 						ResData* data = &GlobalData::vec_resData[m];
 						int type = data->type - 1;
-						if (data->strid.compare(GlobalData::vec_hillResid[i]) == 0 && (data->strid.compare("n002") == 0 || data->strid.compare("n003") == 0))
+						if (data->strid.compare(GlobalData::vec_hillResid[i]) == 0 && (data->strid.compare("67") == 0 || data->strid.compare("68") == 0))
 						{
 							int count = data->count % 2 == 0 ? data->count / 2 : (data->count / 2 + 1);
 							data->count = count;
@@ -455,6 +456,17 @@ void TopBar::updataUI(float dt)
 
 	if (m_lastDayOrNigth != g_nature->getDayOrNight())
 	{
+		if (g_nature->getDayOrNight() == Day)
+		{
+			int r = GlobalData::createRandomNum(100);
+			//if (r < 10)
+			{
+				int r1 = GlobalData::createRandomNum(100);
+				int type = r1 < 50 ? 0 : 1;
+				activityScene = FriendExgScene::createScene(type);
+			}
+
+		}
 		//if (g_nature->getDayOrNight() == Day)
 		//{
 		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了..."));
@@ -486,7 +498,7 @@ void TopBar::updataUI(float dt)
 	innerinjuryBar->setPercentage(g_hero->getInnerinjuryValue());
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	spiritBar->setPercentage(g_hero->getSpiritValue());
-	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_maxhp[g_hero->getLVValue()]);
+	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
 
 	if (m_lastinnerinjury != (int)g_hero->getInnerinjuryValue())
 	{

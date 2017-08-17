@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Fence.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
     <ClCompile Include="..\Classes\Forgingtable.cpp" />
+    <ClCompile Include="..\Classes\FriendExgScene.cpp" />
     <ClCompile Include="..\Classes\Furnace.cpp" />
     <ClCompile Include="..\Classes\GameDataSave.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -264,6 +265,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Fence.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\Forgingtable.h" />
+    <ClInclude Include="..\Classes\FriendExgScene.h" />
     <ClInclude Include="..\Classes\Furnace.h" />
     <ClInclude Include="..\Classes\GameDataSave.h" />
     <ClInclude Include="..\Classes\GameScene.h" />

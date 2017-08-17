@@ -11,6 +11,8 @@
         <Folder Name="images">
           <Image Name="dead.jpg" />
           <Image Name="exsercisedone.png" />
+          <Image Name="friendask.jpg" />
+          <Image Name="friendgive.jpg" />
           <Image Name="gameovertext.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="logo.png" />
@@ -87,6 +89,8 @@
           <Image Name="5.png" />
           <Image Name="6.png" />
           <Image Name="66.png" />
+          <Image Name="67.png" />
+          <Image Name="68.png" />
           <Image Name="69.png" />
           <Image Name="7.png" />
           <Image Name="70.png" />
@@ -152,6 +156,7 @@
           <Image Name="cooktable.png" />
           <Image Name="crit.png" />
           <Image Name="disbtn.png" />
+          <Image Name="disnpcbtn1.png" />
           <Image Name="dividetext.png" />
           <Image Name="dodge.png" />
           <Image Name="e001.png" />
@@ -169,6 +174,10 @@
           <Image Name="fheart0.png" />
           <Image Name="fheart1.png" />
           <Image Name="fheartbg.png" />
+          <Image Name="fhero1.png" />
+          <Image Name="fhero2.png" />
+          <Image Name="fhero3.png" />
+          <Image Name="fhero4.png" />
           <Image Name="fighthpbar.png" />
           <Image Name="fighthpbar2.png" />
           <Image Name="fighthpbg.png" />
@@ -281,6 +290,94 @@
           <Image Name="n002.png" />
           <Image Name="n003.png" />
           <Image Name="n004.png" />
+          <Image Name="n005.png" />
+          <Image Name="n006.png" />
+          <Image Name="n007.png" />
+          <Image Name="n008.png" />
+          <Image Name="n009.png" />
+          <Image Name="n010.png" />
+          <Image Name="n011.png" />
+          <Image Name="n012.png" />
+          <Image Name="n013.png" />
+          <Image Name="n014.png" />
+          <Image Name="n015.png" />
+          <Image Name="n016.png" />
+          <Image Name="n017.png" />
+          <Image Name="n018.png" />
+          <Image Name="n019.png" />
+          <Image Name="n020.png" />
+          <Image Name="n021.png" />
+          <Image Name="n022.png" />
+          <Image Name="n023.png" />
+          <Image Name="n024.png" />
+          <Image Name="n025.png" />
+          <Image Name="n026.png" />
+          <Image Name="n027.png" />
+          <Image Name="n028.png" />
+          <Image Name="n029.png" />
+          <Image Name="n030.png" />
+          <Image Name="n031.png" />
+          <Image Name="n032.png" />
+          <Image Name="n033.png" />
+          <Image Name="n034.png" />
+          <Image Name="n035.png" />
+          <Image Name="n036.png" />
+          <Image Name="n037.png" />
+          <Image Name="n038.png" />
+          <Image Name="n039.png" />
+          <Image Name="n040.png" />
+          <Image Name="n041.png" />
+          <Image Name="n042.png" />
+          <Image Name="n043.png" />
+          <Image Name="n044.png" />
+          <Image Name="n045.png" />
+          <Image Name="n046.png" />
+          <Image Name="n047.png" />
+          <Image Name="n048.png" />
+          <Image Name="n049.png" />
+          <Image Name="n050.png" />
+          <Image Name="n051.png" />
+          <Image Name="n052.png" />
+          <Image Name="n053.png" />
+          <Image Name="n054.png" />
+          <Image Name="n055.png" />
+          <Image Name="n056.png" />
+          <Image Name="n057.png" />
+          <Image Name="n058.png" />
+          <Image Name="n059.png" />
+          <Image Name="n060.png" />
+          <Image Name="n061.png" />
+          <Image Name="n062.png" />
+          <Image Name="n063.png" />
+          <Image Name="n064.png" />
+          <Image Name="n065.png" />
+          <Image Name="n066.png" />
+          <Image Name="n067.png" />
+          <Image Name="n068.png" />
+          <Image Name="n069.png" />
+          <Image Name="n070.png" />
+          <Image Name="n071.png" />
+          <Image Name="n072.png" />
+          <Image Name="n073.png" />
+          <Image Name="n074.png" />
+          <Image Name="n075.png" />
+          <Image Name="n076.png" />
+          <Image Name="n077.png" />
+          <Image Name="n078.png" />
+          <Image Name="n079.png" />
+          <Image Name="n080.png" />
+          <Image Name="n081.png" />
+          <Image Name="n082.png" />
+          <Image Name="n083.png" />
+          <Image Name="n084.png" />
+          <Image Name="n085.png" />
+          <Image Name="n086.png" />
+          <Image Name="n087.png" />
+          <Image Name="n088.png" />
+          <Image Name="n089.png" />
+          <Image Name="n090.png" />
+          <Image Name="n091.png" />
+          <Image Name="n092.png" />
           <Image Name="normalbtn.png" />
           <Image Name="npcbtn1.png" />
           <Image Name="npcheadbox.png" />
@@ -506,6 +603,8 @@
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="pauseLayer.csd" Type="Layer" />
+        <Project Name="relationLayer.csd" Type="Layer" />
+        <Project Name="relationNode.csd" Type="Node" />
         <Project Name="repairLayer.csd" Type="Layer" />
         <Project Name="repairOKLayer.csd" Type="Layer" />
         <Project Name="resDetailsLayer.csd" Type="Layer" />
@@ -530,8 +629,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="relationLayer.csd" Type="Layer" />
-        <Project Name="relationNode.csd" Type="Node" />
+        <Project Name="friendExgLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

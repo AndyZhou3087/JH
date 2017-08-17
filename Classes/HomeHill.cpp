@@ -163,19 +163,22 @@ void HomeHill::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			GlobalData::vec_resData[i].count--;
 
-			if (atoi(data->strid.c_str()) != 0)//资源采集挖掘
+			if (data->strid.compare("67") == 0 || data->strid.compare("68") == 0)//兔子，狼战斗界面
+			{
+				std::string npcid = "n002";
+				if (data->strid.compare("68") == 0)
+					npcid = "n003";
+				FightLayer* layer = FightLayer::create("m1-2", npcid);
+				if (g_gameLayer != NULL)
+					g_gameLayer->addChild(layer, 4, "fightlayer");
+			}
+			else
 			{
 				ActionGetLayer* layer = ActionGetLayer::create(i, data->res, data->type, data->actype);
 				if (g_gameLayer != NULL)
 					g_gameLayer->addChild(layer, 2, "ActionGetLayer");
 			}
-			else//兔子，狼战斗界面
-			{
-				FightLayer* layer = FightLayer::create("m1-2", data->strid);
 
-				if (g_gameLayer != NULL)
-					g_gameLayer->addChild(layer, 4, "fightlayer");
-			}
 
 		}
 	}
