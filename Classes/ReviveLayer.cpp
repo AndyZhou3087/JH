@@ -6,6 +6,8 @@
 #include "ShopLayer.h"
 #include "Const.h"
 #include "FightLayer.h"
+#include "MD5.h"
+#include "HintBox.h"
 
 #ifdef UMENG_SHARE
 #include "UmengShare/Common/CCUMSocialSDK.h"
@@ -246,8 +248,23 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		{
 			int rcount = GlobalData::getReviveCount();
 			int revivegold = rcount * 20;
-			if (GlobalData::getMyGoldCount() >= revivegold)
+			int mygold = GlobalData::getMyGoldCount();
+			if (mygold >= revivegold)
 			{
+				if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
+				{
+					GlobalData::dataIsModified = true;
+					mygold = 0;
+				}
+				GlobalData::setMyGoldCount(mygold);
+
+				if (GlobalData::dataIsModified)
+				{
+					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
+					this->addChild(hint);
+					return;
+				}
+
 				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - revivegold);
 				if (++rcount > 6)
 					rcount = 6;

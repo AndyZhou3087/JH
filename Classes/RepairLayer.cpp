@@ -315,7 +315,11 @@ void RepairLayer::onResItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		Node* node = (Node*)pSender;
 		ResDetailsLayer::whereClick = 1;
 		if (node->getTag() == 0)
-			this->addChild(ResDetailsLayer::create((PackageData*)node->getUserData()));
+		{
+			PackageData* pdata = (PackageData*)node->getUserData();
+			if (pdata != NULL && pdata->strid.length() > 0)
+				this->addChild(ResDetailsLayer::create((PackageData*)node->getUserData()));
+		}
 		else
 		{
 			std::string resid = StringUtils::format("%d", node->getTag());

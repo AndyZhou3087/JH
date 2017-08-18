@@ -722,15 +722,15 @@ public:
 	防作弊数据start
 	*****************************/
 	static std::string getMD5MyGoldCount();
-	static void setMD5MyGoldCount(int val);
+	static void setMD5MyGoldCount(std::string val);
 	static std::string getMD5CostGlodCount();
-	static void setMD5CostGlodCount(int val);
+	static void setMD5CostGlodCount(std::string val);
 	static std::string getMD5FreeReviveCount();
-	static void setMD5FreeReviveCount(int val);
+	static void setMD5FreeReviveCount(std::string val);
 	static std::string getMD5HeroLv();
-	static void setMD5HeroLv(int val);
+	static void setMD5HeroLv(std::string val);
 	static std::string getMD5LiveDays();
-	static void setMD5LiveDays(int val);
+	static void setMD5LiveDays(std::string val);
 
 	/****************************
 	防作弊数据end
@@ -808,6 +808,7 @@ public:
 
 	static GameStatus g_gameStatus;
 	static bool dataIsModified;
+	static bool ispunishment;
 	static bool isFightMaster;
 	static int servertime;
 private:

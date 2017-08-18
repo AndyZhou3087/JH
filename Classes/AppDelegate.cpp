@@ -154,8 +154,11 @@ void AppDelegate::applicationWillEnterForeground() {
 		BuildingUILayer* blayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
 		if (!blayer)
 		{
-			ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
-			ServerDataSwap::getInstance()->vipIsOn();
+			if (g_hero != NULL)
+			{
+				ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
+				ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
+			}
 		}
 		else
 		{

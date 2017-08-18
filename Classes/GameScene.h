@@ -99,6 +99,8 @@ private:
 	*****************************/
 	void onSuccess();
 	void onErr(int errcode);
+
+	void delayChangeStartScene(float dt);
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据

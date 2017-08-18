@@ -77,7 +77,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	heroicon->loadTexture(heroiconstr, cocos2d::ui::TextureResType::PLIST);
 
 	// NPC 图标
-	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
+	npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
 	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
 
@@ -968,6 +968,9 @@ void FightLayer::updateNpcLife()
 void FightLayer::nextFightNpc(float dt)
 {
 	this->unschedule(schedule_selector(FightLayer::delayHeroFight));
+
+	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
 
 	npcnametxt->setString(GlobalData::map_npcs[m_npcid].name);
 
