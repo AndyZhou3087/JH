@@ -83,6 +83,7 @@ std::string GlobalData::MD5LiveDays;
 bool GlobalData::dataIsModified = false;
 
 bool GlobalData::isFightMaster = false;
+int GlobalData::servertime = 0;
 
 GlobalData::GlobalData()
 {

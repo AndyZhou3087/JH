@@ -233,7 +233,7 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				if (m_addrstr.compare("m13-1") == 0)
 				{
 					if (g_gameLayer != NULL)
-						g_gameLayer->addChild(SepcialNpcLayer::create(m_addrstr), 2, "npclayer");
+						g_gameLayer->addChild(SepcialNpcLayer::create(m_addrstr), 2, "sepcialnpclayer");
 				}
 				else
 				{

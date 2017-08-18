@@ -86,7 +86,7 @@ bool ReviveLayer::init()
 	cocos2d::ui::Button* sharebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("sharebtn");
 	sharebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onShare, this));
 
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getReviveCount() > 0)
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
 	{
 		closebtn->setVisible(true);
 		cancelbtn->setVisible(false);
@@ -107,7 +107,7 @@ bool ReviveLayer::init()
 	cocos2d::ui::Button* freeRevivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("freerevivebtn");
 	freeRevivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onFreeRevive, this));
 
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getReviveCount() > 0)
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
 	{
 		closebtn->setVisible(true);
 		cancelbtn->setVisible(false);
@@ -190,7 +190,7 @@ void ReviveLayer::shareCallback(int platform, int stCode, string& errorMsg) {
 		GlobalData::setShareDay(GlobalData::getDayOfYear());
 		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
 		ServerDataSwap::getInstance()->setDelegate(NULL);
-		ServerDataSwap::getInstance()->updateFreeReviveCount(GlobalData::getFreeReviveCount());
+		ServerDataSwap::getInstance()->updateFreeReviveCount();
 	}
 	else if (stCode == -1) {
 		result = "分享取消";
@@ -229,7 +229,7 @@ void ReviveLayer::onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
 		ServerDataSwap::getInstance()->setDelegate(NULL);
-		ServerDataSwap::getInstance()->updateFreeReviveCount(GlobalData::getFreeReviveCount());
+		ServerDataSwap::getInstance()->updateFreeReviveCount();
 	}
 }
 

@@ -18,12 +18,14 @@
 #include "BuyComfirmLayer.h"
 #include "BookShelfLayer.h"
 #include "DivideLayer.h"
+#include "WaitingProgress.h"
 
 BuildingUILayer::BuildingUILayer()
 {
 	selectActionIndex = -1;
 	estarttime = 0;
 	lastCategoryindex = 0;
+	exersiceTag = 0;
 }
 
 
@@ -130,7 +132,6 @@ bool BuildingUILayer::init(Building* build)
 void BuildingUILayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
 }
 
 void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -262,53 +263,7 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 	loadActionUi();
 
 	m_loadlbl->removeFromParentAndCleanup(true);
-
-	if (strcmp(m_build->data.name, "exerciseroom") == 0)
-	{
-		std::string estr = GameDataSave::getInstance()->getExersiceCfg();
-		int index = -1;
-
-		if (estr.length() > 0)
-		{
-			std::vector<std::string> tmp;
-			CommonFuncs::split(estr, tmp, "-");
-			if (tmp.size() >= 4)
-			{
-				index = atoi(tmp[0].c_str());
-				estarttime = atoi(tmp[1].c_str());
-				ex_wgstrid = tmp[2];
-				ex_ngstrid = tmp[3];
-			}
-		}
-		selectActionIndex = index;
-		if (index >= 0)
-		{
-			int curtime = GlobalData::getSysSecTime();
-			int pasttime = curtime - estarttime;
-
-			if (pasttime >= vec_buildAcitonData.at(index).actime * 60)
-			{
-				vec_actionbar[index]->setPercent(100);
-				onExercisefinish(selectActionIndex);
-			}
-			else
-			{
-				vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("取消"));
-				updateExerciseLeftTime(0);
-				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
-			}
-
-			for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
-			{
-				if (i != index)
-					vec_actionbtn[i]->setEnabled(false);
-				else
-					vec_actionbtn[i]->setEnabled(true);
-			}
-
-		}
-
-	}
+	getServerTime();
 }
 
 void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -425,22 +380,11 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 				if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("闭关")) == 0)
 				{
-					estarttime = GlobalData::getSysSecTime();
-					vec_actionbtn[tag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
-					updateExerciseLeftTime(0);
-					this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
-
-					if (g_hero->getAtrByType(H_WG)->count > 0)
-					{
-						ex_wgstrid = g_hero->getAtrByType(H_WG)->strid;
-					}
-					if (g_hero->getAtrByType(H_NG)->count > 0)
-					{
-						ex_ngstrid = g_hero->getAtrByType(H_NG)->strid;
-					}
-					
-					std::string estr = StringUtils::format("%d-%d-%s-%s", tag - ACTION, GlobalData::getSysSecTime(), ex_wgstrid.c_str(), ex_ngstrid.c_str());
-					GameDataSave::getInstance()->setExersiceCfg(estr);
+					exersiceTag = tag;
+					WaitingProgress* waitbox = WaitingProgress::create("准备中...");
+					Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+					ServerDataSwap::getInstance()->setDelegate(this);
+					ServerDataSwap::getInstance()->getServerTime();
 				}
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("取消")) == 0)
 				{
@@ -452,9 +396,11 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
 				{
-					ExerciseDoneLayer* layer = ExerciseDoneLayer::create(ex_wgstrid, ex_ngstrid, extime / 60);
-					this->addChild(layer, 4);
-					resetExercise();
+					exersiceTag = tag;
+					WaitingProgress* waitbox = WaitingProgress::create("准备中...");
+					Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+					ServerDataSwap::getInstance()->setDelegate(this);
+					ServerDataSwap::getInstance()->getServerTime();
 				}
 
 			}
@@ -855,12 +801,12 @@ void BuildingUILayer::updateExerciseLeftTime(float dt)
 	if (selectActionIndex >= 0)
 	{
 		int tatoltime = vec_buildAcitonData.at(selectActionIndex).actime * 60;
-		int lefttime = tatoltime - (GlobalData::getSysSecTime() - estarttime);
+		int lefttime = tatoltime - (curtime - estarttime);
 		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime % 3600/60, lefttime%3600%60);
 		vec_progresstext[selectActionIndex]->setVisible(true);
 		vec_progresstext[selectActionIndex]->setString(str);
 
-		float pecert = 100.0f*(GlobalData::getSysSecTime() - estarttime) / tatoltime;
+		float pecert = 100.0f*(curtime - estarttime) / tatoltime;
 
 		vec_actionbar[selectActionIndex]->runAction(MyProgressFromTo::create(1.0f, vec_actionbar[selectActionIndex]->getPercent(), pecert));
 		if (lefttime <= 0)
@@ -868,6 +814,7 @@ void BuildingUILayer::updateExerciseLeftTime(float dt)
 			onExercisefinish(selectActionIndex);
 		}
 	}
+	curtime++;
 }
 
 void BuildingUILayer::resetExercise()
@@ -985,4 +932,117 @@ void BuildingUILayer::loadActionUIByCategory(int category)
 void BuildingUILayer::delayShowCategoryActionUI(float dt)
 {
 	loadActionUIByCategory(lastCategoryindex);
+}
+
+void BuildingUILayer::getServerTime()
+{
+	if (strcmp(m_build->data.name, "exerciseroom") == 0)
+	{
+		WaitingProgress* waitbox = WaitingProgress::create("加载中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::getInstance()->setDelegate(this);
+		ServerDataSwap::getInstance()->getServerTime();
+	}
+}
+
+void BuildingUILayer::onSuccess()
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (exersiceTag > 0)
+	{
+		if (vec_actionbtn[exersiceTag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("闭关")) == 0)
+		{
+			estarttime = GlobalData::servertime;
+			vec_actionbtn[exersiceTag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
+			curtime = GlobalData::servertime;
+			updateExerciseLeftTime(0);
+			this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+
+			if (g_hero->getAtrByType(H_WG)->count > 0)
+			{
+				ex_wgstrid = g_hero->getAtrByType(H_WG)->strid;
+			}
+			if (g_hero->getAtrByType(H_NG)->count > 0)
+			{
+				ex_ngstrid = g_hero->getAtrByType(H_NG)->strid;
+			}
+
+			std::string estr = StringUtils::format("%d-%d-%s-%s", exersiceTag - ACTION, estarttime, ex_wgstrid.c_str(), ex_ngstrid.c_str());
+			GameDataSave::getInstance()->setExersiceCfg(estr);
+		}
+		else if (vec_actionbtn[exersiceTag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("出关")) == 0)
+		{
+			int extime = vec_buildAcitonData.at(exersiceTag - ACTION).extime;
+			if (GlobalData::servertime + 2 - estarttime >= extime * 60)
+			{
+				ExerciseDoneLayer* layer = ExerciseDoneLayer::create(ex_wgstrid, ex_ngstrid, extime / 60);
+				this->addChild(layer, 4);
+				resetExercise();
+			}
+			else
+			{
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("出关失败"));
+				this->addChild(hbox, 4);
+				vec_actionbtn[exersiceTag - ACTION]->setTitleText(CommonFuncs::gbk2utf("取消"));
+				curtime = GlobalData::servertime;
+
+				updateExerciseLeftTime(0);
+				this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+			}
+		}
+	}
+	else
+	{
+		if (strcmp(m_build->data.name, "exerciseroom") == 0)
+		{
+			std::string estr = GameDataSave::getInstance()->getExersiceCfg();
+			int index = -1;
+
+			if (estr.length() > 0)
+			{
+				std::vector<std::string> tmp;
+				CommonFuncs::split(estr, tmp, "-");
+				if (tmp.size() >= 4)
+				{
+					index = atoi(tmp[0].c_str());
+					estarttime = atoi(tmp[1].c_str());
+					ex_wgstrid = tmp[2];
+					ex_ngstrid = tmp[3];
+				}
+			}
+			selectActionIndex = index;
+			if (index >= 0)
+			{
+				curtime = GlobalData::servertime;
+				int pasttime = curtime - estarttime;
+
+				if (pasttime >= vec_buildAcitonData.at(index).actime * 60)
+				{
+					vec_actionbar[index]->setPercent(100);
+					onExercisefinish(selectActionIndex);
+				}
+				else
+				{
+					vec_actionbtn[index]->setTitleText(CommonFuncs::gbk2utf("取消"));
+					updateExerciseLeftTime(0);
+					this->schedule(schedule_selector(BuildingUILayer::updateExerciseLeftTime), 1);
+				}
+
+				for (unsigned int i = 0; i < vec_actionbtn.size(); i++)
+				{
+					if (i != index)
+						vec_actionbtn[i]->setEnabled(false);
+					else
+						vec_actionbtn[i]->setEnabled(true);
+				}
+
+			}
+
+		}
+	}
+}
+
+void BuildingUILayer::onErr(int errcode)
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }

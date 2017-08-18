@@ -28,8 +28,10 @@ Scene* FriendExgScene::createScene(int type)
 	auto scene = Scene::create();
 
 	// 'layer' is an autorelease object
-	auto layer = FriendExgScene::create(type);
+	Layer* layer = FriendExgScene::create(type);
 
+	if (layer == NULL)
+		return NULL;
 	// add layer as a child to scene
 	scene->addChild(layer);
 

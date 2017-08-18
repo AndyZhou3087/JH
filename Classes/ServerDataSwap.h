@@ -21,7 +21,8 @@ public:
 	void modifyNickName(std::string nickname);
 	void vipSuccNotice(std::string gid);
 	void vipIsOn();
-	void updateFreeReviveCount(int count);
+	void updateFreeReviveCount();
+	void getServerTime();
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
 private:
 	static ServerDataSwap* _serverDataSwap;
@@ -32,6 +33,7 @@ private:
 	static void httpPropadJustDataCB(std::string retdata, int code, std::string tag);
 	static void httpModifyNickNameCB(std::string retdata, int code, std::string tag);
 	static void httpVipIsOnCB(std::string retdata, int code, std::string tag);
+	static void httpGetServerTimeCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

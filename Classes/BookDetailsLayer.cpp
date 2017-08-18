@@ -136,10 +136,12 @@ bool BookDetailsLayer::init(BookData* bookdata)
 
 	cocos2d::ui::Text* status = (cocos2d::ui::Text*)m_csbnode->getChildByName("status");
 
+	bool hasstatus = false;
 	if (g_hero->getMeHas(bookdata->strid) != NULL)
 	{
 		tmpstr = "已拥有";
 		status->setTextColor(Color4B(27, 141, 0, 255));
+		hasstatus = false;
 	}
 	else
 	{
@@ -207,7 +209,6 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		cocos2d::ui::Text* wherelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("where");
 		wherelbl->setString(CommonFuncs::gbk2utf("可在锻造台制造"));
 	}
-	
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)

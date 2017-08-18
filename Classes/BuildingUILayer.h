@@ -8,6 +8,7 @@
 #include "ui/CocosGUI.h"
 #include "Building.h"
 #include "GlobalData.h"
+#include "ServerDataSwap.h"
 USING_NS_CC;
 
 typedef enum
@@ -16,7 +17,7 @@ typedef enum
 	ACTION//每个建筑物自己的操作，eg:床：睡觉；药箱：制药...
 }BACTIONTYPE;
 
-class BuildingUILayer :public Layer
+class BuildingUILayer :public Layer, public ServerDataDelegateProtocol
 {
 public:
 	BuildingUILayer();
@@ -32,6 +33,7 @@ public:
 	*****************************/
 	void resetExercise();
 
+	void getServerTime();
 private:
 
 	/****************************
@@ -120,6 +122,9 @@ private:
 	*****************************/
 	void delayShowCategoryActionUI(float dt);
 
+	void onSuccess();
+	void onErr(int errcode);
+
 private:
 	Building* m_build;
 	Node* buildnode;//每个ITEM NODE
@@ -149,6 +154,8 @@ private:
 	int lastCategoryindex;
 	bool isDraging;
 	Vec2 startPos;
+	int exersiceTag;
+	int curtime;
 };
 #endif
 

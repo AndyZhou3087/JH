@@ -657,13 +657,13 @@ void NpcLayer::onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			std::string childname = StringUtils::format("npcnode%d", itemindex);
 			Node* npcitem = m_scrollview->getChildByName(childname);
 			cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
-			talkbtn->setVisible(false);
+			talkbtn->setEnabled(false);
 
 			cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)npcitem->getChildByName("fightbtn");
-			onFight->setVisible(false);
+			onFight->setEnabled(false);
 
-			cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)npcitem->getChildByName("exchgbtn");
-			onExchange->setVisible(false);
+			cocos2d::ui::Button* onmsterbtn = (cocos2d::ui::Button*)npcitem->getChildByName("msterbtn");
+			onmsterbtn->setEnabled(false);
 
 			cocos2d::ui::Widget* pbg = (cocos2d::ui::Widget*)npcitem->getChildByName("progressbg");
 			pbg->setVisible(true);
@@ -729,14 +729,15 @@ void NpcLayer::actionOver(Ref* pSender, Node* item, int actionindex)
 	}
 
 	g_nature->setTimeInterval(NORMAL_TIMEINTERVAL);
+
 	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)item->getChildByName("talkbtn");
-	talkbtn->setVisible(true);
+	talkbtn->setEnabled(true);
 
 	cocos2d::ui::Button* onFight = (cocos2d::ui::Button*)item->getChildByName("fightbtn");
-	onFight->setVisible(true);
+	onFight->setEnabled(true);
 
-	cocos2d::ui::Button* onExchange = (cocos2d::ui::Button*)item->getChildByName("exchgbtn");
-	onExchange->setVisible(true);
+	cocos2d::ui::Button* onmsterbtn = (cocos2d::ui::Button*)item->getChildByName("msterbtn");
+	onmsterbtn->setEnabled(true);
 
 	cocos2d::ui::Widget* pbg = (cocos2d::ui::Widget*)item->getChildByName("progressbg");
 	pbg->setVisible(false);

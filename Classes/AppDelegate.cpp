@@ -4,6 +4,7 @@
 #include "Const.h"
 #include "GameScene.h"
 #include "ServerDataSwap.h"
+#include "BuildingUILayer.h"
 #ifdef ANALYTICS
 #include "MobClickCpp.h"
 #endif
@@ -150,8 +151,16 @@ void AppDelegate::applicationWillEnterForeground() {
 #endif
 	if (g_gameLayer != NULL)
 	{
-		ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
-		ServerDataSwap::getInstance()->vipIsOn();
+		BuildingUILayer* blayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
+		if (!blayer)
+		{
+			ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
+			ServerDataSwap::getInstance()->vipIsOn();
+		}
+		else
+		{
+			blayer->getServerTime();
+		}
 	}
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();

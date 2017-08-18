@@ -148,7 +148,7 @@ void Nature::updateData(float dt)
 	if (m_time >= 1440.0f)
 	{
 		m_pastdays++;
-		m_time = m_time - 1440.0f;
+		m_time -= 1440.0f;
 		changeWeatherCount = 0;
 		changeWeatherRandow = GlobalData::createRandomNum(24) + 1;
 		ChangeReason();

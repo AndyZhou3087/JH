@@ -230,7 +230,7 @@ void HomeLayer::onclick(Ref* pSender)
 	else
 	{
 		Layer* layer = BuildingUILayer::create(Vec_Buildings[nodetag]);
-		g_gameLayer->addChild(layer, 4);
+		g_gameLayer->addChild(layer, 4, "builduilayer");
 	}
 
 }

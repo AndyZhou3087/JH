@@ -340,7 +340,7 @@ void TopBar::updataUI(float dt)
 	pastmin += g_nature->getTimeInterval();
 	if (pastmin >= 1440.0f)
 	{
-		pastmin = 0.0f;
+		pastmin -= 1440.0f;
 		int livedays = g_nature->getPastDays();
 		str = StringUtils::format("%d", livedays);
 		livedayslbl->setString(str);

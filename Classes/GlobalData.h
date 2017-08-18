@@ -807,6 +807,7 @@ public:
 	static GameStatus g_gameStatus;
 	static bool dataIsModified;
 	static bool isFightMaster;
+	static int servertime;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

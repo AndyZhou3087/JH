@@ -257,7 +257,7 @@ void ServerDataSwap::vipIsOn()
 	HttpUtil::getInstance()->doData(url, httpVipIsOnCB);
 }
 
-void ServerDataSwap::updateFreeReviveCount(int count)
+void ServerDataSwap::updateFreeReviveCount()
 {
 	std::string url;
 	url.append(HTTPURL);
@@ -265,6 +265,14 @@ void ServerDataSwap::updateFreeReviveCount(int count)
 	url.append("playerid=");
 	url.append(GlobalData::UUID());
 	HttpUtil::getInstance()->doData(url);
+}
+
+void ServerDataSwap::getServerTime()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_getservertime");
+	HttpUtil::getInstance()->doData(url, httpGetServerTimeCB);
 }
 
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
@@ -795,6 +803,36 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+}
+
+void ServerDataSwap::httpGetServerTimeCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			rapidjson::Value& timev = doc["time"];
+
+			GlobalData::servertime = timev.GetInt();
+			isok = true;
+		}
+	}
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
 		}
 	}
 	else
