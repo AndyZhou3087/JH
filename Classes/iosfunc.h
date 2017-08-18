@@ -16,3 +16,4 @@ void makeNotification();
 void UMShare();
 const char * getDeviceIDInKeychain();
 const char* gbkToUTF8(const char * p);
+const char* getAppVesion();
