@@ -1744,7 +1744,8 @@ std::string GlobalData::UUID()
 std::string GlobalData::getVersion()
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	return getAppVesion();
+	//return getApp1Vesion();
+    return getvercode();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	return "1.2.0";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
