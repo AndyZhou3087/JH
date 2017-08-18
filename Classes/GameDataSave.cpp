@@ -466,13 +466,13 @@ void GameDataSave::setGoldCount(int count)
 
 bool GameDataSave::getIsPostAllData()
 {
-	int ret = loadIntDataByKey("postallok", 0);
+	int ret = loadIntDataByKey("postalldataok", 0);
 	return ret == 1 ? true : false;
 }
 
 void GameDataSave::setIsPostAllData(bool val)
 {
-	saveIntDataByKey("postallok", val?1:0);
+	saveIntDataByKey("postalldataok", val?1:0);
 }
 
 bool GameDataSave::getIsFirstInstall()
@@ -508,13 +508,13 @@ void GameDataSave::setMyNickName(std::string str)
 
 bool GameDataSave::getIsBuyTimeGift()
 {
-	int ret = loadIntDataByKey("buytimegift", 0);
+	int ret = loadIntDataByKey("isbuytimegift", 0);
 	return ret == 1 ? true : false;
 }
 
 void GameDataSave::setIsBuyTimeGift(bool val)
 {
-	saveIntDataByKey("buytimegift", val ? 1 : 0);
+	saveIntDataByKey("isbuytimegift", val ? 1 : 0);
 }
 
 void GameDataSave::setUseGold(int val)

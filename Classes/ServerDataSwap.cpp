@@ -4,6 +4,7 @@
 #include "json.h"
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
+#include "Hero.h"
 
 #define HTTPURL "https://www.stormnet.cn/api/"
 
@@ -108,6 +109,15 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	int plotindex = GameDataSave::getInstance()->getPlotMissionIndex();
 	int bpotindex = GameDataSave::getInstance()->getBranchPlotMissionIndex();
 	int unlock = GameDataSave::getInstance()->getPlotUnlockChapter();
+	int sex = GameDataSave::getInstance()->getHeroSex();
+
+	if (sex < 0)
+	{
+		if (type != 4)
+			sex = S_MAN;
+		else
+			sex = S_WOMEN;
+	}
 
 	writedoc.AddMember("hungry", hungry, allocator);
 	writedoc.AddMember("innerhurt", innerhurt, allocator);
@@ -118,6 +128,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("task", plotindex, allocator);
 	writedoc.AddMember("btask", bpotindex, allocator);
 	writedoc.AddMember("unlock", unlock, allocator);
+	writedoc.AddMember("sex", sex, allocator);
 	
 	rapidjson::Document doc = ReadJsonFile("data/buildings.json");
 	rapidjson::Value& allBuilds = doc["b"];
@@ -393,6 +404,12 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 
 					GameDataSave::getInstance()->setHeroLV(lv); 
 					GameDataSave::getInstance()->setHeroExp(exp);
+
+					v = item["sex"];
+					int sex = atoi(v.GetString());
+					if (type == 4)
+						sex = S_WOMEN;
+					GameDataSave::getInstance()->setHeroSex(sex);
 
 					v = item["hungry"];
 					int hungry = atoi(v.GetString());
