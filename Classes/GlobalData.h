@@ -756,6 +756,8 @@ public:
 	*****************************/
 	static void loadNpcMasterJsonData();
 
+	static std::string getVersion();
+
     static void setNoAds(bool val);
     static bool getNoAds();
     

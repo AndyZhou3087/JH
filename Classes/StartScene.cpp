@@ -76,6 +76,9 @@ bool StartScene::init()
 	cocos2d::ui::ImageView* logo = (cocos2d::ui::ImageView*)csbnode->getChildByName("logo");
 	logo->addTouchEventListener(CC_CALLBACK_2(StartScene::onLogo, this));
 
+	cocos2d::ui::Text* vesiontxt = (cocos2d::ui::Text*)csbnode->getChildByName("version");
+	vesiontxt->setString(GlobalData::getVersion());
+
 	clicklogocount = 0;
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);

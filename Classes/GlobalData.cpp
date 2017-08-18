@@ -1739,7 +1739,16 @@ std::string GlobalData::UUID()
 	return "qwerqqw";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
+}
 
+std::string GlobalData::getVersion()
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	return getAppVesion();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	return "1.2.0";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#endif
 }
 
 std::string GlobalData::getMD5MyGoldCount()
