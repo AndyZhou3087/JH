@@ -124,13 +124,13 @@
             <FileData Type="MarkedSubImage" Path="ui/qqline0.png" Plist="uipacker.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="versiondesc" ActionTag="1366589720" Tag="57" IconVisible="False" LeftMargin="508.8230" RightMargin="111.1770" TopMargin="1232.8243" BottomMargin="22.1756" FontSize="25" LabelText="版本号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="versiondesc" ActionTag="1366589720" Tag="57" IconVisible="False" LeftMargin="522.8230" RightMargin="97.1770" TopMargin="1232.8243" BottomMargin="22.1756" FontSize="25" LabelText="版本号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="100.0000" Y="25.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="558.8230" Y="34.6756" />
+            <Position X="572.8230" Y="34.6756" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7761" Y="0.0271" />
+            <PrePosition X="0.7956" Y="0.0271" />
             <PreSize X="0.1389" Y="0.0195" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

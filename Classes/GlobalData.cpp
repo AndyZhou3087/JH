@@ -81,7 +81,7 @@ std::string GlobalData::MD5FreeReviveCount;
 std::string GlobalData::MD5HeroLv;
 std::string GlobalData::MD5LiveDays;
 bool GlobalData::dataIsModified = false;
-
+bool GlobalData::ispunishment = false;
 bool GlobalData::isFightMaster = false;
 int GlobalData::servertime = 0;
 
@@ -1492,14 +1492,9 @@ int GlobalData::getMyGoldCount()
 
 void GlobalData::setMyGoldCount(int count)
 {
-	if (MD5MyGoldCount.compare(md5(myGlodCount)) != 0)
-	{
-		dataIsModified = true;
-		return;
-	}
 	myGlodCount = count;
-	MD5MyGoldCount = md5(myGlodCount);
-	GameDataSave::getInstance()->setGoldCount(count);
+	GlobalData::setMD5MyGoldCount(md5(myGlodCount));
+	GameDataSave::getInstance()->setGoldCount(myGlodCount);
 }
 
 std::string GlobalData::getMyID()
@@ -1756,7 +1751,7 @@ std::string GlobalData::getMD5MyGoldCount()
 	return MD5MyGoldCount;
 }
 
-void GlobalData::setMD5MyGoldCount(int val)
+void GlobalData::setMD5MyGoldCount(std::string val)
 {
 	MD5MyGoldCount = val;
 }
@@ -1766,7 +1761,7 @@ std::string GlobalData::getMD5CostGlodCount()
 	return MD5CostGlodCount;
 }
 
-void GlobalData::setMD5CostGlodCount(int val)
+void GlobalData::setMD5CostGlodCount(std::string val)
 {
 	MD5CostGlodCount = val;
 }
@@ -1776,7 +1771,7 @@ std::string GlobalData::getMD5FreeReviveCount()
 	return MD5FreeReviveCount;
 }
 
-void GlobalData::setMD5FreeReviveCount(int val)
+void GlobalData::setMD5FreeReviveCount(std::string val)
 {
 	MD5FreeReviveCount = val;
 }
@@ -1786,7 +1781,7 @@ std::string GlobalData::getMD5HeroLv()
 	return MD5HeroLv;
 }
 
-void GlobalData::setMD5HeroLv(int val)
+void GlobalData::setMD5HeroLv(std::string val)
 {
 	MD5HeroLv = val;
 }
@@ -1796,7 +1791,7 @@ std::string GlobalData::getMD5LiveDays()
 	return MD5LiveDays;
 }
 
-void GlobalData::setMD5LiveDays(int val)
+void GlobalData::setMD5LiveDays(std::string val)
 {
 	MD5LiveDays = val;
 }

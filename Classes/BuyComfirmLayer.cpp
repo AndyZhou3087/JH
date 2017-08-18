@@ -6,6 +6,7 @@
 #include "ShopLayer.h"
 #include "HintBox.h"
 #include "StorageUILayer.h"
+#include "MD5.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
 {
@@ -81,8 +82,23 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (GlobalData::getMyGoldCount() >= m_gdata->price)
+		int mygold = GlobalData::getMyGoldCount();
+		if (mygold >= m_gdata->price)
 		{
+			if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
+			{
+				GlobalData::dataIsModified = true;
+				mygold = 0;
+			}
+			GlobalData::setMyGoldCount(mygold);
+
+			if (GlobalData::dataIsModified)
+			{
+				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
+				this->addChild(hint);
+				return;
+			}
+
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - m_gdata->price);
 			GoldGoodsItem::addBuyGoods(m_gdata);

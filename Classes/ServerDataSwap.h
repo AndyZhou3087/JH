@@ -20,7 +20,7 @@ public:
 	void propadjust();
 	void modifyNickName(std::string nickname);
 	void vipSuccNotice(std::string gid);
-	void vipIsOn();
+	void vipIsOn(int heroid);
 	void updateFreeReviveCount();
 	void getServerTime();
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);

@@ -14,6 +14,10 @@
 #include "HeroProperNode.h"
 #include "MyParticle.h"
 #include "GetVipRewardLayer.h"
+#include "MD5.h"
+#include "StartScene.h"
+#include "HintBox.h"
+#include "WaitingProgress.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -56,6 +60,8 @@ bool GameScene::init()
     {
         return false;
     }
+
+	GlobalData::dataIsModified = false;
 
 	//读取后山资源列表配置文件
 	GlobalData::loadHillResJsonData();
@@ -159,7 +165,7 @@ bool GameScene::init()
 		}
 	}
 	ServerDataSwap::getInstance()->setDelegate(this);
-	ServerDataSwap::getInstance()->vipIsOn();
+	ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
     return true;
 }
 
@@ -182,7 +188,9 @@ void GameScene::loadSaveNatureData()
 	//温度
 	g_nature->setTemperature(GameDataSave::getInstance()->getNatureTemperature());
 	//天数
-	g_nature->setPastDays(GameDataSave::getInstance()->getLiveDays());
+	int livedays = GameDataSave::getInstance()->getLiveDays();
+	g_nature->setPastDays(livedays);
+	GlobalData::setMD5LiveDays(md5(livedays));
 	
 	//设置黑夜或白天
 
@@ -479,9 +487,36 @@ void GameScene::onSuccess()
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(layer, 10);
 	}
+	else
+	{
+		if (GlobalData::ispunishment)
+		{
+			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
+			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+			ServerDataSwap::getInstance()->setDelegate(this);
+			ServerDataSwap::getInstance()->getAllData();
+		}
+	}
+	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
+	{
+		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
+	}
+
 }
 
 void GameScene::onErr(int errcode)
 {
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (GlobalData::ispunishment)
+	{
+		GlobalData::ispunishment = false;
+	}
 
+}
+
+void GameScene::delayChangeStartScene(float dt)
+{
+	Scene* scene = StartScene::createScene();
+
+	Director::getInstance()->replaceScene(scene);
 }

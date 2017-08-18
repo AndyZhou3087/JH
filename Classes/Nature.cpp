@@ -2,6 +2,7 @@
 #include "Const.h"
 #include "GameScene.h"
 #include "CommonFuncs.h"
+#include "MD5.h"
 
 int Nature::ReasonCDays = 30;
 
@@ -147,7 +148,15 @@ void Nature::updateData(float dt)
 
 	if (m_time >= 1440.0f)
 	{
+		if (GlobalData::getMD5LiveDays().compare(md5(m_pastdays)) != 0)
+		{
+			GlobalData::dataIsModified = true;
+			m_pastdays = 0;
+		}
+
 		m_pastdays++;
+
+		GlobalData::setMD5LiveDays(md5(m_pastdays));
 		m_time -= 1440.0f;
 		changeWeatherCount = 0;
 		changeWeatherRandow = GlobalData::createRandomNum(24) + 1;

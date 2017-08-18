@@ -129,7 +129,11 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("btask", bpotindex, allocator);
 	writedoc.AddMember("unlock", unlock, allocator);
 	writedoc.AddMember("sex", sex, allocator);
-	
+
+	int cheat = GlobalData::dataIsModified?1:0;
+	writedoc.AddMember("cheat", cheat, allocator);
+	GlobalData::dataIsModified = false;
+
 	rapidjson::Document doc = ReadJsonFile("data/buildings.json");
 	rapidjson::Value& allBuilds = doc["b"];
 	for (unsigned int i = 0; i < allBuilds.Size(); i++)
@@ -258,13 +262,16 @@ void ServerDataSwap::vipSuccNotice(std::string gid)
 	HttpUtil::getInstance()->doData(url);
 }
 
-void ServerDataSwap::vipIsOn()
+void ServerDataSwap::vipIsOn(int heroid)
 {
 	std::string url;
 	url.append(HTTPURL);
 	url.append("wx_takemonthlycard?");
 	url.append("playerid=");
 	url.append(GlobalData::UUID());
+	url.append("&type=");
+	std::string herostr = StringUtils::format("%d", heroid);
+	url.append(herostr);
 	HttpUtil::getInstance()->doData(url, httpVipIsOnCB);
 }
 
@@ -816,6 +823,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 			{
 				rapidjson::Value& retval = doc["freelife"];
 				GlobalData::setFreeReviveCount(retval.GetInt());
+			}
+
+			if (doc.HasMember("punishment"))
+			{
+				rapidjson::Value& retval = doc["punishment"];
+				GlobalData::ispunishment = retval.GetInt() ==0?false:true;
 			}
 
 			if (m_pDelegateProtocol != NULL)
