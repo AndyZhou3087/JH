@@ -709,13 +709,26 @@ void ExchangeLayer::onExit()
 void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 {
 
+	int dqu = 5;
+	if (g_hero->getLVValue() < 50)
+	{
+		dqu = 3;
+	}
+	else if (g_hero->getLVValue() < 80)
+	{
+		dqu = 4;
+	}
+
 	std::map<int,std::vector<std::string>> map_temp;
 	std::map<std::string, WG_NGData>::iterator it;
 	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
 		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
 		if (!g_hero->checkifHasGF_Equip(gfdata.id))
-			map_temp[gfdata.qu].push_back(gfdata.id);
+		{
+			if (gfdata.qu <= dqu)
+				map_temp[gfdata.qu].push_back(gfdata.id);
+		}
 	}
 
 	std::map<std::string, EquipData>::iterator ite;
@@ -723,7 +736,10 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 	{
 		EquipData edata = GlobalData::map_equips[ite->first];
 		if (!g_hero->checkifHasGF_Equip(edata.id))
-			map_temp[edata.qu].push_back(edata.id);
+		{
+			if (edata.qu <= dqu)
+				map_temp[edata.qu].push_back(edata.id);
+		}
 	}
 	std::map<int, std::vector<std::string>> map_res;
 	std::map<int, std::vector<std::string>>::iterator rit;
@@ -772,9 +788,9 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 				}
 				else
 				{
-					int size0 = vec_res.size();
+					int size0 = map_res[1].size();
 					int r1 = GlobalData::createRandomNum(size0);
-					vec_exchgres.push_back(vec_res[r1]);
+					vec_exchgres.push_back(map_res[1][r1]);
 				}
 				break;
 			}
