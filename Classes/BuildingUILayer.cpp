@@ -1045,4 +1045,6 @@ void BuildingUILayer::onSuccess()
 void BuildingUILayer::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("失败!!!"));
+	this->addChild(hbox, 4);
 }
