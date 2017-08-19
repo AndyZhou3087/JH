@@ -157,14 +157,14 @@ void NpcLayer::refreshNpcNode()
 			std::string rsistr;
 			if (count > 0)
 			{
-				if (count <= 6)
+				if (count <= 10)
 					rsistr = "ui/npcrsi0.png";
 				else
 					rsistr = "ui/npcrsi1.png";
 			}
 			else
 			{
-				if (count >= -6)
+				if (count >= -10)
 					rsistr = "ui/npcrsi2.png";
 				else
 					rsistr = "ui/npcrsi1.png";
@@ -389,12 +389,12 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		
 		if (npcid.compare("n004") == 0 && checkFightCount("n004") < 0)
 		{
-			protectword = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！").c_str());
+			protectword = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("：就凭你？还不够我一刀的，我不杀无名小卒，再去练几年吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！"));
 			
 		}
 		else if (npcid.compare("n005") == 0 && checkFightCount("n005") < 0)
 		{
-			protectword = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！").c_str());
+			protectword = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！"));
 			if (g_hero->getHeadID() == 4)
 				protectword = replaceSexWord(protectword);	
 		}

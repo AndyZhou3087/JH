@@ -233,7 +233,7 @@ float Hero::getMaxLifeValue()
 
 float Hero::getRecoverLifeMaxValue()
 {
-	float flife = maxlifepercent * GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()];
+	float flife = maxlifepercent * getMaxLifeValue();
 	return flife;
 }
 

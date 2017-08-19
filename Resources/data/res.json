@@ -28,5 +28,7 @@
 {"id":"79","max":"5","perhour":[8,6.4,8,8],"type":"7","ep":[0],"cname":"银矿","actype":"3","res":[79],"unit":"1块银矿"},
 {"id":"81","max":"0","perhour":[0,0,0,0],"type":"9","ep":[0],"cname":"混沌石","actype":"0","res":[0],"unit":"1块混沌石"},
 {"id":"82","max":"0","perhour":[0,0,0,0],"type":"9","ep":[5],"cname":"祝福宝石","actype":"0","res":[0],"unit":"1颗祝福宝石"},
-{"id":"83","max":"0","perhour":[0,0,0,0],"type":"9","ep":[0],"cname":"看门雕","actype":"5","res":[0],"unit":"1只看门雕"}
+{"id":"83","max":"0","perhour":[0,0,0,0],"type":"9","ep":[0],"cname":"看门雕","actype":"5","res":[0],"unit":"1只看门雕"},
+{"id":"84","max":"0","perhour":[0,0,0,0],"type":"9","ep":[0],"cname":"女儿红","actype":"0","res":[0],"unit":"1坛女儿红"},
+{"id":"85","max":"0","perhour":[0,0,0,0],"type":"9","ep":[0],"cname":"鲜花","actype":"0","res":[0],"unit":"1朵花"}
 ]}

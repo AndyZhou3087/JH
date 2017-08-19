@@ -7,5 +7,6 @@ proj.win32/
 proj.ios_mac/
 JHCocosUI/Resources/res/
 anim/Story/Resources/res/
+JHCocosUI-Yuan/
 .cocos-project.json
 CMakeLists.txt

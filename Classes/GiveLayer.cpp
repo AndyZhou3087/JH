@@ -213,7 +213,7 @@ void GiveLayer::checkValue()
 	for (unsigned int i = 0; i < myGiveData.size(); i++)
 	{
 		std::string resid = myGiveData[i].strid;
-		giveval += GlobalData::map_allResource[resid].val * myGiveData[i].count / 10;
+		giveval += GlobalData::map_allResource[resid].fval * myGiveData[i].count;
 	}
 	std::string friendstr = StringUtils::format("%d", friendly + giveval);
 	friendlylbl->setString(friendstr);

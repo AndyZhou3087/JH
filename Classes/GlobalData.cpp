@@ -269,6 +269,9 @@ void GlobalData::loadAllResourceJsonData()
 		v = item["val"];
 		data.val = atoi(v.GetString());
 
+		v = item["fval"];
+		data.fval = atoi(v.GetString());
+		
 		v = item["npcs"];
 
 		for (unsigned int m = 0; m < v.Size(); m++)

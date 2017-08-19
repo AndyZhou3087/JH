@@ -35,6 +35,7 @@ typedef struct
 	std::string cname;//中文显示名
 	std::string desc;//描述
 	int val;//资源价值
+	int fval;//好友价值
 	std::vector<std::string> npc;//加成的npc;
 	std::vector<float> npcval;//加成
 }AllResource;
