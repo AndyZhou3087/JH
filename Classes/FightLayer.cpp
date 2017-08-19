@@ -387,6 +387,13 @@ void FightLayer::delayBossFight(float dt)
 	if (herohurt < intminack)
 		herohurt = intminack;
 
+    int skilltype = checkSkill(H_WG);
+    
+    if (skilltype == S_SKILL_1 || skilltype == S_SKILL_2 || skilltype == S_SKILL_5)
+    {
+       GlobalData::map_gfskills[skilltype].leftval--;
+    }
+    
 	if (isNpcAct != 1)
 	{
 		if (npchp <= 0)
@@ -395,7 +402,7 @@ void FightLayer::delayBossFight(float dt)
 			return;
 		}
 
-		int skilltype = checkSkill(H_WG);
+		
 		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
 		{
 			showSkill(skilltype);
@@ -403,7 +410,6 @@ void FightLayer::delayBossFight(float dt)
 			if (npchp < 0)
 				npchp = 0;
 			updateNpcLife();
-			GlobalData::map_gfskills[skilltype].leftval--;
 			if (npchp <= 0)
 			{
 				npcDie();
@@ -413,7 +419,6 @@ void FightLayer::delayBossFight(float dt)
 		else if (skilltype == S_SKILL_2)
 		{
 			showSkill(skilltype);
-			GlobalData::map_gfskills[skilltype].leftval--;
 			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 			return;
 		}
@@ -976,6 +981,10 @@ void FightLayer::nextFightNpc(float dt)
 
 	updateNpcLife();
 
+    GlobalData::map_gfskills[S_SKILL_1].leftval = 0;
+    GlobalData::map_gfskills[S_SKILL_2].leftval = 0;
+    GlobalData::map_gfskills[S_SKILL_3].leftval = 0;
+    GlobalData::map_gfskills[S_SKILL_5].leftval = 0;
 	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 }
 
