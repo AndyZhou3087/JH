@@ -51,12 +51,7 @@ inline int loadIntDataByKey(string key, int defaultValue = 0){
 	if(s == "") {
 		return defaultValue;
 	}
-#if encrypt_data
-	string parseKey = parseData(s);
-	return atoi(parseKey.c_str());	
-#else
 	return atoi(s.c_str());
-#endif
 }
 
 inline float loadFloatDataByKey(string key, float defaultValue = 0.0f){
@@ -67,12 +62,7 @@ inline float loadFloatDataByKey(string key, float defaultValue = 0.0f){
 	if (s == "") {
 		return defaultValue;
 	}
-#if encrypt_data
-	string parseKey = parseData(s);
-	return atof(parseKey.c_str());
-#else
 	return atof(s.c_str());
-#endif
 }
 
 inline std::string loadStringDataByKey(string key, std::string defaultValue = ""){
