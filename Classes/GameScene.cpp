@@ -28,7 +28,7 @@ GameScene* g_gameLayer = NULL;
 UIScroll* g_uiScroll;
 GameScene::GameScene()
 {
-
+	issavedata = true;
 }
 GameScene::~GameScene()
 {
@@ -36,6 +36,7 @@ GameScene::~GameScene()
 	g_gameLayer = NULL;
 	g_nature = NULL;
 	g_hero = NULL;
+	issavedata = true;
 }
 
 Scene* GameScene::createScene()
@@ -312,7 +313,8 @@ void GameScene::loadSavedHeroPropData()
 void GameScene::onExit()
 {
 	//退出保存数据
-	saveAllData();
+	if (issavedata)
+		saveAllData();
 
 	Layer::onExit();
 }
@@ -394,7 +396,8 @@ void GameScene::updata(float dt)
 
 void GameScene::timerSaveData(float dt)
 {
-	saveAllData();
+	if (issavedata)
+		saveAllData();
 }
 
 void GameScene::checkiflive(float dt)
@@ -499,6 +502,7 @@ void GameScene::onSuccess()
 	}
 	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
 	{
+		issavedata = false;
 		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
 	}
 
@@ -516,6 +520,7 @@ void GameScene::onErr(int errcode)
 
 void GameScene::delayChangeStartScene(float dt)
 {
+
 	Scene* scene = StartScene::createScene();
 
 	Director::getInstance()->replaceScene(scene);

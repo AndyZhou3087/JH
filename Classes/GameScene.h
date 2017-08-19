@@ -57,6 +57,7 @@ private:
 	Node* homeLayer;//角色家
 	std::vector<Node*> m_newerNode;
 	int m_newerStep;
+	bool issavedata;
 	
 private:
 	/****************************
