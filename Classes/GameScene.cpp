@@ -494,6 +494,8 @@ void GameScene::onSuccess()
 	{
 		if (GlobalData::ispunishment)
 		{
+            issavedata = false;
+            GlobalData::ispunishment = false;
 			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			ServerDataSwap::getInstance()->setDelegate(this);
@@ -502,7 +504,7 @@ void GameScene::onSuccess()
 	}
 	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
 	{
-		issavedata = false;
+		
 		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
 	}
 
@@ -511,11 +513,6 @@ void GameScene::onSuccess()
 void GameScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	if (GlobalData::ispunishment)
-	{
-		GlobalData::ispunishment = false;
-	}
-
 }
 
 void GameScene::delayChangeStartScene(float dt)

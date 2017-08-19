@@ -325,7 +325,7 @@ void FightLayer::delayHeroFight(float dt)
 		npccritfnt->setString(tmpstr);
 		npccritfnt->setVisible(true);
 	}
-	else if (r < critrnd + npcdodgernd)
+	else if (r < npcdodgernd)
 	{
 		isNpcAct = 1;
 		std::string imgstr = "ui/dodge.png";
@@ -497,7 +497,7 @@ void FightLayer::delayBossFight(float dt)
 		tmpstr = StringUtils::format("%d", herohurt);
 		herocritfnt->setString(tmpstr);
 	}
-	else if (r < npccritrnd + dodgernd)
+	else if (r < dodgernd)
 	{
 		isHeroAct = 1;
 		std::string imgstr = "ui/dodge.png";

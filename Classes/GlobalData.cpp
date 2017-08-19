@@ -1024,6 +1024,10 @@ int GlobalData::getUnlockChapter()
 	if (plotindex >= max)
 		plotindex = max - 1;
 
+    if (plotindex >= max - 1)
+    {
+        c = MAXCHAPTER;
+    }
 	if (vec_PlotMissionData[plotindex].dnpc.compare("n089") == 0 && vec_PlotMissionData[plotindex].status == M_DONE)
 	{
 		c = MAXCHAPTER;
