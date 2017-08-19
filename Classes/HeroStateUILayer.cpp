@@ -182,6 +182,18 @@ void HeroStateUILayer::updateStatus(float dt)
 		herostatus[13]->setString(CommonFuncs::gbk2utf("不详"));
 	}
 
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			cocos2d::ui::Text* mastertext = (cocos2d::ui::Text*)m_csbnode->getChildByName("herostate14");
+			mastertext->setString(GlobalData::map_npcs[nid].name);
+			break;
+		}
+	}
+
 	int letftime1 = m_heroexpendtime - GlobalData::getSysSecTime();
 	if (letftime1 > 0)
 	{

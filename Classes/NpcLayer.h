@@ -81,6 +81,12 @@ private:
 	std::string replaceSexWord(std::string dstr);
 
 	void actionOver(Ref* pSender, Node* item, int actionindex);
+
+	/****************************
+	是否任务中
+	*****************************/
+	int checkIsMissiong(int type, std::string npcid);
+
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;

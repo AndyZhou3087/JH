@@ -385,7 +385,6 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		Node* node = (Node*)pSender;
 		int tag = node->getParent()->getTag();
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[tag];
-
 		std::string protectword;
 		
 		if (npcid.compare("n004") == 0 && checkFightCount("n004") < 0)
@@ -413,7 +412,14 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
-		updateFriendly(npcid);
+
+		PlotMissionData pdata = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
+		int plottype = 1;
+		if (pdata.snpc.compare(npcid) == 0 || (pdata.dnpc.compare(npcid) == 0))
+			plottype = 0;
+
+		if (!checkIsMissiong(plottype, npcid))
+			updateFriendly(npcid);
 	}
 }
 
@@ -853,6 +859,40 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 			}
 			else
 				GlobalData::saveBranchPlotMissionStatus();
+		}
+	}
+
+	return isplotMissioning;
+}
+
+
+int NpcLayer::checkIsMissiong(int type, std::string npcid)
+{
+	bool isplotMissioning = false;
+	int curplot = 0;
+	PlotMissionData* plotData = NULL;
+	if (type == 0)
+	{
+		curplot = GlobalData::getPlotMissionIndex();
+		plotData = &GlobalData::vec_PlotMissionData[curplot];
+	}
+	else
+	{
+		curplot = GlobalData::getBranchPlotMissionIndex();
+		if (GlobalData::vec_BranchPlotMissionData[curplot].unlockchapter <= GlobalData::getUnlockChapter())
+			plotData = &GlobalData::vec_BranchPlotMissionData[curplot];
+	}
+
+	if (plotData != NULL)
+	{
+		if (plotData->snpc.compare(npcid) == 0 && plotData->status != M_DONE)
+		{
+			isplotMissioning = true;
+		}
+
+		if (plotData->dnpc.compare(npcid) == 0 && plotData->status == M_DOING)
+		{
+			isplotMissioning = true;
 		}
 	}
 
@@ -1301,7 +1341,7 @@ void NpcLayer::reFreshFriendlyUI()
 			friendly = -maxfriendly;
 
 		int per = maxfriendly / 5;
-		int count = friendly/per;
+		int count = abs(friendly/per);
 
 		for (int m = 0; m < 5; m++)
 		{

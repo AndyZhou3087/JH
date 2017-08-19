@@ -137,6 +137,21 @@ void Nature::ChangeTemperature()
 	setTemperature(t);
 }
 
+void Nature::setTemperature(int val)
+{
+	m_temperature = val;
+
+	if (m_temperature < -20)
+		m_temperature = 20;
+	else if (m_temperature > 25)
+		m_temperature = 25;
+}
+
+int Nature::getTemperature()
+{
+	return m_temperature;
+}
+
 void Nature::updateData(float dt)
 {
 	if (GlobalData::g_gameStatus != GAMESTART)

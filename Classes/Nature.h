@@ -29,7 +29,6 @@ class Nature:public Node
 public:
 	Nature();
 	~Nature();
-	CC_SYNTHESIZE(int, m_temperature, Temperature);
 	CC_SYNTHESIZE(float, m_time, Time);//虚拟一天时间，0.2s--对应1min
 	CC_SYNTHESIZE(EReason, m_reason, Reason);
 	CC_SYNTHESIZE(EWeather, m_weather, Weather);
@@ -40,6 +39,9 @@ public:
 	CC_SYNTHESIZE(bool, m_isshowinsect, IsShowInsect);
 	CC_SYNTHESIZE(int, m_warmtime, Warmtime);
 	CC_SYNTHESIZE(float, m_warmpasttime, Warmpasttime);
+
+	void setTemperature(int val);
+	int getTemperature();
 
 	void ChangeWeather();
 	void ChangeReason();
@@ -54,6 +56,7 @@ public:
 	void makewarmover();
 
 public:
+	int m_temperature;
 	int static ReasonCDays;//季节切换天数
 	int changeWeatherCount;//每天天气变化次数，最多1次
 	int changeWeatherRandow;//生成的天气变化的小时

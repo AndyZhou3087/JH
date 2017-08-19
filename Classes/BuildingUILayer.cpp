@@ -438,13 +438,13 @@ void BuildingUILayer::ondivideSucc(Ref* pSender, BACTIONTYPE type, Node* divideL
 	if (g_hero->getAtrByType(H_WEAPON)->count > 0 && g_hero->getAtrByType(H_WEAPON)->strid.compare(strid) == 0)
 	{
 		PackageData data;
-		data.count = -1;
+		data.count = 0;
 		g_hero->setAtrByType(H_WEAPON, data);
 	}
 	if (g_hero->getAtrByType(H_ARMOR)->count > 0 && g_hero->getAtrByType(H_ARMOR)->strid.compare(strid) == 0)
 	{
 		PackageData data;
-		data.count = -1;
+		data.count = 0;
 		g_hero->setAtrByType(H_ARMOR, data);
 	}
 	StorageRoom::use(strid);

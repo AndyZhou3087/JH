@@ -330,7 +330,7 @@ void ActionGetLayer::delayDoAction(float dt)
 					std::string brokenstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("你的").c_str(), GlobalData::map_allResource[strid].cname.c_str(), CommonFuncs::gbk2utf("已损坏！！").c_str());
 					g_uiScroll->addEventText(brokenstr, 25, Color3B(204, 4, 4));
 					PackageData data;
-					data.count = -1;
+					data.count = 0;
 					g_hero->setAtrByType((HeroAtrType)m_actype, data);
 				}
 				else if (g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 20 || g_hero->getAtrByType((HeroAtrType)m_actype)->goodvalue == 10)

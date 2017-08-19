@@ -1572,9 +1572,12 @@ void GlobalData::loadFriendly()
 		for (unsigned int i = 0; i < vec_retstr.size(); i++)
 		{
 			std::vector<std::string> tmp;
-			CommonFuncs::split(vec_retstr[i], tmp, "-");
-			map_myfriendly[tmp[0]].friendly = atoi(tmp[1].c_str());
-			map_myfriendly[tmp[0]].relation = atoi(tmp[2].c_str());
+			CommonFuncs::split(vec_retstr[i], tmp, ",");
+			if (tmp.size() >= 3)
+			{
+				map_myfriendly[tmp[0]].friendly = atoi(tmp[1].c_str());
+				map_myfriendly[tmp[0]].relation = atoi(tmp[2].c_str());
+			}
 		}
 	}
 }
@@ -1588,9 +1591,13 @@ void GlobalData::saveFriendly()
 	{
 		int friendly = GlobalData::map_myfriendly[it->first].friendly;
 		int relation = GlobalData::map_myfriendly[it->first].relation;
-		if (friendly != 0 && relation > 0)
+		bool issave = true;
+		if (friendly == 0 && relation == 0)
+			issave = false;
+
+		if (issave)
 		{
-			std::string onestr = StringUtils::format("%s-%d-%d", it->first.c_str(), friendly, relation);
+			std::string onestr = StringUtils::format("%s,%d,%d", it->first.c_str(), friendly, relation);
 			str.append(onestr);
 			str.append(";");
 		}

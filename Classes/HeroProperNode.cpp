@@ -212,7 +212,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 				map_carryData[index].push_back(data);
 			}
 		}
-		if (g_hero->getAtrByType(index)->count > 0)//已经装备上的放在最前面。hpdata->count == -1没有装备
+		if (g_hero->getAtrByType(index)->count > 0)//已经装备上的放在最前面。hpdata->count == 0没有装备
 		{
 			PackageData sdata = *g_hero->getAtrByType(index);
 			map_carryData[index].insert(map_carryData[index].begin(), sdata);
@@ -281,7 +281,7 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 				}
 			}
 		}
-		if (g_hero->getAtrByType(index)->count > 0) // 已经装备上的放在最前面。hpdata->count == -1没有装备
+		if (g_hero->getAtrByType(index)->count > 0) // 已经装备上的放在最前面。hpdata->count == 0没有装备
 		{
 			PackageData sdata = *g_hero->getAtrByType(index);
 			map_carryData[index].insert(map_carryData[index].begin(), sdata);
@@ -387,7 +387,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 
 		lvlbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 
-		if (g_hero->getAtrByType(index)->count > 0)//是否装备了hpdata->count ==-1没有装备
+		if (g_hero->getAtrByType(index)->count > 0)//是否装备了hpdata->count ==0没有装备
 		{
 			if (i == 0)
 			{
@@ -595,7 +595,7 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 	}
 	else
 		StorageRoom::add(mydata);
-	g_hero->getAtrByType(atrype)->count = -1;
+	g_hero->getAtrByType(atrype)->count = 0;
 	lvtext[lastclickindex]->setString("");
 
 	std::string str = "ui/buildsmall.png";

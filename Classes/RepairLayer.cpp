@@ -509,14 +509,14 @@ void RepairLayer::dofail()
 		if (g_hero->getAtrByType(H_WEAPON) == vec_RepairData[clickindex])
 		{
 			PackageData data;
-			data.count = -1;
+			data.count = 0;
 			g_hero->setAtrByType(H_WEAPON, data);
 			return;
 		}
 		if (g_hero->getAtrByType(H_ARMOR) == vec_RepairData[clickindex])
 		{
 			PackageData data;
-			data.count = -1;
+			data.count = 0;
 			g_hero->setAtrByType(H_ARMOR, data);
 			return;
 		}
