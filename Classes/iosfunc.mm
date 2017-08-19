@@ -156,10 +156,4 @@ const char* gbkToUTF8(const char * p) {
     NSString *utf8str = [nsstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return [utf8str UTF8String];
 }
-/*const char * getApp1Version()
-{
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    return [app_Version UTF8String];
-}*/
 
