@@ -18,6 +18,7 @@
 #include "VipShopLayer.h"
 #include "TimeGiftLayer.h"
 #include "RelationLayer.h"
+#include "RankLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -171,6 +172,11 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			RelationLayer* relationlayer = RelationLayer::create();
 			g_gameLayer->addChild(relationlayer,5);
+		}
+		else if (m_addrname.compare("m1-7") == 0)
+		{
+			RankLayer* ranklayer = RankLayer::create();
+			g_gameLayer->addChild(ranklayer, 5, "ranklayer");
 		}
 		else
 		{

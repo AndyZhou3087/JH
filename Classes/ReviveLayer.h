@@ -20,6 +20,10 @@ private:
 	cocos2d::ui::Text* m_revivepricelbl;
 	cocos2d::ui::Text* m_revivedesc;
 	int revivecount;
+	cocos2d::ui::Button* m_closebtn;
+	cocos2d::ui::Button* m_sharebtn;
+	cocos2d::ui::Button* m_cancelbtn;
+	cocos2d::ui::Text* m_sharetext;
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -27,6 +31,7 @@ private:
 	void onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	static void shareCallback(int platform, int stCode, std::string& errorMsg);
 	void checkGoldCount(float dt);
+	void checkShareReviveCount(float dt);
 	int needgold;
 };
 #endif

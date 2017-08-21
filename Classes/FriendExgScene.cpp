@@ -62,7 +62,10 @@ bool FriendExgScene::init(int type)
 	{
 		if (GlobalData::map_myfriendly[mit->first].relation == F_FRIEND)
 		{
+			if (type == 0 && GlobalData::map_NPCFriendData[mit->first].vec_giveres.size() > 0)
 			vec_friends.push_back(mit->first);
+			else if (type == 1 && GlobalData::map_NPCFriendData[mit->first].vec_askres.size() > 0)
+				vec_friends.push_back(mit->first);
 		}
 	}
 
@@ -190,7 +193,7 @@ void FriendExgScene::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 						GlobalData::map_myfriendly[m_npcid].relation = F_NOMAR;
 						std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("与").c_str(), GlobalData::map_npcs[m_npcid].name, CommonFuncs::gbk2utf("关系恶化，不再是朋友！").c_str());
 						g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
-						GlobalData::map_myfriendly[m_npcid].friendly = 0;
+						//GlobalData::map_myfriendly[m_npcid].friendly = 0;
 					}
 				}
 				GlobalData::saveFriendly();

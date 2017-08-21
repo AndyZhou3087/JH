@@ -133,10 +133,15 @@ void AppDelegate::applicationDidEnterBackground() {
 #endif
 	
 	if (g_gameLayer != NULL)
+	{
 		g_gameLayer->saveAllData();
+	}
 
-	ServerDataSwap::getInstance()->setDelegate(NULL);
-	ServerDataSwap::getInstance()->postOneData(GlobalData::getUId());
+	if (!GlobalData::isGetServerData)
+	{
+		ServerDataSwap::getInstance()->setDelegate(NULL);
+		ServerDataSwap::getInstance()->postOneData(GlobalData::getUId());
+	}
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -152,7 +157,7 @@ void AppDelegate::applicationWillEnterForeground() {
 	if (g_gameLayer != NULL)
 	{
 		BuildingUILayer* blayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
-		if (!blayer)
+		if (blayer == NULL)
 		{
 			if (g_hero != NULL)
 			{

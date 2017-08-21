@@ -261,10 +261,10 @@
             <FileData Type="MarkedSubImage" Path="ui/xline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="progressbg" ActionTag="339292738" VisibleForFrame="False" Tag="43" IconVisible="False" LeftMargin="-42.9969" RightMargin="-333.0031" TopMargin="31.9989" BottomMargin="-49.9989" ctype="SpriteObjectData">
+          <AbstractNodeData Name="progressbg" ActionTag="339292738" VisibleForFrame="False" Tag="43" IconVisible="False" LeftMargin="-58.9981" RightMargin="-317.0019" TopMargin="31.9989" BottomMargin="-49.9989" ctype="SpriteObjectData">
             <Size X="376.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="145.0031" Y="-40.9989" />
+            <Position X="129.0019" Y="-40.9989" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -272,20 +272,20 @@
             <FileData Type="MarkedSubImage" Path="ui/buildprogressbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="loadingbar" ActionTag="-606451335" VisibleForFrame="False" Tag="42" IconVisible="False" LeftMargin="-43.9976" RightMargin="-332.0024" TopMargin="31.9989" BottomMargin="-49.9989" ProgressInfo="0" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="loadingbar" ActionTag="-606451335" VisibleForFrame="False" Tag="42" IconVisible="False" LeftMargin="-59.9984" RightMargin="-316.0016" TopMargin="31.9989" BottomMargin="-49.9989" ProgressInfo="0" ctype="LoadingBarObjectData">
             <Size X="376.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="144.0024" Y="-40.9989" />
+            <Position X="128.0016" Y="-40.9989" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <ImageFileData Type="MarkedSubImage" Path="ui/buildprogressbar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-178.5260" RightMargin="52.5260" TopMargin="26.6807" BottomMargin="-53.6807" FontSize="25" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="126.0000" Y="27.0000" />
+          <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-178.5259" RightMargin="61.5259" TopMargin="27.6807" BottomMargin="-52.6807" FontSize="23" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="117.0000" Y="25.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="-52.5260" Y="-40.1807" />
+            <Position X="-61.5259" Y="-40.1807" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />

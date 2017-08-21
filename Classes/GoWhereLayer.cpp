@@ -68,7 +68,11 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	int minute = (int)fmin;
 	std::string faststr;
 	if (minute / 60 > 0)
-		faststr = StringUtils::format("%d小时%d分钟", minute / 60, minute%60);
+	{
+		faststr = StringUtils::format("%d小时%d分钟", minute / 60, minute % 60);
+		if (minute % 60 == 0)
+			faststr = StringUtils::format("%d小时", minute / 60);
+	}
 	else
 		faststr = StringUtils::format("%d分钟", minute);
 	

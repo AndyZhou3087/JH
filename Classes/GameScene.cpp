@@ -165,6 +165,7 @@ bool GameScene::init()
 			GlobalData::setMakeWarmConfig("");
 		}
 	}
+	GlobalData::isGetServerData = true;
 	ServerDataSwap::getInstance()->setDelegate(this);
 	ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
     return true;
@@ -484,6 +485,7 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
+	GlobalData::isGetServerData = false;
 	if (GlobalData::vec_buyVipIds.size() > 0)
 	{
 		GetVipRewardLayer* layer = GetVipRewardLayer::create();
@@ -498,6 +500,7 @@ void GameScene::onSuccess()
             GlobalData::ispunishment = false;
 			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+			GlobalData::isGetServerData = true;
 			ServerDataSwap::getInstance()->setDelegate(this);
 			ServerDataSwap::getInstance()->getAllData();
 		}
@@ -513,6 +516,7 @@ void GameScene::onSuccess()
 void GameScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	GlobalData::isGetServerData = false;
 }
 
 void GameScene::delayChangeStartScene(float dt)

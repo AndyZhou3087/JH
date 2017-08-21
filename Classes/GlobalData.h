@@ -317,6 +317,20 @@ typedef struct
 	std::vector<float> vec_gfbonus;
 }NPCMasterData;
 
+/****************************
+排行榜数据
+*****************************/
+typedef struct
+{
+	int rank;
+	std::string nickname;
+	int herotype;
+	int herolv;
+	int herosex;
+	int heroval;
+}RankData;
+
+
 class GlobalData
 {
 public:
@@ -805,6 +819,8 @@ public:
 
 	static std::map<std::string, NPCMasterData> map_NPCMasterData;
 
+	static std::vector<RankData> vec_rankData;
+
 	static bool isPopingScene;
 
 	static GameStatus g_gameStatus;
@@ -812,6 +828,8 @@ public:
 	static bool ispunishment;
 	static bool isFightMaster;
 	static int servertime;
+	static int myrank;
+	static bool isGetServerData;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

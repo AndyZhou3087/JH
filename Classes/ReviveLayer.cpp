@@ -34,10 +34,10 @@ bool ReviveLayer::init()
 	m_csbnode = CSLoader::createNode("reviveLayer.csb");
 	this->addChild(m_csbnode);
 
-	cocos2d::ui::Button* cancelbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("cacelbtn");
-	cancelbtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
+	m_cancelbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("cacelbtn");
+	m_cancelbtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
 
-	cocos2d::ui::Text* sharetext = (cocos2d::ui::Text*)m_csbnode->getChildByName("sharetext");
+	m_sharetext = (cocos2d::ui::Text*)m_csbnode->getChildByName("sharetext");
 
 	cocos2d::ui::Button* revivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("revivebtn");
 	revivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onRevive, this));
@@ -82,47 +82,34 @@ bool ReviveLayer::init()
 	}
 
 #ifdef UMENG_SHARE
-	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
-	closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
+	m_closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
+	m_closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
 
-	cocos2d::ui::Button* sharebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("sharebtn");
-	sharebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onShare, this));
-
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
-	{
-		closebtn->setVisible(true);
-		cancelbtn->setVisible(false);
-		sharetext->setVisible(true);
-		sharebtn->setVisible(true);
-	}
-	else
-	{
-		closebtn->setVisible(false);
-		cancelbtn->setVisible(true);
-		sharebtn->setVisible(false);
-		sharetext->setVisible(false);
-	}
+	m_sharebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("sharebtn");
+	m_sharebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onShare, this));
+	checkShareReviveCount(0);
+	this->schedule(schedule_selector(ReviveLayer::checkShareReviveCount), 0.5f);
 #else
-	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
-	closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
+	m_closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
+	m_closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
 
 	cocos2d::ui::Button* freeRevivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("freerevivebtn");
 	freeRevivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onFreeRevive, this));
 
 	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
 	{
-		closebtn->setVisible(true);
-		cancelbtn->setVisible(false);
-		sharetext->setString(CommonFuncs::gbk2utf("（每天免费复活一次！）"));
-		sharetext->setVisible(true);
+		m_closebtn->setVisible(true);
+		m_cancelbtn->setVisible(false);
+		m_sharetext->setString(CommonFuncs::gbk2utf("（每天免费复活一次！）"));
+		m_sharetext->setVisible(true);
 		freeRevivebtn->setVisible(true);
 	}
 	else
 	{
-		closebtn->setVisible(false);
-		cancelbtn->setVisible(true);
+		m_closebtn->setVisible(false);
+		m_cancelbtn->setVisible(true);
 		freeRevivebtn->setVisible(false);
-		sharetext->setVisible(false);
+		m_sharetext->setVisible(false);
 	}
 #endif
 
@@ -332,4 +319,22 @@ void ReviveLayer::checkGoldCount(float dt)
 	}
 	else
 		m_revivedesc->setVisible(false);
+}
+
+void ReviveLayer::checkShareReviveCount(float dt)
+{
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
+	{
+		m_closebtn->setVisible(true);
+		m_cancelbtn->setVisible(false);
+		m_sharetext->setVisible(true);
+		m_sharebtn->setVisible(true);
+	}
+	else
+	{
+		m_closebtn->setVisible(false);
+		m_cancelbtn->setVisible(true);
+		m_sharebtn->setVisible(false);
+		m_sharetext->setVisible(false);
+	}
 }

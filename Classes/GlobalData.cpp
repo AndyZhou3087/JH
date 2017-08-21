@@ -49,6 +49,8 @@ std::map<std::string, NPCFriendData> GlobalData::map_NPCFriendData;
 
 std::map<std::string, NPCMasterData> GlobalData::map_NPCMasterData;
 
+std::vector<RankData> GlobalData::vec_rankData;
+
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -84,6 +86,9 @@ bool GlobalData::dataIsModified = false;
 bool GlobalData::ispunishment = false;
 bool GlobalData::isFightMaster = false;
 int GlobalData::servertime = 0;
+
+int GlobalData::myrank = 0;
+bool GlobalData::isGetServerData = false;
 
 GlobalData::GlobalData()
 {

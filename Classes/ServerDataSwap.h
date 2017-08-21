@@ -23,6 +23,7 @@ public:
 	void vipIsOn(int heroid);
 	void updateFreeReviveCount();
 	void getServerTime();
+	void getRankData(std::string orderby);
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
 private:
 	static ServerDataSwap* _serverDataSwap;
@@ -34,6 +35,7 @@ private:
 	static void httpModifyNickNameCB(std::string retdata, int code, std::string tag);
 	static void httpVipIsOnCB(std::string retdata, int code, std::string tag);
 	static void httpGetServerTimeCB(std::string retdata, int code, std::string tag);
+	static void httpGetRankDataCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

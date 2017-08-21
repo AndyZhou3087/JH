@@ -129,12 +129,19 @@ void NpcLayer::refreshNpcNode()
 	{
 		for (int i = 0; i < lesscount; i++)
 		{
-			std::string childname = StringUtils::format("npcnode%d", ncpsize + i);
-			m_scrollview->removeChildByName(childname);
+			std::string removechildname = StringUtils::format("npcnode%d", ncpsize + i);
+			m_scrollview->removeChildByName(removechildname);
+			std::string keepchildname = StringUtils::format("npcnode%d", i);
+			m_scrollview->getChildByName(keepchildname)->setPosition(Vec2(m_scrollview->getContentSize().width / 2, innerheight - i * itemheight - itemheight / 2));
 		}
 	}
 	else
 	{
+		for (int i = 0; i < scrollviewChildSize; i++)
+		{
+			std::string keepchildname = StringUtils::format("npcnode%d", i);
+			m_scrollview->getChildByName(keepchildname)->setPosition(Vec2(m_scrollview->getContentSize().width / 2, innerheight - i * itemheight - itemheight / 2));
+		}
 		for (int i = scrollviewChildSize; i < ncpsize; i++)
 		{
 			Node* npcitem = CSLoader::createNode("npcNode.csb");
@@ -473,7 +480,7 @@ void NpcLayer::onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					{
 						if (nid.compare(e_npc[m]) == 0 && GlobalData::map_myfriendly[nid].relation == F_FRIEND)
 						{
-							GlobalData::map_myfriendly[nid].friendly = 0;
+							GlobalData::map_myfriendly[nid].friendly -= GlobalData::map_NPCFriendData[nid].maxfriendly/5;
 							GlobalData::map_myfriendly[nid].relation = F_NOMAR;
 							e_npcnamstr.append(GlobalData::map_npcs[nid].name);
 							e_npcnamstr.append(CommonFuncs::gbk2utf("、"));
@@ -485,7 +492,7 @@ void NpcLayer::onItemMaster(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				if (ishasenemy)
 				{
 
-					GlobalData::map_myfriendly[npcid].friendly = 0;
+					GlobalData::map_myfriendly[npcid].friendly = GlobalData::map_NPCFriendData[npcid].maxfriendly / 5;
 					GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
 					e_npcnamstr = e_npcnamstr.substr(0, e_npcnamstr.length() - 3);
 					std::string desc = StringUtils::format("%s%s%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("发现你与").c_str(), e_npcnamstr.c_str(), CommonFuncs::gbk2utf("的关系，他们发现你是这种三头两面的人，纷纷离你而去！").c_str());
@@ -559,7 +566,7 @@ void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 					{
 						if (nid.compare(e_npc[m]) == 0 && (GlobalData::map_myfriendly[nid].relation == F_FRIEND || GlobalData::map_myfriendly[nid].relation == F_MASTER))
 						{
-							GlobalData::map_myfriendly[nid].friendly = 0;
+							GlobalData::map_myfriendly[nid].friendly -= GlobalData::map_NPCFriendData[nid].maxfriendly / 5;
 							GlobalData::map_myfriendly[nid].relation = F_NOMAR;
 							e_npcnamstr.append(GlobalData::map_npcs[nid].name);
 							e_npcnamstr.append(CommonFuncs::gbk2utf("、"));
@@ -571,7 +578,7 @@ void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				if (ishasenemy)
 				{
 
-					GlobalData::map_myfriendly[npcid].friendly = 0;
+					GlobalData::map_myfriendly[npcid].friendly -= GlobalData::map_NPCFriendData[npcid].maxfriendly / 5;
 					GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
 					e_npcnamstr = e_npcnamstr.substr(0, e_npcnamstr.length() - 3);
 					std::string desc = StringUtils::format("%s%s%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("发现你与").c_str(), e_npcnamstr.c_str(), CommonFuncs::gbk2utf("的关系，他们发现你是这种三头两面的人，纷纷离你而去！").c_str());
@@ -601,7 +608,7 @@ void NpcLayer::onItemFriend(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
 			GlobalData::saveFriendly();
 			btn->setTitleText(CommonFuncs::gbk2utf("结交"));
-			GlobalData::map_myfriendly[npcid].friendly = 0;
+			GlobalData::map_myfriendly[npcid].friendly -= GlobalData::map_NPCFriendData[npcid].maxfriendly / 5;
 			updateFriendly(npcid);
 		}
 	}
@@ -1424,7 +1431,7 @@ void NpcLayer::updateFriendly(std::string npcid)
 			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
 			std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("与").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("关系恶化，不再是朋友！").c_str());
 			g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
-			GlobalData::map_myfriendly[npcid].friendly = 0;
+			GlobalData::map_myfriendly[npcid].friendly -= GlobalData::map_NPCFriendData[npcid].maxfriendly / 5;
 		}
 	}
 	if (friendly < masterfriendly)
@@ -1434,7 +1441,7 @@ void NpcLayer::updateFriendly(std::string npcid)
 			GlobalData::map_myfriendly[npcid].relation = F_NOMAR;
 			std::string desc = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("不懂尊师重道，被").c_str(), GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("逐出师门！").c_str());
 			g_uiScroll->addEventText(desc, 25, Color3B(204, 4, 4));
-			GlobalData::map_myfriendly[npcid].friendly = 0;
+			GlobalData::map_myfriendly[npcid].friendly -= GlobalData::map_NPCFriendData[npcid].maxfriendly / 5;
 		}
 	}
 	GlobalData::saveFriendly();

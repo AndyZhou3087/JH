@@ -293,6 +293,18 @@ void ServerDataSwap::getServerTime()
 	HttpUtil::getInstance()->doData(url, httpGetServerTimeCB);
 }
 
+void ServerDataSwap::getRankData(std::string orderby)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_ranklist?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&");
+	url.append(orderby);
+	HttpUtil::getInstance()->doData(url, httpGetRankDataCB);
+}
+
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
 {
 	if (code == 0)
@@ -858,6 +870,81 @@ void ServerDataSwap::httpGetServerTimeCB(std::string retdata, int code, std::str
 			isok = true;
 		}
 	}
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+}
+
+void ServerDataSwap::httpGetRankDataCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			GlobalData::vec_rankData.clear();
+			if (doc.HasMember("rank"))
+			{
+				rapidjson::Value& v = doc["rank"];
+				GlobalData::myrank = atoi(v.GetString());
+			}
+			if (doc.HasMember("data"))
+			{
+				rapidjson::Value& dataArray = doc["data"];
+
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
+				{
+					RankData rdata;
+					rdata.rank = m;
+					rapidjson::Value& item = dataArray[m];
+					rapidjson::Value& v = item["nickname"];
+					rdata.nickname = v.GetString();
+					v = item["sex"];
+					rdata.herosex = atoi(v.GetString());
+
+					v = item["type"];
+					rdata.herotype = atoi(v.GetString());
+
+					v = item["exp"];
+					int exp = atoi(v.GetString());
+					int lv = 0;
+					int size = GlobalData::map_heroAtr[rdata.herotype].vec_exp.size();
+					for (int i = 0; i < size; i++)
+					{
+						if (exp > GlobalData::map_heroAtr[rdata.herotype].vec_exp[i])
+						{
+							lv = i;
+							exp = exp - GlobalData::map_heroAtr[rdata.herotype].vec_exp[i];
+						}
+						else
+						{
+							break;
+						}
+					}
+					rdata.herolv = lv;
+
+					v = item["days"];
+					rdata.heroval = atoi(v.GetString());
+					GlobalData::vec_rankData.push_back(rdata);
+				}
+				isok = true;
+			}
+
+		}
+	}
+
 	if (isok)
 	{
 		if (m_pDelegateProtocol != NULL)

@@ -236,6 +236,7 @@
           <Image Name="m1-4.png" />
           <Image Name="m1-5.png" />
           <Image Name="m1-6.png" />
+          <Image Name="m1-7.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
           <Image Name="m2-3.png" />
@@ -289,6 +290,7 @@
           <Image Name="mapmission1_1.png" />
           <Image Name="medicinekit.png" />
           <Image Name="mygoldbox.png" />
+          <Image Name="myrankitem.png" />
           <Image Name="n002.png" />
           <Image Name="n003.png" />
           <Image Name="n004.png" />
@@ -397,6 +399,17 @@
           <Image Name="qubox3.png" />
           <Image Name="qubox4.png" />
           <Image Name="qubox5.png" />
+          <Image Name="rankatktitle.png" />
+          <Image Name="rankcatatitlebox.png" />
+          <Image Name="rankdaytitle.png" />
+          <Image Name="rankitem0.png" />
+          <Image Name="rankitem1.png" />
+          <Image Name="ranknum1.png" />
+          <Image Name="ranknum2.png" />
+          <Image Name="ranknum3.png" />
+          <Image Name="ranktag0.png" />
+          <Image Name="ranktag1.png" />
+          <Image Name="ranktitle.png" />
           <Image Name="redpoint.png" />
           <Image Name="relationheadbox.png" />
           <Image Name="relationtextbox.png" />
@@ -632,6 +645,8 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="rankNode.csd" Type="Node" />
+        <Project Name="rankLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
