@@ -65,6 +65,9 @@ bool GiveLayer::init(std::string npcid)
 	friendly = GlobalData::map_myfriendly[m_npcid].friendly;
 	friendlylbl = (cocos2d::ui::Text*)csbnode->getChildByName("friendly");
 
+	if (friendly < -100000 || friendly > 100000)
+		friendly = 0;
+
 	std::string friendstr = StringUtils::format("%d", friendly);
 	friendlylbl->setString(friendstr);
 

@@ -1587,7 +1587,10 @@ void GlobalData::loadFriendly()
 			CommonFuncs::split(vec_retstr[i], tmp, ",");
 			if (tmp.size() >= 3)
 			{
-				map_myfriendly[tmp[0]].friendly = atoi(tmp[1].c_str());
+				int friendly = atoi(tmp[1].c_str());
+				if (friendly < -100000 || friendly > 100000)
+					friendly = 0;
+				map_myfriendly[tmp[0]].friendly = friendly;
 				map_myfriendly[tmp[0]].relation = atoi(tmp[2].c_str());
 			}
 		}

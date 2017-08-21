@@ -122,7 +122,7 @@ void RelationLayer::delayShowData(float dt)
 			friendly = -maxfriendly;
 
 		int per = maxfriendly / 5;
-		int count = friendly / per;
+		int count = abs(friendly / per);
 
 		for (int m = 0; m < 5; m++)
 		{
