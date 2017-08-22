@@ -101,6 +101,9 @@
 		7254ED961F44498E0063E667 /* giveLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 7254ED931F44498E0063E667 /* giveLayer.csb */; };
 		72573ACE1F08AD0D005DF2F6 /* ExchangeLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72573ACC1F08AD0D005DF2F6 /* ExchangeLayer.cpp */; };
 		72573AD01F08AD28005DF2F6 /* exgLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72573ACF1F08AD28005DF2F6 /* exgLayer.csb */; };
+		725B067C1F4AF8E900ADE663 /* RankLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 725B067B1F4AF8E900ADE663 /* RankLayer.cpp */; };
+		725B067F1F4AFA9800ADE663 /* rankNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 725B067D1F4AFA9800ADE663 /* rankNode.csb */; };
+		725B06801F4AFA9800ADE663 /* rankLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 725B067E1F4AFA9800ADE663 /* rankLayer.csb */; };
 		725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 725CB9D71F15F3C200D2509A /* RepairLayer.cpp */; };
 		725CB9DC1F15F3C200D2509A /* RepairOKLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 725CB9D91F15F3C200D2509A /* RepairOKLayer.cpp */; };
 		725CB9DF1F15F3E900D2509A /* repairLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 725CB9DD1F15F3E900D2509A /* repairLayer.csb */; };
@@ -432,6 +435,10 @@
 		72573ACC1F08AD0D005DF2F6 /* ExchangeLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExchangeLayer.cpp; sourceTree = "<group>"; };
 		72573ACD1F08AD0D005DF2F6 /* ExchangeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeLayer.h; sourceTree = "<group>"; };
 		72573ACF1F08AD28005DF2F6 /* exgLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = exgLayer.csb; sourceTree = "<group>"; };
+		725B067A1F4AF8E900ADE663 /* RankLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankLayer.h; sourceTree = "<group>"; };
+		725B067B1F4AF8E900ADE663 /* RankLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RankLayer.cpp; sourceTree = "<group>"; };
+		725B067D1F4AFA9800ADE663 /* rankNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = rankNode.csb; sourceTree = "<group>"; };
+		725B067E1F4AFA9800ADE663 /* rankLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = rankLayer.csb; sourceTree = "<group>"; };
 		725CB9D71F15F3C200D2509A /* RepairLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepairLayer.cpp; sourceTree = "<group>"; };
 		725CB9D81F15F3C200D2509A /* RepairLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairLayer.h; sourceTree = "<group>"; };
 		725CB9D91F15F3C200D2509A /* RepairOKLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepairOKLayer.cpp; sourceTree = "<group>"; };
@@ -884,10 +891,6 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				72F1551C1F459F7D00C83B47 /* friendExgLayer.csb */,
-				7254ED911F44498E0063E667 /* relationNode.csb */,
-				7254ED921F44498E0063E667 /* relationLayer.csb */,
-				7254ED931F44498E0063E667 /* giveLayer.csb */,
 				728691851ED56CC800D06B0F /* actionGetLayer.csb */,
 				728691861ED56CC800D06B0F /* actionNode.csb */,
 				728691871ED56CC800D06B0F /* activityLayer.csb */,
@@ -924,7 +927,9 @@
 				72573ACF1F08AD28005DF2F6 /* exgLayer.csb */,
 				7286918F1ED56CC800D06B0F /* fightLayer.csb */,
 				728691901ED56CC800D06B0F /* fonts */,
+				72F1551C1F459F7D00C83B47 /* friendExgLayer.csb */,
 				722FA8B51F3B258900904816 /* getVipRewardLayer.csb */,
+				7254ED931F44498E0063E667 /* giveLayer.csb */,
 				72E332C61F0BAAFA00E61182 /* goldGoodsNode.csb */,
 				728691921ED56CC800D06B0F /* goWhereLayer.csb */,
 				72754FEB1F04CCA000AFB4C4 /* gray.fsh */,
@@ -941,6 +946,10 @@
 				7286919C1ED56CC800D06B0F /* outDoorLayer.csb */,
 				723B9F0F1F3327C0000E3B18 /* particle */,
 				7239476F1EF2386D0093E725 /* pauseLayer.csb */,
+				725B067E1F4AFA9800ADE663 /* rankLayer.csb */,
+				725B067D1F4AFA9800ADE663 /* rankNode.csb */,
+				7254ED921F44498E0063E667 /* relationLayer.csb */,
+				7254ED911F44498E0063E667 /* relationNode.csb */,
 				725CB9DD1F15F3E900D2509A /* repairLayer.csb */,
 				725CB9DE1F15F3E900D2509A /* repairOKLayer.csb */,
 				7286919D1ED56CC800D06B0F /* resDetailsLayer.csb */,
@@ -991,6 +1000,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				725B067A1F4AF8E900ADE663 /* RankLayer.h */,
+				725B067B1F4AF8E900ADE663 /* RankLayer.cpp */,
 				72F155191F459F6B00C83B47 /* FriendExgScene.h */,
 				72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */,
 				7254ED881F44496E0063E667 /* RelationLayer.h */,
@@ -1471,6 +1482,7 @@
 				72229CD21F283991001272D3 /* end3_2 in Resources */,
 				725CB9DF1F15F3E900D2509A /* repairLayer.csb in Resources */,
 				72154F361F3C49D600EBD358 /* timeGfitLayer.csb in Resources */,
+				725B06801F4AFA9800ADE663 /* rankLayer.csb in Resources */,
 				72229CD31F283991001272D3 /* end3_2.csb in Resources */,
 				720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */,
 				72229CD51F283991001272D3 /* end4_1.csb in Resources */,
@@ -1492,6 +1504,7 @@
 				723EC0201EF37FF000642589 /* story2_1.csb in Resources */,
 				72777B281EFBD78400151A2B /* UMSocialSDKPromptResources.bundle in Resources */,
 				7271A07B1EE63D90005B980F /* Icon-87.png in Resources */,
+				725B067F1F4AFA9800ADE663 /* rankNode.csb in Resources */,
 				72229CD41F283991001272D3 /* end4_1 in Resources */,
 				728691D41ED56CC800D06B0F /* sounds in Resources */,
 				728691D01ED56CC800D06B0F /* selectSaveComfirmLayer.csb in Resources */,
@@ -1615,6 +1628,7 @@
 				72754FE21F048A0800AFB4C4 /* BookDetailsLayer.cpp in Sources */,
 				72754FE31F048A0800AFB4C4 /* BookShelfLayer.cpp in Sources */,
 				7286905F1ED568B000D06B0F /* GameDataSave.cpp in Sources */,
+				725B067C1F4AF8E900ADE663 /* RankLayer.cpp in Sources */,
 				722FA8B41F3B256B00904816 /* VipShopLayer.cpp in Sources */,
 				7286907A1ED568B000D06B0F /* StartScene.cpp in Sources */,
 				727267FB1EE15920007F036A /* NewerGuideLayer.cpp in Sources */,
