@@ -1,6 +1,6 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="uipacker" Type="Plist" ID="cc6e5a17-5c92-48c4-82e3-3c7ef4e886d4" Version="3.10.0.0" />
-  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="False" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
     <ImageFiles>
       <FilePathData Path="ui/0-ba0.png" />
       <FilePathData Path="ui/0-ba1.png" />
