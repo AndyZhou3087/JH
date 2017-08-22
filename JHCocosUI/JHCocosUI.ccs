@@ -194,7 +194,6 @@
           <Image Name="golditem.png" />
           <Image Name="golditemselect.png" />
           <Image Name="goldtextbox.png" />
-          <Image Name="goodsbg.png" />
           <Image Name="goodssepline.png" />
           <Image Name="gp1.png" />
           <Image Name="gp2.png" />
@@ -385,7 +384,6 @@
           <Image Name="normalbtn.png" />
           <Image Name="npcbtn1.png" />
           <Image Name="npcheadbox.png" />
-          <Image Name="npcicon.png" />
           <Image Name="npcprope0.png" />
           <Image Name="npcprope1.png" />
           <Image Name="npcprope2.png" />

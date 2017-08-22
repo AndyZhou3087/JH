@@ -9,6 +9,7 @@
 #include "MyMenu.h"
 #include "ResDetailsLayer.h"
 #include "RepairOKLayer.h"
+#include "CannotTouchLayer.h"
 
 RepairLayer::RepairLayer()
 {
@@ -332,6 +333,10 @@ void RepairLayer::onResItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 void RepairLayer::showAnim()
 {
 	m_actionBtn->setEnabled(false);
+
+	CannotTouchLayer* layer = CannotTouchLayer::create();
+	g_gameLayer->addChild(layer, 5, "notouchlayer");
+
 	for (int i = 0; i < 3; i++)
 	{
 		ActionInterval* ac1 = Spawn::create(FadeOut::create(1.5f), EaseSineIn::create(MoveTo::create(1.0f, Vec2(repairResBoxImg->getPosition()))), NULL);
@@ -356,6 +361,7 @@ int RepairLayer::getMyPackageResCount(std::string strid)
 
 void RepairLayer::finishAnim(Ref* pSender)
 {
+	float delay = 0.05f;
 	Vec2 pos[] = { Vec2(360, 895), Vec2(140, 530), Vec2(570, 530) };
 
 	for (int i = 0; i < 3; i++)
@@ -371,8 +377,10 @@ void RepairLayer::finishAnim(Ref* pSender)
 		int r = GlobalData::createRandomNum(100);
 		if (r < succrnd)
 		{
+			float dt = 0.5f;
 			data->slv += 1;
-			this->scheduleOnce(schedule_selector(RepairLayer::delayShowOkLayer), 0.5f);
+			this->scheduleOnce(schedule_selector(RepairLayer::delayShowOkLayer), dt);
+			delay += dt;
 		}
 		else
 		{
@@ -400,6 +408,7 @@ void RepairLayer::finishAnim(Ref* pSender)
 	}
 
 	updataUI();
+	this->scheduleOnce(schedule_selector(RepairLayer::delayCanClick), delay);
 }
 
 void RepairLayer::updataUI()
@@ -495,6 +504,11 @@ void RepairLayer::delayShowOkLayer(float dt)
 		onRepairItem(vec_repairItem[clickindex]);
 	}
 	m_actionBtn->setEnabled(true);
+}
+
+void RepairLayer::delayCanClick(float dt)
+{
+	g_gameLayer->removeChildByName("notouchlayer");
 }
 
 void RepairLayer::dofail()

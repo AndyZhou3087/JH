@@ -62,6 +62,7 @@ bool GiveLayer::init(std::string npcid)
 	m_myGoodsSrollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("mygoodsscroll");
 	m_myGoodsSrollView->setScrollBarEnabled(false);
 
+	giveval = 0;
 	friendly = GlobalData::map_myfriendly[m_npcid].friendly;
 	friendlylbl = (cocos2d::ui::Text*)csbnode->getChildByName("friendly");
 

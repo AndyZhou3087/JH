@@ -25,6 +25,7 @@ private:
 	void showAnim();
 	void finishAnim(Ref* pSender);
 	void delayShowOkLayer(float dt);
+	void delayCanClick(float dt);
 	void dofail();
 private:
 	cocos2d::ui::Widget* repairbox;

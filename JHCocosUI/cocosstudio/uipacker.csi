@@ -1,6 +1,6 @@
 <PlistInfoProjectFile>
   <PropertyGroup Name="uipacker" Type="Plist" ID="cc6e5a17-5c92-48c4-82e3-3c7ef4e886d4" Version="3.10.0.0" />
-  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="False" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="False" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
     <ImageFiles>
       <FilePathData Path="ui/0-ba0.png" />
       <FilePathData Path="ui/0-ba1.png" />
@@ -104,7 +104,6 @@
       <FilePathData Path="ui/fighticon.png" />
       <FilePathData Path="ui/forgingtable.png" />
       <FilePathData Path="ui/furnace.png" />
-      <FilePathData Path="ui/goodsbg.png" />
       <FilePathData Path="ui/goodssepline.png" />
       <FilePathData Path="ui/gp1.png" />
       <FilePathData Path="ui/gp2.png" />
@@ -134,7 +133,6 @@
       <FilePathData Path="ui/67.png" />
       <FilePathData Path="ui/68.png" />
       <FilePathData Path="ui/normalbtn.png" />
-      <FilePathData Path="ui/npcicon.png" />
       <FilePathData Path="ui/npcrsi0.png" />
       <FilePathData Path="ui/npcrsi1.png" />
       <FilePathData Path="ui/npcrsi2.png" />
@@ -533,6 +531,6 @@
       <FilePathData Path="ui/rankitem1.png" />
       <FilePathData Path="ui/myrankitem.png" />
     </ImageFiles>
-    <MaxSize Width="4096" Height="4096" />
+    <MaxSize Width="2048" Height="4096" />
   </Content>
 </PlistInfoProjectFile>
