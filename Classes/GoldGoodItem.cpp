@@ -6,8 +6,6 @@
 #include "GameScene.h"
 #include "GameDataSave.h"
 #include "BuyComfirmLayer.h"
-#include "Const.h"
-#include "AnalyticUtil.h"
 #include "MapLayer.h"
 
 GoldGoodsItem::GoldGoodsItem()
@@ -99,10 +97,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 			BuyComfirmLayer* layer = BuyComfirmLayer::create(m_goodData);
 			Director::getInstance()->getRunningScene()->addChild(layer, 1000, "buycomfirmlayer");
-#ifdef ANALYTICS
-			std::string name = StringUtils::format("b%s", m_goodData->icon.c_str());
-			AnalyticUtil::onEvent(name.c_str());
-#endif
+
 		}
 		isDraging = false;
 	}

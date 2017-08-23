@@ -483,10 +483,10 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 
 		m_backbtn->setEnabled(true);
 
-		std::string franmename = "ui/buildtext0.png";
+		std::string franmename = "images/buildtext0.png";
 		if (m_build->data.level > 1)
 		{
-			franmename = "ui/buildtext1.png";
+			franmename = "images/buildtext1.png";
 		}
 		showFinishHintText(franmename);
 		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
@@ -526,7 +526,7 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			StorageRoom::add(data);
 			//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
 			//this->addChild(layer);
-			showFinishHintText("ui/buildtext2.png");
+			showFinishHintText("images/buildtext2.png");
 		}
 
 		for (unsigned int m = 0; m < vec_buildAcitonData.at(type - ACTION).res.size(); m++)
@@ -745,7 +745,7 @@ void BuildingUILayer::onBuidingDetails(cocos2d::Ref *pSender, cocos2d::ui::Widge
 
 void BuildingUILayer::showFinishHintText(std::string path)
 {
-	Sprite* bsprite = Sprite::createWithSpriteFrameName(path);
+	Sprite* bsprite = Sprite::create(path);
 	bsprite->setPosition(Vec2(360, 600));
 	this->addChild(bsprite);
 	bsprite->runAction(Sequence::create(FadeOut::create(1.5f), CallFuncN::create(CC_CALLBACK_1(BuildingUILayer::finishAnim, this, bsprite)), NULL));

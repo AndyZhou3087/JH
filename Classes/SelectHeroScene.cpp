@@ -85,9 +85,9 @@ bool SelectHeroScene::init()
 	heroimg[defaultindex]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 	heroimg[defaultindex]->setContentSize(Sprite::create(str)->getContentSize());
 
-	str = StringUtils::format("ui/select.png");
-	selectimg[defaultindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	selectimg[defaultindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+	str = StringUtils::format("images/select.png");
+	selectimg[defaultindex]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+	selectimg[defaultindex]->setContentSize(Sprite::create(str)->getContentSize());
 	selectimg[defaultindex]->getChildByName("sheroname")->setPositionX(selectimg[defaultindex]->getContentSize().width / 2);
 
     return true;
@@ -121,9 +121,9 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		heroimg[tag - 1]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 		heroimg[tag - 1]->setContentSize(Sprite::create(str)->getContentSize());
 
-		str = StringUtils::format("ui/select.png");
-		selectimg[tag - 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-		selectimg[tag - 1]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+		str = StringUtils::format("images/select.png");
+		selectimg[tag - 1]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+		selectimg[tag - 1]->setContentSize(Sprite::create(str)->getContentSize());
 
 		selectimg[tag - 1]->setPositionX(heroimg[tag - 1]->getContentSize().width / 2);
 
@@ -134,9 +134,9 @@ void SelectHeroScene::onSelect(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		heroimg[_lastSelect - 1]->setContentSize(Sprite::create(str)->getContentSize());
 		heroimg[_lastSelect - 1]->setLocalZOrder(_lastSelect - 1);
 
-		str = StringUtils::format("ui/unselect.png");
-		selectimg[_lastSelect - 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-		selectimg[_lastSelect - 1]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+		str = StringUtils::format("images/unselect.png");
+		selectimg[_lastSelect - 1]->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+		selectimg[_lastSelect - 1]->setContentSize(Sprite::create(str)->getContentSize());
 		selectimg[_lastSelect - 1]->setPositionX(heroimg[_lastSelect - 1]->getContentSize().width / 2);
 		heronameimg[_lastSelect - 1]->setPositionX(selectimg[_lastSelect - 1]->getContentSize().width / 2);
 		

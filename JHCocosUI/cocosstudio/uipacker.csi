@@ -80,9 +80,6 @@
       <FilePathData Path="ui/buildsmall.png" />
       <FilePathData Path="ui/buildtagbtn0.png" />
       <FilePathData Path="ui/buildtagbtn1.png" />
-      <FilePathData Path="ui/buildtext0.png" />
-      <FilePathData Path="ui/buildtext1.png" />
-      <FilePathData Path="ui/buildtext2.png" />
       <FilePathData Path="ui/bwine.png" />
       <FilePathData Path="ui/closebtn.png" />
       <FilePathData Path="ui/cooktable.png" />
@@ -148,7 +145,6 @@
       <FilePathData Path="ui/saveitembg.png" />
       <FilePathData Path="ui/sbed.png" />
       <FilePathData Path="ui/scooktable.png" />
-      <FilePathData Path="ui/select.png" />
       <FilePathData Path="ui/settingselect.png" />
       <FilePathData Path="ui/settingselectbox.png" />
       <FilePathData Path="ui/sexerciseroom.png" />
@@ -180,7 +176,6 @@
       <FilePathData Path="ui/topbox.png" />
       <FilePathData Path="ui/topdegree.png" />
       <FilePathData Path="ui/topdown.png" />
-      <FilePathData Path="ui/topeventwordbox.png" />
       <FilePathData Path="ui/tophero1.png" />
       <FilePathData Path="ui/tophero2.png" />
       <FilePathData Path="ui/tophero3.png" />
@@ -203,7 +198,6 @@
       <FilePathData Path="ui/topspiritred.png" />
       <FilePathData Path="ui/toptemperature.png" />
       <FilePathData Path="ui/toptimeicon.png" />
-      <FilePathData Path="ui/unselect.png" />
       <FilePathData Path="ui/w001.png" />
       <FilePathData Path="ui/w002.png" />
       <FilePathData Path="ui/w003.png" />
@@ -298,11 +292,9 @@
       <FilePathData Path="ui/80m.png" />
       <FilePathData Path="ui/repairokquan.png" />
       <FilePathData Path="ui/repairoktext.png" />
-      <FilePathData Path="ui/strengthfail.png" />
       <FilePathData Path="ui/strengthoktext.png" />
       <FilePathData Path="ui/81.png" />
       <FilePathData Path="ui/82.png" />
-      <FilePathData Path="ui/dividetext.png" />
       <FilePathData Path="ui/addatkicon.png" />
       <FilePathData Path="ui/adddficon.png" />
       <FilePathData Path="ui/addlifeicon.png" />
@@ -333,7 +325,6 @@
       <FilePathData Path="ui/vip2.png" />
       <FilePathData Path="ui/vip3.png" />
       <FilePathData Path="ui/vipbtn.png" />
-      <FilePathData Path="ui/vipshoptitle.png" />
       <FilePathData Path="ui/viptitle.png" />
       <FilePathData Path="ui/tgiftlefttimebox.png" />
       <FilePathData Path="ui/timegiftbtn.png" />
@@ -530,6 +521,9 @@
       <FilePathData Path="ui/myrankitem.png" />
       <FilePathData Path="ui/ranktag0.png" />
       <FilePathData Path="ui/ranktag1.png" />
+      <FilePathData Path="ui/vulture10.png" />
+      <FilePathData Path="ui/vulture8.png" />
+      <FilePathData Path="ui/vulture9.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

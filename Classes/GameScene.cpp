@@ -125,7 +125,7 @@ bool GameScene::init()
 	}
 
 	//滚动文字的背景
-	Sprite* bg = Sprite::createWithSpriteFrameName("ui/topeventwordbox.png");
+	Sprite* bg = Sprite::create("images/topeventwordbox.png");
 	bg->setPosition(Vec2(visibleSize.width / 2, 960));
 	this->addChild(bg, 4);
 

@@ -224,7 +224,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5156" />
             <PreSize X="0.4139" Y="0.2062" />
-            <FileData Type="MarkedSubImage" Path="ui/strengthfail.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/strengthfail.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="desc" ActionTag="2003148900" Tag="88" IconVisible="False" LeftMargin="257.0073" RightMargin="162.9927" TopMargin="266.8796" BottomMargin="951.1204" IsCustomSize="True" FontSize="28" LabelText="十级以上强化失败时武器会消失，请慎重考虑！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

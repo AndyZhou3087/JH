@@ -25,7 +25,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.7211" />
             <PreSize X="1.0000" Y="0.2828" />
-            <FileData Type="MarkedSubImage" Path="ui/vipshoptitle.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/vipshoptitle.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="vipgoodsscroll" ActionTag="356549490" Tag="152" IconVisible="False" LeftMargin="0.0007" RightMargin="-0.0007" TopMargin="399.9981" BottomMargin="195.0019" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
@@ -34,7 +34,7 @@
             <Position X="0.0007" Y="195.0019" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0000" Y="0.1523" />
+            <PrePosition Y="0.1523" />
             <PreSize X="1.0000" Y="0.5352" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />

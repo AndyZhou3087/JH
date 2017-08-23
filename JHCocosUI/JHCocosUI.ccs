@@ -9,6 +9,9 @@
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="images">
+          <Image Name="buildtext0.png" />
+          <Image Name="buildtext1.png" />
+          <Image Name="buildtext2.png" />
           <Image Name="dead.jpg" />
           <Image Name="exsercisedone.png" />
           <Image Name="friendask.jpg" />
@@ -21,6 +24,7 @@
           <Image Name="npctalkbg.png" />
           <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
+          <Image Name="select.png" />
           <Image Name="selectherobg.jpg" />
           <Image Name="shero1.jpg" />
           <Image Name="shero1_s.jpg" />
@@ -36,6 +40,7 @@
           <Image Name="shero4name.png" />
           <Image Name="shoptitle.png" />
           <Image Name="startbg.jpg" />
+          <Image Name="strengthfail.png" />
           <Image Name="syssmallbg.png" />
           <Image Name="t001.jpg" />
           <Image Name="t002.jpg" />
@@ -51,9 +56,13 @@
           <Image Name="t012.jpg" />
           <Image Name="t013.jpg" />
           <Image Name="topbg.png" />
+          <Image Name="topeventwordbox.png" />
           <Image Name="unlockbg.png" />
           <Image Name="unlocktitle.png" />
+          <Image Name="unselect.png" />
           <Image Name="vipbg.png" />
+          <Image Name="vipshoptitle.png" />
+          <Image Name="dividetext.png" />
         </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
@@ -150,16 +159,12 @@
           <Image Name="buildsmall.png" />
           <Image Name="buildtagbtn0.png" />
           <Image Name="buildtagbtn1.png" />
-          <Image Name="buildtext0.png" />
-          <Image Name="buildtext1.png" />
-          <Image Name="buildtext2.png" />
           <Image Name="bwine.png" />
           <Image Name="closebtn.png" />
           <Image Name="cooktable.png" />
           <Image Name="crit.png" />
           <Image Name="disbtn.png" />
           <Image Name="disnpcbtn1.png" />
-          <Image Name="dividetext.png" />
           <Image Name="dodge.png" />
           <Image Name="e001.png" />
           <Image Name="e002.png" />
@@ -420,7 +425,6 @@
           <Image Name="sbed.png" />
           <Image Name="sbookshelf.png" />
           <Image Name="scooktable.png" />
-          <Image Name="select.png" />
           <Image Name="setmodifybtn.png" />
           <Image Name="setnicknamebox.png" />
           <Image Name="settingselect.png" />
@@ -449,7 +453,6 @@
           <Image Name="startbtndis.png" />
           <Image Name="storageroom.png" />
           <Image Name="storagesepline.png" />
-          <Image Name="strengthfail.png" />
           <Image Name="strengthoktext.png" />
           <Image Name="swinemake.png" />
           <Image Name="swinetable.png" />
@@ -469,7 +472,6 @@
           <Image Name="topbox.png" />
           <Image Name="topdegree.png" />
           <Image Name="topdown.png" />
-          <Image Name="topeventwordbox.png" />
           <Image Name="tophero1.png" />
           <Image Name="tophero2.png" />
           <Image Name="tophero3.png" />
@@ -492,20 +494,21 @@
           <Image Name="topspiritred.png" />
           <Image Name="toptemperature.png" />
           <Image Name="toptimeicon.png" />
-          <Image Name="unselect.png" />
           <Image Name="vip1.png" />
           <Image Name="vip2.png" />
           <Image Name="vip3.png" />
           <Image Name="vipbtn.png" />
-          <Image Name="vipshoptitle.png" />
           <Image Name="viptitle.png" />
           <Image Name="vulture1.png" />
+          <Image Name="vulture10.png" />
           <Image Name="vulture2.png" />
           <Image Name="vulture3.png" />
           <Image Name="vulture4.png" />
           <Image Name="vulture5.png" />
           <Image Name="vulture6.png" />
           <Image Name="vulture7.png" />
+          <Image Name="vulture8.png" />
+          <Image Name="vulture9.png" />
           <Image Name="w001.png" />
           <Image Name="w002.png" />
           <Image Name="w003.png" />

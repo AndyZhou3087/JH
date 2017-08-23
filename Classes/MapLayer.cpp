@@ -652,9 +652,9 @@ void MapLayer::vultureAnim()
 	m_vulture->setVisible(true);
 
 	auto animation = Animation::create();
-	for (int i = 1; i < 7; i++)
+	for (int i = 1; i < 10; i++)
 	{
-		char szName[100] = { 0 };
+		char szName[20] = { 0 };
 		sprintf(szName, "ui/vulture%d.png", i);
 		SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
 		animation->addSpriteFrame(frame);

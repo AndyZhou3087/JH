@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4688" />
             <PreSize X="0.3444" Y="0.1711" />
-            <FileData Type="MarkedSubImage" Path="ui/dividetext.png" Plist="uipacker.plist" />
+            <FileData Type="Normal" Path="images/dividetext.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="textlbl" ActionTag="243337762" Tag="18" IconVisible="False" LeftMargin="262.9961" RightMargin="263.0039" TopMargin="807.5322" BottomMargin="439.4678" FontSize="30" LabelText="获得以下物品：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

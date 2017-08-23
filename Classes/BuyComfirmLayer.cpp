@@ -6,6 +6,8 @@
 #include "ShopLayer.h"
 #include "HintBox.h"
 #include "StorageUILayer.h"
+#include "Const.h"
+#include "AnalyticUtil.h"
 #include "MD5.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
@@ -108,6 +110,11 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			StorageUILayer* storageUI = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
 			if (storageUI != NULL)
 				storageUI->updateResContent();
+
+#ifdef ANALYTICS
+			std::string name = StringUtils::format("b%s", m_gdata->icon.c_str());
+			AnalyticUtil::onEvent(name.c_str());
+#endif
 		}
 		else
 		{
