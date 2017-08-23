@@ -40,19 +40,28 @@ bool RankLayer::init()
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(RankLayer::onBack, this));
 
+	tag0btn = (cocos2d::ui::Button*)csbnode->getChildByName("tagbtn0");
+	tag0btn->addTouchEventListener(CC_CALLBACK_2(RankLayer::onRank, this));
+	tag0btn->setTag(0);
+	tag0btn->setBright(false);
+
+	tag1btn = (cocos2d::ui::Button*)csbnode->getChildByName("tagbtn1");
+	tag1btn->addTouchEventListener(CC_CALLBACK_2(RankLayer::onRank, this));
+	tag1btn->setTag(1);
+	tag1btn->setBright(true);
+
 	srollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("scrollview");
 	srollView->setScrollBarEnabled(false);
 	srollView->setBounceEnabled(true);
 
+	text6 = (cocos2d::ui::Text*) csbnode->getChildByName("rankcatabox")->getChildByName("text6");
+
 	GlobalData::g_gameStatus = GAMEPAUSE;
 
-	WaitingProgress* waitbox = WaitingProgress::create("排名中，请稍等...");
-	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+	selectrank = 0;
+	myfightingpower = 0;
 
-	GlobalData::isGetServerData = true;
-	ServerDataSwap::getInstance()->setDelegate(this);
-	std::string orderstr = StringUtils::format("days=%d", g_nature->getPastDays());
-	ServerDataSwap::getInstance()->getRankData(orderstr);
+	getRankData(0);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -79,10 +88,66 @@ void RankLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	}
 }
 
+void RankLayer::onRank(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		cocos2d::ui::Button* btnnode = (cocos2d::ui::Button*)pSender;
+		btnnode->setBright(false);
+		int tag = btnnode->getTag();
+
+		if (selectrank == tag)
+			return;
+
+		if (tag == 0)
+		{
+			tag1btn->setBright(true);
+			text6->setString(CommonFuncs::gbk2utf("天数"));
+		}
+		else
+		{
+			tag0btn->setBright(true);
+			text6->setString(CommonFuncs::gbk2utf("战斗力"));
+		}
+
+		selectrank = btnnode->getTag();
+		getRankData(selectrank);
+	}
+}
+
+void RankLayer::getRankData(int type)
+{
+	WaitingProgress* waitbox = WaitingProgress::create("排名中...");
+	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+
+	GlobalData::isGetServerData = true;
+
+	std::string orderstr = StringUtils::format("days=%d", g_nature->getPastDays());
+	if (type == 1)
+	{
+		myfightingpower = 0;
+		if (g_hero != NULL)
+		{
+			myfightingpower = g_hero->getMaxLifeValue() + g_hero->getTotalDf() * 20 + g_hero->getTotalAtck() * 10 + g_hero->getCritRate() * 100 + g_hero->getdodgeRate() * 100;
+		}
+		orderstr = StringUtils::format("fightingpower=%d", myfightingpower);
+	}
+	else
+	{
+		myfightingpower = 0;
+	}
+	std::string addtypestr = StringUtils::format("&ranktype=%d", type);
+	orderstr.append(addtypestr);
+
+	ServerDataSwap::getInstance()->setDelegate(this);
+	ServerDataSwap::getInstance()->getRankData(orderstr);
+}
+
 void RankLayer::delayShowData(float dt)
 {
 
-	int size = GlobalData::map_NPCFriendData.size();
+	srollView->removeAllChildrenWithCleanup(true);
+	int size = GlobalData::vec_rankData.size();
 
 	int itemheight = 78;
 	int innerheight = itemheight * size;
@@ -98,25 +163,25 @@ void RankLayer::delayShowData(float dt)
 		srollView->addChild(node);
 	}
 
-	m_loadlbl->setVisible(false);
 	RankData myrankdata;
 	myrankdata.rank = GlobalData::myrank;
 	myrankdata.nickname = GlobalData::getMyNickName();
 	myrankdata.herotype = g_hero->getHeadID();
 	myrankdata.herolv = g_hero->getLVValue();
 	myrankdata.herosex = g_hero->getSex();
-	myrankdata.heroval = g_nature->getPastDays();
+
+	if (myfightingpower > 0)
+		myrankdata.heroval = myfightingpower;
+	else
+		myrankdata.heroval = g_nature->getPastDays();
 	RankItem* node = RankItem::create(&myrankdata);
 	node->setPosition(Vec2(360, 130));
 	this->addChild(node);
+
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }
 void RankLayer::onSuccess()
 {
-	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	m_loadlbl = Label::createWithTTF(CommonFuncs::gbk2utf("加载中..."), "fonts/STXINGKA.TTF", 28);
-	m_loadlbl->setColor(Color3B(0, 0, 0));
-	m_loadlbl->setPosition(Vec2(320, 600));
-	this->addChild(m_loadlbl);
 	this->scheduleOnce(schedule_selector(RankLayer::delayShowData), 0.1f);
 	GlobalData::isGetServerData = false;
 }
@@ -196,7 +261,7 @@ bool RankItem::init(RankData *data)
 	}
 
 	cocos2d::ui::Text* herovallbl = (cocos2d::ui::Text*)csbnode->getChildByName("heroval");
-	str = StringUtils::format("%d天", data->heroval);
+	str = StringUtils::format("%d", data->heroval);
 	herovallbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 	return true;
 }

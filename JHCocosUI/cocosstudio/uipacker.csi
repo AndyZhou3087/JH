@@ -522,14 +522,14 @@
       <FilePathData Path="ui/ranknum1.png" />
       <FilePathData Path="ui/ranknum2.png" />
       <FilePathData Path="ui/ranknum3.png" />
-      <FilePathData Path="ui/ranktag0.png" />
-      <FilePathData Path="ui/ranktag1.png" />
       <FilePathData Path="ui/ranktitle.png" />
       <FilePathData Path="ui/m1-7.png" />
       <FilePathData Path="ui/rankcatatitlebox.png" />
       <FilePathData Path="ui/rankitem0.png" />
       <FilePathData Path="ui/rankitem1.png" />
       <FilePathData Path="ui/myrankitem.png" />
+      <FilePathData Path="ui/ranktag0.png" />
+      <FilePathData Path="ui/ranktag1.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

@@ -18,13 +18,19 @@ public:
 
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onRank(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void delayShowData(float dt);
 	void onSuccess();
 	void onErr(int errcode);
+	void getRankData(int type);
 private:
 	cocos2d::ui::ScrollView* srollView;
-	Label * m_loadlbl;
+	cocos2d::ui::Button *tag0btn;
+	cocos2d::ui::Button *tag1btn;
+	cocos2d::ui::Text* text6;
+	int selectrank;
+	int myfightingpower;
 };
 
 class RankItem :public Sprite

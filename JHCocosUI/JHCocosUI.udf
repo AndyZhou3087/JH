@@ -7,18 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="rankLayer.csd" />
-          <FilePathData Path="rankNode.csd" />
-          <FilePathData Path="exgLayer.csd" />
-          <FilePathData Path="giveLayer.csd" />
-          <FilePathData Path="npcNode.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="uipacker.csi" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

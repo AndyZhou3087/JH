@@ -5,6 +5,7 @@
 #include "GameDataSave.h"
 #include "CommonFuncs.h"
 #include "Hero.h"
+#include "GameScene.h"
 
 #define HTTPURL "https://www.stormnet.cn/api/"
 
@@ -133,6 +134,17 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	int cheat = GlobalData::dataIsModified?1:0;
 	writedoc.AddMember("cheat", cheat, allocator);
 	GlobalData::dataIsModified = false;
+
+	int fightingpower = 0;
+
+	if (g_hero != NULL)
+	{
+		fightingpower = g_hero->getMaxLifeValue() + g_hero->getTotalDf() * 20 + g_hero->getTotalAtck() * 10 + g_hero->getCritRate() * 100 + g_hero->getdodgeRate() * 100;
+	}
+	if (fightingpower > 0)
+	{
+		writedoc.AddMember("fightingpower", fightingpower, allocator);
+	}
 
 	rapidjson::Document doc = ReadJsonFile("data/buildings.json");
 	rapidjson::Value& allBuilds = doc["b"];
@@ -935,8 +947,21 @@ void ServerDataSwap::httpGetRankDataCB(std::string retdata, int code, std::strin
 					}
 					rdata.herolv = lv;
 
-					v = item["days"];
-					rdata.heroval = atoi(v.GetString());
+					int heroval = 0;
+					if (item.HasMember("days"))
+					{
+						v = item["days"];
+						heroval = atoi(v.GetString());
+					}
+					else if (item.HasMember("fightingpower"))
+					{
+						v = item["fightingpower"];
+						heroval = atoi(v.GetString());
+					}
+					else
+						heroval = 0;
+
+					rdata.heroval = heroval;
 					GlobalData::vec_rankData.push_back(rdata);
 				}
 				isok = true;

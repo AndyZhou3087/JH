@@ -64,21 +64,21 @@
             <FileData Type="MarkedSubImage" Path="ui/hintdown.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="scrollview" ActionTag="-1150686882" Tag="57" IconVisible="False" LeftMargin="33.0000" RightMargin="32.0000" TopMargin="177.9985" BottomMargin="172.0015" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="655.0000" Y="930.0000" />
+          <AbstractNodeData Name="scrollview" ActionTag="-1150686882" Tag="57" IconVisible="False" LeftMargin="33.0000" RightMargin="32.0000" TopMargin="257.9985" BottomMargin="172.0015" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="655.0000" Y="850.0000" />
             <AnchorPoint />
             <Position X="33.0000" Y="172.0015" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0458" Y="0.1344" />
-            <PreSize X="0.9097" Y="0.7266" />
+            <PreSize X="0.9097" Y="0.6641" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="655" Height="1000" />
+            <InnerNodeSize Width="655" Height="930" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rankcatabox" ActionTag="-1429055899" Tag="58" IconVisible="False" LeftMargin="53.0000" RightMargin="53.0000" TopMargin="129.0000" BottomMargin="1109.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="rankcatabox" ActionTag="-1429055899" Tag="58" IconVisible="False" LeftMargin="53.0001" RightMargin="52.9999" TopMargin="210.9935" BottomMargin="1027.0065" ctype="SpriteObjectData">
             <Size X="614.0000" Y="42.0000" />
             <Children>
               <AbstractNodeData Name="text1" ActionTag="-1588372000" Tag="59" IconVisible="False" LeftMargin="14.2026" RightMargin="546.7974" TopMargin="6.9454" BottomMargin="4.0546" FontSize="28" LabelText="排名" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -141,27 +141,83 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="text6" ActionTag="-1593855803" Tag="68" IconVisible="False" LeftMargin="534.9644" RightMargin="20.0356" TopMargin="6.9454" BottomMargin="4.0546" FontSize="28" LabelText="寿命" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="59.0000" Y="31.0000" />
-                <AnchorPoint ScaleY="0.5000" />
-                <Position X="534.9644" Y="19.5546" />
+              <AbstractNodeData Name="text6" ActionTag="-1593855803" Tag="68" IconVisible="False" LeftMargin="531.9711" RightMargin="25.0289" TopMargin="6.9454" BottomMargin="4.0546" FontSize="28" LabelText="天数" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="57.0000" Y="31.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="560.4711" Y="19.5546" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.8713" Y="0.4656" />
-                <PreSize X="0.0961" Y="0.7381" />
+                <PrePosition X="0.9128" Y="0.4656" />
+                <PreSize X="0.0928" Y="0.7381" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="1130.0000" />
+            <Position X="360.0001" Y="1048.0065" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8828" />
+            <PrePosition X="0.5000" Y="0.8188" />
             <PreSize X="0.8528" Y="0.0328" />
             <FileData Type="MarkedSubImage" Path="ui/rankcatatitlebox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="tagbtn0" ActionTag="1714169879" Tag="79" IconVisible="False" LeftMargin="62.0002" RightMargin="461.9998" TopMargin="160.9934" BottomMargin="1067.0066" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="196.0000" Y="52.0000" />
+            <Children>
+              <AbstractNodeData Name="text" ActionTag="-2068370175" Tag="81" IconVisible="False" LeftMargin="35.0000" RightMargin="35.0000" TopMargin="9.0000" BottomMargin="9.0000" ctype="SpriteObjectData">
+                <Size X="126.0000" Y="34.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="98.0000" Y="26.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.6429" Y="0.6538" />
+                <FileData Type="MarkedSubImage" Path="ui/rankdaytitle.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="160.0002" Y="1093.0066" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.2222" Y="0.8539" />
+            <PreSize X="0.2722" Y="0.0406" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/ranktag1.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/ranktag0.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/ranktag0.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="tagbtn1" ActionTag="-973568867" Tag="80" IconVisible="False" LeftMargin="258.0000" RightMargin="266.0000" TopMargin="160.9934" BottomMargin="1067.0066" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="166" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="196.0000" Y="52.0000" />
+            <Children>
+              <AbstractNodeData Name="text" ActionTag="1911264358" Tag="82" IconVisible="False" LeftMargin="51.0000" RightMargin="51.0000" TopMargin="8.5000" BottomMargin="8.5000" ctype="SpriteObjectData">
+                <Size X="94.0000" Y="35.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="98.0000" Y="26.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.4796" Y="0.6731" />
+                <FileData Type="MarkedSubImage" Path="ui/rankatktitle.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="356.0000" Y="1093.0066" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4944" Y="0.8539" />
+            <PreSize X="0.2722" Y="0.0406" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/ranktag1.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/ranktag0.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/ranktag0.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

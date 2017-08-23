@@ -281,31 +281,14 @@ void FightLayer::delayHeroFight(float dt)
 
 	isHeroAct = -1;
 	isNpcAct = - 1;
-	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()] * 100;
-	if (g_hero->getAtrByType(H_WG)->count > 0)
-		critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].vec_cirt[g_hero->getAtrByType(H_WG)->lv] * 100;
+
+	int critrnd = g_hero->getCritRate() * 100;
 
 	if (checkSkill(H_WG) == S_SKILL_4)
 	{
 		showSkill(S_SKILL_4);
 		critrnd += GlobalData::map_gfskills[S_SKILL_4].leftval * 100;
 	}
-
-	int friendcritrnd = 0;
-	std::map<std::string, FriendlyData>::iterator it;
-	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
-	{
-		std::string nid = it->first;
-		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
-		{
-			friendcritrnd += GlobalData::map_NPCFriendData[nid].critpercent * 100;
-		}
-		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
-		{
-			friendcritrnd += GlobalData::map_NPCMasterData[nid].critpercent * 100;
-		}
-	}
-	critrnd += friendcritrnd;
 
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
 	int r = GlobalData::createRandomNum(10000);
@@ -451,33 +434,13 @@ void FightLayer::delayBossFight(float dt)
 
 	isHeroAct = -1;
 	isNpcAct = -1;
-	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()] * 100;
 
-	if (g_hero->getAtrByType(H_NG)->count > 0)
-		dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].vec_dodge[g_hero->getAtrByType(H_NG)->lv] * 100;
-
+	int dodgernd = g_hero->getdodgeRate() * 100;
 	if (checkSkill(H_NG) == S_SKILL_8)
 	{
 		showSkill(S_SKILL_8);
 		dodgernd += GlobalData::map_gfskills[S_SKILL_8].leftval * 100;
 	}
-
-	int frienddogdernd = 0;
-	std::map<std::string, FriendlyData>::iterator it;
-	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
-	{
-		std::string nid = it->first;
-		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
-		{
-			frienddogdernd += GlobalData::map_NPCFriendData[nid].dodgepercent * 100;
-		}
-		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
-		{
-			frienddogdernd += GlobalData::map_NPCMasterData[nid].dodgepercent * 100;
-		}
-	}
-	dodgernd += frienddogdernd;
-
 
 	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
 	int r = GlobalData::createRandomNum(10000);

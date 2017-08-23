@@ -650,3 +650,52 @@ int Hero::getTotalAtck()
 	int tatk = int(fack + 0.5f);
 	return tatk;
 }
+
+float Hero::getCritRate()
+{
+	int critrnd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_crit[g_hero->getLVValue()];
+	if (g_hero->getAtrByType(H_WG)->count > 0)
+		critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].vec_cirt[g_hero->getAtrByType(H_WG)->lv];
+
+	float friendcritrnd = 0.0f;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			friendcritrnd += GlobalData::map_NPCFriendData[nid].critpercent;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			friendcritrnd += GlobalData::map_NPCMasterData[nid].critpercent;
+		}
+	}
+	critrnd += friendcritrnd;
+	return critrnd;
+}
+
+float Hero::getdodgeRate()
+{
+	int dodgernd = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_dodge[g_hero->getLVValue()];
+
+	if (g_hero->getAtrByType(H_NG)->count > 0)
+		dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].vec_dodge[g_hero->getAtrByType(H_NG)->lv];
+
+	float frienddogdernd = 0.0f;
+	std::map<std::string, FriendlyData>::iterator it;
+	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
+	{
+		std::string nid = it->first;
+		if (GlobalData::map_myfriendly[nid].relation == F_FRIEND)
+		{
+			frienddogdernd += GlobalData::map_NPCFriendData[nid].dodgepercent;
+		}
+		else if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
+		{
+			frienddogdernd += GlobalData::map_NPCMasterData[nid].dodgepercent;
+		}
+	}
+	dodgernd += frienddogdernd;
+	return dodgernd;
+}

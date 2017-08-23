@@ -260,6 +260,17 @@ public:
 	总的攻击
 	*****************************/
 	int getTotalAtck();
+
+	/****************************
+	暴击率
+	*****************************/
+	float getCritRate();
+
+	/****************************
+	闪避率
+	*****************************/
+	float getdodgeRate();
+
 public:
 	static float MAXInnerinjuryValue;//最大内伤值
 	static float MAXOutinjuryValue;//最大外伤值
