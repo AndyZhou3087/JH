@@ -192,6 +192,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MapLayer.cpp" />
     <ClCompile Include="..\Classes\MD5.cpp" />
     <ClCompile Include="..\Classes\MedicineKit.cpp" />
+    <ClCompile Include="..\Classes\MixGFDoneLayer.cpp" />
+    <ClCompile Include="..\Classes\MixGFNode.cpp" />
+    <ClCompile Include="..\Classes\MixSuggestLayer.cpp" />
     <ClCompile Include="..\Classes\MyActionProgressTimer.cpp" />
     <ClCompile Include="..\Classes\MyMenu.cpp" />
     <ClCompile Include="..\Classes\MyPackage.cpp" />
@@ -286,6 +289,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MapLayer.h" />
     <ClInclude Include="..\Classes\MD5.h" />
     <ClInclude Include="..\Classes\MedicineKit.h" />
+    <ClInclude Include="..\Classes\MixGFDoneLayer.h" />
+    <ClInclude Include="..\Classes\MixGFNode.h" />
+    <ClInclude Include="..\Classes\MixSuggestLayer.h" />
     <ClInclude Include="..\Classes\MyActionProgressTimer.h" />
     <ClInclude Include="..\Classes\MyMenu.h" />
     <ClInclude Include="..\Classes\MyPackage.h" />

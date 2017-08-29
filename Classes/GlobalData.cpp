@@ -49,6 +49,8 @@ std::map<std::string, NPCFriendData> GlobalData::map_NPCFriendData;
 
 std::map<std::string, NPCMasterData> GlobalData::map_NPCMasterData;
 
+std::map<std::string, MixGfData> GlobalData::map_MixGfData;
+
 std::vector<RankData> GlobalData::vec_rankData;
 
 bool GlobalData::unlockhero[4] = {true, false, false, false};
@@ -1689,7 +1691,6 @@ void GlobalData::loadNpcFriendJsonData()
 }
 void GlobalData::loadNpcMasterJsonData()
 {
-
 	map_NPCMasterData.clear();
 	rapidjson::Document doc = ReadJsonFile("data/master.json");
 	rapidjson::Value& values = doc["ms"];
@@ -1742,6 +1743,80 @@ void GlobalData::loadNpcMasterJsonData()
 
 	}
 }
+
+void GlobalData::loadMixGfJsonData()
+{
+	map_MixGfData.clear();
+	rapidjson::Document doc = ReadJsonFile("data/zhgf.json");
+	rapidjson::Value& values = doc["m"];
+	for (unsigned int i = 0; i < values.Size(); i++)//一级资源数组
+	{
+		MixGfData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["id"];
+		data.id = v.GetString();
+
+		v = item["name"];
+		data.name = v.GetString();
+
+		v = item["lv"];
+		data.lv = atoi(v.GetString());
+
+		v = item["atk"];
+		data.atkpercent = atof(v.GetString());
+
+		v = item["df"];
+		data.dfpercent = atof(v.GetString());
+
+		v = item["avoid"];
+		data.dodgepercent = atof(v.GetString());
+
+		v = item["crit"];
+		data.critpercent = atof(v.GetString());
+
+		v = item["hp"];
+		data.hppercent = atof(v.GetString());
+
+		v = item["sex"];
+		data.sex = atoi(v.GetString());
+
+		v = item["mgf"];
+		data.mastergf = v.GetString();
+
+		v = item["cgf"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.length() > 1)
+				data.vec_secgf.push_back(resval);
+		}
+
+		v = item["egf"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& resv = v[m];
+			std::string resval = resv.GetString();
+			if (resval.length() > 1)
+				data.vec_mutexgf.push_back(resval);
+		}
+
+		map_MixGfData[data.id] = data;
+
+	}
+}
+
+std::string GlobalData::getMixGF()
+{
+	return GameDataSave::getInstance()->getMixGF();
+}
+
+void GlobalData::setMixGF(std::string str)
+{
+	GameDataSave::getInstance()->setMixGF(str);
+}
+
 
 std::string GlobalData::addUidString(std::string val)
 {

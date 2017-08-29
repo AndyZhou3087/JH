@@ -130,7 +130,6 @@ bool HeroProperNode::init()
 	m_select->setAnchorPoint(Vec2(0, 1));
 	m_scrollView->addChild(m_select, 1);
 	m_select->setVisible(false);
-
 	return true;
 }
 
@@ -151,6 +150,7 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
 		if (heroStateUILayer != NULL)
 			heroStateUILayer->showNewerGuide(12);
+		this->setLocalZOrder(0);
 	}
 }
 
@@ -183,6 +183,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		heroselectbg->setPositionY(heroppoint->getPositionY() - heroppoint->getContentSize().height + 3);
 
 		showNewerGuide(++m_step);
+		this->setLocalZOrder(1);
 	}
 }
 
@@ -285,6 +286,24 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 		{
 			PackageData sdata = *g_hero->getAtrByType(index);
 			map_carryData[index].insert(map_carryData[index].begin(), sdata);
+		}
+		std::string mixgfstr = GlobalData::getMixGF();
+		if (GlobalData::getMixGF().length() > 0)
+		{
+			std::string mastergfid = GlobalData::map_MixGfData[mixgfstr].mastergf;
+			WG_NGData gfdata = GlobalData::map_wgngs[mastergfid];
+			int gftype = gfdata.type - 1;
+			PackageData* carraydata = g_hero->getAtrByType(index);
+			if ((gftype == W_GONG && index == H_WG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0) || (gftype == N_GONG && index == H_NG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0))
+			{
+				PackageData data;
+				data.strid = gfdata.id;
+				data.count = 1;
+				data.lv = gfdata.maxlv - 1;
+				data.type = gftype;
+				data.extype = gfdata.extype;
+				map_carryData[index].insert(map_carryData[index].begin(), data);
+			}
 		}
 	}
 }
@@ -507,6 +526,24 @@ void HeroProperNode::selectCarryData()
 
 	if (m_select->isVisible())
 	{
+		std::string mymixgf = GlobalData::getMixGF();
+		if (mymixgf.length() > 0)
+		{
+			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+			for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
+			{
+				if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
+				{
+					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
+					Director::getInstance()->getRunningScene()->addChild(hint, 4);
+
+					m_select->setVisible(!m_select->isVisible());
+					return;
+				}
+			}
+
+		}
+
 		takeon(m_select_atrype, m_select_udata);
 	}
 	else
@@ -666,6 +703,30 @@ void HeroProperNode::updataMyPackageUI()
 		}
 	}
 }
+void HeroProperNode::refreshGF(HeroAtrType atrype)
+{
+	int index = 0;
+
+	PackageData mydata = *g_hero->getAtrByType(atrype);
+	StorageRoom::add(mydata);
+
+	g_hero->getAtrByType(atrype)->count = 0;
+
+	if (atrype == H_WG)
+		index = 0;
+	else if (atrype == H_NG)
+		index = 1;
+	lvtext[index]->setString("");
+	std::string str = "ui/buildsmall.png";
+	imgbtn[index]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	imgbtn[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+	str = StringUtils::format("ui/hp%d.png", mydata.type + 1);
+
+	propeImages[index]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	propeImages[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+}
+
 
 void HeroProperNode::showNewerGuide(int step)
 {

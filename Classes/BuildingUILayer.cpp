@@ -227,7 +227,7 @@ void BuildingUILayer::loadActionUi()
 		int type = vec_buildAcitonData.at(i).type - 1;
 		if (type == WEAPON || type == PROTECT_EQU)
 		{
-			if (g_hero->getGF_Equip(vec_buildAcitonData.at(i).icon) != NULL)
+			if (g_hero->checkifHasGF_Equip(vec_buildAcitonData.at(i).icon))
 				actbtn->setTitleText(CommonFuncs::gbk2utf("分解"));
 			else if (GlobalData::tempHasGf_Equip(vec_buildAcitonData.at(i).icon))
 			{

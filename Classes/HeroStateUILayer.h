@@ -36,11 +36,11 @@ private:
 	void onPause(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	Node* m_csbnode;
-	//13个属性值显示控件
-	cocos2d::ui::Text* herostatus[14];
+	//7个属性值显示控件
+	cocos2d::ui::Text* herostatus[7];
 private:
 	/****************************
-	定时更新13个属性值
+	定时更新7个属性值
 	*****************************/
 	void updateStatus(float dt);
 

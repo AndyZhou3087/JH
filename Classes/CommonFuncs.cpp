@@ -115,3 +115,22 @@ void CommonFuncs::BtnAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	}
 }
+
+void CommonFuncs::changeGray(cocos2d::Node* node)
+{
+	auto p = GLProgram::createWithFilenames("gray.vsh", "gray.fsh");
+	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
+	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORDS);
+	p->link();
+	p->updateUniforms();
+
+	node->setGLProgram(p);
+}
+
+void CommonFuncs::removeGray(cocos2d::Node* node)
+{
+	std::string str = GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR_NO_MVP;//ShaderPositionTextureColor_noMVP;
+	GLProgram * pProgram = ShaderCache::getInstance()->getGLProgram(str);
+	node->setGLProgram(pProgram);
+}

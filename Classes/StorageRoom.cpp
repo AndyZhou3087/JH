@@ -160,6 +160,31 @@ void StorageRoom::use(std::string strid, int count)
 		}
 	}
 	StorageRoom::save();
+
+	std::string mixid = GlobalData::getMixGF();
+	if (mixid.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mixid];
+
+		if (mdata.mastergf.compare(strid) == 0)
+		{
+			for (unsigned int n = 0; n < mdata.vec_secgf.size(); n++)
+			{
+				if (StorageRoom::getCountById(mdata.vec_secgf[n]) <= 0)
+				{
+					PackageData data;
+					WG_NGData gfdata = GlobalData::map_wgngs[mdata.vec_secgf[n]];
+					data.strid = gfdata.id;
+					data.count = 1;
+					data.lv = gfdata.maxlv - 1;
+					data.type = gfdata.type - 1;
+					data.extype = gfdata.extype;
+					StorageRoom::add(data);
+				}
+			}
+			GlobalData::setMixGF("");
+		}
+	}
 }
 
 void StorageRoom::use(PackageData data)

@@ -524,6 +524,13 @@
       <FilePathData Path="ui/vulture10.png" />
       <FilePathData Path="ui/vulture8.png" />
       <FilePathData Path="ui/vulture9.png" />
+      <FilePathData Path="ui/heroatrmixhint.png" />
+      <FilePathData Path="ui/mixadd.png" />
+      <FilePathData Path="ui/mixmtext.png" />
+      <FilePathData Path="ui/mixsectext.png" />
+      <FilePathData Path="ui/mixbtn.png" />
+      <FilePathData Path="ui/heroatrmixbox.png" />
+      <FilePathData Path="ui/mixsecselect.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

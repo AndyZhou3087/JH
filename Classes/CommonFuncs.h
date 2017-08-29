@@ -32,8 +32,21 @@ public:
 	****************************/
 	static std::string gbk2utf(const char *inbuf);
 
-
+	/****************************
+	按钮点击
+	****************************/
 	static void BtnAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
+	图片变灰操作
+	****************************/
+	static void changeGray(cocos2d::Node* node);
+
+	/****************************
+	图片变灰还原操作
+	****************************/
+	static void removeGray(cocos2d::Node* node);
+
 private:
 
 	/****************************

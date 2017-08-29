@@ -5,6 +5,7 @@
 #include "GameScene.h"
 #include "ServerDataSwap.h"
 #include "BuildingUILayer.h"
+#include "MixSuggestLayer.h"
 #ifdef ANALYTICS
 #include "MobClickCpp.h"
 #endif
@@ -105,6 +106,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//读取武器防具配置文件
 	GlobalData::loadEquipJsonData();
 
+	//读取组合功法配置文件
+	GlobalData::loadMixGfJsonData();
+
 #if defined(CC_PLATFORM_IOS) && defined(ANALYTICS)
     MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
 #endif
@@ -157,12 +161,20 @@ void AppDelegate::applicationWillEnterForeground() {
 	if (g_gameLayer != NULL)
 	{
 		BuildingUILayer* blayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
+		MixSuggestLayer* mlayer = (MixSuggestLayer*)g_gameLayer->getChildByName("mixsuggestlayer");
 		if (blayer == NULL)
 		{
-			if (g_hero != NULL)
+			if (mlayer != NULL)
 			{
-				ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
-				ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
+				mlayer->getServerTime();
+			}
+			else
+			{
+				if (g_hero != NULL)
+				{
+					ServerDataSwap::getInstance()->setDelegate(g_gameLayer);
+					ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
+				}
 			}
 		}
 		else

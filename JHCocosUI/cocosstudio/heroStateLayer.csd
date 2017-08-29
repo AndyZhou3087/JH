@@ -6,23 +6,23 @@
       <ObjectData Name="Layer" Tag="34" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="1926682346" Tag="217" IconVisible="False" LeftMargin="0.0001" RightMargin="-0.0001" TopMargin="110.0001" BottomMargin="69.9999" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
-            <Size X="720.0000" Y="1100.0000" />
+          <AbstractNodeData Name="normalboxgb" ActionTag="1926682346" Tag="217" IconVisible="False" TopMargin="184.5049" BottomMargin="-23.5049" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
+            <Size X="720.0000" Y="1119.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0001" Y="619.9999" />
+            <Position X="360.0000" Y="535.9951" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.4844" />
-            <PreSize X="1.0000" Y="0.8594" />
+            <PrePosition X="0.5000" Y="0.4187" />
+            <PreSize X="1.0000" Y="0.8742" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="pausebtn" ActionTag="485141221" Tag="210" IconVisible="False" LeftMargin="66.3939" RightMargin="567.6061" TopMargin="184.5466" BottomMargin="1013.4534" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="56" Scale9Height="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="pausebtn" ActionTag="485141221" Tag="210" IconVisible="False" LeftMargin="66.3935" RightMargin="567.6065" TopMargin="255.5592" BottomMargin="942.4408" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="56" Scale9Height="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="86.0000" Y="82.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="109.3939" Y="1054.4534" />
+            <Position X="109.3935" Y="983.4408" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1519" Y="0.8238" />
+            <PrePosition X="0.1519" Y="0.7683" />
             <PreSize X="0.1194" Y="0.0641" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/pausebtn.png" Plist="uipacker.plist" />
@@ -31,13 +31,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="1647840050" Tag="37" IconVisible="False" LeftMargin="540.0005" RightMargin="29.9995" TopMargin="179.0054" BottomMargin="1010.9946" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="1647840050" Tag="37" IconVisible="False" LeftMargin="539.9998" RightMargin="30.0002" TopMargin="251.0089" BottomMargin="938.9911" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="615.0005" Y="1055.9946" />
+            <Position X="614.9998" Y="983.9911" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8542" Y="0.8250" />
+            <PrePosition X="0.8542" Y="0.7687" />
             <PreSize X="0.2083" Y="0.0703" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/backbtn.png" Plist="uipacker.plist" />
@@ -46,420 +46,228 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="syssmalltie_0" ActionTag="1497038861" Tag="39" IconVisible="False" LeftMargin="71.1062" RightMargin="468.8938" TopMargin="270.2295" BottomMargin="971.7705" ctype="SpriteObjectData">
+          <AbstractNodeData Name="syssmalltie_0" ActionTag="1497038861" Tag="39" IconVisible="False" LeftMargin="71.1058" RightMargin="468.8942" TopMargin="338.2432" BottomMargin="903.7568" ctype="SpriteObjectData">
             <Size X="180.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="161.1062" Y="990.7705" />
+            <Position X="161.1058" Y="922.7568" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2238" Y="0.7740" />
+            <PrePosition X="0.2238" Y="0.7209" />
             <PreSize X="0.2500" Y="0.0297" />
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-765561398" Tag="36" IconVisible="False" LeftMargin="261.9986" RightMargin="262.0014" TopMargin="259.7378" BottomMargin="965.2622" FontSize="50" LabelText="角色属性" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="title" ActionTag="-765561398" Tag="36" IconVisible="False" LeftMargin="261.9987" RightMargin="262.0013" TopMargin="327.7487" BottomMargin="897.2513" FontSize="50" LabelText="角色属性" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="196.0000" Y="55.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="359.9986" Y="992.7622" />
+            <Position X="359.9987" Y="924.7513" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.5000" Y="0.7756" />
+            <PrePosition X="0.5000" Y="0.7225" />
             <PreSize X="0.2722" Y="0.0430" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="syssmalltie" ActionTag="1998229624" Tag="38" IconVisible="False" LeftMargin="472.5715" RightMargin="67.4285" TopMargin="270.2295" BottomMargin="971.7705" FlipX="True" ctype="SpriteObjectData">
+          <AbstractNodeData Name="syssmalltie" ActionTag="1998229624" Tag="38" IconVisible="False" LeftMargin="472.5724" RightMargin="67.4276" TopMargin="338.2432" BottomMargin="903.7568" FlipX="True" ctype="SpriteObjectData">
             <Size X="180.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="562.5715" Y="990.7705" />
+            <Position X="562.5724" Y="922.7568" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7813" Y="0.7740" />
+            <PrePosition X="0.7814" Y="0.7209" />
             <PreSize X="0.2500" Y="0.0297" />
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext0" ActionTag="178132997" Tag="255" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="602.5557" BottomMargin="642.4443" FontSize="32" LabelText="饥饿状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="659.9443" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.5156" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext1" ActionTag="-858554246" Tag="256" IconVisible="False" LeftMargin="86.8142" RightMargin="493.1858" TopMargin="661.2829" BottomMargin="583.7171" FontSize="32" LabelText="内伤状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5954" ScaleY="0.6852" />
-            <Position X="170.1702" Y="607.6991" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2363" Y="0.4748" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext2" ActionTag="-843758309" Tag="257" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="723.1302" BottomMargin="521.8698" FontSize="32" LabelText="外伤状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="539.3698" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.4214" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext3" ActionTag="-1379166047" Tag="258" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="780.4032" BottomMargin="464.5968" FontSize="32" LabelText="精神状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="482.0968" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.3766" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext4" ActionTag="1032583339" Tag="259" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="839.6870" BottomMargin="405.3130" FontSize="32" LabelText="采集状态:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="422.8130" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.3303" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext5" ActionTag="-1729009414" Tag="260" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="899.9193" BottomMargin="345.0807" FontSize="32" LabelText="砍伐速度:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="362.5807" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.2833" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext6" ActionTag="1878603217" Tag="261" IconVisible="False" LeftMargin="86.9111" RightMargin="493.0889" TopMargin="960.2043" BottomMargin="284.7957" FontSize="32" LabelText="采矿速度:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="156.9111" Y="302.2957" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2179" Y="0.2362" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext7" ActionTag="-1585121893" Tag="262" IconVisible="False" LeftMargin="86.8991" RightMargin="493.1009" TopMargin="1017.0255" BottomMargin="227.9745" FontSize="32" LabelText="制造速度:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="140.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5158" ScaleY="0.6699" />
-            <Position X="159.1111" Y="251.4210" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.2210" Y="0.1964" />
-            <PreSize X="0.1944" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext8" ActionTag="1627135958" Tag="263" IconVisible="False" LeftMargin="410.3224" RightMargin="198.6776" TopMargin="602.5556" BottomMargin="642.4444" FontSize="32" LabelText="生命值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostatetext1" ActionTag="-471138621" Tag="264" IconVisible="False" LeftMargin="86.8982" RightMargin="522.1018" TopMargin="662.8838" BottomMargin="582.1162" FontSize="32" LabelText="攻击力：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="111.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8224" Y="659.9444" />
+            <Position X="142.3982" Y="599.6162" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.5156" />
+            <PrePosition X="0.1978" Y="0.4685" />
             <PreSize X="0.1542" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext9" ActionTag="-471138621" Tag="264" IconVisible="False" LeftMargin="410.3224" RightMargin="198.6776" TopMargin="661.2861" BottomMargin="583.7139" FontSize="32" LabelText="攻击力：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostatetext2" ActionTag="873751964" Tag="265" IconVisible="False" LeftMargin="86.8961" RightMargin="522.1039" TopMargin="713.6901" BottomMargin="531.3099" FontSize="32" LabelText="防御力：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="111.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8224" Y="601.2139" />
+            <AnchorPoint ScaleX="0.5538" ScaleY="0.4251" />
+            <Position X="148.3679" Y="546.1884" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.4697" />
+            <PrePosition X="0.2061" Y="0.4267" />
             <PreSize X="0.1542" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext10" ActionTag="873751964" Tag="265" IconVisible="False" LeftMargin="410.3206" RightMargin="198.6794" TopMargin="723.1301" BottomMargin="521.8699" FontSize="32" LabelText="防御力：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostatetext3" ActionTag="110413977" Tag="131" IconVisible="False" LeftMargin="86.8982" RightMargin="522.1018" TopMargin="764.4977" BottomMargin="480.5023" FontSize="32" LabelText="经验值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="111.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8206" Y="539.3699" />
+            <Position X="142.3982" Y="498.0023" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.4214" />
+            <PrePosition X="0.1978" Y="0.3891" />
             <PreSize X="0.1542" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext11" ActionTag="110413977" Tag="131" IconVisible="False" LeftMargin="410.3206" RightMargin="198.6794" TopMargin="780.4031" BottomMargin="464.5969" FontSize="32" LabelText="经验值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostatetext4" ActionTag="1011772577" Tag="132" IconVisible="False" LeftMargin="86.8982" RightMargin="522.1018" TopMargin="815.3045" BottomMargin="429.6955" FontSize="32" LabelText="等    级：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="111.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8206" Y="482.0969" />
+            <Position X="142.3982" Y="447.1955" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.3766" />
+            <PrePosition X="0.1978" Y="0.3494" />
             <PreSize X="0.1542" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext12" ActionTag="1011772577" Tag="132" IconVisible="False" LeftMargin="410.3206" RightMargin="198.6794" TopMargin="839.6827" BottomMargin="405.3173" FontSize="32" LabelText="等    级：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostatetext5" ActionTag="1627135958" Tag="263" IconVisible="False" LeftMargin="410.3212" RightMargin="198.6788" TopMargin="662.8838" BottomMargin="582.1162" FontSize="32" LabelText="生命值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="111.0000" Y="35.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8206" Y="422.8173" />
+            <Position X="465.8212" Y="599.6162" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.3303" />
+            <PrePosition X="0.6470" Y="0.4685" />
             <PreSize X="0.1542" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate0" ActionTag="-1807343505" Tag="266" IconVisible="False" LeftMargin="239.5806" RightMargin="352.4194" TopMargin="601.4985" BottomMargin="643.5015" FontSize="32" LabelText="鼓腹含和" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="128.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="661.0015" />
+          <AbstractNodeData Name="herostatetext6" ActionTag="-637099323" Tag="82" IconVisible="False" LeftMargin="414.3212" RightMargin="202.6788" TopMargin="713.6566" BottomMargin="531.3434" FontSize="32" LabelText="师   傅：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="103.0000" Y="35.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="465.8212" Y="548.8434" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.5164" />
-            <PreSize X="0.1778" Y="0.0273" />
+            <PrePosition X="0.6470" Y="0.4288" />
+            <PreSize X="0.1431" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate1" ActionTag="1911943445" Tag="267" IconVisible="False" LeftMargin="239.5806" RightMargin="417.4194" TopMargin="662.7830" BottomMargin="582.2170" FontSize="32" LabelText="良好" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="63.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="599.7170" />
+          <AbstractNodeData Name="herostatetext7" ActionTag="922527140" VisibleForFrame="False" Tag="198" IconVisible="False" LeftMargin="414.3223" RightMargin="202.6777" TopMargin="764.4977" BottomMargin="480.5023" FontSize="32" LabelText="性   别：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="103.0000" Y="35.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="465.8223" Y="498.0023" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.4685" />
-            <PreSize X="0.0875" Y="0.0273" />
+            <PrePosition X="0.6470" Y="0.3891" />
+            <PreSize X="0.1431" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate2" ActionTag="374559119" Tag="268" IconVisible="False" LeftMargin="239.5806" RightMargin="417.4194" TopMargin="722.0664" BottomMargin="522.9336" FontSize="32" LabelText="良好" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="63.0000" Y="35.0000" />
+          <AbstractNodeData Name="herostate1" ActionTag="1469547814" Tag="275" IconVisible="False" LeftMargin="208.1061" RightMargin="493.8939" TopMargin="662.8838" BottomMargin="582.1162" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="18.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="540.4336" />
+            <Position X="208.1061" Y="599.6162" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.4222" />
-            <PreSize X="0.0875" Y="0.0273" />
+            <PrePosition X="0.2890" Y="0.4685" />
+            <PreSize X="0.0250" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate3" ActionTag="575828484" Tag="269" IconVisible="False" LeftMargin="239.5806" RightMargin="417.4194" TopMargin="781.3508" BottomMargin="463.6492" FontSize="32" LabelText="良好" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="63.0000" Y="35.0000" />
+          <AbstractNodeData Name="herostate2" ActionTag="-686052110" Tag="276" IconVisible="False" LeftMargin="208.1061" RightMargin="493.8939" TopMargin="713.6566" BottomMargin="531.3434" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="18.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="481.1492" />
+            <Position X="208.1061" Y="548.8434" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.3759" />
-            <PreSize X="0.0875" Y="0.0273" />
+            <PrePosition X="0.2890" Y="0.4288" />
+            <PreSize X="0.0250" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate4" ActionTag="-2048876262" Tag="270" IconVisible="False" LeftMargin="239.5806" RightMargin="416.4194" TopMargin="840.6353" BottomMargin="404.3647" FontSize="32" LabelText="一般" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="64.0000" Y="35.0000" />
+          <AbstractNodeData Name="herostate3" ActionTag="-212997123" Tag="133" IconVisible="False" LeftMargin="208.1067" RightMargin="493.8933" TopMargin="764.4977" BottomMargin="480.5023" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="18.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="421.8647" />
+            <Position X="208.1067" Y="498.0023" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.3296" />
-            <PreSize X="0.0889" Y="0.0273" />
+            <PrePosition X="0.2890" Y="0.3891" />
+            <PreSize X="0.0250" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate5" ActionTag="900924399" Tag="271" IconVisible="False" LeftMargin="239.5806" RightMargin="416.4194" TopMargin="899.9193" BottomMargin="345.0807" FontSize="32" LabelText="一般" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="64.0000" Y="35.0000" />
+          <AbstractNodeData Name="herostate4" ActionTag="1393086130" Tag="134" IconVisible="False" LeftMargin="208.1067" RightMargin="493.8933" TopMargin="815.3045" BottomMargin="429.6955" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="18.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="362.5807" />
+            <Position X="208.1067" Y="447.1955" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.2833" />
-            <PreSize X="0.0889" Y="0.0273" />
+            <PrePosition X="0.2890" Y="0.3494" />
+            <PreSize X="0.0250" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate6" ActionTag="296054135" Tag="272" IconVisible="False" LeftMargin="239.5806" RightMargin="416.4194" TopMargin="960.2043" BottomMargin="284.7957" FontSize="32" LabelText="一般" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="64.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="302.2957" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.2362" />
-            <PreSize X="0.0889" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate7" ActionTag="1038127335" Tag="273" IconVisible="False" LeftMargin="239.5806" RightMargin="416.4194" TopMargin="1020.4880" BottomMargin="224.5120" FontSize="32" LabelText="一般" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="64.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="239.5806" Y="242.0120" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3328" Y="0.1891" />
-            <PreSize X="0.0889" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate8" ActionTag="309438830" Tag="274" IconVisible="False" LeftMargin="529.6165" RightMargin="103.3835" TopMargin="605.8846" BottomMargin="639.1154" FontSize="32" LabelText="100/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostate5" ActionTag="309438830" Tag="274" IconVisible="False" LeftMargin="529.6158" RightMargin="103.3842" TopMargin="662.8838" BottomMargin="582.1162" FontSize="32" LabelText="100/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="87.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6165" Y="656.6154" />
+            <Position X="529.6158" Y="599.6162" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.5130" />
+            <PrePosition X="0.7356" Y="0.4685" />
             <PreSize X="0.1208" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate9" ActionTag="1469547814" Tag="275" IconVisible="False" LeftMargin="529.6165" RightMargin="172.3835" TopMargin="662.7485" BottomMargin="582.2515" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="18.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6165" Y="599.7515" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.4686" />
-            <PreSize X="0.0250" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate10" ActionTag="-686052110" Tag="276" IconVisible="False" LeftMargin="529.6165" RightMargin="172.3835" TopMargin="725.0346" BottomMargin="519.9654" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="18.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6165" Y="537.4654" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.4199" />
-            <PreSize X="0.0250" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate11" ActionTag="-212997123" Tag="133" IconVisible="False" LeftMargin="529.6165" RightMargin="172.3835" TopMargin="780.4031" BottomMargin="464.5969" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="18.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6165" Y="482.0969" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.3766" />
-            <PreSize X="0.0250" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate12" ActionTag="1393086130" Tag="134" IconVisible="False" LeftMargin="529.6204" RightMargin="172.3796" TopMargin="839.6827" BottomMargin="405.3173" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="18.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6204" Y="422.8173" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.3303" />
-            <PreSize X="0.0250" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext13" ActionTag="922527140" VisibleForFrame="False" Tag="198" IconVisible="False" LeftMargin="410.3206" RightMargin="198.6794" TopMargin="960.2043" BottomMargin="284.7957" FontSize="32" LabelText="性    别：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="111.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8206" Y="302.2957" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.2362" />
-            <PreSize X="0.1542" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate13" ActionTag="-168572098" VisibleForFrame="False" Tag="199" IconVisible="False" LeftMargin="529.6204" RightMargin="172.3796" TopMargin="960.2043" BottomMargin="284.7957" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="18.0000" Y="35.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6204" Y="302.2957" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition X="0.7356" Y="0.2362" />
-            <PreSize X="0.0250" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostatetext14" ActionTag="-637099323" Tag="82" IconVisible="False" LeftMargin="410.3206" RightMargin="198.6794" TopMargin="899.9193" BottomMargin="345.0807" FontSize="32" LabelText="师    傅：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="111.0000" Y="35.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="465.8206" Y="362.5807" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6470" Y="0.2833" />
-            <PreSize X="0.1542" Y="0.0273" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="herostate14" ActionTag="-1692677798" Tag="83" IconVisible="False" LeftMargin="529.6204" RightMargin="158.3796" TopMargin="899.9193" BottomMargin="345.0807" FontSize="32" LabelText="无" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="herostate6" ActionTag="-1692677798" Tag="83" IconVisible="False" LeftMargin="529.6158" RightMargin="158.3842" TopMargin="713.6566" BottomMargin="531.3434" FontSize="32" LabelText="无" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="32.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="529.6204" Y="362.5807" />
+            <Position X="529.6158" Y="548.8434" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7356" Y="0.2833" />
+            <PrePosition X="0.7356" Y="0.4288" />
             <PreSize X="0.0444" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroexptime" ActionTag="-1020595773" VisibleForFrame="False" Tag="218" IconVisible="False" LeftMargin="189.9971" RightMargin="530.0029" TopMargin="1093.9468" BottomMargin="186.0532" FontSize="32" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="0.0000" Y="0.0000" />
+          <AbstractNodeData Name="herostate7" ActionTag="-168572098" VisibleForFrame="False" Tag="199" IconVisible="False" LeftMargin="529.6158" RightMargin="172.3842" TopMargin="764.4977" BottomMargin="480.5023" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="18.0000" Y="35.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="189.9971" Y="186.0532" />
+            <Position X="529.6158" Y="498.0023" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition X="0.2639" Y="0.1454" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PrePosition X="0.7356" Y="0.3891" />
+            <PreSize X="0.0250" Y="0.0273" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="gfexptime" ActionTag="-112447246" VisibleForFrame="False" Tag="219" IconVisible="False" LeftMargin="189.9971" RightMargin="530.0029" TopMargin="1143.9464" BottomMargin="136.0536" FontSize="32" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="0.0000" Y="0.0000" />
+          <AbstractNodeData Name="heroexptime" ActionTag="-1020595773" Tag="218" IconVisible="False" LeftMargin="136.7588" RightMargin="213.2412" TopMargin="855.9036" BottomMargin="397.0964" FontSize="25" LabelText="大力丸效果剩%d天%02d:%02d:%02d" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="370.0000" Y="27.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="189.9971" Y="136.0536" />
+            <Position X="136.7588" Y="410.5964" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition X="0.2639" Y="0.1063" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PrePosition X="0.1899" Y="0.3208" />
+            <PreSize X="0.5139" Y="0.0211" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="gfexptime" ActionTag="-112447246" Tag="219" IconVisible="False" LeftMargin="136.7588" RightMargin="213.2412" TopMargin="885.9010" BottomMargin="367.0990" FontSize="25" LabelText="大力丸效果剩%d天%02d:%02d:%02d" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="370.0000" Y="27.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="136.7588" Y="380.5990" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.1899" Y="0.2973" />
+            <PreSize X="0.5139" Y="0.0211" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

@@ -9,6 +9,7 @@
 #include "PauseLayer.h"
 #include "GameDataSave.h"
 #include "MapLayer.h"
+#include "MixGFNode.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -24,11 +25,10 @@ bool HeroStateUILayer::init()
 {
 
 	m_csbnode = CSLoader::createNode("heroStateLayer.csb");
-	m_csbnode->setPosition(Vec2(0, -90));
 	this->addChild(m_csbnode, 0, "csbnode");
 
 	HeroProperNode* heroproper = HeroProperNode::create();
-	heroproper->setPosition(Vec2(360, 835));
+	heroproper->setPosition(Vec2(360, 770));
 	m_csbnode->addChild(heroproper, 0, "HeroProperNode");
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
@@ -39,7 +39,7 @@ bool HeroStateUILayer::init()
 
 	for (int i = 0; i < sizeof(herostatus) / sizeof(herostatus[0]); i++)
 	{
-		std::string str = StringUtils::format("herostate%d", i);
+		std::string str = StringUtils::format("herostate%d", i + 1);
 		herostatus[i] = (cocos2d::ui::Text*)m_csbnode->getChildByName(str);
 	}
 
@@ -50,6 +50,13 @@ bool HeroStateUILayer::init()
 	m_gfexpendtime = GameDataSave::getInstance()->getGfEndTime();
 
 	updateStatus(0);
+
+	MixGFNode* mixnode = MixGFNode::create();
+	mixnode->setPosition(Vec2(360, 220));
+	m_csbnode->addChild(mixnode, 0, "mixnode");
+	if (g_hero->getIsOut())
+		mixnode->setVisible(false);
+
 	//////layer 点击事件，屏蔽下层事件
 	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
 	auto listener = EventListenerTouchOneByOne::create();
@@ -104,83 +111,30 @@ void HeroStateUILayer::updateStatus(float dt)
 			break;
 		}
 	}
-	//饥饿属性
-	herostatus[0]->setString(CommonFuncs::gbk2utf(hungerdesc1[index].c_str()));
 
-	index = 0;
-	for (int i = 0; i < 7; i++)
-	{
-		if (g_hero->getInnerinjuryValue() >= valuerange[i])
-		{
-			index = i;
-			break;
-		}
-	}
-	//内伤属性
-	herostatus[1]->setString(CommonFuncs::gbk2utf(innerInjurydesc1[index].c_str()));
-
-	index = 0;
-	for (int i = 0; i < 7; i++)
-	{
-		if (g_hero->getOutinjuryValue() >= valuerange[i])
-		{
-			index = i;
-			break;
-		}
-	}
-	//外伤属性
-	herostatus[2]->setString(CommonFuncs::gbk2utf(outInjurydesc1[index].c_str()));
-
-	index = 0;
-	for (int i = 0; i < 7; i++)
-	{
-		if (g_hero->getSpiritValue() >= valuerange[i])
-		{
-			index = i;
-			break;
-		}
-	}
-	//精神属性
-	herostatus[3]->setString(CommonFuncs::gbk2utf(spiritInjurydesc1[index].c_str()));
-	//采集速度
-	herostatus[4]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_GATHER)->count > 0 ? "快速":"一般"));
-	//砍伐速度
-	herostatus[5]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_FELL)->count > 0 ? "快速" : "一般"));
-	//挖掘速度
-	herostatus[6]->setString(CommonFuncs::gbk2utf(g_hero->getAtrByType(H_EXCAVATE)->count > 0 ? "快速" : "一般"));
-
-	herostatus[7]->setString(CommonFuncs::gbk2utf("一般"));
-
-	//生命值属性
-	std::string str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
-	herostatus[8]->setString(str);
-
-
-	str = StringUtils::format("%d", g_hero->getTotalAtck());
-	herostatus[9]->setString(str);
+	//攻击属性
+	std::string str = StringUtils::format("%d", g_hero->getTotalAtck());
+	herostatus[0]->setString(str);
 
 	int df = g_hero->getTotalDf();
 
+	//防御属性
 	str = StringUtils::format("%d", g_hero->getTotalDf());
-	herostatus[10]->setString(str);
+	herostatus[1]->setString(str);
 
 	//经验值属性
-	str = StringUtils::format("%d", g_hero->getExpValue());
-	herostatus[11]->setString(str);
+	str = StringUtils::format("%d/%d", g_hero->getExpValue(), GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp[g_hero->getLVValue()]);
+	herostatus[2]->setString(str);
 	//等级属性
 	str = StringUtils::format("%d", g_hero->getLVValue() + 1);
 	int lvmax = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp.size();
 	if (g_hero->getLVValue() + 1 >= lvmax)
 		str = StringUtils::format("%d%s", lvmax, CommonFuncs::gbk2utf("（满级）").c_str());
-	herostatus[12]->setString(str);
+	herostatus[3]->setString(str);
 
-	//性别
-	if (g_hero->getSex() == S_NONE)
-	{
-		m_csbnode->getChildByName("herostatetext13")->setVisible(true);
-		herostatus[13]->setVisible(true);
-		herostatus[13]->setString(CommonFuncs::gbk2utf("不详"));
-	}
+	//生命值属性
+	str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
+	herostatus[4]->setString(str);
 
 	std::map<std::string, FriendlyData>::iterator it;
 	for (it = GlobalData::map_myfriendly.begin(); it != GlobalData::map_myfriendly.end(); ++it)
@@ -188,10 +142,16 @@ void HeroStateUILayer::updateStatus(float dt)
 		std::string nid = it->first;
 		if (GlobalData::map_myfriendly[nid].relation == F_MASTER)
 		{
-			cocos2d::ui::Text* mastertext = (cocos2d::ui::Text*)m_csbnode->getChildByName("herostate14");
-			mastertext->setString(GlobalData::map_npcs[nid].name);
+			herostatus[5]->setString(GlobalData::map_npcs[nid].name);
 			break;
 		}
+	}
+	//性别
+	if (g_hero->getSex() == S_NONE)
+	{
+		m_csbnode->getChildByName("herostatetext6")->setVisible(true);
+		herostatus[6]->setVisible(true);
+		herostatus[6]->setString(CommonFuncs::gbk2utf("不详"));
 	}
 
 	int letftime1 = m_heroexpendtime - GlobalData::getSysSecTime();

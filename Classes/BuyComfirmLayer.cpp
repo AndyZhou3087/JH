@@ -90,12 +90,7 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
 			{
 				GlobalData::dataIsModified = true;
-				mygold = 0;
-			}
-			GlobalData::setMyGoldCount(mygold);
-
-			if (GlobalData::dataIsModified)
-			{
+				GlobalData::setMyGoldCount(0);
 				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
 				this->addChild(hint);
 				return;

@@ -200,10 +200,8 @@ void BookShelfLayer::updateContent(int category)
 
 				if (g_hero->getMeHas(datastrid) == NULL)
 				{
-					std::vector<Node*> vec_graynode;
-					vec_graynode.push_back(box);
-					vec_graynode.push_back(res);
-					changeGray(vec_graynode);
+					CommonFuncs::changeGray(box);
+					CommonFuncs::changeGray(res);
 					namelbl->setOpacity(180);
 				}
 			}
@@ -303,22 +301,5 @@ void BookShelfLayer::onCategory(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 			}
 		}
 		updateContent(node->getTag());
-	}
-}
-
-void BookShelfLayer::changeGray(std::vector<Node*> node)
-{
-	GLProgram * p = new GLProgram();
-	p->initWithFilenames("gray.vsh", "gray.fsh");
-	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
-	p->bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORDS);
-	p->link();
-	p->updateUniforms();
-
-	if (node.size() > 0)
-	{
-		for (unsigned int i = 0; i < node.size();i++)
-			node[i]->setGLProgram(p);
 	}
 }

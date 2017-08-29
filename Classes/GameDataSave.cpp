@@ -536,3 +536,46 @@ void GameDataSave::setFriendly(std::string str)
 {
 	saveStringDataByKey(addUIDString("friendly"), str);
 }
+
+std::string GameDataSave::getMixGF()
+{
+	return loadStringDataByKey(addUIDString("mixgf"), "");
+}
+
+void GameDataSave::setMixGF(std::string str)
+{
+	saveStringDataByKey(addUIDString("mixgf"), str);
+}
+
+int GameDataSave::getFreeMixTime()
+{
+	return loadIntDataByKey(addUIDString("freemixtime"), 0);
+}
+
+void GameDataSave::setFreeMixTime(int val)
+{
+	saveIntDataByKey(addUIDString("freemixtime"), val);
+}
+
+
+int GameDataSave::getMixGfCountByType(int type)
+{
+	std::string typestr = StringUtils::format("mixcount%d", type);
+	return loadIntDataByKey(addUIDString(typestr), 0);
+}
+
+void GameDataSave::setMixGfCountByType(int type, int val)
+{
+	std::string typestr = StringUtils::format("mixcount%d", type);
+	saveIntDataByKey(addUIDString(typestr), val);
+}
+
+std::string GameDataSave::getSuggestMixGf()
+{
+	return loadStringDataByKey(addUIDString("suggestmixgf"), "");
+}
+
+void GameDataSave::setSuggestMixGf(std::string str)
+{
+	saveStringDataByKey(addUIDString("suggestmixgf"), str);
+}

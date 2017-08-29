@@ -226,8 +226,20 @@ float Hero::getMaxLifeValue()
 			friendhppercent += GlobalData::map_NPCMasterData[nid].hppercent / 100;
 		}
 	}
+
+	float mixfglifepercent = 0.0f;
+
+	std::string mymixgf = GlobalData::getMixGF();
+	if (mymixgf.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if ((g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0) || (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0))
+			mixfglifepercent += mdata.hppercent / 100;
+	}
+
 	float flife = GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * 1.0f;
-	flife += flife*friendhppercent;
+	flife = flife + flife*friendhppercent + flife * mixfglifepercent;
+
 	return flife;
 }
 
@@ -300,6 +312,18 @@ bool Hero::checkifHasGF_Equip(std::string gfeid)
 				return true;
 		}
 	}
+
+	std::string mymixgf = GlobalData::getMixGF();
+	if (mymixgf.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		for (unsigned int n = 0; n < mdata.vec_secgf.size(); n++)
+		{
+			if (gfeid.compare(mdata.vec_secgf[n]) == 0)
+				return true;
+		}
+	}
+
 	return false;
 }
 
@@ -331,6 +355,8 @@ PackageData* Hero::getGF_Equip(std::string gfeid)
 				return &StorageRoom::map_storageData[stype][i];
 		}
 	}
+
+
 
 	return NULL;
 }
@@ -549,6 +575,7 @@ int Hero::getTotalDf()
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
 		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
 
+		int masterdf = 0;
 		if (masternpc.length() > 0)
 		{
 			for (unsigned int i = 0; i < GlobalData::map_NPCMasterData[masternpc].vec_gfid.size(); i++)
@@ -556,11 +583,22 @@ int Hero::getTotalDf()
 				if (gfname.compare(GlobalData::map_NPCMasterData[masternpc].vec_gfid[i]) == 0)
 				{
 					int msbdf = ngdf * GlobalData::map_NPCMasterData[masternpc].vec_gfbonus[i] / 100;
-					ngdf += msbdf;
+					masterdf += msbdf;
+
 					break;
 				}
 			}
 		}
+
+		int mixdf = 0;
+		std::string mymixgf = GlobalData::getMixGF();
+		if (mymixgf.length() > 0)
+		{
+			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+			if ((g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0) || (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0))
+				mixdf += ngdf * mdata.dfpercent / 100;
+		}
+		ngdf = ngdf + masterdf + mixdf;
 	}
 
 	if (g_hero->getAtrByType(H_ARMOR)->count > 0 && g_hero->getAtrByType(H_ARMOR)->goodvalue > 0)
@@ -616,6 +654,8 @@ int Hero::getTotalAtck()
 	{
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+
+		int masteratk = 0;
 		if (masternpc.length() > 0)
 		{
 			for (unsigned int i = 0; i < GlobalData::map_NPCMasterData[masternpc].vec_gfid.size(); i++)
@@ -623,11 +663,21 @@ int Hero::getTotalAtck()
 				if (strid.compare(GlobalData::map_NPCMasterData[masternpc].vec_gfid[i]) == 0)
 				{
 					int msbatk = wgAtk * GlobalData::map_NPCMasterData[masternpc].vec_gfbonus[i] / 100;
-					wgAtk += msbatk;
+					masteratk += msbatk;
 					break;
 				}
 			}
 		}
+
+		int mixatk = 0;
+		std::string mymixgf = GlobalData::getMixGF();
+		if (mymixgf.length() > 0)
+		{
+			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+			if ((g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0) || (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0))
+				mixatk += wgAtk * mdata.atkpercent / 100;
+		}
+		wgAtk = wgAtk + masteratk + mixatk;
 	}
 
 	//攻击属性
@@ -672,6 +722,17 @@ float Hero::getCritRate()
 		}
 	}
 	critrnd += friendcritrnd;
+
+	float mixcrit = 0.0f;
+	std::string mymixgf = GlobalData::getMixGF();
+	if (mymixgf.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if ((g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0) || (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0))
+			mixcrit += mdata.critpercent;
+	}
+	critrnd += mixcrit;
+
 	return critrnd;
 }
 
@@ -697,5 +758,16 @@ float Hero::getdodgeRate()
 		}
 	}
 	dodgernd += frienddogdernd;
+
+	float mixdodge = 0.0f;
+	std::string mymixgf = GlobalData::getMixGF();
+	if (mymixgf.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if ((g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0) || (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0))
+			mixdodge += mdata.dodgepercent;
+	}
+	dodgernd += mixdodge;
+
 	return dodgernd;
 }

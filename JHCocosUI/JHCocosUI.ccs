@@ -13,6 +13,7 @@
           <Image Name="buildtext1.png" />
           <Image Name="buildtext2.png" />
           <Image Name="dead.jpg" />
+          <Image Name="dividetext.png" />
           <Image Name="exsercisedone.png" />
           <Image Name="friendask.jpg" />
           <Image Name="friendgive.jpg" />
@@ -20,6 +21,8 @@
           <Image Name="heroselectbg.png" />
           <Image Name="logo.png" />
           <Image Name="mapbg.jpg" />
+          <Image Name="mixdonefail.png" />
+          <Image Name="mixdoneok.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="npctalkbg.png" />
           <Image Name="repairbox.png" />
@@ -41,6 +44,7 @@
           <Image Name="shoptitle.png" />
           <Image Name="startbg.jpg" />
           <Image Name="strengthfail.png" />
+          <Image Name="suggesthero.png" />
           <Image Name="syssmallbg.png" />
           <Image Name="t001.jpg" />
           <Image Name="t002.jpg" />
@@ -62,7 +66,6 @@
           <Image Name="unselect.png" />
           <Image Name="vipbg.png" />
           <Image Name="vipshoptitle.png" />
-          <Image Name="dividetext.png" />
         </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
@@ -205,6 +208,8 @@
           <Image Name="gp3.png" />
           <Image Name="gp4.png" />
           <Image Name="gp5.png" />
+          <Image Name="heroatrmixbox.png" />
+          <Image Name="heroatrmixhint.png" />
           <Image Name="herohead1.png" />
           <Image Name="herohead2.png" />
           <Image Name="herohead3.png" />
@@ -293,6 +298,11 @@
           <Image Name="mapmission1_0.png" />
           <Image Name="mapmission1_1.png" />
           <Image Name="medicinekit.png" />
+          <Image Name="mixadd.png" />
+          <Image Name="mixbtn.png" />
+          <Image Name="mixmtext.png" />
+          <Image Name="mixsecselect.png" />
+          <Image Name="mixsectext.png" />
           <Image Name="mygoldbox.png" />
           <Image Name="myrankitem.png" />
           <Image Name="n002.png" />
@@ -616,6 +626,8 @@
         <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
+        <Project Name="mixDoneLayer.csd" Type="Layer" />
+        <Project Name="mixGFNode.csd" Type="Node" />
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
@@ -648,6 +660,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="mixSuggestLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

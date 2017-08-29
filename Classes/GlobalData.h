@@ -318,6 +318,25 @@ typedef struct
 }NPCMasterData;
 
 /****************************
+组合功法数据
+*****************************/
+typedef struct
+{
+	std::string id;
+	std::string name;
+	std::string mastergf;
+	float atkpercent;
+	float dfpercent;
+	float dodgepercent;
+	float critpercent;
+	float hppercent;
+	int lv;
+	int sex;//0--无，1--男，2-女，3-男女，4-all
+	std::vector<std::string> vec_secgf;
+	std::vector<std::string> vec_mutexgf;
+}MixGfData;
+
+/****************************
 排行榜数据
 *****************************/
 typedef struct
@@ -771,6 +790,21 @@ public:
 	*****************************/
 	static void loadNpcMasterJsonData();
 
+	/****************************
+	解析功法组合
+	*****************************/
+	static void loadMixGfJsonData();
+
+	/****************************
+	获取保存的组合功法ID
+	*****************************/
+	static std::string getMixGF();
+
+	/****************************
+	设置组合功法ID
+	*****************************/
+	static void setMixGF(std::string str);
+
 	static std::string getVersion();
 
     static void setNoAds(bool val);
@@ -818,6 +852,8 @@ public:
 	static std::map<std::string, NPCFriendData> map_NPCFriendData;
 
 	static std::map<std::string, NPCMasterData> map_NPCMasterData;
+
+	static std::map<std::string, MixGfData> GlobalData::map_MixGfData;
 
 	static std::vector<RankData> vec_rankData;
 

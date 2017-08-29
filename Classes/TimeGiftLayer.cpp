@@ -96,7 +96,6 @@ bool TimeGiftLayer::init(int goodsId)
 		this->addChild(namelbl);
 	}
 
-	GlobalData::vec_buyVipIds.clear();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{

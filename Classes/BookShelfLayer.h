@@ -30,7 +30,6 @@ private:
 	int getCountByType(int type);
 	void loadBookData();
 	static bool larger_callback(BookData a, BookData b);
-	void changeGray(std::vector<Node*> node);
 private:
 	int typerow[4];
 	std::map<int, std::vector<BookData>> map_bookData;
