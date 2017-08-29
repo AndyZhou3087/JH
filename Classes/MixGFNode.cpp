@@ -250,14 +250,14 @@ void MixGFNode::addGFData()
 	for (unsigned int m = 0; m < StorageRoom::map_storageData[W_GONG].size(); m++)
 	{
 		PackageData data = StorageRoom::map_storageData[W_GONG][m];
-		//if (data.lv >= GlobalData::map_wgngs[data.strid].maxlv - 1)
+		if (data.lv >= GlobalData::map_wgngs[data.strid].maxlv - 1)
 			vec_myhasgf.push_back(data);
 	}
 
 	for (unsigned int m = 0; m < StorageRoom::map_storageData[N_GONG].size(); m++)
 	{
 		PackageData data = StorageRoom::map_storageData[N_GONG][m];
-		//if (data.lv >= GlobalData::map_wgngs[data.strid].maxlv - 1)
+		if (data.lv >= GlobalData::map_wgngs[data.strid].maxlv - 1)
 			vec_myhasgf.push_back(data);
 	}
 	std::string herocarrywg;
@@ -265,7 +265,7 @@ void MixGFNode::addGFData()
 	{
 		herocarrywg = g_hero->getAtrByType(H_WG)->strid;
 		PackageData sdata = *g_hero->getAtrByType(H_WG);
-		//if (sdata.lv >= GlobalData::map_wgngs[sdata.strid].maxlv - 1)
+		if (sdata.lv >= GlobalData::map_wgngs[sdata.strid].maxlv - 1)
 			vec_myhasgf.insert(vec_myhasgf.begin(), sdata);
 	}
 	std::string herocarryng;
@@ -273,7 +273,7 @@ void MixGFNode::addGFData()
 	{
 		herocarryng = g_hero->getAtrByType(H_NG)->strid;
 		PackageData sdata = *g_hero->getAtrByType(H_NG);
-		//if (sdata.lv >= GlobalData::map_wgngs[sdata.strid].maxlv - 1)
+		if (sdata.lv >= GlobalData::map_wgngs[sdata.strid].maxlv - 1)
 		vec_myhasgf.insert(vec_myhasgf.begin(), sdata);
 	}
 	std::string mymixgf = GlobalData::getMixGF();
