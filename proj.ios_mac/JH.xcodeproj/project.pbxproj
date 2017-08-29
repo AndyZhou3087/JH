@@ -138,6 +138,12 @@
 		72777B2B1EFBD78400151A2B /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72777B221EFBD78400151A2B /* UShareUI.framework */; };
 		72777B361EFBDC2E00151A2B /* CCUMSocialSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72777B331EFBDC2E00151A2B /* CCUMSocialSDK.cpp */; };
 		72777B391EFBDC3900151A2B /* UmSocialControllerIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72777B381EFBDC3900151A2B /* UmSocialControllerIOS.mm */; };
+		728396A21F557F2B00A75AB4 /* MixSuggestLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7283969D1F557F2B00A75AB4 /* MixSuggestLayer.cpp */; };
+		728396A31F557F2B00A75AB4 /* MixGFNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7283969F1F557F2B00A75AB4 /* MixGFNode.cpp */; };
+		728396A41F557F2B00A75AB4 /* MixGFDoneLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 728396A11F557F2B00A75AB4 /* MixGFDoneLayer.cpp */; };
+		728396A81F557F4000A75AB4 /* mixSuggestLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */; };
+		728396A91F557F4000A75AB4 /* mixGFNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 728396A61F557F4000A75AB4 /* mixGFNode.csb */; };
+		728396AA1F557F4000A75AB4 /* mixDoneLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 728396A71F557F4000A75AB4 /* mixDoneLayer.csb */; };
 		7286904F1ED568B000D06B0F /* ActionGetLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */; };
 		728690501ED568B000D06B0F /* ActivitScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72868FE11ED568B000D06B0F /* ActivitScene.cpp */; };
 		728690511ED568B000D06B0F /* Bed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72868FE31ED568B000D06B0F /* Bed.cpp */; };
@@ -486,6 +492,15 @@
 		72777B351EFBDC2E00151A2B /* CCUMTypeDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUMTypeDef.h; sourceTree = "<group>"; };
 		72777B371EFBDC3900151A2B /* UmSocialControllerIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UmSocialControllerIOS.h; sourceTree = "<group>"; };
 		72777B381EFBDC3900151A2B /* UmSocialControllerIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UmSocialControllerIOS.mm; sourceTree = "<group>"; };
+		7283969C1F557F2B00A75AB4 /* MixSuggestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixSuggestLayer.h; sourceTree = "<group>"; };
+		7283969D1F557F2B00A75AB4 /* MixSuggestLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixSuggestLayer.cpp; sourceTree = "<group>"; };
+		7283969E1F557F2B00A75AB4 /* MixGFNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixGFNode.h; sourceTree = "<group>"; };
+		7283969F1F557F2B00A75AB4 /* MixGFNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixGFNode.cpp; sourceTree = "<group>"; };
+		728396A01F557F2B00A75AB4 /* MixGFDoneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixGFDoneLayer.h; sourceTree = "<group>"; };
+		728396A11F557F2B00A75AB4 /* MixGFDoneLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MixGFDoneLayer.cpp; sourceTree = "<group>"; };
+		728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = mixSuggestLayer.csb; sourceTree = "<group>"; };
+		728396A61F557F4000A75AB4 /* mixGFNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = mixGFNode.csb; sourceTree = "<group>"; };
+		728396A71F557F4000A75AB4 /* mixDoneLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = mixDoneLayer.csb; sourceTree = "<group>"; };
 		72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionGetLayer.cpp; sourceTree = "<group>"; };
 		72868FE01ED568B000D06B0F /* ActionGetLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionGetLayer.h; sourceTree = "<group>"; };
 		72868FE11ED568B000D06B0F /* ActivitScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivitScene.cpp; sourceTree = "<group>"; };
@@ -891,6 +906,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */,
+				728396A61F557F4000A75AB4 /* mixGFNode.csb */,
+				728396A71F557F4000A75AB4 /* mixDoneLayer.csb */,
 				728691851ED56CC800D06B0F /* actionGetLayer.csb */,
 				728691861ED56CC800D06B0F /* actionNode.csb */,
 				728691871ED56CC800D06B0F /* activityLayer.csb */,
@@ -1000,6 +1018,12 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7283969C1F557F2B00A75AB4 /* MixSuggestLayer.h */,
+				7283969D1F557F2B00A75AB4 /* MixSuggestLayer.cpp */,
+				7283969E1F557F2B00A75AB4 /* MixGFNode.h */,
+				7283969F1F557F2B00A75AB4 /* MixGFNode.cpp */,
+				728396A01F557F2B00A75AB4 /* MixGFDoneLayer.h */,
+				728396A11F557F2B00A75AB4 /* MixGFDoneLayer.cpp */,
 				725B067A1F4AF8E900ADE663 /* RankLayer.h */,
 				725B067B1F4AF8E900ADE663 /* RankLayer.cpp */,
 				72F155191F459F6B00C83B47 /* FriendExgScene.h */,
@@ -1221,27 +1245,27 @@
 		5087E77117EB970100C73F5D /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				7271A0771EE63D90005B980F /* Default-Landscape~ipad.png */,
-				7271A0781EE63D90005B980F /* Icon-87.png */,
-				7271A0791EE63D90005B980F /* Icon-180.png */,
+				5087E77217EB970100C73F5D /* Default-568h@2x.png */,
 				521A8E6219F0C34300D177D7 /* Default-667h@2x.png */,
 				521A8E6319F0C34300D177D7 /* Default-736h@3x.png */,
-				5087E77217EB970100C73F5D /* Default-568h@2x.png */,
+				7271A0771EE63D90005B980F /* Default-Landscape~ipad.png */,
 				5087E77317EB970100C73F5D /* Default.png */,
 				5087E77417EB970100C73F5D /* Default@2x.png */,
 				50EF62A017ECD613001EB2F8 /* Icon-29.png */,
-				50EF62A117ECD613001EB2F8 /* Icon-50.png */,
 				50EF629217ECD46A001EB2F8 /* Icon-40.png */,
+				50EF62A117ECD613001EB2F8 /* Icon-50.png */,
+				5087E77917EB970100C73F5D /* Icon-57.png */,
 				50EF629317ECD46A001EB2F8 /* Icon-58.png */,
+				5087E77A17EB970100C73F5D /* Icon-72.png */,
+				5087E77B17EB970100C73F5D /* Icon-76.png */,
 				50EF629417ECD46A001EB2F8 /* Icon-80.png */,
+				7271A0781EE63D90005B980F /* Icon-87.png */,
 				50EF629517ECD46A001EB2F8 /* Icon-100.png */,
 				5087E77517EB970100C73F5D /* Icon-114.png */,
 				5087E77617EB970100C73F5D /* Icon-120.png */,
 				5087E77717EB970100C73F5D /* Icon-144.png */,
 				5087E77817EB970100C73F5D /* Icon-152.png */,
-				5087E77917EB970100C73F5D /* Icon-57.png */,
-				5087E77A17EB970100C73F5D /* Icon-72.png */,
-				5087E77B17EB970100C73F5D /* Icon-76.png */,
+				7271A0791EE63D90005B980F /* Icon-180.png */,
 				5087E77C17EB970100C73F5D /* Info.plist */,
 			);
 			name = Icons;
@@ -1475,7 +1499,9 @@
 				723CF5F51F020CB500509BFE /* story4_1.csb in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				728396AA1F557F4000A75AB4 /* mixDoneLayer.csb in Resources */,
 				725CB9E91F1646DF00D2509A /* divedeLayer.csb in Resources */,
+				728396A91F557F4000A75AB4 /* mixGFNode.csb in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				72F4D13E1F21A0C800D9D752 /* challengeCountLayer.csb in Resources */,
 				729772851F09DFBF001DC2B8 /* end1_1.csb in Resources */,
@@ -1525,6 +1551,7 @@
 				723CF5F61F020CB500509BFE /* story4_2.csb in Resources */,
 				728691DB1ED56CC800D06B0F /* tempStorageLayer.csb in Resources */,
 				723EC0371EF3800E00642589 /* story1_2 in Resources */,
+				728396A81F557F4000A75AB4 /* mixSuggestLayer.csb in Resources */,
 				72754FE91F048A1F00AFB4C4 /* bookshelfLayer.csb in Resources */,
 				728691D31ED56CC800D06B0F /* shopLayer.csb in Resources */,
 				7293E0951EE7BAFA009AC1A2 /* exerciseCancelLayer.csb in Resources */,
@@ -1637,6 +1664,7 @@
 				7286906A1ED568B000D06B0F /* json.cpp in Sources */,
 				723CF5EE1F020C8300509BFE /* BookShelf.cpp in Sources */,
 				728690821ED568B000D06B0F /* UnlockLayer.cpp in Sources */,
+				728396A41F557F2B00A75AB4 /* MixGFDoneLayer.cpp in Sources */,
 				72E332C51F0BAADF00E61182 /* RmbGoodsItem.cpp in Sources */,
 				7239471A1EF2384A0093E725 /* ExerciseDoneLayer.cpp in Sources */,
 				7286904F1ED568B000D06B0F /* ActionGetLayer.cpp in Sources */,
@@ -1648,6 +1676,7 @@
 				7286906E1ED568B000D06B0F /* MyPackage.cpp in Sources */,
 				72F8A44E1ED6851E007A5A65 /* AnalyticUtil.cpp in Sources */,
 				728690571ED568B000D06B0F /* CommonFuncs.cpp in Sources */,
+				728396A31F557F2B00A75AB4 /* MixGFNode.cpp in Sources */,
 				7286906C1ED568B000D06B0F /* MedicineKit.cpp in Sources */,
 				7286906B1ED568B000D06B0F /* MapLayer.cpp in Sources */,
 				7286905C1ED568B000D06B0F /* FightLayer.cpp in Sources */,
@@ -1669,6 +1698,7 @@
 				728690841ED568B000D06B0F /* WineTable.cpp in Sources */,
 				728690551ED568B000D06B0F /* BuyDetailsLayer.cpp in Sources */,
 				725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */,
+				728396A21F557F2B00A75AB4 /* MixSuggestLayer.cpp in Sources */,
 				7286907C1ED568B000D06B0F /* StorageUILayer.cpp in Sources */,
 				722FA8B21F3B256B00904816 /* GetVipRewardLayer.cpp in Sources */,
 				728690731ED568B000D06B0F /* ReviveLayer.cpp in Sources */,

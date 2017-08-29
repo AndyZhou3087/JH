@@ -853,7 +853,7 @@ public:
 
 	static std::map<std::string, NPCMasterData> map_NPCMasterData;
 
-	static std::map<std::string, MixGfData> GlobalData::map_MixGfData;
+	static std::map<std::string, MixGfData> map_MixGfData;
 
 	static std::vector<RankData> vec_rankData;
 
