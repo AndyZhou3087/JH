@@ -227,12 +227,24 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mixdesc" ActionTag="-1009537391" Tag="83" IconVisible="False" LeftMargin="-293.1768" RightMargin="-136.8232" TopMargin="58.7357" BottomMargin="-178.7357" IsCustomSize="True" FontSize="28" LabelText="我是百晓生。满级功法可在此进行组合！我知道所有绝佳功法组合，点我进入查看！" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="mixdesc" ActionTag="-1009537391" Tag="83" IconVisible="False" LeftMargin="-293.1768" RightMargin="-136.8232" TopMargin="58.7357" BottomMargin="-178.7357" IsCustomSize="True" FontSize="28" LabelText="我是百晓生。        功法可在此进行组合！我知道所有绝佳功法组合，点我进入查看！" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="430.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
             <Position X="-68.3298" Y="-107.2757" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="mixdesc1" ActionTag="-1277296590" Tag="112" IconVisible="False" LeftMargin="-125.8808" RightMargin="64.8808" TopMargin="71.0850" BottomMargin="-104.0850" FontSize="30" LabelText="满级" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="61.0000" Y="33.0000" />
+            <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
+            <Position X="-93.9839" Y="-84.4335" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />

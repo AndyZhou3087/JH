@@ -54,8 +54,6 @@ bool HeroStateUILayer::init()
 	MixGFNode* mixnode = MixGFNode::create();
 	mixnode->setPosition(Vec2(360, 220));
 	m_csbnode->addChild(mixnode, 0, "mixnode");
-	if (g_hero->getIsOut())
-		mixnode->setVisible(false);
 
 	//////layer 点击事件，屏蔽下层事件
 	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
@@ -149,7 +147,7 @@ void HeroStateUILayer::updateStatus(float dt)
 	//性别
 	if (g_hero->getSex() == S_NONE)
 	{
-		m_csbnode->getChildByName("herostatetext6")->setVisible(true);
+		m_csbnode->getChildByName("herostatetext7")->setVisible(true);
 		herostatus[6]->setVisible(true);
 		herostatus[6]->setString(CommonFuncs::gbk2utf("不详"));
 	}

@@ -55,6 +55,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	m_getallbtn = (cocos2d::ui::Button*)csbnode->getChildByName("allgetbtn");
 	m_getallbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onAllGet, this));
 
+	cocos2d::ui::Button * continuebtn = (cocos2d::ui::Button*)csbnode->getChildByName("continuebtn");
+
 	cocos2d::ui::Text* addrname = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrname->setString(GlobalData::map_maps[m_addrid].cname);
 
@@ -154,7 +156,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	{
 		m_backbtn->setTitleText(CommonFuncs::gbk2utf("退出挑战"));
 		m_backbtn->setTitleFontSize(30);
-		cocos2d::ui::Button * continuebtn = (cocos2d::ui::Button*)csbnode->getChildByName("continuebtn");
 		continuebtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onContinue, this));
 		continuebtn->setVisible(true);
 		int npcsize = GlobalData::map_maps[m_addrid].npcs.size();
@@ -171,6 +172,10 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			winresrnd.push_back(GlobalData::map_challengeReward[npcid].vec_winrnd[i]);
 		}
 		iswd = true;
+	}
+	else
+	{
+		continuebtn->setVisible(false);
 	}
 
 	int winressize = winres.size();

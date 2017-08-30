@@ -114,6 +114,12 @@ void MixGFNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
+		if (g_hero->getIsOut())
+		{
+			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回住宅进行组合！！"));
+			g_gameLayer->addChild(layer, 4);
+			return;
+		}
 		Node* node = (Node*)pSender;
 		int tag = node->getTag();
 		//点击相同的一个不做操作
@@ -212,7 +218,7 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 							}
 						}
 					}
-					if (index == secgfsize && checkSex(g_hero->getSex()))
+					if (index == secgfsize)
 					{
 						isok = 0;
 						//StorageRoom::use(GlobalData::map_MixGfData[it->first].mastergf);
@@ -593,8 +599,16 @@ void MixGFNode::onSuggest(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		MixSuggestLayer* layer = MixSuggestLayer::create();
-		g_gameLayer->addChild(layer, 4, "mixsuggestlayer");
+		if (g_hero->getIsOut())
+		{
+			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回住宅查看！！"));
+			g_gameLayer->addChild(layer, 4);
+		}
+		else
+		{
+			MixSuggestLayer* layer = MixSuggestLayer::create();
+			g_gameLayer->addChild(layer, 4, "mixsuggestlayer");
+		}
 	}
 }
 
@@ -612,5 +626,4 @@ bool MixGFNode::checkSex(int sex)
 			return true;
 	}
 	return false;
-
 }

@@ -285,7 +285,7 @@ void RepairLayer::onRepairItem(cocos2d::Ref* pSender)
 		int needresid = atoi(repairneedres[i].c_str()) / 1000;
 
 		needResbox[resImgStartIndex + i]->setVisible(true);
-		std::string str = StringUtils::format("ui/%d.png", atoi(repairneedres[i].c_str()) / 1000);
+		std::string str = StringUtils::format("ui/%d.png", needresid);
 		needResImg[resImgStartIndex + i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		needResImg[resImgStartIndex + i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 		std::string resid = StringUtils::format("%d", needresid);

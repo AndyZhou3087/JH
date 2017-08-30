@@ -1665,6 +1665,16 @@ void GlobalData::loadNpcFriendJsonData()
 				data.vec_enemynpc.push_back(npcid);
 		}
 
+		v = item["fightnpc"];
+
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			rapidjson::Value& npsv = v[m];
+			std::string npcid = npsv.GetString();
+			if (npcid.length() > 1)
+				data.vec_fightnpc.push_back(npcid);
+		}
+
 		v = item["res"];
 
 		for (unsigned int m = 0; m < v.Size(); m++)

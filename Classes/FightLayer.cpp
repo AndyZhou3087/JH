@@ -61,9 +61,14 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::Text* addrnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrnametxt->setString(GlobalData::map_maps[m_addrid].cname);
 
-	if (GlobalData::map_maps[m_addrid].npcs.size() >= 10)
+	if (m_addrid.compare("m13-1") == 0)
 	{
 		g_hero->setIsWDChallenge(true);
+		m_npcid = GlobalData::map_maps[m_addrid].npcs[0];
+		continuefight = GlobalData::map_maps[m_addrid].npcs.size() - 1;
+	}
+	else if (m_addrid.compare("m1-6") == 0)
+	{
 		m_npcid = GlobalData::map_maps[m_addrid].npcs[0];
 		continuefight = GlobalData::map_maps[m_addrid].npcs.size() - 1;
 	}
@@ -241,7 +246,23 @@ void FightLayer::fightRobber()
 
 void FightLayer::npcDie()
 {
-	this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+	if (m_addrid.compare("m1-6") == 0)
+	{
+		if (continuefight <= 0)
+		{
+			this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+		}
+		else
+		{
+			int totalnpc = GlobalData::map_maps[m_addrid].npcs.size();
+			m_npcid = GlobalData::map_maps[m_addrid].npcs[totalnpc - continuefight];
+			continuefight--;
+			updateFightNextNpc();
+		}
+
+	}
+	else
+		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
 }
 
 int FightLayer::getNpcHurt()

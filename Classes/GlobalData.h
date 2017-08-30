@@ -292,6 +292,7 @@ typedef struct
 	int maxfriendly;
 	int needfriendly;
 	std::vector<std::string> vec_enemynpc;
+	std::vector<std::string> vec_fightnpc;
 	float atkpercent;
 	float dfpercent;
 	float dodgepercent;

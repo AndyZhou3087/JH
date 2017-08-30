@@ -15,7 +15,7 @@ MixSuggestLayer::MixSuggestLayer()
 
 MixSuggestLayer::~MixSuggestLayer()
 {
-
+	GlobalData::g_gameStatus = GAMESTART;
 }
 
 bool MixSuggestLayer::init()
@@ -61,6 +61,7 @@ bool MixSuggestLayer::init()
 
 	getServerTime();
 
+	GlobalData::g_gameStatus = GAMEPAUSE;
 	auto m_listener = EventListenerTouchOneByOne::create();
 	m_listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
