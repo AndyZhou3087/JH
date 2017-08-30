@@ -79,6 +79,8 @@ bool MixGFNode::init()
 
 	loadMixSuccGF();
 
+	updateGFScroll();
+
 	m_listener = EventListenerTouchOneByOne::create();
 	m_listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -304,8 +306,6 @@ void MixGFNode::addGFData()
 			vec_myhasgf.push_back(data);
 		}
 	}
-
-	updateGFScroll();
 }
 
 void MixGFNode::updateGFScroll()
@@ -356,11 +356,28 @@ void MixGFNode::updateGFScroll()
 		namelbl->setPosition(Vec2(box->getContentSize().width / 2, -10));
 		box->addChild(namelbl);
 
-		Label * lvlbl = Label::createWithSystemFont("", "", 15);
-		lvlbl->setColor(Color3B(255, 255, 255));
-		lvlbl->setAnchorPoint(Vec2(1, 0));
-		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
-		box->addChild(lvlbl);
+		//Label * lvlbl = Label::createWithSystemFont("", "", 15);
+		//lvlbl->setColor(Color3B(255, 255, 255));
+		//lvlbl->setAnchorPoint(Vec2(1, 0));
+		//lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
+		//box->addChild(lvlbl);
+
+		if (masterGFData != NULL)
+		{
+			if (masterGFData->strid.compare(tmpdata.strid) == 0)
+			{
+				m_select->setPosition(Vec2(boxItem->getPositionX() - boxItem->getContentSize().width / 2, boxItem->getPositionY() + boxItem->getContentSize().height / 2));
+				m_select->setVisible(true);
+			}
+			for (unsigned int i = 0; i < map_secgfdata.size(); i++)
+			{
+				if (map_secgfdata[i].size() > 0 && map_secgfdata[i][0]->strid.compare(tmpdata.strid) == 0)
+				{
+					m_secselect[i]->setPosition(Vec2(boxItem->getPositionX() - boxItem->getContentSize().width / 2, boxItem->getPositionY() + boxItem->getContentSize().height / 2));
+					m_secselect[i]->setVisible(true);
+				}
+			}
+		}
 	}
 }
 
@@ -390,8 +407,7 @@ void MixGFNode::loadMixSuccGF()
 			img[i + 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 			str = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mdata.vec_secgf[i]].qu);
 			imgbtn[i + 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-			//m_secselect[i]->setPosition(Vec2(imgbtn[i + 1]->getPositionX() - imgbtn[i + 1]->getContentSize().width / 2, imgbtn[i + 1]->getPositionY() + imgbtn[i + 1]->getContentSize().height / 2));
-			//m_secselect[i]->setVisible(true);
+
 
 			for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
 			{
