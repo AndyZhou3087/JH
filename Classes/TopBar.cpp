@@ -459,14 +459,14 @@ void TopBar::updataUI(float dt)
 	{
 		if (g_nature->getDayOrNight() == Day)
 		{
-			//int r = GlobalData::createRandomNum(100);
-			//if (r < 10)
-			//{
-			//	int r1 = GlobalData::createRandomNum(100);
-			//	int type = r1 < 50 ? 0 : 1;
-			//	activityScene = FriendExgScene::createScene(type);
-			//}
-			//else if (r < 20)
+			int r = GlobalData::createRandomNum(100);
+			if (r < 10)
+			{
+				int r1 = GlobalData::createRandomNum(100);
+				int type = r1 < 50 ? 0 : 1;
+				activityScene = FriendExgScene::createScene(type);
+			}
+			else if (r < 20)
 			{
 				activityScene = FriendNpcScene::createScene();
 			}

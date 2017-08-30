@@ -611,19 +611,3 @@ void MixGFNode::onSuggest(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		}
 	}
 }
-
-bool MixGFNode::checkSex(int sex)
-{
-	std::string mymixgf = GlobalData::getMixGF();
-	if (mymixgf.length() > 0)
-	{
-		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
-		if (sex == S_MAN && (mdata.sex == 1 || mdata.sex == 3 || mdata.sex == 4))
-			return true;
-		else if (sex == S_WOMEN && (mdata.sex == 2 || mdata.sex == 3 || mdata.sex == 4))
-			return true;
-		else if (sex == S_NONE && (mdata.sex == 0 || mdata.sex == 4))
-			return true;
-	}
-	return false;
-}

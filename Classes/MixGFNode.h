@@ -77,8 +77,6 @@ private:
 	*****************************/
 	void updateGFScroll();
 
-
-	bool checkSex(int sex);
 private:
 	Node* csbroot;
 	cocos2d::ui::Widget* heroselectbg;

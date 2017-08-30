@@ -497,7 +497,25 @@ void HeroProperNode::selectCarryData()
 				else
 				{
 					if (m_select->isVisible())
+					{
+						std::string mymixgf = GlobalData::getMixGF();
+						if (mymixgf.length() > 0)
+						{
+							MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+							for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
+							{
+								if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
+								{
+									HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
+									Director::getInstance()->getRunningScene()->addChild(hint, 4);
+
+									m_select->setVisible(!m_select->isVisible());
+									return;
+								}
+							}
+						}
 						StorageRoom::add(*m_lastSelectedData);
+					}
 				}
 			}
 			m_select->setVisible(false);
@@ -530,20 +548,25 @@ void HeroProperNode::selectCarryData()
 		if (mymixgf.length() > 0)
 		{
 			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
-			for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
+			int csex = checkSex(g_hero->getSex());
+			if (csex <= 0)
 			{
-				if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
-				{
-					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
-					Director::getInstance()->getRunningScene()->addChild(hint, 4);
+				std::string sexstr;
+				if (csex == 0)
+					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合自宫者装备！！").c_str());
+				else if (csex == -1)
+					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合男性装备！！").c_str());
+				else if (csex == -2)
+					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合女性装备！！").c_str());
+				else
+					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("不适合自宫者装备！！").c_str());
+				HintBox* hint = HintBox::create(sexstr);
+				Director::getInstance()->getRunningScene()->addChild(hint, 4);
 
-					m_select->setVisible(!m_select->isVisible());
-					return;
-				}
+				m_select->setVisible(!m_select->isVisible());
+				return;
 			}
-
 		}
-
 		takeon(m_select_atrype, m_select_udata);
 	}
 	else
@@ -727,6 +750,38 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 	propeImages[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 }
 
+int HeroProperNode::checkSex(int sex)
+{
+	std::string mymixgf = GlobalData::getMixGF();
+	if (mymixgf.length() > 0)
+	{
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if (sex == S_MAN)
+		{
+			if (mdata.sex == 1 || mdata.sex == 3 || mdata.sex == 4)
+				return 1;
+			else
+			{
+				return -mdata.sex;
+			}
+		}
+		else if (sex == S_WOMEN)
+		{
+			if (mdata.sex == 2 || mdata.sex == 3 || mdata.sex == 4)
+				return 1;
+			else
+				return -mdata.sex;
+		}
+		else if (sex == S_NONE)
+		{
+			if (mdata.sex == 0 || mdata.sex == 4)
+				return 1;
+			else
+				return -mdata.sex;
+		}
+	}
+	return 1;
+}
 
 void HeroProperNode::showNewerGuide(int step)
 {

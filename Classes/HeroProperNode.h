@@ -104,6 +104,13 @@ private:
 	*****************************/
 	bool takeoff(HeroAtrType atrype);
 
+	/****************************
+	检查性别，合成功法根据性别可以装备
+	@param 性别
+	@return >0可装备 只适合0--自宫，-1-男，-2-女 -3男女
+	*****************************/
+	int checkSex(int sex);
+
 private:
 	Node* csbroot;
 	cocos2d::ui::ImageView* propeImages[8];//8种装备类型
