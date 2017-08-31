@@ -16,14 +16,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/rankitem1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ranknum" ActionTag="-1356106108" Tag="37" IconVisible="False" LeftMargin="-272.4334" RightMargin="257.4334" TopMargin="-15.0000" BottomMargin="-15.0000" FontSize="30" LabelText="1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="15.0000" Y="30.0000" />
+          <AbstractNodeData Name="ranknum" ActionTag="-1356106108" Tag="37" IconVisible="False" LeftMargin="-271.4334" RightMargin="258.4334" TopMargin="-16.5000" BottomMargin="-16.5000" FontSize="32" LabelText="1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="13.0000" Y="33.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-264.9334" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -39,8 +40,8 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroname" ActionTag="291305008" Tag="39" IconVisible="False" LeftMargin="-7.1187" RightMargin="-70.8813" TopMargin="-13.5000" BottomMargin="-13.5000" FontSize="25" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="78.0000" Y="27.0000" />
+          <AbstractNodeData Name="heroname" ActionTag="291305008" Tag="39" IconVisible="False" LeftMargin="-7.1187" RightMargin="-70.8813" TopMargin="-13.0000" BottomMargin="-13.0000" FontSize="25" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="78.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="31.8813" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -51,8 +52,8 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herolv" ActionTag="-1938935187" Tag="40" IconVisible="False" LeftMargin="96.2976" RightMargin="-129.2976" TopMargin="-13.5000" BottomMargin="-13.5000" FontSize="25" LabelText="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="33.0000" Y="27.0000" />
+          <AbstractNodeData Name="herolv" ActionTag="-1938935187" Tag="40" IconVisible="False" LeftMargin="91.7976" RightMargin="-133.7976" TopMargin="-13.0000" BottomMargin="-13.0000" FontSize="25" LabelText="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="42.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="112.7976" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -63,8 +64,8 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herosex" ActionTag="-1735217691" Tag="41" IconVisible="False" LeftMargin="164.8420" RightMargin="-188.8420" TopMargin="-13.5000" BottomMargin="-13.5000" FontSize="25" LabelText="男" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="24.0000" Y="27.0000" />
+          <AbstractNodeData Name="herosex" ActionTag="-1735217691" Tag="41" IconVisible="False" LeftMargin="165.3420" RightMargin="-188.3420" TopMargin="-13.0000" BottomMargin="-13.0000" FontSize="25" LabelText="男" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="23.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="176.8420" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -75,10 +76,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroval" ActionTag="1966886520" Tag="42" IconVisible="False" LeftMargin="229.9307" RightMargin="-286.9307" TopMargin="-13.5000" BottomMargin="-13.5000" FontSize="25" LabelText="100天" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="57.0000" Y="27.0000" />
+          <AbstractNodeData Name="heroval" ActionTag="1966886520" Tag="42" IconVisible="False" LeftMargin="214.4309" RightMargin="-300.4309" TopMargin="-13.0000" BottomMargin="-13.0000" FontSize="25" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="86.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="258.4307" />
+            <Position X="257.4309" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />

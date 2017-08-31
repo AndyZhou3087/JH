@@ -35,8 +35,8 @@
               <AbstractNodeData Name="textnode" ActionTag="-1961895294" Tag="47" IconVisible="True" LeftMargin="488.6278" RightMargin="151.3722" TopMargin="93.1871" BottomMargin="106.8129" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="name" ActionTag="-811703586" Tag="40" IconVisible="False" LeftMargin="-20.7802" RightMargin="-115.2198" TopMargin="-72.0008" BottomMargin="23.0008" FontSize="45" LabelText="小虾米" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="136.0000" Y="49.0000" />
+                  <AbstractNodeData Name="name" ActionTag="-811703586" Tag="40" IconVisible="False" LeftMargin="-20.7802" RightMargin="-115.2198" TopMargin="-71.0008" BottomMargin="24.0008" FontSize="45" LabelText="小虾米" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="136.0000" Y="47.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="115.2198" Y="47.5008" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -47,8 +47,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="lvtext" ActionTag="-1548734874" Tag="41" IconVisible="False" LeftMargin="-46.4232" RightMargin="-32.5768" TopMargin="-11.3372" BottomMargin="-23.6628" FontSize="32" LabelText="等级：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="79.0000" Y="35.0000" />
+                  <AbstractNodeData Name="lvtext" ActionTag="-1548734874" Tag="41" IconVisible="False" LeftMargin="-44.4232" RightMargin="-32.5768" TopMargin="-10.3372" BottomMargin="-22.6628" FontSize="32" LabelText="等级：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="77.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="32.5768" Y="-6.1628" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -59,10 +59,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="lv" ActionTag="1087021703" Tag="42" IconVisible="False" LeftMargin="55.5705" RightMargin="-82.5705" TopMargin="-9.3375" BottomMargin="-25.6625" FontSize="32" LabelText="10" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="27.0000" Y="35.0000" />
+                  <AbstractNodeData Name="lv" ActionTag="1087021703" Tag="42" IconVisible="False" LeftMargin="48.5703" RightMargin="-82.5703" TopMargin="-6.3375" BottomMargin="-26.6625" FontSize="32" LabelText="10" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="34.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="82.5705" Y="-8.1625" />
+                    <Position X="82.5703" Y="-10.1625" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
                     <PrePosition />
@@ -71,8 +71,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="lvji" ActionTag="780596825" Tag="43" IconVisible="False" LeftMargin="82.2198" RightMargin="-115.2198" TopMargin="-11.3372" BottomMargin="-23.6628" FontSize="32" LabelText="级" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="33.0000" Y="35.0000" />
+                  <AbstractNodeData Name="lvji" ActionTag="780596825" Tag="43" IconVisible="False" LeftMargin="80.2198" RightMargin="-115.2198" TopMargin="-10.3372" BottomMargin="-22.6628" FontSize="32" LabelText="级" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="35.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="115.2198" Y="-6.1628" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -83,8 +83,8 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="daytext" ActionTag="1390240763" Tag="44" IconVisible="False" LeftMargin="-114.5938" RightMargin="-28.4062" TopMargin="35.8402" BottomMargin="-70.8402" FontSize="32" LabelText="冒险时间：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="143.0000" Y="35.0000" />
+                  <AbstractNodeData Name="daytext" ActionTag="1390240763" Tag="44" IconVisible="False" LeftMargin="-112.5938" RightMargin="-28.4062" TopMargin="36.8402" BottomMargin="-69.8402" FontSize="32" LabelText="冒险时间：" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="141.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                     <Position X="28.4062" Y="-53.3402" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -95,10 +95,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="day" ActionTag="812947118" Tag="45" IconVisible="False" LeftMargin="36.5720" RightMargin="-82.5720" TopMargin="35.8402" BottomMargin="-70.8402" FontSize="32" LabelText="200" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="46.0000" Y="35.0000" />
+                  <AbstractNodeData Name="day" ActionTag="812947118" Tag="45" IconVisible="False" LeftMargin="51.5715" RightMargin="-104.5715" TopMargin="40.8401" BottomMargin="-73.8401" FontSize="32" LabelText="100" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="53.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="82.5720" Y="-53.3402" />
+                    <Position X="104.5715" Y="-57.3401" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
                     <PrePosition />
@@ -107,10 +107,10 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="daytian" ActionTag="1348417825" Tag="46" RotationSkewX="1.8783" RotationSkewY="1.8767" IconVisible="False" LeftMargin="79.6459" RightMargin="-114.6459" TopMargin="35.8491" BottomMargin="-70.8491" FontSize="32" LabelText="天" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="35.0000" Y="35.0000" />
+                  <AbstractNodeData Name="daytian" ActionTag="1348417825" Tag="46" RotationSkewX="1.8783" RotationSkewY="1.8767" IconVisible="False" LeftMargin="100.6457" RightMargin="-134.6457" TopMargin="39.8490" BottomMargin="-72.8490" FontSize="32" LabelText="天" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="34.0000" Y="33.0000" />
                     <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position X="114.6459" Y="-53.3491" />
+                    <Position X="134.6457" Y="-56.3490" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="0" G="0" B="0" />
                     <PrePosition />
@@ -141,8 +141,8 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="nodatatext" ActionTag="317591312" VisibleForFrame="False" Tag="48" IconVisible="False" LeftMargin="112.0000" RightMargin="-270.0000" TopMargin="-28.0000" BottomMargin="-16.0000" FontSize="40" LabelText="暂无进度" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="158.0000" Y="44.0000" />
+          <AbstractNodeData Name="nodatatext" ActionTag="317591312" VisibleForFrame="False" Tag="48" IconVisible="False" LeftMargin="108.0000" RightMargin="-270.0000" TopMargin="-26.5000" BottomMargin="-14.5000" FontSize="40" LabelText="暂无进度" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="162.0000" Y="41.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="270.0000" Y="6.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />

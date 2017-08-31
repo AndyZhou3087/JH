@@ -9,14 +9,14 @@
           <AbstractNodeData Name="itembg" ActionTag="-1167684375" Tag="128" IconVisible="False" LeftMargin="-321.0000" RightMargin="-321.0000" TopMargin="-101.0000" BottomMargin="-101.0000" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
             <Size X="642.0000" Y="202.0000" />
             <Children>
-              <AbstractNodeData Name="name" ActionTag="620350723" Tag="129" IconVisible="False" LeftMargin="147.5294" RightMargin="354.4706" TopMargin="24.4521" BottomMargin="139.5479" FontSize="35" LabelText="新手月卡" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="140.0000" Y="38.0000" />
+              <AbstractNodeData Name="name" ActionTag="620350723" Tag="129" IconVisible="False" LeftMargin="147.5294" RightMargin="354.4706" TopMargin="25.4521" BottomMargin="140.5479" FontSize="35" LabelText="新手月卡" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="140.0000" Y="36.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="147.5294" Y="158.5479" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.2298" Y="0.7849" />
-                <PreSize X="0.2181" Y="0.1881" />
+                <PreSize X="0.2181" Y="0.1782" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -32,14 +32,15 @@
                 <FileData Type="MarkedSubImage" Path="ui/shopsepline.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="price" ActionTag="-514691903" Tag="132" IconVisible="False" LeftMargin="412.2357" RightMargin="194.7643" TopMargin="37.5392" BottomMargin="141.4608" FontSize="23" LabelText="6元" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="35.0000" Y="23.0000" />
+              <AbstractNodeData Name="price" ActionTag="-514691903" Tag="132" IconVisible="False" LeftMargin="409.2357" RightMargin="194.7643" TopMargin="37.0392" BottomMargin="140.9608" FontSize="23" LabelText="6元" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="38.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                 <Position X="447.2357" Y="152.9608" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.6966" Y="0.7572" />
-                <PreSize X="0.0545" Y="0.1139" />
+                <PreSize X="0.0592" Y="0.1188" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -53,14 +54,14 @@
                 <PreSize X="0.1651" Y="0.5248" />
                 <FileData Type="MarkedSubImage" Path="ui/vip1.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc" ActionTag="437115070" Tag="134" IconVisible="False" LeftMargin="141.0096" RightMargin="100.9904" TopMargin="150.4225" BottomMargin="26.5775" IsCustomSize="True" FontSize="23" LabelText="购买后每日登录即可领取，持续30天" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="400.0000" Y="25.0000" />
+              <AbstractNodeData Name="desc" ActionTag="437115070" Tag="134" IconVisible="False" LeftMargin="141.0096" RightMargin="67.9904" TopMargin="148.4226" BottomMargin="28.5774" IsCustomSize="True" FontSize="25" LabelText="购买后每日登录即可领取，持续30天" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="433.0000" Y="25.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="141.0096" Y="39.0775" />
+                <Position X="141.0096" Y="41.0774" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.2196" Y="0.1935" />
-                <PreSize X="0.6231" Y="0.1238" />
+                <PrePosition X="0.2196" Y="0.2034" />
+                <PreSize X="0.6745" Y="0.1238" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -87,6 +88,18 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="leftday" ActionTag="1372396427" VisibleForFrame="False" Tag="60" IconVisible="False" LeftMargin="-288.0047" RightMargin="202.0047" TopMargin="42.7034" BottomMargin="-66.7034" FontSize="23" LabelText="剩100天" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="86.0000" Y="24.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-245.0047" Y="-54.7034" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

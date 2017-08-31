@@ -29,14 +29,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="revivecountlbl" ActionTag="-1345363941" Tag="133" IconVisible="False" LeftMargin="411.5399" RightMargin="176.4601" TopMargin="718.9906" BottomMargin="530.0094" FontSize="28" LabelText="复活药水x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="132.0000" Y="31.0000" />
+          <AbstractNodeData Name="revivecountlbl" ActionTag="-1345363941" Tag="133" IconVisible="False" LeftMargin="408.6414" RightMargin="174.3586" TopMargin="719.9444" BottomMargin="531.0556" FontSize="28" LabelText="复活药水x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="137.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.5797" ScaleY="0.5231" />
             <Position X="488.0603" Y="546.2255" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
             <PrePosition X="0.6779" Y="0.4267" />
-            <PreSize X="0.1833" Y="0.0242" />
+            <PreSize X="0.1903" Y="0.0227" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -44,36 +44,37 @@
           <AbstractNodeData Name="revivebtn" ActionTag="-1740360797" Tag="47" IconVisible="False" LeftMargin="405.4145" RightMargin="164.5855" TopMargin="738.1982" BottomMargin="451.8018" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <Children>
-              <AbstractNodeData Name="priceicon" ActionTag="2006020828" Tag="132" IconVisible="False" LeftMargin="54.7833" RightMargin="29.2167" TopMargin="50.0142" BottomMargin="3.9858" ctype="SpriteObjectData">
+              <AbstractNodeData Name="priceicon" ActionTag="2006020828" Tag="132" IconVisible="False" LeftMargin="54.7833" RightMargin="29.2167" TopMargin="49.0142" BottomMargin="4.9858" ctype="SpriteObjectData">
                 <Size X="66.0000" Y="36.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="87.7833" Y="21.9858" />
+                <Position X="87.7833" Y="22.9858" />
                 <Scale ScaleX="0.5000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5852" Y="0.2443" />
+                <PrePosition X="0.5852" Y="0.2554" />
                 <PreSize X="0.4400" Y="0.4000" />
                 <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="price" ActionTag="1226021185" Tag="131" IconVisible="False" LeftMargin="48.6817" RightMargin="79.3183" TopMargin="55.2588" BottomMargin="13.7412" FontSize="21" LabelText="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="22.0000" Y="21.0000" />
+              <AbstractNodeData Name="price" ActionTag="1226021185" Tag="131" IconVisible="False" LeftMargin="43.6818" RightMargin="79.3182" TopMargin="55.7587" BottomMargin="12.2413" FontSize="21" LabelText="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="27.0000" Y="22.0000" />
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                <Position X="70.6817" Y="24.2412" />
+                <Position X="70.6818" Y="23.2413" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="208" G="194" B="194" />
-                <PrePosition X="0.4712" Y="0.2693" />
-                <PreSize X="0.1467" Y="0.2333" />
+                <PrePosition X="0.4712" Y="0.2582" />
+                <PreSize X="0.1800" Y="0.2444" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="text" ActionTag="1019780108" Tag="130" IconVisible="False" LeftMargin="32.8611" RightMargin="41.1389" TopMargin="17.9998" BottomMargin="28.0002" FontSize="40" LabelText="复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="76.0000" Y="44.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="70.8611" Y="50.0002" />
+              <AbstractNodeData Name="text" ActionTag="1019780108" Tag="130" IconVisible="False" LeftMargin="31.3611" RightMargin="39.6389" TopMargin="17.4998" BottomMargin="31.5002" FontSize="40" LabelText="复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="79.0000" Y="41.0000" />
+                <AnchorPoint ScaleX="0.4587" ScaleY="0.5079" />
+                <Position X="67.5969" Y="52.3251" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4724" Y="0.5556" />
-                <PreSize X="0.5067" Y="0.4889" />
+                <PrePosition X="0.4506" Y="0.5814" />
+                <PreSize X="0.5267" Y="0.4556" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -125,14 +126,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="sharetext" ActionTag="-969405136" VisibleForFrame="False" Tag="172" IconVisible="False" LeftMargin="145.4998" RightMargin="145.5002" TopMargin="837.3569" BottomMargin="414.6431" FontSize="26" LabelText="（每日分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="429.0000" Y="28.0000" />
+          <AbstractNodeData Name="sharetext" ActionTag="-969405136" VisibleForFrame="False" Tag="172" IconVisible="False" LeftMargin="144.9998" RightMargin="145.0002" TopMargin="837.8569" BottomMargin="415.1431" FontSize="26" LabelText="（每日分享至朋友圈可免费复活一次）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="430.0000" Y="27.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="428.6431" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.3349" />
-            <PreSize X="0.5958" Y="0.0219" />
+            <PreSize X="0.5972" Y="0.0211" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -140,14 +141,14 @@
           <AbstractNodeData Name="sharebtn" ActionTag="784518322" VisibleForFrame="False" Tag="174" IconVisible="False" LeftMargin="159.1100" RightMargin="410.8900" TopMargin="738.2000" BottomMargin="451.8000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <Children>
-              <AbstractNodeData Name="text" ActionTag="1731902981" Tag="175" IconVisible="False" LeftMargin="51.3061" RightMargin="22.6939" TopMargin="25.7598" BottomMargin="20.2402" FontSize="40" LabelText="分享" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="76.0000" Y="44.0000" />
+              <AbstractNodeData Name="text" ActionTag="1731902981" Tag="175" IconVisible="False" LeftMargin="50.8061" RightMargin="22.1939" TopMargin="27.2598" BottomMargin="21.7402" FontSize="40" LabelText="分享" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="77.0000" Y="41.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="89.3061" Y="42.2402" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5954" Y="0.4693" />
-                <PreSize X="0.5067" Y="0.4889" />
+                <PreSize X="0.5133" Y="0.4556" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -181,27 +182,27 @@
           <AbstractNodeData Name="freerevivebtn" ActionTag="-1298335833" VisibleForFrame="False" Tag="21" IconVisible="False" LeftMargin="159.1100" RightMargin="410.8900" TopMargin="738.2000" BottomMargin="451.8000" TouchEnable="True" FontSize="36" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <Children>
-              <AbstractNodeData Name="text" ActionTag="856662343" Tag="22" IconVisible="False" LeftMargin="10.3070" RightMargin="21.6930" TopMargin="24.2597" BottomMargin="32.7403" FontSize="30" LabelText="免费复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="118.0000" Y="33.0000" />
+              <AbstractNodeData Name="text" ActionTag="856662343" Tag="22" IconVisible="False" LeftMargin="9.3070" RightMargin="20.6930" TopMargin="25.2597" BottomMargin="33.7403" FontSize="30" LabelText="免费复活" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="120.0000" Y="31.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="69.3070" Y="49.2403" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4620" Y="0.5471" />
-                <PreSize X="0.7867" Y="0.3667" />
+                <PreSize X="0.8000" Y="0.3444" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="count" ActionTag="548373963" Tag="38" IconVisible="False" LeftMargin="63.3070" RightMargin="62.6930" TopMargin="53.2596" BottomMargin="13.7404" FontSize="23" LabelText="x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="24.0000" Y="23.0000" />
+              <AbstractNodeData Name="count" ActionTag="548373963" Tag="38" IconVisible="False" LeftMargin="64.3070" RightMargin="63.6930" TopMargin="52.7596" BottomMargin="13.2404" FontSize="23" LabelText="x1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="22.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="75.3070" Y="25.2404" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5020" Y="0.2804" />
-                <PreSize X="0.1600" Y="0.2556" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <PreSize X="0.1467" Y="0.2667" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

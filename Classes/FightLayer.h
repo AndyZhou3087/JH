@@ -50,6 +50,11 @@ public:
 	****************************/
 	void reviveContinueChallege();
 
+	/****************************
+	胜利后可重新开始挑战
+	****************************/
+	void restartFightNpc(std::string npcid);
+
 private:
 	/****************************
 	逃跑按钮回调

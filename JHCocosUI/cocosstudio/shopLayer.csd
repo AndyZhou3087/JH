@@ -16,25 +16,27 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="images/selectherobg.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqtext" ActionTag="1329191533" Tag="183" IconVisible="False" LeftMargin="446.4944" RightMargin="147.5056" TopMargin="1233.3022" BottomMargin="21.6978" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="126.0000" Y="25.0000" />
+          <AbstractNodeData Name="qqtext" ActionTag="1329191533" Tag="183" IconVisible="False" LeftMargin="438.4941" RightMargin="153.5059" TopMargin="1232.8022" BottomMargin="21.1978" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="128.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="509.4944" Y="34.1978" />
+            <Position X="502.4941" Y="34.1978" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7076" Y="0.0267" />
-            <PreSize X="0.1750" Y="0.0195" />
+            <PrePosition X="0.6979" Y="0.0267" />
+            <PreSize X="0.1778" Y="0.0203" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qq" ActionTag="-1398706058" Tag="182" IconVisible="False" LeftMargin="585.9611" RightMargin="17.0389" TopMargin="1233.3022" BottomMargin="21.6977" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="117.0000" Y="25.0000" />
+          <AbstractNodeData Name="qq" ActionTag="-1398706058" Tag="182" IconVisible="False" LeftMargin="580.4609" RightMargin="15.5391" TopMargin="1232.8022" BottomMargin="21.1978" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="124.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="644.4611" Y="34.1977" />
+            <Position X="642.4609" Y="34.1978" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8951" Y="0.0267" />
-            <PreSize X="0.1625" Y="0.0195" />
+            <PrePosition X="0.8923" Y="0.0267" />
+            <PreSize X="0.1722" Y="0.0203" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -99,14 +101,14 @@
           <AbstractNodeData Name="goldtextbox" ActionTag="1155993220" Tag="64" IconVisible="False" LeftMargin="205.1326" RightMargin="238.8674" TopMargin="165.2441" BottomMargin="1042.7559" ctype="SpriteObjectData">
             <Size X="276.0000" Y="72.0000" />
             <Children>
-              <AbstractNodeData Name="text" ActionTag="1912312881" Tag="65" IconVisible="False" LeftMargin="64.5000" RightMargin="64.5000" TopMargin="8.5000" BottomMargin="8.5000" FontSize="50" LabelText="金元宝" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="147.0000" Y="55.0000" />
+              <AbstractNodeData Name="text" ActionTag="1912312881" Tag="65" IconVisible="False" LeftMargin="64.5000" RightMargin="64.5000" TopMargin="10.0000" BottomMargin="10.0000" FontSize="50" LabelText="金元宝" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="147.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="138.0000" Y="36.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.5000" />
-                <PreSize X="0.5326" Y="0.7639" />
+                <PreSize X="0.5326" Y="0.7222" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -171,14 +173,15 @@
             <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mygoldlbl" ActionTag="-1104259580" Tag="75" IconVisible="False" LeftMargin="66.9030" RightMargin="637.0970" TopMargin="4.6779" BottomMargin="1242.3221" FontSize="32" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="16.0000" Y="33.0000" />
+          <AbstractNodeData Name="mygoldlbl" ActionTag="-1104259580" Tag="75" IconVisible="False" LeftMargin="66.9030" RightMargin="597.0970" TopMargin="7.6780" BottomMargin="1239.3220" FontSize="32" LabelText="999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="56.0000" Y="33.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="66.9030" Y="1258.8221" />
+            <Position X="66.9030" Y="1255.8220" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0929" Y="0.9835" />
-            <PreSize X="0.0222" Y="0.0258" />
+            <PrePosition X="0.0929" Y="0.9811" />
+            <PreSize X="0.0778" Y="0.0258" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

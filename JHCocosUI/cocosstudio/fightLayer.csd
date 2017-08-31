@@ -38,14 +38,14 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="510476990" Tag="122" IconVisible="False" LeftMargin="310.4998" RightMargin="310.5002" TopMargin="496.7233" BottomMargin="728.2767" FontSize="50" LabelText="后山" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="99.0000" Y="55.0000" />
+          <AbstractNodeData Name="title" ActionTag="510476990" Tag="122" IconVisible="False" LeftMargin="311.4998" RightMargin="311.5002" TopMargin="498.2233" BottomMargin="729.7767" FontSize="50" LabelText="后山" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="97.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9998" Y="755.7767" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5905" />
-            <PreSize X="0.1375" Y="0.0430" />
+            <PreSize X="0.1347" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -86,14 +86,14 @@
             <PreSize X="0.1667" Y="0.0938" />
             <FileData Type="MarkedSubImage" Path="ui/n004.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="71.0822" RightMargin="555.9178" TopMargin="633.5000" BottomMargin="613.5000" FontSize="30" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="93.0000" Y="33.0000" />
+          <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="72.0822" RightMargin="555.9178" TopMargin="634.5000" BottomMargin="614.5000" FontSize="30" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="92.0000" Y="31.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="164.0822" Y="630.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.2279" Y="0.4922" />
-            <PreSize X="0.1292" Y="0.0258" />
+            <PreSize X="0.1278" Y="0.0242" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -109,14 +109,14 @@
             <FileData Type="MarkedSubImage" Path="ui/fighticon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="537.0000" RightMargin="31.0000" TopMargin="633.5000" BottomMargin="613.5000" FontSize="30" LabelText="李自成鬼魂" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="152.0000" Y="33.0000" />
+          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="537.0000" RightMargin="30.0000" TopMargin="634.5000" BottomMargin="614.5000" FontSize="30" LabelText="李自成鬼魂" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="153.0000" Y="31.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="537.0000" Y="630.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.7458" Y="0.4922" />
-            <PreSize X="0.2111" Y="0.0258" />
+            <PreSize X="0.2125" Y="0.0242" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -183,25 +183,27 @@
             <PreSize X="0.3222" Y="0.0141" />
             <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herohpvaluetext" ActionTag="613342465" Tag="135" IconVisible="False" LeftMargin="160.9971" RightMargin="511.0029" TopMargin="666.5024" BottomMargin="598.4976" FontSize="15" LabelText="95/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="48.0000" Y="15.0000" />
+          <AbstractNodeData Name="herohpvaluetext" ActionTag="613342465" Tag="135" IconVisible="False" LeftMargin="159.4971" RightMargin="509.5029" TopMargin="668.0024" BottomMargin="595.9976" FontSize="15" LabelText="95/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="51.0000" Y="16.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="184.9971" Y="605.9976" />
+            <Position X="184.9971" Y="603.9976" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2569" Y="0.4734" />
-            <PreSize X="0.0667" Y="0.0117" />
+            <PrePosition X="0.2569" Y="0.4719" />
+            <PreSize X="0.0708" Y="0.0125" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npchpvaluetext" ActionTag="-1085362581" Tag="136" IconVisible="False" LeftMargin="513.9996" RightMargin="158.0004" TopMargin="666.5002" BottomMargin="598.4998" FontSize="15" LabelText="80/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="48.0000" Y="15.0000" />
+          <AbstractNodeData Name="npchpvaluetext" ActionTag="-1085362581" Tag="136" IconVisible="False" LeftMargin="512.4995" RightMargin="156.5005" TopMargin="668.0004" BottomMargin="595.9996" FontSize="15" LabelText="80/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="51.0000" Y="16.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="537.9996" Y="605.9998" />
+            <Position X="537.9995" Y="603.9996" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7472" Y="0.4734" />
-            <PreSize X="0.0667" Y="0.0117" />
+            <PrePosition X="0.7472" Y="0.4719" />
+            <PreSize X="0.0708" Y="0.0125" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

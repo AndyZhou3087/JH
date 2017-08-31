@@ -17,14 +17,14 @@
             <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shopsepline" ActionTag="337243557" Tag="316" IconVisible="False" LeftMargin="154.7038" RightMargin="147.2962" TopMargin="540.3448" BottomMargin="733.6552" ctype="SpriteObjectData">
-            <Size X="418.0000" Y="6.0000" />
+          <AbstractNodeData Name="shopsepline" ActionTag="337243557" Tag="316" IconVisible="False" LeftMargin="209.7038" RightMargin="202.2962" TopMargin="541.3448" BottomMargin="734.6552" ctype="SpriteObjectData">
+            <Size X="308.0000" Y="4.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="363.7038" Y="736.6552" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="1.5000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5051" Y="0.5755" />
-            <PreSize X="0.5806" Y="0.0047" />
+            <PreSize X="0.4278" Y="0.0031" />
             <FileData Type="MarkedSubImage" Path="ui/shopsepline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -38,31 +38,31 @@
             <PreSize X="0.2514" Y="0.1859" />
             <FileData Type="MarkedSubImage" Path="ui/tophero3.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="1658045766" Tag="314" IconVisible="False" LeftMargin="299.0878" RightMargin="269.9122" TopMargin="405.3291" BottomMargin="819.6709" FontSize="50" LabelText="小鱼儿" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="151.0000" Y="55.0000" />
+          <AbstractNodeData Name="name" ActionTag="1658045766" Tag="314" IconVisible="False" LeftMargin="299.0878" RightMargin="269.9122" TopMargin="406.8291" BottomMargin="821.1709" FontSize="50" LabelText="小鱼儿" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="151.0000" Y="52.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="299.0878" Y="847.1709" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4154" Y="0.6619" />
-            <PreSize X="0.2097" Y="0.0430" />
+            <PreSize X="0.2097" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="price" ActionTag="-1001192735" Tag="315" IconVisible="False" LeftMargin="460.8699" RightMargin="154.1301" TopMargin="500.9489" BottomMargin="749.0511" FontSize="30" LabelText="￥12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="105.0000" Y="30.0000" />
+          <AbstractNodeData Name="price" ActionTag="-1001192735" Tag="315" IconVisible="False" LeftMargin="460.8699" RightMargin="153.1301" TopMargin="504.4489" BottomMargin="744.5511" FontSize="30" LabelText="￥12.00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="106.0000" Y="31.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="460.8699" Y="764.0511" />
+            <Position X="460.8699" Y="760.0511" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.6401" Y="0.5969" />
-            <PreSize X="0.1458" Y="0.0234" />
-            <FontResource Type="Default" Path="" Plist="" />
+            <PrePosition X="0.6401" Y="0.5938" />
+            <PreSize X="0.1472" Y="0.0242" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-879945319" Tag="317" IconVisible="False" LeftMargin="133.2425" RightMargin="136.7576" TopMargin="550.0829" BottomMargin="629.9171" IsCustomSize="True" FontSize="30" LabelText="从未来穿越而来的特种兵，为了回到属于自己的时代而被迫行走江湖" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desc" ActionTag="-879945319" Tag="317" IconVisible="False" LeftMargin="133.2425" RightMargin="136.7575" TopMargin="550.0829" BottomMargin="629.9171" IsCustomSize="True" FontSize="30" LabelText="从未来穿越而来的特种兵，为了回到属于自己的时代而被迫行走江湖" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="450.0000" Y="100.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="133.2425" Y="679.9171" />

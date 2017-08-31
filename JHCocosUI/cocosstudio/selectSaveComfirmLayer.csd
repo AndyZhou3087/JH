@@ -16,14 +16,14 @@
             <PreSize X="0.7264" Y="0.3820" />
             <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="385671525" Tag="461" IconVisible="False" LeftMargin="276.6517" RightMargin="345.3483" TopMargin="431.3739" BottomMargin="804.6261" FontSize="40" LabelText="角色：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="98.0000" Y="44.0000" />
+          <AbstractNodeData Name="title" ActionTag="385671525" Tag="461" IconVisible="False" LeftMargin="277.6517" RightMargin="346.3483" TopMargin="432.8739" BottomMargin="806.1261" FontSize="40" LabelText="角色：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="96.0000" Y="41.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="325.6517" Y="826.6261" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4523" Y="0.6458" />
-            <PreSize X="0.1361" Y="0.0344" />
+            <PreSize X="0.1333" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -82,25 +82,25 @@
             <PreSize X="0.2514" Y="0.1859" />
             <FileData Type="MarkedSubImage" Path="ui/tophero1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shopsepline" ActionTag="355576853" Tag="481" IconVisible="False" LeftMargin="139.3392" RightMargin="162.6608" TopMargin="536.3391" BottomMargin="737.6609" ctype="SpriteObjectData">
-            <Size X="418.0000" Y="6.0000" />
+          <AbstractNodeData Name="shopsepline" ActionTag="355576853" Tag="481" IconVisible="False" LeftMargin="201.3400" RightMargin="210.6600" TopMargin="537.3391" BottomMargin="738.6609" ctype="SpriteObjectData">
+            <Size X="308.0000" Y="4.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="348.3392" Y="740.6609" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Position X="355.3400" Y="740.6609" />
+            <Scale ScaleX="1.5000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4838" Y="0.5786" />
-            <PreSize X="0.5806" Y="0.0047" />
+            <PrePosition X="0.4935" Y="0.5786" />
+            <PreSize X="0.4278" Y="0.0031" />
             <FileData Type="MarkedSubImage" Path="ui/shopsepline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="-101591218" Tag="482" IconVisible="False" LeftMargin="383.8331" RightMargin="214.1669" TopMargin="431.3739" BottomMargin="804.6261" FontSize="40" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="122.0000" Y="44.0000" />
+          <AbstractNodeData Name="name" ActionTag="-101591218" Tag="482" IconVisible="False" LeftMargin="383.8331" RightMargin="215.1669" TopMargin="432.8739" BottomMargin="806.1261" FontSize="40" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="121.0000" Y="41.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="383.8331" Y="826.6261" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5331" Y="0.6458" />
-            <PreSize X="0.1694" Y="0.0344" />
+            <PreSize X="0.1681" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

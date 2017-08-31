@@ -56,6 +56,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	m_getallbtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onAllGet, this));
 
 	cocos2d::ui::Button * continuebtn = (cocos2d::ui::Button*)csbnode->getChildByName("continuebtn");
+	continuebtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onContinue, this));
 
 	cocos2d::ui::Text* addrname = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	addrname->setString(GlobalData::map_maps[m_addrid].cname);
@@ -156,8 +157,6 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	{
 		m_backbtn->setTitleText(CommonFuncs::gbk2utf("退出挑战"));
 		m_backbtn->setTitleFontSize(30);
-		continuebtn->addTouchEventListener(CC_CALLBACK_2(Winlayer::onContinue, this));
-		continuebtn->setVisible(true);
 		int npcsize = GlobalData::map_maps[m_addrid].npcs.size();
 		if (npcid.compare(GlobalData::map_maps[m_addrid].npcs[npcsize - 1]) == 0)
 		{
@@ -175,7 +174,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	}
 	else
 	{
-		continuebtn->setVisible(false);
+		if (m_addrid.compare("m1-6") == 0)
+			continuebtn->setVisible(false);
 	}
 
 	int winressize = winres.size();
@@ -507,9 +507,15 @@ void Winlayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+
 		FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
 		if (fightlayer != NULL)
-			fightlayer->continueChallenge();
+		{
+			if (m_addrid.compare("m13-1") == 0)
+				fightlayer->continueChallenge();
+			else
+				fightlayer->restartFightNpc(m_npcid);
+		}
 
 		this->removeFromParentAndCleanup(true);
 	}
@@ -687,7 +693,7 @@ void Winlayer::updataMyPackageUI()
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 		str = StringUtils::format("%d", MyPackage::vec_packages[i].count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINWEI.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
@@ -730,7 +736,7 @@ void Winlayer::updataRewardUI()
 		box->addChild(res);
 
 		str = StringUtils::format("%d", getRewardData[i].count);
-		Label * reslbl = Label::createWithSystemFont(str, "", 18);
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINWEI.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}

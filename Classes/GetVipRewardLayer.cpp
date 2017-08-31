@@ -116,7 +116,7 @@ bool GetVipRewardLayer::init()
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().width / 2));
 		box->addChild(res);
 
-		Label * coutlbl = Label::createWithSystemFont(strcount, "", 25);
+		Label * coutlbl = Label::createWithTTF(strcount, "fonts/STXINWEI.TTF", 25);//Label::createWithSystemFont(strcount, "", 25);
 		coutlbl->setAnchorPoint(Vec2(1, 0.5));
 		coutlbl->setColor(Color3B(255, 255, 255));
 		coutlbl->setPosition(Vec2(box->getPositionX() + box->getContentSize().width / 2 - 10, 580));

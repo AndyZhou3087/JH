@@ -209,7 +209,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 					}
 					else
 					{
-						val = lv;
+						val = lv + 1;
 					}
 				}
                 std::string valstr = StringUtils::format("%d", val);
@@ -566,7 +566,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 									}
 									else
 									{
-										lv = val;
+										lv = val - 1;
 									}
 									count = 1;
 								}

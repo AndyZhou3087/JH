@@ -9,14 +9,14 @@
           <AbstractNodeData Name="itembg" ActionTag="42567500" Tag="152" IconVisible="False" LeftMargin="-321.0000" RightMargin="-321.0000" TopMargin="-101.0000" BottomMargin="-101.0000" TouchEnable="True" LeftEage="94" RightEage="94" TopEage="66" BottomEage="66" Scale9OriginX="94" Scale9OriginY="66" Scale9Width="454" Scale9Height="70" ctype="ImageViewObjectData">
             <Size X="642.0000" Y="202.0000" />
             <Children>
-              <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="147.5294" RightMargin="351.4706" TopMargin="24.4521" BottomMargin="139.5479" FontSize="35" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="143.0000" Y="38.0000" />
+              <AbstractNodeData Name="name" ActionTag="589127072" Tag="95" IconVisible="False" LeftMargin="147.5294" RightMargin="350.4706" TopMargin="25.4521" BottomMargin="140.5479" FontSize="35" LabelText="经验药水" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="144.0000" Y="36.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="147.5294" Y="158.5479" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.2298" Y="0.7849" />
-                <PreSize X="0.2227" Y="0.1881" />
+                <PreSize X="0.2243" Y="0.1782" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -43,14 +43,15 @@
                 <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="price" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="387.2350" RightMargin="230.7650" TopMargin="37.5392" BottomMargin="141.4608" FontSize="23" LabelText="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="24.0000" Y="23.0000" />
+              <AbstractNodeData Name="price" ActionTag="1730715278" Tag="97" IconVisible="False" LeftMargin="382.2350" RightMargin="230.7650" TopMargin="38.0392" BottomMargin="139.9608" FontSize="23" LabelText="60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="29.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                <Position X="411.2350" Y="152.9608" />
+                <Position X="411.2350" Y="151.9608" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
-                <PrePosition X="0.6406" Y="0.7572" />
-                <PreSize X="0.0374" Y="0.1139" />
+                <PrePosition X="0.6406" Y="0.7523" />
+                <PreSize X="0.0452" Y="0.1188" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

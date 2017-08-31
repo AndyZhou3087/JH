@@ -55,37 +55,39 @@
             <FileData Type="MarkedSubImage" Path="ui/timegiftpricebox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="price" ActionTag="1234813478" Tag="100" RotationSkewX="-30.0000" RotationSkewY="-30.0075" IconVisible="False" LeftMargin="117.1760" RightMargin="517.8240" TopMargin="488.3211" BottomMargin="736.6789" FontSize="50" LabelText="12元" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="85.0000" Y="55.0000" />
+          <AbstractNodeData Name="price" ActionTag="1234813478" Tag="100" RotationSkewX="-30.0000" RotationSkewY="-30.0075" IconVisible="False" LeftMargin="110.6760" RightMargin="511.3240" TopMargin="489.8211" BottomMargin="738.1789" FontSize="50" LabelText="12元" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="98.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="159.6760" Y="764.1789" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2218" Y="0.5970" />
-            <PreSize X="0.1181" Y="0.0430" />
+            <PreSize X="0.1361" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="time" ActionTag="877311979" Tag="102" IconVisible="False" LeftMargin="327.5341" RightMargin="167.4659" TopMargin="488.8224" BottomMargin="741.1776" FontSize="50" LabelText="108:25:45" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="225.0000" Y="50.0000" />
+          <AbstractNodeData Name="time" ActionTag="877311979" Tag="102" IconVisible="False" LeftMargin="327.5337" RightMargin="172.4663" TopMargin="492.8228" BottomMargin="735.1772" FontSize="50" LabelText="108:25:45" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="220.0000" Y="52.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="327.5341" Y="766.1776" />
+            <Position X="327.5337" Y="761.1772" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.4549" Y="0.5986" />
-            <PreSize X="0.3125" Y="0.0391" />
+            <PrePosition X="0.4549" Y="0.5947" />
+            <PreSize X="0.3056" Y="0.0406" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="timedesc" ActionTag="802548618" Tag="101" IconVisible="False" LeftMargin="266.6198" RightMargin="403.3802" TopMargin="490.2087" BottomMargin="739.7913" FontSize="50" LabelText="剩" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="50.0000" Y="50.0000" />
+          <AbstractNodeData Name="timedesc" ActionTag="802548618" Tag="101" IconVisible="False" LeftMargin="266.6198" RightMargin="403.3802" TopMargin="486.7087" BottomMargin="736.2913" FontSize="55" LabelText="剩" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="50.0000" Y="57.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="291.6198" Y="764.7913" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4050" Y="0.5975" />
-            <PreSize X="0.0694" Y="0.0391" />
+            <PreSize X="0.0694" Y="0.0445" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

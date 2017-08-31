@@ -54,26 +54,26 @@
             <PreSize X="0.1694" Y="0.0953" />
             <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="namelbl" ActionTag="-961094467" Tag="122" IconVisible="False" LeftMargin="319.1470" RightMargin="325.8530" TopMargin="525.8885" BottomMargin="710.1115" FontSize="40" LabelText="鲜肉" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="75.0000" Y="44.0000" />
+          <AbstractNodeData Name="namelbl" ActionTag="-961094467" Tag="122" IconVisible="False" LeftMargin="319.1470" RightMargin="325.8530" TopMargin="527.3885" BottomMargin="711.6115" FontSize="40" LabelText="鲜肉" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="75.0000" Y="41.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="356.6470" Y="732.1115" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4953" Y="0.5720" />
-            <PreSize X="0.1042" Y="0.0344" />
+            <PreSize X="0.1042" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="valuelbl" ActionTag="-1849114880" Tag="124" IconVisible="False" LeftMargin="310.5001" RightMargin="310.4999" TopMargin="568.5475" BottomMargin="686.4525" FontSize="23" LabelText="库存：100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="99.0000" Y="25.0000" />
+          <AbstractNodeData Name="valuelbl" ActionTag="-1849114880" Tag="124" IconVisible="False" LeftMargin="306.0001" RightMargin="305.9999" TopMargin="569.0475" BottomMargin="686.9525" FontSize="23" LabelText="库存：100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="108.0000" Y="24.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0001" Y="698.9525" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5461" />
-            <PreSize X="0.1375" Y="0.0195" />
+            <PreSize X="0.1500" Y="0.0188" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -105,14 +105,14 @@
           <AbstractNodeData Name="usebtn" ActionTag="-25072642" VisibleForFrame="False" Tag="17" IconVisible="False" LeftMargin="165.9995" RightMargin="404.0005" TopMargin="793.0000" BottomMargin="397.0000" TouchEnable="True" FontSize="36" ButtonText="使用" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <Children>
-              <AbstractNodeData Name="valuelbl" ActionTag="1704639579" Tag="18" IconVisible="False" LeftMargin="19.5134" RightMargin="33.4866" TopMargin="-14.0000" BottomMargin="80.0000" FontSize="22" LabelText="大力丸 x10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="97.0000" Y="24.0000" />
+              <AbstractNodeData Name="valuelbl" ActionTag="1704639579" Tag="18" IconVisible="False" LeftMargin="14.5134" RightMargin="28.4866" TopMargin="-13.5000" BottomMargin="80.5000" FontSize="22" LabelText="大力丸 x10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="107.0000" Y="23.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="68.0134" Y="92.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="0" B="0" />
                 <PrePosition X="0.4534" Y="1.0222" />
-                <PreSize X="0.6467" Y="0.2667" />
+                <PreSize X="0.7133" Y="0.2556" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -132,26 +132,26 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qulbl" ActionTag="882990601" VisibleForFrame="False" Tag="989" IconVisible="False" LeftMargin="432.5053" RightMargin="227.4947" TopMargin="481.8250" BottomMargin="765.1750" FontSize="30" LabelText="一流" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="60.0000" Y="33.0000" />
+          <AbstractNodeData Name="qulbl" ActionTag="882990601" VisibleForFrame="False" Tag="989" IconVisible="False" LeftMargin="432.5053" RightMargin="225.4947" TopMargin="482.8250" BottomMargin="766.1750" FontSize="30" LabelText="一流" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="62.0000" Y="31.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="432.5053" Y="781.6750" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.6007" Y="0.6107" />
-            <PreSize X="0.0833" Y="0.0258" />
+            <PreSize X="0.0861" Y="0.0242" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="horselbl" ActionTag="997851199" VisibleForFrame="False" Tag="107" IconVisible="False" LeftMargin="424.3782" RightMargin="130.6218" TopMargin="826.6052" BottomMargin="426.3948" FontSize="25" LabelText="白马（生命%d）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="165.0000" Y="27.0000" />
+          <AbstractNodeData Name="horselbl" ActionTag="997851199" VisibleForFrame="False" Tag="107" IconVisible="False" LeftMargin="424.3782" RightMargin="117.6218" TopMargin="827.1052" BottomMargin="426.8948" FontSize="25" LabelText="白马（生命%d）" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="178.0000" Y="26.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="424.3782" Y="439.8948" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5894" Y="0.3437" />
-            <PreSize X="0.2292" Y="0.0211" />
+            <PreSize X="0.2472" Y="0.0203" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

@@ -96,14 +96,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp6.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_0" ActionTag="-1241441050" Tag="53" IconVisible="False" LeftMargin="-218.0002" RightMargin="178.0002" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_0" ActionTag="-1241441050" Tag="53" IconVisible="False" LeftMargin="-215.0002" RightMargin="178.0002" TopMargin="-26.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="-178.0002" Y="10.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -117,14 +118,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp5.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_1" ActionTag="924542818" Tag="54" IconVisible="False" LeftMargin="-64.0449" RightMargin="24.0449" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_1" ActionTag="924542818" Tag="54" IconVisible="False" LeftMargin="-61.0449" RightMargin="24.0449" TopMargin="-26.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="-24.0449" Y="10.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -138,14 +140,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp3.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_2" ActionTag="-2103265923" Tag="55" IconVisible="False" LeftMargin="88.6042" RightMargin="-128.6042" TopMargin="-26.0000" BottomMargin="11.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_2" ActionTag="-2103265923" Tag="55" IconVisible="False" LeftMargin="91.6042" RightMargin="-128.6042" TopMargin="-27.0000" BottomMargin="11.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="128.6042" Y="11.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -159,14 +162,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp4.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_3" ActionTag="993704952" Tag="56" IconVisible="False" LeftMargin="242.3758" RightMargin="-282.3758" TopMargin="-25.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_3" ActionTag="993704952" Tag="56" IconVisible="False" LeftMargin="245.3758" RightMargin="-282.3758" TopMargin="-26.9999" BottomMargin="10.9999" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="282.3758" Y="10.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -180,14 +184,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_4" ActionTag="53910579" Tag="57" IconVisible="False" LeftMargin="-247.2494" RightMargin="178.2494" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="耐久度100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="69.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_4" ActionTag="53910579" Tag="57" IconVisible="False" LeftMargin="-250.2494" RightMargin="178.2494" TopMargin="104.0000" BottomMargin="-120.0000" FontSize="15" LabelText="耐久度100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="72.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="-178.2494" Y="-120.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -201,14 +206,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-2.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_5" ActionTag="1812029841" Tag="58" IconVisible="False" LeftMargin="-64.2694" RightMargin="24.2694" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_5" ActionTag="1812029841" Tag="58" IconVisible="False" LeftMargin="-61.2694" RightMargin="24.2694" TopMargin="104.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="-24.2694" Y="-120.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -222,14 +228,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp8-3.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_6" ActionTag="-894041941" Tag="59" IconVisible="False" LeftMargin="88.1640" RightMargin="-128.1640" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_6" ActionTag="-894041941" Tag="59" IconVisible="False" LeftMargin="91.1640" RightMargin="-128.1640" TopMargin="104.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="128.1640" Y="-120.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -243,14 +250,15 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/hp9-4.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext_7" ActionTag="978784068" Tag="60" IconVisible="False" LeftMargin="242.7701" RightMargin="-282.7701" TopMargin="105.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="15.0000" />
+          <AbstractNodeData Name="lvtext_7" ActionTag="978784068" Tag="60" IconVisible="False" LeftMargin="245.7701" RightMargin="-282.7701" TopMargin="104.0000" BottomMargin="-120.0000" FontSize="15" LabelText="Lv.10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="37.0000" Y="16.0000" />
             <AnchorPoint ScaleX="1.0000" />
             <Position X="282.7701" Y="-120.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -290,14 +298,14 @@
                 <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title" ActionTag="-2042744108" Tag="72" IconVisible="False" LeftMargin="274.5802" RightMargin="272.4198" TopMargin="14.0114" BottomMargin="496.9886" FontSize="50" LabelText="外功" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="97.0000" Y="55.0000" />
+              <AbstractNodeData Name="title" ActionTag="-2042744108" Tag="72" IconVisible="False" LeftMargin="274.5802" RightMargin="272.4198" TopMargin="15.5114" BottomMargin="498.4886" FontSize="50" LabelText="外功" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="97.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="323.0802" Y="524.4886" />
                 <Scale ScaleX="0.6500" ScaleY="0.6500" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.5017" Y="0.9267" />
-                <PreSize X="0.1506" Y="0.0972" />
+                <PreSize X="0.1506" Y="0.0919" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

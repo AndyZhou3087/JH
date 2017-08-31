@@ -165,7 +165,7 @@ void StorageUILayer::updateResContent()
 				box->addChild(res);
 
 				str = StringUtils::format("%d", StorageRoom::map_storageData[i].at(m).count);
-				Label * reslbl = Label::createWithSystemFont(str, "", 18);
+				Label * reslbl = Label::createWithTTF(str, "fonts/STXINWEI.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 				reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 				box->addChild(reslbl);
 			}

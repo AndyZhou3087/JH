@@ -631,6 +631,7 @@
         <Project Name="mixDoneLayer.csd" Type="Layer" />
         <Project Name="mixGFNode.csd" Type="Node" />
         <Project Name="mixSuggestLayer.csd" Type="Layer" />
+        <Project Name="noticeLayer.csd" Type="Layer" />
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
@@ -663,7 +664,6 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="noticeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

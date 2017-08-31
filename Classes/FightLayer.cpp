@@ -1082,3 +1082,9 @@ void FightLayer::showNpcTextAmin(std::string filename)
 	npcactimg->runAction(Sequence::create(ac1, DelayTime::create(0.8f), Hide::create(), NULL));
 	npccritfnt->setVisible(false);
 }
+
+void FightLayer::restartFightNpc(std::string npcid)
+{
+	m_npcid = npcid;
+	updateFightNextNpc();
+}

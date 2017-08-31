@@ -53,26 +53,26 @@
             <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="703727244" Tag="132" IconVisible="False" LeftMargin="313.1108" RightMargin="319.8892" TopMargin="276.0755" BottomMargin="954.9245" TouchEnable="True" FontSize="45" LabelText="设置" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="87.0000" Y="49.0000" />
+          <AbstractNodeData Name="title" ActionTag="703727244" Tag="132" IconVisible="False" LeftMargin="312.1108" RightMargin="318.8892" TopMargin="277.0755" BottomMargin="955.9245" TouchEnable="True" FontSize="45" LabelText="设置" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="89.0000" Y="47.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="356.6108" Y="979.4245" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4953" Y="0.7652" />
-            <PreSize X="0.1208" Y="0.0383" />
+            <PreSize X="0.1236" Y="0.0367" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="soundtext" ActionTag="1304241062" Tag="151" IconVisible="False" LeftMargin="243.4497" RightMargin="390.5503" TopMargin="720.4029" BottomMargin="521.5971" FontSize="35" LabelText="音效：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="86.0000" Y="38.0000" />
+          <AbstractNodeData Name="soundtext" ActionTag="1304241062" Tag="151" IconVisible="False" LeftMargin="244.4497" RightMargin="391.5503" TopMargin="721.4029" BottomMargin="522.5971" FontSize="35" LabelText="音效：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="84.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="286.4497" Y="540.5971" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.3978" Y="0.4223" />
-            <PreSize X="0.1194" Y="0.0297" />
+            <PreSize X="0.1167" Y="0.0281" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -91,14 +91,14 @@
             <NodeNormalFileData Type="MarkedSubImage" Path="ui/settingselect.png" Plist="uipacker.plist" />
             <NodeDisableFileData Type="MarkedSubImage" Path="ui/settingselect.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="settingdesc" ActionTag="-1642585485" Tag="153" IconVisible="False" LeftMargin="427.4309" RightMargin="257.5691" TopMargin="720.4029" BottomMargin="521.5971" FontSize="35" LabelText="开" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="35.0000" Y="38.0000" />
+          <AbstractNodeData Name="settingdesc" ActionTag="-1642585485" Tag="153" IconVisible="False" LeftMargin="427.4309" RightMargin="257.5691" TopMargin="721.4029" BottomMargin="522.5971" FontSize="35" LabelText="开" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="35.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="444.9309" Y="540.5971" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.6180" Y="0.4223" />
-            <PreSize X="0.0486" Y="0.0297" />
+            <PreSize X="0.0486" Y="0.0281" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -119,26 +119,26 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="nicknametext" ActionTag="653964220" Tag="118" IconVisible="False" LeftMargin="120.7509" RightMargin="501.2491" TopMargin="384.2672" BottomMargin="851.7328" FontSize="40" LabelText="昵称：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="98.0000" Y="44.0000" />
+          <AbstractNodeData Name="nicknametext" ActionTag="653964220" Tag="118" IconVisible="False" LeftMargin="121.6787" RightMargin="502.3213" TopMargin="385.8338" BottomMargin="853.1662" FontSize="40" LabelText="昵称：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="96.0000" Y="41.0000" />
             <AnchorPoint ScaleX="0.4628" ScaleY="0.4775" />
             <Position X="166.1075" Y="872.7437" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.2307" Y="0.6818" />
-            <PreSize X="0.1361" Y="0.0344" />
+            <PreSize X="0.1333" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="idtext" ActionTag="425895819" Tag="119" IconVisible="False" LeftMargin="120.7509" RightMargin="501.2491" TopMargin="464.9996" BottomMargin="771.0004" FontSize="40" LabelText="编号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="98.0000" Y="44.0000" />
+          <AbstractNodeData Name="idtext" ActionTag="425895819" Tag="119" IconVisible="False" LeftMargin="121.7509" RightMargin="502.2491" TopMargin="466.4996" BottomMargin="772.5004" FontSize="40" LabelText="编号：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="96.0000" Y="41.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="169.7509" Y="793.0004" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.2358" Y="0.6195" />
-            <PreSize X="0.1361" Y="0.0344" />
+            <PreSize X="0.1333" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -164,15 +164,15 @@
             <PreSize X="0.5278" Y="0.0313" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="225.0000" RightMargin="315.0000" TopMargin="463.9996" BottomMargin="776.0004" FontSize="40" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="180.0000" Y="40.0000" />
+          <AbstractNodeData Name="id" ActionTag="-1757053631" Tag="121" IconVisible="False" LeftMargin="225.0001" RightMargin="293.9999" TopMargin="469.4996" BottomMargin="769.5004" FontSize="40" LabelText="123456789" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="201.0000" Y="41.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="225.0000" Y="796.0004" />
+            <Position X="225.0001" Y="790.0004" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.3125" Y="0.6219" />
-            <PreSize X="0.2500" Y="0.0313" />
-            <FontResource Type="Default" Path="" Plist="" />
+            <PrePosition X="0.3125" Y="0.6172" />
+            <PreSize X="0.2792" Y="0.0320" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
