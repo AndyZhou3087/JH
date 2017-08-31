@@ -524,7 +524,7 @@ void ActionGetLayer::updataMyPackageUI()
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 		str = StringUtils::format("%d", MyPackage::vec_packages[i].count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINWEI.TTF", 18);
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
@@ -568,7 +568,7 @@ void ActionGetLayer::updataRewardUI()
 		box->addChild(res);
 
 		str = StringUtils::format("%d", getResData[i].count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINWEI.TTF", 18);
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}

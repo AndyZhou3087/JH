@@ -49,7 +49,7 @@ bool NoticeLayer::init(std::string contentstr)
 	scrollview->setScrollBarEnabled(false);
 	scrollview->setBounceEnabled(true);
 
-	Label* contentlbl = Label::createWithTTF(GlobalData::noticecontent, "fonts/STXINWEI.TTF", 30);
+	Label* contentlbl = Label::createWithTTF(GlobalData::noticecontent, "fonts/STXINGKA.TTF", 30);
 	contentlbl->setAnchorPoint(Vec2(0, 1));
 	contentlbl->setColor(Color3B(0, 0, 0));
 	contentlbl->setHorizontalAlignment(TextHAlignment::LEFT);

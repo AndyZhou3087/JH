@@ -142,7 +142,7 @@ bool FriendExgScene::init(int type)
 		this->addChild(namelbl);
 
 		std::string strcount = StringUtils::format("x%d", vec_res[i]%1000);
-		Label * coutlbl = Label::createWithTTF(strcount, "fonts/STXINWEI.TTF", 25);//Label::createWithSystemFont(strcount, "", 25);
+		Label * coutlbl = Label::createWithTTF(strcount, "fonts/STXINGKA.TTF", 25);//Label::createWithSystemFont(strcount, "", 25);
 		coutlbl->setAnchorPoint(Vec2(1, 0.5f));
 		coutlbl->setColor(Color3B(255, 255, 255));
 		coutlbl->setPosition(Vec2(box->getPositionX() + 50, 180));

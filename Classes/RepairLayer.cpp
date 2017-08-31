@@ -466,7 +466,7 @@ void RepairLayer::updataUI()
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
 
-		Label * goodlbl = Label::createWithTTF("", "fonts/STXINWEI.TTF", 15);//Label::createWithSystemFont("", "", 15);
+		Label * goodlbl = Label::createWithTTF("", "fonts/STXINGKA.TTF", 15);//Label::createWithSystemFont("", "", 15);
 		if (m_type == 2)
 		{
 			if (tmpdata->strid.compare("82") == 0)

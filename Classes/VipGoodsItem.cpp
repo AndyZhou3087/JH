@@ -90,7 +90,7 @@ bool VipGoodsItem::init(GoodsData* gdata)
 		res->setPosition(Vec2(startx + i*spacex, starty));
 		this->addChild(res);
 
-		Label * coutlbl = Label::createWithTTF(strcount, "fonts/STXINWEI.TTF", 21);//Label::createWithSystemFont(strcount, "", 21);
+		Label * coutlbl = Label::createWithTTF(strcount, "fonts/STXINGKA.TTF", 21);//Label::createWithSystemFont(strcount, "", 21);
 		coutlbl->setColor(Color3B(0, 0, 0));
 		coutlbl->setPosition(Vec2(res->getPositionX(), 20));
 		this->addChild(coutlbl);
