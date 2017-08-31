@@ -61,6 +61,7 @@ private:
 	cocos2d::ui::Button* silverbtn;
 	cocos2d::ui::Button* goldbtn;
 	cocos2d::ui::Text* freetimelbl;
+	cocos2d::ui::Text* mixname;
 	Node *csbroot;
 	int severtime;
 	int startime;

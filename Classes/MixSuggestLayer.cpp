@@ -53,6 +53,8 @@ bool MixSuggestLayer::init()
 	freetimelbl = (cocos2d::ui::Text*)csbroot->getChildByName("freetime");
 	freetimelbl->setVisible(false);
 
+	mixname = (cocos2d::ui::Text*)csbroot->getChildByName("mixtitle");
+
 	std::string suggestgfstr = GameDataSave::getInstance()->getSuggestMixGf();
 
 	if (suggestgfstr.length() > 0)
@@ -246,14 +248,16 @@ void MixSuggestLayer::randMixGf(int type)
 
 	MixGfData mixdata = map_bylvMixGf[index + 1][gfrand];
 
-	loadMixGfUi(mixdata);
-
 	GameDataSave::getInstance()->setMixGfCountByType(type, count + 1);
 	GameDataSave::getInstance()->setSuggestMixGf(mixdata.id);
+
+	loadMixGfUi(mixdata);
 }
 
 void MixSuggestLayer::loadMixGfUi(MixGfData mixdata)
 {
+	std::string suggestgfstr = GameDataSave::getInstance()->getSuggestMixGf();
+	mixname->setString(GlobalData::map_MixGfData[suggestgfstr].name);
 	std::string str = StringUtils::format("ui/%s.png", mixdata.mastergf.c_str());
 	img[0]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	name[0]->setString(GlobalData::map_allResource[mixdata.mastergf].cname);
