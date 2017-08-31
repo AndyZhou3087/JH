@@ -424,6 +424,7 @@ void MixGFNode::loadMixSuccGF()
 				}
 			}
 		}
+		mixtitle->setString(GlobalData::map_MixGfData[mymixgf].name);
 	}
 }
 

@@ -28,6 +28,7 @@ private:
 	void checkServerData(float dt);
 	cocos2d::ui::Widget* m_continuebtn;
 	int clicklogocount;
+	bool isdouserdata;
 };
 
 #endif

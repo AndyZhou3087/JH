@@ -30,6 +30,7 @@ bool MixSuggestLayer::init()
 	{
 		std::string str = StringUtils::format("mixbox_%d", i);
 
+		imgbox[i] = (cocos2d::ui::ImageView*)csbroot->getChildByName(str);
 		img[i] = (cocos2d::ui::ImageView*)csbroot->getChildByName(str)->getChildByName("img");
 
 		str = StringUtils::format("name%d", i);
@@ -257,19 +258,25 @@ void MixSuggestLayer::loadMixGfUi(MixGfData mixdata)
 	img[0]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	name[0]->setString(GlobalData::map_allResource[mixdata.mastergf].cname);
 
+	std::string sstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mixdata.mastergf].qu);
+	imgbox[0]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
+
 	int secsize = mixdata.vec_secgf.size();
 	for (int i = 0; i < 3; i++)
 	{
 		if (i < secsize)
 		{
 			str = StringUtils::format("ui/%s.png", mixdata.vec_secgf[i].c_str());
+			sstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mixdata.vec_secgf[i]].qu);
 			name[i + 1]->setString(GlobalData::map_allResource[mixdata.vec_secgf[i]].cname);
 		}
 		else
 		{
 			str = "ui/mixsectext.png";
+			sstr = "ui/buildsmall.png";
 			name[i + 1]->setString("");
 		}
 		img[i + 1]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		imgbox[i+1]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 	}
 }

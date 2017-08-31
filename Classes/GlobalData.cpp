@@ -91,6 +91,7 @@ int GlobalData::servertime = 0;
 
 int GlobalData::myrank = 0;
 bool GlobalData::isGetServerData = false;
+std::string GlobalData::noticecontent;
 
 GlobalData::GlobalData()
 {
@@ -1901,6 +1902,16 @@ std::string GlobalData::getMD5LiveDays()
 void GlobalData::setMD5LiveDays(std::string val)
 {
 	MD5LiveDays = val;
+}
+
+int GlobalData::getNoPopNoticeDay()
+{
+	return GameDataSave::getInstance()->getNoPopNoticeDay();
+}
+
+void GlobalData::setNoPopNoticeDay(int day)
+{
+	GameDataSave::getInstance()->setNoPopNoticeDay(day);
 }
 
 void GlobalData::setNoAds(bool val)

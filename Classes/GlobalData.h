@@ -808,6 +808,18 @@ public:
 
 	static std::string getVersion();
 
+	/****************************
+	获取不再弹出公告的日期，只记录天数（一年中的天数）
+	return 天数（一年中的天数）
+	*****************************/
+	static int getNoPopNoticeDay();
+
+	/****************************
+	设置不再弹出公告的日期
+	@para 天数（一年中的天数）
+	*****************************/
+	static void setNoPopNoticeDay(int day);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -867,6 +879,7 @@ public:
 	static int servertime;
 	static int myrank;
 	static bool isGetServerData;
+	static std::string noticecontent;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

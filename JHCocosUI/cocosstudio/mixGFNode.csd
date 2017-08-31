@@ -194,6 +194,18 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="desc0" ActionTag="-1973381812" Tag="136" IconVisible="False" LeftMargin="391.3748" RightMargin="58.6252" TopMargin="488.7793" BottomMargin="46.2207" FontSize="28" LabelText="仅显示满级功法" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="194.0000" Y="31.0000" />
+                <AnchorPoint ScaleY="0.5955" />
+                <Position X="391.3748" Y="64.6812" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.6077" Y="0.1143" />
+                <PreSize X="0.3012" Y="0.0548" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
             <Position X="0.0002" Y="727.0000" />

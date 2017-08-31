@@ -9,6 +9,7 @@
 #include "WaitingProgress.h"
 #include "GameDataSave.h"
 #include "HintBox.h"
+#include "NoticeLayer.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -80,14 +81,12 @@ bool StartScene::init()
 	vesiontxt->setString(GlobalData::getVersion());
 
 	clicklogocount = 0;
-
+	isdouserdata = false;
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_START);
 
 
-	this->scheduleOnce(schedule_selector(StartScene::checkServerData), 0.1f);
+	this->scheduleOnce(schedule_selector(StartScene::checkServerData), 0.05f);
 	
-
-
     return true;
 }
 
@@ -164,6 +163,7 @@ void StartScene::checkServerData(float dt)
 
 			ServerDataSwap::getInstance()->setDelegate(this);
 			ServerDataSwap::getInstance()->postAllData();
+			isdouserdata = true;
 		}
 	}
 	else
@@ -172,6 +172,19 @@ void StartScene::checkServerData(float dt)
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 		ServerDataSwap::getInstance()->setDelegate(this);
 		ServerDataSwap::getInstance()->getAllData();
+		isdouserdata = true;
+	}
+
+	if (!isdouserdata)
+	{
+		if (GlobalData::getNoPopNoticeDay() != GlobalData::getDayOfYear())
+		{
+			WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
+			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+
+			ServerDataSwap::getInstance()->setDelegate(this);
+			ServerDataSwap::getInstance()->getannouncement();
+		}
 	}
 }
 
@@ -201,18 +214,33 @@ void StartScene::onSuccess()
 	}
 	else
 	{
-		GameDataSave::getInstance()->setIsPostAllData(true);
-
-		m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
-
-		if (GameDataSave::getInstance()->getHeroLV() >= 1)
+		if (isdouserdata)
 		{
-			for (int i = 0; i < 50; i++)
+			isdouserdata = false;
+			GameDataSave::getInstance()->setIsPostAllData(true);
+
+			m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
+
+			if (GameDataSave::getInstance()->getHeroLV() >= 1)
 			{
-				GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+				for (int i = 0; i < 50; i++)
+				{
+					GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+				}
+			}
+			GlobalData::init();
+			if (GlobalData::getNoPopNoticeDay() != GlobalData::getDayOfYear())
+			{
+				WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
+				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+				ServerDataSwap::getInstance()->setDelegate(this);
+				ServerDataSwap::getInstance()->getannouncement();
 			}
 		}
-		GlobalData::init();
+		else
+		{
+			Director::getInstance()->getRunningScene()->addChild(NoticeLayer::create(GlobalData::noticecontent), 1);
+		}
 	}
 }
 

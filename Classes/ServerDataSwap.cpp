@@ -317,6 +317,18 @@ void ServerDataSwap::getRankData(std::string orderby)
 	HttpUtil::getInstance()->doData(url, httpGetRankDataCB);
 }
 
+void ServerDataSwap::getannouncement()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_getannouncement?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&vercode=");
+	url.append(GlobalData::getVersion());
+	HttpUtil::getInstance()->doData(url, httpGetAnnouncementCB);
+}
+
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
 {
 	if (code == 0)
@@ -967,6 +979,55 @@ void ServerDataSwap::httpGetRankDataCB(std::string retdata, int code, std::strin
 				isok = true;
 			}
 
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+}
+
+void ServerDataSwap::httpGetAnnouncementCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("data"))
+			{
+				GlobalData::noticecontent.clear();
+				rapidjson::Value& dataArray = doc["data"];
+
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
+				{
+					rapidjson::Value& v = dataArray[m]["content"];
+					GlobalData::noticecontent.append(v.GetString());
+					GlobalData::noticecontent.append("\r\n");
+				}
+				
+				isok = true;
+			}
+			else
+			{
+				isok = false;
+			}
+		}
+		if (GlobalData::noticecontent.length() <= 0)
+		{
+			isok = false;
 		}
 	}
 

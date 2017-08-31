@@ -54,6 +54,7 @@ private:
 	void loadMixGfUi(MixGfData mixdata);
 
 private:
+	cocos2d::ui::ImageView* imgbox[4];
 	cocos2d::ui::ImageView* img[4];
 	cocos2d::ui::Text* name[4];
 	cocos2d::ui::Button* freebtn;

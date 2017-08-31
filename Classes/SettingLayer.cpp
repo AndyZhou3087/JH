@@ -8,7 +8,6 @@
 #include "iosfunc.h"
 #endif
 #include "HintBox.h"
-#include "CommonFuncs.h"
 #include "WaitingProgress.h"
 
 SettingLayer::SettingLayer()

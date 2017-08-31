@@ -579,3 +579,13 @@ void GameDataSave::setSuggestMixGf(std::string str)
 {
 	saveStringDataByKey(addUIDString("suggestmixgf"), str);
 }
+
+int GameDataSave::getNoPopNoticeDay()
+{
+	return loadIntDataByKey("nopopnoticeday", -1);
+}
+
+void GameDataSave::setNoPopNoticeDay(int day)
+{
+	saveIntDataByKey("nopopnoticeday", day);
+}

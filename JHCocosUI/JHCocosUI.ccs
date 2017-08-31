@@ -24,6 +24,7 @@
           <Image Name="mixdonefail.png" />
           <Image Name="mixdoneok.png" />
           <Image Name="normalboxgb.png" />
+          <Image Name="noticebg.png" />
           <Image Name="npctalkbg.png" />
           <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
@@ -616,6 +617,7 @@
         <Project Name="exgLayer.csd" Type="Layer" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="friendExgLayer.csd" Type="Layer" />
+        <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
         <Project Name="getVipRewardLayer.csd" Type="Layer" />
         <Project Name="giveLayer.csd" Type="Layer" />
         <Project Name="goldGoodsNode.csd" Type="Node" />
@@ -661,7 +663,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
+        <Project Name="noticeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
