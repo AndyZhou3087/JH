@@ -510,6 +510,10 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 			else if (NewerGuideLayer::checkifNewerGuide(39))
 				homehill->showNewerGuide(39);
 		}
+		FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
+		if (fightlayer != NULL)
+			fightlayer->removeFromParentAndCleanup(true);
+
 		this->removeFromParentAndCleanup(true);
 	}
 }
