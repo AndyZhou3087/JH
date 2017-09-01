@@ -56,7 +56,7 @@ bool NoticeLayer::init(std::string contentstr)
 	contentlbl->setLineBreakWithoutSpace(true);
 	contentlbl->setMaxLineWidth(scrollview->getContentSize().width);
 	scrollview->addChild(contentlbl);
-	int innerheight = contentlbl->getHeight();
+	int innerheight = contentlbl->getStringNumLines() * 30;//contentlbl->getHeight();
 	int contentheight = scrollview->getContentSize().height;
 	if (innerheight < contentheight)
 		innerheight = contentheight;

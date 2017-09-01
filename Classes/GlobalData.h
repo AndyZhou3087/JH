@@ -857,6 +857,7 @@ public:
 	static std::map<std::string, FriendlyData> map_myfriendly;//技能数据
 
 	static std::vector<std::string> vec_buyVipIds;
+	static std::map<std::string,int> map_buyVipDays;
 
 	static std::vector<std::string> vec_tempGf_Equip;
 

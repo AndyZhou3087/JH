@@ -66,6 +66,42 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="leftday_0" ActionTag="-1253831546" VisibleForFrame="False" Tag="25" IconVisible="False" LeftMargin="39.0475" RightMargin="579.9525" TopMargin="148.1270" BottomMargin="29.8730" FontSize="23" LabelText="剩" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="23.0000" Y="24.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="50.5475" Y="41.8730" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.0787" Y="0.2073" />
+                <PreSize X="0.0358" Y="0.1188" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="leftday" ActionTag="1372396427" VisibleForFrame="False" Tag="60" IconVisible="False" LeftMargin="61.5000" RightMargin="539.5000" TopMargin="150.2915" BottomMargin="27.7085" FontSize="23" LabelText="999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="41.0000" Y="24.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="82.0000" Y="39.7085" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.1277" Y="0.1966" />
+                <PreSize X="0.0639" Y="0.1188" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="leftday_1" ActionTag="646150248" VisibleForFrame="False" Tag="26" IconVisible="False" LeftMargin="97.5627" RightMargin="518.4374" TopMargin="148.1270" BottomMargin="29.8731" FontSize="23" LabelText="天" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="26.0000" Y="24.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="110.5627" Y="41.8731" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.1722" Y="0.2073" />
+                <PreSize X="0.0405" Y="0.1188" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -88,18 +124,6 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="leftday" ActionTag="1372396427" VisibleForFrame="False" Tag="60" IconVisible="False" LeftMargin="-288.0047" RightMargin="202.0047" TopMargin="42.7034" BottomMargin="-66.7034" FontSize="23" LabelText="剩100天" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="86.0000" Y="24.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-245.0047" Y="-54.7034" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="204" G="4" B="4" />
-            <PrePosition />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

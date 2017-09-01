@@ -42,6 +42,9 @@ std::vector<GoodsData> GlobalData::vec_goods;
 
 std::vector<std::string> GlobalData::vec_buyVipIds;
 
+std::map<std::string, int> GlobalData::map_buyVipDays;
+
+
 std::map<std::string, ChallengeRewardData> GlobalData::map_challengeReward;
 std::map<std::string, FriendlyData> GlobalData::map_myfriendly;
 
@@ -1839,7 +1842,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "325E6676-4607-444E-BFE9-FADD69F470D1";
+	return "qwerqqw";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 }

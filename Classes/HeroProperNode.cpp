@@ -311,7 +311,7 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 {
 	refreshCarryData();
 	int tempsize = map_carryData[index].size();
-	int itemheight = 150;
+	int itemheight = 165;
 	int row = tempsize % 4 == 0 ? tempsize / 4 : (tempsize / 4 + 1);
 	int innerheight = itemheight * row;
 	int contentheight = m_scrollView->getContentSize().height;
@@ -514,7 +514,9 @@ void HeroProperNode::selectCarryData()
 								}
 							}
 						}
-						StorageRoom::add(*m_lastSelectedData);
+
+						if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+							StorageRoom::add(*m_lastSelectedData);
 					}
 				}
 			}
@@ -549,7 +551,7 @@ void HeroProperNode::selectCarryData()
 		{
 			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
 			int csex = checkSex(g_hero->getSex());
-			if (csex <= 0)
+			if (m_select_udata->strid.compare(mdata.mastergf) == 0 && csex <= 0)
 			{
 				std::string sexstr;
 				if (csex == 0)
@@ -654,7 +656,10 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 		}
 	}
 	else
-		StorageRoom::add(mydata);
+	{
+		if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+			StorageRoom::add(mydata);
+	}
 	g_hero->getAtrByType(atrype)->count = 0;
 	lvtext[lastclickindex]->setString("");
 
@@ -731,7 +736,8 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 	int index = 0;
 
 	PackageData mydata = *g_hero->getAtrByType(atrype);
-	StorageRoom::add(mydata);
+	if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+		StorageRoom::add(mydata);
 
 	g_hero->getAtrByType(atrype)->count = 0;
 

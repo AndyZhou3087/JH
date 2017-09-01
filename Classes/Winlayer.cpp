@@ -176,6 +176,18 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	{
 		if (m_addrid.compare("m1-6") == 0)
 			continuebtn->setVisible(false);
+		else if (m_addrid.compare("m1-2") == 0)
+		{
+			for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+			{
+				ResData *data = &GlobalData::vec_resData[i];
+				if ((m_npcid.compare("n002") == 0 && data->strid.compare("67") == 0 && data->count <= 0) || (m_npcid.compare("n003") == 0 && data->strid.compare("68") == 0 && data->count <= 0))
+				{
+					continuebtn->setEnabled(false);
+					break;
+				}
+			}
+		}
 	}
 
 	int winressize = winres.size();
@@ -507,14 +519,24 @@ void Winlayer::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
 		FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
 		if (fightlayer != NULL)
 		{
 			if (m_addrid.compare("m13-1") == 0)
 				fightlayer->continueChallenge();
 			else
+			{
+				for (unsigned int i = 0; i < GlobalData::vec_resData.size(); i++)
+				{
+					ResData *data = &GlobalData::vec_resData[i];
+					if ((m_npcid.compare("n002") == 0 && data->strid.compare("67") == 0 && data->count > 0) || (m_npcid.compare("n003") == 0 && data->strid.compare("68") == 0 && data->count > 0))
+					{
+						data->count--;
+						break;
+					}
+				}
 				fightlayer->restartFightNpc(m_npcid);
+			}
 		}
 
 		this->removeFromParentAndCleanup(true);

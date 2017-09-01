@@ -137,7 +137,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	if (NewerGuideLayer::checkifNewerGuide(39))
 		m_escapebtn->setVisible(false);
 	// 滚动文字
-	m_fihgtScorll = UIScroll::create(610.0f, 420.0f);
+	m_fihgtScorll = UIScroll::create(610.0f, 418.0f);
 	m_fihgtScorll->setPosition(Vec2(360, 350));
 	csbnode->addChild(m_fihgtScorll);
 
@@ -566,7 +566,7 @@ void FightLayer::delayShowWinLayer(float dt)
 		continuefight--;
 	}
 
-	if (m_addrid.compare("m13-1") != 0)
+	if (m_addrid.compare("m1-6") == 0)
 		this->removeFromParentAndCleanup(true);
 }
 

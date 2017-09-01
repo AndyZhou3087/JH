@@ -835,6 +835,7 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 		rapidjson::Document doc;
 		if (JsonReader(retdata, doc))
 		{
+			GlobalData::map_buyVipDays.clear();
 			for (rapidjson::Value::ConstMemberIterator iter = doc.MemberBegin(); iter != doc.MemberEnd(); ++iter)
 			{
 				std::string strid = iter->name.GetString();
@@ -845,6 +846,16 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 					if (val > 0)
 					{
 						GlobalData::vec_buyVipIds.push_back(strid);
+						
+					}
+				}
+				else
+				{
+					std::size_t pos = strid.find("vip");
+					if (pos != std::string::npos && pos > 0)
+					{
+						int val = iter->value.GetInt();
+						GlobalData::map_buyVipDays[strid] = val;
 					}
 				}
 			}

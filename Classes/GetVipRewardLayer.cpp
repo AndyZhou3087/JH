@@ -127,7 +127,6 @@ bool GetVipRewardLayer::init()
 		namelbl->setPosition(Vec2(box->getPositionX(), 530));
 		this->addChild(namelbl);
 	}
-
 	GlobalData::vec_buyVipIds.clear();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)

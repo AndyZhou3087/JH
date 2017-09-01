@@ -317,7 +317,7 @@ void MixGFNode::addGFData()
 void MixGFNode::updateGFScroll()
 {
 	int tempsize = vec_myhasgf.size();
-	int itemheight = 150;
+	int itemheight = 165;
 	int row = tempsize % 4 == 0 ? tempsize / 4 : (tempsize / 4 + 1);
 	int innerheight = itemheight * row;
 	int contentheight = m_scrollView->getContentSize().height;
