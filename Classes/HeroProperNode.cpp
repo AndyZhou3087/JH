@@ -514,9 +514,14 @@ void HeroProperNode::selectCarryData()
 								}
 							}
 						}
-
-						if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+						if (m_lastSelectedData->type == N_GONG || m_lastSelectedData->type == W_GONG)
+						{
+							if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+								StorageRoom::add(*m_lastSelectedData);
+						}
+						else
 							StorageRoom::add(*m_lastSelectedData);
+	
 					}
 				}
 			}
@@ -657,8 +662,15 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 	}
 	else
 	{
-		if (StorageRoom::getCountById(mydata.strid) <= 0)
+		if (mydata.type == N_GONG || mydata.type == W_GONG)
+		{
+			if (StorageRoom::getCountById(mydata.strid) <= 0)
+				StorageRoom::add(mydata);
+		}
+		else
+		{
 			StorageRoom::add(mydata);
+		}
 	}
 	g_hero->getAtrByType(atrype)->count = 0;
 	lvtext[lastclickindex]->setString("");
@@ -736,7 +748,13 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 	int index = 0;
 
 	PackageData mydata = *g_hero->getAtrByType(atrype);
-	if (StorageRoom::getCountById(mydata.strid) <= 0)
+
+	if (mydata.type == N_GONG || mydata.type == W_GONG)
+	{
+		if (StorageRoom::getCountById(mydata.strid) <= 0)
+			StorageRoom::add(mydata);
+	}
+	else
 		StorageRoom::add(mydata);
 
 	g_hero->getAtrByType(atrype)->count = 0;
