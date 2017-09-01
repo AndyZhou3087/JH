@@ -416,7 +416,7 @@ void GameScene::checkiflive(float dt)
 		}
 
 		ReviveLayer* layer = ReviveLayer::create();
-		g_gameLayer->addChild(layer, 10, "revivelayer");
+		g_gameLayer->addChild(layer, 100, "revivelayer");
 	}
 }
 

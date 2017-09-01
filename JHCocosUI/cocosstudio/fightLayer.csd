@@ -109,14 +109,14 @@
             <FileData Type="MarkedSubImage" Path="ui/fighticon.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="537.0000" RightMargin="30.0000" TopMargin="634.5000" BottomMargin="614.5000" FontSize="30" LabelText="李自成鬼魂" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="153.0000" Y="31.0000" />
+          <AbstractNodeData Name="npcname" ActionTag="-1423917536" Tag="130" IconVisible="False" LeftMargin="546.9994" RightMargin="50.0006" TopMargin="634.4999" BottomMargin="614.5001" FontSize="30" LabelText="闯王鬼魂" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="123.0000" Y="31.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="537.0000" Y="630.0000" />
+            <Position X="546.9994" Y="630.0001" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7458" Y="0.4922" />
-            <PreSize X="0.2125" Y="0.0242" />
+            <PrePosition X="0.7597" Y="0.4922" />
+            <PreSize X="0.1708" Y="0.0242" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
