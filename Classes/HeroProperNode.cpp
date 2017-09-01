@@ -657,7 +657,7 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 	}
 	else
 	{
-		if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+		if (StorageRoom::getCountById(mydata.strid) <= 0)
 			StorageRoom::add(mydata);
 	}
 	g_hero->getAtrByType(atrype)->count = 0;
@@ -736,7 +736,7 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 	int index = 0;
 
 	PackageData mydata = *g_hero->getAtrByType(atrype);
-	if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
+	if (StorageRoom::getCountById(mydata.strid) <= 0)
 		StorageRoom::add(mydata);
 
 	g_hero->getAtrByType(atrype)->count = 0;

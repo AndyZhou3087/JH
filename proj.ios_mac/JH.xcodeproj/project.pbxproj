@@ -47,6 +47,8 @@
 		521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6219F0C34300D177D7 /* Default-667h@2x.png */; };
 		521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6319F0C34300D177D7 /* Default-736h@3x.png */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
+		720040451F57E6AC006C03DB /* NoticeLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 720040441F57E6AC006C03DB /* NoticeLayer.cpp */; };
+		720040471F57E6B9006C03DB /* noticeLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720040461F57E6B9006C03DB /* noticeLayer.csb */; };
 		720AB2F31F0CD7B600CF23A5 /* end2_1 in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2EF1F0CD7B600CF23A5 /* end2_1 */; };
 		720AB2F41F0CD7B600CF23A5 /* end2_1.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F01F0CD7B600CF23A5 /* end2_1.csb */; };
 		720AB2F51F0CD7B600CF23A5 /* end2_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 720AB2F11F0CD7B600CF23A5 /* end2_2.csb */; };
@@ -93,6 +95,8 @@
 		723EC0371EF3800E00642589 /* story1_2 in Resources */ = {isa = PBXBuildFile; fileRef = 723EC0331EF3800E00642589 /* story1_2 */; };
 		723EC0381EF3800E00642589 /* story2_1 in Resources */ = {isa = PBXBuildFile; fileRef = 723EC0341EF3800E00642589 /* story2_1 */; };
 		723EC0391EF3800E00642589 /* story2_2 in Resources */ = {isa = PBXBuildFile; fileRef = 723EC0351EF3800E00642589 /* story2_2 */; };
+		724E92B11F56CB600092DB5A /* FriendNpcScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 724E92B01F56CB600092DB5A /* FriendNpcScene.cpp */; };
+		724E92B31F56CB720092DB5A /* friendNpcChallengeLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 724E92B21F56CB720092DB5A /* friendNpcChallengeLayer.csb */; };
 		7254ED8E1F44496E0063E667 /* RelationLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7254ED891F44496E0063E667 /* RelationLayer.cpp */; };
 		7254ED8F1F44496E0063E667 /* MD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7254ED8B1F44496E0063E667 /* MD5.cpp */; };
 		7254ED901F44496E0063E667 /* GiveLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7254ED8D1F44496E0063E667 /* GiveLayer.cpp */; };
@@ -371,6 +375,9 @@
 		521A8E6219F0C34300D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		720040431F57E6AC006C03DB /* NoticeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeLayer.h; sourceTree = "<group>"; };
+		720040441F57E6AC006C03DB /* NoticeLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NoticeLayer.cpp; sourceTree = "<group>"; };
+		720040461F57E6B9006C03DB /* noticeLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = noticeLayer.csb; sourceTree = "<group>"; };
 		720AB2EF1F0CD7B600CF23A5 /* end2_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = end2_1; sourceTree = "<group>"; };
 		720AB2F01F0CD7B600CF23A5 /* end2_1.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_1.csb; sourceTree = "<group>"; };
 		720AB2F11F0CD7B600CF23A5 /* end2_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end2_2.csb; sourceTree = "<group>"; };
@@ -429,6 +436,9 @@
 		723EC0331EF3800E00642589 /* story1_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story1_2; sourceTree = "<group>"; };
 		723EC0341EF3800E00642589 /* story2_1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story2_1; sourceTree = "<group>"; };
 		723EC0351EF3800E00642589 /* story2_2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = story2_2; sourceTree = "<group>"; };
+		724E92AF1F56CB600092DB5A /* FriendNpcScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendNpcScene.h; sourceTree = "<group>"; };
+		724E92B01F56CB600092DB5A /* FriendNpcScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FriendNpcScene.cpp; sourceTree = "<group>"; };
+		724E92B21F56CB720092DB5A /* friendNpcChallengeLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = friendNpcChallengeLayer.csb; sourceTree = "<group>"; };
 		7254ED881F44496E0063E667 /* RelationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationLayer.h; sourceTree = "<group>"; };
 		7254ED891F44496E0063E667 /* RelationLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RelationLayer.cpp; sourceTree = "<group>"; };
 		7254ED8A1F44496E0063E667 /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
@@ -906,9 +916,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */,
-				728396A61F557F4000A75AB4 /* mixGFNode.csb */,
-				728396A71F557F4000A75AB4 /* mixDoneLayer.csb */,
+				720040461F57E6B9006C03DB /* noticeLayer.csb */,
+				724E92B21F56CB720092DB5A /* friendNpcChallengeLayer.csb */,
 				728691851ED56CC800D06B0F /* actionGetLayer.csb */,
 				728691861ED56CC800D06B0F /* actionNode.csb */,
 				728691871ED56CC800D06B0F /* activityLayer.csb */,
@@ -959,6 +968,9 @@
 				728691971ED56CC800D06B0F /* homeLayer.csb */,
 				72E332C71F0BAAFA00E61182 /* images */,
 				728691991ED56CC800D06B0F /* mapLayer.csb */,
+				728396A71F557F4000A75AB4 /* mixDoneLayer.csb */,
+				728396A61F557F4000A75AB4 /* mixGFNode.csb */,
+				728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */,
 				7286919A1ED56CC800D06B0F /* npcLayer.csb */,
 				7286919B1ED56CC800D06B0F /* npcNode.csb */,
 				7286919C1ED56CC800D06B0F /* outDoorLayer.csb */,
@@ -1018,22 +1030,10 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7283969C1F557F2B00A75AB4 /* MixSuggestLayer.h */,
-				7283969D1F557F2B00A75AB4 /* MixSuggestLayer.cpp */,
-				7283969E1F557F2B00A75AB4 /* MixGFNode.h */,
-				7283969F1F557F2B00A75AB4 /* MixGFNode.cpp */,
-				728396A01F557F2B00A75AB4 /* MixGFDoneLayer.h */,
-				728396A11F557F2B00A75AB4 /* MixGFDoneLayer.cpp */,
-				725B067A1F4AF8E900ADE663 /* RankLayer.h */,
-				725B067B1F4AF8E900ADE663 /* RankLayer.cpp */,
-				72F155191F459F6B00C83B47 /* FriendExgScene.h */,
-				72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */,
-				7254ED881F44496E0063E667 /* RelationLayer.h */,
-				7254ED891F44496E0063E667 /* RelationLayer.cpp */,
-				7254ED8A1F44496E0063E667 /* MD5.h */,
-				7254ED8B1F44496E0063E667 /* MD5.cpp */,
-				7254ED8C1F44496E0063E667 /* GiveLayer.h */,
-				7254ED8D1F44496E0063E667 /* GiveLayer.cpp */,
+				720040431F57E6AC006C03DB /* NoticeLayer.h */,
+				720040441F57E6AC006C03DB /* NoticeLayer.cpp */,
+				724E92AF1F56CB600092DB5A /* FriendNpcScene.h */,
+				724E92B01F56CB600092DB5A /* FriendNpcScene.cpp */,
 				72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */,
 				72868FE01ED568B000D06B0F /* ActionGetLayer.h */,
 				72868FE11ED568B000D06B0F /* ActivitScene.cpp */,
@@ -1091,6 +1091,8 @@
 				72868FFB1ED568B000D06B0F /* FightLayer.h */,
 				72868FFC1ED568B000D06B0F /* Forgingtable.cpp */,
 				72868FFD1ED568B000D06B0F /* Forgingtable.h */,
+				72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */,
+				72F155191F459F6B00C83B47 /* FriendExgScene.h */,
 				72868FFE1ED568B000D06B0F /* Furnace.cpp */,
 				72868FFF1ED568B000D06B0F /* Furnace.h */,
 				728690001ED568B000D06B0F /* GameDataSave.cpp */,
@@ -1099,6 +1101,8 @@
 				728690031ED568B000D06B0F /* GameScene.h */,
 				722FA8AC1F3B256B00904816 /* GetVipRewardLayer.cpp */,
 				722FA8AD1F3B256B00904816 /* GetVipRewardLayer.h */,
+				7254ED8D1F44496E0063E667 /* GiveLayer.cpp */,
+				7254ED8C1F44496E0063E667 /* GiveLayer.h */,
 				728690041ED568B000D06B0F /* GlobalData.cpp */,
 				728690051ED568B000D06B0F /* GlobalData.h */,
 				72E332BD1F0BAADF00E61182 /* GoldGoodItem.cpp */,
@@ -1133,8 +1137,16 @@
 				728690191ED568B000D06B0F /* MapLayer.h */,
 				72F8A4681ED6A706007A5A65 /* MBProgressHUD.h */,
 				72F8A4691ED6A706007A5A65 /* MBProgressHUD.m */,
+				7254ED8B1F44496E0063E667 /* MD5.cpp */,
+				7254ED8A1F44496E0063E667 /* MD5.h */,
 				7286901A1ED568B000D06B0F /* MedicineKit.cpp */,
 				7286901B1ED568B000D06B0F /* MedicineKit.h */,
+				728396A11F557F2B00A75AB4 /* MixGFDoneLayer.cpp */,
+				728396A01F557F2B00A75AB4 /* MixGFDoneLayer.h */,
+				7283969F1F557F2B00A75AB4 /* MixGFNode.cpp */,
+				7283969E1F557F2B00A75AB4 /* MixGFNode.h */,
+				7283969D1F557F2B00A75AB4 /* MixSuggestLayer.cpp */,
+				7283969C1F557F2B00A75AB4 /* MixSuggestLayer.h */,
 				7286901C1ED568B000D06B0F /* MyActionProgressTimer.cpp */,
 				7286901D1ED568B000D06B0F /* MyActionProgressTimer.h */,
 				727267F61EE15920007F036A /* MyMenu.cpp */,
@@ -1153,6 +1165,10 @@
 				728690251ED568B000D06B0F /* OutDoor.h */,
 				723947171EF2384A0093E725 /* PauseLayer.cpp */,
 				723947181EF2384A0093E725 /* PauseLayer.h */,
+				725B067B1F4AF8E900ADE663 /* RankLayer.cpp */,
+				725B067A1F4AF8E900ADE663 /* RankLayer.h */,
+				7254ED891F44496E0063E667 /* RelationLayer.cpp */,
+				7254ED881F44496E0063E667 /* RelationLayer.h */,
 				725CB9D71F15F3C200D2509A /* RepairLayer.cpp */,
 				725CB9D81F15F3C200D2509A /* RepairLayer.h */,
 				725CB9D91F15F3C200D2509A /* RepairOKLayer.cpp */,
@@ -1456,6 +1472,7 @@
 			files = (
 				72229CD61F283991001272D3 /* end4_2 in Resources */,
 				722FA8B81F3B258900904816 /* getVipRewardLayer.csb in Resources */,
+				720040471F57E6B9006C03DB /* noticeLayer.csb in Resources */,
 				72229CD01F283991001272D3 /* end3_1 in Resources */,
 				72F1551D1F459F7D00C83B47 /* friendExgLayer.csb in Resources */,
 				728691B41ED56CC800D06B0F /* actionNode.csb in Resources */,
@@ -1480,6 +1497,7 @@
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				728691C81ED56CC800D06B0F /* npcLayer.csb in Resources */,
 				723EC0101EF37FF000642589 /* story1_2.csb in Resources */,
+				724E92B31F56CB720092DB5A /* friendNpcChallengeLayer.csb in Resources */,
 				728691DF1ED56CC800D06B0F /* unlockLayer.csb in Resources */,
 				7254ED951F44498E0063E667 /* relationLayer.csb in Resources */,
 				728691B81ED56CC800D06B0F /* buyDetailsLayer.csb in Resources */,
@@ -1668,6 +1686,7 @@
 				72E332C51F0BAADF00E61182 /* RmbGoodsItem.cpp in Sources */,
 				7239471A1EF2384A0093E725 /* ExerciseDoneLayer.cpp in Sources */,
 				7286904F1ED568B000D06B0F /* ActionGetLayer.cpp in Sources */,
+				720040451F57E6AC006C03DB /* NoticeLayer.cpp in Sources */,
 				728690671ED568B000D06B0F /* HintBox.cpp in Sources */,
 				728690651ED568B000D06B0F /* HeroProperNode.cpp in Sources */,
 				725CB9E71F1646C400D2509A /* DivideLayer.cpp in Sources */,
@@ -1696,6 +1715,7 @@
 				722286A61F31C48300EE46A4 /* WaitingProgress.cpp in Sources */,
 				72154F341F3C49C200EBD358 /* TimeGiftLayer.cpp in Sources */,
 				728690841ED568B000D06B0F /* WineTable.cpp in Sources */,
+				724E92B11F56CB600092DB5A /* FriendNpcScene.cpp in Sources */,
 				728690551ED568B000D06B0F /* BuyDetailsLayer.cpp in Sources */,
 				725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */,
 				728396A21F557F2B00A75AB4 /* MixSuggestLayer.cpp in Sources */,
