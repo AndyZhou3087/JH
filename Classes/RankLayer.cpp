@@ -120,8 +120,6 @@ void RankLayer::getRankData(int type)
 	WaitingProgress* waitbox = WaitingProgress::create("排名中...");
 	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 
-	GlobalData::isGetServerData = true;
-
 	std::string orderstr = StringUtils::format("days=%d", g_nature->getPastDays());
 	if (type == 1)
 	{
@@ -136,11 +134,13 @@ void RankLayer::getRankData(int type)
 	{
 		myfightingpower = 0;
 	}
+
+	if (myfightingpower >= 1000000)
+		myfightingpower = 30000;
 	std::string addtypestr = StringUtils::format("&ranktype=%d", type);
 	orderstr.append(addtypestr);
 
-	ServerDataSwap::getInstance()->setDelegate(this);
-	ServerDataSwap::getInstance()->getRankData(orderstr);
+	ServerDataSwap::init(this)->getRankData(orderstr);
 }
 
 void RankLayer::delayShowData(float dt)
@@ -183,7 +183,6 @@ void RankLayer::delayShowData(float dt)
 void RankLayer::onSuccess()
 {
 	this->scheduleOnce(schedule_selector(RankLayer::delayShowData), 0.1f);
-	GlobalData::isGetServerData = false;
 }
 
 void RankLayer::onErr(int errcode)
@@ -191,7 +190,6 @@ void RankLayer::onErr(int errcode)
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
 	this->addChild(box);
-	GlobalData::isGetServerData = false;
 }
 
 RankItem::RankItem()

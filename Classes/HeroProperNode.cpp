@@ -59,57 +59,9 @@ bool HeroProperNode::init()
 		PackageData* hpdata = g_hero->getAtrByType(Atrytpe[i]);
 		if (hpdata->count > 0)
 		{
-			str = StringUtils::format("ui/%s.png", hpdata->strid.c_str());
-			propeImages[i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-			propeImages[i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-			 
-			if (Atrytpe[i] == H_WG || Atrytpe[i] == H_NG)
-			{
-				int lv = hpdata->lv + 1;
-				str = StringUtils::format("Lv.%d", lv);
-				if (lv >= GlobalData::map_wgngs[hpdata->strid].maxlv)
-					str = StringUtils::format("Lv.%d(满级)", lv);
-
-				std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[hpdata->strid].qu);
-				imgbtn[i]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
-				imgbtn[i]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
-
-			}
-			else if (Atrytpe[i] == H_GATHER || Atrytpe[i] == H_FELL || Atrytpe[i] == H_EXCAVATE || Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
-			{
-				str = StringUtils::format("耐久度%d%%", hpdata->goodvalue);
-				if (Atrytpe[i] == H_ARMOR || Atrytpe[i] == H_WEAPON)
-				{
-					std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[hpdata->strid].qu);
-					imgbtn[i]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
-					imgbtn[i]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
-				}
-			}
-			else if (Atrytpe[i] == H_MOUNT)
-			{
-				if (hpdata->strid.compare("74") == 0)
-				{
-					str = StringUtils::format("生命%d", hpdata->goodvalue);
-				}
-				else
-					str = "永久";
-			}
-
-			else
-			{
-				str = "";
-			}
-			lvtext[i]->setString(CommonFuncs::gbk2utf(str.c_str()));
+			PackageData carrydata = *hpdata;
+			updataProperpanel(i, *hpdata);
 		}
-		else
-		{
-			lvtext[i]->setString("");
-		}
-
-		if (hpdata->goodvalue < 20)
-			lvtext[i]->setColor(Color3B(204, 4, 4));
-		else
-			lvtext[i]->setColor(Color3B(255, 255, 255));
 	}
 
 	heroselectbg = (cocos2d::ui::Widget*)csbroot->getChildByName("heroselectbg");
@@ -287,24 +239,24 @@ void HeroProperNode::addCarryData(HeroAtrType index)
 			PackageData sdata = *g_hero->getAtrByType(index);
 			map_carryData[index].insert(map_carryData[index].begin(), sdata);
 		}
-		std::string mixgfstr = GlobalData::getMixGF();
-		if (GlobalData::getMixGF().length() > 0)
-		{
-			std::string mastergfid = GlobalData::map_MixGfData[mixgfstr].mastergf;
-			WG_NGData gfdata = GlobalData::map_wgngs[mastergfid];
-			int gftype = gfdata.type - 1;
-			PackageData* carraydata = g_hero->getAtrByType(index);
-			if ((gftype == W_GONG && index == H_WG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0) || (gftype == N_GONG && index == H_NG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0))
-			{
-				PackageData data;
-				data.strid = gfdata.id;
-				data.count = 1;
-				data.lv = gfdata.maxlv - 1;
-				data.type = gftype;
-				data.extype = gfdata.extype;
-				map_carryData[index].insert(map_carryData[index].begin(), data);
-			}
-		}
+		//std::string mixgfstr = GlobalData::getMixGF();
+		//if (GlobalData::getMixGF().length() > 0)
+		//{
+		//	std::string mastergfid = GlobalData::map_MixGfData[mixgfstr].mastergf;
+		//	WG_NGData gfdata = GlobalData::map_wgngs[mastergfid];
+		//	int gftype = gfdata.type - 1;
+		//	PackageData* carraydata = g_hero->getAtrByType(index);
+		//	if ((gftype == W_GONG && index == H_WG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0) || (gftype == N_GONG && index == H_NG && carraydata->strid.compare(mastergfid) != 0 && carraydata->count <= 0))
+		//	{
+		//		PackageData data;
+		//		data.strid = gfdata.id;
+		//		data.count = 1;
+		//		data.lv = gfdata.maxlv - 1;
+		//		data.type = gftype;
+		//		data.extype = gfdata.extype;
+		//		map_carryData[index].insert(map_carryData[index].begin(), data);
+		//	}
+		//}
 	}
 }
 void HeroProperNode::showSelectFrame(HeroAtrType index)
@@ -373,6 +325,18 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 		lvlbl->setAnchorPoint(Vec2(1, 0));
 		lvlbl->setPosition(Vec2(box->getContentSize().width - 10, 8));
 		box->addChild(lvlbl);
+
+		std::string mymixgf = GlobalData::getMixGF();
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if (mymixgf.length() > 0)
+		{
+			if (rstrid.compare(mdata.mastergf) == 0)
+			{
+				Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+				mixtag->setPosition(Vec2(box->getContentSize().width - 15, box->getContentSize().height - 15));
+				box->addChild(mixtag);
+			}
+		}
 
 		if (index == H_WG || index == H_NG )
 		{
@@ -496,24 +460,10 @@ void HeroProperNode::selectCarryData()
 				}
 				else
 				{
+					if (!isCanTakeOn())
+						return;
 					if (m_select->isVisible())
 					{
-						std::string mymixgf = GlobalData::getMixGF();
-						if (mymixgf.length() > 0)
-						{
-							MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
-							for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
-							{
-								if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
-								{
-									HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
-									Director::getInstance()->getRunningScene()->addChild(hint, 4);
-
-									m_select->setVisible(!m_select->isVisible());
-									return;
-								}
-							}
-						}
 						if (m_lastSelectedData->type == N_GONG || m_lastSelectedData->type == W_GONG)
 						{
 							if (StorageRoom::getCountById(m_lastSelectedData->strid) <= 0)
@@ -532,49 +482,17 @@ void HeroProperNode::selectCarryData()
 
 	m_select->setPosition(Vec2(m_select_itemnode->getPositionX() - m_select_itemnode->getContentSize().width / 2, m_select_itemnode->getPositionY() + m_select_itemnode->getContentSize().height / 2));
 
-	std::string str;
-
-	if (m_select->isVisible())//之前是选中m_select可见，现在点了就是没选中
-	{
-		if (m_select_udata->type >= TOOLS)
-			str = StringUtils::format("ui/hp%d-%d.png", m_select_udata->type + 1, m_select_udata->extype);
-		else
-			str = StringUtils::format("ui/hp%d.png", m_select_udata->type + 1);
-
-		m_select->setVisible(false);
-	}
-	else//选中
-	{
-		m_select->setVisible(true);
-		str = StringUtils::format("ui/%s.png", m_select_udata->strid.c_str());
-	}
-
+	PackageData curCarrydata = *m_select_udata;
+	//之前是选中m_select可见，现在点了就是没选中
+	m_select->setVisible(!m_select->isVisible());
 	if (m_select->isVisible())
 	{
-		std::string mymixgf = GlobalData::getMixGF();
-		if (mymixgf.length() > 0)
+		if (!isCanTakeOn())
 		{
-			MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
-			int csex = checkSex(g_hero->getSex());
-			if (m_select_udata->strid.compare(mdata.mastergf) == 0 && csex <= 0)
-			{
-				std::string sexstr;
-				if (csex == 0)
-					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合自宫者装备！！").c_str());
-				else if (csex == -1)
-					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合男性装备！！").c_str());
-				else if (csex == -2)
-					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合女性装备！！").c_str());
-				else
-					sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("不适合自宫者装备！！").c_str());
-				HintBox* hint = HintBox::create(sexstr);
-				Director::getInstance()->getRunningScene()->addChild(hint, 4);
-
-				m_select->setVisible(!m_select->isVisible());
-				return;
-			}
+			m_select->setVisible(!m_select->isVisible());
+			return;
 		}
-		takeon(m_select_atrype, m_select_udata);
+		takeon(m_select_atrype, curCarrydata);
 	}
 	else
 	{
@@ -584,68 +502,24 @@ void HeroProperNode::selectCarryData()
 			return;
 		}
 	}
-
-	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
-	propeImages[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
-
-
 	m_lastSelectedData = m_select_udata;
 
 	updataMyPackageUI();
+	HeroStateUILayer* parent = (HeroStateUILayer*)this->getParent()->getParent();
+	parent->updateArrow();
 }
 
-void HeroProperNode::takeon(HeroAtrType atrype, PackageData* pdata)
+void HeroProperNode::takeon(HeroAtrType atrype, PackageData pdata)
 {
 	if (g_hero->getIsOut())
-		MyPackage::cutone(*pdata);
+		MyPackage::cutone(pdata);
 	else
-		StorageRoom::use(*pdata);
+		StorageRoom::use(pdata);
 
-	g_hero->setAtrByType(atrype, *pdata);
-	std::string str;
-	if (atrype == H_WG || atrype == H_NG)
-	{
-		int lv = pdata->lv + 1;
-		str = StringUtils::format("Lv.%d", lv);
+	g_hero->setAtrByType(atrype, pdata);
 
-		if (lv >= GlobalData::map_wgngs[pdata->strid].maxlv)
-			str = StringUtils::format("Lv.%d(满级)", lv);
+	updataProperpanel(lastclickindex, pdata);
 
-		std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
-		imgbtn[lastclickindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
-		imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
-	}
-	else if (atrype == H_GATHER || atrype == H_FELL || atrype == H_EXCAVATE || atrype == H_WEAPON || atrype == H_ARMOR)
-	{
-		str = StringUtils::format("耐久度%d%%", pdata->goodvalue);
-
-		if (atrype == H_WEAPON || atrype == H_ARMOR)
-		{
-			std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
-			imgbtn[lastclickindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
-			imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
-		}
-	}
-	else if (atrype == H_MOUNT)
-	{
-		if (pdata->strid.compare("74") == 0)
-		{
-			str = StringUtils::format("生命%d", pdata->goodvalue);
-		}
-		else
-			str = "永久";
-	}
-	else
-	{
-		str = "";
-	}
-
-	if (pdata->goodvalue < 20)
-		lvtext[lastclickindex]->setColor(Color3B(204, 4, 4));
-	else
-		lvtext[lastclickindex]->setColor(Color3B(255, 255, 255));
-
-	lvtext[lastclickindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 }
 
 bool HeroProperNode::takeoff(HeroAtrType atrype)
@@ -672,13 +546,93 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 			StorageRoom::add(mydata);
 		}
 	}
+
+	std::string strid = mydata.strid;
+	if (mydata.type >= TOOLS)
+		strid = StringUtils::format("hp%d-%d", m_select_udata->type + 1, m_select_udata->extype);
+	else
+		strid = StringUtils::format("hp%d", m_select_udata->type + 1);
+
 	g_hero->getAtrByType(atrype)->count = 0;
 	lvtext[lastclickindex]->setString("");
 
 	std::string str = "ui/buildsmall.png";
+
+	imgbtn[lastclickindex]->removeAllChildrenWithCleanup(true);
+
 	imgbtn[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
+
+	str = StringUtils::format("ui/%s.png", strid.c_str());
+	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+
 	return true;
+}
+
+void HeroProperNode::updataProperpanel(int atrypeindex, PackageData pdata)
+{
+	HeroAtrType atrype = Atrytpe[atrypeindex];
+	std::string str; 
+	if (atrype == H_WG || atrype == H_NG)
+	{
+		int lv = pdata.lv + 1;
+		str = StringUtils::format("Lv.%d", lv);
+
+		if (lv >= GlobalData::map_wgngs[pdata.strid].maxlv)
+			str = StringUtils::format("Lv.%d(满级)", lv);
+
+		std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata.strid].qu);
+		imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+		imgbtn[atrypeindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+	}
+	else if (atrype == H_GATHER || atrype == H_FELL || atrype == H_EXCAVATE || atrype == H_WEAPON || atrype == H_ARMOR)
+	{
+		str = StringUtils::format("耐久度%d%%", pdata.goodvalue);
+
+		if (atrype == H_WEAPON || atrype == H_ARMOR)
+		{
+			std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata.strid].qu);
+			imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+			imgbtn[atrypeindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
+		}
+	}
+	else if (atrype == H_MOUNT)
+	{
+		if (pdata.strid.compare("74") == 0)
+		{
+			str = StringUtils::format("生命%d", pdata.goodvalue);
+		}
+		else
+			str = "永久";
+	}
+	else
+	{
+		str = "";
+	}
+
+	if (pdata.goodvalue < 20)
+		lvtext[atrypeindex]->setColor(Color3B(204, 4, 4));
+	else
+		lvtext[atrypeindex]->setColor(Color3B(255, 255, 255));
+
+	lvtext[atrypeindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
+
+	std::string strid = StringUtils::format("ui/%s.png", pdata.strid.c_str());
+	propeImages[atrypeindex]->loadTexture(strid, cocos2d::ui::TextureResType::PLIST);
+
+	imgbtn[atrypeindex]->removeAllChildrenWithCleanup(true);
+
+	std::string mymixgf = GlobalData::getMixGF();
+	MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+	if (mymixgf.length() > 0)
+	{
+		if (pdata.strid.compare(mdata.mastergf) == 0)
+		{
+			Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+			mixtag->setPosition(Vec2(imgbtn[atrypeindex]->getContentSize().width - 15, imgbtn[atrypeindex]->getContentSize().height - 15));
+			imgbtn[atrypeindex]->addChild(mixtag);
+		}
+	}
 }
 
 void HeroProperNode::removeitem()
@@ -693,23 +647,9 @@ void HeroProperNode::removeitem()
 	}
 }
 
-void HeroProperNode::saveData()
-{
-	//保存装备栏数据
-	std::string str;
-	for (int i = H_WEAPON; i < H_MAX; i++)
-	{
-		PackageData* sdata = g_hero->getAtrByType((HeroAtrType)i);
-	
-		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue, sdata->slv,sdata->tqu);
-		str.append(idstr);
-	}
-	GameDataSave::getInstance()->setHeroProperData(str.substr(0, str.length() - 1));
-}
-
 void HeroProperNode::onExit()
 {
-	saveData();
+	g_hero->saveProperData();
 	Node::onExit();
 }
 
@@ -774,6 +714,15 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 	propeImages[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 }
 
+void HeroProperNode::removeMixTag()
+{
+	if (g_hero->getAtrByType(H_WG)->count > 0 || g_hero->getAtrByType(H_NG)->count > 0)
+	{
+		imgbtn[0]->removeAllChildrenWithCleanup(true);
+		imgbtn[1]->removeAllChildrenWithCleanup(true);
+	}
+}
+
 int HeroProperNode::checkSex(int sex)
 {
 	std::string mymixgf = GlobalData::getMixGF();
@@ -805,6 +754,64 @@ int HeroProperNode::checkSex(int sex)
 		}
 	}
 	return 1;
+}
+
+bool HeroProperNode::isCanTakeOn()
+{
+	bool ret = true;
+	std::string mymixgf = GlobalData::getMixGF();
+	MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+	if (mymixgf.length() > 0)
+	{
+
+		int csex = checkSex(g_hero->getSex());
+		if (m_select_udata->strid.compare(mdata.mastergf) == 0 && csex <= 0)
+		{
+			std::string sexstr;
+			if (csex == 0)
+				sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合自宫者装备！！").c_str());
+			else if (csex == -1)
+				sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合男性装备！！").c_str());
+			else if (csex == -2)
+				sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("只适合女性装备！！").c_str());
+			else
+				sexstr = StringUtils::format("%s%s", mdata.name.c_str(), CommonFuncs::gbk2utf("不适合自宫者装备！！").c_str());
+			HintBox* hint = HintBox::create(sexstr);
+			Director::getInstance()->getRunningScene()->addChild(hint, 4);
+			return false;
+		}
+
+		std::string caryymastergf;
+		if (m_select_udata->type == N_GONG)
+		{
+			if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0)
+			{
+				caryymastergf = g_hero->getAtrByType(H_WG)->strid;
+			}
+		}
+		else if (m_select_udata->type == W_GONG)
+		{
+			if (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0)
+			{
+				caryymastergf = g_hero->getAtrByType(H_NG)->strid;
+			}
+		}
+
+		if (caryymastergf.length() > 0)
+		{
+			for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
+			{
+				if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
+				{
+					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
+					Director::getInstance()->getRunningScene()->addChild(hint, 4);
+					return false;
+				}
+			}
+		}
+	}
+
+	return ret;
 }
 
 void HeroProperNode::showNewerGuide(int step)

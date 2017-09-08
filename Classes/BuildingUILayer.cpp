@@ -229,7 +229,7 @@ void BuildingUILayer::loadActionUi()
 		{
 			if (g_hero->checkifHasGF_Equip(vec_buildAcitonData.at(i).icon))
 				actbtn->setTitleText(CommonFuncs::gbk2utf("分解"));
-			else if (GlobalData::tempHasGf_Equip(vec_buildAcitonData.at(i).icon))
+			else if (GlobalData::tempHasGf_Equip(vec_buildAcitonData.at(i).icon).length() > 0)
 			{
 				actbtn->setTitleText(CommonFuncs::gbk2utf("已有"));
 			}
@@ -330,7 +330,9 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 			if (node->getTitleText().compare(CommonFuncs::gbk2utf("已有")) == 0)
 			{
-				HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("其它地点临时存放点有此物品!"));
+				std::string mapid = GlobalData::tempHasGf_Equip(vec_buildAcitonData.at(tag - ACTION).icon);
+				std::string hasstr = StringUtils::format("%s%s%s", GlobalData::map_maps[mapid].cname, CommonFuncs::gbk2utf("临时存放点存有").c_str(), vec_buildAcitonData.at(tag - ACTION).cname.c_str());
+				HintBox* layer = HintBox::create(hasstr);
 				this->addChild(layer);
 				return;
 			}
@@ -383,8 +385,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 					exersiceTag = tag;
 					WaitingProgress* waitbox = WaitingProgress::create("准备中...");
 					Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-					ServerDataSwap::getInstance()->setDelegate(this);
-					ServerDataSwap::getInstance()->getServerTime();
+					ServerDataSwap::init(this)->getServerTime();
 				}
 				else if (vec_actionbtn[tag - ACTION]->getTitleText().compare(CommonFuncs::gbk2utf("取消")) == 0)
 				{
@@ -399,8 +400,7 @@ void BuildingUILayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 					exersiceTag = tag;
 					WaitingProgress* waitbox = WaitingProgress::create("准备中...");
 					Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-					ServerDataSwap::getInstance()->setDelegate(this);
-					ServerDataSwap::getInstance()->getServerTime();
+					ServerDataSwap::init(this)->getServerTime();
 				}
 
 			}
@@ -940,8 +940,7 @@ void BuildingUILayer::getServerTime()
 	{
 		WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-		ServerDataSwap::getInstance()->setDelegate(this);
-		ServerDataSwap::getInstance()->getServerTime();
+		ServerDataSwap::init(this)->getServerTime();
 	}
 }
 

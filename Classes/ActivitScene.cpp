@@ -371,7 +371,7 @@ void ActivitScene::getRndRes(float dt)
 	{
 		for (unsigned int i = 0; i < vec_tempgf.size(); i++)
 		{
-			if (!GlobalData::tempHasGf_Equip(vec_tempgf[i]))
+			if (GlobalData::tempHasGf_Equip(vec_tempgf[i]).length() <= 0)
 			{
 				vec_randRes.push_back(vec_tempgf[i]);
 			}
@@ -395,7 +395,7 @@ void ActivitScene::getRndRes(float dt)
 	{
 		for (unsigned int i = 0; i < vec_tempequip.size(); i++)
 		{
-			if (!GlobalData::tempHasGf_Equip(vec_tempequip[i]))
+			if (GlobalData::tempHasGf_Equip(vec_tempequip[i]).length() <= 0)
 				vec_randRes.push_back(vec_tempequip[i]);
 		}
 		if (vec_randRes.size() > 0)
@@ -500,6 +500,7 @@ void ActivitScene::popself(float dt)
 
 void ActivitScene::saveTempResData()
 {
+	GlobalData::map_tempGf_Equip[m_tempmapid].clear();
 	std::string str;
 	int size = map_tempdata[m_tempmapid].size();
 	for (int i = 0; i < size; i++)
@@ -511,17 +512,7 @@ void ActivitScene::saveTempResData()
 		std::string tmpstrid = map_tempdata[m_tempmapid][i].strid;
 		if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
 		{
-			bool isfind = false;
-			for (unsigned int n = 0; n < GlobalData::vec_tempGf_Equip.size(); n++)
-			{
-				if (GlobalData::vec_tempGf_Equip[n].compare(tmpstrid) == 0)
-				{
-					isfind = true;
-					break;
-				}
-			}
-			if (!isfind)
-				GlobalData::vec_tempGf_Equip.push_back(tmpstrid);
+			GlobalData::map_tempGf_Equip[m_tempmapid].push_back(tmpstrid);
 		}
 	}
 	GameDataSave::getInstance()->setTempStorage(m_tempmapid, str.substr(0, str.length() - 1));

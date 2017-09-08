@@ -178,8 +178,7 @@ void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
     WaitingProgress* waitbox = WaitingProgress::create("处理中...");
     Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
     
-	ServerDataSwap::getInstance()->setDelegate(this);
-    ServerDataSwap::getInstance()->modifyNickName(utf8str);
+	ServerDataSwap::init(this)->modifyNickName(utf8str);
 }
 
 void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)

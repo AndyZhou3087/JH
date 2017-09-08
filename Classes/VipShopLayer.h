@@ -5,10 +5,11 @@
 #include "ui/CocosGUI.h"
 #include "GlobalData.h"
 #include "MyPackage.h"
+#include "ServerDataSwap.h"
 USING_NS_CC;
 
 
-class VipShopLayer :public Layer
+class VipShopLayer :public Layer, public ServerDataDelegateProtocol
 {
 public:
 	VipShopLayer();
@@ -17,9 +18,13 @@ public:
 	bool init();
 	static VipShopLayer* create();
 
+	void getLeftDays();
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void loadVipShopData();
+	void onSuccess();
+	void onErr(int errcode);
 private:
 
 	cocos2d::ui::ScrollView* m_vipScrollview;

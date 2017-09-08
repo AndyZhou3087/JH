@@ -92,6 +92,18 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
 	resbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
+	std::string mymixgf = GlobalData::getMixGF();
+	MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+	if (mymixgf.length() > 0)
+	{
+		if (pdata->strid.compare(mdata.mastergf) == 0)
+		{
+			Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+			mixtag->setPosition(Vec2(resbox->getContentSize().width - 15, resbox->getContentSize().height - 15));
+			resbox->addChild(mixtag);
+		}
+	}
+
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)resbox->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/%s.png", pdata->strid.c_str());

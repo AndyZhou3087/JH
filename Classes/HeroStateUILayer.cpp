@@ -46,14 +46,24 @@ bool HeroStateUILayer::init()
 	m_heroexptimelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("heroexptime");
 	m_gfexptimelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("gfexptime");
 
+	arrow1 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow1");
+	arrow2 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow2");
+	arrow3 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow3");
+
 	m_heroexpendtime = GameDataSave::getInstance()->getHeroExpEndTime();
 	m_gfexpendtime = GameDataSave::getInstance()->getGfEndTime();
+
+	lastatk = g_hero->getTotalAtck();
+	lastdf = g_hero->getTotalDf();
+	lastmaxhp = g_hero->getMaxLifeValue();
 
 	updateStatus(0);
 
 	MixGFNode* mixnode = MixGFNode::create();
-	mixnode->setPosition(Vec2(360, 220));
+	mixnode->setPosition(Vec2(360, 215));
 	m_csbnode->addChild(mixnode, 0, "mixnode");
+
+
 
 	//////layer 点击事件，屏蔽下层事件
 	this->schedule(schedule_selector(HeroStateUILayer::updateStatus), 1.0f);
@@ -110,14 +120,15 @@ void HeroStateUILayer::updateStatus(float dt)
 		}
 	}
 
+	int curack = g_hero->getTotalAtck();
 	//攻击属性
-	std::string str = StringUtils::format("%d", g_hero->getTotalAtck());
+	std::string str = StringUtils::format("%d", curack);
 	herostatus[0]->setString(str);
 
-	int df = g_hero->getTotalDf();
+	int curdf = g_hero->getTotalDf();
 
 	//防御属性
-	str = StringUtils::format("%d", g_hero->getTotalDf());
+	str = StringUtils::format("%d", curdf);
 	herostatus[1]->setString(str);
 
 	//经验值属性
@@ -130,8 +141,9 @@ void HeroStateUILayer::updateStatus(float dt)
 		str = StringUtils::format("%d%s", lvmax, CommonFuncs::gbk2utf("（满级）").c_str());
 	herostatus[3]->setString(str);
 
+	int curmaxhp = g_hero->getMaxLifeValue();
 	//生命值属性
-	str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), (int)g_hero->getMaxLifeValue());
+	str = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), curmaxhp);
 	herostatus[4]->setString(str);
 
 	std::map<std::string, FriendlyData>::iterator it;
@@ -187,6 +199,9 @@ void HeroStateUILayer::updateStatus(float dt)
 	{
 		m_gfexptimelbl->setVisible(false);
 	}
+	arrow1->setPositionX(herostatus[0]->getPositionX() + herostatus[0]->getContentSize().width);
+	arrow2->setPositionX(herostatus[1]->getPositionX() + herostatus[1]->getContentSize().width);
+	arrow3->setPositionX(herostatus[4]->getPositionX() + herostatus[4]->getContentSize().width);
 }
 
 void HeroStateUILayer::onExit()
@@ -199,4 +214,76 @@ void HeroStateUILayer::showNewerGuide(int step)
 	std::vector<Node*> nodes;
 	nodes.push_back(m_csbnode->getChildByName("backbtn"));
 	g_gameLayer->showNewerGuide(step, nodes);
+}
+
+void HeroStateUILayer::updateArrow()
+{
+	int curack = g_hero->getTotalAtck();
+	if (curack != lastatk)
+	{
+		arrow1->setVisible(true);
+		arrow1->setPositionX(herostatus[0]->getPositionX() + herostatus[0]->getContentSize().width);
+		if (curack > lastatk)
+		{
+			arrow1->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		else if (curack < lastatk)
+		{
+			arrow1->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		arrow1->stopAllActions();
+		arrow1->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
+		lastatk = curack;
+	}
+	else
+	{
+		arrow1->stopAllActions();
+		arrow1->setVisible(false);
+	}
+
+	int curdf = g_hero->getTotalDf();
+	if (curdf != lastdf)
+	{
+		arrow2->setVisible(true);
+		arrow2->setPositionX(herostatus[1]->getPositionX() + herostatus[1]->getContentSize().width);
+		if (curdf > lastdf)
+		{
+			arrow2->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		else if (curdf < lastdf)
+		{
+			arrow2->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		arrow2->stopAllActions();
+		arrow2->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
+		lastdf = curdf;
+	}
+	else
+	{
+		arrow2->stopAllActions();
+		arrow2->setVisible(false);
+	}
+
+	int curmaxhp = g_hero->getMaxLifeValue();
+	if (curmaxhp != lastmaxhp)
+	{
+		arrow3->setVisible(true);
+		arrow3->setPositionX(herostatus[4]->getPositionX() + herostatus[4]->getContentSize().width);
+		if (curmaxhp > lastmaxhp)
+		{
+			arrow3->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		else if (curmaxhp < lastmaxhp)
+		{
+			arrow3->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
+		}
+		arrow3->stopAllActions();
+		arrow3->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
+		lastmaxhp = curmaxhp;
+	}
+	else
+	{
+		arrow3->stopAllActions();
+		arrow3->setVisible(false);
+	}
 }

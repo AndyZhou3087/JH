@@ -178,8 +178,7 @@ void ReviveLayer::shareCallback(int platform, int stCode, string& errorMsg) {
 		reviveOk();
 		GlobalData::setShareDay(GlobalData::getDayOfYear());
 		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
-		ServerDataSwap::getInstance()->setDelegate(NULL);
-		ServerDataSwap::getInstance()->updateFreeReviveCount();
+		ServerDataSwap::init()->updateFreeReviveCount();
 	}
 	else if (stCode == -1) {
 		result = "分享取消";
@@ -217,8 +216,7 @@ void ReviveLayer::onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		GlobalData::setShareDay(GlobalData::getDayOfYear());
 
 		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
-		ServerDataSwap::getInstance()->setDelegate(NULL);
-		ServerDataSwap::getInstance()->updateFreeReviveCount();
+		ServerDataSwap::init()->updateFreeReviveCount();
 	}
 }
 

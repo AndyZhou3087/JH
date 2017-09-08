@@ -181,7 +181,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 					pdata.type = gfdata.type - 1;
 					pdata.extype = gfdata.extype;
 					updateDefaultStorage(pdata,g_hero->getHeadID());
-					if (!g_hero->checkifHasGF_Equip(payRes[i]) && !GlobalData::tempHasGf_Equip(payRes[i]))
+					if (!g_hero->checkifHasGF_Equip(payRes[i]) && GlobalData::tempHasGf_Equip(payRes[i]).length() <= 0)
 					{
 						StorageRoom::add(pdata);
 						break;
@@ -204,7 +204,7 @@ void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
 						pdata.goodvalue = 100;
 						pdata.extype = edata.extype;
 						updateDefaultStorage(pdata, g_hero->getHeadID());
-						if (!g_hero->checkifHasGF_Equip(payRes[i]) && !GlobalData::tempHasGf_Equip(payRes[i]))
+						if (!g_hero->checkifHasGF_Equip(payRes[i]) && GlobalData::tempHasGf_Equip(payRes[i]).length() <= 0)
 						{
 							StorageRoom::add(pdata);
 							break;

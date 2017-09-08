@@ -110,6 +110,8 @@ void StartScene::onContinue(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		WaitingProgress* waitbox = WaitingProgress::create("进入游戏...");
+		this->addChild(waitbox, 1, "waitbox");
 		std::string uid = GlobalData::getUId();
 		GlobalData::setUId(uid);
 
@@ -161,8 +163,7 @@ void StartScene::checkServerData(float dt)
 			WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 
-			ServerDataSwap::getInstance()->setDelegate(this);
-			ServerDataSwap::getInstance()->postAllData();
+			ServerDataSwap::init(this)->postAllData();
 			isdouserdata = true;
 		}
 	}
@@ -170,8 +171,7 @@ void StartScene::checkServerData(float dt)
 	{
 		WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-		ServerDataSwap::getInstance()->setDelegate(this);
-		ServerDataSwap::getInstance()->getAllData();
+		ServerDataSwap::init(this)->getAllData();
 		isdouserdata = true;
 	}
 
@@ -182,8 +182,7 @@ void StartScene::checkServerData(float dt)
 			WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 
-			ServerDataSwap::getInstance()->setDelegate(this);
-			ServerDataSwap::getInstance()->getannouncement();
+			ServerDataSwap::init(this)->getannouncement();
 		}
 	}
 }
@@ -197,8 +196,7 @@ void StartScene::onLogo(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 		{
 			WaitingProgress* waitbox = WaitingProgress::create("数据处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::getInstance()->setDelegate(this);
-			ServerDataSwap::getInstance()->propadjust();
+			ServerDataSwap::init(this)->propadjust();
 		}
 	}
 }
@@ -233,8 +231,7 @@ void StartScene::onSuccess()
 			{
 				WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
 				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-				ServerDataSwap::getInstance()->setDelegate(this);
-				ServerDataSwap::getInstance()->getannouncement();
+				ServerDataSwap::init(this)->getannouncement();
 			}
 		}
 		else

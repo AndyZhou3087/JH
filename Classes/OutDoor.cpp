@@ -140,6 +140,18 @@ void OutDoor::updataMyPackageUI()
 		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
+
+		std::string mymixgf = GlobalData::getMixGF();
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if (mymixgf.length() > 0)
+		{
+			if (MyPackage::vec_packages[i].strid.compare(mdata.mastergf) == 0)
+			{
+				Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+				mixtag->setPosition(Vec2(box->getContentSize().width - 15, box->getContentSize().height - 15));
+				box->addChild(mixtag);
+			}
+		}
 	}
 }
 
@@ -221,6 +233,18 @@ void OutDoor::updataStorageUI()
 		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
+
+		std::string mymixgf = GlobalData::getMixGF();
+		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+		if (mymixgf.length() > 0)
+		{
+			if (allStorageData[i]->strid.compare(mdata.mastergf) == 0)
+			{
+				Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+				mixtag->setPosition(Vec2(box->getContentSize().width - 15, box->getContentSize().height - 15));
+				box->addChild(mixtag);
+			}
+		}
 	}
 }
 void OutDoor::onStorageItem(cocos2d::Ref* pSender)

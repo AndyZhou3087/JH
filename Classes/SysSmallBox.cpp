@@ -25,7 +25,6 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	image = (cocos2d::ui::ImageView*)csbnode->getChildByName("image");
 	titleTxt = (cocos2d::ui::Text*)csbnode->getChildByName("title");
 	title1Txt = (cocos2d::ui::Text*)csbnode->getChildByName("title1");
-	textTxt = (cocos2d::ui::Text*) csbnode->getChildByName("text");
 	valueTxt = (cocos2d::ui::Text*) csbnode->getChildByName("valuelbl");
 
 	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
@@ -33,7 +32,13 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	image->setScale(1.5f);
 	titleTxt->setString(CommonFuncs::gbk2utf(title.c_str()));
 	title1Txt->setString(CommonFuncs::gbk2utf(title1.c_str()));
-	textTxt->setString(CommonFuncs::gbk2utf(text.c_str()));
+
+	textTxt = Label::createWithTTF(CommonFuncs::gbk2utf(text.c_str()), "fonts/STXINGKA.TTF", 26);
+	textTxt->setMaxLineWidth(400);
+	textTxt->setColor(Color3B(0, 0, 0));
+	textTxt->setPosition(Vec2(150, 580));
+	textTxt->setAnchorPoint(Vec2(0, 1));
+	csbnode->addChild(textTxt);
 
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();

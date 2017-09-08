@@ -15,6 +15,7 @@
 #include "GetVipRewardLayer.h"
 #include "MapLayer.h"
 #include "ServerDataSwap.h"
+#include "VipShopLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #include "iosfunc.h"
@@ -198,13 +199,23 @@ void ShopLayer::setMessage(PYARET ret)
 		}
 		else if (payindex < herocount + golditemcount + vipcount)//买VIP
 		{
-			GlobalData::vec_buyVipIds.push_back(GlobalData::vec_goods[payindex - herocount].icon);
+			std::string vipid = GlobalData::vec_goods[payindex - herocount].icon;
+			GlobalData::vec_buyVipIds.push_back(vipid);
+			//int monthdays = GlobalData::getMonth_Days();
+			//if (GlobalData::map_buyVipDays.find(vipid) != GlobalData::map_buyVipDays.end())
+			//	GlobalData::map_buyVipDays[vipid] += monthdays;
+			//else
+			//	GlobalData::map_buyVipDays[vipid] = monthdays;
 
-			ServerDataSwap::getInstance()->setDelegate(NULL);
-			ServerDataSwap::getInstance()->vipSuccNotice(GlobalData::vec_goods[payindex - herocount].icon);
+			ServerDataSwap::init()->vipSuccNotice(vipid);
 			GetVipRewardLayer* layer = GetVipRewardLayer::create();
-			if(g_gameLayer != NULL)
-				g_gameLayer->addChild(layer, 10);
+			if (g_gameLayer != NULL)
+			{
+				g_gameLayer->addChild(layer, 10, "viprewardlayer");
+				VipShopLayer* vipshop = (VipShopLayer*)g_gameLayer->getChildByName("vipshoplayer");
+				if (vipshop != NULL)
+					vipshop->getLeftDays();
+			}
 
 #ifdef ANALYTICS
 			std::string name[] = { "byk6", "byk30", "byk68"};

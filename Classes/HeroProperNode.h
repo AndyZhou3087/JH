@@ -37,15 +37,15 @@ public:
 	void selectCarryData();
 
 	/****************************
-	保存数据
-	*****************************/
-	static void saveData();
-
-	/****************************
 	刷新装备栏中的功法，功法组合时选择中的会清除掉，
 	@param 功法类型
 	*****************************/
 	void refreshGF(HeroAtrType atrype);
+
+	/****************************
+	移除组合标签
+	*****************************/
+	void removeMixTag();
 
 private:
 
@@ -86,6 +86,11 @@ private:
 	void addCarryData(HeroAtrType index);
 
 	/****************************
+	更新属性面板
+	*****************************/
+	void updataProperpanel(int atrypeindex, PackageData pdata);
+
+	/****************************
 	更新背包栏数据
 	*****************************/
 	void updataMyPackageUI();
@@ -95,7 +100,7 @@ private:
 	@param 装备类型
 	@param 装备数据
 	*****************************/
-	void takeon(HeroAtrType atrype, PackageData* pdata);
+	void takeon(HeroAtrType atrype, PackageData pdata);
 
 	/****************************
 	卸下装备
@@ -110,6 +115,12 @@ private:
 	@return >0可装备 只适合0--自宫，-1-男，-2-女 -3男女
 	*****************************/
 	int checkSex(int sex);
+
+	/****************************
+	检查是否能带上装备
+	@return true:能装备上，false:不能装备上
+	*****************************/
+	bool isCanTakeOn();
 
 private:
 	Node* csbroot;

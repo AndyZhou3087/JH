@@ -450,6 +450,7 @@ void ActionGetLayer::saveTempData()
 			allResData.push_back(getResData[i]);
 		}
 	}
+	GlobalData::map_tempGf_Equip["m1-2"].clear();
 	std::string str;
 	for (unsigned int i = 0; i < allResData.size(); i++)
 	{
@@ -459,17 +460,7 @@ void ActionGetLayer::saveTempData()
 		std::string tmpstrid = allResData[i].strid;
 		if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
 		{
-			bool isfind = false;
-			for (unsigned int n = 0; n < GlobalData::vec_tempGf_Equip.size(); n++)
-			{
-				if (GlobalData::vec_tempGf_Equip[n].compare(tmpstrid) == 0)
-				{
-					isfind = true;
-					break;
-				}
-			}
-			if (!isfind)
-				GlobalData::vec_tempGf_Equip.push_back(tmpstrid);
+			GlobalData::map_tempGf_Equip["m1-2"].push_back(tmpstrid);
 		}
 	}
 	GameDataSave::getInstance()->setTempStorage("m1-2", str.substr(0, str.length() - 1));

@@ -531,6 +531,9 @@
       <FilePathData Path="ui/mixbtn.png" />
       <FilePathData Path="ui/heroatrmixbox.png" />
       <FilePathData Path="ui/mixsecselect.png" />
+      <FilePathData Path="ui/mixtag.png" />
+      <FilePathData Path="ui/arrowdown.png" />
+      <FilePathData Path="ui/arrowup.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

@@ -4,10 +4,11 @@
 #include "GlobalData.h"
 #include "Const.h"
 #include "GoldGoodsItem.h"
+#include "WaitingProgress.h"
 
 GetVipRewardLayer::GetVipRewardLayer()
 {
-
+	rgoldcount = 0;
 }
 
 
@@ -30,7 +31,7 @@ bool GetVipRewardLayer::init()
 	std::string namestr;
 
 	int golditemcount = sizeof(goldcount) / sizeof(goldcount[0]);
-	int rgoldcount = 0;
+
 	std::vector<std::string> vec_rewardres;
 	for (unsigned int i = 0; i < GlobalData::vec_buyVipIds.size(); i++)
 	{
@@ -39,6 +40,7 @@ bool GetVipRewardLayer::init()
 			std::string vipid = GlobalData::vec_goods[m].icon;
 			if (GlobalData::vec_buyVipIds[i].compare(vipid) == 0)
 			{
+				vec_rgoodsindex.push_back(m);
 				namestr.append(GlobalData::vec_goods[m].name);
 				namestr.append(CommonFuncs::gbk2utf("、"));
 				rgoldcount += vipgoldcount[m - golditemcount];
@@ -67,12 +69,11 @@ bool GetVipRewardLayer::init()
 						vec_rewardres.push_back(GlobalData::vec_goods[m].vec_res[n]);
 					}
 				}
-				GoldGoodsItem::addBuyGoods(&GlobalData::vec_goods[m]);
 			}
 		}
 	}
 	namestr = namestr.substr(0, namestr.length() - 3);
-	GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + rgoldcount);
+
 	std::string descstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("获取").c_str(), namestr.c_str(), CommonFuncs::gbk2utf("福利：").c_str());
 	cocos2d::ui::Text* desctext = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
 	desctext->setString(descstr);
@@ -127,6 +128,9 @@ bool GetVipRewardLayer::init()
 		namelbl->setPosition(Vec2(box->getPositionX(), 530));
 		this->addChild(namelbl);
 	}
+	WaitingProgress* waitbox = WaitingProgress::create("获取月卡中...");
+	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+	ServerDataSwap::init(this)->isGetVip(GlobalData::vec_buyVipIds);
 	GlobalData::vec_buyVipIds.clear();
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -162,4 +166,24 @@ void GetVipRewardLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 	{
 		this->removeFromParentAndCleanup(true);
 	}
+}
+
+void GetVipRewardLayer::getVipGoods()
+{
+	GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + rgoldcount);
+
+	for (unsigned int m = 0; m < vec_rgoodsindex.size();m++)
+		GoldGoodsItem::addBuyGoods(&GlobalData::vec_goods[vec_rgoodsindex[m]]);
+
+}
+void GetVipRewardLayer::onSuccess()
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	getVipGoods();
+}
+
+void GetVipRewardLayer::onErr(int errcode)
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	this->removeFromParentAndCleanup(true);
 }

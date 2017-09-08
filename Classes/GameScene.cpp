@@ -165,9 +165,7 @@ bool GameScene::init()
 			GlobalData::setMakeWarmConfig("");
 		}
 	}
-	GlobalData::isGetServerData = true;
-	ServerDataSwap::getInstance()->setDelegate(this);
-	ServerDataSwap::getInstance()->vipIsOn(g_hero->getHeadID());
+	ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
     return true;
 }
 
@@ -265,7 +263,7 @@ void GameScene::loadSaveHeroData()
 void GameScene::loadSavedHeroPropData()
 {
 	//角色佩戴装备
-	std::string strval = GameDataSave::getInstance()->getHeroProperData();
+	std::string strval = GlobalData::getHeroProperData();
 	std::vector<std::string> tmp;
 	CommonFuncs::split(strval, tmp, ";");
 	//解析
@@ -340,8 +338,9 @@ void GameScene::saveAllData()
 
 	//保存资源数据
 	GlobalData::saveResData();
-	//保存角色装备栏数据
-	HeroProperNode::saveData();
+
+	//保存装备数据
+	g_hero->saveProperData();
 }
 
 void GameScene::updata(float dt)
@@ -485,12 +484,17 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
-	GlobalData::isGetServerData = false;
+	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
+	{
+
+		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
+	}
+
 	if (GlobalData::vec_buyVipIds.size() > 0)
 	{
 		GetVipRewardLayer* layer = GetVipRewardLayer::create();
 		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(layer, 10);
+			g_gameLayer->addChild(layer, 10, "viprewardlayer");
 	}
 	else
 	{
@@ -500,23 +504,14 @@ void GameScene::onSuccess()
             GlobalData::ispunishment = false;
 			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			GlobalData::isGetServerData = true;
-			ServerDataSwap::getInstance()->setDelegate(this);
-			ServerDataSwap::getInstance()->getAllData();
+			ServerDataSwap::init(this)->getAllData();
 		}
 	}
-	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
-	{
-		
-		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
-	}
-
 }
 
 void GameScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	GlobalData::isGetServerData = false;
 }
 
 void GameScene::delayChangeStartScene(float dt)

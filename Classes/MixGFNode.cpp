@@ -62,6 +62,10 @@ bool MixGFNode::init()
 	cocos2d::ui::ImageView* suggestbtn = (cocos2d::ui::ImageView*)csbroot->getChildByName("heroatrmixhint");
 	suggestbtn->addTouchEventListener(CC_CALLBACK_2(MixGFNode::onSuggest, this));
 
+	desc0 = (cocos2d::ui::Text*)csbroot->getChildByName("mixdesc");
+	desc1 = (cocos2d::ui::Text*)csbroot->getChildByName("mixdesc1");
+	desc = (cocos2d::ui::Text*)csbroot->getChildByName("desc");
+
 	m_select = Sprite::createWithSpriteFrameName("ui/atrselected.png");
 	m_select->setAnchorPoint(Vec2(0, 1));
 	m_scrollView->addChild(m_select, 1);
@@ -80,6 +84,8 @@ bool MixGFNode::init()
 	loadMixSuccGF();
 
 	updateGFScroll();
+
+	updateDesc();
 
 	m_listener = EventListenerTouchOneByOne::create();
 	m_listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -116,7 +122,7 @@ void MixGFNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 
 		if (g_hero->getIsOut())
 		{
-			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回住宅进行组合！！"));
+			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回住所进行组合！！"));
 			g_gameLayer->addChild(layer, 4);
 			return;
 		}
@@ -141,16 +147,19 @@ void MixGFNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 			std::map<int, std::vector<PackageData*>>::iterator it;
 			for (it = map_secgfdata.begin(); it != map_secgfdata.end(); ++it)
 			{
-				for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
+				if (map_secgfdata[it->first].size() > 0)
 				{
-					std::string name = StringUtils::format("resbox%d", m);
-					MenuItemSprite *menuSprite = (MenuItemSprite *)m_scrollView->getChildByName(name)->getChildByName("itembox");
-					if (vec_myhasgf[m].strid.compare(map_secgfdata[it->first][0]->strid) == 0)
+					for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
 					{
 						std::string name = StringUtils::format("resbox%d", m);
 						MenuItemSprite *menuSprite = (MenuItemSprite *)m_scrollView->getChildByName(name)->getChildByName("itembox");
-						CommonFuncs::removeGray(menuSprite->getNormalImage());
-						CommonFuncs::removeGray(menuSprite->getNormalImage()->getChildByName("res"));
+						if (vec_myhasgf[m].strid.compare(map_secgfdata[it->first][0]->strid) == 0)
+						{
+							std::string name = StringUtils::format("resbox%d", m);
+							MenuItemSprite *menuSprite = (MenuItemSprite *)m_scrollView->getChildByName(name)->getChildByName("itembox");
+							CommonFuncs::removeGray(menuSprite->getNormalImage());
+							CommonFuncs::removeGray(menuSprite->getNormalImage()->getChildByName("res"));
+						}
 					}
 				}
 			}
@@ -164,24 +173,27 @@ void MixGFNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 			std::map<int, std::vector<PackageData*>>::iterator it;
 			for (it = map_secgfdata.begin(); it != map_secgfdata.end(); ++it)
 			{
-				for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
+				if (map_secgfdata[it->first].size() > 0)
 				{
-					std::string name = StringUtils::format("resbox%d", m);
-					MenuItemSprite *menuSprite = (MenuItemSprite *)m_scrollView->getChildByName(name)->getChildByName("itembox");
-					if (vec_myhasgf[m].strid.compare(map_secgfdata[it->first][0]->strid) == 0)
+					for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
 					{
-						if (it->first == lastclickindex - 1)
+						std::string name = StringUtils::format("resbox%d", m);
+						MenuItemSprite *menuSprite = (MenuItemSprite *)m_scrollView->getChildByName(name)->getChildByName("itembox");
+						if (vec_myhasgf[m].strid.compare(map_secgfdata[it->first][0]->strid) == 0)
 						{
-							CommonFuncs::removeGray(menuSprite->getNormalImage());
-							CommonFuncs::removeGray(menuSprite->getNormalImage()->getChildByName("res"));
-						}
-						else
-						{
-							CommonFuncs::changeGray(menuSprite->getNormalImage());
-							CommonFuncs::changeGray(menuSprite->getNormalImage()->getChildByName("res"));
-						}
+							if (it->first == lastclickindex - 1)
+							{
+								CommonFuncs::removeGray(menuSprite->getNormalImage());
+								CommonFuncs::removeGray(menuSprite->getNormalImage()->getChildByName("res"));
+							}
+							else
+							{
+								CommonFuncs::changeGray(menuSprite->getNormalImage());
+								CommonFuncs::changeGray(menuSprite->getNormalImage()->getChildByName("res"));
+							}
 
-						break;
+							break;
+						}
 					}
 				}
 			}
@@ -211,7 +223,7 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 					{
 						for (int m = 0; m < secgfsize; m++)
 						{
-							if (GlobalData::map_MixGfData[it->first].vec_secgf[i].compare(map_secgfdata[m][0]->strid) == 0)
+							if (map_secgfdata[m].size() > 0 && GlobalData::map_MixGfData[it->first].vec_secgf[i].compare(map_secgfdata[m][0]->strid) == 0)
 							{
 								index++;
 								break;
@@ -248,6 +260,8 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 				g_hero->setLifeValue(life);
 			}
 		}
+
+		updateDesc();
 	}
 }
 
@@ -449,6 +463,7 @@ void MixGFNode::onItem(Ref* pSender)
 		}
 		return;
 	}
+	HeroProperNode * heropropernode = (HeroProperNode*)this->getParent()->getChildByName("HeroProperNode");
 	Node* item = (Node*)pSender;
 	int tag = item->getTag();
 	PackageData* pdata = (PackageData*)item->getUserData();
@@ -507,7 +522,6 @@ void MixGFNode::onItem(Ref* pSender)
 		img[lastclickindex]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 		lastselectitem = pdata;
 
-		HeroProperNode * heropropernode = (HeroProperNode*)this->getParent()->getChildByName("HeroProperNode");
 		if (pdata->type == W_GONG && g_hero->getAtrByType(H_WG)->strid.compare(pdata->strid) == 0 && g_hero->getAtrByType(H_WG)->count > 0)
 			heropropernode->refreshGF(H_WG);
 		else if (pdata->type == N_GONG && g_hero->getAtrByType(H_NG)->strid.compare(pdata->strid) == 0 && g_hero->getAtrByType(H_NG)->count > 0)
@@ -572,6 +586,8 @@ void MixGFNode::onItem(Ref* pSender)
 	}
 	mixtitle->setString(CommonFuncs::gbk2utf("武功合成"));
 	GlobalData::setMixGF("");
+	updateDesc();
+	heropropernode->removeMixTag();
 }
 
 
@@ -602,7 +618,7 @@ void MixGFNode::onSuggest(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		if (g_hero->getIsOut())
 		{
-			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回住宅查看！！"));
+			HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("请回所宅查看！！"));
 			g_gameLayer->addChild(layer, 4);
 		}
 		else
@@ -610,5 +626,60 @@ void MixGFNode::onSuggest(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			MixSuggestLayer* layer = MixSuggestLayer::create();
 			g_gameLayer->addChild(layer, 4, "mixsuggestlayer");
 		}
+	}
+}
+
+void MixGFNode::updateDesc()
+{
+	std::string mixid = GlobalData::getMixGF();
+	if (mixid.length() > 0)
+	{
+		MixGfData mixdata = GlobalData::map_MixGfData[mixid];
+		desc0->setVisible(false);
+		desc1->setVisible(false);
+		std::string atkstr;
+		std::string dfstr;
+		std::string critstr;
+		std::string dodgestr;
+		std::string maxhpstr;
+		float atk = mixdata.atkpercent;
+		float df = mixdata.dfpercent;
+		float crit = mixdata.critpercent;
+		float dodge = mixdata.dodgepercent;
+		float maxhp = mixdata.hppercent;
+		if (atk > 0)
+			atkstr = StringUtils::format("+%.2f%%", atk);
+		else
+			atkstr = StringUtils::format("%.2f%%", atk);
+
+		if (df > 0)
+			dfstr = StringUtils::format("+%.2f%%", df);
+		else
+			dfstr = StringUtils::format("%.2f%%", df);
+
+		if (crit > 0)
+			critstr = StringUtils::format("+%.2f%%", crit);
+		else
+			critstr = StringUtils::format("%.2f%%", crit);
+
+		if (dodge > 0)
+			dodgestr = StringUtils::format("+%.2f%%", dodge);
+		else
+			dodgestr = StringUtils::format("%.2f%%", dodge);
+
+		if (maxhp > 0)
+			maxhpstr = StringUtils::format("+%.2f%%", maxhp);
+		else
+			maxhpstr = StringUtils::format("%.2f%%", maxhp);
+
+		std::string str = StringUtils::format("%s%s%s%s%s%s%s%s%s%s", CommonFuncs::gbk2utf("武功攻击").c_str(), atkstr.c_str(), CommonFuncs::gbk2utf("，内功防御").c_str(), dfstr.c_str(), CommonFuncs::gbk2utf("，总暴击率").c_str(), critstr.c_str(), CommonFuncs::gbk2utf("，总闪避率").c_str(), dodgestr.c_str(), CommonFuncs::gbk2utf("，最大气血").c_str(), maxhpstr.c_str());
+		desc->setString(str);
+		desc->setVisible(true);
+	}
+	else
+	{
+		desc0->setVisible(true);
+		desc1->setVisible(true);
+		desc->setVisible(false);
 	}
 }

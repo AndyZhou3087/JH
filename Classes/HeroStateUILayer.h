@@ -24,6 +24,8 @@ public:
 	*****************************/
 	void showNewerGuide(int step);
 
+	void updateArrow();
+
 private:
 	/****************************
 	点击“返回”按钮回调
@@ -49,6 +51,13 @@ private:
 	cocos2d::ui::Text* m_gfexptimelbl;//大力丸剩余时间控件
 	int m_heroexpendtime;//经验药水结束时间
 	int m_gfexpendtime;//经验药水结束时间
+	int lastatk;//上一次攻击
+	int lastdf;//上一次防御
+	int lastmaxhp;//上一次最大生命值
+
+	cocos2d::ui::ImageView* arrow1;
+	cocos2d::ui::ImageView* arrow2;
+	cocos2d::ui::ImageView* arrow3;
 };
 #endif
 

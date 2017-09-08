@@ -168,6 +168,18 @@ void StorageUILayer::updateResContent()
 				Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
 				reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 				box->addChild(reslbl);
+
+				std::string mymixgf = GlobalData::getMixGF();
+				MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+				if (mymixgf.length() > 0)
+				{
+					if (StorageRoom::map_storageData[i].at(m).strid.compare(mdata.mastergf) == 0)
+					{
+						Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
+						mixtag->setPosition(Vec2(box->getContentSize().width - 15, box->getContentSize().height - 15));
+						box->addChild(mixtag);
+					}
+				}
 			}
 		}
 	}

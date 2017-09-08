@@ -446,6 +446,12 @@ public:
 	static int getDayOfYear();
 
 	/****************************
+	当前月的天数
+	@return 当前月的天数
+	*****************************/
+	static int getMonth_Days();
+
+	/****************************
 	获取userid
 	*****************************/
 	static std::string getUId();
@@ -574,9 +580,9 @@ public:
 
 	/****************************
 	临时存放地是否有功法，装备
-	@return false:没有，yes：有
+	@return 临时存放点的地图ID,没有返回空字符串
 	*****************************/
-	static bool tempHasGf_Equip(std::string strid);
+	static std::string tempHasGf_Equip(std::string strid);
 
 	/****************************
 	获取分享的日期，只记录天数（一年中的天数）
@@ -754,6 +760,16 @@ public:
 	static void loadTempGF_EquipData();
 
 	/****************************
+	获取角色装备栏数据
+	*****************************/
+	static std::string getHeroProperData();
+
+	/****************************
+	设置角色装备栏数据
+	*****************************/
+	static void setHeroProperData(std::string strval);
+
+	/****************************
 	防作弊数据start
 	*****************************/
 	static std::string getMD5MyGoldCount();
@@ -859,7 +875,7 @@ public:
 	static std::vector<std::string> vec_buyVipIds;
 	static std::map<std::string,int> map_buyVipDays;
 
-	static std::vector<std::string> vec_tempGf_Equip;
+	static std::map<std::string,std::vector<std::string>> map_tempGf_Equip;
 
 	static std::map<std::string, ChallengeRewardData> map_challengeReward;
 
@@ -879,7 +895,6 @@ public:
 	static bool isFightMaster;
 	static int servertime;
 	static int myrank;
-	static bool isGetServerData;
 	static std::string noticecontent;
 private:
 	static bool unlockhero[4];//角色解锁

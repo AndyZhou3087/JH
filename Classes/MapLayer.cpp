@@ -349,7 +349,7 @@ void MapLayer::onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventT
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		VipShopLayer* shopLayer = VipShopLayer::create();
-		g_gameLayer->addChild(shopLayer, 5);
+		g_gameLayer->addChild(shopLayer, 5, "vipshoplayer");
 	}
 }
 

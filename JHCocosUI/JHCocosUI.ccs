@@ -148,6 +148,8 @@
           <Image Name="addatkicon.png" />
           <Image Name="adddficon.png" />
           <Image Name="addlifeicon.png" />
+          <Image Name="arrowdown.png" />
+          <Image Name="arrowup.png" />
           <Image Name="atrselected.png" />
           <Image Name="backbtn.png" />
           <Image Name="backstartbtn.png" />
@@ -304,6 +306,7 @@
           <Image Name="mixmtext.png" />
           <Image Name="mixsecselect.png" />
           <Image Name="mixsectext.png" />
+          <Image Name="mixtag.png" />
           <Image Name="mygoldbox.png" />
           <Image Name="myrankitem.png" />
           <Image Name="n002.png" />

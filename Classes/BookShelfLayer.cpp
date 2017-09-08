@@ -198,11 +198,29 @@ void BookShelfLayer::updateContent(int category)
 				namelbl->setPosition(Vec2(box->getContentSize().width / 2, -17));
 				box->addChild(namelbl);
 
+	
 				if (g_hero->getMeHas(datastrid) == NULL)
 				{
-					CommonFuncs::changeGray(box);
-					CommonFuncs::changeGray(res);
-					namelbl->setOpacity(180);
+					std::string mixid = GlobalData::getMixGF();
+
+					bool isinmixSec = false;
+					if (mixid.length() > 0)
+					{
+						for (unsigned int n = 0; n < GlobalData::map_MixGfData[mixid].vec_secgf.size(); n++)
+						{
+							if (datastrid.compare(GlobalData::map_MixGfData[mixid].vec_secgf[n]) == 0)
+							{
+								isinmixSec = true;
+								break;
+							}
+						}
+					}
+					if (!isinmixSec)
+					{
+						CommonFuncs::changeGray(box);
+						CommonFuncs::changeGray(res);
+						namelbl->setOpacity(180);
+					}
 				}
 			}
 		}

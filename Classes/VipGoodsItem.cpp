@@ -35,7 +35,9 @@ bool VipGoodsItem::init(GoodsData* gdata)
 	descTxt = (cocos2d::ui::Text*)bgnode->getChildByName("desc");
 	priceTxt = (cocos2d::ui::Text*)bgnode->getChildByName("price");
 
-	cocos2d::ui::Text* leftday = (cocos2d::ui::Text*)bgnode->getChildByName("leftday");
+	leftday = (cocos2d::ui::Text*)bgnode->getChildByName("leftday");
+	leftday_0 = (cocos2d::ui::Text*)bgnode->getChildByName("leftday_0");
+	leftday_1 = (cocos2d::ui::Text*)bgnode->getChildByName("leftday_1");
 
 	//图标
 	std::string imagepath = StringUtils::format("ui/%s.png", gdata->icon.c_str());
@@ -50,20 +52,6 @@ bool VipGoodsItem::init(GoodsData* gdata)
 	cocos2d::ui::Button* bgbtn = (cocos2d::ui::Button*)csbnode->getChildByName("itembg");//整块节点击
 	bgbtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onItem, this));
 	bgbtn->setSwallowTouches(false);
-
-	//std::map<std::string, int>::iterator it;
-
-	//for (it = GlobalData::map_buyVipDays.begin(); it != GlobalData::map_buyVipDays.end(); ++it)
-	//{
-	//	if (it->first.find(gdata->icon) != std::string::npos)
-	//	{
-	//		leftday->setVisible(true);
-	//		std::string leftdaystr = StringUtils::format("%d", GlobalData::map_buyVipDays[it->first]);
-	//		leftday->setString(leftdaystr);
-	//		break;
-	//	}
-
-	//}
 
 	int golditemcount = sizeof(goldcount) / sizeof(goldcount[0]);
 	int index = 0;
@@ -115,6 +103,10 @@ bool VipGoodsItem::init(GoodsData* gdata)
 	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)csbnode->getChildByName("buybtn");
 	buybtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onBuyBtn, this));
 	buybtn->setSwallowTouches(false);
+
+	updateLeftDays(0);
+	this->schedule(schedule_selector(VipGoodsItem::updateLeftDays), 1.0f);
+
 	return true;
 }
 
@@ -158,5 +150,23 @@ void VipGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			ShopLayer::beginPay(this->getTag());
 		}
 		isDraging = false;
+	}
+}
+
+void VipGoodsItem::updateLeftDays(float dt)
+{
+	std::map<std::string, int>::iterator it;
+
+	for (it = GlobalData::map_buyVipDays.begin(); it != GlobalData::map_buyVipDays.end(); ++it)
+	{
+		if (it->first.find(m_goodData->icon) != std::string::npos)
+		{
+			leftday_0->setVisible(true);
+			leftday_1->setVisible(true);
+			leftday->setVisible(true);
+			std::string leftdaystr = StringUtils::format("%d", GlobalData::map_buyVipDays[it->first]);
+			leftday->setString(leftdaystr);
+			break;
+		}
 	}
 }

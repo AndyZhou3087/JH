@@ -136,16 +136,34 @@ bool BookDetailsLayer::init(BookData* bookdata)
 
 	cocos2d::ui::Text* status = (cocos2d::ui::Text*)m_csbnode->getChildByName("status");
 
-	bool hasstatus = false;
 	if (g_hero->getMeHas(bookdata->strid) != NULL)
 	{
 		tmpstr = "已拥有";
 		status->setTextColor(Color4B(27, 141, 0, 255));
-		hasstatus = false;
 	}
 	else
 	{
-		tmpstr = "未拥有";
+		std::string mixid = GlobalData::getMixGF();
+
+		bool isinmixSec = false;
+		if (mixid.length() > 0)
+		{
+			for (unsigned int n = 0; n < GlobalData::map_MixGfData[mixid].vec_secgf.size(); n++)
+			{
+				if (bookdata->strid.compare(GlobalData::map_MixGfData[mixid].vec_secgf[n]) == 0)
+				{
+					isinmixSec = true;
+					break;
+				}
+			}
+		}
+		if (!isinmixSec)
+			tmpstr = "未拥有";
+		else
+		{
+			tmpstr = "已拥有";
+			status->setTextColor(Color4B(27, 141, 0, 255));
+		}
 	}
 
 	status->setString(CommonFuncs::gbk2utf(tmpstr.c_str()));

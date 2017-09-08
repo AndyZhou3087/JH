@@ -148,15 +148,15 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 
 		f_gfexp = GlobalData::map_wgngs[gfname].vec_exp.at(curlv) * hour;
 
+
+		std::string str = StringUtils::format("%s%s+%d", GlobalData::map_allResource[gfname].cname.c_str(), CommonFuncs::gbk2utf("经验值： ").c_str(), f_gfexp);
 		if (vec_gfdata[m]->type == W_GONG)
 		{
-			std::string str = StringUtils::format("武功经验值： +%d", f_gfexp);
-			m_wgtext->setString(CommonFuncs::gbk2utf(str.c_str()));
+			m_wgtext->setString(str.c_str());
 		}
 		else if (vec_gfdata[m]->type == N_GONG)
 		{
-			std::string str = StringUtils::format("内功经验值： +%d", f_gfexp);
-			m_ngtext->setString(CommonFuncs::gbk2utf(str.c_str()));
+			m_ngtext->setString(str.c_str());
 		}
 
 		vec_gfdata[m]->exp += f_gfexp;
@@ -214,6 +214,6 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 		}
 	}
 
-	std::string str = StringUtils::format("角色经验值： +%d", f_heroexp);
+	std::string str = StringUtils::format("%s经验值： +%d", heroname[g_hero->getHeadID()-1].c_str(), f_heroexp);
 	m_herotext->setString(CommonFuncs::gbk2utf(str.c_str()));
 }

@@ -80,7 +80,7 @@ bool GlobalData::isBuyTimeGift = false;
 
 int GlobalData::freeReviveCount = 0;
 
-std::vector<std::string> GlobalData::vec_tempGf_Equip;
+std::map<std::string, std::vector<std::string>> GlobalData::map_tempGf_Equip;
 
 std::string GlobalData::MD5MyGoldCount;
 std::string GlobalData::MD5CostGlodCount;
@@ -93,7 +93,6 @@ bool GlobalData::isFightMaster = false;
 int GlobalData::servertime = 0;
 
 int GlobalData::myrank = 0;
-bool GlobalData::isGetServerData = false;
 std::string GlobalData::noticecontent;
 
 GlobalData::GlobalData()
@@ -725,6 +724,27 @@ int GlobalData::getDayOfYear()
 	return day;
 }
 
+int GlobalData::getMonth_Days()
+{
+	struct tm *tm;
+	time_t timep;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	time(&timep);
+#else
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	timep = tv.tv_sec;
+#endif
+	tm = localtime(&timep);
+	int month = tm->tm_mon;
+	int days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int day = days[month];
+	int year = tm->tm_year;
+	if ((year % 4 == 0 && year % 100 != 0 || year % 400 == 0) && month == 2)
+		day += 1;
+	return day;
+}
+
 std::string GlobalData::getUId()
 {
 	uid = GameDataSave::getInstance()->getUserId();
@@ -1236,7 +1256,7 @@ void GlobalData::loadGfskillData()
 	}
 }
 
-bool GlobalData::tempHasGf_Equip(std::string strid)
+std::string GlobalData::tempHasGf_Equip(std::string strid)
 {
 	//std::map<std::string, MapData>::iterator it;
 
@@ -1260,13 +1280,19 @@ bool GlobalData::tempHasGf_Equip(std::string strid)
 	//		}
 	//	}
 	//}
-	for (unsigned int i = 0; i < GlobalData::vec_tempGf_Equip.size(); i++)
+
+	std::map<std::string, std::vector<std::string>>::iterator it;
+
+	for (it = GlobalData::map_tempGf_Equip.begin(); it != GlobalData::map_tempGf_Equip.end(); ++it)
 	{
-		if (GlobalData::vec_tempGf_Equip[i].compare(strid) == 0)
-			return true;
+		for (unsigned int i = 0; i < GlobalData::map_tempGf_Equip[it->first].size(); i++)
+		{
+			if (GlobalData::map_tempGf_Equip[it->first][i].compare(strid) == 0)
+				return it->first;
+		}
 	}
 
-	return false;
+	return "";
 }
 
 int GlobalData::getResType(std::string strid)
@@ -1402,7 +1428,7 @@ void GlobalData::loadChallengeRewardData()
 
 void GlobalData::loadTempGF_EquipData()
 {
-	vec_tempGf_Equip.clear();
+	map_tempGf_Equip.clear();
 	std::map<std::string, MapData>::iterator it;
 
 	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
@@ -1422,17 +1448,7 @@ void GlobalData::loadTempGF_EquipData()
 				int tmptype = atoi(tmp[1].c_str());
 				if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
 				{
-					bool isfind = false;
-					for (unsigned int n = 0; n < vec_tempGf_Equip.size(); n++)
-					{
-						if (vec_tempGf_Equip[n].compare(tmpstrid) == 0)
-						{
-							isfind = true;
-							break;
-						}
-					}
-					if (!isfind)
-						vec_tempGf_Equip.push_back(tmpstrid);
+					map_tempGf_Equip[mapid].push_back(tmpstrid);
 				}
 			}
 		}
@@ -1831,6 +1847,15 @@ void GlobalData::setMixGF(std::string str)
 	GameDataSave::getInstance()->setMixGF(str);
 }
 
+std::string GlobalData::getHeroProperData()
+{
+	return GameDataSave::getInstance()->getHeroProperData();
+}
+void GlobalData::setHeroProperData(std::string strval)
+{
+	GameDataSave::getInstance()->setHeroProperData(strval);
+}
+
 
 std::string GlobalData::addUidString(std::string val)
 {
@@ -1842,7 +1867,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "qwerqqw";
+	return "325E6676-4607-444E-BFE9-FADD69F470D1";//"";325E6676-4607-444E-BFE9-FADD69F470D1
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 }
@@ -1852,7 +1877,7 @@ std::string GlobalData::getVersion()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     return getvercode();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "1.2.0";
+	return "1.2.4";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 }

@@ -8,6 +8,7 @@
 #include "VipGoodsItem.h"
 #include "GameScene.h"
 #include "MapLayer.h"
+#include "WaitingProgress.h"
 
 VipShopLayer::VipShopLayer()
 {
@@ -107,4 +108,21 @@ void VipShopLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	{
 		this->removeFromParentAndCleanup(true);
 	}
+}
+
+void VipShopLayer::onSuccess()
+{
+	this->removeChildByName("waitbox");
+}
+
+void VipShopLayer::onErr(int errcode)
+{
+	this->removeChildByName("waitbox");
+}
+
+void VipShopLayer::getLeftDays()
+{
+	WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+	this->addChild(waitbox, 1, "waitbox");
+	ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
 }

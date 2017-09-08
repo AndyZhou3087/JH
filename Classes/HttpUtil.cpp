@@ -2,12 +2,12 @@
 
 HttpUtil::HttpUtil()
 {
-	m_httpcallback = NULL;
+
 }
 
 HttpUtil::~HttpUtil()
 {
-	m_httpcallback = NULL;
+
 }
 
 HttpUtil* HttpUtil::getInstance()
@@ -18,9 +18,9 @@ HttpUtil* HttpUtil::getInstance()
 	return httputil;
 }
 
-void HttpUtil::doData(std::string url, HTTPCOMPLETE_CALLBACK http_cb, std::string filename, HTTPTYPE method, std::string postdata, std::string tag)
+void HttpUtil::doData(std::string url, HttpCBFunc http_cb, std::string filename, HTTPTYPE method, std::string postdata, std::string tag)
 {
-	m_httpcallback = http_cb;
+	http_cbfunc = http_cb;
 	m_filename = filename;
 	m_tag = tag;
 	HttpClient* httpClient = HttpClient::getInstance();
@@ -35,7 +35,6 @@ void HttpUtil::doData(std::string url, HTTPCOMPLETE_CALLBACK http_cb, std::strin
 	httpReq->setRequestType(httpmethod);
 	httpReq->setUrl(url.c_str());
 	httpReq->setResponseCallback(CC_CALLBACK_2(HttpUtil::onHttpRequestCompleted, this));
-	//httpReq->setResponseCallback(ccHttpRequestCallback(onHttpRequestCompleted));
 	httpClient->setTimeoutForConnect(10);
 	httpClient->send(httpReq);
 	httpReq->release();
@@ -50,7 +49,7 @@ void HttpUtil::onHttpRequestCompleted(cocos2d::network::HttpClient *sender, coco
 	//    判断是否响应成功
 	if (!response->isSucceed())
 	{
-		retcode = -1;
+		retcode = -2;
 	}
 	else
 	{
@@ -59,7 +58,7 @@ void HttpUtil::onHttpRequestCompleted(cocos2d::network::HttpClient *sender, coco
 		std::string tag = response->getHttpRequest()->getTag();
 		if (buffer == NULL)
 		{
-			retcode = -2;
+			retcode = -1;
 		}
 		else
 		{
@@ -84,8 +83,8 @@ void HttpUtil::onHttpRequestCompleted(cocos2d::network::HttpClient *sender, coco
 			fclose(fp);
 		}
 	}
-	if (m_httpcallback != NULL)
-		m_httpcallback(retdata, retcode, m_tag);
+
+	http_cbfunc(retdata, retcode, m_tag);
 
 	release();
 }

@@ -1182,7 +1182,7 @@ void NpcLayer::getWinRes(int type)
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(winres[i]) && !GlobalData::tempHasGf_Equip(winres[i]))
+				if (winres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(winres[i]) && GlobalData::tempHasGf_Equip(winres[i]).length() <= 0)
 				{
 					isfind = true;
 					data.strid = gfdata.id;
@@ -1217,7 +1217,6 @@ void NpcLayer::getWinRes(int type)
 			tempResData.push_back(data);
 		}
 	}
-
 	if (tempResData.size() > 0)
 	{
 		std::string datastr = GameDataSave::getInstance()->getTempStorage(m_addrstr);
@@ -1236,17 +1235,8 @@ void NpcLayer::getWinRes(int type)
 			std::string tmpstrid = tempResData[i].strid;
 			if (tmptype == W_GONG || tmptype == N_GONG || tmptype == WEAPON || tmptype == PROTECT_EQU)
 			{
-				bool isfind = false;
-				for (unsigned int n = 0; n < GlobalData::vec_tempGf_Equip.size(); n++)
-				{
-					if (GlobalData::vec_tempGf_Equip[n].compare(tmpstrid) == 0)
-					{
-						isfind = true;
-						break;
-					}
-				}
-				if (!isfind)
-					GlobalData::vec_tempGf_Equip.push_back(tmpstrid);
+				GlobalData::map_tempGf_Equip[m_addrstr].clear();
+				GlobalData::map_tempGf_Equip[m_addrstr].push_back(tmpstrid);
 			}
 		}
 		GameDataSave::getInstance()->setTempStorage(m_addrstr, datastr);

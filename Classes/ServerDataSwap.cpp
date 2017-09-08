@@ -9,28 +9,35 @@
 
 #define HTTPURL "https://www.stormnet.cn/api/"
 
-ServerDataSwap* ServerDataSwap::_serverDataSwap = NULL;
-
-ServerDataDelegateProtocol* ServerDataSwap::m_pDelegateProtocol = NULL;
+bool ServerDataSwap::isdoing = false;
 
 ServerDataSwap::ServerDataSwap()
 {
-
+	m_pDelegateProtocol = NULL;
 }
 
 ServerDataSwap::~ServerDataSwap()
 {
-
+	m_pDelegateProtocol = NULL;
+	isdoing = false;
+}
+ServerDataSwap::ServerDataSwap(ServerDataDelegateProtocol *pDelegateProtocol)
+{
+	m_pDelegateProtocol = pDelegateProtocol;
+	isdoing = true;
+}
+bool ServerDataSwap::isGetingData()
+{
+	return isdoing;
 }
 
-ServerDataSwap* ServerDataSwap::getInstance()
+ServerDataSwap* ServerDataSwap::init(ServerDataDelegateProtocol* delegateProtocol)
 {
-	if (_serverDataSwap == NULL)
-	{
-		_serverDataSwap = new  ServerDataSwap();
-	}
+	ServerDataSwap *serverDataSwap = new  ServerDataSwap(delegateProtocol);
+	serverDataSwap->autorelease();
+	serverDataSwap->retain();
 
-	return _serverDataSwap;
+	return serverDataSwap;
 }
 
 void ServerDataSwap::setDelegate(ServerDataDelegateProtocol *delegateProtocol)
@@ -143,6 +150,8 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	}
 	if (fightingpower > 0)
 	{
+		if (fightingpower >= 1000000)
+			fightingpower = 30000;
 		writedoc.AddMember("fightingpower", fightingpower, allocator);
 	}
 
@@ -226,7 +235,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	url.append(HTTPURL);
 	url.append("wx_savealldata");
 	std::string tagstr = StringUtils::format("%d", tag);
-    HttpUtil::getInstance()->doData(url, httpPostOneDataCB, "", POST, postdata, tagstr);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPostOneDataCB, this), "", POST, postdata, tagstr);
 }
 
 void ServerDataSwap::getAllData()
@@ -236,7 +245,7 @@ void ServerDataSwap::getAllData()
 	url.append("wx_getalldata?");
 	url.append("playerid=");
 	url.append(GlobalData::UUID());
-	HttpUtil::getInstance()->doData(url, httpGetAllDataCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetAllDataCB, this));
 }
 
 void ServerDataSwap::propadjust()
@@ -246,7 +255,7 @@ void ServerDataSwap::propadjust()
 	url.append("wx_propadjust?");
 	url.append("playerid=");
 	url.append(GlobalData::UUID());
-	HttpUtil::getInstance()->doData(url, httpPropadJustDataCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPropadJustDataCB, this));
 	
 }
 
@@ -259,7 +268,7 @@ void ServerDataSwap::modifyNickName(std::string nickname)
 	url.append(GlobalData::UUID());
 	url.append("&name=");
 	url.append(nickname);
-	HttpUtil::getInstance()->doData(url, httpModifyNickNameCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpModifyNickNameCB, this));
 }
 
 void ServerDataSwap::vipSuccNotice(std::string gid)
@@ -271,7 +280,7 @@ void ServerDataSwap::vipSuccNotice(std::string gid)
 	url.append(GlobalData::UUID());
 	url.append("&goodsid=");
 	url.append(gid);
-	HttpUtil::getInstance()->doData(url);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpBlankCB, this));
 }
 
 void ServerDataSwap::vipIsOn(int heroid)
@@ -284,7 +293,26 @@ void ServerDataSwap::vipIsOn(int heroid)
 	url.append("&type=");
 	std::string herostr = StringUtils::format("%d", heroid);
 	url.append(herostr);
-	HttpUtil::getInstance()->doData(url, httpVipIsOnCB);
+	url.append("&vercode=");
+	url.append(GlobalData::getVersion());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpVipIsOnCB, this));
+}
+
+void ServerDataSwap::isGetVip(std::vector<std::string> vipids)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_donemonthlycard?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	std::string strvip;
+	for (unsigned int i = 0; i < vipids.size(); i++)
+	{
+		std::string str = StringUtils::format("&%s=1", vipids[i].c_str());
+		strvip.append(str);
+	}
+	url.append(strvip);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpIsGetVipCB, this));
 }
 
 void ServerDataSwap::updateFreeReviveCount()
@@ -294,7 +322,7 @@ void ServerDataSwap::updateFreeReviveCount()
 	url.append("wx_usefreelife?");
 	url.append("playerid=");
 	url.append(GlobalData::UUID());
-	HttpUtil::getInstance()->doData(url);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpBlankCB, this));
 }
 
 void ServerDataSwap::getServerTime()
@@ -302,7 +330,7 @@ void ServerDataSwap::getServerTime()
 	std::string url;
 	url.append(HTTPURL);
 	url.append("wx_getservertime");
-	HttpUtil::getInstance()->doData(url, httpGetServerTimeCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetServerTimeCB, this));
 }
 
 void ServerDataSwap::getRankData(std::string orderby)
@@ -314,7 +342,7 @@ void ServerDataSwap::getRankData(std::string orderby)
 	url.append(GlobalData::UUID());
 	url.append("&");
 	url.append(orderby);
-	HttpUtil::getInstance()->doData(url, httpGetRankDataCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetRankDataCB, this));
 }
 
 void ServerDataSwap::getannouncement()
@@ -326,7 +354,12 @@ void ServerDataSwap::getannouncement()
 	url.append(GlobalData::UUID());
 	url.append("&vercode=");
 	url.append(GlobalData::getVersion());
-	HttpUtil::getInstance()->doData(url, httpGetAnnouncementCB);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetAnnouncementCB, this));
+}
+
+void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
+{
+	release();
 }
 
 void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::string tag)
@@ -359,6 +392,7 @@ void ServerDataSwap::httpPostOneDataCB(std::string retdata, int code, std::strin
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
 void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string tag)
@@ -631,6 +665,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 	{
 		m_pDelegateProtocol->onErr(-1);
 	}
+	release();
 }
 
 void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::string tag)
@@ -726,7 +761,7 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 										}
 										else
 										{
-											lv = val;
+											lv = val - 1;
 										}
 										count = 1;
 									}
@@ -752,7 +787,7 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 									}
 									else
 									{
-										lv = val;
+										lv = val - 1;
 									}
 									count = 1;
 								}
@@ -785,10 +820,8 @@ void ServerDataSwap::httpPropadJustDataCB(std::string retdata, int code, std::st
 			m_pDelegateProtocol->onErr(retult);
 		}
 	}
+	release();
 }
-
-
-
 
 void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::string tag)
 {
@@ -826,6 +859,7 @@ void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::st
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
 void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string tag)
@@ -835,6 +869,7 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 		rapidjson::Document doc;
 		if (JsonReader(retdata, doc))
 		{
+			GlobalData::vec_buyVipIds.clear();
 			GlobalData::map_buyVipDays.clear();
 			for (rapidjson::Value::ConstMemberIterator iter = doc.MemberBegin(); iter != doc.MemberEnd(); ++iter)
 			{
@@ -855,7 +890,7 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 					if (pos != std::string::npos && pos > 0)
 					{
 						int val = iter->value.GetInt();
-						GlobalData::map_buyVipDays[strid] = val;
+						GlobalData::map_buyVipDays[strid.substr(pos)] = val;
 					}
 				}
 			}
@@ -889,6 +924,7 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
 void ServerDataSwap::httpGetServerTimeCB(std::string retdata, int code, std::string tag)
@@ -919,6 +955,7 @@ void ServerDataSwap::httpGetServerTimeCB(std::string retdata, int code, std::str
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
 void ServerDataSwap::httpGetRankDataCB(std::string retdata, int code, std::string tag)
@@ -1007,6 +1044,7 @@ void ServerDataSwap::httpGetRankDataCB(std::string retdata, int code, std::strin
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
 void ServerDataSwap::httpGetAnnouncementCB(std::string retdata, int code, std::string tag)
@@ -1056,5 +1094,15 @@ void ServerDataSwap::httpGetAnnouncementCB(std::string retdata, int code, std::s
 			m_pDelegateProtocol->onErr(-1);
 		}
 	}
+	release();
 }
 
+void ServerDataSwap::httpIsGetVipCB(std::string retdata, int code, std::string tag)
+{
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code >= -1)
+			m_pDelegateProtocol->onSuccess();
+	}
+	release();
+}

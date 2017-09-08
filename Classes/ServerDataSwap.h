@@ -7,12 +7,11 @@
 
 class ServerDataDelegateProtocol;
 
-class ServerDataSwap
+class ServerDataSwap: public cocos2d::Ref
 {
 public:
-	ServerDataSwap();
-	~ServerDataSwap();
-	static ServerDataSwap* getInstance();
+
+	static ServerDataSwap* init(ServerDataDelegateProtocol* delegateProtocol = NULL);
 
 	void postOneData(std::string userid, int tag = 0);
 	void postAllData();
@@ -21,23 +20,30 @@ public:
 	void modifyNickName(std::string nickname);
 	void vipSuccNotice(std::string gid);
 	void vipIsOn(int heroid);
+	void isGetVip(std::vector<std::string> vipids);
 	void updateFreeReviveCount();
 	void getServerTime();
 	void getRankData(std::string orderby);
 	void getannouncement();
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
+	static bool isGetingData();
 private:
-	static ServerDataSwap* _serverDataSwap;
-	static ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
+	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
+	static bool isdoing;
+	ServerDataSwap();
+	~ServerDataSwap();
+	ServerDataSwap(ServerDataDelegateProtocol *pDelegateProtocol);
 private:
-	static void httpPostOneDataCB(std::string retdata, int code, std::string tag);
-	static void httpGetAllDataCB(std::string retdata, int code, std::string tag);
-	static void httpPropadJustDataCB(std::string retdata, int code, std::string tag);
-	static void httpModifyNickNameCB(std::string retdata, int code, std::string tag);
-	static void httpVipIsOnCB(std::string retdata, int code, std::string tag);
-	static void httpGetServerTimeCB(std::string retdata, int code, std::string tag);
-	static void httpGetRankDataCB(std::string retdata, int code, std::string tag);
-	static void httpGetAnnouncementCB(std::string retdata, int code, std::string tag);
+	void httpPostOneDataCB(std::string retdata, int code, std::string tag);
+	void httpGetAllDataCB(std::string retdata, int code, std::string tag);
+	void httpPropadJustDataCB(std::string retdata, int code, std::string tag);
+	void httpModifyNickNameCB(std::string retdata, int code, std::string tag);
+	void httpVipIsOnCB(std::string retdata, int code, std::string tag);
+	void httpGetServerTimeCB(std::string retdata, int code, std::string tag);
+	void httpGetRankDataCB(std::string retdata, int code, std::string tag);
+	void httpGetAnnouncementCB(std::string retdata, int code, std::string tag);
+	void httpIsGetVipCB(std::string retdata, int code, std::string tag);
+	void httpBlankCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

@@ -26,7 +26,9 @@ private:
 	cocos2d::ui::Text* priceTxt;
 	bool isDraging;
 	Vec2 startPos;
-
+	cocos2d::ui::Text* leftday;
+	cocos2d::ui::Text* leftday_0;
+	cocos2d::ui::Text* leftday_1;
 	GoodsData* m_goodData;
 private:
 
@@ -35,6 +37,7 @@ private:
 	*****************************/
 	void onBuyBtn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void updateLeftDays(float dt);
 };
 #endif
 

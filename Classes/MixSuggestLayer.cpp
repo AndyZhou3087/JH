@@ -26,6 +26,11 @@ bool MixSuggestLayer::init()
 	csbroot = CSLoader::createNode("mixSuggestLayer.csb");
 	this->addChild(csbroot);
 
+
+	desc0 = (cocos2d::ui::Text*)csbroot->getChildByName("desc0");
+	desc1 = (cocos2d::ui::Text*)csbroot->getChildByName("desc1");
+	desc = (cocos2d::ui::Text*)csbroot->getChildByName("desc");
+
 	for (int i = 0; i < 4; i++)
 	{
 		std::string str = StringUtils::format("mixbox_%d", i);
@@ -78,11 +83,9 @@ bool MixSuggestLayer::init()
 
 void MixSuggestLayer::getServerTime()
 {
-	GlobalData::isGetServerData = true;
 	WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-	ServerDataSwap::getInstance()->setDelegate(this);
-	ServerDataSwap::getInstance()->getServerTime();
+	ServerDataSwap::init(this)->getServerTime();
 }
 
 void MixSuggestLayer::onEnterTransitionDidFinish()
@@ -166,7 +169,6 @@ void MixSuggestLayer::onGold(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 
 void MixSuggestLayer::onSuccess()
 {
-	GlobalData::isGetServerData = false;
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 
 	severtime = GlobalData::servertime;
@@ -183,7 +185,6 @@ void MixSuggestLayer::onSuccess()
 
 void MixSuggestLayer::onErr(int errcode)
 {
-	GlobalData::isGetServerData = false;
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 
 }
@@ -282,5 +283,61 @@ void MixSuggestLayer::loadMixGfUi(MixGfData mixdata)
 		}
 		img[i + 1]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 		imgbox[i+1]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
+	}
+	updateDesc();
+}
+
+void MixSuggestLayer::updateDesc()
+{
+	std::string mixid = GameDataSave::getInstance()->getSuggestMixGf();
+	if (mixid.length() > 0)
+	{
+		MixGfData mixdata = GlobalData::map_MixGfData[mixid];
+		desc0->setVisible(false);
+		desc1->setVisible(false);
+		std::string atkstr;
+		std::string dfstr;
+		std::string critstr;
+		std::string dodgestr;
+		std::string maxhpstr;
+		float atk = mixdata.atkpercent;
+		float df = mixdata.dfpercent;
+		float crit = mixdata.critpercent;
+		float dodge = mixdata.dodgepercent;
+		float maxhp = mixdata.hppercent;
+		if (atk > 0)
+			atkstr = StringUtils::format("+%.2f%%", atk);
+		else
+			atkstr = StringUtils::format("%.2f%%", atk);
+
+		if (df > 0)
+			dfstr = StringUtils::format("+%.2f%%", df);
+		else
+			dfstr = StringUtils::format("%.2f%%", df);
+
+		if (crit > 0)
+			critstr = StringUtils::format("+%.2f%%", crit);
+		else
+			critstr = StringUtils::format("%.2f%%", crit);
+
+		if (dodge > 0)
+			dodgestr = StringUtils::format("+%.2f%%", dodge);
+		else
+			dodgestr = StringUtils::format("%.2f%%", dodge);
+
+		if (maxhp > 0)
+			maxhpstr = StringUtils::format("+%.2f%%", maxhp);
+		else
+			maxhpstr = StringUtils::format("%.2f%%", maxhp);
+
+		std::string str = StringUtils::format("%s%s%s%s%s%s%s%s%s%s", CommonFuncs::gbk2utf("武功攻击").c_str(), atkstr.c_str(), CommonFuncs::gbk2utf("，内功防御").c_str(), dfstr.c_str(), CommonFuncs::gbk2utf("，总暴击率").c_str(), critstr.c_str(), CommonFuncs::gbk2utf("，总闪避率").c_str(), dodgestr.c_str(), CommonFuncs::gbk2utf("，最大气血").c_str(), maxhpstr.c_str());
+		desc->setString(str);
+		desc->setVisible(true);
+	}
+	else
+	{
+		desc0->setVisible(true);
+		desc1->setVisible(true);
+		desc->setVisible(false);
 	}
 }

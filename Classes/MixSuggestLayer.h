@@ -53,6 +53,8 @@ private:
 
 	void loadMixGfUi(MixGfData mixdata);
 
+	void updateDesc();
+
 private:
 	cocos2d::ui::ImageView* imgbox[4];
 	cocos2d::ui::ImageView* img[4];
@@ -65,6 +67,10 @@ private:
 	Node *csbroot;
 	int severtime;
 	int startime;
+
+	cocos2d::ui::Text* desc0;
+	cocos2d::ui::Text* desc1;
+	cocos2d::ui::Text* desc;
 };
 #endif
 

@@ -252,12 +252,28 @@ float Hero::getRecoverLifeMaxValue()
 void Hero::setAtrByType(HeroAtrType type, PackageData pData)
 {
 	map_heroAtr[type] = pData;
+	saveProperData();
 }
 
 PackageData* Hero::getAtrByType(HeroAtrType type)
 {
 	return &map_heroAtr[type];
 }
+
+void Hero::saveProperData()
+{
+	//保存装备栏数据
+	std::string str;
+	for (int i = H_WEAPON; i < H_MAX; i++)
+	{
+		PackageData* sdata = g_hero->getAtrByType((HeroAtrType)i);
+
+		std::string idstr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", sdata->strid.c_str(), sdata->type, sdata->count, sdata->extype, sdata->lv, sdata->exp, sdata->goodvalue, sdata->slv, sdata->tqu);
+		str.append(idstr);
+	}
+	GlobalData::setHeroProperData(str.substr(0, str.length() - 1));
+}
+
 void Hero::revive()
 {
 	//复活-满状态复活

@@ -77,6 +77,11 @@ private:
 	*****************************/
 	void updateGFScroll();
 
+	/****************************
+	更新组合功法说明
+	*****************************/
+	void updateDesc();
+
 private:
 	Node* csbroot;
 	cocos2d::ui::Widget* heroselectbg;
@@ -93,6 +98,9 @@ private:
 	std::vector<PackageData> vec_myhasgf;
 	PackageData* masterGFData;
 	std::map<int, std::vector<PackageData*>> map_secgfdata;
+	cocos2d::ui::Text* desc0;
+	cocos2d::ui::Text* desc1;
+	cocos2d::ui::Text* desc;
 };
 #endif
 

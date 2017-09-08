@@ -194,7 +194,7 @@ void ExchangeLayer::delayShowExgData(float dt)
 			for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 			{
 				WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-				if (exchgres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(exchgres[i]) && !GlobalData::tempHasGf_Equip(exchgres[i]))
+				if (exchgres[i].compare(gfdata.id) == 0 && !g_hero->checkifHasGF_Equip(exchgres[i]) && GlobalData::tempHasGf_Equip(exchgres[i]).length() <= 0)
 				{
 					isfind = true;
 					data.strid = gfdata.id;
@@ -748,7 +748,7 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 		for (unsigned int i = 0; i < map_temp[rit->first].size(); i++)
 		{
 			std::string tmpstr = map_temp[rit->first][i];
-			if (!GlobalData::tempHasGf_Equip(tmpstr))
+			if (GlobalData::tempHasGf_Equip(tmpstr).length() <= 0)
 				map_res[rit->first].push_back(tmpstr);
 		}
 	}

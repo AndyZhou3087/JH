@@ -152,14 +152,14 @@
                 <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title" ActionTag="-910771035" Tag="278" IconVisible="False" LeftMargin="277.0802" RightMargin="274.9198" TopMargin="14.0114" BottomMargin="496.9886" FontSize="50" LabelText="功法" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="92.0000" Y="55.0000" />
+              <AbstractNodeData Name="title" ActionTag="-910771035" Tag="278" IconVisible="False" LeftMargin="274.5802" RightMargin="272.4198" TopMargin="15.5114" BottomMargin="498.4886" FontSize="50" LabelText="功法" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="97.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="323.0802" Y="524.4886" />
                 <Scale ScaleX="0.6500" ScaleY="0.6500" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.5017" Y="0.9267" />
-                <PreSize X="0.1429" Y="0.0972" />
+                <PreSize X="0.1506" Y="0.0919" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -194,14 +194,14 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="desc0" ActionTag="-1973381812" Tag="136" IconVisible="False" LeftMargin="391.3748" RightMargin="58.6252" TopMargin="488.7793" BottomMargin="46.2207" FontSize="28" LabelText="仅显示满级功法" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="194.0000" Y="31.0000" />
+              <AbstractNodeData Name="desc0" ActionTag="-1973381812" Tag="136" IconVisible="False" LeftMargin="391.3748" RightMargin="56.6252" TopMargin="489.5883" BottomMargin="47.4117" FontSize="28" LabelText="仅显示满级功法" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="196.0000" Y="29.0000" />
                 <AnchorPoint ScaleY="0.5955" />
                 <Position X="391.3748" Y="64.6812" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="204" G="4" B="4" />
                 <PrePosition X="0.6077" Y="0.1143" />
-                <PreSize X="0.3012" Y="0.0548" />
+                <PreSize X="0.3043" Y="0.0512" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -227,8 +227,8 @@
             <FileData Type="MarkedSubImage" Path="ui/heroatrmixbox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mixtitle" ActionTag="2049360533" Tag="82" IconVisible="False" LeftMargin="-240.5519" RightMargin="59.5519" TopMargin="-140.4375" BottomMargin="91.4375" FontSize="45" LabelText="武功组合" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="181.0000" Y="49.0000" />
+          <AbstractNodeData Name="mixtitle" ActionTag="2049360533" Tag="82" IconVisible="False" LeftMargin="-241.5977" RightMargin="58.5977" TopMargin="-139.6285" BottomMargin="92.6285" FontSize="45" LabelText="武功组合" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="183.0000" Y="47.0000" />
             <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
             <Position X="-145.9070" Y="120.6170" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -239,10 +239,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mixdesc" ActionTag="-1009537391" Tag="83" IconVisible="False" LeftMargin="-293.1768" RightMargin="-136.8232" TopMargin="58.7357" BottomMargin="-178.7357" IsCustomSize="True" FontSize="28" LabelText="我是百晓生。        功法可在此进行组合！我知道所有绝佳功法组合，点我进入查看！" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="mixdesc" ActionTag="-1009537391" Tag="83" IconVisible="False" LeftMargin="-293.1770" RightMargin="-136.8230" TopMargin="58.7357" BottomMargin="-178.7357" IsCustomSize="True" FontSize="28" LabelText="我是百晓生。        功法可在此进行组合！我知道所有绝佳功法组合，点我进入查看！" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="430.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
-            <Position X="-68.3298" Y="-107.2757" />
+            <Position X="-68.3300" Y="-107.2757" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
@@ -251,12 +251,24 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="mixdesc1" ActionTag="-1277296590" Tag="112" IconVisible="False" LeftMargin="-125.8808" RightMargin="64.8808" TopMargin="71.0850" BottomMargin="-104.0850" FontSize="30" LabelText="满级" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="61.0000" Y="33.0000" />
+          <AbstractNodeData Name="mixdesc1" ActionTag="-1277296590" Tag="112" IconVisible="False" LeftMargin="-126.9266" RightMargin="63.9266" TopMargin="71.8940" BottomMargin="-102.8940" FontSize="30" LabelText="满级" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="63.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
             <Position X="-93.9839" Y="-84.4335" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="desc" ActionTag="786370749" Tag="52" IconVisible="False" LeftMargin="-293.1770" RightMargin="-136.8230" TopMargin="58.7400" BottomMargin="-178.7400" IsCustomSize="True" FontSize="28" LabelText="" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="430.0000" Y="120.0000" />
+            <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
+            <Position X="-68.3300" Y="-107.2800" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />

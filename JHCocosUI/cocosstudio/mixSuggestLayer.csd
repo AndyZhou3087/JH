@@ -315,7 +315,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="1659748099" Tag="58" IconVisible="False" LeftMargin="88.6149" RightMargin="112.3851" TopMargin="706.2961" BottomMargin="549.7039" FontSize="23" LabelText="我是百晓生，我知道所有的神功组合，你想知道吗？" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desc" ActionTag="-1216837034" Tag="86" IconVisible="False" LeftMargin="88.6149" RightMargin="112.3851" TopMargin="705.7791" BottomMargin="524.2209" IsCustomSize="True" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="519.0000" Y="50.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="88.6149" Y="549.2209" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.1231" Y="0.4291" />
+            <PreSize X="0.7208" Y="0.0391" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="desc0" ActionTag="1659748099" Tag="58" IconVisible="False" LeftMargin="88.6149" RightMargin="112.3851" TopMargin="706.2961" BottomMargin="549.7039" FontSize="23" LabelText="我是百晓生，我知道所有的神功组合，你想知道吗？" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="519.0000" Y="24.0000" />
             <AnchorPoint ScaleX="0.5229" ScaleY="0.5955" />
             <Position X="360.0000" Y="563.9959" />
