@@ -647,27 +647,27 @@ void MixGFNode::updateDesc()
 		float crit = mixdata.critpercent;
 		float dodge = mixdata.dodgepercent;
 		float maxhp = mixdata.hppercent;
-		if (atk > 0)
+		if (atk >= 0)
 			atkstr = StringUtils::format("+%.2f%%", atk);
 		else
 			atkstr = StringUtils::format("%.2f%%", atk);
 
-		if (df > 0)
+		if (df >= 0)
 			dfstr = StringUtils::format("+%.2f%%", df);
 		else
 			dfstr = StringUtils::format("%.2f%%", df);
 
-		if (crit > 0)
+		if (crit >= 0)
 			critstr = StringUtils::format("+%.2f%%", crit);
 		else
 			critstr = StringUtils::format("%.2f%%", crit);
 
-		if (dodge > 0)
+		if (dodge >= 0)
 			dodgestr = StringUtils::format("+%.2f%%", dodge);
 		else
 			dodgestr = StringUtils::format("%.2f%%", dodge);
 
-		if (maxhp > 0)
+		if (maxhp >= 0)
 			maxhpstr = StringUtils::format("+%.2f%%", maxhp);
 		else
 			maxhpstr = StringUtils::format("%.2f%%", maxhp);

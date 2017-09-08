@@ -225,10 +225,47 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="silverbtn" ActionTag="-87985554" Tag="744" IconVisible="False" LeftMargin="282.0580" RightMargin="287.9420" TopMargin="771.7037" BottomMargin="418.2963" TouchEnable="True" FontSize="40" ButtonText="刷新" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="silverbtn" ActionTag="-87985554" Tag="744" IconVisible="False" LeftMargin="282.0600" RightMargin="287.9400" TopMargin="771.7037" BottomMargin="418.2963" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
+            <Children>
+              <AbstractNodeData Name="silver" ActionTag="-1992555859" VisibleForFrame="False" Tag="747" IconVisible="False" LeftMargin="-0.6680" RightMargin="44.6680" TopMargin="8.7044" BottomMargin="-24.7044" ctype="SpriteObjectData">
+                <Size X="106.0000" Y="106.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="52.3320" Y="28.2956" />
+                <Scale ScaleX="0.4000" ScaleY="0.4000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3489" Y="0.3144" />
+                <PreSize X="0.7067" Y="1.1778" />
+                <FileData Type="MarkedSubImage" Path="ui/80.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="silvercount" ActionTag="1879269803" VisibleForFrame="False" Tag="774" IconVisible="False" LeftMargin="64.8012" RightMargin="36.1988" TopMargin="49.9153" BottomMargin="11.0847" FontSize="28" LabelText="x50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="49.0000" Y="29.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="89.3012" Y="25.5847" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5953" Y="0.2843" />
+                <PreSize X="0.3267" Y="0.3222" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="text" ActionTag="-56530443" Tag="117" IconVisible="False" LeftMargin="29.1993" RightMargin="36.8007" TopMargin="18.0000" BottomMargin="28.0000" FontSize="42" LabelText="刷新" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="84.0000" Y="44.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="71.1993" Y="50.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4747" Y="0.5556" />
+                <PreSize X="0.5600" Y="0.4889" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="357.0580" Y="463.2963" />
+            <Position X="357.0600" Y="463.2963" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4959" Y="0.3620" />
@@ -241,10 +278,47 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="goldbtn" ActionTag="1274345705" Tag="745" IconVisible="False" LeftMargin="491.3034" RightMargin="78.6966" TopMargin="771.7037" BottomMargin="418.2963" TouchEnable="True" FontSize="40" ButtonText="刷新" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="goldbtn" ActionTag="1274345705" Tag="745" IconVisible="False" LeftMargin="491.3000" RightMargin="78.7000" TopMargin="771.7037" BottomMargin="418.2963" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
+            <Children>
+              <AbstractNodeData Name="gold" ActionTag="-1394707647" VisibleForFrame="False" Tag="746" IconVisible="False" LeftMargin="19.3182" RightMargin="64.6818" TopMargin="45.8125" BottomMargin="8.1875" ctype="SpriteObjectData">
+                <Size X="66.0000" Y="36.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="52.3182" Y="26.1875" />
+                <Scale ScaleX="0.6000" ScaleY="0.6000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3488" Y="0.2910" />
+                <PreSize X="0.4400" Y="0.4000" />
+                <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="goldcount" ActionTag="-1688663374" VisibleForFrame="False" Tag="775" IconVisible="False" LeftMargin="65.6467" RightMargin="35.3533" TopMargin="51.3223" BottomMargin="9.6777" FontSize="28" LabelText="x50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="49.0000" Y="29.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="90.1467" Y="24.1777" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6010" Y="0.2686" />
+                <PreSize X="0.3267" Y="0.3222" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="text" ActionTag="1832403168" Tag="113" IconVisible="False" LeftMargin="29.2040" RightMargin="36.7960" TopMargin="18.0000" BottomMargin="28.0000" FontSize="42" LabelText="刷新" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="84.0000" Y="44.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="71.2040" Y="50.0000" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4747" Y="0.5556" />
+                <PreSize X="0.5600" Y="0.4889" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="566.3034" Y="463.2963" />
+            <Position X="566.3000" Y="463.2963" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7865" Y="0.3620" />
@@ -257,60 +331,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="gold" ActionTag="-1394707647" Tag="746" IconVisible="False" LeftMargin="513.7327" RightMargin="140.2673" TopMargin="851.4498" BottomMargin="392.5502" ctype="SpriteObjectData">
-            <Size X="66.0000" Y="36.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="546.7327" Y="410.5502" />
-            <Scale ScaleX="0.8000" ScaleY="0.8000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7594" Y="0.3207" />
-            <PreSize X="0.0917" Y="0.0281" />
-            <FileData Type="MarkedSubImage" Path="ui/gold.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="silver" ActionTag="-1992555859" Tag="747" IconVisible="False" LeftMargin="281.7007" RightMargin="332.2993" TopMargin="814.7474" BottomMargin="359.2526" ctype="SpriteObjectData">
-            <Size X="106.0000" Y="106.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="334.7007" Y="412.2526" />
-            <Scale ScaleX="0.5000" ScaleY="0.5000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4649" Y="0.3221" />
-            <PreSize X="0.1472" Y="0.0828" />
-            <FileData Type="MarkedSubImage" Path="ui/80.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="freetime" ActionTag="1239097572" Tag="773" IconVisible="False" LeftMargin="89.0339" RightMargin="526.9661" TopMargin="859.9589" BottomMargin="394.0411" FontSize="25" LabelText="23:59:00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="freetime0" ActionTag="1239097572" Tag="773" IconVisible="False" LeftMargin="89.0339" RightMargin="526.9661" TopMargin="859.9589" BottomMargin="394.0411" FontSize="25" LabelText="23:59:00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="104.0000" Y="26.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="141.0339" Y="407.0411" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="89.0339" Y="407.0411" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.1959" Y="0.3180" />
+            <PrePosition X="0.1237" Y="0.3180" />
             <PreSize X="0.1444" Y="0.0203" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="silvercount" ActionTag="1879269803" Tag="774" IconVisible="False" LeftMargin="358.1700" RightMargin="326.8300" TopMargin="856.9587" BottomMargin="394.0413" FontSize="28" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="35.0000" Y="29.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="375.6700" Y="408.5413" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.5218" Y="0.3192" />
-            <PreSize X="0.0486" Y="0.0227" />
-            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="goldcount" ActionTag="-1688663374" Tag="775" IconVisible="False" LeftMargin="571.0641" RightMargin="113.9359" TopMargin="856.9588" BottomMargin="394.0412" FontSize="28" LabelText="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="35.0000" Y="29.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="588.5641" Y="408.5412" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.8175" Y="0.3192" />
-            <PreSize X="0.0486" Y="0.0227" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -395,6 +423,30 @@
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.8210" Y="0.4819" />
             <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="freetime1" ActionTag="207388023" Tag="118" IconVisible="False" LeftMargin="269.0600" RightMargin="274.9400" TopMargin="859.9589" BottomMargin="394.0411" FontSize="25" LabelText="23:59:00后免费" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="176.0000" Y="26.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="269.0600" Y="407.0411" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.3737" Y="0.3180" />
+            <PreSize X="0.2444" Y="0.0203" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="freetime2" ActionTag="-911326945" Tag="119" IconVisible="False" LeftMargin="478.3000" RightMargin="65.7000" TopMargin="860.9589" BottomMargin="393.0411" FontSize="25" LabelText="23:59:00后免费" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="176.0000" Y="26.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="478.3000" Y="406.0411" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.6643" Y="0.3172" />
+            <PreSize X="0.2444" Y="0.0203" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

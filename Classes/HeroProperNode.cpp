@@ -781,34 +781,50 @@ bool HeroProperNode::isCanTakeOn()
 			return false;
 		}
 
-		std::string caryymastergf;
+
+		std::string othergf;
 		if (m_select_udata->type == N_GONG)
 		{
-			if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0)
+			if (g_hero->getAtrByType(H_WG)->count > 0)
 			{
-				caryymastergf = g_hero->getAtrByType(H_WG)->strid;
+				othergf = g_hero->getAtrByType(H_WG)->strid;
 			}
 		}
 		else if (m_select_udata->type == W_GONG)
 		{
-			if (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0)
+			if (g_hero->getAtrByType(H_NG)->count > 0)
 			{
-				caryymastergf = g_hero->getAtrByType(H_NG)->strid;
+				othergf = g_hero->getAtrByType(H_NG)->strid;
 			}
 		}
+		std::string comparegf;
+		std::string descstr;
 
-		if (caryymastergf.length() > 0)
+		if (m_select_udata->strid.compare(mdata.mastergf) == 0)
+		{
+			comparegf = othergf;
+			descstr = StringUtils::format("%s%s%s%s", CommonFuncs::gbk2utf("学习").c_str(), "%s", CommonFuncs::gbk2utf("，无法使用").c_str(), mdata.name.c_str());
+
+		}
+		else if (othergf.compare(mdata.mastergf) == 0)
+		{
+			comparegf = m_select_udata->strid;
+			descstr = StringUtils::format("%s%s%s%s", CommonFuncs::gbk2utf("学习").c_str(), mdata.name.c_str(), CommonFuncs::gbk2utf("，无法使用").c_str(), "%s");
+		}
+		if (comparegf.length() > 0)
 		{
 			for (unsigned int i = 0; i < mdata.vec_mutexgf.size(); i++)
 			{
-				if (mdata.vec_mutexgf[i].compare(m_select_udata->strid) == 0)
+				if (mdata.vec_mutexgf[i].compare(comparegf) == 0)
 				{
-					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("功法冲突，不能同时装备！！"));
+					std::string str = StringUtils::format(descstr.c_str(), GlobalData::map_allResource[mdata.vec_mutexgf[i]].cname.c_str());
+					HintBox* hint = HintBox::create(str);
 					Director::getInstance()->getRunningScene()->addChild(hint, 4);
 					return false;
 				}
 			}
 		}
+
 	}
 
 	return ret;

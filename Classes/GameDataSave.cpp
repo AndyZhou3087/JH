@@ -547,14 +547,16 @@ void GameDataSave::setMixGF(std::string str)
 	saveStringDataByKey(addUIDString("mixgf"), str);
 }
 
-int GameDataSave::getFreeMixTime()
+int GameDataSave::getFreeMixTime(int type)
 {
-	return loadIntDataByKey(addUIDString("freemixtime"), 0);
+	std::string typestr = StringUtils::format("freemixtime%d", type);
+	return loadIntDataByKey(addUIDString(typestr), 0);
 }
 
-void GameDataSave::setFreeMixTime(int val)
+void GameDataSave::setFreeMixTime(int type, int val)
 {
-	saveIntDataByKey(addUIDString("freemixtime"), val);
+	std::string typestr = StringUtils::format("freemixtime%d", type);
+	saveIntDataByKey(addUIDString(typestr), val);
 }
 
 

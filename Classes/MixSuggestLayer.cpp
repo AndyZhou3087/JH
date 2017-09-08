@@ -9,7 +9,9 @@
 
 MixSuggestLayer::MixSuggestLayer()
 {
-	startime = 0;
+	startime0 = 0;
+	startime1 = 1;
+	startime2 = 0;
 }
 
 
@@ -55,8 +57,15 @@ bool MixSuggestLayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbroot->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(MixSuggestLayer::onBack, this));
 
-	freetimelbl = (cocos2d::ui::Text*)csbroot->getChildByName("freetime");
-	freetimelbl->setVisible(false);
+	freetimelbl0 = (cocos2d::ui::Text*)csbroot->getChildByName("freetime0");
+	freetimelbl0->setVisible(false);
+
+	freetimelbl1 = (cocos2d::ui::Text*)csbroot->getChildByName("freetime1");
+	freetimelbl1->setVisible(false);
+
+	freetimelbl2 = (cocos2d::ui::Text*)csbroot->getChildByName("freetime2");
+	freetimelbl2->setVisible(false);
+
 
 	mixname = (cocos2d::ui::Text*)csbroot->getChildByName("mixtitle");
 
@@ -65,7 +74,9 @@ bool MixSuggestLayer::init()
 	if (suggestgfstr.length() > 0)
 		loadMixGfUi(GlobalData::map_MixGfData[suggestgfstr]);
 
-	startime = GameDataSave::getInstance()->getFreeMixTime();
+	startime0 = GameDataSave::getInstance()->getFreeMixTime(0);
+	startime1 = GameDataSave::getInstance()->getFreeMixTime(1);
+	startime2 = GameDataSave::getInstance()->getFreeMixTime(2);
 
 	getServerTime();
 
@@ -113,9 +124,9 @@ void MixSuggestLayer::onFree(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		freebtn->setEnabled(false);
-		freetimelbl->setEnabled(true);
-		startime = severtime;
-		GameDataSave::getInstance()->setFreeMixTime(startime);
+		freetimelbl0->setVisible(true);
+		startime0 = severtime;
+		GameDataSave::getInstance()->setFreeMixTime(0, startime0);
 		randMixGf(0);
 	}
 }
@@ -125,15 +136,39 @@ void MixSuggestLayer::onSilver(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (StorageRoom::getCountById("80") < 50)
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)silverbtn->getChildByName("text");
+		if (severtime - startime1 >= 86400)
 		{
-			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两不足！"));
-			this->addChild(hbox);
+			silverbtn->getChildByName("silver")->setVisible(false);
+			silverbtn->getChildByName("silvercount")->setVisible(false);
+			freetimelbl1->setVisible(false);
+			text->setPositionY(45);
+			text->setFontSize(50);
+			text->setString(CommonFuncs::gbk2utf("免费"));
+			startime1 = severtime;
+			GameDataSave::getInstance()->setFreeMixTime(1, startime1);
+			randMixGf(1);
 		}
 		else
 		{
-			StorageRoom::use("80", 50);
-			randMixGf(1);
+
+			silverbtn->getChildByName("silver")->setVisible(true);
+			silverbtn->getChildByName("silvercount")->setVisible(true);
+			freetimelbl1->setVisible(true);
+			text->setPositionY(50);
+			text->setFontSize(42);
+			text->setString(CommonFuncs::gbk2utf("刷新"));
+
+			if (StorageRoom::getCountById("80") < 50)
+			{
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两不足！"));
+				this->addChild(hbox);
+			}
+			else
+			{
+				StorageRoom::use("80", 50);
+				randMixGf(1);
+			}
 		}
 	}
 }
@@ -143,26 +178,50 @@ void MixSuggestLayer::onGold(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		int mygold = GlobalData::getMyGoldCount();
-
-		if (mygold > 50)
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)goldbtn->getChildByName("text");
+		if (severtime - startime2 >= 86400)
 		{
-			if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
-			{
-				GlobalData::dataIsModified = true;
-				GlobalData::setMyGoldCount(0);
-				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
-				this->addChild(hint);
-				return;
-			}
+			goldbtn->getChildByName("gold")->setVisible(false);
+			goldbtn->getChildByName("goldcount")->setVisible(false);
+			freetimelbl2->setVisible(false);
+			text->setPositionY(45);
+			text->setFontSize(50);
+			text->setString(CommonFuncs::gbk2utf("免费"));
+			startime2 = severtime;
 
-			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 50);
+			GameDataSave::getInstance()->setFreeMixTime(2, startime2);
 			randMixGf(2);
 		}
 		else
 		{
-			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！"));
-			this->addChild(hbox);
+			goldbtn->getChildByName("gold")->setVisible(true);
+			goldbtn->getChildByName("goldcount")->setVisible(true);
+			freetimelbl2->setVisible(true);
+			text->setPositionY(50);
+			text->setFontSize(42);
+			text->setString(CommonFuncs::gbk2utf("刷新"));
+
+			int mygold = GlobalData::getMyGoldCount();
+
+			if (mygold > 50)
+			{
+				if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
+				{
+					GlobalData::dataIsModified = true;
+					GlobalData::setMyGoldCount(0);
+					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
+					this->addChild(hint);
+					return;
+				}
+
+				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 50);
+				randMixGf(2);
+			}
+			else
+			{
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！"));
+				this->addChild(hbox);
+			}
 		}
 	}
 }
@@ -176,10 +235,31 @@ void MixSuggestLayer::onSuccess()
 	this->unschedule(schedule_selector(MixSuggestLayer::updateServerTime));
 	this->schedule(schedule_selector(MixSuggestLayer::updateServerTime), 1.0f);
 
-	if (severtime - startime >= 86400)
+	if (severtime - startime0 >= 86400)
 	{
 		freebtn->setEnabled(true);
-		freetimelbl->setVisible(false);
+		freetimelbl0->setVisible(false);
+	}
+
+	if (severtime - startime1 >= 86400)
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)silverbtn->getChildByName("text");
+		silverbtn->getChildByName("silver")->setVisible(false);
+		silverbtn->getChildByName("silvercount")->setVisible(false);
+		freetimelbl1->setVisible(false);
+		text->setPositionY(45);
+		text->setFontSize(50);
+		text->setString(CommonFuncs::gbk2utf("免费"));
+	}
+	if (severtime - startime2 >= 86400)
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)goldbtn->getChildByName("text");
+		goldbtn->getChildByName("gold")->setVisible(false);
+		goldbtn->getChildByName("goldcount")->setVisible(false);
+		freetimelbl2->setVisible(false);
+		text->setPositionY(45);
+		text->setFontSize(50);
+		text->setString(CommonFuncs::gbk2utf("免费"));
 	}
 }
 
@@ -193,19 +273,69 @@ void MixSuggestLayer::updateServerTime(float dt)
 {
 	severtime++;
 
-	if (severtime - startime >= 86400)
+	if (severtime - startime0 >= 86400)
 	{
 		freebtn->setEnabled(true);
-		freetimelbl->setVisible(false);
+		freetimelbl0->setVisible(false);
 	}
 	else
 	{
 		freebtn->setEnabled(false);
-		freetimelbl->setVisible(true);
+		freetimelbl0->setVisible(true);
 
-		int lefttime = 86400 - (severtime - startime);
+		int lefttime = 86400 - (severtime - startime0);
 		std::string str = StringUtils::format("%02d:%02d:%02d", lefttime / 3600, lefttime % 3600 / 60, lefttime % 3600 % 60);
-		freetimelbl->setString(str);
+		freetimelbl0->setString(str);
+	}
+
+	if (severtime - startime1 >= 86400)
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)silverbtn->getChildByName("text");
+		silverbtn->getChildByName("silver")->setVisible(false);
+		silverbtn->getChildByName("silvercount")->setVisible(false);
+		freetimelbl1->setVisible(false);
+		text->setPositionY(45);
+		text->setFontSize(50);
+		text->setString(CommonFuncs::gbk2utf("免费"));
+	}
+	else
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)silverbtn->getChildByName("text");
+		silverbtn->getChildByName("silver")->setVisible(true);
+		silverbtn->getChildByName("silvercount")->setVisible(true);
+		freetimelbl1->setVisible(true);
+		text->setPositionY(50);
+		text->setFontSize(42);
+		text->setString(CommonFuncs::gbk2utf("刷新"));
+
+		int lefttime = 86400 - (severtime - startime1);
+		std::string str = StringUtils::format("%02d:%02d:%02d后免费", lefttime / 3600, lefttime % 3600 / 60, lefttime % 3600 % 60);
+		freetimelbl1->setString(CommonFuncs::gbk2utf(str.c_str()));
+	}
+
+	if (severtime - startime2 >= 86400)
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)goldbtn->getChildByName("text");
+		goldbtn->getChildByName("gold")->setVisible(false);
+		goldbtn->getChildByName("goldcount")->setVisible(false);
+		freetimelbl2->setVisible(false);
+		text->setPositionY(45);
+		text->setFontSize(50);
+		text->setString(CommonFuncs::gbk2utf("免费"));
+	}
+	else
+	{
+		cocos2d::ui::Text* text = (cocos2d::ui::Text*)goldbtn->getChildByName("text");
+		goldbtn->getChildByName("gold")->setVisible(true);
+		goldbtn->getChildByName("goldcount")->setVisible(true);
+		freetimelbl2->setVisible(true);
+		text->setPositionY(50);
+		text->setFontSize(42);
+
+		int lefttime = 86400 - (severtime - startime2);
+		std::string str = StringUtils::format("%02d:%02d:%02d后免费", lefttime / 3600, lefttime % 3600 / 60, lefttime % 3600 % 60);
+		freetimelbl2->setString(CommonFuncs::gbk2utf(str.c_str()));
+		text->setString(CommonFuncs::gbk2utf("刷新"));
 	}
 }
 
@@ -305,27 +435,27 @@ void MixSuggestLayer::updateDesc()
 		float crit = mixdata.critpercent;
 		float dodge = mixdata.dodgepercent;
 		float maxhp = mixdata.hppercent;
-		if (atk > 0)
+		if (atk >= 0)
 			atkstr = StringUtils::format("+%.2f%%", atk);
 		else
 			atkstr = StringUtils::format("%.2f%%", atk);
 
-		if (df > 0)
+		if (df >= 0)
 			dfstr = StringUtils::format("+%.2f%%", df);
 		else
 			dfstr = StringUtils::format("%.2f%%", df);
 
-		if (crit > 0)
+		if (crit >= 0)
 			critstr = StringUtils::format("+%.2f%%", crit);
 		else
 			critstr = StringUtils::format("%.2f%%", crit);
 
-		if (dodge > 0)
+		if (dodge >= 0)
 			dodgestr = StringUtils::format("+%.2f%%", dodge);
 		else
 			dodgestr = StringUtils::format("%.2f%%", dodge);
 
-		if (maxhp > 0)
+		if (maxhp >= 0)
 			maxhpstr = StringUtils::format("+%.2f%%", maxhp);
 		else
 			maxhpstr = StringUtils::format("%.2f%%", maxhp);
