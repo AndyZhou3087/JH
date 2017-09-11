@@ -534,6 +534,7 @@
       <FilePathData Path="ui/mixtag.png" />
       <FilePathData Path="ui/arrowdown.png" />
       <FilePathData Path="ui/arrowup.png" />
+      <FilePathData Path="ui/m1-8.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

@@ -40,14 +40,14 @@
                   <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9771" RightMargin="471.0229" TopMargin="994.6161" BottomMargin="316.3839" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
                     <Size X="57.0000" Y="85.0000" />
                     <Children>
-                      <AbstractNodeData Name="vulture" ActionTag="1263559421" Tag="76" IconVisible="False" LeftMargin="18.9826" RightMargin="-1.9826" TopMargin="-13.1359" BottomMargin="58.1359" ctype="SpriteObjectData">
-                        <Size X="40.0000" Y="40.0000" />
+                      <AbstractNodeData Name="vulture" ActionTag="1263559421" Tag="76" IconVisible="False" LeftMargin="8.9826" RightMargin="-11.9826" TopMargin="-23.1359" BottomMargin="48.1359" ctype="SpriteObjectData">
+                        <Size X="60.0000" Y="60.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="38.9826" Y="78.1359" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition X="0.6839" Y="0.9192" />
-                        <PreSize X="0.7018" Y="0.4706" />
+                        <PreSize X="1.0526" Y="0.7059" />
                         <FileData Type="MarkedSubImage" Path="ui/vulture1.png" Plist="uipacker.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
@@ -119,6 +119,16 @@
                     <PrePosition X="0.3700" Y="0.2335" />
                     <PreSize X="0.0735" Y="0.0716" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-7.png" Plist="uipacker.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="m1-8" ActionTag="-1605847947" Tag="80" IconVisible="False" LeftMargin="1287.0381" RightMargin="592.9619" TopMargin="744.0812" BottomMargin="531.9188" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="90" Scale9Height="86" ctype="ImageViewObjectData">
+                    <Size X="120.0000" Y="120.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1347.0381" Y="591.9188" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.6735" Y="0.4240" />
+                    <PreSize X="0.0600" Y="0.0860" />
+                    <FileData Type="MarkedSubImage" Path="ui/m1-8.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="m10-1" ActionTag="-1299461788" Tag="15" IconVisible="False" LeftMargin="1019.0541" RightMargin="810.9459" TopMargin="183.3392" BottomMargin="1111.6608" TouchEnable="True" LeftEage="56" RightEage="56" TopEage="33" BottomEage="33" Scale9OriginX="56" Scale9OriginY="33" Scale9Width="58" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="170.0000" Y="101.0000" />
