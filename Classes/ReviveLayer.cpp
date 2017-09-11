@@ -8,6 +8,7 @@
 #include "FightLayer.h"
 #include "MD5.h"
 #include "HintBox.h"
+#include "AnalyticUtil.h"
 
 #ifdef UMENG_SHARE
 #include "UmengShare/Common/CCUMSocialSDK.h"
