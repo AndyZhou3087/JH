@@ -217,6 +217,9 @@ void ReviveLayer::onFreeRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 		GlobalData::setFreeReviveCount(GlobalData::getFreeReviveCount() - 1);
 		ServerDataSwap::init()->updateFreeReviveCount();
+#ifdef ANALYTICS
+		AnalyticUtil::onEvent("freerevive");
+#endif
 	}
 }
 
@@ -252,6 +255,9 @@ void ReviveLayer::onRevive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 				int usegold = GlobalData::getUseGold() + revivegold;
 				GlobalData::setUseGold(usegold);
 				reviveOk();
+#ifdef ANALYTICS
+				AnalyticUtil::onEvent("goldrevive");
+#endif
 			}
 			else
 				Director::getInstance()->getRunningScene()->addChild(ShopLayer::create(), 1000);
