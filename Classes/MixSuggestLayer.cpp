@@ -435,33 +435,87 @@ void MixSuggestLayer::updateDesc()
 		float crit = mixdata.critpercent;
 		float dodge = mixdata.dodgepercent;
 		float maxhp = mixdata.hppercent;
-		if (atk >= 0)
-			atkstr = StringUtils::format("+%.2f%%", atk);
-		else
-			atkstr = StringUtils::format("%.2f%%", atk);
 
-		if (df >= 0)
+		std::string desstr;
+		if (atk > 0.0f)
+		{
+			atkstr = StringUtils::format("+%.2f%%", atk);
+			desstr.append(CommonFuncs::gbk2utf("大幅增加攻击"));
+		}
+		else if (atk < 0.0f)
+		{
+			atkstr = StringUtils::format("%.2f%%", atk);
+			desstr.append(CommonFuncs::gbk2utf("大幅降低攻击"));
+		}
+
+		if (df > 0.0f)
+		{
 			dfstr = StringUtils::format("+%.2f%%", df);
-		else
+
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅增加防御"));
+		}
+		else if (df < 0.0f)
+		{
 			dfstr = StringUtils::format("%.2f%%", df);
 
-		if (crit >= 0)
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅降低防御"));
+		}
+
+		if (crit > 0.0f)
+		{
 			critstr = StringUtils::format("+%.2f%%", crit);
-		else
+
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅增加暴击率"));
+		}
+		else if (crit < 0.0f)
+		{
 			critstr = StringUtils::format("%.2f%%", crit);
 
-		if (dodge >= 0)
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅降低暴击率"));
+		}
+
+		if (dodge > 0.0f)
+		{
 			dodgestr = StringUtils::format("+%.2f%%", dodge);
-		else
+
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅增加闪避率"));
+		}
+		else if (dodge < 0.0f)
+		{
 			dodgestr = StringUtils::format("%.2f%%", dodge);
 
-		if (maxhp >= 0)
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅降低闪避率"));
+		}
+
+		if (maxhp > 0.0f)
+		{
 			maxhpstr = StringUtils::format("+%.2f%%", maxhp);
-		else
+
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅增加最大气血。"));
+		}
+		else if (maxhp < 0.0f)
+		{
 			maxhpstr = StringUtils::format("%.2f%%", maxhp);
 
-		std::string str = StringUtils::format("%s%s%s%s%s%s%s%s%s%s", CommonFuncs::gbk2utf("武功攻击").c_str(), atkstr.c_str(), CommonFuncs::gbk2utf("，内功防御").c_str(), dfstr.c_str(), CommonFuncs::gbk2utf("，总暴击率").c_str(), critstr.c_str(), CommonFuncs::gbk2utf("，总闪避率").c_str(), dodgestr.c_str(), CommonFuncs::gbk2utf("，最大气血").c_str(), maxhpstr.c_str());
-		desc->setString(str);
+			if (desstr.length() > 0)
+				desstr.append(CommonFuncs::gbk2utf("，"));
+			desstr.append(CommonFuncs::gbk2utf("大幅降低最大气血。"));
+		}
+		desc->setString(desstr);
 		desc->setVisible(true);
 	}
 	else
