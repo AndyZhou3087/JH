@@ -57,7 +57,7 @@ bool SettingLayer::init()
 	cocos2d::ui::TextField* name = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
 	name->setString(mynamestr);
 	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
-	//name->setVisible(false);
+	name->setVisible(false);
 
 	m_editName = cocos2d::ui::EditBox::create(Size(380, 44), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
 	m_editName->setPosition(Point(225, 875));
@@ -72,7 +72,6 @@ bool SettingLayer::init()
 	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);
 	m_editName->setDelegate(this);
 	csbnode->addChild(m_editName);
-	m_editName->setVisible(false);
 
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
