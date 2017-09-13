@@ -82,6 +82,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	loadTempData();
 
+	if (m_addrid.compare("m1-6") == 0)
+		GlobalData::map_maps["m1-6"].npcs.clear();
+
 	std::vector<std::string> winres = GlobalData::map_npcs[npcid].winres;
 	std::vector<int> winresrnd = GlobalData::map_npcs[npcid].winresrnd;
 
@@ -90,8 +93,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	int plottype = 0;
 
 	std::string fnpc = m_npcid;
-	if (GlobalData::map_maps[m_addrid].npcs.size() == 10)
+	if (GlobalData::map_maps[m_addrid].npcs.size() >= 10)
 		fnpc = GlobalData::map_maps[m_addrid].npcs[0];
+
 	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(fnpc) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
 	{
 		plotdata = &GlobalData::vec_PlotMissionData[curplot];
