@@ -18,8 +18,6 @@ public:
 	GameScene();
 	~GameScene();
     static cocos2d::Scene* createScene();
-
-	virtual void onExit();
     virtual bool init();
 	CREATE_FUNC(GameScene);
 	/****************************

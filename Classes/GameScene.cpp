@@ -32,6 +32,10 @@ GameScene::GameScene()
 }
 GameScene::~GameScene()
 {
+	//退出保存数据
+	if (issavedata)
+		saveAllData();
+
 	GameDataSave::purgeGameSave();
 	g_gameLayer = NULL;
 	g_nature = NULL;
@@ -307,15 +311,6 @@ void GameScene::loadSavedHeroPropData()
 		g_hero->setAtrByType((HeroAtrType)i, sdata);
 		//g_hero->set [sdata.type].push_back(sdata);
 	}
-}
-
-void GameScene::onExit()
-{
-	//退出保存数据
-	if (issavedata)
-		saveAllData();
-
-	Layer::onExit();
 }
 
 void GameScene::saveAllData()
