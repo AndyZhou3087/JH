@@ -82,6 +82,15 @@ bool HeroProperNode::init()
 	m_select->setAnchorPoint(Vec2(0, 1));
 	m_scrollView->addChild(m_select, 1);
 	m_select->setVisible(false);
+
+	m_listener = EventListenerTouchOneByOne::create();
+	m_listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+	m_listener->setSwallowTouches(false);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
+
 	return true;
 }
 
@@ -98,7 +107,7 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	{
 		heroselectbg->setVisible(false);
 		heroppoint->setVisible(false);
-
+		m_listener->setSwallowTouches(false);
 		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
 		if (heroStateUILayer != NULL)
 			heroStateUILayer->showNewerGuide(12);
@@ -110,6 +119,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
 		Node* node = (Node*)pSender;
@@ -117,7 +127,7 @@ void HeroProperNode::onImageClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		//点击相同的一个不做操作
 		if (lastclickindex == tag && heroselectbg->isVisible())
 			return;
-
+		m_listener->setSwallowTouches(true);
 		if (g_NewerGuideLayer != NULL)
 		{
 			g_NewerGuideLayer->removeFromParentAndCleanup(true);

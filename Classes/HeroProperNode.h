@@ -124,6 +124,7 @@ private:
 
 private:
 	Node* csbroot;
+	EventListenerTouchOneByOne* m_listener;
 	cocos2d::ui::ImageView* propeImages[8];//8种装备类型
 	cocos2d::ui::ImageView* imgbtn[8];//8种装备框
 	cocos2d::ui::Text* lvtext[8];//8种装备等级或者耐久度
