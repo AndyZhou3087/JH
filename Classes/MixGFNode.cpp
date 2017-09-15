@@ -233,16 +233,7 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 					if (index == secgfsize)
 					{
 						isok = 0;
-						//StorageRoom::use(GlobalData::map_MixGfData[it->first].mastergf);
 						HeroProperNode * heropropernode = (HeroProperNode*)this->getParent()->getChildByName("HeroProperNode");
-						for (int n = 0; n < secgfsize; n++)
-						{
-							StorageRoom::use(GlobalData::map_MixGfData[it->first].vec_secgf[n]);
-						}
-						GlobalData::setMixGF(it->first);
-						mixtitle->setString(GlobalData::map_MixGfData[it->first].name);
-						mixokbtn->setVisible(false);
-
 						HeroAtrType heroatrtype[] = { H_WG, H_NG };
 						for (int i = 0; i < 2; i++)
 						{
@@ -266,6 +257,15 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 
 							}
 						}
+						//StorageRoom::use(GlobalData::map_MixGfData[it->first].mastergf);
+
+						for (int n = 0; n < secgfsize; n++)
+						{
+							StorageRoom::use(GlobalData::map_MixGfData[it->first].vec_secgf[n]);
+						}
+						GlobalData::setMixGF(it->first);
+						mixtitle->setString(GlobalData::map_MixGfData[it->first].name);
+						mixokbtn->setVisible(false);
 
 						break;
 					}
