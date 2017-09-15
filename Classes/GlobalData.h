@@ -350,6 +350,39 @@ typedef struct
 	int heroval;
 }RankData;
 
+/****************************
+帮派列表数据
+*****************************/
+typedef struct
+{
+	int id;
+	int rank;
+	std::string factionname;
+	int membercount;
+	int maxcount;
+	int lvlimit;
+	int sexlimit;
+	int lv;
+	std::string owner;
+	std::string desc;
+	int action;
+}FactionListData;
+
+/****************************
+帮派成员列表
+*****************************/
+typedef struct
+{
+	int id;
+	int userid;
+	int herolv;
+	int herotype;
+	std::string nickname;
+	int factionid;
+	int contribution;
+	int position;
+}FactionMemberData;
+
 
 class GlobalData
 {
@@ -887,6 +920,11 @@ public:
 
 	static std::vector<RankData> vec_rankData;
 
+	static std::vector<FactionListData> vec_factionListData;
+
+	static std::vector<FactionMemberData> vec_factionMemberData;
+	
+
 	static bool isPopingScene;
 
 	static GameStatus g_gameStatus;
@@ -896,6 +934,8 @@ public:
 	static int servertime;
 	static int myrank;
 	static std::string noticecontent;
+	static int myFaction;
+	static int mytitle;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
