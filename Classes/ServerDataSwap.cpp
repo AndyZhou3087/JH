@@ -137,14 +137,11 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("btask", bpotindex, allocator);
 	writedoc.AddMember("unlock", unlock, allocator);
 	writedoc.AddMember("sex", sex, allocator);
-    std::string friendshipstr = GameDataSave::getInstance()->getFriendly();
-	writedoc.AddMember("friendship", rapidjson::Value(friendshipstr.c_str(), allocator), allocator);
-    
+
 	int cheat = GlobalData::dataIsModified?1:0;
 	writedoc.AddMember("cheat", cheat, allocator);
 	GlobalData::dataIsModified = false;
 
-    
 	int fightingpower = 0;
 
 	if (g_hero != NULL)
@@ -217,7 +214,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 					jsonkey = strid;
 					if (type == WEAPON || type == PROTECT_EQU)
 					{
-						val = slv * 1000 + goodvalue;
+						val = slv * 1000 + goodvalue + 1;
 					}
 					else
 					{
@@ -637,13 +634,6 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 						int blv = atoi(v.GetString());
 						GameDataSave::getInstance()->setBuildLV(buildname, blv);
 					}
-                    
-                    if (item.HasMember("friendship"))
-                    {
-                        v = item["friendship"];
-                        std::string friendshipstr = v.GetString();
-                        GameDataSave::getInstance()->setFriendly(friendshipstr);
-                    }
 
 					v = item["holding"];
 				
@@ -674,7 +664,9 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 								{
 									if (strid.compare(0, 1, "a") == 0 || strid.compare(0, 1, "e") == 0)
 									{
-										goodvalue = val % 1000;
+										goodvalue = val % 1000 - 1;
+										if (goodvalue < 0)
+											goodvalue = 0;
 										slv = val / 1000;
 									}
 									else
