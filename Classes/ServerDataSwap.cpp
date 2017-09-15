@@ -138,6 +138,12 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("unlock", unlock, allocator);
 	writedoc.AddMember("sex", sex, allocator);
 
+	std::string friendshipstr = GameDataSave::getInstance()->getFriendly();
+	writedoc.AddMember("friendship", rapidjson::Value(friendshipstr.c_str(), allocator), allocator);
+
+	std::string mixgfstr = GameDataSave::getInstance()->getMixGF();
+	writedoc.AddMember("mixgf", rapidjson::Value(mixgfstr.c_str(), allocator), allocator);
+
 	int cheat = GlobalData::dataIsModified?1:0;
 	writedoc.AddMember("cheat", cheat, allocator);
 	GlobalData::dataIsModified = false;
@@ -633,6 +639,19 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 						v = item[buildname.c_str()];
 						int blv = atoi(v.GetString());
 						GameDataSave::getInstance()->setBuildLV(buildname, blv);
+					}
+
+					if (item.HasMember("friendship"))
+					{
+						v = item["friendship"];
+						std::string friendshipstr = v.GetString();
+						GameDataSave::getInstance()->setFriendly(friendshipstr);
+					}
+
+					if (item.HasMember("mixgf"))
+					{
+						v = item["mixgf"];
+						GameDataSave::getInstance()->setMixGF(v.GetString());
 					}
 
 					v = item["holding"];
