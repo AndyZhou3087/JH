@@ -137,11 +137,14 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("btask", bpotindex, allocator);
 	writedoc.AddMember("unlock", unlock, allocator);
 	writedoc.AddMember("sex", sex, allocator);
-
+    std::string friendshipstr = GameDataSave::getInstance()->getFriendly();
+	writedoc.AddMember("friendship", rapidjson::Value(friendshipstr.c_str(), allocator), allocator);
+    
 	int cheat = GlobalData::dataIsModified?1:0;
 	writedoc.AddMember("cheat", cheat, allocator);
 	GlobalData::dataIsModified = false;
 
+    
 	int fightingpower = 0;
 
 	if (g_hero != NULL)
@@ -634,6 +637,13 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 						int blv = atoi(v.GetString());
 						GameDataSave::getInstance()->setBuildLV(buildname, blv);
 					}
+                    
+                    if (item.HasMember("friendship"))
+                    {
+                        v = item["friendship"];
+                        std::string friendshipstr = v.GetString();
+                        GameDataSave::getInstance()->setFriendly(friendshipstr);
+                    }
 
 					v = item["holding"];
 				

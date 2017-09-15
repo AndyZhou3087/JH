@@ -466,13 +466,13 @@ void GameDataSave::setGoldCount(int count)
 
 bool GameDataSave::getIsPostAllData()
 {
-	int ret = loadIntDataByKey("postalldataok", 0);
+	int ret = loadIntDataByKey("postallok", 0);
 	return ret == 1 ? true : false;
 }
 
 void GameDataSave::setIsPostAllData(bool val)
 {
-	saveIntDataByKey("postalldataok", val?1:0);
+	saveIntDataByKey("postallok", val?1:0);
 }
 
 bool GameDataSave::getIsFirstInstall()

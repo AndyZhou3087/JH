@@ -1030,10 +1030,6 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				720040431F57E6AC006C03DB /* NoticeLayer.h */,
-				720040441F57E6AC006C03DB /* NoticeLayer.cpp */,
-				724E92AF1F56CB600092DB5A /* FriendNpcScene.h */,
-				724E92B01F56CB600092DB5A /* FriendNpcScene.cpp */,
 				72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */,
 				72868FE01ED568B000D06B0F /* ActionGetLayer.h */,
 				72868FE11ED568B000D06B0F /* ActivitScene.cpp */,
@@ -1093,6 +1089,8 @@
 				72868FFD1ED568B000D06B0F /* Forgingtable.h */,
 				72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */,
 				72F155191F459F6B00C83B47 /* FriendExgScene.h */,
+				724E92B01F56CB600092DB5A /* FriendNpcScene.cpp */,
+				724E92AF1F56CB600092DB5A /* FriendNpcScene.h */,
 				72868FFE1ED568B000D06B0F /* Furnace.cpp */,
 				72868FFF1ED568B000D06B0F /* Furnace.h */,
 				728690001ED568B000D06B0F /* GameDataSave.cpp */,
@@ -1159,6 +1157,8 @@
 				728690211ED568B000D06B0F /* Nature.h */,
 				727267F81EE15920007F036A /* NewerGuideLayer.cpp */,
 				727267F91EE15920007F036A /* NewerGuideLayer.h */,
+				720040441F57E6AC006C03DB /* NoticeLayer.cpp */,
+				720040431F57E6AC006C03DB /* NoticeLayer.h */,
 				728690221ED568B000D06B0F /* NpcLayer.cpp */,
 				728690231ED568B000D06B0F /* NpcLayer.h */,
 				728690241ED568B000D06B0F /* OutDoor.cpp */,
