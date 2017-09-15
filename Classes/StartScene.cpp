@@ -163,7 +163,27 @@ void StartScene::checkServerData(float dt)
 			WaitingProgress* waitbox = WaitingProgress::create("数据加载中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 
-			ServerDataSwap::init(this)->postAllData();
+			std::vector<std::string> vec_ids = GlobalData::getSaveListId();
+
+			std::vector<std::string> vec_userid;
+			for (unsigned int i = 0; i < vec_ids.size(); i++)
+			{
+				std::string saveuid = vec_ids[i];
+				if (saveuid.length() > 0)
+				{
+					vec_userid.push_back(saveuid);
+				}
+			}
+
+			int tag = 0;
+			for (unsigned int i = 0; i < vec_userid.size(); i++)
+			{
+				if (i == vec_userid.size() - 1)
+					tag = 1;
+				ServerDataSwap::init(this)->postOneData(vec_userid[i], tag);
+			}
+
+			//ServerDataSwap::init(this)->postAllData();
 			isdouserdata = true;
 		}
 	}
