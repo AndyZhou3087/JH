@@ -357,6 +357,75 @@ void ServerDataSwap::getannouncement()
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetAnnouncementCB, this));
 }
 
+void ServerDataSwap::createFaciton(std::string name, int lvlimit, int sexlimit, std::string desc)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_buildfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&nickname=");
+	url.append(name);
+
+	url.append("&type=");
+	std::string typestr = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(typestr);
+
+	url.append("&levellower=");
+	std::string str = StringUtils::format("%d",lvlimit);
+	url.append(str);
+	url.append("&sex=");
+	str = StringUtils::format("%d", sexlimit);
+	url.append(str);
+	url.append("&remark=");
+	url.append(desc);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpCreateFactionCB, this));
+}
+
+void ServerDataSwap::getFactionList()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_factionlist?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&type=");
+	std::string typestr = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(typestr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetFactionListCB, this));
+}
+
+void ServerDataSwap::requestFaction(int factionid)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_requestfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpRequestFactionListCB, this));
+}
+
+void ServerDataSwap::getFactionMembers(int factionid)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_factionmemberlist?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetFactionMemberCB, this));
+}
+
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -1106,3 +1175,211 @@ void ServerDataSwap::httpIsGetVipCB(std::string retdata, int code, std::string t
 	}
 	release();
 }
+
+void ServerDataSwap::httpCreateFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetFactionListCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			GlobalData::vec_factionListData.clear();
+			if (doc.HasMember("belongto"))
+			{
+				rapidjson::Value& v = doc["belongto"];
+				GlobalData::myFaction = v.GetInt();
+			}
+			if (doc.HasMember("title"))
+			{
+				rapidjson::Value& v = doc["title"];
+				GlobalData::mytitle = v.GetInt();
+			}
+
+			if (doc.HasMember("data"))
+			{
+				rapidjson::Value& dataArray = doc["data"];
+
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
+				{
+					FactionListData fdata;
+					fdata.rank = m;
+
+					rapidjson::Value& v = dataArray[m]["id"];
+					fdata.id = atoi(v.GetString());
+
+					v = dataArray[m]["nickname"];
+					fdata.factionname = v.GetString();
+
+					v = dataArray[m]["levellower"];
+					fdata.lvlimit = atoi(v.GetString());
+
+					v = dataArray[m]["sex"];
+					fdata.sexlimit = atoi(v.GetString());
+
+					v = dataArray[m]["buildername"];
+					fdata.owner = v.GetString();
+
+					v = dataArray[m]["peoplenumber"];
+					fdata.membercount = atoi(v.GetString());
+
+					v = dataArray[m]["peopleupper"];
+					fdata.maxcount = atoi(v.GetString());
+
+					fdata.lv = 1;
+					v = dataArray[m]["remark"];
+					fdata.desc = v.GetString();
+					GlobalData::vec_factionListData.push_back(fdata);
+				}
+			}
+			isok = true;
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpRequestFactionListCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+void ServerDataSwap::httpGetFactionMemberCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("data"))
+			{
+				GlobalData::vec_factionMemberData.clear();
+				rapidjson::Value& dataArray = doc["data"];
+
+				for (unsigned int m = 0; m < dataArray.Size(); m++)
+				{
+					FactionMemberData fdata;
+					fdata.id = m + 1;
+					rapidjson::Value& v = dataArray[m]["id"];
+					fdata.userid = atoi(v.GetString());
+
+					v = dataArray[m]["type"];
+					fdata.herotype = atoi(v.GetString());
+
+					v = dataArray[m]["exp"];
+					int exp = atoi(v.GetString());
+					int lv = 0;
+					int size = GlobalData::map_heroAtr[fdata.herotype].vec_exp.size();
+					for (int i = 0; i < size; i++)
+					{
+						if (exp > GlobalData::map_heroAtr[fdata.herotype].vec_exp[i])
+						{
+							lv = i;
+							exp = exp - GlobalData::map_heroAtr[fdata.herotype].vec_exp[i];
+						}
+						else
+						{
+							break;
+						}
+					}
+					fdata.herolv = lv;
+
+					v = dataArray[m]["nickname"];
+					fdata.nickname = atoi(v.GetString());
+
+					v = dataArray[m]["contribution"];
+					fdata.contribution = atoi(v.GetString());
+
+					v = dataArray[m]["factionid"];
+					fdata.factionid = atoi(v.GetString());
+
+					v = dataArray[m]["title"];
+					fdata.position = atoi(v.GetString());
+					GlobalData::vec_factionMemberData.push_back(fdata);
+				}
+			}
+			isok = true;
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+

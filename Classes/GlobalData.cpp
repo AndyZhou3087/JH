@@ -56,6 +56,10 @@ std::map<std::string, MixGfData> GlobalData::map_MixGfData;
 
 std::vector<RankData> GlobalData::vec_rankData;
 
+std::vector<FactionListData> GlobalData::vec_factionListData;
+
+std::vector<FactionMemberData> GlobalData::vec_factionMemberData;
+
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -95,6 +99,9 @@ int GlobalData::servertime = 0;
 int GlobalData::myrank = 0;
 std::string GlobalData::noticecontent;
 
+int GlobalData::myFaction = 0;
+int GlobalData::mytitle = 0;
+
 GlobalData::GlobalData()
 {
 
@@ -111,6 +118,8 @@ void GlobalData::init()
 	myGlodCount = GameDataSave::getInstance()->getGoldCount();
 	MD5MyGoldCount = md5(myGlodCount);
 	isBuyTimeGift = GameDataSave::getInstance()->getIsBuyTimeGift();
+	myFaction = 0;
+	mytitle = 0;
 }
 
 void GlobalData::loadBuildActionJSon()
@@ -1867,7 +1876,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "325E6676-4607-444E-BFE9-FADD69F470D1";//"";325E6676-4607-444E-BFE9-FADD69F470D1
+	return "qwerqqw";//"";325E6676-4607-444E-BFE9-FADD69F470D1
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 }

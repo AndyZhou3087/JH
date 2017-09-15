@@ -27,6 +27,11 @@ public:
 	void getannouncement();
 	void setDelegate(ServerDataDelegateProtocol *delegateProtocol);
 	static bool isGetingData();
+
+	void createFaciton(std::string name, int lvlimit, int sexlimit, std::string desc);
+	void getFactionList();
+	void requestFaction(int factionid);
+	void getFactionMembers(int factionid);
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -44,6 +49,10 @@ private:
 	void httpGetAnnouncementCB(std::string retdata, int code, std::string tag);
 	void httpIsGetVipCB(std::string retdata, int code, std::string tag);
 	void httpBlankCB(std::string retdata, int code, std::string tag);
+	void httpCreateFactionCB(std::string retdata, int code, std::string tag);
+	void httpGetFactionListCB(std::string retdata, int code, std::string tag);
+	void httpRequestFactionListCB(std::string retdata, int code, std::string tag);
+	void httpGetFactionMemberCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol
