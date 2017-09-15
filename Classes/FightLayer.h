@@ -184,6 +184,7 @@ private:
 	int isHeroAct;//0--暴击；1-闪避
 
 	int isNpcAct;//0--暴击；1-闪避
+	bool isWin;
 };
 #endif
 

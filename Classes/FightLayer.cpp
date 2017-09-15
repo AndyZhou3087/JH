@@ -20,6 +20,7 @@ FightLayer::FightLayer()
 	isUseWg = false;
 	winnpcount = 0;
 	winProperCount = 0;
+	isWin = false;
 }
 
 
@@ -191,6 +192,8 @@ void FightLayer::onEscape(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	{
 		Node* node = (Node*)pSender;
 		GlobalData::isFightMaster = false;
+		if (isWin)
+			return;
 
 		if (node->getTag() == 0)
 		{
@@ -250,6 +253,7 @@ void FightLayer::npcDie()
 	{
 		if (continuefight <= 0)
 		{
+			isWin = true;
 			this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
 		}
 		else
@@ -262,7 +266,10 @@ void FightLayer::npcDie()
 
 	}
 	else
+	{
+		isWin = true;
 		this->scheduleOnce(schedule_selector(FightLayer::delayShowWinLayer), 1.5f);
+	}
 }
 
 int FightLayer::getNpcHurt()
@@ -308,7 +315,10 @@ void FightLayer::delayHeroFight(float dt)
 	if (checkSkill(H_WG) == S_SKILL_4)
 	{
 		showSkill(S_SKILL_4);
-		critrnd += GlobalData::map_gfskills[S_SKILL_4].leftval * 100;
+		if (g_hero->getAtrByType(H_WG)->count > 0)
+		{
+			critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].skilleffect * 100;
+		}
 	}
 
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
@@ -426,17 +436,23 @@ void FightLayer::delayBossFight(float dt)
 			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 			return;
 		}
-
 		skilltype = checkSkill(H_NG);
 		if (skilltype == S_SKILL_6)
 		{
 			showSkill(skilltype);
-			herohurt = herohurt * (100 - GlobalData::map_gfskills[skilltype].leftval) / 100;
+			if (g_hero->getAtrByType(H_NG)->count > 0)
+			{
+				herohurt = herohurt * (100 - GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect) / 100;
+			}
 		}
 		else if (skilltype == S_SKILL_7)
 		{
 			showSkill(skilltype);
-			int npclosthp = npchp * GlobalData::map_gfskills[skilltype].leftval / 100;
+			int npclosthp = 0;
+			if (g_hero->getAtrByType(H_NG)->count > 0)
+			{
+				npclosthp = npchp * GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect / 100;
+			}
 			npchp -= npclosthp;
 			if (npchp < 0)
 				npchp = 0;
@@ -460,7 +476,11 @@ void FightLayer::delayBossFight(float dt)
 	if (checkSkill(H_NG) == S_SKILL_8)
 	{
 		showSkill(S_SKILL_8);
-		dodgernd += GlobalData::map_gfskills[S_SKILL_8].leftval * 100;
+		if (g_hero->getAtrByType(H_NG)->count > 0)
+		{
+			dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect * 100;
+		}
+		
 	}
 
 	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
@@ -568,6 +588,7 @@ void FightLayer::delayShowWinLayer(float dt)
 
 	if (m_addrid.compare("m1-6") == 0)
 		this->removeFromParentAndCleanup(true);
+	isWin = false;
 }
 
 void FightLayer::showFightWord(int type, int value)
@@ -989,6 +1010,7 @@ void FightLayer::continueChallenge()
 
 void FightLayer::updateFightNextNpc()
 {
+	isecapeok = false;
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
 	m_escapebtn->setEnabled(true);
 	m_escapebtn->setTag(0);
@@ -998,6 +1020,7 @@ void FightLayer::updateFightNextNpc()
 
 void FightLayer::reviveContinueChallege()
 {
+	isecapeok = false;
 	m_escapebtn->setTitleText(CommonFuncs::gbk2utf("逃跑"));
 	m_escapebtn->setEnabled(true);
 	m_escapebtn->setTag(0);

@@ -12,6 +12,7 @@
 #include "NewerGuideLayer.h"
 #include "FriendExgScene.h"
 #include "FriendNpcScene.h"
+#include "FightLayer.h"
 
 TopBar::TopBar()
 {
@@ -468,7 +469,9 @@ void TopBar::updataUI(float dt)
 			}
 			else if (r < 20)
 			{
-				activityScene = FriendNpcScene::createScene();
+				FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
+				if (fightlayer == NULL)
+					activityScene = FriendNpcScene::createScene();
 			}
 
 		}
@@ -620,8 +623,11 @@ void TopBar::checkNpcRandMap()
 			}
 			GlobalData::setWxbMapPos(rpos);
 			GlobalData::map_maps[wxbinmap[rpos]].npcs.push_back("n012");
-            if (g_maplayer != NULL)
-                g_maplayer->updataPlotMissionIcon(0);
+			if (g_maplayer != NULL)
+			{
+				g_maplayer->updataPlotMissionIcon(0);
+				g_maplayer->updataPlotMissionIcon(1);
+			}
 		}
 	}
 
@@ -640,5 +646,10 @@ void TopBar::checkNpcRandMap()
 
 		GlobalData::setDgqbMapPos(r1);
 		GlobalData::map_maps[dgqbinmap[r1]].npcs.push_back("n091");
+		if (g_maplayer != NULL)
+		{
+			g_maplayer->updataPlotMissionIcon(0);
+			g_maplayer->updataPlotMissionIcon(1);
+		}
 	}
 }

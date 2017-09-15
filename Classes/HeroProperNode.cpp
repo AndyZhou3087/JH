@@ -515,8 +515,11 @@ void HeroProperNode::selectCarryData()
 	m_lastSelectedData = m_select_udata;
 
 	updataMyPackageUI();
-	HeroStateUILayer* parent = (HeroStateUILayer*)this->getParent()->getParent();
-	parent->updateArrow();
+
+	HeroStateUILayer* heroStateUiLayer = (HeroStateUILayer*)g_gameLayer->getChildByName("HeroStateUILayer");
+
+	if (heroStateUiLayer != NULL)
+		heroStateUiLayer->updateArrow();
 }
 
 void HeroProperNode::takeon(HeroAtrType atrype, PackageData pdata)
