@@ -376,16 +376,19 @@ void MapLayer::updateUnlockChapter()
 	for (it = GlobalData::map_maps.begin(); it != GlobalData::map_maps.end(); ++it)
 	{
 		std::string mapid = GlobalData::map_maps[it->first].strid;
-		cocos2d::ui::Widget* mapNamImage = (cocos2d::ui::Widget*)m_mapbg->getChildByName(mapid);
-
-		std::vector<std::string> tmp;
-
-		CommonFuncs::split(mapid, tmp, "-");
-		int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
-		if (mapchapter <= GlobalData::getUnlockChapter())
+		if (mapid.length() > 0)
 		{
-			if (mapNamImage != NULL)
-				mapNamImage->setVisible(true);
+			cocos2d::ui::Widget* mapNamImage = (cocos2d::ui::Widget*)m_mapbg->getChildByName(mapid);
+
+			std::vector<std::string> tmp;
+
+			CommonFuncs::split(mapid, tmp, "-");
+			int mapchapter = atoi(tmp[0].substr(1, tmp[0].size() - 1).c_str());
+			if (mapchapter <= GlobalData::getUnlockChapter())
+			{
+				if (mapNamImage != NULL)
+					mapNamImage->setVisible(true);
+			}
 		}
 	}
 }
