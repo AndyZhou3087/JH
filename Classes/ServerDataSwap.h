@@ -32,6 +32,12 @@ public:
 	void getFactionList();
 	void requestFaction(int factionid);
 	void getFactionMembers(int factionid);
+
+	void joinFaction(int factionid, int requesterId, int requestertype);
+	void kickFaction(int factionid, int requesterId, int requestertype);
+	void promotionFaction(int factionid, int requesterId, int requestertype, int position);
+	void leaveFaction(int actiontype, int factionid, int herotype);
+	void contributionFaction(int factionid, int contribution, int herotype);
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -53,6 +59,13 @@ private:
 	void httpGetFactionListCB(std::string retdata, int code, std::string tag);
 	void httpRequestFactionListCB(std::string retdata, int code, std::string tag);
 	void httpGetFactionMemberCB(std::string retdata, int code, std::string tag);
+	void httpJionFactionCB(std::string retdata, int code, std::string tag);
+	void httpKickFactionCB(std::string retdata, int code, std::string tag);
+
+	void httpPromotionFactionCB(std::string retdata, int code, std::string tag);
+	void httpLeaveFactionCB(std::string retdata, int code, std::string tag);
+
+	void httpContributionFactionCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

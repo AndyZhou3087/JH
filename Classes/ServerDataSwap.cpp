@@ -414,6 +414,10 @@ void ServerDataSwap::requestFaction(int factionid)
 	std::string factionidstr = StringUtils::format("%d", factionid);
 	url.append(factionidstr);
 
+	url.append("&type=");
+	std::string typestr = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(typestr);
+
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpRequestFactionListCB, this));
 }
 
@@ -428,9 +432,128 @@ void ServerDataSwap::getFactionMembers(int factionid)
 	std::string factionidstr = StringUtils::format("%d", factionid);
 	url.append(factionidstr);
 
+	url.append("&type=");
+	std::string herotypestr = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(herotypestr);
+
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetFactionMemberCB, this));
 }
 
+void ServerDataSwap::joinFaction(int factionid, int requesterId, int requestertype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_joinfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&requester=");
+	std::string requesterstr = StringUtils::format("%d", requesterId);
+	url.append(requesterstr);
+
+	url.append("&type=");
+	requesterstr = StringUtils::format("%d", requestertype);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpJionFactionCB, this));
+}
+
+void ServerDataSwap::kickFaction(int factionid, int requesterId, int requestertype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_kickfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&requester=");
+	std::string requesterstr = StringUtils::format("%d", requesterId);
+	url.append(requesterstr);
+
+	url.append("&type=");
+	requesterstr = StringUtils::format("%d", requestertype);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpKickFactionCB, this));
+}
+
+void ServerDataSwap::promotionFaction(int factionid, int requesterId, int requestertype, int position)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_promotionfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&requester=");
+	std::string requesterstr = StringUtils::format("%d", requesterId);
+	url.append(requesterstr);
+
+	url.append("&type=");
+	requesterstr = StringUtils::format("%d", requestertype);
+	url.append(requesterstr);
+
+	url.append("&title=");
+	requesterstr = StringUtils::format("%d", position);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPromotionFactionCB, this));
+}
+
+void ServerDataSwap::leaveFaction(int actiontype, int factionid, int herotype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	if (actiontype == 0)
+		url.append("wx_leavefaction?");
+	else
+		url.append("wx_releasefaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&type=");
+	std::string requesterstr = StringUtils::format("%d", herotype);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpLeaveFactionCB, this));
+}
+
+void ServerDataSwap::contributionFaction(int factionid, int contribution, int herotype)
+{
+	std::string url;
+	url.append(HTTPURL);
+
+	url.append("wx_contributionfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&contribution=");
+	std::string contributionstr = StringUtils::format("%d", contribution);
+	url.append(contributionstr);
+
+	url.append("&type=");
+	std::string requesterstr = StringUtils::format("%d", herotype);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpContributionFactionCB, this));
+}
 
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
@@ -1275,7 +1398,11 @@ void ServerDataSwap::httpGetFactionListCB(std::string retdata, int code, std::st
 					v = dataArray[m]["peopleupper"];
 					fdata.maxcount = atoi(v.GetString());
 
-					fdata.lv = 1;
+					v = dataArray[m]["exp"];
+					fdata.exp = atoi(v.GetString());
+
+					fdata.lv = 0;
+
 					v = dataArray[m]["remark"];
 					fdata.desc = v.GetString();
 					GlobalData::vec_factionListData.push_back(fdata);
@@ -1328,6 +1455,7 @@ void ServerDataSwap::httpRequestFactionListCB(std::string retdata, int code, std
 	}
 	release();
 }
+
 void ServerDataSwap::httpGetFactionMemberCB(std::string retdata, int code, std::string tag)
 {
 	bool isok = false;
@@ -1370,7 +1498,7 @@ void ServerDataSwap::httpGetFactionMemberCB(std::string retdata, int code, std::
 					fdata.herolv = lv;
 
 					v = dataArray[m]["nickname"];
-					fdata.nickname = atoi(v.GetString());
+					fdata.nickname = v.GetString();
 
 					v = dataArray[m]["contribution"];
 					fdata.contribution = atoi(v.GetString());
@@ -1404,3 +1532,137 @@ void ServerDataSwap::httpGetFactionMemberCB(std::string retdata, int code, std::
 	release();
 }
 
+void ServerDataSwap::httpJionFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpKickFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpPromotionFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpLeaveFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpContributionFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}

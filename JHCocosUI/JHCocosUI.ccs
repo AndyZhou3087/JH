@@ -15,6 +15,7 @@
           <Image Name="dead.jpg" />
           <Image Name="dividetext.png" />
           <Image Name="exsercisedone.png" />
+          <Image Name="factiondescinputbox.png" />
           <Image Name="friendask.jpg" />
           <Image Name="friendgive.jpg" />
           <Image Name="gameovertext.png" />
@@ -168,6 +169,7 @@
           <Image Name="bwine.png" />
           <Image Name="closebtn.png" />
           <Image Name="cooktable.png" />
+          <Image Name="createfactionicon.png" />
           <Image Name="crit.png" />
           <Image Name="disbtn.png" />
           <Image Name="disnpcbtn1.png" />
@@ -182,7 +184,16 @@
           <Image Name="e008.png" />
           <Image Name="e009.png" />
           <Image Name="e010.png" />
+          <Image Name="enterfactionicon.png" />
           <Image Name="exerciseroom.png" />
+          <Image Name="factioncreatetitle.png" />
+          <Image Name="factionlimitbtn.png" />
+          <Image Name="factionmemberitem0.png" />
+          <Image Name="factionmemberitem1.png" />
+          <Image Name="factionmodifybtn.png" />
+          <Image Name="factiontitle.png" />
+          <Image Name="factlistitem0.png" />
+          <Image Name="factlistitem1.png" />
           <Image Name="fence.png" />
           <Image Name="fheart0.png" />
           <Image Name="fheart1.png" />
@@ -249,6 +260,7 @@
           <Image Name="m1-5.png" />
           <Image Name="m1-6.png" />
           <Image Name="m1-7.png" />
+          <Image Name="m1-8.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
           <Image Name="m2-3.png" />
@@ -618,6 +630,11 @@
         <Project Name="exerciseCancelLayer.csd" Type="Layer" />
         <Project Name="exerciseDoneLayer.csd" Type="Layer" />
         <Project Name="exgLayer.csd" Type="Layer" />
+        <Project Name="factionCreateLayer.csd" Type="Layer" />
+        <Project Name="factionlistNode.csd" Type="Node" />
+        <Project Name="factionMainLayer.csd" Type="Layer" />
+        <Project Name="factionMemberLayer.csd" Type="Layer" />
+        <Project Name="factionmemberNode.csd" Type="Node" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="friendExgLayer.csd" Type="Layer" />
         <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
@@ -667,6 +684,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="promotionLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

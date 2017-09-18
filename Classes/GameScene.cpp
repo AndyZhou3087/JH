@@ -29,6 +29,7 @@ UIScroll* g_uiScroll;
 GameScene::GameScene()
 {
 	issavedata = true;
+	isAnewGetData = false;
 }
 GameScene::~GameScene()
 {
@@ -41,6 +42,7 @@ GameScene::~GameScene()
 	g_nature = NULL;
 	g_hero = NULL;
 	issavedata = true;
+	isAnewGetData = false;
 }
 
 Scene* GameScene::createScene()
@@ -479,9 +481,9 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
-	if (Director::getInstance()->getRunningScene()->getChildByName("waitbox") != NULL)
+	if (isAnewGetData)
 	{
-
+		isAnewGetData = false;
 		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
 	}
 
@@ -497,6 +499,7 @@ void GameScene::onSuccess()
 		{
             issavedata = false;
             GlobalData::ispunishment = false;
+			isAnewGetData = true;
 			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			ServerDataSwap::init(this)->getAllData();
@@ -507,6 +510,10 @@ void GameScene::onSuccess()
 void GameScene::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (isAnewGetData)
+	{
+		isAnewGetData = false;
+	}
 }
 
 void GameScene::delayChangeStartScene(float dt)

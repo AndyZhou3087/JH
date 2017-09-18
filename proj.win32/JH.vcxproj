@@ -169,6 +169,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ExerciseCancelLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseDoneLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseRoom.cpp" />
+    <ClCompile Include="..\Classes\FactionCreateLayer.cpp" />
+    <ClCompile Include="..\Classes\FactionMainLayer.cpp" />
+    <ClCompile Include="..\Classes\FactionMemberLayer.cpp" />
     <ClCompile Include="..\Classes\Fence.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
     <ClCompile Include="..\Classes\Forgingtable.cpp" />
@@ -206,6 +209,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\NpcLayer.cpp" />
     <ClCompile Include="..\Classes\OutDoor.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
+    <ClCompile Include="..\Classes\PromotionLayer.cpp" />
     <ClCompile Include="..\Classes\RankLayer.cpp" />
     <ClCompile Include="..\Classes\RelationLayer.cpp" />
     <ClCompile Include="..\Classes\RepairLayer.cpp" />
@@ -268,6 +272,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ExerciseCancelLayer.h" />
     <ClInclude Include="..\Classes\ExerciseDoneLayer.h" />
     <ClInclude Include="..\Classes\ExerciseRoom.h" />
+    <ClInclude Include="..\Classes\FactionCreateLayer.h" />
+    <ClInclude Include="..\Classes\FactionMainLayer.h" />
+    <ClInclude Include="..\Classes\FactionMemberLayer.h" />
     <ClInclude Include="..\Classes\Fence.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\Forgingtable.h" />
@@ -305,6 +312,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\NpcLayer.h" />
     <ClInclude Include="..\Classes\OutDoor.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
+    <ClInclude Include="..\Classes\PromotionLayer.h" />
     <ClInclude Include="..\Classes\RankLayer.h" />
     <ClInclude Include="..\Classes\RelationLayer.h" />
     <ClInclude Include="..\Classes\RepairLayer.h" />

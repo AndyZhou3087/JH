@@ -534,6 +534,17 @@
       <FilePathData Path="ui/mixtag.png" />
       <FilePathData Path="ui/arrowdown.png" />
       <FilePathData Path="ui/arrowup.png" />
+      <FilePathData Path="ui/m1-8.png" />
+      <FilePathData Path="ui/factiontitle.png" />
+      <FilePathData Path="ui/createfactionicon.png" />
+      <FilePathData Path="ui/enterfactionicon.png" />
+      <FilePathData Path="ui/factioncreatetitle.png" />
+      <FilePathData Path="ui/factionlimitbtn.png" />
+      <FilePathData Path="ui/factlistitem0.png" />
+      <FilePathData Path="ui/factlistitem1.png" />
+      <FilePathData Path="ui/factionmemberitem0.png" />
+      <FilePathData Path="ui/factionmemberitem1.png" />
+      <FilePathData Path="ui/factionmodifybtn.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

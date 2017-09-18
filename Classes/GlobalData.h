@@ -362,6 +362,7 @@ typedef struct
 	int maxcount;
 	int lvlimit;
 	int sexlimit;
+	int exp;
 	int lv;
 	std::string owner;
 	std::string desc;

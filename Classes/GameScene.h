@@ -56,6 +56,7 @@ private:
 	std::vector<Node*> m_newerNode;
 	int m_newerStep;
 	bool issavedata;
+	bool isAnewGetData;
 	
 private:
 	/****************************

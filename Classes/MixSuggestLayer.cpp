@@ -203,7 +203,7 @@ void MixSuggestLayer::onGold(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 
 			int mygold = GlobalData::getMyGoldCount();
 
-			if (mygold > 50)
+			if (mygold >= 50)
 			{
 				if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
 				{
