@@ -44,6 +44,9 @@ bool PromotionLayer::init(FactionMemberData *data, Node* target)
 	cocos2d::ui::Button* okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 	okbtn->addTouchEventListener(CC_CALLBACK_2(PromotionLayer::onOk, this));
 
+	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
+	backbtn->addTouchEventListener(CC_CALLBACK_2(PromotionLayer::onBack, this));
+
 	//checkbox
 
 	for (int i = 0; i < 3; i++)
@@ -60,10 +63,6 @@ bool PromotionLayer::init(FactionMemberData *data, Node* target)
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		return true;
-	};
-	listener->onTouchEnded = [=](Touch *touch, Event *event)
-	{
-		this->removeFromParentAndCleanup(true);
 	};
 
 	listener->setSwallowTouches(true);
@@ -115,6 +114,15 @@ void PromotionLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 		ServerDataSwap::init(this)->promotionFaction(m_memberdata->factionid, m_memberdata->userid, m_memberdata->herotype, m_select);
+	}
+}
+
+void PromotionLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		this->removeFromParentAndCleanup(true);
 	}
 }
 
