@@ -120,13 +120,13 @@
                     <PreSize X="0.0735" Y="0.0716" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-7.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="m1-8" ActionTag="134175701" Tag="292" IconVisible="False" LeftMargin="1282.8701" RightMargin="597.1299" TopMargin="747.7847" BottomMargin="528.2153" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="90" Scale9Height="86" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="m1-8" ActionTag="134175701" Tag="292" IconVisible="False" LeftMargin="1286.8687" RightMargin="593.1313" TopMargin="745.7847" BottomMargin="530.2153" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="90" Scale9Height="86" ctype="ImageViewObjectData">
                     <Size X="120.0000" Y="120.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="1342.8701" Y="588.2153" />
+                    <Position X="1346.8687" Y="590.2153" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.6714" Y="0.4214" />
+                    <PrePosition X="0.6734" Y="0.4228" />
                     <PreSize X="0.0600" Y="0.0860" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-8.png" Plist="uipacker.plist" />
                   </AbstractNodeData>

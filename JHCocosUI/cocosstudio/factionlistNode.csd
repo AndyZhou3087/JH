@@ -31,7 +31,7 @@
           <AbstractNodeData Name="name" ActionTag="961971783" Tag="135" IconVisible="False" LeftMargin="-248.1727" RightMargin="87.1727" TopMargin="-12.5000" BottomMargin="-12.5000" IsCustomSize="True" FontSize="22" LabelText="帮派" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="161.0000" Y="25.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-167.6727" Y="0.0000" />
+            <Position X="-167.6727" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />

@@ -109,7 +109,7 @@
                 <FileData Type="MarkedSubImage" Path="ui/addlifeicon.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="valuelbl" ActionTag="-694860823" Tag="25" IconVisible="False" LeftMargin="84.0000" RightMargin="0.0000" TopMargin="132.0000" BottomMargin="8.0000" FontSize="17" LabelText="20%" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="valuelbl" ActionTag="-694860823" Tag="25" IconVisible="False" LeftMargin="84.0000" TopMargin="132.0000" BottomMargin="8.0000" FontSize="17" LabelText="20%" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="40.0000" Y="18.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="84.0000" Y="17.0000" />
