@@ -283,7 +283,7 @@
             <FileData Type="Normal" Path="images/factiondescinputbox.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="descinput" ActionTag="-1457944529" Tag="363" IconVisible="False" LeftMargin="60.5811" RightMargin="59.4189" TopMargin="540.0000" BottomMargin="570.0000" TouchEnable="True" FontSize="30" IsCustomSize="True" LabelText="" PlaceHolderText="请输入帮派详细信息（限80字）" MaxLengthEnable="True" MaxLengthText="100" ctype="TextFieldObjectData">
+          <AbstractNodeData Name="descinput" ActionTag="-1457944529" Tag="363" IconVisible="False" LeftMargin="60.5811" RightMargin="59.4189" TopMargin="540.0000" BottomMargin="570.0000" TouchEnable="True" FontSize="30" IsCustomSize="True" LabelText="" PlaceHolderText="请输入帮派详细信息（限80字，换行键完成输入）" MaxLengthEnable="True" MaxLengthText="100" ctype="TextFieldObjectData">
             <Size X="600.0000" Y="170.0000" />
             <AnchorPoint ScaleY="1.0000" />
             <Position X="60.5811" Y="740.0000" />
