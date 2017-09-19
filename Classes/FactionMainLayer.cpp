@@ -322,14 +322,30 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 				Director::getInstance()->getRunningScene()->addChild(hintbox);
 				return;
 			}
-			int mysex = g_hero->getSex();
-			if (mysex != m_data->sexlimit && g_hero->getSex() < 4)
+			int selectsex = g_hero->getSex();
+			if (m_data->sexlimit < 4)
 			{
-				std::string sexstr[] = { "只收自宫者", "只收男性", "只收女性", "只收男性和女性" };
-				std::string str = StringUtils::format("%s%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf(sexstr[mysex].c_str()).c_str());
-				HintBox* hintbox = HintBox::create(str);
-				Director::getInstance()->getRunningScene()->addChild(hintbox);
-				return;
+				bool isok = true;
+				if (m_data->sexlimit == 3)
+				{
+					if (selectsex = 0)
+					{
+						isok = false;
+					}
+				}
+				else if (selectsex != m_data->sexlimit)
+				{
+					isok = false;
+				}
+
+				if (!isok)
+				{
+					std::string sexstr[] = { "只收自宫者", "只收男性", "只收女性", "只收男性和女性" };
+					std::string str = StringUtils::format("%s%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf(sexstr[m_data->sexlimit].c_str()).c_str());
+					HintBox* hintbox = HintBox::create(str);
+					Director::getInstance()->getRunningScene()->addChild(hintbox);
+					return;
+				}
 			}
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");

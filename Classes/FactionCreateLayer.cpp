@@ -207,7 +207,7 @@ void FactionCreateLayer::onSelectLv(cocos2d::Ref *pSender, cocos2d::ui::Widget::
 	{
 		cocos2d::ui::Button* btnode = (cocos2d::ui::Button*)pSender;
 		int tag = btnode->getTag();
-		int lvl[] = {30,50,80,100};
+		int lvl[] = {30,50,80,0};
 		for (int i = 0; i < 4; i++)
 		{
 			if (i == tag)
