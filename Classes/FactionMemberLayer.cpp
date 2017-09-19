@@ -335,7 +335,7 @@ bool FactionMemberItem::init(FactionMemberData *data)
 		return false;
 
 	m_data = data;
-	Node* csbnode = CSLoader::createNode("factionMemberNode.csb");
+	Node* csbnode = CSLoader::createNode("factionmemberNode.csb");
 	csbnode->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 	this->addChild(csbnode);
 

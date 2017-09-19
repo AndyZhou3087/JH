@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="factionMemberNode" Type="Node" ID="e81b21c3-58a0-475a-960a-9b50e1634863" Version="3.10.0.0" />
+  <PropertyGroup Name="factionmemberNode" Type="Node" ID="e81b21c3-58a0-475a-960a-9b50e1634863" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -16,10 +16,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/factionmemberitem1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="headimg" ActionTag="-950519847" Tag="105" IconVisible="False" LeftMargin="-331.0411" RightMargin="211.0411" TopMargin="-61.8878" BottomMargin="-58.1122" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="headimg" ActionTag="-950519847" Tag="105" IconVisible="False" LeftMargin="-331.0411" RightMargin="211.0411" TopMargin="-62.8878" BottomMargin="-57.1122" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
             <Size X="120.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-271.0411" Y="1.8878" />
+            <Position X="-271.0411" Y="2.8878" />
             <Scale ScaleX="0.5200" ScaleY="0.5200" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
