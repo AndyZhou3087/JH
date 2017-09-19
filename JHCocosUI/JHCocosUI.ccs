@@ -634,7 +634,7 @@
         <Project Name="factionlistNode.csd" Type="Node" />
         <Project Name="factionMainLayer.csd" Type="Layer" />
         <Project Name="factionMemberLayer.csd" Type="Layer" />
-        <Project Name="factionmemberNode.csd" Type="Node" />
+        <Project Name="factionMemberNode.csd" Type="Node" />
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="friendExgLayer.csd" Type="Layer" />
         <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
