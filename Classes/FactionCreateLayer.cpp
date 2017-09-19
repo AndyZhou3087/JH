@@ -5,6 +5,9 @@
 #include "Const.h"
 #include "FactionMainLayer.h"
 #include "MD5.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "iosfunc.h"
+#endif
 
 FactionCreateLayer::FactionCreateLayer()
 {
@@ -140,7 +143,13 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 			}
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->createFaciton(factionname, selectlv, selectsex, descinput->getString());
+			std::string utf8name = factionname;
+			std::string utf8desc = descinput->getString();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			utf8name = gbkToUTF8(factionname.c_str());
+			utf8desc = gbkToUTF8(descinput->getString().c_str());
+#endif
+			ServerDataSwap::init(this)->createFaciton(utf8name, selectlv, selectsex, utf8desc);
 		}
 		else
 		{
