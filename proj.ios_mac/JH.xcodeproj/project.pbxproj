@@ -244,6 +244,12 @@
 		728691EF1ED5740100D06B0F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 728691EE1ED5740100D06B0F /* libsqlite3.tbd */; };
 		728692091ED5972700D06B0F /* uipacker.png in Resources */ = {isa = PBXBuildFile; fileRef = 728692081ED5972700D06B0F /* uipacker.png */; };
 		7286920B1ED5973E00D06B0F /* uipacker.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7286920A1ED5973E00D06B0F /* uipacker.plist */; };
+		72886EF21F7269E900FC3701 /* newerGuide2Layer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72886EF01F7269E900FC3701 /* newerGuide2Layer.csb */; };
+		72886EF31F7269E900FC3701 /* factionComfirmLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72886EF11F7269E900FC3701 /* factionComfirmLayer.csb */; };
+		72886EF81F726A0900FC3701 /* NewerGuide2Layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72886EF51F726A0900FC3701 /* NewerGuide2Layer.cpp */; };
+		72886EF91F726A0900FC3701 /* FactionComfirmLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72886EF71F726A0900FC3701 /* FactionComfirmLayer.cpp */; };
+		72886EFC1F72727D00FC3701 /* FactionDetailsLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72886EFB1F72727D00FC3701 /* FactionDetailsLayer.cpp */; };
+		72886EFE1F72728700FC3701 /* factionDetailsLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72886EFD1F72728700FC3701 /* factionDetailsLayer.csb */; };
 		7293E0921EE7BAE3009AC1A2 /* ExerciseCancelLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7293E08E1EE7BAE3009AC1A2 /* ExerciseCancelLayer.cpp */; };
 		7293E0931EE7BAE3009AC1A2 /* ExerciseRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7293E0901EE7BAE3009AC1A2 /* ExerciseRoom.cpp */; };
 		7293E0951EE7BAFA009AC1A2 /* exerciseCancelLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 7293E0941EE7BAFA009AC1A2 /* exerciseCancelLayer.csb */; };
@@ -253,6 +259,15 @@
 		729772861F09DFBF001DC2B8 /* end1_2 in Resources */ = {isa = PBXBuildFile; fileRef = 729772821F09DFBF001DC2B8 /* end1_2 */; };
 		729772871F09DFBF001DC2B8 /* end1_2.csb in Resources */ = {isa = PBXBuildFile; fileRef = 729772831F09DFBF001DC2B8 /* end1_2.csb */; };
 		72B1D75B1F0F6F7600D73B31 /* LZKeychain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */; };
+		72CE4C5A1F6FD82900E64220 /* PromotionLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72CE4C531F6FD82900E64220 /* PromotionLayer.cpp */; };
+		72CE4C5B1F6FD82900E64220 /* FactionMemberLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72CE4C551F6FD82900E64220 /* FactionMemberLayer.cpp */; };
+		72CE4C5C1F6FD82900E64220 /* FactionMainLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72CE4C571F6FD82900E64220 /* FactionMainLayer.cpp */; };
+		72CE4C5D1F6FD82900E64220 /* FactionCreateLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72CE4C591F6FD82900E64220 /* FactionCreateLayer.cpp */; };
+		72CE4C641F6FD84000E64220 /* promotionLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72CE4C5E1F6FD84000E64220 /* promotionLayer.csb */; };
+		72CE4C661F6FD84000E64220 /* factionMemberLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72CE4C601F6FD84000E64220 /* factionMemberLayer.csb */; };
+		72CE4C671F6FD84000E64220 /* factionMainLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72CE4C611F6FD84000E64220 /* factionMainLayer.csb */; };
+		72CE4C681F6FD84000E64220 /* factionlistNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72CE4C621F6FD84000E64220 /* factionlistNode.csb */; };
+		72CE4C691F6FD84000E64220 /* factionCreateLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72CE4C631F6FD84000E64220 /* factionCreateLayer.csb */; };
 		72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098A91F08C45F00FEABAB /* iosfunc.mm */; };
 		72D098B81F08CA3100FEABAB /* MobClickCpp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 72D098B71F08CA3000FEABAB /* MobClickCpp.mm */; };
 		72D5CAC01F0E1A21007A5D12 /* Shake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72D5CABE1F0E1A21007A5D12 /* Shake.cpp */; };
@@ -261,6 +276,7 @@
 		72E332C91F0BAAFA00E61182 /* goldGoodsNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72E332C61F0BAAFA00E61182 /* goldGoodsNode.csb */; };
 		72E332CA1F0BAAFA00E61182 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 72E332C71F0BAAFA00E61182 /* images */; };
 		72E332CB1F0BAAFA00E61182 /* rmbGoodsNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72E332C81F0BAAFA00E61182 /* rmbGoodsNode.csb */; };
+		72F0DDF71F70AA76006923C6 /* factionmemberNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72F0DDF61F70AA76006923C6 /* factionmemberNode.csb */; };
 		72F1551B1F459F6B00C83B47 /* FriendExgScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */; };
 		72F1551D1F459F7D00C83B47 /* friendExgLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72F1551C1F459F7D00C83B47 /* friendExgLayer.csb */; };
 		72F4D13A1F21A0AC00D9D752 /* ChallengeCountLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72F4D1361F21A0AC00D9D752 /* ChallengeCountLayer.cpp */; };
@@ -663,6 +679,15 @@
 		728691EE1ED5740100D06B0F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		728692081ED5972700D06B0F /* uipacker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uipacker.png; sourceTree = "<group>"; };
 		7286920A1ED5973E00D06B0F /* uipacker.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = uipacker.plist; sourceTree = "<group>"; };
+		72886EF01F7269E900FC3701 /* newerGuide2Layer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = newerGuide2Layer.csb; sourceTree = "<group>"; };
+		72886EF11F7269E900FC3701 /* factionComfirmLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionComfirmLayer.csb; sourceTree = "<group>"; };
+		72886EF41F726A0900FC3701 /* NewerGuide2Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewerGuide2Layer.h; sourceTree = "<group>"; };
+		72886EF51F726A0900FC3701 /* NewerGuide2Layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewerGuide2Layer.cpp; sourceTree = "<group>"; };
+		72886EF61F726A0900FC3701 /* FactionComfirmLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionComfirmLayer.h; sourceTree = "<group>"; };
+		72886EF71F726A0900FC3701 /* FactionComfirmLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionComfirmLayer.cpp; sourceTree = "<group>"; };
+		72886EFA1F72727D00FC3701 /* FactionDetailsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionDetailsLayer.h; sourceTree = "<group>"; };
+		72886EFB1F72727D00FC3701 /* FactionDetailsLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionDetailsLayer.cpp; sourceTree = "<group>"; };
+		72886EFD1F72728700FC3701 /* factionDetailsLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionDetailsLayer.csb; sourceTree = "<group>"; };
 		7293E08E1EE7BAE3009AC1A2 /* ExerciseCancelLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExerciseCancelLayer.cpp; sourceTree = "<group>"; };
 		7293E08F1EE7BAE3009AC1A2 /* ExerciseCancelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseCancelLayer.h; sourceTree = "<group>"; };
 		7293E0901EE7BAE3009AC1A2 /* ExerciseRoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExerciseRoom.cpp; sourceTree = "<group>"; };
@@ -676,6 +701,19 @@
 		729772831F09DFBF001DC2B8 /* end1_2.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = end1_2.csb; sourceTree = "<group>"; };
 		72B1D7591F0F6F7600D73B31 /* LZKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZKeychain.h; sourceTree = "<group>"; };
 		72B1D75A1F0F6F7600D73B31 /* LZKeychain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LZKeychain.mm; sourceTree = "<group>"; };
+		72CE4C521F6FD82900E64220 /* PromotionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionLayer.h; sourceTree = "<group>"; };
+		72CE4C531F6FD82900E64220 /* PromotionLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PromotionLayer.cpp; sourceTree = "<group>"; };
+		72CE4C541F6FD82900E64220 /* FactionMemberLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionMemberLayer.h; sourceTree = "<group>"; };
+		72CE4C551F6FD82900E64220 /* FactionMemberLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionMemberLayer.cpp; sourceTree = "<group>"; };
+		72CE4C561F6FD82900E64220 /* FactionMainLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionMainLayer.h; sourceTree = "<group>"; };
+		72CE4C571F6FD82900E64220 /* FactionMainLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionMainLayer.cpp; sourceTree = "<group>"; };
+		72CE4C581F6FD82900E64220 /* FactionCreateLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionCreateLayer.h; sourceTree = "<group>"; };
+		72CE4C591F6FD82900E64220 /* FactionCreateLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionCreateLayer.cpp; sourceTree = "<group>"; };
+		72CE4C5E1F6FD84000E64220 /* promotionLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = promotionLayer.csb; sourceTree = "<group>"; };
+		72CE4C601F6FD84000E64220 /* factionMemberLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionMemberLayer.csb; sourceTree = "<group>"; };
+		72CE4C611F6FD84000E64220 /* factionMainLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionMainLayer.csb; sourceTree = "<group>"; };
+		72CE4C621F6FD84000E64220 /* factionlistNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionlistNode.csb; sourceTree = "<group>"; };
+		72CE4C631F6FD84000E64220 /* factionCreateLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionCreateLayer.csb; sourceTree = "<group>"; };
 		72D098A91F08C45F00FEABAB /* iosfunc.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iosfunc.mm; sourceTree = "<group>"; };
 		72D098B61F08CA3000FEABAB /* MobClickCpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickCpp.h; sourceTree = "<group>"; };
 		72D098B71F08CA3000FEABAB /* MobClickCpp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MobClickCpp.mm; sourceTree = "<group>"; };
@@ -688,6 +726,7 @@
 		72E332C61F0BAAFA00E61182 /* goldGoodsNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = goldGoodsNode.csb; sourceTree = "<group>"; };
 		72E332C71F0BAAFA00E61182 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		72E332C81F0BAAFA00E61182 /* rmbGoodsNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = rmbGoodsNode.csb; sourceTree = "<group>"; };
+		72F0DDF61F70AA76006923C6 /* factionmemberNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = factionmemberNode.csb; sourceTree = "<group>"; };
 		72F155191F459F6B00C83B47 /* FriendExgScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendExgScene.h; sourceTree = "<group>"; };
 		72F1551A1F459F6B00C83B47 /* FriendExgScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FriendExgScene.cpp; sourceTree = "<group>"; };
 		72F1551C1F459F7D00C83B47 /* friendExgLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = friendExgLayer.csb; sourceTree = "<group>"; };
@@ -916,8 +955,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				720040461F57E6B9006C03DB /* noticeLayer.csb */,
-				724E92B21F56CB720092DB5A /* friendNpcChallengeLayer.csb */,
+				72886EFD1F72728700FC3701 /* factionDetailsLayer.csb */,
 				728691851ED56CC800D06B0F /* actionGetLayer.csb */,
 				728691861ED56CC800D06B0F /* actionNode.csb */,
 				728691871ED56CC800D06B0F /* activityLayer.csb */,
@@ -952,9 +990,16 @@
 				7293E0941EE7BAFA009AC1A2 /* exerciseCancelLayer.csb */,
 				723947341EF2386D0093E725 /* exerciseDoneLayer.csb */,
 				72573ACF1F08AD28005DF2F6 /* exgLayer.csb */,
+				72886EF11F7269E900FC3701 /* factionComfirmLayer.csb */,
+				72CE4C631F6FD84000E64220 /* factionCreateLayer.csb */,
+				72CE4C621F6FD84000E64220 /* factionlistNode.csb */,
+				72CE4C611F6FD84000E64220 /* factionMainLayer.csb */,
+				72CE4C601F6FD84000E64220 /* factionMemberLayer.csb */,
+				72F0DDF61F70AA76006923C6 /* factionmemberNode.csb */,
 				7286918F1ED56CC800D06B0F /* fightLayer.csb */,
 				728691901ED56CC800D06B0F /* fonts */,
 				72F1551C1F459F7D00C83B47 /* friendExgLayer.csb */,
+				724E92B21F56CB720092DB5A /* friendNpcChallengeLayer.csb */,
 				722FA8B51F3B258900904816 /* getVipRewardLayer.csb */,
 				7254ED931F44498E0063E667 /* giveLayer.csb */,
 				72E332C61F0BAAFA00E61182 /* goldGoodsNode.csb */,
@@ -971,11 +1016,14 @@
 				728396A71F557F4000A75AB4 /* mixDoneLayer.csb */,
 				728396A61F557F4000A75AB4 /* mixGFNode.csb */,
 				728396A51F557F4000A75AB4 /* mixSuggestLayer.csb */,
+				72886EF01F7269E900FC3701 /* newerGuide2Layer.csb */,
+				720040461F57E6B9006C03DB /* noticeLayer.csb */,
 				7286919A1ED56CC800D06B0F /* npcLayer.csb */,
 				7286919B1ED56CC800D06B0F /* npcNode.csb */,
 				7286919C1ED56CC800D06B0F /* outDoorLayer.csb */,
 				723B9F0F1F3327C0000E3B18 /* particle */,
 				7239476F1EF2386D0093E725 /* pauseLayer.csb */,
+				72CE4C5E1F6FD84000E64220 /* promotionLayer.csb */,
 				725B067E1F4AFA9800ADE663 /* rankLayer.csb */,
 				725B067D1F4AFA9800ADE663 /* rankNode.csb */,
 				7254ED921F44498E0063E667 /* relationLayer.csb */,
@@ -1030,6 +1078,20 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				72886EFA1F72727D00FC3701 /* FactionDetailsLayer.h */,
+				72886EFB1F72727D00FC3701 /* FactionDetailsLayer.cpp */,
+				72886EF41F726A0900FC3701 /* NewerGuide2Layer.h */,
+				72886EF51F726A0900FC3701 /* NewerGuide2Layer.cpp */,
+				72886EF61F726A0900FC3701 /* FactionComfirmLayer.h */,
+				72886EF71F726A0900FC3701 /* FactionComfirmLayer.cpp */,
+				72CE4C521F6FD82900E64220 /* PromotionLayer.h */,
+				72CE4C531F6FD82900E64220 /* PromotionLayer.cpp */,
+				72CE4C541F6FD82900E64220 /* FactionMemberLayer.h */,
+				72CE4C551F6FD82900E64220 /* FactionMemberLayer.cpp */,
+				72CE4C561F6FD82900E64220 /* FactionMainLayer.h */,
+				72CE4C571F6FD82900E64220 /* FactionMainLayer.cpp */,
+				72CE4C581F6FD82900E64220 /* FactionCreateLayer.h */,
+				72CE4C591F6FD82900E64220 /* FactionCreateLayer.cpp */,
 				72868FDF1ED568B000D06B0F /* ActionGetLayer.cpp */,
 				72868FE01ED568B000D06B0F /* ActionGetLayer.h */,
 				72868FE11ED568B000D06B0F /* ActivitScene.cpp */,
@@ -1473,11 +1535,14 @@
 				72229CD61F283991001272D3 /* end4_2 in Resources */,
 				722FA8B81F3B258900904816 /* getVipRewardLayer.csb in Resources */,
 				720040471F57E6B9006C03DB /* noticeLayer.csb in Resources */,
+				72F0DDF71F70AA76006923C6 /* factionmemberNode.csb in Resources */,
 				72229CD01F283991001272D3 /* end3_1 in Resources */,
 				72F1551D1F459F7D00C83B47 /* friendExgLayer.csb in Resources */,
 				728691B41ED56CC800D06B0F /* actionNode.csb in Resources */,
 				728691CC1ED56CC800D06B0F /* resNode.csb in Resources */,
+				72886EF21F7269E900FC3701 /* newerGuide2Layer.csb in Resources */,
 				729772841F09DFBF001DC2B8 /* end1_1 in Resources */,
+				72886EFE1F72728700FC3701 /* factionDetailsLayer.csb in Resources */,
 				72754FED1F04CCA000AFB4C4 /* gray.fsh in Resources */,
 				7239479F1EF2386D0093E725 /* buyComfirmLayer.csb in Resources */,
 				729772861F09DFBF001DC2B8 /* end1_2 in Resources */,
@@ -1492,11 +1557,14 @@
 				72229CD91F2839CA001272D3 /* end2_2 in Resources */,
 				722FA8BA1F3B258900904816 /* vipShopLayer.csb in Resources */,
 				723947B51EF2386D0093E725 /* exerciseDoneLayer.csb in Resources */,
+				72CE4C641F6FD84000E64220 /* promotionLayer.csb in Resources */,
 				728691CF1ED56CC800D06B0F /* selectHeroLayer.csb in Resources */,
 				72229CD71F283991001272D3 /* end4_2.csb in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				728691C81ED56CC800D06B0F /* npcLayer.csb in Resources */,
 				723EC0101EF37FF000642589 /* story1_2.csb in Resources */,
+				72CE4C681F6FD84000E64220 /* factionlistNode.csb in Resources */,
+				72CE4C691F6FD84000E64220 /* factionCreateLayer.csb in Resources */,
 				724E92B31F56CB720092DB5A /* friendNpcChallengeLayer.csb in Resources */,
 				728691DF1ED56CC800D06B0F /* unlockLayer.csb in Resources */,
 				7254ED951F44498E0063E667 /* relationLayer.csb in Resources */,
@@ -1519,12 +1587,14 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				728396AA1F557F4000A75AB4 /* mixDoneLayer.csb in Resources */,
 				725CB9E91F1646DF00D2509A /* divedeLayer.csb in Resources */,
+				72886EF31F7269E900FC3701 /* factionComfirmLayer.csb in Resources */,
 				728396A91F557F4000A75AB4 /* mixGFNode.csb in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
 				72F4D13E1F21A0C800D9D752 /* challengeCountLayer.csb in Resources */,
 				729772851F09DFBF001DC2B8 /* end1_1.csb in Resources */,
 				72229CD21F283991001272D3 /* end3_2 in Resources */,
 				725CB9DF1F15F3E900D2509A /* repairLayer.csb in Resources */,
+				72CE4C671F6FD84000E64220 /* factionMainLayer.csb in Resources */,
 				72154F361F3C49D600EBD358 /* timeGfitLayer.csb in Resources */,
 				725B06801F4AFA9800ADE663 /* rankLayer.csb in Resources */,
 				72229CD31F283991001272D3 /* end3_2.csb in Resources */,
@@ -1573,6 +1643,7 @@
 				72754FE91F048A1F00AFB4C4 /* bookshelfLayer.csb in Resources */,
 				728691D31ED56CC800D06B0F /* shopLayer.csb in Resources */,
 				7293E0951EE7BAFA009AC1A2 /* exerciseCancelLayer.csb in Resources */,
+				72CE4C661F6FD84000E64220 /* factionMemberLayer.csb in Resources */,
 				728691CA1ED56CC800D06B0F /* outDoorLayer.csb in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				728691DA1ED56CC800D06B0F /* sysSmallLayer.csb in Resources */,
@@ -1617,6 +1688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72CE4C5B1F6FD82900E64220 /* FactionMemberLayer.cpp in Sources */,
 				7286905E1ED568B000D06B0F /* Furnace.cpp in Sources */,
 				728690771ED568B000D06B0F /* SettingLayer.cpp in Sources */,
 				728690791ED568B000D06B0F /* SoundManager.cpp in Sources */,
@@ -1636,7 +1708,10 @@
 				72D098B81F08CA3100FEABAB /* MobClickCpp.mm in Sources */,
 				728690801ED568B000D06B0F /* TopBar.cpp in Sources */,
 				7293E0931EE7BAE3009AC1A2 /* ExerciseRoom.cpp in Sources */,
+				72CE4C5C1F6FD82900E64220 /* FactionMainLayer.cpp in Sources */,
 				728690661ED568B000D06B0F /* HeroStateUILayer.cpp in Sources */,
+				72886EF81F726A0900FC3701 /* NewerGuide2Layer.cpp in Sources */,
+				72CE4C5D1F6FD82900E64220 /* FactionCreateLayer.cpp in Sources */,
 				7286905B1ED568B000D06B0F /* Fence.cpp in Sources */,
 				728690721ED568B000D06B0F /* ResDetailsLayer.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -1651,6 +1726,7 @@
 				72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */,
 				723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */,
 				728690691ED568B000D06B0F /* HomeLayer.cpp in Sources */,
+				72886EF91F726A0900FC3701 /* FactionComfirmLayer.cpp in Sources */,
 				7286907D1ED568B000D06B0F /* StoryScene.cpp in Sources */,
 				728690601ED568B000D06B0F /* GameScene.cpp in Sources */,
 				728690581ED568B000D06B0F /* CookTable.cpp in Sources */,
@@ -1660,6 +1736,7 @@
 				72F8A4511ED6851E007A5A65 /* IOSPurchaseWrap.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				728690741ED568B000D06B0F /* SelectHeroScene.cpp in Sources */,
+				72886EFC1F72727D00FC3701 /* FactionDetailsLayer.cpp in Sources */,
 				727267FA1EE15920007F036A /* MyMenu.cpp in Sources */,
 				72F8A4501ED6851E007A5A65 /* IOSPurchase.mm in Sources */,
 				72573ACE1F08AD0D005DF2F6 /* ExchangeLayer.cpp in Sources */,
@@ -1717,6 +1794,7 @@
 				728690841ED568B000D06B0F /* WineTable.cpp in Sources */,
 				724E92B11F56CB600092DB5A /* FriendNpcScene.cpp in Sources */,
 				728690551ED568B000D06B0F /* BuyDetailsLayer.cpp in Sources */,
+				72CE4C5A1F6FD82900E64220 /* PromotionLayer.cpp in Sources */,
 				725CB9DB1F15F3C200D2509A /* RepairLayer.cpp in Sources */,
 				728396A21F557F2B00A75AB4 /* MixSuggestLayer.cpp in Sources */,
 				7286907C1ED568B000D06B0F /* StorageUILayer.cpp in Sources */,

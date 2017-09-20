@@ -774,13 +774,13 @@ void MixGFNode::showTalkGuide()
 		{
 			std::string childname = StringUtils::format("mixbox_%d", i);
 			Node* node = csbroot->getChildByName(childname);
-			node->setUserData("buildsmall");
+			node->setUserData((void*)"buildsmall");
 			vec_node.push_back(node);
 			Node* cnode = node->getChildByName("img");
 			if (i == 0)
-				cnode->setUserData("mixmtext");
+				cnode->setUserData((void*)"mixmtext");
 			else
-				cnode->setUserData("mixsectext");
+				cnode->setUserData((void*)"mixsectext");
 			vec_node.push_back(cnode);
 		}
 		NewerGuide2Layer *layer = NewerGuide2Layer::create(102, vec_node);
