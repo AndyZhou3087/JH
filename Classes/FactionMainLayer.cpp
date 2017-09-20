@@ -6,6 +6,7 @@
 #include "Const.h"
 #include "GameScene.h"
 #include "FactionMemberLayer.h"
+#include "FactionDetailsLayer.h"
 
 FactionMainLayer::FactionMainLayer()
 {
@@ -46,6 +47,9 @@ bool FactionMainLayer::init()
 
 	createbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("createbtn");
 	createbtn->addTouchEventListener(CC_CALLBACK_2(FactionMainLayer::onCreateFaction, this));
+
+	cocos2d::ui::Widget* morebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("morebtn");
+	morebtn->addTouchEventListener(CC_CALLBACK_2(FactionMainLayer::onMore, this));
 
 	srollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("scrollview");
 	srollView->setScrollBarEnabled(false);
@@ -117,6 +121,16 @@ void FactionMainLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Widge
 
 		FactionCreateLayer* flayer = FactionCreateLayer::create();
 		this->addChild(flayer);
+	}
+}
+
+void FactionMainLayer::onMore(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		FactionDetailsLayer* fdlayer = FactionDetailsLayer::create();
+		g_gameLayer->addChild(fdlayer, 5);
 	}
 }
 

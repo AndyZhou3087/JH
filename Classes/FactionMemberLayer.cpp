@@ -443,6 +443,7 @@ void FactionMemberItem::onModify(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 
 void FactionMemberItem::onRefuse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		f_action = F_REFUSE;

@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ExerciseRoom.cpp" />
     <ClCompile Include="..\Classes\FactionComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\FactionCreateLayer.cpp" />
+    <ClCompile Include="..\Classes\FactionDetailsLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMainLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMemberLayer.cpp" />
     <ClCompile Include="..\Classes\Fence.cpp" />
@@ -276,6 +277,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ExerciseRoom.h" />
     <ClInclude Include="..\Classes\FactionComfirmLayer.h" />
     <ClInclude Include="..\Classes\FactionCreateLayer.h" />
+    <ClInclude Include="..\Classes\FactionDetailsLayer.h" />
     <ClInclude Include="..\Classes\FactionMainLayer.h" />
     <ClInclude Include="..\Classes\FactionMemberLayer.h" />
     <ClInclude Include="..\Classes\Fence.h" />

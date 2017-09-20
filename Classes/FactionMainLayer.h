@@ -25,6 +25,7 @@ private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onEnterFaction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onMore(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void delayShowData(float dt);
 	void onSuccess();

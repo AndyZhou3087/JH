@@ -318,6 +318,9 @@
     <ClCompile Include="..\Classes\FactionComfirmLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FactionDetailsLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -630,6 +633,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FactionComfirmLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FactionDetailsLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

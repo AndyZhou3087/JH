@@ -421,7 +421,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 						Node* npcitemnode = m_scrollview->getChildByName(childname);
 
 						cocos2d::ui::Widget* npcrsi = (cocos2d::ui::Widget*)npcitemnode->getChildByName("npcrsi");
-						npcrsi->setUserData("npcrsi2");
+						npcrsi->setUserData((void*)"npcrsi2");
 						vec_node.push_back(npcrsi);
 					}
 					NewerGuide2Layer *layer = NewerGuide2Layer::create(101, vec_node);
@@ -1476,18 +1476,18 @@ void NpcLayer::showTalkGuider()
 			Node* npcitemnode = m_scrollview->getChildByName(childname);
 
 			cocos2d::ui::Widget* fbtn = (cocos2d::ui::Widget*)npcitemnode->getChildByName("friendbtn");
-			fbtn->setUserData("npcbtn1");
+			fbtn->setUserData((void*)"npcbtn1");
 			vec_node.push_back(fbtn);
 
 			cocos2d::ui::Widget* gbtn = (cocos2d::ui::Widget*)npcitemnode->getChildByName("givebtn");
-			gbtn->setUserData("npcbtn1");
+			gbtn->setUserData((void*)"npcbtn1");
 			vec_node.push_back(gbtn);
 			
 			for (int i = 0; i < 5; i++)
 			{
 				std::string str = StringUtils::format("fheartbg_%d", i);
 				cocos2d::ui::Widget* npcheartbg = (cocos2d::ui::Widget*)npcitemnode->getChildByName(str);
-				npcheartbg->setUserData("fheartbg");
+				npcheartbg->setUserData((void*)"fheartbg");
 				vec_node.push_back(npcheartbg);
 
 				//str = StringUtils::format("fbar_%d", i);

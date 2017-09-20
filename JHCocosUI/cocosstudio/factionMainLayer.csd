@@ -221,6 +221,22 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="morebtn" ActionTag="-962098470" Tag="424" IconVisible="False" LeftMargin="625.9955" RightMargin="34.0045" TopMargin="1180.8262" BottomMargin="39.1739" TouchEnable="True" FontSize="35" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="30" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="60.0000" Y="60.0000" />
+            <AnchorPoint ScaleX="0.4084" ScaleY="0.4210" />
+            <Position X="650.4972" Y="64.4354" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.9035" Y="0.0503" />
+            <PreSize X="0.0833" Y="0.0469" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>
