@@ -343,12 +343,23 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		if (GlobalData::myFaction > 0)
 		{
 			std::string descstr;
-			if (GlobalData::mytitle == 0 || GlobalData::mytitle == -1)
+			if (GlobalData::mytitle == 0)
 			{ 
-				WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-				ServerDataSwap::init(this)->cancelFaction(m_data->id);
-				return;
+				if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("取消申请")) == 0)
+				{
+					WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+					Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+					ServerDataSwap::init(this)->cancelFaction(m_data->id);
+					return;
+				}
+				else
+				{
+					descstr = "已申请帮派！！";
+				}
+			}
+			else if (GlobalData::mytitle == -1)
+			{
+				checkRequset();
 			}
 			else if (GlobalData::mytitle == 1)
 				descstr = "已创建帮派！！";
@@ -363,43 +374,48 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		}
 		else
 		{
-			if (g_hero->getLVValue() < m_data->lvlimit - 1)
-			{
-				std::string str = StringUtils::format("%s%s%d%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf("需要申请者达到").c_str(), m_data->lvlimit, CommonFuncs::gbk2utf("级").c_str());
-				HintBox* hintbox = HintBox::create(str);
-				Director::getInstance()->getRunningScene()->addChild(hintbox);
-				return;
-			}
-			int selectsex = g_hero->getSex();
-			if (m_data->sexlimit < 4)
-			{
-				bool isok = true;
-				if (m_data->sexlimit == 3)
-				{
-					if (selectsex = 0)
-					{
-						isok = false;
-					}
-				}
-				else if (selectsex != m_data->sexlimit)
-				{
-					isok = false;
-				}
-
-				if (!isok)
-				{
-					std::string sexstr[] = { "只收自宫者", "只收男性", "只收女性", "只收男性和女性" };
-					std::string str = StringUtils::format("%s%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf(sexstr[m_data->sexlimit].c_str()).c_str());
-					HintBox* hintbox = HintBox::create(str);
-					Director::getInstance()->getRunningScene()->addChild(hintbox);
-					return;
-				}
-			}
-			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->requestFaction(m_data->id);
+			checkRequset();
 		}
 	}
+}
+
+void FactionListItem::checkRequset()
+{
+	if (g_hero->getLVValue() < m_data->lvlimit - 1)
+	{
+		std::string str = StringUtils::format("%s%s%d%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf("需要申请者达到").c_str(), m_data->lvlimit, CommonFuncs::gbk2utf("级").c_str());
+		HintBox* hintbox = HintBox::create(str);
+		Director::getInstance()->getRunningScene()->addChild(hintbox);
+		return;
+	}
+	int selectsex = g_hero->getSex();
+	if (m_data->sexlimit < 4)
+	{
+		bool isok = true;
+		if (m_data->sexlimit == 3)
+		{
+			if (selectsex = 0)
+			{
+				isok = false;
+			}
+		}
+		else if (selectsex != m_data->sexlimit)
+		{
+			isok = false;
+		}
+
+		if (!isok)
+		{
+			std::string sexstr[] = { "只收自宫者", "只收男性", "只收女性", "只收男性和女性" };
+			std::string str = StringUtils::format("%s%s", m_data->factionname.c_str(), CommonFuncs::gbk2utf(sexstr[m_data->sexlimit].c_str()).c_str());
+			HintBox* hintbox = HintBox::create(str);
+			Director::getInstance()->getRunningScene()->addChild(hintbox);
+			return;
+		}
+	}
+	WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+	ServerDataSwap::init(this)->requestFaction(m_data->id);
 }
 
 void FactionListItem::onSuccess()

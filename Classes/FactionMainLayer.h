@@ -50,6 +50,7 @@ private:
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSuccess();
 	void onErr(int errcode);
+	void checkRequset();
 private:
 	FactionListData* m_data;
 	cocos2d::ui::Button *actionbtn;
