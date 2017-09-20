@@ -17,14 +17,14 @@
             <FileData Type="Normal" Path="images/noticebg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="1607239592" Tag="45" IconVisible="False" LeftMargin="302.5000" RightMargin="302.5000" TopMargin="231.5000" BottomMargin="983.5000" FontSize="60" LabelText="告示" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="115.0000" Y="65.0000" />
+          <AbstractNodeData Name="title" ActionTag="1607239592" Tag="45" IconVisible="False" LeftMargin="302.0000" RightMargin="302.0000" TopMargin="233.0000" BottomMargin="985.0000" FontSize="60" LabelText="告示" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="116.0000" Y="62.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="1016.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.7937" />
-            <PreSize X="0.1597" Y="0.0508" />
+            <PreSize X="0.1611" Y="0.0484" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -45,14 +45,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-1917809870" Tag="101" IconVisible="False" LeftMargin="499.2473" RightMargin="54.7527" TopMargin="965.2976" BottomMargin="283.7024" FontSize="28" LabelText="今日不再弹出" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="166.0000" Y="31.0000" />
+          <AbstractNodeData Name="desc" ActionTag="-1917809870" Tag="101" IconVisible="False" LeftMargin="499.2473" RightMargin="53.7527" TopMargin="966.2976" BottomMargin="284.7024" FontSize="28" LabelText="今日不再弹出" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="167.0000" Y="29.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="499.2473" Y="299.2024" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.6934" Y="0.2338" />
-            <PreSize X="0.2306" Y="0.0242" />
+            <PreSize X="0.2319" Y="0.0227" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -71,19 +71,19 @@
             <NodeNormalFileData Type="MarkedSubImage" Path="ui/settingselect.png" Plist="uipacker.plist" />
             <NodeDisableFileData Type="MarkedSubImage" Path="ui/settingselect.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="-1791717748" Tag="111" IconVisible="False" LeftMargin="39.9981" RightMargin="30.0019" TopMargin="363.0002" BottomMargin="436.9998" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="650.0000" Y="480.0000" />
+          <AbstractNodeData Name="ScrollView" ActionTag="-1791717748" Tag="111" IconVisible="False" LeftMargin="39.9982" RightMargin="30.0018" TopMargin="362.0003" BottomMargin="417.9997" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="650.0000" Y="500.0000" />
             <AnchorPoint />
-            <Position X="39.9981" Y="436.9998" />
+            <Position X="39.9982" Y="417.9997" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0556" Y="0.3414" />
-            <PreSize X="0.9028" Y="0.3750" />
+            <PrePosition X="0.0556" Y="0.3266" />
+            <PreSize X="0.9028" Y="0.3906" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="650" Height="480" />
+            <InnerNodeSize Width="650" Height="500" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

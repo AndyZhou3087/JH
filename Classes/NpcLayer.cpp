@@ -13,6 +13,7 @@
 #include "MyActionProgressTimer.h"
 #include "RepairLayer.h"
 #include "GiveLayer.h"
+#include "NewerGuide2Layer.h"
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
@@ -404,6 +405,30 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			protectword = StringUtils::format("%s%s", GlobalData::map_npcs[npcid].name, CommonFuncs::gbk2utf("：少侠，你现在还太弱，还是在修炼修炼吧！先去打打野狼和兔子，升升等级再来吧！以后的人可没我这么好心！").c_str());
 			if (g_hero->getHeadID() == 4)
 				protectword = replaceSexWord(protectword);	
+		}
+		else
+		{
+			int count = checkFightCount(npcid);
+			if (NewerGuide2Layer::checkifNewerGuide(101))
+			{
+				if (count < 0 && count >= -10)
+				{
+					std::vector<Node*> vec_node;
+					int npcitemcount = m_scrollview->getChildrenCount();
+					if (npcitemcount > 0)
+					{
+						std::string childname = StringUtils::format("npcnode%d", tag);
+						Node* npcitemnode = m_scrollview->getChildByName(childname);
+
+						cocos2d::ui::Widget* npcrsi = (cocos2d::ui::Widget*)npcitemnode->getChildByName("npcrsi");
+						npcrsi->setUserData("npcrsi2");
+						vec_node.push_back(npcrsi);
+					}
+					NewerGuide2Layer *layer = NewerGuide2Layer::create(101, vec_node);
+					g_gameLayer->addChild(layer, NEWERLAYERZOER);
+					return;
+				}
+			}
 		}
 		if (protectword.length() > 0)
 		{
@@ -1437,4 +1462,41 @@ void NpcLayer::updateFriendly(std::string npcid)
 	GlobalData::saveFriendly();
 	reFreshFriendlyUI();
 	reFreshRelationUI();
+}
+
+void NpcLayer::showTalkGuider()
+{
+	if (NewerGuide2Layer::checkifNewerGuide(100) && GlobalData::getUnlockChapter() == 2)
+	{
+		std::vector<Node*> vec_node;
+		int npcitemcount = m_scrollview->getChildrenCount();
+		if (npcitemcount > 0)
+		{
+			std::string childname = StringUtils::format("npcnode%d", 0);
+			Node* npcitemnode = m_scrollview->getChildByName(childname);
+
+			cocos2d::ui::Widget* fbtn = (cocos2d::ui::Widget*)npcitemnode->getChildByName("friendbtn");
+			fbtn->setUserData("npcbtn1");
+			vec_node.push_back(fbtn);
+
+			cocos2d::ui::Widget* gbtn = (cocos2d::ui::Widget*)npcitemnode->getChildByName("givebtn");
+			gbtn->setUserData("npcbtn1");
+			vec_node.push_back(gbtn);
+			
+			for (int i = 0; i < 5; i++)
+			{
+				std::string str = StringUtils::format("fheartbg_%d", i);
+				cocos2d::ui::Widget* npcheartbg = (cocos2d::ui::Widget*)npcitemnode->getChildByName(str);
+				npcheartbg->setUserData("fheartbg");
+				vec_node.push_back(npcheartbg);
+
+				//str = StringUtils::format("fbar_%d", i);
+				//cocos2d::ui::Widget* npcheart = (cocos2d::ui::Widget*)npcitemnode->getChildByName(str);
+				//npcheart->setUserData("fheart1");
+				//vec_node.push_back(npcheart);
+			}
+		}
+		NewerGuide2Layer *layer = NewerGuide2Layer::create(100, vec_node);
+		g_gameLayer->addChild(layer, NEWERLAYERZOER);
+	}
 }

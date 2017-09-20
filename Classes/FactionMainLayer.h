@@ -18,6 +18,7 @@ public:
 	static FactionMainLayer* create();
 	void getFactionListData();
 	void disBtn();
+	void resetBtn();
 
 	void updateLvAndMember();
 private:

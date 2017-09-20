@@ -9,6 +9,17 @@
           <Fnt Name="topnum.fnt" />
         </Folder>
         <Folder Name="images">
+          <Folder Name="newerguide">
+            <Image Name="newerguidenextbtn.png" />
+            <Image Name="newerguider.png" />
+            <Image Name="newerhammer0.png" />
+            <Image Name="newerhammer1.png" />
+            <Image Name="newerquan.png" />
+            <Image Name="newersj0.png" />
+            <Image Name="newersj1.png" />
+            <Image Name="newertextbox.png" />
+            <Image Name="newerwhite.jpg" />
+          </Folder>
           <Image Name="buildtext0.png" />
           <Image Name="buildtext1.png" />
           <Image Name="buildtext2.png" />
@@ -651,6 +662,7 @@
         <Project Name="mixDoneLayer.csd" Type="Layer" />
         <Project Name="mixGFNode.csd" Type="Node" />
         <Project Name="mixSuggestLayer.csd" Type="Layer" />
+        <Project Name="newerGuide2Layer.csd" Type="Layer" />
         <Project Name="noticeLayer.csd" Type="Layer" />
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
@@ -685,6 +697,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="factionComfirmLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

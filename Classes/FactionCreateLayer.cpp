@@ -86,7 +86,7 @@ bool FactionCreateLayer::init()
 	}
 	sexlimitbtn[4]->setBright(false);
 
-	selectlv = 100;
+	selectlv = 0;
 	selectsex = 4;
 
 	GlobalData::g_gameStatus = GAMEPAUSE;
@@ -164,8 +164,6 @@ void FactionCreateLayer::onSuccess()
 	GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 50);
 	int usegold = GlobalData::getUseGold() + 50;
 	GlobalData::setUseGold(usegold);
-
-
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	FactionMainLayer* parent = (FactionMainLayer*)this->getParent();
 	parent->getFactionListData();

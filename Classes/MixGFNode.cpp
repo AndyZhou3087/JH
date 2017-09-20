@@ -14,6 +14,7 @@
 #include "MixGFDoneLayer.h"
 #include "HeroProperNode.h"
 #include "MixSuggestLayer.h"
+#include "NewerGuide2Layer.h"
 
 MixGFNode::MixGFNode()
 {
@@ -761,5 +762,28 @@ void MixGFNode::updateDesc()
 		desc0->setVisible(true);
 		desc1->setVisible(true);
 		desc->setVisible(false);
+	}
+}
+
+void MixGFNode::showTalkGuide()
+{
+	if (NewerGuide2Layer::checkifNewerGuide(102))
+	{
+		std::vector<Node*> vec_node;
+		for (int i = 0; i < 4;i++)
+		{
+			std::string childname = StringUtils::format("mixbox_%d", i);
+			Node* node = csbroot->getChildByName(childname);
+			node->setUserData("buildsmall");
+			vec_node.push_back(node);
+			Node* cnode = node->getChildByName("img");
+			if (i == 0)
+				cnode->setUserData("mixmtext");
+			else
+				cnode->setUserData("mixsectext");
+			vec_node.push_back(cnode);
+		}
+		NewerGuide2Layer *layer = NewerGuide2Layer::create(102, vec_node);
+		g_gameLayer->addChild(layer, NEWERLAYERZOER);
 	}
 }

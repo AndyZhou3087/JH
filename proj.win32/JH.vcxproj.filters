@@ -312,6 +312,12 @@
     <ClCompile Include="..\Classes\PromotionLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\NewerGuide2Layer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FactionComfirmLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -618,6 +624,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PromotionLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NewerGuide2Layer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FactionComfirmLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,16 +7,6 @@
 #include "GlobalData.h"
 USING_NS_CC;
 
-typedef enum
-{
-	F_NONE,
-	F_CREATE,
-	F_GETLIST,
-	F_LEAVE,
-	F_RELEASE,
-	F_CONTRIB//贡献值
-}FactionAction;
-
 class FactionMemberLayer :public Layer, public ServerDataDelegateProtocol
 {
 public:
@@ -59,13 +49,17 @@ public:
 private:
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onModify(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onRefuse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSuccess();
 	void onErr(int errcode);
+	void removeItem();
 private:
 	FactionMemberData* m_data;
 	cocos2d::ui::Button *actionbtn;
 	cocos2d::ui::Button* modifybtn;
 	cocos2d::ui::Text* postionlbl;
 	cocos2d::ui::Text* contributionlbl;
+	FactionAction f_action;
+	cocos2d::ui::Button* refusebtn;
 };
 #endif

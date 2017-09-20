@@ -17,6 +17,7 @@
 #include "NewerGuideLayer.h"
 #include "SpecialHintLayer.h"
 #include "HintBox.h"
+#include "MixGFNode.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -109,8 +110,17 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		heroppoint->setVisible(false);
 		m_listener->setSwallowTouches(false);
 		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
+		MixGFNode* mixnode = (MixGFNode*)heroStateUILayer->getChildByName("csbnode")->getChildByName("mixnode");
 		if (heroStateUILayer != NULL)
-			heroStateUILayer->showNewerGuide(12);
+		{
+			if (NewerGuideLayer::checkifNewerGuide(12))
+				heroStateUILayer->showNewerGuide(12);
+			else
+			{
+				if (m_lastSelectedData != NULL && ((m_lastSelectedData->type == N_GONG && g_hero->getAtrByType(H_NG)->count >0) || (m_lastSelectedData->type == W_GONG && g_hero->getAtrByType(H_WG)->count >0)))
+					mixnode->showTalkGuide();
+			}
+		}
 		this->setLocalZOrder(0);
 	}
 }
@@ -532,7 +542,6 @@ void HeroProperNode::takeon(HeroAtrType atrype, PackageData pdata)
 	g_hero->setAtrByType(atrype, pdata);
 
 	updataProperpanel(lastclickindex, pdata);
-
 }
 
 bool HeroProperNode::takeoff(HeroAtrType atrype)

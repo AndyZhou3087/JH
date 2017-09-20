@@ -107,6 +107,14 @@ void FactionMainLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Widge
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		if (g_hero->getLVValue() < 49)
+		{
+			std::string str = StringUtils::format("%s", CommonFuncs::gbk2utf("等级达到50级才能创建帮派！！").c_str());
+			HintBox * box = HintBox::create(str);
+			this->addChild(box);
+			return;
+		}
+
 		FactionCreateLayer* flayer = FactionCreateLayer::create();
 		this->addChild(flayer);
 	}
@@ -165,8 +173,16 @@ void FactionMainLayer::onSuccess()
 		createbtn->setEnabled(false);
 		if (GlobalData::mytitle == 0)
 			enterbtn->setEnabled(false);
-		else
+		else if (GlobalData::mytitle > 0)
 			enterbtn->setEnabled(true);
+		else
+		{
+			enterbtn->setEnabled(false);
+			createbtn->setEnabled(true);
+			std::string str = StringUtils::format("%s", CommonFuncs::gbk2utf("你申请帮派的请求被拒绝了！！请重新申请吧~~").c_str());
+			HintBox * box = HintBox::create(str);
+			this->addChild(box);
+		}
 	}
 	else
 	{
@@ -185,6 +201,12 @@ void FactionMainLayer::onErr(int errcode)
 void FactionMainLayer::disBtn()
 {
 	createbtn->setEnabled(false);
+	enterbtn->setEnabled(false);
+}
+
+void FactionMainLayer::resetBtn()
+{
+	createbtn->setEnabled(true);
 	enterbtn->setEnabled(false);
 }
 
@@ -249,12 +271,19 @@ bool FactionListItem::init(FactionListData *data)
 	if (GlobalData::myFaction == data->id)
 	{
 		if (GlobalData::mytitle == 0)
-			actionbtn->setTitleText(CommonFuncs::gbk2utf("申请中..."));
+		{
+			actionbtn->setTitleText(CommonFuncs::gbk2utf("取消申请"));
+		}
 		else if (GlobalData::mytitle == 1)
+		{
 			actionbtn->setTitleText(CommonFuncs::gbk2utf("已创建"));
+			actionbtn->setEnabled(false);
+		}
 		else if (GlobalData::mytitle == 2 || GlobalData::mytitle == 3 || GlobalData::mytitle == 4)
+		{
 			actionbtn->setTitleText(CommonFuncs::gbk2utf("已加入"));
-		actionbtn->setEnabled(false);
+			actionbtn->setEnabled(false);
+		}
 	}
 
 	return true;
@@ -300,8 +329,13 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		if (GlobalData::myFaction > 0)
 		{
 			std::string descstr;
-			if (GlobalData::mytitle == 0)
-				descstr = "已申请帮派！！";
+			if (GlobalData::mytitle == 0 || GlobalData::mytitle == -1)
+			{ 
+				WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+				ServerDataSwap::init(this)->cancelFaction(m_data->id);
+				return;
+			}
 			else if (GlobalData::mytitle == 1)
 				descstr = "已创建帮派！！";
 			else if (GlobalData::mytitle == 2 || GlobalData::mytitle == 3 || GlobalData::mytitle == 4)
@@ -357,18 +391,36 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 void FactionListItem::onSuccess()
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	actionbtn->setTitleText(CommonFuncs::gbk2utf("申请中..."));
-	actionbtn->setEnabled(false);
-	GlobalData::myFaction = m_data->id;
-	GlobalData::mytitle = 0;
-	FactionMainLayer* fmainlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
-	if (fmainlayer != NULL)
-		fmainlayer->disBtn();
+
+	if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("申请加入")) == 0)
+	{
+		actionbtn->setTitleText(CommonFuncs::gbk2utf("取消申请"));
+		GlobalData::myFaction = m_data->id;
+		GlobalData::mytitle = 0;
+		FactionMainLayer* fmainlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
+		if (fmainlayer != NULL)
+			fmainlayer->disBtn();
+	}
+	else if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("取消申请")) == 0)
+	{
+		actionbtn->setTitleText(CommonFuncs::gbk2utf("申请加入"));
+		GlobalData::myFaction = 0;
+		GlobalData::mytitle = 0;
+		FactionMainLayer* fmainlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
+		if (fmainlayer != NULL)
+			fmainlayer->resetBtn();
+	}
 }
 
 void FactionListItem::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("申请失败，请检查网络设置稍后重试！！"));
+	std::string errstr = "申请失败，请检查网络设置稍后重试！！";
+	if (errcode <= -2)
+	{
+		errstr = "申请已通过，请重新进入！！";
+	}
+
+	HintBox * box = HintBox::create(CommonFuncs::gbk2utf(errstr.c_str()));
 	Director::getInstance()->getRunningScene()->addChild(box);
 }

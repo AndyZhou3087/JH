@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "PromotionLayer.h"
 #include "FactionMainLayer.h"
+#include "FactionComfirmLayer.h"
 #include "MD5.h"
 
 const std::string positionstr[] = { "", "帮主", "副帮主", "长老", "帮众" };
@@ -120,40 +121,8 @@ void FactionMemberLayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (GlobalData::mytitle == 1)
-		{
-			int mygold = GlobalData::getMyGoldCount();
-
-			if (mygold >= 50)
-			{
-				if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
-				{
-					GlobalData::dataIsModified = true;
-					GlobalData::setMyGoldCount(0);
-					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
-					this->addChild(hint);
-					return;
-				}
-
-				f_action = F_RELEASE;
-				WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-				ServerDataSwap::init(this)->leaveFaction(1, m_fldata->id, g_hero->getHeadID());
-			}
-			else
-			{
-				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！！"));
-				this->addChild(hint);
-			}
-		}
-		else
-		{
-			f_action = F_LEAVE;
-
-			WaitingProgress* waitbox = WaitingProgress::create("加载中...");
-			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->leaveFaction(0, m_fldata->id, g_hero->getHeadID());
-		}
+		FactionComfirmLayer* fclayer = FactionComfirmLayer::create(m_fldata);
+		this->addChild(fclayer);
 	}
 }
 
@@ -207,10 +176,11 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 		}
 		if (isok)
 		{
+			f_action = F_CONTRIB;
 			WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			ServerDataSwap::init(this)->contributionFaction(m_fldata->id, contribution, g_hero->getHeadID());
-			f_action = F_CONTRIB;
+
 		}
 	}
 }
@@ -277,21 +247,7 @@ void FactionMemberLayer::updateUi()
 
 void FactionMemberLayer::onSuccess()
 {
-	if (f_action == F_LEAVE || f_action == F_RELEASE)
-	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		GlobalData::myFaction = 0;
-		GlobalData::mytitle = 0;
-		f_action = F_NONE;
-		this->removeFromParentAndCleanup(true);
-
-		FactionMainLayer* fmlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
-		if (fmlayer != NULL)
-		{
-			fmlayer->getFactionListData();
-		}
-	}
-	else if (f_action == F_CONTRIB)
+	if (f_action == F_CONTRIB)
 	{
 		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 		f_action = F_NONE;
@@ -308,8 +264,6 @@ void FactionMemberLayer::onSuccess()
 	{
 		this->scheduleOnce(schedule_selector(FactionMemberLayer::delayShowData), 0.1f);
 	}
-
-
 }
 
 void FactionMemberLayer::onErr(int errcode)
@@ -322,7 +276,7 @@ void FactionMemberLayer::onErr(int errcode)
 
 FactionMemberItem::FactionMemberItem()
 {
-
+	f_action = F_NONE;
 }
 FactionMemberItem::~FactionMemberItem()
 {
@@ -372,6 +326,9 @@ bool FactionMemberItem::init(FactionMemberData *data)
 	actionbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 	actionbtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onAction, this));
 
+	refusebtn = (cocos2d::ui::Button*)csbnode->getChildByName("refusebtn");
+	refusebtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onRefuse, this));
+
 	modifybtn = (cocos2d::ui::Button*)csbnode->getChildByName("modifybtn");
 	modifybtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onModify, this));
 
@@ -393,6 +350,7 @@ bool FactionMemberItem::init(FactionMemberData *data)
 			{
 				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
 				modifybtn->setVisible(false);
+				refusebtn->setVisible(true);
 			}
 			else
 				actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
@@ -403,6 +361,7 @@ bool FactionMemberItem::init(FactionMemberData *data)
 			{
 				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
 				modifybtn->setVisible(false);
+				refusebtn->setVisible(true);
 			}
 			else if (data->position == 1 || data->position == 2)
 			{
@@ -418,6 +377,7 @@ bool FactionMemberItem::init(FactionMemberData *data)
 			{
 				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
 				modifybtn->setVisible(false);
+				refusebtn->setVisible(true);
 			}
 			else if (data->position == 1 || data->position == 2 || data->position == 3)
 			{
@@ -481,51 +441,79 @@ void FactionMemberItem::onModify(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 	}
 }
 
+void FactionMemberItem::onRefuse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		f_action = F_REFUSE;
+		WaitingProgress* waitbox = WaitingProgress::create("加载中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::init(this)->refuseFaction(m_data->factionid, m_data->userid, m_data->herotype);
+	}
+}
+
 void FactionMemberItem::onSuccess()
 {
 	FactionMemberLayer* mlayer = (FactionMemberLayer*)g_gameLayer->getChildByName("factionmemberlayer");
 
-	if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("同意加入")) == 0)
+	if (f_action == F_REFUSE)
 	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		m_data->position = 4;
-		modifybtn->setVisible(true);
-		actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
-		postionlbl->setString(CommonFuncs::gbk2utf("帮众"));
-
-		for (unsigned int i = 0; i < GlobalData::vec_factionListData.size(); i++)
-		{
-			if (GlobalData::vec_factionListData[i].id == m_data->factionid)
-			{
-				GlobalData::vec_factionListData[i].membercount++;
-				break;
-			}
-		}
-		mlayer->updateUi();
+		removeItem();
 	}
-	else if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("逐出")) == 0)
+	else
 	{
-		for (unsigned int i = 0; i < GlobalData::vec_factionListData.size(); i++)
+		if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("同意加入")) == 0)
 		{
-			if (GlobalData::vec_factionListData[i].id == m_data->factionid)
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			m_data->position = 4;
+			modifybtn->setVisible(true);
+			refusebtn->setVisible(false);
+			actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
+			postionlbl->setString(CommonFuncs::gbk2utf("帮众"));
+
+			for (unsigned int i = 0; i < GlobalData::vec_factionListData.size(); i++)
 			{
-				GlobalData::vec_factionListData[i].membercount--;
-				break;
+				if (GlobalData::vec_factionListData[i].id == m_data->factionid)
+				{
+					GlobalData::vec_factionListData[i].membercount++;
+					break;
+				}
 			}
-		}
-		for (unsigned int i = 0; i < GlobalData::vec_factionMemberData.size(); i++)
-		{
-			if (GlobalData::vec_factionMemberData[i].userid == m_data->userid && GlobalData::vec_factionMemberData[i].herotype == m_data->herotype)
-			{
-				GlobalData::vec_factionMemberData.erase(GlobalData::vec_factionMemberData.begin() + i);
-				break;
-			}
-		}
-		if (mlayer != NULL)
-		{
 			mlayer->updateUi();
-			mlayer->delayShowData(0);
 		}
+		else if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("逐出")) == 0)
+		{
+			for (unsigned int i = 0; i < GlobalData::vec_factionListData.size(); i++)
+			{
+				if (GlobalData::vec_factionListData[i].id == m_data->factionid)
+				{
+					GlobalData::vec_factionListData[i].membercount--;
+					break;
+				}
+			}
+			removeItem();
+		}
+	}
+
+	f_action = F_NONE;
+}
+
+void FactionMemberItem::removeItem()
+{
+	FactionMemberLayer* mlayer = (FactionMemberLayer*)g_gameLayer->getChildByName("factionmemberlayer");
+
+	for (unsigned int i = 0; i < GlobalData::vec_factionMemberData.size(); i++)
+	{
+		if (GlobalData::vec_factionMemberData[i].userid == m_data->userid && GlobalData::vec_factionMemberData[i].herotype == m_data->herotype)
+		{
+			GlobalData::vec_factionMemberData.erase(GlobalData::vec_factionMemberData.begin() + i);
+			break;
+		}
+	}
+	if (mlayer != NULL)
+	{
+		mlayer->updateUi();
+		mlayer->delayShowData(0);
 	}
 }
 
@@ -534,6 +522,8 @@ void FactionMemberItem::onErr(int errcode)
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("操作失败，请检查网络设置稍后重试！！"));
 	Director::getInstance()->getRunningScene()->addChild(box);
+
+	f_action = F_NONE;
 }
 
 void FactionMemberItem::updatePosition(int position)

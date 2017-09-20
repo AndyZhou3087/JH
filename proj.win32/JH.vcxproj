@@ -169,6 +169,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ExerciseCancelLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseDoneLayer.cpp" />
     <ClCompile Include="..\Classes\ExerciseRoom.cpp" />
+    <ClCompile Include="..\Classes\FactionComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\FactionCreateLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMainLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMemberLayer.cpp" />
@@ -204,6 +205,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MyPackage.cpp" />
     <ClCompile Include="..\Classes\MyParticle.cpp" />
     <ClCompile Include="..\Classes\Nature.cpp" />
+    <ClCompile Include="..\Classes\NewerGuide2Layer.cpp" />
     <ClCompile Include="..\Classes\NewerGuideLayer.cpp" />
     <ClCompile Include="..\Classes\NoticeLayer.cpp" />
     <ClCompile Include="..\Classes\NpcLayer.cpp" />
@@ -272,6 +274,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ExerciseCancelLayer.h" />
     <ClInclude Include="..\Classes\ExerciseDoneLayer.h" />
     <ClInclude Include="..\Classes\ExerciseRoom.h" />
+    <ClInclude Include="..\Classes\FactionComfirmLayer.h" />
     <ClInclude Include="..\Classes\FactionCreateLayer.h" />
     <ClInclude Include="..\Classes\FactionMainLayer.h" />
     <ClInclude Include="..\Classes\FactionMemberLayer.h" />
@@ -307,6 +310,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MyPackage.h" />
     <ClInclude Include="..\Classes\MyParticle.h" />
     <ClInclude Include="..\Classes\Nature.h" />
+    <ClInclude Include="..\Classes\NewerGuide2Layer.h" />
     <ClInclude Include="..\Classes\NewerGuideLayer.h" />
     <ClInclude Include="..\Classes\NoticeLayer.h" />
     <ClInclude Include="..\Classes\NpcLayer.h" />

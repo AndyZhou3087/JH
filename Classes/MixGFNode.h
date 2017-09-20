@@ -31,6 +31,8 @@ public:
 	*****************************/
 	static void saveData();
 
+	void showTalkGuide();
+
 private:
 
 	/****************************

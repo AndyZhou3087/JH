@@ -421,6 +421,24 @@ void ServerDataSwap::requestFaction(int factionid)
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpRequestFactionListCB, this));
 }
 
+void ServerDataSwap::cancelFaction(int factionid)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_cancelfaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&type=");
+	std::string typestr = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(typestr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpCancelFactionCB, this));
+}
+
 void ServerDataSwap::getFactionMembers(int factionid)
 {
 	std::string url;
@@ -553,6 +571,28 @@ void ServerDataSwap::contributionFaction(int factionid, int contribution, int he
 	url.append(requesterstr);
 
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpContributionFactionCB, this));
+}
+
+void ServerDataSwap::refuseFaction(int factionid, int requesterId, int requestertype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_refusefaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&factionid=");
+	std::string factionidstr = StringUtils::format("%d", factionid);
+	url.append(factionidstr);
+
+	url.append("&requester=");
+	std::string requesterstr = StringUtils::format("%d", requesterId);
+	url.append(requesterstr);
+
+	url.append("&type=");
+	requesterstr = StringUtils::format("%d", requestertype);
+	url.append(requesterstr);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpRefuseFactionCB, this));
 }
 
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
@@ -1508,7 +1548,8 @@ void ServerDataSwap::httpGetFactionMemberCB(std::string retdata, int code, std::
 
 					v = dataArray[m]["title"];
 					fdata.position = atoi(v.GetString());
-					GlobalData::vec_factionMemberData.push_back(fdata);
+					if (fdata.position >= 0)
+						GlobalData::vec_factionMemberData.push_back(fdata);
 				}
 			}
 			isok = true;
@@ -1641,6 +1682,60 @@ void ServerDataSwap::httpLeaveFactionCB(std::string retdata, int code, std::stri
 }
 
 void ServerDataSwap::httpContributionFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpCancelFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpRefuseFactionCB(std::string retdata, int code, std::string tag)
 {
 	int ret = code;
 	if (m_pDelegateProtocol != NULL)

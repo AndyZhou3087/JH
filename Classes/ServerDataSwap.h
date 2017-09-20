@@ -38,6 +38,9 @@ public:
 	void promotionFaction(int factionid, int requesterId, int requestertype, int position);
 	void leaveFaction(int actiontype, int factionid, int herotype);
 	void contributionFaction(int factionid, int contribution, int herotype);
+
+	void cancelFaction(int factionid);
+	void refuseFaction(int factionid, int requesterId, int requestertype);
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -66,6 +69,10 @@ private:
 	void httpLeaveFactionCB(std::string retdata, int code, std::string tag);
 
 	void httpContributionFactionCB(std::string retdata, int code, std::string tag);
+
+	void httpCancelFactionCB(std::string retdata, int code, std::string tag);
+
+	void httpRefuseFactionCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

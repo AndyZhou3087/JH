@@ -518,6 +518,12 @@ void Winlayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 		if (fightlayer != NULL)
 			fightlayer->removeFromParentAndCleanup(true);
 
+		NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
+		if (npclayer != NULL)
+		{
+			npclayer->showTalkGuider();
+		}
+
 		this->removeFromParentAndCleanup(true);
 	}
 }

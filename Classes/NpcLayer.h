@@ -45,6 +45,11 @@ public:
 	*****************************/
 	void updateFriendly(std::string npcid);
 
+	/****************************
+	显示对话引导
+	*****************************/
+	void showTalkGuider();
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

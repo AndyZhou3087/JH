@@ -384,6 +384,16 @@ typedef struct
 	int position;
 }FactionMemberData;
 
+typedef enum
+{
+	F_NONE,
+	F_CREATE,
+	F_GETLIST,
+	F_LEAVE,
+	F_RELEASE,
+	F_CONTRIB,//贡献值
+	F_REFUSE
+}FactionAction;
 
 class GlobalData
 {

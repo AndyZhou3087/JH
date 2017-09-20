@@ -669,6 +669,7 @@ int Hero::getTotalAtck()
 	if (g_hero->getAtrByType(H_WG)->count > 0)
 	{
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
+		int gflv = g_hero->getAtrByType(H_WG)->lv;
 		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
 
 		int masteratk = 0;

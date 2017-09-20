@@ -151,7 +151,7 @@
             <FileData Type="MarkedSubImage" Path="ui/relationtextbox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="nametext" ActionTag="598787493" Tag="69" IconVisible="False" LeftMargin="62.7160" RightMargin="533.2841" TopMargin="135.6769" BottomMargin="1115.3231" FontSize="28" LabelText="帮派名称：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="nametext" ActionTag="598787493" Tag="69" IconVisible="False" LeftMargin="62.7159" RightMargin="533.2841" TopMargin="135.6769" BottomMargin="1115.3231" FontSize="28" LabelText="帮派名称：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="124.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.4628" ScaleY="0.4775" />
             <Position X="120.1031" Y="1129.1707" />
@@ -175,7 +175,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvtext" ActionTag="-1971016928" Tag="71" IconVisible="False" LeftMargin="455.3401" RightMargin="65.6600" TopMargin="135.6769" BottomMargin="1115.3231" FontSize="28" LabelText="帮派等级：    级" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="lvtext" ActionTag="-1971016928" Tag="71" IconVisible="False" LeftMargin="455.3401" RightMargin="65.6599" TopMargin="135.6769" BottomMargin="1115.3231" FontSize="28" LabelText="帮派等级：    级" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="199.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.4628" ScaleY="0.4775" />
             <Position X="547.4373" Y="1129.1707" />
@@ -199,7 +199,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="counttext" ActionTag="242519004" Tag="74" IconVisible="False" LeftMargin="62.7160" RightMargin="533.2841" TopMargin="185.7053" BottomMargin="1065.2947" FontSize="28" LabelText="帮派人数：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="counttext" ActionTag="242519004" Tag="74" IconVisible="False" LeftMargin="62.7159" RightMargin="533.2841" TopMargin="185.7053" BottomMargin="1065.2947" FontSize="28" LabelText="帮派人数：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="124.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.4628" ScaleY="0.4775" />
             <Position X="120.1031" Y="1079.1422" />
@@ -223,7 +223,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="exptext" ActionTag="-1589918634" Tag="76" IconVisible="False" LeftMargin="367.2623" RightMargin="256.7378" TopMargin="185.7052" BottomMargin="1065.2947" FontSize="28" LabelText="经验值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="exptext" ActionTag="-1589918634" Tag="76" IconVisible="False" LeftMargin="367.2624" RightMargin="256.7376" TopMargin="185.7040" BottomMargin="1065.2960" FontSize="28" LabelText="经验值：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="96.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.4974" ScaleY="0.4537" />
             <Position X="415.0128" Y="1078.4534" />
@@ -247,7 +247,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desctext" ActionTag="553150714" Tag="78" IconVisible="False" LeftMargin="62.7160" RightMargin="533.2841" TopMargin="233.1689" BottomMargin="1017.8311" FontSize="28" LabelText="帮派介绍：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desctext" ActionTag="553150714" Tag="78" IconVisible="False" LeftMargin="62.7160" RightMargin="533.2840" TopMargin="233.1689" BottomMargin="1017.8311" FontSize="28" LabelText="帮派介绍：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="124.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.4628" ScaleY="0.4775" />
             <Position X="120.1032" Y="1031.6786" />
@@ -292,9 +292,9 @@
             <PreSize X="0.2083" Y="0.0453" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
-            <DisabledFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
-            <PressedFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -308,9 +308,9 @@
             <PreSize X="0.2083" Y="0.0453" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
-            <DisabledFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
-            <PressedFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/factionlimitbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/mixbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
