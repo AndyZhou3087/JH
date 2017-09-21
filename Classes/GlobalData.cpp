@@ -102,6 +102,8 @@ std::string GlobalData::noticecontent;
 int GlobalData::myFaction = 0;
 int GlobalData::mytitle = 0;
 
+int GlobalData::myFactionlv = 0;
+
 GlobalData::GlobalData()
 {
 

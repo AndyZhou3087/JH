@@ -947,6 +947,7 @@ public:
 	static std::string noticecontent;
 	static int myFaction;
 	static int mytitle;
+	static int myFactionlv;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

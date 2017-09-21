@@ -172,6 +172,7 @@ bool GameScene::init()
 		}
 	}
 	ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
+	ServerDataSwap::init(NULL)->getFactionList();
     return true;
 }
 

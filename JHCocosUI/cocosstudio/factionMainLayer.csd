@@ -38,30 +38,19 @@
             <FileData Type="MarkedSubImage" Path="ui/factiontitle.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="hintdown" ActionTag="1061239160" Tag="111" IconVisible="False" LeftMargin="315.4672" RightMargin="314.5328" TopMargin="1058.8209" BottomMargin="191.1791" ctype="SpriteObjectData">
-            <Size X="90.0000" Y="30.0000" />
-            <AnchorPoint ScaleX="0.4948" ScaleY="0.7354" />
-            <Position X="359.9992" Y="213.2411" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.1666" />
-            <PreSize X="0.1250" Y="0.0234" />
-            <FileData Type="MarkedSubImage" Path="ui/hintdown.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="scrollview" ActionTag="-644685346" Tag="112" IconVisible="False" LeftMargin="36.0808" RightMargin="28.9192" TopMargin="174.0004" BottomMargin="225.9996" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
-            <Size X="655.0000" Y="880.0000" />
+          <AbstractNodeData Name="scrollview" ActionTag="-644685346" Tag="112" IconVisible="False" LeftMargin="36.0807" RightMargin="28.9193" TopMargin="176.0010" BottomMargin="303.9990" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="655.0000" Y="800.0000" />
             <AnchorPoint />
-            <Position X="36.0808" Y="225.9996" />
+            <Position X="36.0807" Y="303.9990" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0501" Y="0.1766" />
-            <PreSize X="0.9097" Y="0.6875" />
+            <PrePosition X="0.0501" Y="0.2375" />
+            <PreSize X="0.9097" Y="0.6250" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="655" Height="880" />
+            <InnerNodeSize Width="655" Height="800" />
           </AbstractNodeData>
           <AbstractNodeData Name="textbox" ActionTag="-2040360138" Tag="113" IconVisible="False" LeftMargin="55.0000" RightMargin="55.0000" TopMargin="132.0000" BottomMargin="1112.0000" ctype="SpriteObjectData">
             <Size X="610.0000" Y="36.0000" />
@@ -221,7 +210,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="morebtn" ActionTag="-962098470" Tag="424" IconVisible="False" LeftMargin="625.9955" RightMargin="34.0045" TopMargin="1180.8262" BottomMargin="39.1739" TouchEnable="True" FontSize="35" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="30" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="morebtn" ActionTag="-962098470" Tag="424" IconVisible="False" LeftMargin="625.9932" RightMargin="34.0068" TopMargin="1180.8246" BottomMargin="39.1754" TouchEnable="True" FontSize="35" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="30" Scale9Height="38" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="60.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.4084" ScaleY="0.4210" />
             <Position X="650.4972" Y="64.4354" />
@@ -234,6 +223,18 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvdesc" ActionTag="1323974288" Tag="104" IconVisible="False" LeftMargin="51.5002" RightMargin="51.4998" TopMargin="996.9525" BottomMargin="190.0475" IsCustomSize="True" FontSize="30" LabelText="等级介绍：1级增加2%闪避率、2级增加2%暴击率、3级增加2%生命值、4级帮派增加2%防御力、5级帮派增加2%攻击力" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="617.0000" Y="93.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="360.0002" Y="236.5475" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.5000" Y="0.1848" />
+            <PreSize X="0.8569" Y="0.0727" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

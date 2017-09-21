@@ -1408,6 +1408,15 @@ void ServerDataSwap::httpGetFactionListCB(std::string retdata, int code, std::st
 				GlobalData::mytitle = v.GetInt();
 			}
 
+			if (GlobalData::myFaction > 0 && GlobalData::mytitle > 0)
+			{
+				if (doc.HasMember("level"))
+				{
+					rapidjson::Value& v = doc["level"];
+					GlobalData::myFactionlv = v.GetInt();
+				}
+			}
+
 			if (doc.HasMember("data"))
 			{
 				rapidjson::Value& dataArray = doc["data"];

@@ -169,6 +169,7 @@ void AppDelegate::applicationWillEnterForeground() {
 				if (g_hero != NULL && !ServerDataSwap::isGetingData())
 				{
 					ServerDataSwap::init(g_gameLayer)->vipIsOn(g_hero->getHeadID());
+					ServerDataSwap::init(NULL)->getFactionList();
 				}
 			}
 		}

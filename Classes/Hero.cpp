@@ -240,6 +240,8 @@ float Hero::getMaxLifeValue()
 	float flife = GlobalData::map_heroAtr[getHeadID()].vec_maxhp[getLVValue()] * 1.0f;
 	flife = flife + flife*friendhppercent + flife * mixfglifepercent;
 
+	if (GlobalData::myFactionlv == 3)
+		flife += flife*0.02f;
 	return flife;
 }
 
@@ -636,6 +638,10 @@ int Hero::getTotalDf()
 
 
 	fdf += fdf*frienddfpercent;
+
+	if (GlobalData::myFactionlv == 4)
+		fdf += fdf*0.02f;
+
 	adf = int(fdf + 0.5f);
 	return adf;
 }
@@ -720,6 +726,9 @@ int Hero::getTotalAtck()
 
 	fack += fack* friendatkpercent;
 
+	if (GlobalData::myFactionlv == 5)
+		fack += fack*0.02f;
+
 	int tatk = int(fack + 0.5f);
 	return tatk;
 }
@@ -755,7 +764,8 @@ float Hero::getCritRate()
 			mixcrit += mdata.critpercent;
 	}
 	critrnd += mixcrit;
-
+	if (GlobalData::myFactionlv == 2)
+		critrnd += 2;
 	return critrnd;
 }
 
@@ -791,6 +801,8 @@ float Hero::getdodgeRate()
 			mixdodge += mdata.dodgepercent;
 	}
 	dodgernd += mixdodge;
+	if (GlobalData::myFactionlv == 1)
+		dodgernd += 2;
 
 	return dodgernd;
 }
