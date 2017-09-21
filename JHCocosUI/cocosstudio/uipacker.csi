@@ -546,6 +546,7 @@
       <FilePathData Path="ui/x030.png" />
       <FilePathData Path="ui/xline.png" />
       <FilePathData Path="ui/factionmore.png" />
+      <FilePathData Path="ui/factionbtnselected.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

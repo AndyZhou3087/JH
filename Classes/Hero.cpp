@@ -589,7 +589,11 @@ int Hero::getTotalDf()
 	if (g_hero->getAtrByType(H_NG)->count > 0)
 	{
 		std::string gfname = g_hero->getAtrByType(H_NG)->strid;
-		ngdf = GlobalData::map_wgngs[gfname].vec_bns[g_hero->getAtrByType(H_NG)->lv];
+		int gflv = g_hero->getAtrByType(H_NG)->lv;
+
+		if (gflv > GlobalData::map_wgngs[gfname].maxlv - 1)
+			gflv = GlobalData::map_wgngs[gfname].maxlv - 1;
+		ngdf = GlobalData::map_wgngs[gfname].vec_bns[gflv];
 
 		int masterdf = 0;
 		if (masternpc.length() > 0)
@@ -670,7 +674,9 @@ int Hero::getTotalAtck()
 	{
 		std::string strid = g_hero->getAtrByType(H_WG)->strid;
 		int gflv = g_hero->getAtrByType(H_WG)->lv;
-		wgAtk = GlobalData::map_wgngs[strid].vec_bns[g_hero->getAtrByType(H_WG)->lv];
+		if (gflv > GlobalData::map_wgngs[strid].maxlv - 1)
+			gflv = GlobalData::map_wgngs[strid].maxlv - 1;
+		wgAtk = GlobalData::map_wgngs[strid].vec_bns[gflv];
 
 		int masteratk = 0;
 		if (masternpc.length() > 0)

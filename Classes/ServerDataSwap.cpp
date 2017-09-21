@@ -1715,6 +1715,7 @@ void ServerDataSwap::httpCancelFactionCB(std::string retdata, int code, std::str
 	{
 		if (code == 0)
 		{
+			int title = 0;
 			rapidjson::Document doc;
 			if (JsonReader(retdata, doc))
 			{
@@ -1723,9 +1724,18 @@ void ServerDataSwap::httpCancelFactionCB(std::string retdata, int code, std::str
 					rapidjson::Value& v = doc["ret"];
 					ret = v.GetInt();
 				}
+				if (doc.HasMember("title"))
+				{
+					rapidjson::Value& v = doc["title"];
+					title = atoi(v.GetString());
+				}
 			}
 			if (ret == 0)
+			{
 				m_pDelegateProtocol->onSuccess();
+				if (title == 4)
+					m_pDelegateProtocol->onErr(-title);
+			}
 			else
 				m_pDelegateProtocol->onErr(-ret);
 		}

@@ -7,6 +7,7 @@
 #include "WaitingProgress.h"
 #include "GameScene.h"
 #include "FactionMainLayer.h"
+#include "FactionMemberLayer.h"
 
 bool FactionComfirmLayer::init(FactionListData *fldata)
 {
@@ -138,6 +139,12 @@ void FactionComfirmLayer::onSuccess()
 	GlobalData::mytitle = 0;
 	f_action = F_NONE;
 	removSelf();
+
+	FactionMemberLayer* flayer = (FactionMemberLayer*)g_gameLayer->getChildByName("factionmemberlayer");
+	if (flayer != NULL)
+	{
+		flayer->removeFromParentAndCleanup(true);
+	}
 
 	FactionMainLayer* fmlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
 	if (fmlayer != NULL)

@@ -20,6 +20,7 @@
 #include "RelationLayer.h"
 #include "RankLayer.h"
 #include "FactionMainLayer.h"
+#include "NewerGuide2Layer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -322,8 +323,12 @@ void MapLayer::Arrive()
 			{
 				std::string strid = g_hero->getAtrByType(H_MOUNT)->strid;
 				std::string descstr = StringUtils::format("%s%s%d", GlobalData::map_allResource[strid].cname.c_str(), CommonFuncs::gbk2utf("生命仅剩").c_str(), g_hero->getAtrByType(H_MOUNT)->goodvalue);
-
 				g_uiScroll->addEventText(descstr, 25, Color3B(204, 4, 4));
+			}
+
+			if (g_hero->getAtrByType(H_MOUNT)->goodvalue <= 10)
+			{
+				showTalkGuide();
 			}
 		}
 	}
@@ -699,5 +704,15 @@ void MapLayer::checkTimeGift(float dt)
 	else
 	{
 		m_timegiftbtn->setVisible(false);
+	}
+}
+
+void MapLayer::showTalkGuide()
+{
+	if (NewerGuide2Layer::checkifNewerGuide(103))
+	{
+		std::vector<Node*> vec_node;
+		NewerGuide2Layer *layer = NewerGuide2Layer::create(103, vec_node);
+		g_gameLayer->addChild(layer, NEWERLAYERZOER);
 	}
 }

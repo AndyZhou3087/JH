@@ -197,6 +197,7 @@
           <Image Name="e010.png" />
           <Image Name="enterfactionicon.png" />
           <Image Name="exerciseroom.png" />
+          <Image Name="factionbtnselected.png" />
           <Image Name="factioncreatetitle.png" />
           <Image Name="factionlimitbtn.png" />
           <Image Name="factionmemberitem0.png" />
