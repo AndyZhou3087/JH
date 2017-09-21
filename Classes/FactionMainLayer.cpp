@@ -344,9 +344,9 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		std::string descstr;
 		if (GlobalData::myFaction > 0)
 		{
-			std::string descstr;
 			if (GlobalData::mytitle == 0)
 			{ 
 				if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("取消申请")) == 0)
@@ -378,6 +378,13 @@ void FactionListItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 		}
 		else
 		{
+			if (m_data->membercount >= m_data->maxcount)
+			{
+				descstr = StringUtils::format("%s已满员！", m_data->factionname.c_str());
+				HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf(descstr.c_str()));
+				Director::getInstance()->getRunningScene()->addChild(hintbox);
+				return;
+			}
 			checkRequset();
 		}
 	}

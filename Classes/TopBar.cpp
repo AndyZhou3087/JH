@@ -478,7 +478,7 @@ void TopBar::updataUI(float dt)
 			}
 			else if (r < 30)
 			{
-				if (aday <= 0)
+				if (aday <= 0 && g_hero->getLVValue() >= 29)
 					activityScene = ApprenticeScene::createScene(0);
 			}
 			if (aday > 0 && g_nature->getPastDays() - aday >= 30)
