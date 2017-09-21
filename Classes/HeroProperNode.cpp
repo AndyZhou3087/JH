@@ -110,7 +110,7 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		heroppoint->setVisible(false);
 		m_listener->setSwallowTouches(false);
 		HeroStateUILayer* heroStateUILayer = (HeroStateUILayer*)this->getParent()->getParent();
-		MixGFNode* mixnode = (MixGFNode*)heroStateUILayer->getChildByName("csbnode")->getChildByName("mixnode");
+		MixGFNode* mixnode = (MixGFNode*)this->getParent()->getChildByName("mixnode");
 		if (heroStateUILayer != NULL)
 		{
 			if (NewerGuideLayer::checkifNewerGuide(12))
