@@ -591,3 +591,35 @@ void GameDataSave::setNoPopNoticeDay(int day)
 {
 	saveIntDataByKey("nopopnoticeday", day);
 }
+
+int GameDataSave::getContributionDay()
+{
+	return loadIntDataByKey(addUIDString("contributeday"), -1);
+}
+
+void GameDataSave::setContributionDay(int day)
+{
+	saveIntDataByKey(addUIDString("contributeday"), day);
+}
+
+
+int GameDataSave::getSliverContribution()
+{
+	return loadIntDataByKey(addUIDString("slivercontribute"), 0);
+}
+
+
+void GameDataSave::setSliverContribution(int val)
+{
+	saveIntDataByKey(addUIDString("slivercontribute"), val);
+}
+
+int GameDataSave::getGoldContribution()
+{
+	return loadIntDataByKey(addUIDString("goldcontribute"), 0);
+}
+
+void GameDataSave::setGoldContribution(int val)
+{
+	saveIntDataByKey(addUIDString("goldcontribute"), val);
+}

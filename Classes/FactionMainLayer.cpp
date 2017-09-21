@@ -310,7 +310,7 @@ void FactionListItem::updateLvAndPeopleCount()
 	int lv = 0;
 	for (int i = 99; i >= 0; i--)
 	{
-		if (m_data->exp >= i*i*m_data->maxcount * 100)
+		if (m_data->exp >= i*i*(20+(i-1)*5) * 100)
 		{
 			lv = i;
 			break;

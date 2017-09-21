@@ -610,16 +610,52 @@ public:
 	void setSuggestMixGf(std::string str);
 
 	/****************************
-	记载不再弹出公告的日期，只记录天数（一年中的天数）
+	加载不再弹出公告的日期，只记录天数（一年中的天数）
 	return 天数（一年中的天数）
 	*****************************/
-	static int getNoPopNoticeDay();
+	int getNoPopNoticeDay();
 
 	/****************************
 	保存不再弹出公告的日期
 	@para 天数（一年中的天数）
 	*****************************/
-	static void setNoPopNoticeDay(int day);
+	void setNoPopNoticeDay(int day);
+
+	/****************************
+	加载贡献的日期，只记录天数（一年中的天数）
+	return 天数（一年中的天数）
+	*****************************/
+	int getContributionDay();
+
+	/****************************
+	保存贡献的日期
+	@para 天数（一年中的天数）
+	*****************************/
+	void setContributionDay(int day);
+
+	/****************************
+	加载银两贡献个数
+	return 银两贡献个数
+	*****************************/
+	int getSliverContribution();
+
+	/****************************
+	保存银两贡献个数
+	@para 银两贡献个数
+	*****************************/
+	void setSliverContribution(int val);
+
+	/****************************
+	加载元宝贡献个数
+	return 元宝贡献个数
+	*****************************/
+	int getGoldContribution();
+
+	/****************************
+	保存元宝贡献个数
+	@para 元宝贡献个数
+	*****************************/
+	void setGoldContribution(int val);
 
 private:
 	/****************************

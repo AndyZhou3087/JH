@@ -8,6 +8,7 @@
 #include "FactionMainLayer.h"
 #include "FactionComfirmLayer.h"
 #include "MD5.h"
+#include "GameDataSave.h"
 
 const std::string positionstr[] = { "", "帮主", "副帮主", "长老", "帮众" };
 FactionMemberLayer::FactionMemberLayer()
@@ -78,8 +79,9 @@ bool FactionMemberLayer::init(FactionListData *fldata)
 	str = StringUtils::format("%d/%d", fldata->exp, lv*lv*fldata->maxcount*100);
 	explbl->setString(str);
 
+	std::string descstr = StringUtils::format("                  %s", fldata->desc.c_str());
 	cocos2d::ui::Text* desclbl = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
-	desclbl->setString(fldata->desc);
+	desclbl->setString(descstr);
 
 	srollView = (cocos2d::ui::ScrollView*)csbnode->getChildByName("scrollview");
 	srollView->setScrollBarEnabled(false);
@@ -88,6 +90,16 @@ bool FactionMemberLayer::init(FactionListData *fldata)
 	m_fldata = fldata;
 
 	GlobalData::g_gameStatus = GAMEPAUSE;
+
+	int curday = GlobalData::getDayOfYear();
+	int contributionday = GameDataSave::getInstance()->getContributionDay();
+
+	if (curday != contributionday)
+	{
+		GameDataSave::getInstance()->setContributionDay(curday);
+		GameDataSave::getInstance()->setSliverContribution(0);
+		GameDataSave::getInstance()->setGoldContribution(0);
+	}
 
 	getFactionMemberData();
 
@@ -137,6 +149,13 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 		bool isok = false;
 		if (tag == 0)
 		{
+			int c = 0;//GameDataSave::getInstance()->getSliverContribution();
+			//if (c >= 100)
+			//{
+			//	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两贡献超额，每日限额100银两！"));
+			//	this->addChild(hbox);
+			//	return;
+			//}
 			if (StorageRoom::getCountById("80") < 10)
 			{
 				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两不足！"));
@@ -144,6 +163,7 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 			}
 			else
 			{
+				GameDataSave::getInstance()->setSliverContribution(c+10);
 				StorageRoom::use("80", 10);
 				contribution += 10;
 				isok = true;
@@ -151,6 +171,14 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 		}
 		else
 		{
+			int c = 0;//GameDataSave::getInstance()->getGoldContribution();
+			//if (c >= 100)
+			//{
+			//	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("元宝贡献超额，每日限额100元宝！"));
+			//	this->addChild(hbox);
+			//	return;
+			//}
+
 			int mygold = GlobalData::getMyGoldCount();
 
 			if (mygold >= 10)
@@ -163,7 +191,7 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 					this->addChild(hint);
 					return;
 				}
-
+				GameDataSave::getInstance()->setGoldContribution(c + 10);
 				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 10);
 				contribution += 100;
 				isok = true;
@@ -217,13 +245,11 @@ void FactionMemberLayer::delayShowData(float dt)
 
 void FactionMemberLayer::updateUi()
 {
-	std::string str = StringUtils::format("%d/%d", m_fldata->membercount, m_fldata->maxcount);
-	countlbl->setString(str);
-
 	int lv = 0;
+	std::string str;
 	for (int i = 99; i >= 0; i--)
 	{
-		if (m_fldata->exp >= i*i*m_fldata->maxcount * 100)
+		if (m_fldata->exp >= i*i*(20+(i-1)*5) * 100)
 		{
 			lv = i;
 			break;
@@ -234,9 +260,14 @@ void FactionMemberLayer::updateUi()
 	lv = lv + 1;
 	str = StringUtils::format("%d", lv);
 	lvlbl->setString(str);
+	m_fldata->maxcount = 20 + (lv-1) * 5;
+	str = StringUtils::format("%d/%d", m_fldata->membercount, m_fldata->maxcount);
+	countlbl->setString(str);
 
 	str = StringUtils::format("%d/%d", m_fldata->exp, lv*lv*m_fldata->maxcount * 100);
 	explbl->setString(str);
+
+
 	FactionMainLayer* fmlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
 	if (fmlayer != NULL)
 	{
