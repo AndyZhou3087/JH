@@ -33,7 +33,6 @@ private:
 	cocos2d::ui::Text* explbl;
 	cocos2d::ui::Text* lvlbl;
 	FactionAction f_action;
-	int contribution;
 };
 
 class FactionMemberItem :public Sprite, public ServerDataDelegateProtocol
@@ -45,14 +44,14 @@ public:
 	bool init(FactionMemberData *data);
 	static FactionMemberItem* create(FactionMemberData *data);
 	void updatePosition(int position);
-	void updateContribution(int contribution);
+	void removeItem();
 private:
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onModify(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRefuse(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSuccess();
 	void onErr(int errcode);
-	void removeItem();
+
 private:
 	FactionMemberData* m_data;
 	cocos2d::ui::Button *actionbtn;

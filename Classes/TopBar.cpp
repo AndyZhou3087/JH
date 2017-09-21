@@ -13,6 +13,7 @@
 #include "FriendExgScene.h"
 #include "FriendNpcScene.h"
 #include "FightLayer.h"
+#include "ApprenticeScene.h"
 
 TopBar::TopBar()
 {
@@ -460,6 +461,8 @@ void TopBar::updataUI(float dt)
 	{
 		if (g_nature->getDayOrNight() == Day)
 		{
+			int aday = GameDataSave::getInstance()->getApprenticeDay();
+
 			int r = GlobalData::createRandomNum(100);
 			if (r < 10)
 			{
@@ -473,6 +476,13 @@ void TopBar::updataUI(float dt)
 				if (fightlayer == NULL)
 					activityScene = FriendNpcScene::createScene();
 			}
+			else if (r < 30)
+			{
+				if (aday <= 0)
+					activityScene = ApprenticeScene::createScene(0);
+			}
+			if (aday > 0 && g_nature->getPastDays() - aday >= 30)
+				activityScene = ApprenticeScene::createScene(1);
 
 		}
 		//if (g_nature->getDayOrNight() == Day)

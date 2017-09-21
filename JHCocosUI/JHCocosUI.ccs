@@ -643,7 +643,9 @@
         <Project Name="exerciseCancelLayer.csd" Type="Layer" />
         <Project Name="exerciseDoneLayer.csd" Type="Layer" />
         <Project Name="exgLayer.csd" Type="Layer" />
+        <Project Name="factionComfirmLayer.csd" Type="Layer" />
         <Project Name="factionCreateLayer.csd" Type="Layer" />
+        <Project Name="factionDetailsLayer.csd" Type="Layer" />
         <Project Name="factionlistNode.csd" Type="Node" />
         <Project Name="factionMainLayer.csd" Type="Layer" />
         <Project Name="factionMemberLayer.csd" Type="Layer" />
@@ -699,8 +701,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="factionComfirmLayer.csd" Type="Layer" />
-        <Project Name="factionDetailsLayer.csd" Type="Layer" />
+        <Project Name="apprenticeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

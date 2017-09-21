@@ -321,6 +321,12 @@
     <ClCompile Include="..\Classes\FactionDetailsLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ApprenticeScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FactionKickComfirmLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -636,6 +642,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FactionDetailsLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ApprenticeScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FactionKickComfirmLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

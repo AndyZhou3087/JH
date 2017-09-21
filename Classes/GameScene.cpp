@@ -384,6 +384,26 @@ void GameScene::updata(float dt)
 					{
 						data->pastmin = 0;
 						data->count = data->max;
+						if (GameDataSave::getInstance()->getApprenticeDay() > 0)
+						{
+							PackageData pdata;
+							if (data->res.size() > 0)
+							{
+								int cres = data->res[0];
+								if (cres > 0 && atoi(data->strid.c_str()) != 67 && atoi(data->strid.c_str()) != 68)
+								{
+									std::string strid = StringUtils::format("%d", cres);
+									pdata.strid = strid;
+									pdata.type = data->type - 1;
+									pdata.count = data->max;
+									StorageRoom::add(pdata);
+									data->count = 0;
+									data->waittime = 0.0f;
+									std::string str = StringUtils::format("%s%s x%d", CommonFuncs::gbk2utf("你的弟子刚刚帮你收集了").c_str(), GlobalData::map_allResource[strid].cname.c_str(), data->max);
+									g_uiScroll->addEventText(str, 25, Color3B(204, 4, 4));
+								}
+							}
+						}
 					}
 				}
 			}

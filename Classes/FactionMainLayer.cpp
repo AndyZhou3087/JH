@@ -317,6 +317,10 @@ void FactionListItem::updateLvAndPeopleCount()
 		}
 	}
 	m_data->lv = lv;
+	if (m_data->lv > 4)
+	{
+		m_data->lv = 4;
+	}
 	str = StringUtils::format("%d", m_data->lv + 1);
 	lvlbl->setString(str);
 }

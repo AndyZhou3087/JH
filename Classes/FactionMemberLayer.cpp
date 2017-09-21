@@ -9,12 +9,12 @@
 #include "FactionComfirmLayer.h"
 #include "MD5.h"
 #include "GameDataSave.h"
+#include "FactionKickComfirmLayer.h"
 
 const std::string positionstr[] = { "", "帮主", "副帮主", "长老", "帮众" };
 FactionMemberLayer::FactionMemberLayer()
 {
 	f_action = F_NONE;
-	contribution = 0;
 }
 
 
@@ -22,7 +22,6 @@ FactionMemberLayer::~FactionMemberLayer()
 {
 	GlobalData::g_gameStatus = GAMESTART;
 	f_action = F_NONE;
-	contribution = 0;
 }
 
 
@@ -145,7 +144,7 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 	{
 		Node* btnnode = (Node*)pSender;
 		int tag = btnnode->getTag();
-		contribution = 0;
+		int contribution = 0;
 		bool isok = false;
 		if (tag == 0)
 		{
@@ -232,13 +231,18 @@ void FactionMemberLayer::delayShowData(float dt)
 		innerheight = contentheight;
 	srollView->setInnerContainerSize(Size(srollView->getContentSize().width, innerheight));
 
+	int contribution = 0;
+
 	for (unsigned int i = 0; i < GlobalData::vec_factionMemberData.size(); i++)
 	{
 		FactionMemberItem* node = FactionMemberItem::create(&GlobalData::vec_factionMemberData[i]);
 		node->setPosition(Vec2(srollView->getContentSize().width/2, innerheight - itemheight / 2 - i * itemheight));
 		std::string nodestr = StringUtils::format("fmitem%d", i);
 		srollView->addChild(node,0, nodestr);
+		contribution += GlobalData::vec_factionMemberData[i].contribution;
 	}
+	m_fldata->exp = contribution / 10;
+	updateUi();
 
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }
@@ -258,6 +262,14 @@ void FactionMemberLayer::updateUi()
 	m_fldata->lv = lv;
 
 	lv = lv + 1;
+
+	bool ismaxlv = false;
+	if (lv > 5)
+	{
+		lv = 5;
+		m_fldata->lv = 4;
+		ismaxlv = true;
+	}
 	str = StringUtils::format("%d", lv);
 	lvlbl->setString(str);
 	m_fldata->maxcount = 20 + (lv-1) * 5;
@@ -265,6 +277,8 @@ void FactionMemberLayer::updateUi()
 	countlbl->setString(str);
 
 	str = StringUtils::format("%d/%d", m_fldata->exp, lv*lv*m_fldata->maxcount * 100);
+	if (ismaxlv)
+		str = "-/-";
 	explbl->setString(str);
 
 
@@ -282,14 +296,8 @@ void FactionMemberLayer::onSuccess()
 	{
 		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 		f_action = F_NONE;
-		m_fldata->exp += contribution / 10;
-		updateUi();
-		for (unsigned int i = 0; i < GlobalData::vec_factionMemberData.size(); i++)
-		{
-			std::string nodestr = StringUtils::format("fmitem%d", i);
-			FactionMemberItem* node = (FactionMemberItem*)srollView->getChildByName(nodestr);
-			node->updateContribution(contribution);
-		}
+
+		getFactionMemberData();
 	}
 	else
 	{
@@ -456,9 +464,8 @@ void FactionMemberItem::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 		}
 		else if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("逐出")) == 0)
 		{
-			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->kickFaction(m_data->factionid, m_data->userid, m_data->herotype);
+			FactionKickComfirmLayer* player = FactionKickComfirmLayer::create(this, m_data);
+			g_gameLayer->addChild(player, 5);
 		}
 	}
 }
@@ -513,18 +520,6 @@ void FactionMemberItem::onSuccess()
 			}
 			mlayer->updateUi();
 		}
-		else if (actionbtn->getTitleText().compare(CommonFuncs::gbk2utf("逐出")) == 0)
-		{
-			for (unsigned int i = 0; i < GlobalData::vec_factionListData.size(); i++)
-			{
-				if (GlobalData::vec_factionListData[i].id == m_data->factionid)
-				{
-					GlobalData::vec_factionListData[i].membercount--;
-					break;
-				}
-			}
-			removeItem();
-		}
 	}
 
 	f_action = F_NONE;
@@ -561,11 +556,4 @@ void FactionMemberItem::onErr(int errcode)
 void FactionMemberItem::updatePosition(int position)
 {
 	postionlbl->setString(CommonFuncs::gbk2utf(positionstr[position].c_str()));
-}
-
-void FactionMemberItem::updateContribution(int contribution)
-{
-	m_data->contribution += contribution;
-	std::string str = StringUtils::format("%d", m_data->contribution);
-	contributionlbl->setString(str);
 }

@@ -157,7 +157,7 @@ void FactionComfirmLayer::onErr(int errcode)
 {
 	f_action = F_NONE;
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
+	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据处理异常，请检查网络连接！！"));
 	Director::getInstance()->getRunningScene()->addChild(box,1);
 	removSelf();
 }

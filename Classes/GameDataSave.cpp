@@ -623,3 +623,12 @@ void GameDataSave::setGoldContribution(int val)
 {
 	saveIntDataByKey(addUIDString("goldcontribute"), val);
 }
+
+int GameDataSave::getApprenticeDay()
+{
+	return loadIntDataByKey(addUIDString("apprentice"), 0);
+}
+void GameDataSave::setApprenticeDay(int val)
+{
+	saveIntDataByKey(addUIDString("apprentice"), val);
+}

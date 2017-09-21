@@ -148,6 +148,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ActivitScene.cpp" />
     <ClCompile Include="..\Classes\AnalyticUtil.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\ApprenticeScene.cpp" />
     <ClCompile Include="..\Classes\Bed.cpp" />
     <ClCompile Include="..\Classes\BookDetailsLayer.cpp" />
     <ClCompile Include="..\Classes\BookShelf.cpp" />
@@ -172,6 +173,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\FactionComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\FactionCreateLayer.cpp" />
     <ClCompile Include="..\Classes\FactionDetailsLayer.cpp" />
+    <ClCompile Include="..\Classes\FactionKickComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMainLayer.cpp" />
     <ClCompile Include="..\Classes\FactionMemberLayer.cpp" />
     <ClCompile Include="..\Classes\Fence.cpp" />
@@ -253,6 +255,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ActivitScene.h" />
     <ClInclude Include="..\Classes\AnalyticUtil.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\ApprenticeScene.h" />
     <ClInclude Include="..\Classes\Bed.h" />
     <ClInclude Include="..\Classes\BookDetailsLayer.h" />
     <ClInclude Include="..\Classes\BookShelf.h" />
@@ -278,6 +281,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\FactionComfirmLayer.h" />
     <ClInclude Include="..\Classes\FactionCreateLayer.h" />
     <ClInclude Include="..\Classes\FactionDetailsLayer.h" />
+    <ClInclude Include="..\Classes\FactionKickComfirmLayer.h" />
     <ClInclude Include="..\Classes\FactionMainLayer.h" />
     <ClInclude Include="..\Classes\FactionMemberLayer.h" />
     <ClInclude Include="..\Classes\Fence.h" />
