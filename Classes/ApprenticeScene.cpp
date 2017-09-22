@@ -7,6 +7,7 @@
 #include "HintBox.h"
 #include "GameDataSave.h"
 #include "MD5.h"
+#include "GameScene.h"
 
 ApprenticeScene::ApprenticeScene()
 {
@@ -164,7 +165,7 @@ void ApprenticeScene::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	{
 		if (m_type == 0)
 		{
-			int curday = GlobalData::getDayOfYear();
+			int curgameday = g_nature->getPastDays();
 			int aday = GameDataSave::getInstance()->getApprenticeDay();
 			if (aday < 0)
 			{
@@ -172,7 +173,7 @@ void ApprenticeScene::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			}
 			else
 			{
-				GameDataSave::getInstance()->setApprenticeDay(curday);
+				GameDataSave::getInstance()->setApprenticeDay(curgameday);
 			}
 			Director::getInstance()->popScene();
 		}
@@ -184,7 +185,7 @@ void ApprenticeScene::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 }
 void ApprenticeScene::giveGold()
 {
-	int curday = GlobalData::getDayOfYear();
+	int curgameday = g_nature->getPastDays();
 	int mygold = GlobalData::getMyGoldCount();
 
 	if (mygold >= 20)
@@ -198,7 +199,7 @@ void ApprenticeScene::giveGold()
 			return;
 		}
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 20);
-		GameDataSave::getInstance()->setApprenticeDay(curday);
+		GameDataSave::getInstance()->setApprenticeDay(curgameday);
 	}
 	else
 	{
