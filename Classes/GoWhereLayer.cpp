@@ -274,7 +274,8 @@ void GoWhereLayer::showNewerGuide(int step)
 		nodes.push_back(m_enterbtn);	
 	else if (step == 51 && m_type == ARRIVE)
 		nodes.push_back(m_stbtn);
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (nodes.size() > 0)
+		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 void GoWhereLayer::delayShowNewerGuide(float dt)

@@ -99,7 +99,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 
 		Label *wordlbl = Label::createWithTTF(CommonFuncs::gbk2utf(descText[step].c_str()), "fonts/STXINGKA.TTF", 30);
 		wordlbl->setLineBreakWithoutSpace(true);
-		wordlbl->setMaxLineWidth(610);
+		wordlbl->setMaxLineWidth(630);
 		wordlbl->setColor(Color3B(0, 0, 0));
 		wordlbl->setPosition(textbox->getContentSize().width / 2, textbox->getContentSize().height / 2);
 		textbox->addChild(wordlbl);

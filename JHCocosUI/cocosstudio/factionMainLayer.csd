@@ -226,7 +226,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lvdesc" ActionTag="1323974288" Tag="104" IconVisible="False" LeftMargin="51.5002" RightMargin="51.4998" TopMargin="996.9525" BottomMargin="190.0475" IsCustomSize="True" FontSize="30" LabelText="等级介绍：1级增加2%闪避率、2级增加2%暴击率、3级增加2%生命值、4级帮派增加2%防御力、5级帮派增加2%攻击力" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="lvdesc" ActionTag="1323974288" Tag="104" IconVisible="False" LeftMargin="51.5002" RightMargin="51.4998" TopMargin="996.9525" BottomMargin="190.0475" IsCustomSize="True" FontSize="29" LabelText="等级介绍：1级增加闪避率、2级增加暴击率、3级增加生命值、4级增加防御力、5级增加攻击力" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="617.0000" Y="93.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0002" Y="236.5475" />
