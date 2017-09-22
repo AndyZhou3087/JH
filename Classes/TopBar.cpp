@@ -476,14 +476,19 @@ void TopBar::updataUI(float dt)
 				if (fightlayer == NULL)
 					activityScene = FriendNpcScene::createScene();
 			}
-			else if (r < 30)
+			else
 			{
-				if (aday <= 0 && g_hero->getLVValue() >= 29)
-					activityScene = ApprenticeScene::createScene(0);
+				if (g_hero->getLVValue() >= 29)
+				{
+					if (aday == 0 || (aday < 0 && r < 30))
+						activityScene = ApprenticeScene::createScene(0);
+				}
 			}
-			if (aday > 0 && g_nature->getPastDays() - aday >= 30)
-				activityScene = ApprenticeScene::createScene(1);
-
+			if (activityScene == NULL)
+			{
+				if (aday > 0 && g_nature->getPastDays() - aday >= 30)
+					activityScene = ApprenticeScene::createScene(1);
+			}
 		}
 		//if (g_nature->getDayOrNight() == Day)
 		//{
