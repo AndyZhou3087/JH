@@ -1,4 +1,4 @@
-﻿#include "FactionMemberLayer.h"
+#include "FactionMemberLayer.h"
 #include "CommonFuncs.h"
 #include "HintBox.h"
 #include "WaitingProgress.h"
@@ -148,13 +148,13 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 		bool isok = false;
 		if (tag == 0)
 		{
-			int c = 0;//GameDataSave::getInstance()->getSliverContribution();
-			//if (c >= 100)
-			//{
-			//	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两贡献超额，每日限额100银两！"));
-			//	this->addChild(hbox);
-			//	return;
-			//}
+			int c = GameDataSave::getInstance()->getSliverContribution();
+            if (c >= 100)
+            {
+                HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两贡献超额，每日限额100银两！"));
+                this->addChild(hbox);
+                return;
+            }
 			if (StorageRoom::getCountById("80") < 10)
 			{
 				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("银两不足！"));
@@ -170,13 +170,13 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 		}
 		else
 		{
-			int c = 0;//GameDataSave::getInstance()->getGoldContribution();
-			//if (c >= 100)
-			//{
-			//	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("元宝贡献超额，每日限额100元宝！"));
-			//	this->addChild(hbox);
-			//	return;
-			//}
+			int c = GameDataSave::getInstance()->getGoldContribution();
+            if (c >= 100)
+            {
+                HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("元宝贡献超额，每日限额100元宝！"));
+                this->addChild(hbox);
+                return;
+            }
 
 			int mygold = GlobalData::getMyGoldCount();
 

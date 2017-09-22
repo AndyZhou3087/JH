@@ -1,4 +1,4 @@
-﻿#include "NpcLayer.h"
+#include "NpcLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "FightLayer.h"
@@ -358,7 +358,7 @@ void NpcLayer::onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		bool isplotMissioning = false;
 		PlotMissionData pdata = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
 		int plottype = 1;
-		if (pdata.snpc.compare(npc.id) == 0 || (pdata.dnpc.compare(npc.id) == 0))
+		if ((pdata.snpc.compare(npc.id) == 0 || pdata.dnpc.compare(npc.id) == 0) && pdata.type == 0)
 			plottype = 0;
 
 		isplotMissioning = doCheckPlotMisson(plottype, npc);
@@ -447,7 +447,7 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 
 		PlotMissionData pdata = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
 		int plottype = 1;
-		if (pdata.snpc.compare(npcid) == 0 || (pdata.dnpc.compare(npcid) == 0))
+		if ((pdata.snpc.compare(npcid) == 0 || pdata.dnpc.compare(npcid) == 0) && pdata.type == 1)
 			plottype = 0;
 
 		if (!checkIsMissiong(plottype, npcid))
