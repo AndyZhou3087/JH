@@ -34,6 +34,10 @@ private:
 	void onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void giveGold();
+
+	void showHint(int type);
+
+	void delayShowShop(float dt);
 private:
 	int m_type;
 };

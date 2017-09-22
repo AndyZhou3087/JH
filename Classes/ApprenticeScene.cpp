@@ -8,6 +8,7 @@
 #include "GameDataSave.h"
 #include "MD5.h"
 #include "GameScene.h"
+#include "ShopLayer.h"
 
 ApprenticeScene::ApprenticeScene()
 {
@@ -153,6 +154,7 @@ void ApprenticeScene::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		if (m_type == 1)
 		{
 			GameDataSave::getInstance()->setApprenticeDay(-1);
+			showHint(0);
 		}
 		Director::getInstance()->popScene();
 	}
@@ -174,8 +176,8 @@ void ApprenticeScene::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			else
 			{
 				GameDataSave::getInstance()->setApprenticeDay(curgameday);
+				Director::getInstance()->popScene();
 			}
-			Director::getInstance()->popScene();
 		}
 		else
 		{
@@ -200,10 +202,30 @@ void ApprenticeScene::giveGold()
 		}
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 20);
 		GameDataSave::getInstance()->setApprenticeDay(curgameday);
+		if (m_type == 1)
+			showHint(1);
+
+		Director::getInstance()->popScene();
 	}
 	else
 	{
 		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！"));
-		this->addChild(hbox);
+		this->addChild(hbox, 0, "hintbox");
+		this->scheduleOnce(schedule_selector(ApprenticeScene::delayShowShop), 1.0f);
 	}
+}
+
+void ApprenticeScene::showHint(int type)
+{
+	std::string str = "因为你太过小气，徒弟已经离你而去！";
+	if (type == 1)
+		str = "因为你慷慨大方，徒弟更加任劳任怨！";
+	HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
+	g_gameLayer->addChild(hbox, 10);
+}
+
+void ApprenticeScene::delayShowShop(float dt)
+{
+	this->removeChildByName("hintbox");
+	this->addChild(ShopLayer::create(), 1);
 }
