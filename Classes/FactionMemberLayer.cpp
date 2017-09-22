@@ -1,4 +1,4 @@
-#include "FactionMemberLayer.h"
+﻿#include "FactionMemberLayer.h"
 #include "CommonFuncs.h"
 #include "HintBox.h"
 #include "WaitingProgress.h"
