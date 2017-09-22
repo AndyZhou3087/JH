@@ -304,6 +304,9 @@
 		72F8A4891ED6B137007A5A65 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F8A4881ED6B137007A5A65 /* libxml2.tbd */; };
 		72F8A48B1ED6B1AB007A5A65 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F8A48A1ED6B1AB007A5A65 /* OpenAL.framework */; };
 		72F8A48D1ED6B291007A5A65 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 72F8A48C1ED6B291007A5A65 /* libc++abi.tbd */; };
+		72F9F0461F73B4FE00E2731B /* FactionKickComfirmLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72F9F0431F73B4FD00E2731B /* FactionKickComfirmLayer.cpp */; };
+		72F9F0471F73B4FE00E2731B /* ApprenticeScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 72F9F0451F73B4FD00E2731B /* ApprenticeScene.cpp */; };
+		72F9F0491F73B50E00E2731B /* apprenticeLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 72F9F0481F73B50E00E2731B /* apprenticeLayer.csb */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -765,6 +768,11 @@
 		72F8A48F1ED6B4F0007A5A65 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../cocos2d/external/curl/prebuilt/ios/libcrypto.a; sourceTree = "<group>"; };
 		72F8A4901ED6B4F0007A5A65 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../cocos2d/external/curl/prebuilt/ios/libcurl.a; sourceTree = "<group>"; };
 		72F8A4911ED6B4F0007A5A65 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../cocos2d/external/curl/prebuilt/ios/libssl.a; sourceTree = "<group>"; };
+		72F9F0421F73B4FD00E2731B /* FactionKickComfirmLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FactionKickComfirmLayer.h; sourceTree = "<group>"; };
+		72F9F0431F73B4FD00E2731B /* FactionKickComfirmLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FactionKickComfirmLayer.cpp; sourceTree = "<group>"; };
+		72F9F0441F73B4FD00E2731B /* ApprenticeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApprenticeScene.h; sourceTree = "<group>"; };
+		72F9F0451F73B4FD00E2731B /* ApprenticeScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ApprenticeScene.cpp; sourceTree = "<group>"; };
+		72F9F0481F73B50E00E2731B /* apprenticeLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = apprenticeLayer.csb; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -955,6 +963,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72F9F0481F73B50E00E2731B /* apprenticeLayer.csb */,
 				72886EFD1F72728700FC3701 /* factionDetailsLayer.csb */,
 				728691851ED56CC800D06B0F /* actionGetLayer.csb */,
 				728691861ED56CC800D06B0F /* actionNode.csb */,
@@ -1078,6 +1087,10 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				72F9F0421F73B4FD00E2731B /* FactionKickComfirmLayer.h */,
+				72F9F0431F73B4FD00E2731B /* FactionKickComfirmLayer.cpp */,
+				72F9F0441F73B4FD00E2731B /* ApprenticeScene.h */,
+				72F9F0451F73B4FD00E2731B /* ApprenticeScene.cpp */,
 				72886EFA1F72727D00FC3701 /* FactionDetailsLayer.h */,
 				72886EFB1F72727D00FC3701 /* FactionDetailsLayer.cpp */,
 				72886EF41F726A0900FC3701 /* NewerGuide2Layer.h */,
@@ -1480,7 +1493,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = T5NN4HTVSU;
+						DevelopmentTeam = 4XUL6A3335;
 					};
 				};
 			};
@@ -1563,6 +1576,7 @@
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				728691C81ED56CC800D06B0F /* npcLayer.csb in Resources */,
 				723EC0101EF37FF000642589 /* story1_2.csb in Resources */,
+				72F9F0491F73B50E00E2731B /* apprenticeLayer.csb in Resources */,
 				72CE4C681F6FD84000E64220 /* factionlistNode.csb in Resources */,
 				72CE4C691F6FD84000E64220 /* factionCreateLayer.csb in Resources */,
 				724E92B31F56CB720092DB5A /* friendNpcChallengeLayer.csb in Resources */,
@@ -1691,6 +1705,7 @@
 				72CE4C5B1F6FD82900E64220 /* FactionMemberLayer.cpp in Sources */,
 				7286905E1ED568B000D06B0F /* Furnace.cpp in Sources */,
 				728690771ED568B000D06B0F /* SettingLayer.cpp in Sources */,
+				72F9F0471F73B4FE00E2731B /* ApprenticeScene.cpp in Sources */,
 				728690791ED568B000D06B0F /* SoundManager.cpp in Sources */,
 				722286A51F31C48300EE46A4 /* ServerDataSwap.cpp in Sources */,
 				728690641ED568B000D06B0F /* Hero.cpp in Sources */,
@@ -1774,6 +1789,7 @@
 				728690571ED568B000D06B0F /* CommonFuncs.cpp in Sources */,
 				728396A31F557F2B00A75AB4 /* MixGFNode.cpp in Sources */,
 				7286906C1ED568B000D06B0F /* MedicineKit.cpp in Sources */,
+				72F9F0461F73B4FE00E2731B /* FactionKickComfirmLayer.cpp in Sources */,
 				7286906B1ED568B000D06B0F /* MapLayer.cpp in Sources */,
 				7286905C1ED568B000D06B0F /* FightLayer.cpp in Sources */,
 				7254ED8E1F44496E0063E667 /* RelationLayer.cpp in Sources */,
@@ -1836,7 +1852,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = T5NN4HTVSU;
+				DEVELOPMENT_TEAM = 4XUL6A3335;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1874,7 +1890,7 @@
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuxx.jh1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuxx.jh2;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1891,7 +1907,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
-				DEVELOPMENT_TEAM = T5NN4HTVSU;
+				DEVELOPMENT_TEAM = 4XUL6A3335;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1927,7 +1943,7 @@
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kuxx.jh1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kuxx.jh2;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
