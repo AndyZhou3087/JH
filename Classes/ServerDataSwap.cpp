@@ -910,6 +910,7 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 			if (m_pDelegateProtocol != NULL)
 			{
 				m_pDelegateProtocol->onSuccess();
+				GlobalData::init();
 			}
 		}
 	}
