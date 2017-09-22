@@ -122,6 +122,7 @@ void GlobalData::init()
 	isBuyTimeGift = GameDataSave::getInstance()->getIsBuyTimeGift();
 	myFaction = 0;
 	mytitle = 0;
+	myFactionlv = 0;
 }
 
 void GlobalData::loadBuildActionJSon()
