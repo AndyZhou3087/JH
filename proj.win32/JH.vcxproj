@@ -215,6 +215,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\OutDoor.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
     <ClCompile Include="..\Classes\PromotionLayer.cpp" />
+    <ClCompile Include="..\Classes\RaffleLayer.cpp" />
+    <ClCompile Include="..\Classes\RaffleResultLayer.cpp" />
     <ClCompile Include="..\Classes\RankLayer.cpp" />
     <ClCompile Include="..\Classes\RelationLayer.cpp" />
     <ClCompile Include="..\Classes\RepairLayer.cpp" />
@@ -222,6 +224,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ResDetailsLayer.cpp" />
     <ClCompile Include="..\Classes\ReviveLayer.cpp" />
     <ClCompile Include="..\Classes\RmbGoodsItem.cpp" />
+    <ClCompile Include="..\Classes\RollDiceLayer.cpp" />
     <ClCompile Include="..\Classes\SelectHeroScene.cpp" />
     <ClCompile Include="..\Classes\SelectSaveComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\SelectSaveLayer.cpp" />
@@ -323,6 +326,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\OutDoor.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
     <ClInclude Include="..\Classes\PromotionLayer.h" />
+    <ClInclude Include="..\Classes\RaffleLayer.h" />
+    <ClInclude Include="..\Classes\RaffleResultLayer.h" />
     <ClInclude Include="..\Classes\RankLayer.h" />
     <ClInclude Include="..\Classes\RelationLayer.h" />
     <ClInclude Include="..\Classes\RepairLayer.h" />
@@ -330,6 +335,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ResDetailsLayer.h" />
     <ClInclude Include="..\Classes\ReviveLayer.h" />
     <ClInclude Include="..\Classes\RmbGoodsItem.h" />
+    <ClInclude Include="..\Classes\RollDiceLayer.h" />
     <ClInclude Include="..\Classes\SelectHeroScene.h" />
     <ClInclude Include="..\Classes\SelectSaveComfirmLayer.h" />
     <ClInclude Include="..\Classes\SelectSaveLayer.h" />

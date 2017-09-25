@@ -21,6 +21,8 @@
 #include "RankLayer.h"
 #include "FactionMainLayer.h"
 #include "NewerGuide2Layer.h"
+#include "RollDiceLayer.h"
+#include "RaffleLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -114,6 +116,10 @@ bool MapLayer::init()
 	m_timegiftbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
 	m_timegiftbtn->setVisible(false);
 
+	m_rafflebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("rafflebtn");
+	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
+	//m_rafflebtn->setVisible(false);
+
 	m_tgiftlefttimelbl = (cocos2d::ui::Text*)m_timegiftbtn->getChildByName("lefttimelbl");
 
 	checkTimeGift(0);
@@ -184,6 +190,11 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			FactionMainLayer* factionmainlayer = FactionMainLayer::create();
 			g_gameLayer->addChild(factionmainlayer, 5, "factionmainlayer");
+		}
+		else if (m_addrname.compare("m1-9") == 0)
+		{
+			RollDiceLayer* rlayer = RollDiceLayer::create();
+			g_gameLayer->addChild(rlayer, 5);
 		}
 		else
 		{
@@ -365,6 +376,16 @@ void MapLayer::onVipShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventT
 }
 
 void MapLayer::onTimeGift(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		RaffleLayer* rlayer = RaffleLayer::create();
+		g_gameLayer->addChild(rlayer, 5);
+	}
+}
+
+void MapLayer::onRaffle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
@@ -705,6 +726,18 @@ void MapLayer::checkTimeGift(float dt)
 	{
 		m_timegiftbtn->setVisible(false);
 	}
+	//if (GlobalData::myRaffleData.isshow)
+	//{
+	//	m_rafflebtn->setVisible(true);
+	//	if (m_timegiftbtn->isVisible())
+	//	{
+	//		m_rafflebtn->setPositionY(500);
+	//	}
+	//	else
+	//	{
+	//		m_rafflebtn->setPositionY(665);
+	//	}
+	//}
 }
 
 void MapLayer::showTalkGuide()

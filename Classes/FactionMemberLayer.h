@@ -33,6 +33,7 @@ private:
 	cocos2d::ui::Text* explbl;
 	cocos2d::ui::Text* lvlbl;
 	FactionAction f_action;
+	int usetypecontribution;
 };
 
 class FactionMemberItem :public Sprite, public ServerDataDelegateProtocol

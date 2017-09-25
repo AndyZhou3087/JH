@@ -4,6 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="fonts">
+          <Fnt Name="coinpoolnum.fnt" />
           <Fnt Name="critnum.fnt" />
           <TTF Name="STXINGKA.TTF" />
           <Fnt Name="topnum.fnt" />
@@ -24,6 +25,11 @@
           <Image Name="buildtext1.png" />
           <Image Name="buildtext2.png" />
           <Image Name="dead.jpg" />
+          <Image Name="dicebg.jpg" />
+          <Image Name="dicecontent.png" />
+          <Image Name="dicetitle.png" />
+          <Image Name="dicetitlebox.png" />
+          <Image Name="dicewordbox.png" />
           <Image Name="dividetext.png" />
           <Image Name="exsercisedone.png" />
           <Image Name="factiondescinputbox.png" />
@@ -32,12 +38,17 @@
           <Image Name="gameovertext.png" />
           <Image Name="heroselectbg.png" />
           <Image Name="logo.png" />
+          <Image Name="lotterycontent2.png" />
+          <Image Name="lotterygoldtext.png" />
+          <Image Name="lotterynamebox.png" />
+          <Image Name="lotterynamedesctext.png" />
           <Image Name="mapbg.jpg" />
           <Image Name="mixdonefail.png" />
           <Image Name="mixdoneok.png" />
           <Image Name="normalboxgb.png" />
           <Image Name="noticebg.png" />
           <Image Name="npctalkbg.png" />
+          <Image Name="rafflerettitle.png" />
           <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
           <Image Name="select.png" />
@@ -79,6 +90,8 @@
           <Image Name="unselect.png" />
           <Image Name="vipbg.png" />
           <Image Name="vipshoptitle.png" />
+          <Image Name="wxb0.png" />
+          <Image Name="wxb1.png" />
         </Folder>
         <Folder Name="ui">
           <Image Name="0-ba0.png" />
@@ -182,6 +195,12 @@
           <Image Name="cooktable.png" />
           <Image Name="createfactionicon.png" />
           <Image Name="crit.png" />
+          <Image Name="dice1.png" />
+          <Image Name="dice2.png" />
+          <Image Name="dice3.png" />
+          <Image Name="dice4.png" />
+          <Image Name="dice5.png" />
+          <Image Name="dice6.png" />
           <Image Name="disbtn.png" />
           <Image Name="disnpcbtn1.png" />
           <Image Name="dodge.png" />
@@ -274,6 +293,7 @@
           <Image Name="m1-6.png" />
           <Image Name="m1-7.png" />
           <Image Name="m1-8.png" />
+          <Image Name="m1-9.png" />
           <Image Name="m2-1.png" />
           <Image Name="m2-2.png" />
           <Image Name="m2-3.png" />
@@ -441,6 +461,7 @@
           <Image Name="qubox3.png" />
           <Image Name="qubox4.png" />
           <Image Name="qubox5.png" />
+          <Image Name="rafflebtn.png" />
           <Image Name="rankatktitle.png" />
           <Image Name="rankcatatitlebox.png" />
           <Image Name="rankdaytitle.png" />
@@ -630,6 +651,7 @@
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="activityLayer.csd" Type="Layer" />
+        <Project Name="apprenticeLayer.csd" Type="Layer" />
         <Project Name="bookDetailsLayer.csd" Type="Layer" />
         <Project Name="bookshelfLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
@@ -673,6 +695,8 @@
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="pauseLayer.csd" Type="Layer" />
         <Project Name="promotionLayer.csd" Type="Layer" />
+        <Project Name="raffleLayer.csd" Type="Layer" />
+        <Project Name="raffleResultLayer.csd" Type="Scene" />
         <Project Name="rankLayer.csd" Type="Layer" />
         <Project Name="rankNode.csd" Type="Node" />
         <Project Name="relationLayer.csd" Type="Layer" />
@@ -683,6 +707,7 @@
         <Project Name="resNode.csd" Type="Node" />
         <Project Name="reviveLayer.csd" Type="Layer" />
         <Project Name="rmbGoodsNode.csd" Type="Node" />
+        <Project Name="rollDiceLayer.csd" Type="Layer" />
         <Project Name="savedNode.csd" Type="Node" />
         <Project Name="selectHeroLayer.csd" Type="Layer" />
         <Project Name="selectSaveComfirmLayer.csd" Type="Layer" />
@@ -701,7 +726,6 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="apprenticeLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

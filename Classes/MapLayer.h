@@ -117,6 +117,11 @@ private:
 	void onTimeGift(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	点击夺宝按钮回调
+	*****************************/
+	void onRaffle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();
@@ -154,6 +159,7 @@ private:
 	cocos2d::ui::ScrollView* m_mapscroll;//地图
 	cocos2d::ui::Text* m_tgiftlefttimelbl;
 	cocos2d::ui::Widget* m_timegiftbtn;
+	cocos2d::ui::Widget* m_rafflebtn;
 	int m_startClickX;
 	int m_startClickY;
 	bool m_isDraging;

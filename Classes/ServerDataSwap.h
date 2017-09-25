@@ -41,6 +41,10 @@ public:
 
 	void cancelFaction(int factionid);
 	void refuseFaction(int factionid, int requesterId, int requestertype);
+	void getlotteryData(int actiontype);
+
+	void getCoinpoolData();
+	void playCoinpoolData();
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -73,6 +77,12 @@ private:
 	void httpCancelFactionCB(std::string retdata, int code, std::string tag);
 
 	void httpRefuseFactionCB(std::string retdata, int code, std::string tag);
+
+	void httpLotteryCB(std::string retdata, int code, std::string tag);
+
+	void httpGetCoinpoolCB(std::string retdata, int code, std::string tag);
+
+	void httpPlayCoinpoolCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

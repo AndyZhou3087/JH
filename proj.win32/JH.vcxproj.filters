@@ -327,6 +327,15 @@
     <ClCompile Include="..\Classes\FactionKickComfirmLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\RollDiceLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RaffleLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RaffleResultLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -648,6 +657,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FactionKickComfirmLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RollDiceLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RaffleLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RaffleResultLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

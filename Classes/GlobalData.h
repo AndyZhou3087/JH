@@ -395,6 +395,27 @@ typedef enum
 	F_REFUSE
 }FactionAction;
 
+typedef struct
+{
+	int leftcount;//剩余次数
+	int nextcostgold;//下次需要的元宝
+	int wingold;//中奖元宝
+	bool isshow;//是否显示
+}MyLotteryData;
+
+typedef struct
+{
+	int leftime;//剩余分钟
+	bool iscanplay;//是否可以再投
+	int poolgold;//奖池金额
+	std::vector<std::string> vec_nicknames;
+	std::vector<int> vec_wingold;
+	int mywingold;
+	int mywinrank;
+	std::string mywinstage;
+	bool isshow;//是否显示
+}RaffleData;
+
 class GlobalData
 {
 public:
@@ -948,6 +969,9 @@ public:
 	static int myFaction;
 	static int mytitle;
 	static int myFactionlv;
+	static MyLotteryData myLotteryData;
+
+	static RaffleData myRaffleData;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

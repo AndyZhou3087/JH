@@ -20,7 +20,6 @@ FactionMemberLayer::FactionMemberLayer()
 
 FactionMemberLayer::~FactionMemberLayer()
 {
-	GlobalData::g_gameStatus = GAMESTART;
 	f_action = F_NONE;
 }
 
@@ -87,8 +86,6 @@ bool FactionMemberLayer::init(FactionListData *fldata)
 	srollView->setBounceEnabled(true);
 
 	m_fldata = fldata;
-
-	GlobalData::g_gameStatus = GAMEPAUSE;
 
 	int curday = GlobalData::getDayOfYear();
 	int contributionday = GameDataSave::getInstance()->getContributionDay();
@@ -162,9 +159,8 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 			}
 			else
 			{
-				GameDataSave::getInstance()->setSliverContribution(c+10);
-				StorageRoom::use("80", 10);
-				contribution += 10;
+				contribution = 10;
+				usetypecontribution = 0;
 				isok = true;
 			}
 		}
@@ -190,9 +186,8 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 					this->addChild(hint);
 					return;
 				}
-				GameDataSave::getInstance()->setGoldContribution(c + 10);
-				GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 10);
-				contribution += 100;
+				contribution = 100;
+				usetypecontribution = 1;
 				isok = true;
 			}
 			else
@@ -298,6 +293,18 @@ void FactionMemberLayer::onSuccess()
 		f_action = F_NONE;
 
 		getFactionMemberData();
+		if (usetypecontribution == 0)
+		{
+			int c = GameDataSave::getInstance()->getSliverContribution();
+			GameDataSave::getInstance()->setSliverContribution(c+10);
+			StorageRoom::use("80", 10);
+		}
+		else if (usetypecontribution == 1)
+		{
+			int c = GameDataSave::getInstance()->getGoldContribution();
+			GameDataSave::getInstance()->setGoldContribution(c + 10);
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 10);
+		}
 	}
 	else
 	{

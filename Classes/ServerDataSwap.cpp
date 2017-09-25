@@ -595,6 +595,41 @@ void ServerDataSwap::refuseFaction(int factionid, int requesterId, int requester
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpRefuseFactionCB, this));
 }
 
+void ServerDataSwap::getlotteryData(int actiontype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_lottery?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+
+	url.append("&type=");
+	std::string str = StringUtils::format("%d", actiontype);
+	url.append(str);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpLotteryCB, this));
+}
+
+void ServerDataSwap::getCoinpoolData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_getcoinpool?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetCoinpoolCB, this));
+}
+
+void ServerDataSwap::playCoinpoolData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_playcoinpool?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPlayCoinpoolCB, this));
+}
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -1165,6 +1200,19 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 			{
 				rapidjson::Value& retval = doc["punishment"];
 				GlobalData::ispunishment = retval.GetInt() ==0?false:true;
+			}
+
+
+			if (doc.HasMember("coinpool"))
+			{
+				rapidjson::Value& retval = doc["coinpool"];
+				GlobalData::myRaffleData.isshow = retval.GetInt() == 0 ? false : true;
+			}
+
+			if (doc.HasMember("lottery"))
+			{
+				rapidjson::Value& retval = doc["lottery"];
+				GlobalData::myLotteryData.isshow = retval.GetInt() == 0 ? false : true;
 			}
 
 			if (m_pDelegateProtocol != NULL)
@@ -1769,6 +1817,160 @@ void ServerDataSwap::httpRefuseFactionCB(std::string retdata, int code, std::str
 				{
 					rapidjson::Value& v = doc["ret"];
 					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpLotteryCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+				if (doc.HasMember("count"))
+				{
+					rapidjson::Value& v = doc["count"];
+					GlobalData::myLotteryData.leftcount = v.GetInt();
+				}
+				if (doc.HasMember("cost"))
+				{
+					rapidjson::Value& v = doc["cost"];
+					GlobalData::myLotteryData.nextcostgold = v.GetInt();
+				}
+				if (doc.HasMember("gain"))
+				{
+					rapidjson::Value& v = doc["gain"];
+					GlobalData::myLotteryData.wingold = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetCoinpoolCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+
+					if (ret == 2)
+					{
+						GlobalData::myRaffleData.iscanplay = false;
+					}
+					else if (ret == 0)
+						GlobalData::myRaffleData.iscanplay = true;
+				}
+				if (doc.HasMember("remain"))
+				{
+					rapidjson::Value& v = doc["remain"];
+					GlobalData::myRaffleData.leftime = v.GetInt();
+				}
+
+				if (doc.HasMember("pool"))
+				{
+					rapidjson::Value& v = doc["pool"];
+					GlobalData::myRaffleData.poolgold = v.GetInt();
+				}
+
+				if (doc.HasMember("data"))
+				{
+					GlobalData::myRaffleData.vec_nicknames.clear();
+					GlobalData::myRaffleData.vec_wingold.clear();
+					rapidjson::Value& dataArray = doc["data"];
+
+					for (unsigned int m = 0; m < dataArray.Size(); m++)
+					{
+						rapidjson::Value& v = dataArray[m]["nickname"];
+						GlobalData::myRaffleData.vec_nicknames.push_back(v.GetString());
+					}
+
+					for (unsigned int m = 0; m < dataArray.Size(); m++)
+					{
+						rapidjson::Value& v = dataArray[m]["gain"];
+						GlobalData::myRaffleData.vec_wingold.push_back(atoi(v.GetString()));
+					}
+				}
+
+				if (doc.HasMember("my"))
+				{
+					rapidjson::Value& dataArray = doc["my"];
+
+					if (dataArray.Size() >= 1)
+					{
+						rapidjson::Value& v = dataArray[0]["gain"];
+						GlobalData::myRaffleData.mywingold = atoi(v.GetString());
+						v = dataArray[0]["stage"];
+						GlobalData::myRaffleData.mywinstage = v.GetString();
+						v = dataArray[0]["rank"];
+						GlobalData::myRaffleData.mywinrank = atoi(v.GetString());
+					}
+				}
+			}
+			if (ret == 0 || ret == 2)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpPlayCoinpoolCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+
+				if (doc.HasMember("pool"))
+				{
+					rapidjson::Value& v = doc["pool"];
+					GlobalData::myRaffleData.poolgold = v.GetInt();
 				}
 			}
 			if (ret == 0)

@@ -130,6 +130,16 @@
                     <PreSize X="0.0600" Y="0.0860" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-8.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
+                  <AbstractNodeData Name="m1-9" ActionTag="1048019826" Tag="347" IconVisible="False" LeftMargin="1649.3247" RightMargin="210.6753" TopMargin="935.3120" BottomMargin="330.6880" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="110" Scale9Height="96" ctype="ImageViewObjectData">
+                    <Size X="140.0000" Y="130.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1719.3247" Y="395.6880" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.8597" Y="0.2834" />
+                    <PreSize X="0.0700" Y="0.0931" />
+                    <FileData Type="MarkedSubImage" Path="ui/m1-9.png" Plist="uipacker.plist" />
+                  </AbstractNodeData>
                   <AbstractNodeData Name="m10-1" ActionTag="-1299461788" Tag="15" IconVisible="False" LeftMargin="1019.0541" RightMargin="810.9459" TopMargin="183.3392" BottomMargin="1111.6608" TouchEnable="True" LeftEage="56" RightEage="56" TopEage="33" BottomEage="33" Scale9OriginX="56" Scale9OriginY="33" Scale9Width="58" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="170.0000" Y="101.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -832,6 +842,22 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/timegiftbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="rafflebtn" ActionTag="1204722579" Tag="211" IconVisible="False" LeftMargin="1.0000" RightMargin="611.0000" TopMargin="725.5000" BottomMargin="445.5000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="78" Scale9Height="87" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="108.0000" Y="109.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="55.0000" Y="500.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0764" Y="0.3906" />
+            <PreSize X="0.1500" Y="0.0852" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/rafflebtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/rafflebtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/rafflebtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

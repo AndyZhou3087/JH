@@ -211,7 +211,7 @@ void ApprenticeScene::giveGold()
 	{
 		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！"));
 		this->addChild(hbox, 0, "hintbox");
-		this->scheduleOnce(schedule_selector(ApprenticeScene::delayShowShop), 1.0f);
+		this->scheduleOnce(schedule_selector(ApprenticeScene::delayShowShop), 0.8f);
 	}
 }
 

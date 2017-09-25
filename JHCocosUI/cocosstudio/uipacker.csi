@@ -547,6 +547,14 @@
       <FilePathData Path="ui/xline.png" />
       <FilePathData Path="ui/factionmore.png" />
       <FilePathData Path="ui/factionbtnselected.png" />
+      <FilePathData Path="ui/m1-9.png" />
+      <FilePathData Path="ui/rafflebtn.png" />
+      <FilePathData Path="ui/dice1.png" />
+      <FilePathData Path="ui/dice2.png" />
+      <FilePathData Path="ui/dice3.png" />
+      <FilePathData Path="ui/dice4.png" />
+      <FilePathData Path="ui/dice5.png" />
+      <FilePathData Path="ui/dice6.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>
