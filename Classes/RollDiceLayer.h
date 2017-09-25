@@ -23,6 +23,7 @@ private:
 	void onErr(int errcode);
 
 	void showResult(float dt);
+	void openDice(float dt);
 private:
 	void refreshGoldCount(float dt);
 	cocos2d::ui::Text* mygoldlbl;

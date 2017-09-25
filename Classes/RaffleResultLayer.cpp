@@ -11,6 +11,7 @@ RaffleResultLayer::RaffleResultLayer()
 
 RaffleResultLayer::~RaffleResultLayer()
 {
+
 }
 
 RaffleResultLayer* RaffleResultLayer::create()
@@ -80,6 +81,7 @@ void RaffleResultLayer::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + GlobalData::myRaffleData.mywingold);
+		GlobalData::myRaffleData.mywingold = -1;
 		this->removeFromParentAndCleanup(true);
 	}
 }

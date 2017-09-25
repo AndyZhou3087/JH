@@ -43,7 +43,7 @@ bool RaffleLayer::init()
 	backbtn->addTouchEventListener(CC_CALLBACK_2(RaffleLayer::onBack, this));
 
 	GlobalData::myRaffleData.iscanplay = false;
-	GlobalData::myRaffleData.mywingold = 0;
+	GlobalData::myRaffleData.mywingold = -1;
 	GlobalData::myRaffleData.mywinrank = 0;
 
 	joinbtn = (cocos2d::ui::Button*)csbnode->getChildByName("joinbtn");
@@ -184,6 +184,13 @@ void RaffleLayer::onSuccess()
 		{
 			RaffleResultLayer* rrlayer = RaffleResultLayer::create();
 			this->addChild(rrlayer, 100);
+		}
+		else if (GlobalData::myRaffleData.mywingold == 0)
+		{
+			GlobalData::myRaffleData.mywingold = -1;
+			std::string str = StringUtils::format("您参与的第%s期未中奖，祝下次好运！", GlobalData::myRaffleData.mywinstage.c_str());
+			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
+			this->addChild(hbox, 10);
 		}
 	}
 	else

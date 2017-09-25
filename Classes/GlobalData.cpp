@@ -1883,7 +1883,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "qwerqqwer";//"325E6676-4607-444E-BFE9-FADD69F470D1";
+	return "qwerqqwer2";//"325E6676-4607-444E-BFE9-FADD69F470D1";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #endif
 }

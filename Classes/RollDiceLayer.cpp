@@ -159,9 +159,9 @@ void RollDiceLayer::onSuccess()
 	{
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - useGold);
 		winbs = GlobalData::myLotteryData.wingold / useGold;
-		int r = GlobalData::createRandomNum(5);
+		int r = GlobalData::createRandomNum(3);
 
-		this->scheduleOnce(schedule_selector(RollDiceLayer::showResult), r + 2.0f);
+		this->scheduleOnce(schedule_selector(RollDiceLayer::showResult), r + 1.0f);
 	}
 
 	if (GlobalData::myLotteryData.leftcount <= 0)
@@ -208,7 +208,16 @@ void RollDiceLayer::showResult(float dt)
 	backbtn->setEnabled(true);
 	rollbtn->setEnabled(true);
 
+	anim_action = CSLoader::createTimeline("rollDiceAnim.csb");
+	animnode->runAction(anim_action);
+	anim_action->gotoFrameAndPlay(0, 0, false);
 	animnode->stopAllActions();
+
+	this->scheduleOnce(schedule_selector(RollDiceLayer::openDice), 1.0f);
+}
+
+void RollDiceLayer::openDice(float dt)
+{
 	animnode->getChildByName("node")->getChildByName("cover")->setVisible(false);
 	std::string dicestr = StringUtils::format("ui/dice%d.png", winbs);
 

@@ -789,14 +789,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" RightMargin="618.0000" TopMargin="427.0000" BottomMargin="747.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="72" Scale9Height="84" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="102.0000" Y="106.0000" />
+          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" LeftMargin="0.0000" RightMargin="598.0000" TopMargin="419.0000" BottomMargin="739.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="122.0000" Y="122.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="51.0000" Y="800.0000" />
+            <Position X="61.0000" Y="800.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0708" Y="0.6250" />
-            <PreSize X="0.1417" Y="0.0828" />
+            <PrePosition X="0.0847" Y="0.6250" />
+            <PreSize X="0.1694" Y="0.0953" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/vipbtn.png" Plist="uipacker.plist" />
@@ -845,14 +845,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rafflebtn" ActionTag="1204722579" Tag="211" IconVisible="False" LeftMargin="1.0000" RightMargin="611.0000" TopMargin="725.5000" BottomMargin="445.5000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="78" Scale9Height="87" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="108.0000" Y="109.0000" />
+          <AbstractNodeData Name="rafflebtn" ActionTag="1204722579" Tag="211" IconVisible="False" LeftMargin="1.0000" RightMargin="595.0000" TopMargin="719.0004" BottomMargin="438.9997" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="94" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="124.0000" Y="122.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="55.0000" Y="500.0000" />
+            <Position X="63.0000" Y="499.9997" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0764" Y="0.3906" />
-            <PreSize X="0.1500" Y="0.0852" />
+            <PrePosition X="0.0875" Y="0.3906" />
+            <PreSize X="0.1722" Y="0.0953" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />
             <DisabledFileData Type="MarkedSubImage" Path="ui/rafflebtn.png" Plist="uipacker.plist" />
