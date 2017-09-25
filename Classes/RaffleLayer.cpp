@@ -70,11 +70,8 @@ bool RaffleLayer::init()
 
 	refreshGoldCount(0);
 	this->schedule(schedule_selector(RaffleLayer::refreshGoldCount), 1);
-	actiontype = 0;
-
-	WaitingProgress* waitbox = WaitingProgress::create("刷新中...");
-	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-	ServerDataSwap::init(this)->getCoinpoolData();
+	updatePool(0);
+	this->schedule(schedule_selector(RaffleLayer::updatePool), 60);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -86,6 +83,15 @@ bool RaffleLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
+}
+
+void RaffleLayer::updatePool(float dt)
+{
+	actiontype = 0;
+
+	WaitingProgress* waitbox = WaitingProgress::create("刷新中...");
+	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+	ServerDataSwap::init(this)->getCoinpoolData();
 }
 
 void RaffleLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -182,6 +188,9 @@ void RaffleLayer::onSuccess()
 	}
 	else
 	{
+		std::string str = StringUtils::format("%d", GlobalData::myRaffleData.poolgold);
+		poolnum->setString(str);
+
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 20);
 		GlobalData::myRaffleData.iscanplay = false;
 		joinbtn->setEnabled(false);

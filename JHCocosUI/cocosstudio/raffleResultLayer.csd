@@ -28,14 +28,14 @@
             <FileData Type="Normal" Path="images/rafflerettitle.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="1451195028" Tag="48" IconVisible="False" LeftMargin="70.9516" RightMargin="75.0484" TopMargin="584.3955" BottomMargin="643.6045" FontSize="50" LabelText="恭喜你获得            期第   名" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="574.0000" Y="52.0000" />
+          <AbstractNodeData Name="desc" ActionTag="1451195028" Tag="48" IconVisible="False" LeftMargin="64.9516" RightMargin="69.0484" TopMargin="584.3955" BottomMargin="643.6045" FontSize="50" LabelText="恭喜你获得             期第   名" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="586.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="357.9516" Y="669.6045" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4972" Y="0.5231" />
-            <PreSize X="0.7972" Y="0.0406" />
+            <PreSize X="0.8139" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -126,25 +126,25 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="stagelbl" ActionTag="1146835209" Tag="89" IconVisible="False" LeftMargin="320.8670" RightMargin="399.1330" TopMargin="612.9615" BottomMargin="667.0385" FontSize="50" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="stagelbl" ActionTag="1146835209" Tag="89" IconVisible="False" LeftMargin="316.8670" RightMargin="403.1330" TopMargin="612.9615" BottomMargin="667.0385" FontSize="50" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="320.8670" Y="667.0385" />
+            <Position X="316.8670" Y="667.0385" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.4456" Y="0.5211" />
+            <PrePosition X="0.4401" Y="0.5211" />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ranklbl" ActionTag="483546627" Tag="90" IconVisible="False" LeftMargin="556.0000" RightMargin="164.0000" TopMargin="610.6715" BottomMargin="669.3285" FontSize="50" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="ranklbl" ActionTag="483546627" Tag="90" IconVisible="False" LeftMargin="560.9999" RightMargin="159.0001" TopMargin="610.6715" BottomMargin="669.3285" FontSize="50" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="556.0000" Y="669.3285" />
+            <Position X="560.9999" Y="669.3285" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.7722" Y="0.5229" />
+            <PrePosition X="0.7792" Y="0.5229" />
             <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />

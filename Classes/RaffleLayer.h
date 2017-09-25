@@ -21,6 +21,7 @@ private:
 	void onJoin(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSuccess();
 	void onErr(int errcode);
+	void updatePool(float dt);
 private:
 	void refreshGoldCount(float dt);
 	cocos2d::ui::Text* mygoldlbl;
