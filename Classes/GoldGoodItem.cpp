@@ -1,4 +1,4 @@
-﻿#include "GoldGoodsItem.h"
+#include "GoldGoodsItem.h"
 #include "CommonFuncs.h"
 #include "ShopLayer.h"
 #include "SoundManager.h"
@@ -38,7 +38,7 @@ bool GoldGoodsItem::init(GoodsData* gdata)
 
 	//图标
 	std::string imagepath = StringUtils::format("ui/%s.png", gdata->icon.c_str());
-	icon->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
+	icon->loadTexture(imagepath, cocos2d::ui::Widget::TextureResType::PLIST);
 	icon->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 
 	nameTxt->setString(gdata->name);

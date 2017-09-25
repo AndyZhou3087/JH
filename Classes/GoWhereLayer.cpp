@@ -1,4 +1,4 @@
-﻿#include "GoWhereLayer.h"
+#include "GoWhereLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "GlobalData.h"
@@ -83,7 +83,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	//地点的类型
 	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("typepng");
 	std::string str = StringUtils::format("images/%s.jpg", mdata.tpngname);
-	typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+	typeimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
 	
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(GoWhereLayer::onClose, this));
@@ -140,7 +140,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 		title->setString(CommonFuncs::gbk2utf("奇遇"));
 		desc->setString(CommonFuncs::gbk2utf("发现悬崖下面紫光闪耀，好像藏着什么好东西，你想下去一探究竟，少侠还请三思，崖下白骨露野，跳下去多半会一命呜呼！"));
 		std::string str = StringUtils::format("images/%s.jpg", "t008");
-		typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
+		typeimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
 #ifdef ANALYTICS
 		AnalyticUtil::onEvent("showjump");
 #endif

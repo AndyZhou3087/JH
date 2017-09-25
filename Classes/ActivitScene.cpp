@@ -1,4 +1,4 @@
-﻿#include "ActivitScene.h"
+#include "ActivitScene.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "Const.h"
@@ -47,7 +47,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	this->addChild(csbnode);
 
 	cocos2d::ui::ImageView* image = (cocos2d::ui::ImageView*)csbnode->getChildByName("image");
-	image->loadTexture(imagepath, cocos2d::ui::TextureResType::LOCAL);
+    image->loadTexture(imagepath, cocos2d::ui::Widget::TextureResType::LOCAL);
 	m_text = (cocos2d::ui::Text*)csbnode->getChildByName("text");
 	m_text->setString(content);
 
@@ -93,7 +93,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 		int rj = GlobalData::createRandomNum(100);
 		if (rj < 50)
 		{
-			image->loadTexture("images/jumphurt.jpg", cocos2d::ui::TextureResType::LOCAL);
+            image->loadTexture("images/jumphurt.jpg", cocos2d::ui::Widget::TextureResType::LOCAL);
 			m_text->setString(CommonFuncs::gbk2utf("跳崖摔伤"));
 			float val = g_hero->getInnerinjuryValue();
 			int herolv = g_hero->getLVValue();
@@ -142,7 +142,7 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 			int rf = GlobalData::createRandomNum(100);
 			if (rf < 50)
 			{
-				image->loadTexture("images/jumpnothing.jpg", cocos2d::ui::TextureResType::LOCAL);
+                image->loadTexture("images/jumpnothing.jpg", cocos2d::ui::Widget::TextureResType::LOCAL);
 				m_text->setString(CommonFuncs::gbk2utf("一无所获"));
 				tips->setString(CommonFuncs::gbk2utf("这次白跳了，什么都没有，发光的只不过时一个破石头在反光。"));
 				distime = 3.0f;
@@ -219,7 +219,7 @@ void ActivitScene::checkstoleData(float dt)
 		std::map<int, std::vector<PackageData>>::iterator it;
 		for (it = StorageRoom::map_storageData.begin(); it != StorageRoom::map_storageData.end(); ++it)
 		{
-			int size = StorageRoom::map_storageData[it->first].size();
+			size_t size = StorageRoom::map_storageData[it->first].size();
 			for (int j = 0; j < size; j++)
 			{
 				PackageData sdata = StorageRoom::map_storageData[it->first][j];
@@ -247,8 +247,8 @@ void ActivitScene::checkstoleData(float dt)
 	}
 	else
 	{
-		int tempmapsize = map_tempdata.size();
-		int r = GlobalData::createRandomNum(tempmapsize);
+		size_t tempmapsize = map_tempdata.size();
+		int r = GlobalData::createRandomNum((int)tempmapsize);
 		std::map<std::string, std::vector<PackageData>>::iterator it;
 
 		int count = 0;
@@ -268,8 +268,8 @@ void ActivitScene::checkstoleData(float dt)
 
 	if (m_stoleData.size() > 0)
 	{
-		int rcount = m_stoleData.size() < 3 ? m_stoleData.size() : 3;
-		int r = GlobalData::createRandomNum(rcount) + 1;
+		size_t rcount = m_stoleData.size() < 3 ? m_stoleData.size() : 3;
+		int r = GlobalData::createRandomNum((int)rcount) + 1;
 		int startx[] = { 360, 300, 240, 180, 120 };
 		int spacex[] = { 120, 120, 120, 120, 120 };
 		srand(GlobalData::getSysSecTime());
@@ -378,7 +378,7 @@ void ActivitScene::getRndRes(float dt)
 		}
 		if (vec_randRes.size() > 0)
 		{
-			r = GlobalData::createRandomNum(vec_randRes.size());
+			r = GlobalData::createRandomNum((int)vec_randRes.size());
 			PackageData data;
 			data.strid = vec_randRes[r];
 			data.type = GlobalData::map_wgngs[data.strid].type - 1;
@@ -400,7 +400,7 @@ void ActivitScene::getRndRes(float dt)
 		}
 		if (vec_randRes.size() > 0)
 		{
-			r1 = GlobalData::createRandomNum(vec_randRes.size());
+			r1 = GlobalData::createRandomNum((int)vec_randRes.size());
 
 			PackageData data;
 			data.strid = vec_randRes[r1];
@@ -436,7 +436,7 @@ void ActivitScene::getRndRes(float dt)
 	int startx[] = { 360, 300, 240, 180, 120 };
 	int spacex[] = { 120, 120, 120, 120, 120 };
 
-	int datasize = vec_randData.size();
+	size_t datasize = vec_randData.size();
 	for (int i = 0; i < datasize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
@@ -502,7 +502,7 @@ void ActivitScene::saveTempResData()
 {
 	GlobalData::map_tempGf_Equip[m_tempmapid].clear();
 	std::string str;
-	int size = map_tempdata[m_tempmapid].size();
+	size_t size = map_tempdata[m_tempmapid].size();
 	for (int i = 0; i < size; i++)
 	{
 		std::string onestr = StringUtils::format("%s-%d-%d-%d-%d-%d-%d-%d-%d;", map_tempdata[m_tempmapid][i].strid.c_str(), map_tempdata[m_tempmapid][i].type, map_tempdata[m_tempmapid][i].count, map_tempdata[m_tempmapid][i].extype, map_tempdata[m_tempmapid][i].lv, map_tempdata[m_tempmapid][i].exp, map_tempdata[m_tempmapid][i].goodvalue, map_tempdata[m_tempmapid][i].slv, map_tempdata[m_tempmapid][i].tqu);

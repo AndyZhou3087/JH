@@ -1,4 +1,4 @@
-﻿#include "SelectSaveComfirmLayer.h"
+#include "SelectSaveComfirmLayer.h"
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "GameDataSave.h"
@@ -27,7 +27,7 @@ bool SelectSaveComfirmLayer::init(int index)
 
 	cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("headimg");
 	std::string headstr = StringUtils::format("ui/tophero%d.png", index + 1);
-	headimg->loadTexture(headstr, cocos2d::ui::TextureResType::PLIST);
+	headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
 
 	//////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();

@@ -1,4 +1,4 @@
-﻿#include "HeroProperNode.h"
+#include "HeroProperNode.h"
 #include "json.h"
 #include "CommonFuncs.h"
 #include "Const.h"
@@ -582,11 +582,11 @@ bool HeroProperNode::takeoff(HeroAtrType atrype)
 
 	imgbtn[lastclickindex]->removeAllChildrenWithCleanup(true);
 
-	imgbtn[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	imgbtn[lastclickindex]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	imgbtn[lastclickindex]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	str = StringUtils::format("ui/%s.png", strid.c_str());
-	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	propeImages[lastclickindex]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 
 	return true;
 }
@@ -604,7 +604,7 @@ void HeroProperNode::updataProperpanel(int atrypeindex, PackageData pdata)
 			str = StringUtils::format("Lv.%d(满级)", lv);
 
 		std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata.strid].qu);
-		imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+		imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
 		imgbtn[atrypeindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 	}
 	else if (atrype == H_GATHER || atrype == H_FELL || atrype == H_EXCAVATE || atrype == H_WEAPON || atrype == H_ARMOR)
@@ -614,7 +614,7 @@ void HeroProperNode::updataProperpanel(int atrypeindex, PackageData pdata)
 		if (atrype == H_WEAPON || atrype == H_ARMOR)
 		{
 			std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata.strid].qu);
-			imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+			imgbtn[atrypeindex]->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
 			imgbtn[atrypeindex]->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 		}
 	}
@@ -640,7 +640,7 @@ void HeroProperNode::updataProperpanel(int atrypeindex, PackageData pdata)
 	lvtext[atrypeindex]->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 	std::string strid = StringUtils::format("ui/%s.png", pdata.strid.c_str());
-	propeImages[atrypeindex]->loadTexture(strid, cocos2d::ui::TextureResType::PLIST);
+	propeImages[atrypeindex]->loadTexture(strid, cocos2d::ui::Widget::TextureResType::PLIST);
 
 	imgbtn[atrypeindex]->removeAllChildrenWithCleanup(true);
 
@@ -727,12 +727,12 @@ void HeroProperNode::refreshGF(HeroAtrType atrype)
 		index = 1;
 	lvtext[index]->setString("");
 	std::string str = "ui/buildsmall.png";
-	imgbtn[index]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	imgbtn[index]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	imgbtn[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	str = StringUtils::format("ui/hp%d.png", mydata.type + 1);
 
-	propeImages[index]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	propeImages[index]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	propeImages[index]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 }
 

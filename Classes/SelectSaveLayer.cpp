@@ -1,4 +1,4 @@
-﻿#include "SelectSaveLayer.h"
+#include "SelectSaveLayer.h"
 #include "GlobalData.h"
 #include "SoundManager.h"
 #include "GameDataSave.h"
@@ -32,7 +32,7 @@ bool SelectSaveLayer::init()
 
 		cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)itembg->getChildByName("head");
 		std::string headstr = StringUtils::format("ui/tophero%d.png", i+1);
-		headimg->loadTexture(headstr, cocos2d::ui::TextureResType::PLIST);
+		headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
 
 		cocos2d::ui::Widget* textnode = (cocos2d::ui::Widget*)selectbtn->getChildByName("textnode");
 

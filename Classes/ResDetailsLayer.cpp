@@ -1,4 +1,4 @@
-﻿#include "ResDetailsLayer.h"
+#include "ResDetailsLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "StorageRoom.h"
@@ -89,7 +89,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 		qulbl->setTextColor(qucolor[qu - 1]);
 	}
 
-	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+	resbox->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
 	resbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
 	std::string mymixgf = GlobalData::getMixGF();
@@ -107,7 +107,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)resbox->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/%s.png", pdata->strid.c_str());
-	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	resimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::Text* atkdftext = (cocos2d::ui::Text*)m_csbnode->getChildByName("atkdftext");

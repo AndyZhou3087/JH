@@ -1,4 +1,4 @@
-﻿#include "ExchangeLayer.h"
+#include "ExchangeLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "MyPackage.h"
@@ -55,7 +55,7 @@ bool ExchangeLayer::init(std::string npcid)
 
 	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
-	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+	npchead->loadTexture(npcheadstr, cocos2d::ui::Widget::TextureResType::PLIST);
 
 	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcname->setString(GlobalData::map_npcs[npcid].name);
@@ -239,7 +239,7 @@ void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
-	int size0 = npcGoodsData.size();
+	size_t size0 = npcGoodsData.size();
 
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
@@ -375,7 +375,7 @@ void ExchangeLayer::onMyGoodsItem(cocos2d::Ref* pSender)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 
-	int size0 = myGoodsData.size();
+	size_t size0 = myGoodsData.size();
 
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
@@ -435,9 +435,9 @@ void ExchangeLayer::onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			m_npcWordLbl->setTextColor(Color4B(0, 0, 0, 255));
 			return;
 		}
-		int size0 = myGoodsData.size();
-		int size1 = npcExgData.size();
-		int size = size0 + size1;
+		size_t size0 = myGoodsData.size();
+		size_t size1 = npcExgData.size();
+		size_t size = size0 + size1;
 		if (size > 5)
 		{
 			HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf("背包放不下了哦！！"));
@@ -542,9 +542,9 @@ void ExchangeLayer::updata()
 
 void ExchangeLayer::updataMyGoodsUI()
 {
-	int size0 = myGoodsData.size();
-	int size1 = npcExgData.size();
-	int size = size0 + size1;
+	size_t size0 = myGoodsData.size();
+	size_t size1 = npcExgData.size();
+	int size = (int)(size0 + size1);
 
 	m_myGoodsSrollView->removeAllChildrenWithCleanup(true);
 
@@ -571,7 +571,7 @@ void ExchangeLayer::updataMyGoodsUI()
 		allMydata.push_back(&npcExgData[i]);
 	}
 
-	int allsize = allMydata.size();
+	size_t allsize = allMydata.size();
 	for (int i = 0; i < allsize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
@@ -621,9 +621,9 @@ void ExchangeLayer::updataMyGoodsUI()
 
 void ExchangeLayer::updataNpcGoodsUI()
 {
-	int size0 = npcGoodsData.size();
-	int size1 = myExgData.size();
-	int size = size0 + size1;
+	size_t size0 = npcGoodsData.size();
+	size_t size1 = myExgData.size();
+	int size = int(size0 + size1);
 
 	m_npcGoodsSrollView->removeAllChildrenWithCleanup(true);
 
@@ -650,7 +650,7 @@ void ExchangeLayer::updataNpcGoodsUI()
 		allNpcdata.push_back(&myExgData[i]);
 	}
 
-	int allsize = allNpcdata.size();
+	size_t allsize = allNpcdata.size();
 	for (int i = 0; i < allsize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
@@ -779,17 +779,17 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 		{
 			if (r < randnum[m])
 			{
-				int size = map_res[m + 1].size();
+				size_t size = map_res[m + 1].size();
 				if (size > 0)
 				{
-					int r1 = GlobalData::createRandomNum(size);
+					int r1 = GlobalData::createRandomNum((int)size);
 					vec_exchgres.push_back(map_res[m + 1][r1]);
 					map_res[m + 1].erase(map_res[m + 1].begin() + r1);
 				}
 				else
 				{
-					int size0 = map_res[1].size();
-					int r1 = GlobalData::createRandomNum(size0);
+					size_t size0 = map_res[1].size();
+					int r1 = GlobalData::createRandomNum((int)size0);
 					vec_exchgres.push_back(map_res[1][r1]);
 				}
 				break;

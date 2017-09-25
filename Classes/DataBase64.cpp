@@ -1,4 +1,4 @@
-﻿
+
 /********************************************************************
  *    文件名  :    DATABASE64.CPP
  *    作者    :    
@@ -61,7 +61,7 @@ std::string encryptData(unsigned char const* bytes_to_encode, unsigned int in_le
 }
 
 std::string parseData(std::string const& encoded_string) {
-    int in_len = encoded_string.size();
+    size_t in_len = encoded_string.size();
     int i = 0;
     int j = 0;
     int in_ = 0;

@@ -1,4 +1,4 @@
-﻿#include "HomeHill.h"
+#include "HomeHill.h"
 #include "json.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
@@ -73,7 +73,7 @@ bool HomeHill::init()
 			{
 				actionbtn->setUserData((void*)GlobalData::vec_resData[m].strid.c_str());
 				std::string str = StringUtils::format("ui/%s.png", data.strid.c_str());
-				iconimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+				iconimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 				iconimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 				name->setString(GlobalData::map_allResource[data.strid].cname);

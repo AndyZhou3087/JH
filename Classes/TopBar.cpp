@@ -1,4 +1,4 @@
-﻿#include "TopBar.h"
+#include "TopBar.h"
 #include "CommonFuncs.h"
 #include "GameDataSave.h"
 #include "GameScene.h"
@@ -37,7 +37,7 @@ bool TopBar::init()
 	heroimg->setName("hero");
 	heroimg->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getHeadID());
-	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
+	heroimg->loadTexture(heroidstr, cocos2d::ui::Widget::TextureResType::PLIST);
 	heroimg->setContentSize(Sprite::createWithSpriteFrameName(heroidstr)->getContentSize());
 
 	reason = (cocos2d::ui::ImageView*)csbnode->getChildByName("reason");
@@ -45,7 +45,7 @@ bool TopBar::init()
 	reason->setName("reason");
 
 	std::string str = StringUtils::format("ui/top_r_season%d.png", g_nature->getReason());
-	reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	reason->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	weather = (cocos2d::ui::ImageView*)csbnode->getChildByName("weather");
@@ -53,7 +53,7 @@ bool TopBar::init()
 	weather->addTouchEventListener(CC_CALLBACK_2(TopBar::onclick, this));
 
 	str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
-	weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	weather->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::ImageView* livedaysincon = (cocos2d::ui::ImageView*)csbnode->getChildByName("livedaysincon");
@@ -349,7 +349,7 @@ void TopBar::updataUI(float dt)
 		livedayslbl->setString(str);
 
 		str = StringUtils::format("ui/top_r_season%d.png", g_nature->getReason());
-		reason->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		reason->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 		reason->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 		GameDataSave::getInstance()->setLiveDays(livedays);
@@ -433,7 +433,7 @@ void TopBar::updataUI(float dt)
 	if (m_lastweather != g_nature->getWeather())
 	{
 		str = StringUtils::format("ui/top_weather%d.png", g_nature->getWeather());
-		weather->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+		weather->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 		weather->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 		if (g_nature->getWeather() == Rainy)

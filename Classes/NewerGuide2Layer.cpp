@@ -1,4 +1,4 @@
-﻿
+
 #include "NewerGuide2Layer.h"
 #include "GlobalData.h"
 #include "GameDataSave.h"
@@ -58,7 +58,7 @@ bool NewerGuide2Layer::init(int step, std::vector<Node*> stencilNodes)
 	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("node")->getChildByName("heroimg");
 
 	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getHeadID());
-	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
+	heroimg->loadTexture(heroidstr, cocos2d::ui::Widget::TextureResType::PLIST);
 
 	wordtext = (cocos2d::ui::Text*)csbnode->getChildByName("node")->getChildByName("text");
 

@@ -1,4 +1,4 @@
-﻿#include "DeathLayer.h"
+#include "DeathLayer.h"
 #include "CommonFuncs.h"
 #include "StartScene.h"
 #include "SoundManager.h"
@@ -24,7 +24,7 @@ bool DeathLayer::init()
 	Node* csbnode = CSLoader::createNode("deathLayer.csb");
 	this->addChild(csbnode);
 
-	csbnode->runAction(CCFadeIn::create(3.0f));
+	csbnode->runAction(FadeIn::create(3.0f));
 
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();

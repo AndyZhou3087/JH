@@ -1,4 +1,4 @@
-﻿#include "BookDetailsLayer.h"
+#include "BookDetailsLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "StorageRoom.h"
@@ -56,13 +56,13 @@ bool BookDetailsLayer::init(BookData* bookdata)
 		qulbl->setTextColor(qucolor[qu - 1]);
 	}
 
-	resbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+    resbox->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
 	resbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)resbox->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/%s.png", bookdata->strid.c_str());
-	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	resimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("desclbl");
@@ -205,16 +205,15 @@ bool BookDetailsLayer::init(BookData* bookdata)
 			std::string npcname = GlobalData::map_npcs[it->first].name;
 			std::size_t findpos;
 			std::string temp = wherestr;
-			int count = 0;
 			while (1){
 				findpos = temp.find(npcname);
 				if (findpos != std::string::npos){
 					temp = temp.substr(findpos + npcname.length(), temp.length() - npcname.length());
-					int sindex = (wherestr.length() - temp.length() - npcname.length()) / 3;
-					int len = npcname.length() / 3;
-					for (int i = sindex; i < sindex + len; i++)
+					size_t sindex = (wherestr.length() - temp.length() - npcname.length()) / 3;
+					size_t len = npcname.length() / 3;
+					for (size_t i = sindex; i < sindex + len; i++)
 					{
-						wherelbl->getLetter(i)->setColor(Color3B(230, 35, 35));
+						wherelbl->getLetter((int)i)->setColor(Color3B(230, 35, 35));
 					}
 				}
 				else

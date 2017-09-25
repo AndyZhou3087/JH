@@ -1,4 +1,4 @@
-﻿#include "RankLayer.h"
+#include "RankLayer.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "HintBox.h"
@@ -224,7 +224,7 @@ bool RankItem::init(RankData *data)
 	if (itemstr.length() > 0)
 	{
 		cocos2d::ui::ImageView* item = (cocos2d::ui::ImageView*)csbnode->getChildByName("item");
-		item->loadTexture(itemstr, cocos2d::ui::TextureResType::PLIST);
+		item->loadTexture(itemstr, cocos2d::ui::Widget::TextureResType::PLIST);
 	}
 
 	cocos2d::ui::Text* ranknumlbl = (cocos2d::ui::Text*)csbnode->getChildByName("ranknum");

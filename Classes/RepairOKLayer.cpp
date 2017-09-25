@@ -1,4 +1,4 @@
-﻿#include "RepairOKLayer.h"
+#include "RepairOKLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "GlobalData.h"
@@ -43,11 +43,11 @@ bool RepairOKLayer::init(PackageData* pdata, int type)
 	cocos2d::ui::ImageView* m_repairImg = (cocos2d::ui::ImageView*)m_repairImgbox->getChildByName("img");
 
 	std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
-	m_repairImgbox->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
+	m_repairImgbox->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
 	m_repairImgbox->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
 	std::string repairResStr = StringUtils::format("ui/%s.png", pdata->strid.c_str());
-	m_repairImg->loadTexture(repairResStr, cocos2d::ui::TextureResType::PLIST);
+	m_repairImg->loadTexture(repairResStr, cocos2d::ui::Widget::TextureResType::PLIST);
 	m_repairImg->setContentSize(Sprite::createWithSpriteFrameName(repairResStr)->getContentSize());
 
 	m_okimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("oknode")->getChildByName("okimg");
@@ -56,7 +56,7 @@ bool RepairOKLayer::init(PackageData* pdata, int type)
 		str = "ui/repairoktext.png";
 	else
 		str = "ui/strengthoktext.png";
-	m_okimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
+	m_okimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
 	m_okimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 	m_okimg->setVisible(false);
 

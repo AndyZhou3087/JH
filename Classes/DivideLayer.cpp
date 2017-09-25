@@ -1,4 +1,4 @@
-﻿#include "DivideLayer.h"
+#include "DivideLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "Const.h"
@@ -51,7 +51,7 @@ void DivideLayer::showContent()
 	int startx[] = { 360, 300, 240, 180, 120 };
 	int spacex[] = { 120, 120, 120, 120, 120 };
 
-	int datasize = m_bdata->res.size();
+	size_t datasize = m_bdata->res.size();
 	for (int i = 0; i < datasize; i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
