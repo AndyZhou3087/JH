@@ -1,4 +1,4 @@
-#include "FactionMainLayer.h"
+﻿#include "FactionMainLayer.h"
 #include "CommonFuncs.h"
 #include "HintBox.h"
 #include "WaitingProgress.h"
@@ -253,7 +253,7 @@ bool FactionListItem::init(FactionListData *data)
 	if (itemstr.length() > 0)
 	{
 		cocos2d::ui::ImageView* item = (cocos2d::ui::ImageView*)csbnode->getChildByName("item");
-		item->loadTexture(itemstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		item->loadTexture(itemstr, cocos2d::ui::TextureResType::PLIST);
 	}
 
 	cocos2d::ui::Text* ranknumlbl = (cocos2d::ui::Text*)csbnode->getChildByName("num");

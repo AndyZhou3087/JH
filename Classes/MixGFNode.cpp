@@ -1,4 +1,4 @@
-#include "MixGFNode.h"
+﻿#include "MixGFNode.h"
 #include "json.h"
 #include "CommonFuncs.h"
 #include "Const.h"
@@ -435,9 +435,9 @@ void MixGFNode::loadMixSuccGF()
 	{
 		MixGfData mdata =  GlobalData::map_MixGfData[mymixgf];
 		std::string str = StringUtils::format("ui/%s.png", mdata.mastergf.c_str());
-		img[0]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		img[0]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		str = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mdata.mastergf].qu);
-		imgbtn[0]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		imgbtn[0]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 
 		for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
 		{
@@ -451,9 +451,9 @@ void MixGFNode::loadMixSuccGF()
 		for (unsigned int i = 0; i < mdata.vec_secgf.size(); i++)
 		{
 			str = StringUtils::format("ui/%s.png", mdata.vec_secgf[i].c_str());
-			img[i + 1]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+			img[i + 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 			str = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mdata.vec_secgf[i]].qu);
-			imgbtn[i + 1]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+			imgbtn[i + 1]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 
 
 			for (unsigned int m = 0; m < vec_myhasgf.size(); m++)
@@ -515,9 +515,9 @@ void MixGFNode::onItem(Ref* pSender)
 				m_secselect[index]->setVisible(false);
 				map_secgfdata.erase(index);
 				std::string sstr = "ui/buildsmall.png";
-				imgbtn[index+1]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+				imgbtn[index+1]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 				sstr = "ui/mixsectext.png";
-				img[index + 1]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+				img[index + 1]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 			}
 		}
 		else
@@ -527,9 +527,9 @@ void MixGFNode::onItem(Ref* pSender)
 				m_select->setVisible(false);
 				masterGFData = NULL;
 				std::string sstr = "ui/buildsmall.png";
-				imgbtn[0]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+				imgbtn[0]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 				sstr = "ui/mixmtext.png";
-				img[0]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+				img[0]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 			}
 
 			for (unsigned int i = 0; i < map_secgfdata.size(); i++)
@@ -544,9 +544,9 @@ void MixGFNode::onItem(Ref* pSender)
 		}
 
 		std::string sstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[pdata->strid].qu);
-		imgbtn[lastclickindex]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		imgbtn[lastclickindex]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 		sstr = StringUtils::format("ui/%s.png", pdata->strid.c_str());
-		img[lastclickindex]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		img[lastclickindex]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 		lastselectitem = pdata;
 
 		if (pdata->type == W_GONG && g_hero->getAtrByType(H_WG)->strid.compare(pdata->strid) == 0 && g_hero->getAtrByType(H_WG)->count > 0)
@@ -569,7 +569,7 @@ void MixGFNode::onItem(Ref* pSender)
 		}
 
 		std::string sstr = "ui/buildsmall.png";
-		imgbtn[lastclickindex]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		imgbtn[lastclickindex]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 
 		if (lastclickindex == 0)
 		{
@@ -581,7 +581,7 @@ void MixGFNode::onItem(Ref* pSender)
 			sstr = "ui/mixsectext.png";
 			map_secgfdata.erase(lastclickindex - 1);
 		}
-		img[lastclickindex]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		img[lastclickindex]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 
 		lastselectitem = NULL;
 

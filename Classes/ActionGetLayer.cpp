@@ -1,4 +1,4 @@
-#include "ActionGetLayer.h"
+﻿#include "ActionGetLayer.h"
 #include "json.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
@@ -154,7 +154,7 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 	//点击奖励栏的资源
 	Node* node = (Node*)pSender;
 	PackageData* data = (PackageData*)node->getUserData();
-	size_t size = getResData.size();
+	int size = getResData.size();
 
 	int count = data->count - 1;
 	if (count <= 0)//数量为0，全部加到背包中了，移除掉
@@ -435,7 +435,7 @@ void ActionGetLayer::saveTempData()
 
 	for (unsigned int i = 0; i < getResData.size(); i++)
 	{
-		size_t tmpsize = tempResData.size();
+		int tmpsize = tempResData.size();
 		int j = 0;
 		for (j = 0; j < tmpsize; j++)
 		{

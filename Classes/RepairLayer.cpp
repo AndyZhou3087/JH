@@ -1,4 +1,4 @@
-#include "RepairLayer.h"
+﻿#include "RepairLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "Const.h"
@@ -229,11 +229,11 @@ void RepairLayer::onRepairItem(cocos2d::Ref* pSender)
 	resIsEnough = true;
 
 	std::string qustr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[pdata->strid].qu);
-	repairResBoxImg->loadTexture(qustr, cocos2d::ui::Widget::TextureResType::PLIST);
+	repairResBoxImg->loadTexture(qustr, cocos2d::ui::TextureResType::PLIST);
 	repairResBoxImg->setContentSize(Sprite::createWithSpriteFrameName(qustr)->getContentSize());
 
 	std::string repairResStr = StringUtils::format("ui/%s.png", pdata->strid.c_str());
-	repairResImg->loadTexture(repairResStr, cocos2d::ui::Widget::TextureResType::PLIST);
+	repairResImg->loadTexture(repairResStr, cocos2d::ui::TextureResType::PLIST);
 	repairResImg->setContentSize(Sprite::createWithSpriteFrameName(repairResStr)->getContentSize());
 	repairResImg->setTag(0);
 	repairResImg->setUserData(pdata);
@@ -286,7 +286,7 @@ void RepairLayer::onRepairItem(cocos2d::Ref* pSender)
 
 		needResbox[resImgStartIndex + i]->setVisible(true);
 		std::string str = StringUtils::format("ui/%d.png", needresid);
-		needResImg[resImgStartIndex + i]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		needResImg[resImgStartIndex + i]->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		needResImg[resImgStartIndex + i]->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 		std::string resid = StringUtils::format("%d", needresid);
 		int mycount = getMyPackageResCount(resid);

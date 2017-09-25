@@ -1,4 +1,4 @@
-#include "MixSuggestLayer.h"
+﻿#include "MixSuggestLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "SoundManager.h"
@@ -394,7 +394,7 @@ void MixSuggestLayer::loadMixGfUi(MixGfData mixdata)
 	name[0]->setString(GlobalData::map_allResource[mixdata.mastergf].cname);
 
 	std::string sstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[mixdata.mastergf].qu);
-	imgbox[0]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	imgbox[0]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 
 	int secsize = mixdata.vec_secgf.size();
 	for (int i = 0; i < 3; i++)
@@ -412,7 +412,7 @@ void MixSuggestLayer::loadMixGfUi(MixGfData mixdata)
 			name[i + 1]->setString("");
 		}
 		img[i + 1]->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
-		imgbox[i+1]->loadTexture(sstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		imgbox[i+1]->loadTexture(sstr, cocos2d::ui::TextureResType::PLIST);
 	}
 	updateDesc();
 }

@@ -1,4 +1,4 @@
-#include "BuildingUILayer.h"
+﻿#include "BuildingUILayer.h"
 #include "json.h"
 #include "Bed.h"
 #include "MyActionProgressTimer.h"
@@ -86,7 +86,7 @@ bool BuildingUILayer::init(Building* build)
 	//建筑物图标
 	cocos2d::ui::ImageView* buildicon = (cocos2d::ui::ImageView*)buildnode->getChildByName("item")->getChildByName("box")->getChildByName("icon");
 	std::string iconstr = StringUtils::format("ui/s%s.png", m_build->data.name);
-	buildicon->loadTexture(iconstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	buildicon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 	buildicon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 	buildicon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onBuidingDetails, this));
 
@@ -183,9 +183,9 @@ void BuildingUILayer::setActionScrollViewUI()
 void BuildingUILayer::loadActionUi()
 {
 	int itemheight = 120;
-	size_t acsize = vec_buildAcitonData.size();
+	int acsize = vec_buildAcitonData.size();
 
-	size_t scrollinnerheight = acsize * itemheight;
+	int scrollinnerheight = acsize * itemheight;
 
 	int scorellheight = scrollview->getContentSize().height;
 	if (scrollinnerheight < scorellheight)
@@ -212,7 +212,7 @@ void BuildingUILayer::loadActionUi()
 		cocos2d::ui::ImageView* icon = (cocos2d::ui::ImageView*)item->getChildByName("box")->getChildByName("icon");
 
 		std::string iconstr = StringUtils::format("ui/%s.png", vec_buildAcitonData.at(i).icon);
-		icon->loadTexture(iconstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		icon->loadTexture(iconstr, cocos2d::ui::TextureResType::PLIST);
 		icon->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
 		/*建筑物操作的显示ICON*/
 		icon->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onResDetails, this));
@@ -255,7 +255,7 @@ void BuildingUILayer::delayLoadActionUi(float dt)
 
 	std::string name = m_build->data.name;
 
-	size_t size = GlobalData::map_buidACData[name].size();
+	int size = GlobalData::map_buidACData[name].size();
 
 	for (int i = 0; i < size; i++)
 		vec_buildAcitonData.push_back(GlobalData::map_buidACData[name][i]);
@@ -567,7 +567,7 @@ void BuildingUILayer::updataBuildRes()
 	if (level >= m_build->data.maxlevel)
 		level = m_build->data.maxlevel - 1;
 
-	size_t ressize = m_build->data.Res[level].size();
+	int ressize = m_build->data.Res[level].size();
 
 	if (ressize > 0)
 	{
@@ -629,7 +629,7 @@ void BuildingUILayer::updataActionRes()
 		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 		if (m_build->data.level >= vec_buildAcitonData.at(i).blv)
 		{
-			size_t ressize = vec_buildAcitonData.at(i).res.size();
+			int ressize = vec_buildAcitonData.at(i).res.size();
 			if (ressize > 0)
 			{
 				for (unsigned int m = 0; m < vec_buildAcitonData.at(i).res.size(); m++)
@@ -869,7 +869,7 @@ void BuildingUILayer::onCategory(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 void BuildingUILayer::loadActionUIByCategory(int category)
 {
 	vec_buildAcitonData.clear();
-	size_t size = GlobalData::map_buidACData["forgingtable"].size();
+	int size = GlobalData::map_buidACData["forgingtable"].size();
 	if (category == 0)
 	{
 		for (int i = 0; i < size; i++)

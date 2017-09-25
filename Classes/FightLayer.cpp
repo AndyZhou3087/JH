@@ -1,4 +1,4 @@
-#include "FightLayer.h"
+﻿#include "FightLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "Const.h"
@@ -80,12 +80,12 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 
 	cocos2d::ui::ImageView* heroicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroicon");
 	std::string heroiconstr = StringUtils::format("ui/fhero%d.png", g_hero->getHeadID());
-	heroicon->loadTexture(heroiconstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	heroicon->loadTexture(heroiconstr, cocos2d::ui::TextureResType::PLIST);
 
 	// NPC 图标
 	npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
-	npchead->loadTexture(npcheadstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
 
 	//NPC名称
 	npcnametxt = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
@@ -328,7 +328,7 @@ void FightLayer::delayHeroFight(float dt)
 		isHeroAct = 0;
 		npchurt *= 2;
 		std::string tmpstr = "ui/crit.png";
-		npcactimg->loadTexture(tmpstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		npcactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
 		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
 		npcactimg->setVisible(true);
 		npcactimg->setOpacity(200);
@@ -343,7 +343,7 @@ void FightLayer::delayHeroFight(float dt)
 	{
 		isNpcAct = 1;
 		std::string imgstr = "ui/dodge.png";
-		npcactimg->loadTexture(imgstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		npcactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
 		npcactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
 		npcactimg->setVisible(true);
 		npccritfnt->setVisible(false);
@@ -490,7 +490,7 @@ void FightLayer::delayBossFight(float dt)
 		isNpcAct = 0;
 		herohurt *= 2;
 		std::string tmpstr = "ui/crit.png";
-		heroactimg->loadTexture(tmpstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		heroactimg->loadTexture(tmpstr, cocos2d::ui::TextureResType::PLIST);
 		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(tmpstr)->getContentSize());
 		heroactimg->setVisible(true);
 		herocritfnt->setVisible(true);
@@ -505,7 +505,7 @@ void FightLayer::delayBossFight(float dt)
 	{
 		isHeroAct = 1;
 		std::string imgstr = "ui/dodge.png";
-		heroactimg->loadTexture(imgstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		heroactimg->loadTexture(imgstr, cocos2d::ui::TextureResType::PLIST);
 		heroactimg->setContentSize(Sprite::createWithSpriteFrameName(imgstr)->getContentSize());
 		heroactimg->setVisible(true);
 		herocritfnt->setVisible(false);
@@ -974,7 +974,7 @@ void FightLayer::nextFightNpc(float dt)
 	this->unschedule(schedule_selector(FightLayer::delayHeroFight));
 
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
-	npchead->loadTexture(npcheadstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
 
 	npcnametxt->setString(GlobalData::map_npcs[m_npcid].name);
 
@@ -1082,7 +1082,7 @@ void FightLayer::showSkill(int skilltype)
 
 void FightLayer::showHeroTextAmin(std::string filename)
 {
-	heroactimg->loadTexture(filename, cocos2d::ui::Widget::TextureResType::PLIST);
+	heroactimg->loadTexture(filename, cocos2d::ui::TextureResType::PLIST);
 	heroactimg->setContentSize(Sprite::createWithSpriteFrameName(filename)->getContentSize());
 	heroactimg->setVisible(true);
 	herocritfnt->setVisible(false);
@@ -1096,7 +1096,7 @@ void FightLayer::showHeroTextAmin(std::string filename)
 
 void FightLayer::showNpcTextAmin(std::string filename)
 {
-	npcactimg->loadTexture(filename, cocos2d::ui::Widget::TextureResType::PLIST);
+	npcactimg->loadTexture(filename, cocos2d::ui::TextureResType::PLIST);
 	npcactimg->setContentSize(Sprite::createWithSpriteFrameName(filename)->getContentSize());
 	npcactimg->setVisible(true);
 	npcactimg->setOpacity(200);

@@ -1,4 +1,4 @@
-#include "BookShelfLayer.h"
+﻿#include "BookShelfLayer.h"
 #include <algorithm>
 #include "json.h"
 #include "CommonFuncs.h"
@@ -246,7 +246,8 @@ void BookShelfLayer::onclick(Ref* pSender)
 
 int BookShelfLayer::getCountByType(int type)
 {
-	return (int)map_bookData[type].size();
+	int count = 0;
+	return map_bookData[type].size();
 }
 
 void BookShelfLayer::loadBookData()

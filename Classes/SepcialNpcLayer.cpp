@@ -1,4 +1,4 @@
-#include "SepcialNpcLayer.h"
+﻿#include "SepcialNpcLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "GlobalData.h"
@@ -45,7 +45,7 @@ bool SepcialNpcLayer::init(std::string addrid)
 
 	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("typepng");
 	std::string str = StringUtils::format("images/%s.jpg", GlobalData::map_maps[addrid].tpngname);
-	typeimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+	typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)

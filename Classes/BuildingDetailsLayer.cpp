@@ -1,4 +1,4 @@
-#include "BuildingDetailsLayer.h"
+﻿#include "BuildingDetailsLayer.h"
 #include "SoundManager.h"
 #include "CommonFuncs.h"
 
@@ -30,7 +30,7 @@ bool BuildingDetailsLayer::init(Building* pdata)
 	cocos2d::ui::ImageView* resimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall")->getChildByName("Image");
 
 	std::string str = StringUtils::format("ui/s%s.png", pdata->data.name);
-	resimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+	resimg->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 	resimg->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 
 	cocos2d::ui::Text* buildingname = (cocos2d::ui::Text*)csbnode->getChildByName("namelbl");

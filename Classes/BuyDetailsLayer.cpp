@@ -1,4 +1,4 @@
-#include "BuyDetailsLayer.h"
+﻿#include "BuyDetailsLayer.h"
 #include "CommonFuncs.h"
 #include "ShopLayer.h"
 #include "SoundManager.h"
@@ -47,7 +47,7 @@ bool BuyDetailsLayer::init(int heroid)
 	}
 	goodstext->setString(goodsstr);
 	std::string imagepath = StringUtils::format("ui/tophero%d.png", heroid);
-	image->loadTexture(imagepath, cocos2d::ui::Widget::TextureResType::PLIST);
+	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	image->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 
 	nameTxt->setString(CommonFuncs::gbk2utf(heroname[heroid - 1].c_str()));

@@ -1,4 +1,4 @@
-#include "NpcLayer.h"
+﻿#include "NpcLayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "FightLayer.h"
@@ -66,7 +66,7 @@ bool NpcLayer::init(std::string addrid)
 
 	cocos2d::ui::ImageView* typeimg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("typepng");
 	std::string str = StringUtils::format("images/%s.jpg", mdata.tpngname);
-	typeimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+	typeimg->loadTexture(str, cocos2d::ui::TextureResType::LOCAL);
 	
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onBack, this));
@@ -153,7 +153,7 @@ void NpcLayer::refreshNpcNode()
 
 			cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)npcitem->getChildByName("npcicon");
 			std::string npcheadstr = StringUtils::format("ui/%s.png", mdata.npcs[i].c_str());
-			npchead->loadTexture(npcheadstr, cocos2d::ui::Widget::TextureResType::PLIST);
+			npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
 
 			cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)npcitem->getChildByName("npcname");
 			npcname->setString(GlobalData::map_npcs[mdata.npcs[i]].name);
@@ -178,7 +178,7 @@ void NpcLayer::refreshNpcNode()
 					rsistr = "ui/npcrsi1.png";
 			}
 
-			npcrsi->loadTexture(rsistr, cocos2d::ui::Widget::TextureResType::PLIST);
+			npcrsi->loadTexture(rsistr, cocos2d::ui::TextureResType::PLIST);
 
 			cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
 			talkbtn->addTouchEventListener(CC_CALLBACK_2(NpcLayer::onItemTalk, this));
@@ -1372,11 +1372,11 @@ void NpcLayer::reFreshFriendlyUI()
 			friendbar->setPercent(0);
 			if (friendly < 0)
 			{
-				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::Widget::TextureResType::PLIST);
+				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::TextureResType::PLIST);
 			}
 			else
 			{
-				friendbar->loadTexture("ui/fheart1.png", cocos2d::ui::Widget::TextureResType::PLIST);
+				friendbar->loadTexture("ui/fheart1.png", cocos2d::ui::TextureResType::PLIST);
 			}
 			if (m < count)
 			{

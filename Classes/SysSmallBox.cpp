@@ -1,4 +1,4 @@
-#include "SysSmallBox.h"
+﻿#include "SysSmallBox.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "Hero.h"
@@ -27,7 +27,7 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 	title1Txt = (cocos2d::ui::Text*)csbnode->getChildByName("title1");
 	valueTxt = (cocos2d::ui::Text*) csbnode->getChildByName("valuelbl");
 
-	image->loadTexture(imagepath, cocos2d::ui::Widget::TextureResType::PLIST);
+	image->loadTexture(imagepath, cocos2d::ui::TextureResType::PLIST);
 	image->setContentSize(Sprite::createWithSpriteFrameName(imagepath)->getContentSize());
 	image->setScale(1.5f);
 	titleTxt->setString(CommonFuncs::gbk2utf(title.c_str()));
@@ -89,7 +89,7 @@ void SysSmallBox::updataUI(float dt)
 		}
 		std::string str = StringUtils::format("ui/top_r_season%d.png", v);
 
-		image->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		image->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 		image->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 		image->setScale(1.5f);
 
@@ -106,7 +106,7 @@ void SysSmallBox::updataUI(float dt)
 			lastvalue = g_nature->getWeather();
 			std::string str = StringUtils::format("ui/top_weather%d.png", v);
 
-			image->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+			image->loadTexture(str, cocos2d::ui::TextureResType::PLIST);
 			image->setContentSize(Sprite::createWithSpriteFrameName(str)->getContentSize());
 			image->setScale(1.5f);
 

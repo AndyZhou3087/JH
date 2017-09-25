@@ -1,4 +1,4 @@
-#include "ChallengeCountLayer.h"
+﻿#include "ChallengeCountLayer.h"
 #include "CommonFuncs.h"
 #include "GameScene.h"
 #include "SoundManager.h"
@@ -31,7 +31,7 @@ bool ChallengeCountLayer::init(int* wincount, int winnpccount, bool isRevive)
 	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroimg");
 	heroimg->addTouchEventListener(CC_CALLBACK_2(ChallengeCountLayer::onHeroimg, this));
 	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getHeadID());
-	heroimg->loadTexture(heroidstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
 	heroimg->setContentSize(Sprite::createWithSpriteFrameName(heroidstr)->getContentSize());
 
 	cocos2d::ui::Button* cancelbtn = (cocos2d::ui::Button*)csbnode->getChildByName("cancelbtn");

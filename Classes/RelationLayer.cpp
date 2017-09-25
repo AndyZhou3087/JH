@@ -1,4 +1,4 @@
-#include "RelationLayer.h"
+﻿#include "RelationLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 
@@ -131,11 +131,11 @@ void RelationLayer::delayShowData(float dt)
 
 			if (friendly < 0)
 			{
-				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::Widget::TextureResType::PLIST);
+				friendbar->loadTexture("ui/fheart0.png", cocos2d::ui::TextureResType::PLIST);
 			}
 			else
 			{
-				friendbar->loadTexture("ui/fheart1.png", cocos2d::ui::Widget::TextureResType::PLIST);
+				friendbar->loadTexture("ui/fheart1.png", cocos2d::ui::TextureResType::PLIST);
 			}
 			if (m < count)
 			{

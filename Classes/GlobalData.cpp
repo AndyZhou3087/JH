@@ -1,4 +1,4 @@
-#include "GlobalData.h"
+﻿#include "GlobalData.h"
 #include "Building.h"
 #include "StorageRoom.h"
 #include "MyPackage.h"

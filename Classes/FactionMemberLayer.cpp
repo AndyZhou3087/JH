@@ -1,4 +1,4 @@
-#include "FactionMemberLayer.h"
+﻿#include "FactionMemberLayer.h"
 #include "CommonFuncs.h"
 #include "HintBox.h"
 #include "WaitingProgress.h"
@@ -347,12 +347,12 @@ bool FactionMemberItem::init(FactionMemberData *data)
 	if (itemstr.length() > 0)
 	{
 		cocos2d::ui::ImageView* item = (cocos2d::ui::ImageView*)csbnode->getChildByName("item");
-		item->loadTexture(itemstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		item->loadTexture(itemstr, cocos2d::ui::TextureResType::PLIST);
 	}
 
 	std::string headstr = StringUtils::format("ui/fhero%d.png", m_data->herotype);
 	cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("headimg");
-	headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	headimg->loadTexture(headstr, cocos2d::ui::TextureResType::PLIST);
 	headimg->setScale(0.52f);
 
 	cocos2d::ui::Text* nicknamelbl = (cocos2d::ui::Text*)csbnode->getChildByName("name");

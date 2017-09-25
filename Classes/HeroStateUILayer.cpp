@@ -1,4 +1,4 @@
-#include "HeroStateUILayer.h"
+﻿#include "HeroStateUILayer.h"
 #include "CommonFuncs.h"
 #include "Const.h"
 #include "HeroProperNode.h"
@@ -225,11 +225,11 @@ void HeroStateUILayer::updateArrow()
 		arrow1->setPositionX(herostatus[0]->getPositionX() + herostatus[0]->getContentSize().width);
 		if (curack > lastatk)
 		{
-			arrow1->loadTexture("ui/arrowup.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow1->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		else if (curack < lastatk)
 		{
-			arrow1->loadTexture("ui/arrowdown.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow1->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		arrow1->stopAllActions();
 		arrow1->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
@@ -248,11 +248,11 @@ void HeroStateUILayer::updateArrow()
 		arrow2->setPositionX(herostatus[1]->getPositionX() + herostatus[1]->getContentSize().width);
 		if (curdf > lastdf)
 		{
-			arrow2->loadTexture("ui/arrowup.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow2->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		else if (curdf < lastdf)
 		{
-			arrow2->loadTexture("ui/arrowdown.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow2->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		arrow2->stopAllActions();
 		arrow2->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
@@ -271,11 +271,11 @@ void HeroStateUILayer::updateArrow()
 		arrow3->setPositionX(herostatus[4]->getPositionX() + herostatus[4]->getContentSize().width);
 		if (curmaxhp > lastmaxhp)
 		{
-			arrow3->loadTexture("ui/arrowup.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow3->loadTexture("ui/arrowup.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		else if (curmaxhp < lastmaxhp)
 		{
-			arrow3->loadTexture("ui/arrowdown.png", cocos2d::ui::Widget::TextureResType::PLIST);
+			arrow3->loadTexture("ui/arrowdown.png", cocos2d::ui::TextureResType::PLIST);
 		}
 		arrow3->stopAllActions();
 		arrow3->runAction(Repeat::create(Sequence::create(FadeOut::create(0.3f), FadeIn::create(0.3f), NULL), 5));
