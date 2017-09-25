@@ -160,6 +160,7 @@ private:
 	cocos2d::ui::Text* m_tgiftlefttimelbl;
 	cocos2d::ui::Widget* m_timegiftbtn;
 	cocos2d::ui::Widget* m_rafflebtn;
+	cocos2d::ui::Widget* m_lotteryimg;
 	int m_startClickX;
 	int m_startClickY;
 	bool m_isDraging;

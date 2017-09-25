@@ -30,6 +30,7 @@
 MapLayer* g_maplayer = NULL;
 MapLayer::MapLayer()
 {
+	m_lotteryimg = NULL;
 	ismoving = false;
 	if (g_hero != NULL)
 		g_hero->setIsMoving(false);
@@ -72,6 +73,12 @@ bool MapLayer::init()
 #endif
 		if (mapname->getName().compare(addr) == 0)
 			heroposindex = i;
+
+		if (mapname->getName().compare("m1-9") == 0)
+		{
+			m_lotteryimg = mapname;
+			m_lotteryimg->setScale(0.0f);
+		}
 	}
 
 	Vec2 pos = m_mapbg->getChildren().at(heroposindex)->getPosition();
@@ -118,7 +125,7 @@ bool MapLayer::init()
 
 	m_rafflebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("rafflebtn");
 	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
-	//m_rafflebtn->setVisible(false);
+	m_rafflebtn->setVisible(false);
 
 	m_tgiftlefttimelbl = (cocos2d::ui::Text*)m_timegiftbtn->getChildByName("lefttimelbl");
 
@@ -726,18 +733,22 @@ void MapLayer::checkTimeGift(float dt)
 	{
 		m_timegiftbtn->setVisible(false);
 	}
-	//if (GlobalData::myRaffleData.isshow)
-	//{
-	//	m_rafflebtn->setVisible(true);
-	//	if (m_timegiftbtn->isVisible())
-	//	{
-	//		m_rafflebtn->setPositionY(500);
-	//	}
-	//	else
-	//	{
-	//		m_rafflebtn->setPositionY(665);
-	//	}
-	//}
+	if (GlobalData::myRaffleData.isshow)
+	{
+		m_rafflebtn->setVisible(true);
+		if (m_timegiftbtn->isVisible())
+		{
+			m_rafflebtn->setPositionY(500);
+		}
+		else
+		{
+			m_rafflebtn->setPositionY(665);
+		}
+	}
+	if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
+	{
+		m_lotteryimg->setScale(1.0f);
+	}
 }
 
 void MapLayer::showTalkGuide()
