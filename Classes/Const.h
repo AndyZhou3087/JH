@@ -60,7 +60,7 @@ static int heroprice[] = { 0, 6, 12, 30 };
 
 static int buyprice[] = { 0, 6, 12, 30, 6, 12, 30, 68};
 
-static std::string payCode[] = { "", "awx010", "awx011", "awx013", "awx018", "awx019", "awx020", "awx021", "awx022", "awx023","awx024","awx025"};
+static std::string payCode[] = { "", "wx010", "wx011", "wx013", "wx018", "wx019", "wx020", "wx021", "wx022", "wx023","wx024","wx025"};
 static int goldcount[] = {60, 140, 400, 1080};
 static int vipgoldcount[] = { 10, 20, 50 };
 static std::string tipswords[] = { "精神的愉悦可以让你的做任何事情都事半功倍", "重复性的工作只会让你的精神越来越抑郁", "饥饿会让你的战斗力直线下降，所以战斗前一定要吃饱饭！", "每个武林中人都有属于自己的独门武功，去打败他们获得武功吧！",

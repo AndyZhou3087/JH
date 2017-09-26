@@ -1,6 +1,6 @@
 ﻿#include "RaffleLayer.h"
 #include "Const.h"
-
+#include "GameDataSave.h"
 #include "SoundManager.h"
 #include "AnalyticUtil.h"
 #include "CommonFuncs.h"
@@ -45,6 +45,7 @@ bool RaffleLayer::init()
 	GlobalData::myRaffleData.iscanplay = false;
 	GlobalData::myRaffleData.mywingold = -1;
 	GlobalData::myRaffleData.mywinrank = 0;
+	GlobalData::myRaffleData.curstage = "";
 
 	joinbtn = (cocos2d::ui::Button*)csbnode->getChildByName("joinbtn");
 	joinbtn->addTouchEventListener(CC_CALLBACK_2(RaffleLayer::onJoin, this));
@@ -184,13 +185,19 @@ void RaffleLayer::onSuccess()
 		{
 			RaffleResultLayer* rrlayer = RaffleResultLayer::create();
 			this->addChild(rrlayer, 100);
-
+			GameDataSave::getInstance()->setRaffleStage("");
 		}
 		else
 		{
-			std::string str = StringUtils::format("您参与的第%s期未中奖，祝下次好运！", GlobalData::myRaffleData.mywinstage.c_str());
-			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
-			this->addChild(hbox, 10);
+			std::string myrafflestage = GameDataSave::getInstance()->getRaffleStage();
+
+			if (myrafflestage.length() > 0 && myrafflestage.compare(GlobalData::myRaffleData.curstage) != 0)
+			{
+				GameDataSave::getInstance()->setRaffleStage("");
+				std::string str = StringUtils::format("您参与的第%s期未中奖，祝下次好运！", GlobalData::myRaffleData.mywinstage.c_str());
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
+				this->addChild(hbox, 10);
+			}
 		}
 		GlobalData::myRaffleData.mywingold = -1;
 	}
@@ -198,6 +205,8 @@ void RaffleLayer::onSuccess()
 	{
 		std::string str = StringUtils::format("%d", GlobalData::myRaffleData.poolgold);
 		poolnum->setString(str);
+
+		GameDataSave::getInstance()->setRaffleStage(GlobalData::myRaffleData.curstage);
 
 		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 20);
 		GlobalData::myRaffleData.iscanplay = false;

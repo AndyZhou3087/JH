@@ -414,6 +414,7 @@ typedef struct
 	int mywinrank;
 	std::string mywinstage;
 	bool isshow;//是否显示
+	std::string curstage;
 }RaffleData;
 
 class GlobalData

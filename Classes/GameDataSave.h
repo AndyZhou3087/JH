@@ -669,6 +669,18 @@ public:
 	*****************************/
 	void setApprenticeDay(int val);
 
+	/****************************
+	夺宝期数
+	return
+	*****************************/
+	std::string getRaffleStage();
+
+	/****************************
+	夺宝期数
+	@para
+	*****************************/
+	void setRaffleStage(std::string strval);
+
 private:
 	/****************************
 	加上userid后的字符串

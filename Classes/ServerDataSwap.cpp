@@ -1900,6 +1900,12 @@ void ServerDataSwap::httpGetCoinpoolCB(std::string retdata, int code, std::strin
 					GlobalData::myRaffleData.leftime = v.GetInt();
 				}
 
+				if (doc.HasMember("stage"))
+				{
+					rapidjson::Value& v = doc["stage"];
+					GlobalData::myRaffleData.curstage = v.GetString();
+				}
+
 				if (doc.HasMember("pool"))
 				{
 					rapidjson::Value& v = doc["pool"];

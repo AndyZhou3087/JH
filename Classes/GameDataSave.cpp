@@ -632,3 +632,13 @@ void GameDataSave::setApprenticeDay(int val)
 {
 	saveIntDataByKey(addUIDString("apprentice"), val);
 }
+
+std::string GameDataSave::getRaffleStage()
+{
+	return loadStringDataByKey("rafflestage", "");
+}
+
+void GameDataSave::setRaffleStage(std::string strval)
+{
+	saveStringDataByKey("rafflestage", strval);
+}
