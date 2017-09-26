@@ -733,22 +733,22 @@ void MapLayer::checkTimeGift(float dt)
 	{
 		m_timegiftbtn->setVisible(false);
 	}
-	if (GlobalData::myRaffleData.isshow)
-	{
-		m_rafflebtn->setVisible(true);
-		if (m_timegiftbtn->isVisible())
-		{
-			m_rafflebtn->setPositionY(500);
-		}
-		else
-		{
-			m_rafflebtn->setPositionY(665);
-		}
-	}
-	if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
-	{
-		m_lotteryimg->setScale(1.0f);
-	}
+	//if (GlobalData::myRaffleData.isshow)
+	//{
+	//	m_rafflebtn->setVisible(true);
+	//	if (m_timegiftbtn->isVisible())
+	//	{
+	//		m_rafflebtn->setPositionY(500);
+	//	}
+	//	else
+	//	{
+	//		m_rafflebtn->setPositionY(665);
+	//	}
+	//}
+	//if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
+	//{
+	//	m_lotteryimg->setScale(1.0f);
+	//}
 }
 
 void MapLayer::showTalkGuide()
