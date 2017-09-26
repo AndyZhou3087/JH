@@ -10,6 +10,7 @@
 #include "GameDataSave.h"
 #include "HintBox.h"
 #include "NoticeLayer.h"
+#include "Const.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -62,9 +63,6 @@ bool StartScene::init()
 	cocos2d::ui::Widget* savedbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("savedbtn");
 	savedbtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onLoadSaved, this));
 
-	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)csbnode->getChildByName("qq");
-	qq->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
-
 	m_continuebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("continuebtn");
 	m_continuebtn->addTouchEventListener(CC_CALLBACK_2(StartScene::onContinue, this));
 	std::string uid = GlobalData::getUId();
@@ -79,6 +77,15 @@ bool StartScene::init()
 
 	cocos2d::ui::Text* vesiontxt = (cocos2d::ui::Text*)csbnode->getChildByName("version");
 	vesiontxt->setString(GlobalData::getVersion());
+
+	int rqq = GlobalData::createRandomNum(2);
+	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)csbnode->getChildByName("qq");
+	qq1->setString(QQNUM[rqq]);
+	qq1->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+
+	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)csbnode->getChildByName("qq_1");
+	qq2->setString(QQNUM[1-rqq]);
+	qq2->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
 
 	clicklogocount = 0;
 	isdouserdata = false;

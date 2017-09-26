@@ -119,8 +119,14 @@ bool ShopLayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onBack, this));
 
-	cocos2d::ui::Widget* qq = (cocos2d::ui::Widget*)m_csbnode->getChildByName("qq");
-	qq->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
+	int rqq = GlobalData::createRandomNum(2);
+	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq");
+	qq1->setString(QQNUM[rqq]);
+	qq1->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
+
+	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq_1");
+	qq2->setString(QQNUM[1 - rqq]);
+	qq2->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)

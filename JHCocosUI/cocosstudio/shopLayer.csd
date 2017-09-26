@@ -16,37 +16,37 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="images/selectherobg.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqtext" ActionTag="1329191533" Tag="183" IconVisible="False" LeftMargin="438.4941" RightMargin="153.5059" TopMargin="1232.8022" BottomMargin="21.1978" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="qqtext" ActionTag="1329191533" Tag="183" IconVisible="False" LeftMargin="309.4969" RightMargin="282.5031" TopMargin="1235.8022" BottomMargin="18.1978" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="502.4941" Y="34.1978" />
+            <Position X="373.4969" Y="31.1978" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6979" Y="0.0267" />
+            <PrePosition X="0.5187" Y="0.0244" />
             <PreSize X="0.1778" Y="0.0203" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qq" ActionTag="-1398706058" Tag="182" IconVisible="False" LeftMargin="578.9609" RightMargin="14.0391" TopMargin="1232.8022" BottomMargin="21.1978" TouchEnable="True" FontSize="25" LabelText="552393763" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="qq" ActionTag="-1398706058" Tag="182" IconVisible="False" LeftMargin="446.9731" RightMargin="146.0269" TopMargin="1235.8022" BottomMargin="18.1978" TouchEnable="True" FontSize="25" LabelText="552393763" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="127.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="642.4609" Y="34.1978" />
+            <Position X="510.4731" Y="31.1978" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8923" Y="0.0267" />
+            <PrePosition X="0.7090" Y="0.0244" />
             <PreSize X="0.1764" Y="0.0203" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="580.4998" RightMargin="12.5002" TopMargin="1257.5599" BottomMargin="20.4401" ctype="SpriteObjectData">
+          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="448.5043" RightMargin="144.4957" TopMargin="1260.5571" BottomMargin="17.4428" ctype="SpriteObjectData">
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="643.9998" Y="21.4401" />
-            <Scale ScaleX="1.1000" ScaleY="1.0000" />
+            <Position X="512.0043" Y="18.4428" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8944" Y="0.0168" />
+            <PrePosition X="0.7111" Y="0.0144" />
             <PreSize X="0.1764" Y="0.0016" />
             <FileData Type="MarkedSubImage" Path="ui/qqline0.png" Plist="uipacker.plist" />
             <BlendFunc Src="770" Dst="771" />
@@ -143,7 +143,7 @@
             <Position X="-0.0001" Y="88.2628" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition Y="0.0690" />
+            <PrePosition X="0.0000" Y="0.0690" />
             <PreSize X="1.0000" Y="0.5352" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
@@ -184,6 +184,29 @@
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="qq_1" ActionTag="460357214" Tag="124" IconVisible="False" LeftMargin="593.2032" RightMargin="2.7968" TopMargin="1235.8022" BottomMargin="18.1978" TouchEnable="True" FontSize="25" LabelText="621564945" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="124.0000" Y="26.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="655.2032" Y="31.1978" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.9100" Y="0.0244" />
+            <PreSize X="0.1722" Y="0.0203" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="qqline_1" ActionTag="-168286669" Tag="125" IconVisible="False" LeftMargin="593.2383" RightMargin="-0.2383" TopMargin="1260.4663" BottomMargin="17.5337" ctype="SpriteObjectData">
+            <Size X="127.0000" Y="2.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="656.7383" Y="18.5337" />
+            <Scale ScaleX="1.0000" ScaleY="0.9091" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.9121" Y="0.0145" />
+            <PreSize X="0.1764" Y="0.0016" />
+            <FileData Type="MarkedSubImage" Path="ui/qqline0.png" Plist="uipacker.plist" />
+            <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
