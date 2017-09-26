@@ -18,6 +18,7 @@ public:
 private:
 	void onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
+	int wingold;
 };
 #endif
 

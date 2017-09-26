@@ -48,6 +48,8 @@ bool RaffleResultLayer::init()
 	str = StringUtils::format("%d", GlobalData::myRaffleData.mywingold);
 	wingoldlbl->setString(str);
 	
+	wingold = GlobalData::myRaffleData.mywingold;
+
 	std::string rankstr[] = { "一", "二", "三" };
 	int rankpercent[] = { 50, 30, 20 };
 
@@ -80,8 +82,7 @@ void RaffleResultLayer::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + GlobalData::myRaffleData.mywingold);
-		GlobalData::myRaffleData.mywingold = -1;
+		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + wingold);
 		this->removeFromParentAndCleanup(true);
 	}
 }

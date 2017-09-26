@@ -184,14 +184,15 @@ void RaffleLayer::onSuccess()
 		{
 			RaffleResultLayer* rrlayer = RaffleResultLayer::create();
 			this->addChild(rrlayer, 100);
+
 		}
-		else if (GlobalData::myRaffleData.mywingold == 0)
+		else
 		{
-			GlobalData::myRaffleData.mywingold = -1;
 			std::string str = StringUtils::format("您参与的第%s期未中奖，祝下次好运！", GlobalData::myRaffleData.mywinstage.c_str());
 			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
 			this->addChild(hbox, 10);
 		}
+		GlobalData::myRaffleData.mywingold = -1;
 	}
 	else
 	{
