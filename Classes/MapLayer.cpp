@@ -1,4 +1,4 @@
-﻿#include "MapLayer.h"
+#include "MapLayer.h"
 #include "json.h"
 #include "HomeLayer.h"
 #include "HomeHill.h"
