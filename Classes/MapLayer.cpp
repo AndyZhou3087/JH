@@ -21,7 +21,6 @@
 #include "RankLayer.h"
 #include "FactionMainLayer.h"
 #include "NewerGuide2Layer.h"
-#include "RollDiceLayer.h"
 #include "RaffleLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
@@ -72,7 +71,9 @@ bool MapLayer::init()
 		mapname->setVisible(false);
 #endif
 		if (mapname->getName().compare(addr) == 0)
+		{
 			heroposindex = i;
+		}
 
 		if (mapname->getName().compare("m1-9") == 0)
 		{
@@ -91,7 +92,10 @@ bool MapLayer::init()
 	m_herohead = Sprite::createWithSpriteFrameName(heroidstr);
 	m_herohead->setAnchorPoint(Vec2(0.5, 0));
 	m_herohead->setPosition(m_heroPos);
-
+	if (addr.compare("m1-9") == 0)
+	{
+		m_herohead->setVisible(false);
+	}
 	m_mapscroll->addChild(m_herohead);
 
 	updateUnlockChapter();
@@ -124,7 +128,7 @@ bool MapLayer::init()
 	m_timegiftbtn->setVisible(false);
 
 	m_rafflebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("rafflebtn");
-	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
+	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onRaffle, this));
 	m_rafflebtn->setVisible(false);
 
 	m_tgiftlefttimelbl = (cocos2d::ui::Text*)m_timegiftbtn->getChildByName("lefttimelbl");
@@ -197,11 +201,6 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			FactionMainLayer* factionmainlayer = FactionMainLayer::create();
 			g_gameLayer->addChild(factionmainlayer, 5, "factionmainlayer");
-		}
-		else if (m_addrname.compare("m1-9") == 0)
-		{
-			RollDiceLayer* rlayer = RollDiceLayer::create();
-			g_gameLayer->addChild(rlayer, 5);
 		}
 		else
 		{
@@ -733,22 +732,23 @@ void MapLayer::checkTimeGift(float dt)
 	{
 		m_timegiftbtn->setVisible(false);
 	}
-	//if (GlobalData::myRaffleData.isshow)
-	//{
-	//	m_rafflebtn->setVisible(true);
-	//	if (m_timegiftbtn->isVisible())
-	//	{
-	//		m_rafflebtn->setPositionY(500);
-	//	}
-	//	else
-	//	{
-	//		m_rafflebtn->setPositionY(665);
-	//	}
-	//}
-	//if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
-	//{
-	//	m_lotteryimg->setScale(1.0f);
-	//}
+	if (GlobalData::myRaffleData.isshow)
+	{
+		m_rafflebtn->setVisible(true);
+		if (m_timegiftbtn->isVisible())
+		{
+			m_rafflebtn->setPositionY(500);
+		}
+		else
+		{
+			m_rafflebtn->setPositionY(665);
+		}
+	}
+	if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
+	{
+		m_herohead->setVisible(true);
+		m_lotteryimg->setScale(1.0f);
+	}
 }
 
 void MapLayer::showTalkGuide()

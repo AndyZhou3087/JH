@@ -137,7 +137,6 @@ void RollDiceLayer::onRoll(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		anim_action = CSLoader::createTimeline("rollDiceAnim.csb");
 		animnode->runAction(anim_action);
 		anim_action->gotoFrameAndPlay(0, true);
-
 		actiontype = 1;
 		backbtn->setEnabled(false);
 		rollbtn->setEnabled(false);

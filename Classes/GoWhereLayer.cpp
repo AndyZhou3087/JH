@@ -14,7 +14,7 @@
 #include "ActivitScene.h"
 #include "SepcialNpcLayer.h"
 #include "AnalyticUtil.h"
-
+#include "RollDiceLayer.h"
 GoWhereLayer::GoWhereLayer()
 {
 
@@ -219,6 +219,11 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		{
 			if (g_gameLayer != NULL)
 				g_gameLayer->addChild(HomeHill::create(), 2, "homehill");
+		}
+		else if (m_addrstr.compare("m1-9") == 0)
+		{
+			RollDiceLayer* rlayer = RollDiceLayer::create();
+			g_gameLayer->addChild(rlayer, 5);
 		}
 		else
 		{
