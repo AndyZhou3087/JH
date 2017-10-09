@@ -1,4 +1,4 @@
-#include "MapLayer.h"
+﻿#include "MapLayer.h"
 #include "json.h"
 #include "HomeLayer.h"
 #include "HomeHill.h"
@@ -386,8 +386,9 @@ void MapLayer::onTimeGift(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		RaffleLayer* rlayer = RaffleLayer::create();
-		g_gameLayer->addChild(rlayer, 5);
+		TimeGiftLayer* giftLayer = TimeGiftLayer::create(TIMEGIFT);
+		g_gameLayer->addChild(giftLayer, 5, "gift");
+
 	}
 }
 
@@ -396,8 +397,8 @@ void MapLayer::onRaffle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		TimeGiftLayer* giftLayer = TimeGiftLayer::create(TIMEGIFT);
-		g_gameLayer->addChild(giftLayer, 5, "gift");
+		RaffleLayer* rlayer = RaffleLayer::create();
+		g_gameLayer->addChild(rlayer, 5);
 	}
 }
 
