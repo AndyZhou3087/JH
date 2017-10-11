@@ -1215,6 +1215,15 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				GlobalData::myLotteryData.isshow = retval.GetInt() == 0 ? false : true;
 			}
 
+			if (doc.HasMember("login_days"))
+			{
+				rapidjson::Value& retval = doc["login_days"];
+				int days = retval.GetInt();
+				if (days > 0)
+					GlobalData::continueLoginDays = retval.GetInt();
+			}
+
+		
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();
 		}

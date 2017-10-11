@@ -18,6 +18,7 @@
 #include "StartScene.h"
 #include "HintBox.h"
 #include "WaitingProgress.h"
+#include "LoginRewardLayer.h"
 USING_NS_CC;
 
 Nature* g_nature;
@@ -502,6 +503,7 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
+	GlobalData::continueLoginDays = 3;
 	if (isAnewGetData)
 	{
 		isAnewGetData = false;
@@ -524,6 +526,14 @@ void GameScene::onSuccess()
 			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			ServerDataSwap::init(this)->getAllData();
+		}
+		else
+		{
+			if (GlobalData::continueLoginDays > 0)
+			{
+				LoginRewardLayer* llayer = LoginRewardLayer::create();
+				g_gameLayer->addChild(llayer, 10);
+			}
 		}
 	}
 }

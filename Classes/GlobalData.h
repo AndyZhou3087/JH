@@ -973,6 +973,7 @@ public:
 	static MyLotteryData myLotteryData;
 
 	static RaffleData myRaffleData;
+	static int continueLoginDays;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

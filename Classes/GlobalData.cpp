@@ -108,6 +108,8 @@ MyLotteryData GlobalData::myLotteryData;
 
 RaffleData GlobalData::myRaffleData;
 
+int GlobalData::continueLoginDays = 0;
+
 GlobalData::GlobalData()
 {
 

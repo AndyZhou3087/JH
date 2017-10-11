@@ -271,6 +271,11 @@
           <Image Name="hp8-2.png" />
           <Image Name="hp8-3.png" />
           <Image Name="hp9-4.png" />
+          <Image Name="loginrbtn.png" />
+          <Image Name="loginritem0.png" />
+          <Image Name="loginritem1.png" />
+          <Image Name="loginritem2.png" />
+          <Image Name="loginrtitle.png" />
           <Image Name="m10-1.png" />
           <Image Name="m10-2.png" />
           <Image Name="m10-3.png" />
@@ -684,6 +689,7 @@
         <Project Name="hintLayer.csd" Type="Layer" />
         <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
+        <Project Name="loginRewardLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
         <Project Name="mixDoneLayer.csd" Type="Layer" />
         <Project Name="mixGFNode.csd" Type="Node" />

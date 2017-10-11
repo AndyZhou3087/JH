@@ -555,6 +555,11 @@
       <FilePathData Path="ui/dice4.png" />
       <FilePathData Path="ui/dice5.png" />
       <FilePathData Path="ui/dice6.png" />
+      <FilePathData Path="ui/loginrbtn.png" />
+      <FilePathData Path="ui/loginritem0.png" />
+      <FilePathData Path="ui/loginritem1.png" />
+      <FilePathData Path="ui/loginritem2.png" />
+      <FilePathData Path="ui/loginrtitle.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

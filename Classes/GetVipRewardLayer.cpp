@@ -5,6 +5,8 @@
 #include "Const.h"
 #include "GoldGoodsItem.h"
 #include "WaitingProgress.h"
+#include "LoginRewardLayer.h"
+#include "GameScene.h"
 
 GetVipRewardLayer::GetVipRewardLayer()
 {
@@ -165,6 +167,12 @@ void GetVipRewardLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->removeFromParentAndCleanup(true);
+
+		if (GlobalData::continueLoginDays > 0)
+		{
+			LoginRewardLayer* llayer = LoginRewardLayer::create();
+			g_gameLayer->addChild(llayer, 10);
+		}
 	}
 }
 
