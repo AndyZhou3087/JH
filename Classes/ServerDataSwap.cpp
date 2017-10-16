@@ -1,4 +1,4 @@
-﻿#include "ServerDataSwap.h"
+#include "ServerDataSwap.h"
 #include "GlobalData.h"
 #include "HttpUtil.h"
 #include "json.h"
@@ -73,6 +73,7 @@ void ServerDataSwap::postAllData()
 
 void ServerDataSwap::postOneData(std::string userid, int tag)
 {
+    isdoing = false;
 	std::string postdata;
 
 	rapidjson::Document writedoc;

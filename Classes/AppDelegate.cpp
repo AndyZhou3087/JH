@@ -1,4 +1,4 @@
-﻿#include "AppDelegate.h"
+#include "AppDelegate.h"
 #include "StartScene.h"
 #include "SoundManager.h"
 #include "Const.h"
@@ -144,7 +144,7 @@ void AppDelegate::applicationDidEnterBackground() {
 		g_gameLayer->saveAllData();
 	}
 
-	ServerDataSwap::init()->postOneData(GlobalData::getUId());
+	ServerDataSwap::init(NULL)->postOneData(GlobalData::getUId());
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }

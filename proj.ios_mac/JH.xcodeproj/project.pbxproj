@@ -56,6 +56,11 @@
 		722FA8B81F3B258900904816 /* getVipRewardLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B51F3B258900904816 /* getVipRewardLayer.csb */; };
 		722FA8B91F3B258900904816 /* vipGoodsNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B61F3B258900904816 /* vipGoodsNode.csb */; };
 		722FA8BA1F3B258900904816 /* vipShopLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 722FA8B71F3B258900904816 /* vipShopLayer.csb */; };
+		723292551F949FB8005C797A /* AchiveLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723292531F949FB7005C797A /* AchiveLayer.cpp */; };
+		723292561F949FB8005C797A /* LoginRewardLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723292541F949FB7005C797A /* LoginRewardLayer.cpp */; };
+		7232925A1F949FD1005C797A /* achiveNode.csb in Resources */ = {isa = PBXBuildFile; fileRef = 723292571F949FD0005C797A /* achiveNode.csb */; };
+		7232925B1F949FD1005C797A /* loginRewardLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 723292581F949FD0005C797A /* loginRewardLayer.csb */; };
+		7232925C1F949FD1005C797A /* achiveLayer.csb in Resources */ = {isa = PBXBuildFile; fileRef = 723292591F949FD1005C797A /* achiveLayer.csb */; };
 		723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */; };
 		7239471A1EF2384A0093E725 /* ExerciseDoneLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */; };
 		7239471B1EF2384A0093E725 /* PauseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 723947171EF2384A0093E725 /* PauseLayer.cpp */; };
@@ -397,6 +402,13 @@
 		722FA8B51F3B258900904816 /* getVipRewardLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = getVipRewardLayer.csb; sourceTree = "<group>"; };
 		722FA8B61F3B258900904816 /* vipGoodsNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vipGoodsNode.csb; sourceTree = "<group>"; };
 		722FA8B71F3B258900904816 /* vipShopLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = vipShopLayer.csb; sourceTree = "<group>"; };
+		723292511F949FB6005C797A /* LoginRewardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRewardLayer.h; sourceTree = "<group>"; };
+		723292521F949FB7005C797A /* AchiveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchiveLayer.h; sourceTree = "<group>"; };
+		723292531F949FB7005C797A /* AchiveLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchiveLayer.cpp; sourceTree = "<group>"; };
+		723292541F949FB7005C797A /* LoginRewardLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoginRewardLayer.cpp; sourceTree = "<group>"; };
+		723292571F949FD0005C797A /* achiveNode.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = achiveNode.csb; sourceTree = "<group>"; };
+		723292581F949FD0005C797A /* loginRewardLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginRewardLayer.csb; sourceTree = "<group>"; };
+		723292591F949FD1005C797A /* achiveLayer.csb */ = {isa = PBXFileReference; lastKnownFileType = file; path = achiveLayer.csb; sourceTree = "<group>"; };
 		723947131EF2384A0093E725 /* BuyComfirmLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuyComfirmLayer.cpp; sourceTree = "<group>"; };
 		723947141EF2384A0093E725 /* BuyComfirmLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyComfirmLayer.h; sourceTree = "<group>"; };
 		723947151EF2384A0093E725 /* ExerciseDoneLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExerciseDoneLayer.cpp; sourceTree = "<group>"; };
@@ -941,6 +953,9 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				723292591F949FD1005C797A /* achiveLayer.csb */,
+				723292571F949FD0005C797A /* achiveNode.csb */,
+				723292581F949FD0005C797A /* loginRewardLayer.csb */,
 				724356E81F78A28000284396 /* raffleLayer.csb */,
 				724356E51F78A28000284396 /* raffleResultLayer.csb */,
 				724356E71F78A28000284396 /* rollDiceAnim.csb */,
@@ -1069,6 +1084,10 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				723292531F949FB7005C797A /* AchiveLayer.cpp */,
+				723292521F949FB7005C797A /* AchiveLayer.h */,
+				723292541F949FB7005C797A /* LoginRewardLayer.cpp */,
+				723292511F949FB6005C797A /* LoginRewardLayer.h */,
 				724356F11F78A2A000284396 /* RaffleLayer.cpp */,
 				724356ED1F78A29E00284396 /* RaffleLayer.h */,
 				724356EF1F78A29F00284396 /* RaffleResultLayer.cpp */,
@@ -1509,6 +1528,7 @@
 				72F0DDF71F70AA76006923C6 /* factionmemberNode.csb in Resources */,
 				72229CD01F283991001272D3 /* end3_1 in Resources */,
 				72F1551D1F459F7D00C83B47 /* friendExgLayer.csb in Resources */,
+				7232925B1F949FD1005C797A /* loginRewardLayer.csb in Resources */,
 				728691B41ED56CC800D06B0F /* actionNode.csb in Resources */,
 				728691CC1ED56CC800D06B0F /* resNode.csb in Resources */,
 				72886EF21F7269E900FC3701 /* newerGuide2Layer.csb in Resources */,
@@ -1569,6 +1589,7 @@
 				728691CD1ED56CC800D06B0F /* reviveLayer.csb in Resources */,
 				723CF5F21F020CA600509BFE /* story4_2 in Resources */,
 				724356EB1F78A28000284396 /* rollDiceAnim.csb in Resources */,
+				7232925A1F949FD1005C797A /* achiveNode.csb in Resources */,
 				7254ED961F44498E0063E667 /* giveLayer.csb in Resources */,
 				723CF5F11F020CA600509BFE /* story4_1 in Resources */,
 				724356E91F78A28000284396 /* raffleResultLayer.csb in Resources */,
@@ -1583,6 +1604,7 @@
 				72777B281EFBD78400151A2B /* UMSocialSDKPromptResources.bundle in Resources */,
 				724356F71F78DA6800284396 /* Images.xcassets in Resources */,
 				725B067F1F4AFA9800ADE663 /* rankNode.csb in Resources */,
+				7232925C1F949FD1005C797A /* achiveLayer.csb in Resources */,
 				72229CD41F283991001272D3 /* end4_1 in Resources */,
 				728691D41ED56CC800D06B0F /* sounds in Resources */,
 				728691D01ED56CC800D06B0F /* selectSaveComfirmLayer.csb in Resources */,
@@ -1683,6 +1705,7 @@
 				72D098AA1F08C45F00FEABAB /* iosfunc.mm in Sources */,
 				723947191EF2384A0093E725 /* BuyComfirmLayer.cpp in Sources */,
 				728690691ED568B000D06B0F /* HomeLayer.cpp in Sources */,
+				723292551F949FB8005C797A /* AchiveLayer.cpp in Sources */,
 				72886EF91F726A0900FC3701 /* FactionComfirmLayer.cpp in Sources */,
 				7286907D1ED568B000D06B0F /* StoryScene.cpp in Sources */,
 				728690601ED568B000D06B0F /* GameScene.cpp in Sources */,
@@ -1731,6 +1754,7 @@
 				724356F31F78A2A000284396 /* RaffleResultLayer.cpp in Sources */,
 				7286906E1ED568B000D06B0F /* MyPackage.cpp in Sources */,
 				72F8A44E1ED6851E007A5A65 /* AnalyticUtil.cpp in Sources */,
+				723292561F949FB8005C797A /* LoginRewardLayer.cpp in Sources */,
 				728690571ED568B000D06B0F /* CommonFuncs.cpp in Sources */,
 				728396A31F557F2B00A75AB4 /* MixGFNode.cpp in Sources */,
 				7286906C1ED568B000D06B0F /* MedicineKit.cpp in Sources */,
