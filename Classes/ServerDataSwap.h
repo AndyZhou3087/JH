@@ -7,7 +7,7 @@
 
 class ServerDataDelegateProtocol;
 
-class ServerDataSwap: public cocos2d::Ref
+class ServerDataSwap
 {
 public:
 
@@ -51,6 +51,7 @@ private:
 	ServerDataSwap();
 	~ServerDataSwap();
 	ServerDataSwap(ServerDataDelegateProtocol *pDelegateProtocol);
+	void release();
 private:
 	void httpPostOneDataCB(std::string retdata, int code, std::string tag);
 	void httpGetAllDataCB(std::string retdata, int code, std::string tag);

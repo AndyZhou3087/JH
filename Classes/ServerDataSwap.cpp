@@ -34,8 +34,6 @@ bool ServerDataSwap::isGetingData()
 ServerDataSwap* ServerDataSwap::init(ServerDataDelegateProtocol* delegateProtocol)
 {
 	ServerDataSwap *serverDataSwap = new  ServerDataSwap(delegateProtocol);
-	serverDataSwap->autorelease();
-	serverDataSwap->retain();
 
 	return serverDataSwap;
 }
@@ -45,6 +43,10 @@ void ServerDataSwap::setDelegate(ServerDataDelegateProtocol *delegateProtocol)
 	m_pDelegateProtocol = delegateProtocol;
 }
 
+void ServerDataSwap::release()
+{
+	delete this;
+}
 
 void ServerDataSwap::postAllData()
 {

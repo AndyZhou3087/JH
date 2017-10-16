@@ -282,6 +282,8 @@ bool FactionListItem::init(FactionListData *data)
 
 	actionbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 	actionbtn->addTouchEventListener(CC_CALLBACK_2(FactionListItem::onAction, this));
+	actionbtn->setSwallowTouches(false);
+
 	if (GlobalData::myFaction == data->id)
 	{
 		if (GlobalData::mytitle == 0)

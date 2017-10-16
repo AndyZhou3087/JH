@@ -371,12 +371,15 @@ bool FactionMemberItem::init(FactionMemberData *data)
 
 	actionbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 	actionbtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onAction, this));
+	actionbtn->setSwallowTouches(false);
 
 	refusebtn = (cocos2d::ui::Button*)csbnode->getChildByName("refusebtn");
 	refusebtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onRefuse, this));
+	refusebtn->setSwallowTouches(false);
 
 	modifybtn = (cocos2d::ui::Button*)csbnode->getChildByName("modifybtn");
 	modifybtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberItem::onModify, this));
+	modifybtn->setSwallowTouches(false);
 
 	if (atoi(GlobalData::getMyID().c_str()) == data->userid && g_hero->getHeadID() == data->herotype)
 	{
