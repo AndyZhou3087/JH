@@ -171,7 +171,7 @@ void GetVipRewardLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 		if (GlobalData::continueLoginDays > 0)
 		{
 			LoginRewardLayer* llayer = LoginRewardLayer::create();
-			g_gameLayer->addChild(llayer, 10);
+			g_gameLayer->addChild(llayer, 100);
 		}
 	}
 }

@@ -530,10 +530,10 @@ void GameScene::onSuccess()
 		}
 		else
 		{
-			if (GlobalData::continueLoginDays > 0)
+			if (GlobalData::continueLoginDays > 0 && (NewerGuideLayer::checkifNewerGuide(47) == 0||g_hero->getLVValue() >= 1))
 			{
 				LoginRewardLayer* llayer = LoginRewardLayer::create();
-				g_gameLayer->addChild(llayer, 10);
+				g_gameLayer->addChild(llayer, 100);
 			}
 		}
 	}
