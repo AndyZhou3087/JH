@@ -445,6 +445,17 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		if (g_gameLayer != NULL)
 			g_gameLayer->addChild(FightLayer::create(m_addrstr, npcid), 4, "fightlayer");
 
+		for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+		{
+			if (GlobalData::vec_achiveData[i].type == A_12)
+			{
+				if (GlobalData::vec_achiveData[i].vec_para[0].compare(npcid) == 0)
+				{
+					GlobalData::doAchive(A_12, GlobalData::vec_achiveData[i].finish + 1);
+				}
+			}
+		}
+
 		PlotMissionData pdata = GlobalData::vec_PlotMissionData[GlobalData::getPlotMissionIndex()];
 		int plottype = 1;
 		if (pdata.snpc.compare(npcid) == 0 || pdata.dnpc.compare(npcid) == 0)
@@ -888,6 +899,17 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				GlobalData::savePlotMissionStatus();
 				if (plotData->status == M_DONE)
 					updatePlotUI(1);
+
+				for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+				{
+					if (GlobalData::vec_achiveData[i].type == A_6)
+					{
+						if (plotData->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0)
+						{
+							GlobalData::doAchive(A_6, 1);
+						}
+					}
+				}
 			}
 			else
 				GlobalData::saveBranchPlotMissionStatus();

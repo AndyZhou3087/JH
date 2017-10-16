@@ -381,6 +381,15 @@ void RepairLayer::finishAnim(Ref* pSender)
 			data->slv += 1;
 			this->scheduleOnce(schedule_selector(RepairLayer::delayShowOkLayer), dt);
 			delay += dt;
+
+			for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+			{
+				if (GlobalData::vec_achiveData[i].type == A_9)
+				{
+					if (GlobalData::vec_achiveData[i].vec_para[0].compare(data->strid) == 0)
+						GlobalData::doAchive(A_9, data->slv);
+				}
+			}
 		}
 		else
 		{

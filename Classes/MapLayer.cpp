@@ -22,6 +22,7 @@
 #include "FactionMainLayer.h"
 #include "NewerGuide2Layer.h"
 #include "RaffleLayer.h"
+#include "AchiveLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -201,6 +202,11 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			FactionMainLayer* factionmainlayer = FactionMainLayer::create();
 			g_gameLayer->addChild(factionmainlayer, 5, "factionmainlayer");
+		}
+		else if (m_addrname.compare("m1-10") == 0)
+		{
+			AchiveLayer* alayer = AchiveLayer::create();
+			g_gameLayer->addChild(alayer, 5);
 		}
 		else
 		{
@@ -438,7 +444,7 @@ void MapLayer::showUnlockLayer(float dt)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	this->scheduleOnce(schedule_selector(MapLayer::delayShowComments), 2.0f);
 #endif
-
+	GlobalData::doAchive(A_5, GlobalData::getUnlockChapter());
 }
 
 void MapLayer::delayShowComments(float dt)

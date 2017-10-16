@@ -144,6 +144,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\AchiveLayer.cpp" />
     <ClCompile Include="..\Classes\ActionGetLayer.cpp" />
     <ClCompile Include="..\Classes\ActivitScene.cpp" />
     <ClCompile Include="..\Classes\AnalyticUtil.cpp" />
@@ -197,6 +198,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HomeLayer.cpp" />
     <ClCompile Include="..\Classes\HttpUtil.cpp" />
     <ClCompile Include="..\Classes\json.cpp" />
+    <ClCompile Include="..\Classes\LoginRewardLayer.cpp" />
     <ClCompile Include="..\Classes\MapLayer.cpp" />
     <ClCompile Include="..\Classes\MD5.cpp" />
     <ClCompile Include="..\Classes\MedicineKit.cpp" />
@@ -254,6 +256,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\AchiveLayer.h" />
     <ClInclude Include="..\Classes\ActionGetLayer.h" />
     <ClInclude Include="..\Classes\ActivitScene.h" />
     <ClInclude Include="..\Classes\AnalyticUtil.h" />
@@ -308,6 +311,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HomeLayer.h" />
     <ClInclude Include="..\Classes\HttpUtil.h" />
     <ClInclude Include="..\Classes\json.h" />
+    <ClInclude Include="..\Classes\LoginRewardLayer.h" />
     <ClInclude Include="..\Classes\MapLayer.h" />
     <ClInclude Include="..\Classes\MD5.h" />
     <ClInclude Include="..\Classes\MedicineKit.h" />

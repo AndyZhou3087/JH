@@ -35,7 +35,8 @@ private:
 	void saveTempData();
 	void loadTempData();
 	void updataLV();
-	void showLvUpText();
+	void showHeroLvUp();
+	void showLvUpAnim(int type);
 	int addHeroExp();
 	int addGfExp();
 private:
@@ -47,6 +48,8 @@ private:
 	cocos2d::ui::Text* gfexplbl;
 	cocos2d::ui::Button* m_backbtn;
 	cocos2d::ui::Button* m_getallbtn;
+	bool iswglvup;
+	bool isnglvup;
 };
 #endif
 

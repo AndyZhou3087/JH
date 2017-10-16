@@ -336,6 +336,12 @@
     <ClCompile Include="..\Classes\RaffleResultLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\LoginRewardLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AchiveLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -666,6 +672,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RaffleResultLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoginRewardLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AchiveLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

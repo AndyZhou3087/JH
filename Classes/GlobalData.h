@@ -417,6 +417,35 @@ typedef struct
 	std::string curstage;
 }RaffleData;
 
+
+typedef enum
+{
+	A_0,//消耗%s元宝
+	A_1,//拥有%s元宝
+	A_2,//角色等级达到%s
+	A_3,//拥有银两%s
+	A_4,//战胜%sNPC
+	A_5,//解锁%s章节
+	A_6,//完成%s任务
+	A_7,//%s武功达到%s等级
+	A_8,//合成%s武功组合
+	A_9,//%s强化到%s等级
+	A_10,//%s等级以上的武功拥有%s个
+	A_11,//生存天数达到%s天
+	A_12//累计挑战%s%s次
+}AchiveType;
+
+typedef struct
+{
+	std::string id;
+	std::string name;
+	int type;
+	std::vector<std::string> vec_para;
+	std::vector<std::string> vec_rwd;
+	std::string desc;
+	int finish;
+}AchiveData;
+
 class GlobalData
 {
 public:
@@ -479,6 +508,11 @@ public:
 	解析武器防具数据
 	*****************************/
 	static void loadEquipJsonData();
+
+	/****************************
+	解析成就数据
+	*****************************/
+	static void loadAchiveJsonData();
 
 	/****************************
 	解析商城数据
@@ -902,6 +936,21 @@ public:
 	*****************************/
 	static void setNoPopNoticeDay(int day);
 
+	/****************************
+	获取保存的成就信息
+	*****************************/
+	static void getAchiveData();
+
+	/****************************
+	保存成就信息
+	*****************************/
+	static void saveAchiveData();
+
+	/****************************
+	成就信息
+	*****************************/
+	static void doAchive(int atype, int count);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -957,6 +1006,7 @@ public:
 
 	static std::vector<FactionMemberData> vec_factionMemberData;
 	
+	static std::vector<AchiveData> vec_achiveData;
 
 	static bool isPopingScene;
 

@@ -276,6 +276,12 @@ public:
 	*****************************/
 	void saveProperData();
 
+	/****************************
+	获取功法多少等级个数
+	@return 个数
+	*****************************/
+	int getGfCountByLv(int lv);
+
 public:
 	static float MAXInnerinjuryValue;//最大内伤值
 	static float MAXOutinjuryValue;//最大外伤值

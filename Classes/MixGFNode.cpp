@@ -268,6 +268,15 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 						mixtitle->setString(GlobalData::map_MixGfData[it->first].name);
 						mixokbtn->setVisible(false);
 
+						for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+						{
+							if (GlobalData::vec_achiveData[i].type == A_8)
+							{
+								if (GlobalData::vec_achiveData[i].vec_para[0].compare(it->first) == 0)
+									GlobalData::doAchive(A_8, 1);
+							}
+						}
+
 						break;
 					}
 				}

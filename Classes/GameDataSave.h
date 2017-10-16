@@ -681,6 +681,18 @@ public:
 	*****************************/
 	void setRaffleStage(std::string strval);
 
+	/****************************
+	成就数据
+	return
+	*****************************/
+	std::string getAchiveData();
+
+	/****************************
+	成就数据
+	@para
+	*****************************/
+	void setAchiveData(std::string strval);
+
 private:
 	/****************************
 	加上userid后的字符串

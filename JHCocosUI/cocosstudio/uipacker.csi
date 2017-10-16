@@ -560,6 +560,8 @@
       <FilePathData Path="ui/loginritem1.png" />
       <FilePathData Path="ui/loginritem2.png" />
       <FilePathData Path="ui/loginrtitle.png" />
+      <FilePathData Path="ui/achivetitle.png" />
+      <FilePathData Path="ui/m1-10.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

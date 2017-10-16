@@ -642,3 +642,13 @@ void GameDataSave::setRaffleStage(std::string strval)
 {
 	saveStringDataByKey("rafflestage", strval);
 }
+
+std::string GameDataSave::getAchiveData()
+{
+	return loadStringDataByKey(addUIDString("achive"), "");
+}
+
+void GameDataSave::setAchiveData(std::string strval)
+{
+	saveStringDataByKey(addUIDString("achive"), strval);
+}

@@ -527,6 +527,11 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 			//HintBox* layer = HintBox::create(CommonFuncs::gbk2utf("制作成功"));
 			//this->addChild(layer);
 			showFinishHintText("images/buildtext2.png");
+
+			if (idstr.compare("80") == 0)
+			{
+				GlobalData::doAchive(A_3, StorageRoom::getCountById("80"));
+			}
 		}
 
 		for (unsigned int m = 0; m < vec_buildAcitonData.at(type - ACTION).res.size(); m++)

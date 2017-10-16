@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="19" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="bgimg" ActionTag="-1887840075" Tag="27" IconVisible="False" LeftMargin="-0.0004" RightMargin="0.0004" TopMargin="166.9926" BottomMargin="261.0074" LeftEage="237" RightEage="237" TopEage="281" BottomEage="281" Scale9OriginX="237" Scale9OriginY="281" Scale9Width="246" Scale9Height="290" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="bgimg" ActionTag="-1887840075" Tag="27" IconVisible="False" LeftMargin="-0.0004" RightMargin="0.0004" TopMargin="166.9927" BottomMargin="261.0074" LeftEage="237" RightEage="237" TopEage="281" BottomEage="281" Scale9OriginX="237" Scale9OriginY="281" Scale9Width="246" Scale9Height="290" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="852.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9996" Y="687.0074" />
@@ -30,26 +30,6 @@
           <AbstractNodeData Name="item1" ActionTag="-787343575" Tag="28" IconVisible="False" LeftMargin="92.4348" RightMargin="477.5652" TopMargin="372.4760" BottomMargin="707.5240" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="-1471018924" Tag="29" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="-1593965330" Tag="30" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="1442426415" Tag="161" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -62,7 +42,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="-931739678" Tag="163" IconVisible="False" LeftMargin="17.1090" RightMargin="19.8910" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="-931739678" Tag="163" IconVisible="False" LeftMargin="17.1071" RightMargin="19.8929" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="1025747085" Tag="164" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -98,26 +78,6 @@
           <AbstractNodeData Name="item2" ActionTag="-1426494586" Tag="165" IconVisible="False" LeftMargin="285.0001" RightMargin="284.9999" TopMargin="372.4760" BottomMargin="707.5240" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="417037857" Tag="166" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="519786717" Tag="167" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="762022147" Tag="168" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -130,7 +90,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="827642073" Tag="169" IconVisible="False" LeftMargin="17.1090" RightMargin="19.8910" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="827642073" Tag="169" IconVisible="False" LeftMargin="17.1071" RightMargin="19.8929" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-512910191" Tag="170" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -166,26 +126,6 @@
           <AbstractNodeData Name="item3" ActionTag="-1313375519" Tag="171" IconVisible="False" LeftMargin="478.7828" RightMargin="91.2172" TopMargin="372.4760" BottomMargin="707.5240" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="-1475129868" Tag="172" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="-861220594" Tag="173" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="-541034881" Tag="174" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -198,7 +138,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="-80315610" Tag="175" IconVisible="False" LeftMargin="17.1097" RightMargin="19.8903" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="-80315610" Tag="175" IconVisible="False" LeftMargin="17.1078" RightMargin="19.8922" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-348175801" Tag="176" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -234,26 +174,6 @@
           <AbstractNodeData Name="item4" ActionTag="108518701" Tag="177" IconVisible="False" LeftMargin="28.8676" RightMargin="541.1324" TopMargin="668.6677" BottomMargin="411.3323" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="-1839553493" Tag="178" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="761851356" Tag="179" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="1489720312" Tag="180" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -266,7 +186,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="169902437" Tag="181" IconVisible="False" LeftMargin="17.1097" RightMargin="19.8903" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="169902437" Tag="181" IconVisible="False" LeftMargin="17.1078" RightMargin="19.8922" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-858086825" Tag="182" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -302,26 +222,6 @@
           <AbstractNodeData Name="item5" ActionTag="2058134924" Tag="183" IconVisible="False" LeftMargin="199.9133" RightMargin="370.0867" TopMargin="668.6677" BottomMargin="411.3323" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="-1594034667" Tag="184" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="-1497137541" Tag="185" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="-62478810" Tag="186" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -334,7 +234,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="1682987550" Tag="187" IconVisible="False" LeftMargin="17.1097" RightMargin="19.8903" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="1682987550" Tag="187" IconVisible="False" LeftMargin="17.1078" RightMargin="19.8922" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-1728649485" Tag="188" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -370,26 +270,6 @@
           <AbstractNodeData Name="item6" ActionTag="1076346385" Tag="189" IconVisible="False" LeftMargin="370.9595" RightMargin="199.0405" TopMargin="668.6677" BottomMargin="411.3323" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="541358299" Tag="190" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="-190751574" Tag="191" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="-852377981" Tag="192" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -402,7 +282,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="-752169536" Tag="193" IconVisible="False" LeftMargin="17.1097" RightMargin="19.8903" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="-752169536" Tag="193" IconVisible="False" LeftMargin="17.1078" RightMargin="19.8922" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-2054827115" Tag="194" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -438,26 +318,6 @@
           <AbstractNodeData Name="item7" ActionTag="-816552465" Tag="195" IconVisible="False" LeftMargin="542.0051" RightMargin="27.9949" TopMargin="668.6677" BottomMargin="411.3323" LeftEage="49" RightEage="49" TopEage="66" BottomEage="66" Scale9OriginX="49" Scale9OriginY="66" Scale9Width="52" Scale9Height="68" ctype="ImageViewObjectData">
             <Size X="150.0000" Y="200.0000" />
             <Children>
-              <AbstractNodeData Name="rwdboximg" ActionTag="2080310779" Tag="196" IconVisible="False" LeftMargin="11.0002" RightMargin="16.9998" TopMargin="9.0000" BottomMargin="69.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-                <Size X="122.0000" Y="122.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0002" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.8133" Y="0.6100" />
-                <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="rwdimg" ActionTag="-1225901025" Tag="197" IconVisible="False" LeftMargin="19.0000" RightMargin="25.0000" TopMargin="17.0000" BottomMargin="77.0000" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="26" Scale9Height="26" ctype="ImageViewObjectData">
-                <Size X="106.0000" Y="106.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="72.0000" Y="130.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4800" Y="0.6500" />
-                <PreSize X="0.7067" Y="0.5300" />
-                <FileData Type="MarkedSubImage" Path="ui/23.png" Plist="uipacker.plist" />
-              </AbstractNodeData>
               <AbstractNodeData Name="name" ActionTag="1076744176" Tag="198" IconVisible="False" LeftMargin="22.5000" RightMargin="28.5000" TopMargin="155.4199" BottomMargin="18.5801" FontSize="25" LabelText="夺宝规则" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="99.0000" Y="26.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -470,7 +330,7 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="getimg" ActionTag="264018526" Tag="199" IconVisible="False" LeftMargin="17.1097" RightMargin="19.8903" TopMargin="204.6691" BottomMargin="-51.6691" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="getimg" ActionTag="264018526" Tag="199" IconVisible="False" LeftMargin="17.1078" RightMargin="19.8922" TopMargin="204.6690" BottomMargin="-51.6690" TouchEnable="True" LeftEage="37" RightEage="37" TopEage="15" BottomEage="15" Scale9OriginX="37" Scale9OriginY="15" Scale9Width="39" Scale9Height="17" ctype="ImageViewObjectData">
                 <Size X="113.0000" Y="47.0000" />
                 <Children>
                   <AbstractNodeData Name="statutext" ActionTag="-849437446" Tag="200" IconVisible="False" LeftMargin="10.0000" RightMargin="11.0000" TopMargin="8.0000" BottomMargin="8.0000" FontSize="30" LabelText="第三天" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

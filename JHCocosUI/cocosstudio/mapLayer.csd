@@ -34,7 +34,7 @@
           <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
             <Size X="720.0000" Y="892.0000" />
             <Children>
-              <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" ctype="SpriteObjectData">
+              <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" LeftMargin="-1.5475" RightMargin="1.5476" TopMargin="-1.5476" BottomMargin="1.5476" ctype="SpriteObjectData">
                 <Size X="2000.0000" Y="1396.0000" />
                 <Children>
                   <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9771" RightMargin="471.0229" TopMargin="994.6161" BottomMargin="316.3839" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
@@ -139,6 +139,16 @@
                     <PrePosition X="0.8597" Y="0.2834" />
                     <PreSize X="0.0700" Y="0.0931" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-9.png" Plist="uipacker.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="m1-10" ActionTag="1235227395" Tag="218" IconVisible="False" LeftMargin="987.8903" RightMargin="890.1097" TopMargin="1037.2898" BottomMargin="266.7103" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="92" Scale9Height="58" ctype="ImageViewObjectData">
+                    <Size X="122.0000" Y="92.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="1048.8903" Y="312.7103" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5244" Y="0.2240" />
+                    <PreSize X="0.0610" Y="0.0659" />
+                    <FileData Type="MarkedSubImage" Path="ui/m1-10.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="m10-1" ActionTag="-1299461788" Tag="15" IconVisible="False" LeftMargin="1019.0541" RightMargin="810.9459" TopMargin="183.3392" BottomMargin="1111.6608" TouchEnable="True" LeftEage="56" RightEage="56" TopEage="33" BottomEage="33" Scale9OriginX="56" Scale9OriginY="33" Scale9Width="58" Scale9Height="35" ctype="ImageViewObjectData">
                     <Size X="170.0000" Y="101.0000" />
@@ -752,10 +762,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position />
+                <Position X="-1.5475" Y="1.5476" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
+                <PrePosition X="-0.0008" Y="0.0011" />
                 <PreSize X="1.0000" Y="1.0000" />
                 <FileData Type="Normal" Path="images/mapbg.jpg" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
@@ -789,7 +799,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" LeftMargin="0.0000" RightMargin="598.0000" TopMargin="419.0000" BottomMargin="739.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="vipbtn" ActionTag="-877144570" Tag="154" IconVisible="False" RightMargin="598.0000" TopMargin="419.0000" BottomMargin="739.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="92" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="122.0000" Y="122.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="61.0000" Y="800.0000" />
@@ -845,7 +855,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rafflebtn" ActionTag="1204722579" Tag="211" IconVisible="False" LeftMargin="1.0000" RightMargin="595.0000" TopMargin="719.0004" BottomMargin="438.9997" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="94" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="rafflebtn" ActionTag="1204722579" Tag="211" IconVisible="False" LeftMargin="1.0000" RightMargin="595.0000" TopMargin="719.0003" BottomMargin="438.9997" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="94" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="124.0000" Y="122.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="63.0000" Y="499.9997" />

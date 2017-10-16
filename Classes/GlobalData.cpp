@@ -60,6 +60,8 @@ std::vector<FactionListData> GlobalData::vec_factionListData;
 
 std::vector<FactionMemberData> GlobalData::vec_factionMemberData;
 
+std::vector<AchiveData> GlobalData::vec_achiveData;
+
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
 std::string GlobalData::uid = "";
@@ -1127,6 +1129,43 @@ void GlobalData::loadShopData()
 	}
 }
 
+void GlobalData::loadAchiveJsonData()
+{
+	vec_achiveData.clear();
+	rapidjson::Document doc = ReadJsonFile("data/achive.json");
+	rapidjson::Value& values = doc["a"];
+	for (unsigned int i = 0; i < values.Size(); i++)//武器防具数组
+	{
+		AchiveData data;
+		rapidjson::Value& item = values[i];
+		rapidjson::Value& v = item["id"];
+		data.id = v.GetString();
+		v = item["type"];
+		data.type = atoi(v.GetString());
+		v = item["name"];
+		data.name = v.GetString();
+		v = item["desc"];
+		data.desc = v.GetString();
+		v = item["para1"];
+		data.vec_para.push_back(v.GetString());
+		v = item["para2"];
+		std::string para2str = v.GetString();
+		if (para2str.length() > 0 && para2str.compare("0") != 0)
+			data.vec_para.push_back(v.GetString());
+
+		v = item["rwd"];
+		for (unsigned int m = 0; m < v.Size(); m++)
+		{
+			std::string val = v[m].GetString();
+			if (val.length() > 0 && val.compare("0") != 0)
+			{
+				data.vec_rwd.push_back(val);
+			}
+		}
+		data.finish = 0;
+		vec_achiveData.push_back(data);
+	}
+}
 int GlobalData::createRandomNum(int val)
 {
 	int syssec = GlobalData::getSysSecTime();
@@ -1547,6 +1586,7 @@ void GlobalData::setMyGoldCount(int count)
 	myGlodCount = count;
 	GlobalData::setMD5MyGoldCount(md5(myGlodCount));
 	GameDataSave::getInstance()->setGoldCount(myGlodCount);
+	GlobalData::doAchive(A_1, count);
 }
 
 std::string GlobalData::getMyID()
@@ -1605,6 +1645,7 @@ int GlobalData::getFreeReviveCount()
 void GlobalData::setUseGold(int val)
 {
 	GameDataSave::getInstance()->setUseGold(val);
+	GlobalData::doAchive(A_0, val);
 }
 
 int GlobalData::getUseGold()
@@ -1874,6 +1915,46 @@ void GlobalData::setHeroProperData(std::string strval)
 	GameDataSave::getInstance()->setHeroProperData(strval);
 }
 
+void GlobalData::getAchiveData()
+{
+	std::string datastr = GameDataSave::getInstance()->getAchiveData();
+	if (datastr.length() > 0)
+	{
+		std::vector<std::string> vec_retstr;
+		CommonFuncs::split(datastr, vec_retstr, ";");
+		for (unsigned int i = 0; i < vec_retstr.size(); i++)
+		{
+			GlobalData::vec_achiveData[i].finish = atoi(vec_retstr[i].c_str());
+		}
+	}
+}
+
+void GlobalData::saveAchiveData()
+{
+	std::string str;
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		std::string onestr = StringUtils::format("%d;", GlobalData::vec_achiveData[i].finish);
+		str.append(onestr);
+	}
+
+	GameDataSave::getInstance()->setAchiveData(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::doAchive(int atype, int count)
+{
+	bool issave = false;
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		if (GlobalData::vec_achiveData[i].type == atype && GlobalData::vec_achiveData[i].finish != -1)
+		{
+			issave = true;
+			GlobalData::vec_achiveData[i].finish = count;
+		}
+	}
+	if (issave)
+		saveAchiveData();
+}
 
 std::string GlobalData::addUidString(std::string val)
 {

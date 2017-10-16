@@ -126,6 +126,17 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			GlobalData::setUnlockChapter(unlockchapter);
 			GlobalData::setPlotMissionIndex(curplot + 1);
 			GlobalData::savePlotMissionStatus();
+
+			for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+			{
+				if (GlobalData::vec_achiveData[i].type == A_6)
+				{
+					if (plotdata->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0)
+					{
+						GlobalData::doAchive(A_6, 1);
+					}
+				}
+			}
 		}
 		else
 		{
@@ -191,6 +202,20 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					break;
 				}
 			}
+		}
+		else
+		{
+			for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+			{
+				if (GlobalData::vec_achiveData[i].type == A_4)
+				{
+					if (GlobalData::vec_achiveData[i].vec_para[0].compare(m_npcid) == 0)
+					{
+						GlobalData::doAchive(A_4, 1);
+					}
+				}
+			}
+			
 		}
 	}
 
@@ -386,10 +411,13 @@ void Winlayer::updataLV()
 		{
 			g_hero->setLVValue(lv);
 			g_hero->setLifeValue(g_hero->getMaxLifeValue());
-			showLvUpText();
+			showHeroLvUp();
+			GlobalData::doAchive(A_2, lv + 1);
 		}
 	}
 
+	iswglvup = false;
+	iswglvup = false;
 	for (int m = H_WG; m <= H_NG; m++)
 	{
 		lv = 0;
@@ -413,8 +441,30 @@ void Winlayer::updataLV()
 			{
 				int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
 				if (lv >= gfmaxlv)
-					lv = gfmaxlv - 1;
-				gfData->lv = lv;
+					gfData->lv = gfmaxlv - 1;
+				else
+				{
+					gfData->lv = lv;
+					if (m == H_WG)
+						iswglvup = true;
+					else
+						iswglvup = true;
+				}
+
+				for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+				{
+					if (GlobalData::vec_achiveData[i].type == A_7)
+					{
+						if (GlobalData::vec_achiveData[i].vec_para[0].compare(GlobalData::map_wgngs[gfname].id) == 0)
+							GlobalData::doAchive(A_7, gfData->lv + 1);
+					}
+
+					if (GlobalData::vec_achiveData[i].type == A_10)
+					{
+						int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
+						GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+					}
+				}
 			}
 		}
 
@@ -776,7 +826,7 @@ void Winlayer::onExit()
 	Layer::onExit();
 }
 
-void Winlayer::showLvUpText()
+void Winlayer::showHeroLvUp()
 {
 	Sprite* lvUpSprite = Sprite::createWithSpriteFrameName("ui/herolvuptext.png");
 	lvUpSprite->setPosition(Vec2(360, 400));

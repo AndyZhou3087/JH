@@ -411,6 +411,37 @@ PackageData* Hero::getMeHas(std::string strid)
 	return NULL;
 }
 
+int Hero::getGfCountByLv(int lv)
+{
+	int count = 0;
+	//装备栏是否有
+	for (int i = H_WG; i <= H_NG; i++)
+	{
+		if (getAtrByType((HeroAtrType)i)->count > 0 && getAtrByType((HeroAtrType)i)->lv >= lv-1)
+		{
+			count++;
+		}
+	}
+	//背包中是否有
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		if ((MyPackage::vec_packages[i].type == W_GONG || MyPackage::vec_packages[i].type == N_GONG) && MyPackage::vec_packages[i].lv >= lv-1)
+			count++;
+	}
+	//仓库中是否有
+	for (int i = N_GONG; i <= W_GONG; i++)
+	{
+		int size = StorageRoom::map_storageData[i].size();
+		for (int j = 0; j < size; j++)
+		{
+			PackageData sdata = StorageRoom::map_storageData[i][j];
+			if (sdata.lv >= lv - 1)
+				count++;
+		}
+	}
+	return count;
+}
+
 void Hero::checkMaxVaule(float dt)
 {
 	float mlife = 1.0f;

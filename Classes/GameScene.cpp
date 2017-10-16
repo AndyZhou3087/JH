@@ -97,6 +97,8 @@ bool GameScene::init()
 	GlobalData::loadNpcMasterJsonData();
 	GlobalData::loadFriendly();
 
+	GlobalData::getAchiveData();
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -503,7 +505,6 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
-	GlobalData::continueLoginDays = 3;
 	if (isAnewGetData)
 	{
 		isAnewGetData = false;

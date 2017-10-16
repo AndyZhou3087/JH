@@ -13,7 +13,7 @@ LoginRewardLayer::LoginRewardLayer()
 
 LoginRewardLayer::~LoginRewardLayer()
 {
-
+	GlobalData::g_gameStatus = GAMESTART;
 }
 
 bool LoginRewardLayer::init()
@@ -46,8 +46,8 @@ bool LoginRewardLayer::init()
 
 		cocos2d::ui::Text* statutext = (cocos2d::ui::Text*)getimg->getChildByName("statutext");
 
-		cocos2d::ui::ImageView* rwdboximg = (cocos2d::ui::ImageView*)item->getChildByName("rwdboximg");
-		cocos2d::ui::ImageView* rwdimg = (cocos2d::ui::ImageView*)item->getChildByName("rwdimg");
+		//cocos2d::ui::ImageView* rwdboximg = (cocos2d::ui::ImageView*)item->getChildByName("rwdboximg");
+		//cocos2d::ui::ImageView* rwdimg = (cocos2d::ui::ImageView*)item->getChildByName("rwdimg");
 
 		cocos2d::ui::Text* name = (cocos2d::ui::Text*)item->getChildByName("name");
 
@@ -73,11 +73,15 @@ bool LoginRewardLayer::init()
 		{
 			str = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[resid].qu);
 		}
-		rwdboximg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
+
+		Sprite * rwdboximg = Sprite::createWithSpriteFrameName(str);
+		rwdboximg->setPosition(Vec2(72, 130));
+		item->addChild(rwdboximg);
 
 		str = StringUtils::format("ui/%s.png", resid.c_str());
-		rwdimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::PLIST);
-		
+		Sprite * rwdimg = Sprite::createWithSpriteFrameName(str);
+		rwdimg->setPosition(Vec2(72, 130));
+		item->addChild(rwdimg);
 
 		if (i < logindays)
 		{
@@ -85,10 +89,8 @@ bool LoginRewardLayer::init()
 			getimg->loadTexture("ui/disnpcbtn1.png", cocos2d::ui::Widget::TextureResType::PLIST);
 			getimg->setEnabled(false);
 			statutext->setString(CommonFuncs::gbk2utf("已领取"));
-			cocos2d::ui::Scale9Sprite* _9sprite = (cocos2d::ui::Scale9Sprite*)rwdboximg->getVirtualRenderer();
-			CommonFuncs::changeGray(_9sprite->getSprite());
-			_9sprite = (cocos2d::ui::Scale9Sprite*)rwdimg->getVirtualRenderer();
-			CommonFuncs::changeGray(_9sprite->getSprite());
+			CommonFuncs::changeGray(rwdboximg);
+			CommonFuncs::changeGray(rwdimg);
 		}
 		else if (i == logindays)
 		{
@@ -105,6 +107,7 @@ bool LoginRewardLayer::init()
 		}
 	}
 
+	GlobalData::g_gameStatus = GAMEPAUSE;
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -137,7 +140,8 @@ void LoginRewardLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		cocos2d::ui::Button* getbtn = (cocos2d::ui::Button*)pSender;
+		getbtn->setEnabled(false);
 		std::string resid = LOGINREWARDS[GlobalData::continueLoginDays - 1];
 		int res = atoi(resid.c_str());
 		int count = 1;

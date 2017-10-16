@@ -171,6 +171,7 @@ void Nature::updateData(float dt)
 
 		m_pastdays++;
 
+		GlobalData::doAchive(A_11, m_pastdays);
 		GlobalData::setMD5LiveDays(md5(m_pastdays));
 		m_time -= 1440.0f;
 		changeWeatherCount = 0;

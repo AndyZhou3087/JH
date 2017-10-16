@@ -170,6 +170,7 @@
           <Image Name="a018.png" />
           <Image Name="a019.png" />
           <Image Name="a020.png" />
+          <Image Name="achivetitle.png" />
           <Image Name="addatkicon.png" />
           <Image Name="adddficon.png" />
           <Image Name="addlifeicon.png" />
@@ -282,6 +283,7 @@
           <Image Name="m10-4.png" />
           <Image Name="m10-5.png" />
           <Image Name="m1-1.png" />
+          <Image Name="m1-10.png" />
           <Image Name="m11-1.png" />
           <Image Name="m11-2.png" />
           <Image Name="m11-3.png" />
@@ -653,6 +655,8 @@
           <Image Name="x030.png" />
           <Image Name="xline.png" />
         </Folder>
+        <Project Name="achiveLayer.csd" Type="Layer" />
+        <Project Name="achiveNode.csd" Type="Node" />
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="activityLayer.csd" Type="Layer" />
