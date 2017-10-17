@@ -117,7 +117,7 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 				heroStateUILayer->showNewerGuide(12);
 			else
 			{
-				if (m_lastSelectedData != NULL && ((m_lastSelectedData->type == N_GONG && g_hero->getAtrByType(H_NG)->count >0) || (m_lastSelectedData->type == W_GONG && g_hero->getAtrByType(H_WG)->count >0)))
+				if (mixnode != NULL && m_lastSelectedData != NULL && ((m_lastSelectedData->type == N_GONG && g_hero->getAtrByType(H_NG)->count >0) || (m_lastSelectedData->type == W_GONG && g_hero->getAtrByType(H_WG)->count >0)))
 					mixnode->showTalkGuide();
 			}
 		}
