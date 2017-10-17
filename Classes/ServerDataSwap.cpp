@@ -1753,6 +1753,7 @@ void ServerDataSwap::httpLeaveFactionCB(std::string retdata, int code, std::stri
 
 void ServerDataSwap::httpContributionFactionCB(std::string retdata, int code, std::string tag)
 {
+	GlobalData::factionExp = 0;
 	int ret = code;
 	if (m_pDelegateProtocol != NULL)
 	{
@@ -1768,7 +1769,14 @@ void ServerDataSwap::httpContributionFactionCB(std::string retdata, int code, st
 				}
 			}
 			if (ret == 0)
+			{
+				if (doc.HasMember("exp"))
+				{
+					rapidjson::Value& v = doc["exp"];
+					GlobalData::factionExp = v.GetInt();
+				}
 				m_pDelegateProtocol->onSuccess();
+			}
 			else
 				m_pDelegateProtocol->onErr(-ret);
 		}

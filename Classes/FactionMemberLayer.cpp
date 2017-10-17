@@ -201,6 +201,7 @@ void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widg
 			f_action = F_CONTRIB;
 			WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+
 			ServerDataSwap::init(this)->contributionFaction(m_fldata->id, contribution, g_hero->getHeadID());
 
 		}
@@ -226,17 +227,14 @@ void FactionMemberLayer::delayShowData(float dt)
 		innerheight = contentheight;
 	srollView->setInnerContainerSize(Size(srollView->getContentSize().width, innerheight));
 
-	int contribution = 0;
-
 	for (unsigned int i = 0; i < GlobalData::vec_factionMemberData.size(); i++)
 	{
 		FactionMemberItem* node = FactionMemberItem::create(&GlobalData::vec_factionMemberData[i]);
 		node->setPosition(Vec2(srollView->getContentSize().width/2, innerheight - itemheight / 2 - i * itemheight));
 		std::string nodestr = StringUtils::format("fmitem%d", i);
 		srollView->addChild(node,0, nodestr);
-		contribution += GlobalData::vec_factionMemberData[i].contribution;
 	}
-	m_fldata->exp = contribution / 10;
+
 	updateUi();
 
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
@@ -291,6 +289,9 @@ void FactionMemberLayer::onSuccess()
 	{
 		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 		f_action = F_NONE;
+
+		if (GlobalData::factionExp > 0)
+			m_fldata->exp = GlobalData::factionExp;
 
 		getFactionMemberData();
 		if (usetypecontribution == 0)

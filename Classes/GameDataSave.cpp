@@ -519,12 +519,12 @@ void GameDataSave::setIsBuyTimeGift(bool val)
 
 void GameDataSave::setUseGold(int val)
 {
-	saveIntDataByKey("usegold", val);
+	saveIntDataByKey("costgold", val);
 }
 
 int GameDataSave::getUseGold()
 {
-	return loadIntDataByKey("usegold", 0);
+	return loadIntDataByKey("costgold", 0);
 }
 
 std::string GameDataSave::getFriendly()

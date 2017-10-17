@@ -77,8 +77,8 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/buildtagbtn1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishbg" ActionTag="1883340414" Tag="119" IconVisible="False" LeftMargin="-315.0000" RightMargin="-35.0000" TopMargin="31.0000" BottomMargin="-49.0000" ctype="SpriteObjectData">
-            <Size X="350.0000" Y="18.0000" />
+          <AbstractNodeData Name="finishbg" ActionTag="1883340414" Tag="119" IconVisible="False" LeftMargin="-314.0000" RightMargin="-34.0000" TopMargin="28.0000" BottomMargin="-52.0000" ctype="SpriteObjectData">
+            <Size X="348.0000" Y="24.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-140.0000" Y="-40.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -88,8 +88,8 @@
             <FileData Type="MarkedSubImage" Path="ui/achivebarbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishbar" ActionTag="-1700739977" Tag="118" IconVisible="False" LeftMargin="-315.0000" RightMargin="-35.0000" TopMargin="31.0000" BottomMargin="-49.0000" ctype="LoadingBarObjectData">
-            <Size X="350.0000" Y="18.0000" />
+          <AbstractNodeData Name="finishbar" ActionTag="-1700739977" Tag="118" IconVisible="False" LeftMargin="-314.0000" RightMargin="-34.0000" TopMargin="28.0000" BottomMargin="-52.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="348.0000" Y="24.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-140.0000" Y="-40.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -208,10 +208,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishtext" ActionTag="-208332180" Tag="168" IconVisible="False" LeftMargin="-161.0000" RightMargin="119.0000" TopMargin="31.5000" BottomMargin="-48.5000" FontSize="16" LabelText="0/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="42.0000" Y="17.0000" />
+          <AbstractNodeData Name="finishtext" ActionTag="-208332180" Tag="168" IconVisible="False" LeftMargin="-167.5000" RightMargin="112.5000" TopMargin="30.0000" BottomMargin="-52.0000" FontSize="21" LabelText="0/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="55.0000" Y="22.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-140.0000" Y="-40.0000" />
+            <Position X="-140.0000" Y="-41.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

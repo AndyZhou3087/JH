@@ -60,6 +60,8 @@ std::vector<FactionListData> GlobalData::vec_factionListData;
 
 std::vector<FactionMemberData> GlobalData::vec_factionMemberData;
 
+int GlobalData::factionExp = 0;
+
 std::vector<AchiveData> GlobalData::vec_achiveData;
 
 bool GlobalData::unlockhero[4] = {true, false, false, false};
@@ -1932,20 +1934,21 @@ void GlobalData::getAchiveData()
 void GlobalData::saveAchiveData()
 {
 	std::string str;
+	std::vector<AchiveData> saveAchives = GlobalData::vec_achiveData;
 
-	sortAchiveById();
-	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	sort(saveAchives.begin(), saveAchives.end(), sortAchiveById_CallBack);
+
+	for (unsigned int i = 0; i < saveAchives.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%d;", GlobalData::vec_achiveData[i].finish);
+		int finish = saveAchives[i].finish;
+		int maxcount = GlobalData::getAchiveFinishCount(saveAchives[i]);
+		if (finish > maxcount)
+			finish = maxcount;
+		std::string onestr = StringUtils::format("%d;", finish);
 		str.append(onestr);
 	}
 
 	GameDataSave::getInstance()->setAchiveData(str.substr(0, str.length() - 1));
-}
-
-void GlobalData::sortAchiveById()
-{
-	sort(GlobalData::vec_achiveData.begin(), GlobalData::vec_achiveData.end(), sortAchiveById_CallBack);
 }
 
 bool GlobalData::sortAchiveById_CallBack(AchiveData a, AchiveData b)
@@ -1964,9 +1967,6 @@ void GlobalData::doAchive(int atype, int count)
 		if (GlobalData::vec_achiveData[i].type == atype && GlobalData::vec_achiveData[i].finish != -1)
 		{
 			issave = true;
-			int needcount = GlobalData::getAchiveFinishCount(GlobalData::vec_achiveData[i]);
-			if (count > needcount)
-				count = needcount;
 			GlobalData::vec_achiveData[i].finish = count;
 		}
 	}
@@ -1977,6 +1977,7 @@ void GlobalData::doAchive(int atype, int count)
 int GlobalData::getAchiveFinishCount(AchiveData adata)
 {
 	int needcount = 1;
+
 	if (adata.type == A_0 || adata.type == A_1 || adata.type == A_2 || adata.type == A_3 || adata.type == A_5 || adata.type == A_11)
 	{
 		needcount = atoi(adata.vec_para[0].c_str());

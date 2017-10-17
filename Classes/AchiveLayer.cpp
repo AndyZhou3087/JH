@@ -218,9 +218,11 @@ bool AchiveItem::init(AchiveData *data)
 	}
 
 	needcount = GlobalData::getAchiveFinishCount(*data);
-
-	finishstr = StringUtils::format("%d/%d", data->finish, needcount);
-	m_bar->setPercent(data->finish*100.0f / needcount);
+	int finishcount = data->finish;
+	if (finishcount > needcount)
+		finishcount = needcount;
+	finishstr = StringUtils::format("%d/%d", finishcount, needcount);
+	m_bar->setPercent(finishcount*100.0f / needcount);
 	m_finishtext->setString(finishstr);
 	desc->setString(descstr);
 	if (data->finish == -1)

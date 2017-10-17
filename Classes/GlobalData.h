@@ -947,11 +947,6 @@ public:
 	static void saveAchiveData();
 
 	/****************************
-	成就按ID排序保存
-	*****************************/
-	static void sortAchiveById();
-
-	/****************************
 	成就ID排序回调
 	*****************************/
 	static bool sortAchiveById_CallBack(AchiveData a, AchiveData b);
@@ -1020,6 +1015,7 @@ public:
 	static std::vector<FactionListData> vec_factionListData;
 
 	static std::vector<FactionMemberData> vec_factionMemberData;
+	static int factionExp;
 	
 	static std::vector<AchiveData> vec_achiveData;
 
