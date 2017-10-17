@@ -86,6 +86,8 @@ void AchiveLayer::delayShowData(float dt)
 		innerheight = contentheight;
 	srollView->setInnerContainerSize(Size(srollView->getContentSize().width, innerheight));
 
+	sort(GlobalData::vec_achiveData.begin(), GlobalData::vec_achiveData.end(), larger_callback);
+
 	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
 	{
 		AchiveItem* node = AchiveItem::create(&GlobalData::vec_achiveData[i]);
@@ -93,6 +95,18 @@ void AchiveLayer::delayShowData(float dt)
 		srollView->addChild(node);
 	}
 	m_loadlbl->setVisible(false);
+}
+
+bool AchiveLayer::larger_callback(AchiveData a, AchiveData b)
+{
+	int needcountA = GlobalData::getAchiveFinishCount(a);
+	int needcountB = GlobalData::getAchiveFinishCount(b);
+	float percentA = a.finish*100.0f / needcountA;
+	float percentB = b.finish*100.0f / needcountB;
+	if (percentA > percentB)
+		return true;
+	else
+		return false;
 }
 
 
@@ -169,12 +183,10 @@ bool AchiveItem::init(AchiveData *data)
 	if (data->type == A_0 || data->type == A_1 || data->type == A_2 || data->type == A_3 || data->type == A_5 || data->type == A_11)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), data->vec_para[0].c_str());
-		needcount = atoi(data->vec_para[0].c_str());
 	}
 	else if (data->type == A_4)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), GlobalData::map_npcs[data->vec_para[0]].name);
-		needcount = 1;
 	}
 	else if (data->type == A_6)
 	{
@@ -186,30 +198,27 @@ bool AchiveItem::init(AchiveData *data)
 				break;
 			}
 		}
-		needcount = 1;
 	}
 	else if (data->type == A_7 || data->type == A_9)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), GlobalData::map_allResource[data->vec_para[0]].cname.c_str(), data->vec_para[1].c_str());
-		needcount = atoi(data->vec_para[1].c_str());
-
 	}
 	else if (data->type == A_8)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), GlobalData::map_MixGfData[data->vec_para[0]].name.c_str());
-		needcount = 1;
 	}
 
 	else if (data->type == A_10)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), data->vec_para[0].c_str(), data->vec_para[1].c_str());
-		needcount = atoi(data->vec_para[1].c_str());
 	}
 	else if (data->type == A_12)
 	{
 		descstr = StringUtils::format(data->desc.c_str(), GlobalData::map_npcs[data->vec_para[0]].name, data->vec_para[1].c_str());
-		needcount = atoi(data->vec_para[1].c_str());
 	}
+
+	needcount = GlobalData::getAchiveFinishCount(*data);
+
 	finishstr = StringUtils::format("%d/%d", data->finish, needcount);
 	m_bar->setPercent(data->finish*100.0f / needcount);
 	m_finishtext->setString(finishstr);

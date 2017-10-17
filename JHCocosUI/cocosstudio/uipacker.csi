@@ -562,6 +562,8 @@
       <FilePathData Path="ui/loginrtitle.png" />
       <FilePathData Path="ui/achivetitle.png" />
       <FilePathData Path="ui/m1-10.png" />
+      <FilePathData Path="ui/achivebar.png" />
+      <FilePathData Path="ui/achivebarbg.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

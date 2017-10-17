@@ -77,26 +77,26 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/buildtagbtn1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishbg" ActionTag="1883340414" Tag="119" IconVisible="False" LeftMargin="-315.8781" RightMargin="83.8781" TopMargin="32.1025" BottomMargin="-50.1025" ctype="SpriteObjectData">
-            <Size X="232.0000" Y="18.0000" />
+          <AbstractNodeData Name="finishbg" ActionTag="1883340414" Tag="119" IconVisible="False" LeftMargin="-315.0000" RightMargin="-35.0000" TopMargin="31.0000" BottomMargin="-49.0000" ctype="SpriteObjectData">
+            <Size X="350.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-199.8781" Y="-41.1025" />
+            <Position X="-140.0000" Y="-40.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="MarkedSubImage" Path="ui/fighthpbg.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/achivebarbg.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishbar" ActionTag="-1700739977" Tag="118" IconVisible="False" LeftMargin="-315.8809" RightMargin="83.8809" TopMargin="32.1025" BottomMargin="-50.1025" ctype="LoadingBarObjectData">
-            <Size X="232.0000" Y="18.0000" />
+          <AbstractNodeData Name="finishbar" ActionTag="-1700739977" Tag="118" IconVisible="False" LeftMargin="-315.0000" RightMargin="-35.0000" TopMargin="31.0000" BottomMargin="-49.0000" ctype="LoadingBarObjectData">
+            <Size X="350.0000" Y="18.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-199.8809" Y="-41.1025" />
+            <Position X="-140.0000" Y="-40.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <ImageFileData Type="MarkedSubImage" Path="ui/fighthpbar.png" Plist="uipacker.plist" />
+            <ImageFileData Type="MarkedSubImage" Path="ui/achivebar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="rwd_1" ActionTag="-710991802" VisibleForFrame="False" Tag="157" IconVisible="False" LeftMargin="-286.8852" RightMargin="180.8852" TopMargin="-50.0475" BottomMargin="-55.9525" LeftEage="34" RightEage="34" TopEage="34" BottomEage="34" Scale9OriginX="34" Scale9OriginY="34" Scale9Width="38" Scale9Height="38" ctype="ImageViewObjectData">
             <Size X="106.0000" Y="106.0000" />
@@ -208,10 +208,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="finishtext" ActionTag="-208332180" Tag="168" IconVisible="False" LeftMargin="-221.0001" RightMargin="179.0001" TopMargin="33.3013" BottomMargin="-50.3013" FontSize="16" LabelText="0/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="finishtext" ActionTag="-208332180" Tag="168" IconVisible="False" LeftMargin="-161.0000" RightMargin="119.0000" TopMargin="31.5000" BottomMargin="-48.5000" FontSize="16" LabelText="0/100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="42.0000" Y="17.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-200.0001" Y="-41.8013" />
+            <Position X="-140.0000" Y="-40.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

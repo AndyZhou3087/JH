@@ -1,4 +1,4 @@
-#include "ServerDataSwap.h"
+﻿#include "ServerDataSwap.h"
 #include "GlobalData.h"
 #include "HttpUtil.h"
 #include "json.h"

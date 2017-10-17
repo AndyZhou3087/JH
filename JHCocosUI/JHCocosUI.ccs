@@ -170,6 +170,8 @@
           <Image Name="a018.png" />
           <Image Name="a019.png" />
           <Image Name="a020.png" />
+          <Image Name="achivebar.png" />
+          <Image Name="achivebarbg.png" />
           <Image Name="achivetitle.png" />
           <Image Name="addatkicon.png" />
           <Image Name="adddficon.png" />

@@ -947,9 +947,24 @@ public:
 	static void saveAchiveData();
 
 	/****************************
+	成就按ID排序保存
+	*****************************/
+	static void sortAchiveById();
+
+	/****************************
+	成就ID排序回调
+	*****************************/
+	static bool sortAchiveById_CallBack(AchiveData a, AchiveData b);
+
+	/****************************
 	成就信息
 	*****************************/
 	static void doAchive(int atype, int count);
+
+	/****************************
+	完成成就需要的次数
+	*****************************/
+	static int getAchiveFinishCount(AchiveData adata);
 
     static void setNoAds(bool val);
     static bool getNoAds();

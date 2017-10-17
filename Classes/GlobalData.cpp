@@ -1932,6 +1932,8 @@ void GlobalData::getAchiveData()
 void GlobalData::saveAchiveData()
 {
 	std::string str;
+
+	sortAchiveById();
 	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
 	{
 		std::string onestr = StringUtils::format("%d;", GlobalData::vec_achiveData[i].finish);
@@ -1939,6 +1941,19 @@ void GlobalData::saveAchiveData()
 	}
 
 	GameDataSave::getInstance()->setAchiveData(str.substr(0, str.length() - 1));
+}
+
+void GlobalData::sortAchiveById()
+{
+	sort(GlobalData::vec_achiveData.begin(), GlobalData::vec_achiveData.end(), sortAchiveById_CallBack);
+}
+
+bool GlobalData::sortAchiveById_CallBack(AchiveData a, AchiveData b)
+{
+	if (atoi(a.id.c_str()) > atoi(b.id.c_str()))
+		return false;
+	else
+		return true;
 }
 
 void GlobalData::doAchive(int atype, int count)
@@ -1949,12 +1964,40 @@ void GlobalData::doAchive(int atype, int count)
 		if (GlobalData::vec_achiveData[i].type == atype && GlobalData::vec_achiveData[i].finish != -1)
 		{
 			issave = true;
+			int needcount = GlobalData::getAchiveFinishCount(GlobalData::vec_achiveData[i]);
+			if (count > needcount)
+				count = needcount;
 			GlobalData::vec_achiveData[i].finish = count;
 		}
 	}
 	if (issave)
 		saveAchiveData();
 }
+
+int GlobalData::getAchiveFinishCount(AchiveData adata)
+{
+	int needcount = 1;
+	if (adata.type == A_0 || adata.type == A_1 || adata.type == A_2 || adata.type == A_3 || adata.type == A_5 || adata.type == A_11)
+	{
+		needcount = atoi(adata.vec_para[0].c_str());
+	}
+
+	else if (adata.type == A_7 || adata.type == A_9)
+	{
+		needcount = atoi(adata.vec_para[1].c_str());
+
+	}
+	else if (adata.type == A_10)
+	{
+		needcount = atoi(adata.vec_para[1].c_str());
+	}
+	else if (adata.type == A_12)
+	{
+		needcount = atoi(adata.vec_para[1].c_str());
+	}
+	return needcount;
+}
+
 
 std::string GlobalData::addUidString(std::string val)
 {

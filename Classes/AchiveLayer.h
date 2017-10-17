@@ -19,9 +19,11 @@ private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void delayShowData(float dt);
+	static bool larger_callback(AchiveData a, AchiveData b);
 private:
 	cocos2d::ui::ScrollView* srollView;
 	Label * m_loadlbl;
+
 };
 
 class AchiveItem :public Sprite
@@ -43,5 +45,6 @@ private:
 	cocos2d::ui::ImageView* m_getimg;
 	cocos2d::ui::Text* m_gettext;
 	void finish();
+
 };
 #endif

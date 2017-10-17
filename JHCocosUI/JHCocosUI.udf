@@ -7,26 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="rollDiceLayer.csd" />
-          <FilePathData Path="raffleLayer.csd" />
-          <FilePathData Path="mapLayer.csd" />
-          <FilePathData Path="startLayer.csd" />
-          <FilePathData Path="shopLayer.csd" />
-          <FilePathData Path="loginRewardLayer.csd" />
-          <FilePathData Path="vipShopLayer.csd" />
-          <FilePathData Path="actionNode.csd" />
-          <FilePathData Path="resNode.csd" />
-          <FilePathData Path="achiveNode.csd" />
-          <FilePathData Path="fightLayer.csd" />
-          <FilePathData Path="relationLayer.csd" />
-          <FilePathData Path="achiveLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="loginRewardLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

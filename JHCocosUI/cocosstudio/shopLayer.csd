@@ -6,13 +6,13 @@
       <ObjectData Name="Layer" Tag="102" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="normalboxgb" ActionTag="-2015733362" Tag="123" IconVisible="False" LeftMargin="5.8162" RightMargin="-5.8162" TopMargin="0.0001" BottomMargin="-0.0001" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="582" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="normalboxgb" ActionTag="-2015733362" Tag="123" IconVisible="False" TopMargin="0.0001" BottomMargin="-0.0001" Scale9Enable="True" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="582" ctype="ImageViewObjectData">
             <Size X="720.0000" Y="1280.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="365.8162" Y="639.9999" />
+            <Position X="360.0000" Y="639.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5081" Y="0.5000" />
+            <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="images/selectherobg.jpg" Plist="" />
           </AbstractNodeData>
@@ -40,7 +40,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="448.5043" RightMargin="144.4957" TopMargin="1260.5571" BottomMargin="17.4428" ctype="SpriteObjectData">
+          <AbstractNodeData Name="qqline" ActionTag="1642502145" Tag="181" IconVisible="False" LeftMargin="448.5043" RightMargin="144.4957" TopMargin="1260.5573" BottomMargin="17.4428" ctype="SpriteObjectData">
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="512.0043" Y="18.4428" />
