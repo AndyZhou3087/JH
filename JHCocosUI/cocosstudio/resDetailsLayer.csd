@@ -204,17 +204,85 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skilltext" ActionTag="-239238419" Tag="126" IconVisible="False" LeftMargin="120.0000" RightMargin="120.0000" TopMargin="628.0513" BottomMargin="601.9487" IsCustomSize="True" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="skilltext" ActionTag="-239238419" Tag="126" IconVisible="False" LeftMargin="119.4362" RightMargin="120.5638" TopMargin="628.0514" BottomMargin="601.9486" IsCustomSize="True" FontSize="23" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="480.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="360.0000" Y="626.9487" />
+            <Position X="359.4362" Y="626.9486" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.5000" Y="0.4898" />
+            <PrePosition X="0.4992" Y="0.4898" />
             <PreSize X="0.6667" Y="0.0391" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="selectcountnode" ActionTag="-1605081743" VisibleForFrame="False" Tag="19" IconVisible="True" LeftMargin="345.3146" RightMargin="374.6854" TopMargin="640.1524" BottomMargin="639.8476" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="resselectcountbox" ActionTag="1393675395" Tag="27" IconVisible="False" LeftMargin="-168.0000" RightMargin="54.0000" TopMargin="-26.9999" BottomMargin="-27.0001" ctype="SpriteObjectData">
+                <Size X="114.0000" Y="54.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-111.0000" Y="-0.0001" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="ui/resselectcountbox.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="addone" ActionTag="-2026431043" Tag="24" IconVisible="False" LeftMargin="188.8208" RightMargin="-238.8208" TopMargin="-24.9997" BottomMargin="-25.0003" TouchEnable="True" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="18" Scale9Height="18" ctype="ImageViewObjectData">
+                <Size X="50.0000" Y="50.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="213.8208" Y="-0.0003" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="ui/resadd1.png" Plist="uipacker.plist" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="minusone" ActionTag="610237585" Tag="25" IconVisible="False" LeftMargin="-228.3952" RightMargin="178.3952" TopMargin="-25.0000" BottomMargin="-25.0000" TouchEnable="True" LeftEage="16" RightEage="16" TopEage="16" BottomEage="16" Scale9OriginX="16" Scale9OriginY="16" Scale9Width="18" Scale9Height="18" ctype="ImageViewObjectData">
+                <Size X="50.0000" Y="50.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-203.3952" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="ui/resminus1.png" Plist="uipacker.plist" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="slider" ActionTag="-1002428070" Tag="26" IconVisible="False" LeftMargin="-53.9999" RightMargin="-176.0001" TopMargin="-4.9999" BottomMargin="-7.0001" TouchEnable="True" ctype="SliderObjectData">
+                <Size X="230.0000" Y="12.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="61.0001" Y="-1.0001" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <BackGroundData Type="MarkedSubImage" Path="ui/ressliderbg.png" Plist="uipacker.plist" />
+                <ProgressBarData Type="MarkedSubImage" Path="ui/ressliderinner.png" Plist="uipacker.plist" />
+                <BallNormalData Type="MarkedSubImage" Path="ui/rescontrolslider.png" Plist="uipacker.plist" />
+                <BallPressedData Type="MarkedSubImage" Path="ui/rescontrolslider.png" Plist="uipacker.plist" />
+                <BallDisabledData Type="MarkedSubImage" Path="ui/rescontrolslider.png" Plist="uipacker.plist" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="rescountlbl" ActionTag="1993746613" Tag="28" IconVisible="False" LeftMargin="-119.2757" RightMargin="102.2757" TopMargin="-10.6045" BottomMargin="-15.3955" FontSize="25" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="17.0000" Y="26.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="-110.7757" Y="-2.3955" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="345.3146" Y="639.8476" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.4796" Y="0.4999" />
+            <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

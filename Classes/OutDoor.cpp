@@ -8,11 +8,14 @@
 #include "SoundManager.h"
 #include "ActivitScene.h"
 #include "MyMenu.h"
+#include "ResDetailsLayer.h"
 
 OutDoor::OutDoor()
 {
 	lastSrollViewHeight = -1;
 	lastrows = 0;
+	m_isLongPress = false;
+	m_longTouchNode = NULL;
 }
 
 
@@ -206,33 +209,24 @@ void OutDoor::updataStorageUI()
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
 		}
 
-		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
-		//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
-		//scrollview->addChild(box);
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(OutDoor::onStorageItem, this));
+		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addTouchEventListener(CC_CALLBACK_2(OutDoor::onStorageItem, this));
+		boxItem->setTouchEnabled(true);
 		boxItem->setUserData(allStorageData[i]);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
-		MyMenu* menu = MyMenu::create();
-		menu->addChild(boxItem);
-		menu->setTouchlimit(scrollview);
-		menu->setPosition(Vec2(0, 0));
+
 		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->addChild(menu, 0, name);
+		scrollview->addChild(boxItem, 0, name);
 
 		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
+		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
+		boxItem->addChild(res);
 
 		str = StringUtils::format("%d", allStorageData[i]->count);
 		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
+		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 25, 25));
+		boxItem->addChild(reslbl);
 
 		std::string mymixgf = GlobalData::getMixGF();
 		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
@@ -241,23 +235,57 @@ void OutDoor::updataStorageUI()
 			if (allStorageData[i]->strid.compare(mdata.mastergf) == 0)
 			{
 				Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
-				mixtag->setPosition(Vec2(box->getContentSize().width - 15, box->getContentSize().height - 15));
-				box->addChild(mixtag);
+				mixtag->setPosition(Vec2(boxItem->getContentSize().width - 15, boxItem->getContentSize().height - 15));
+				boxItem->addChild(mixtag);
 			}
 		}
 	}
 }
-void OutDoor::onStorageItem(cocos2d::Ref* pSender)
+
+void OutDoor::longTouchUpdate(float delay){
+	m_isLongPress = true;
+	if (m_longTouchNode != NULL){
+		std::string name = m_longTouchNode->getName();
+		//if (name.find("resitem") != std::string::npos)
+		{
+			unschedule(schedule_selector(OutDoor::longTouchUpdate));
+			ResDetailsLayer::whereClick = 2;
+			PackageData* data = (PackageData*)m_longTouchNode->getUserData();
+			this->addChild(ResDetailsLayer::create(data));
+		}
+	}
+}
+
+void OutDoor::onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
-	PackageData* data = (PackageData*)node->getUserData();
+	if (type == ui::Widget::TouchEventType::BEGAN)
+	{
+		m_longTouchNode = node;
+		schedule(schedule_selector(OutDoor::longTouchUpdate), 1.0f);
+
+	}
+
+	else if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		unschedule(schedule_selector(OutDoor::longTouchUpdate));
+		if (!m_isLongPress)
+		{
+			takeout((PackageData*)node->getUserData());
+		}
+	}
+}
+
+void OutDoor::takeout(PackageData* pdata)
+{
+	PackageData* data = pdata;
 
 	int count = data->count - 1;
 	if (count <= 0)
 	{
 		std::vector<PackageData>::iterator it;
-		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end();++it)
+		for (it = StorageRoom::map_storageData[data->type].begin(); it != StorageRoom::map_storageData[data->type].end(); ++it)
 		{
 			if (it->strid.compare(data->strid) == 0 && it->goodvalue == data->goodvalue)
 			{

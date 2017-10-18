@@ -10,11 +10,12 @@
 #include "Const.h"
 #include "GameDataSave.h"
 #include "ShopLayer.h"
+#include "OutDoor.h"
 
 #define WINESTRID "23"
 #define GRASSRID "5"
 
-int ResDetailsLayer::whereClick = 0;//0--仓库，1其他
+int ResDetailsLayer::whereClick = 0;//0--仓库，1其他，2长按资源按钮
 
 ResDetailsLayer::ResDetailsLayer()
 {
@@ -114,7 +115,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	cocos2d::ui::Text* crittext = (cocos2d::ui::Text*)m_csbnode->getChildByName("crittext");
 
-	cocos2d::ui::Text* valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
+	valuelbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("valuelbl");
 	cocos2d::ui::Text* slvatk = (cocos2d::ui::Text*)m_csbnode->getChildByName("slvatk");
 
 	cocos2d::ui::Text* skilltext = (cocos2d::ui::Text*)m_csbnode->getChildByName("skilltext");
@@ -130,6 +131,17 @@ bool ResDetailsLayer::init(PackageData* pdata)
 				count += MyPackage::vec_packages[i].count;
 				break;
 			}
+		}
+	}
+	else if (whereClick == 2)
+	{
+		if (atoi(pdata->strid.c_str()) > 0)
+		{
+			Node* selectCountNode = (Node*)m_csbnode->getChildByName("selectcountnode");
+			selectCountNode->setVisible(true);
+			selectCountlbl = (cocos2d::ui::Text*)selectCountNode->getChildByName("rescountlbl");
+			slider = (cocos2d::ui::Slider*)selectCountNode->getChildByName("slider");
+			slider->addEventListener(CC_CALLBACK_2(ResDetailsLayer::sliderEvent, this));
 		}
 	}
 
@@ -448,6 +460,18 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			}
 
 		}
+		else if (whereClick == 2)
+		{
+			int usecount = atoi(selectCountlbl->getString().c_str());
+			for (int i = 0; i < usecount; i++)
+			{
+				OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
+				if (Olayer != NULL)
+				{
+					Olayer->takeout(m_packageData);
+				}
+			}
+		}
 		removSelf();
 	}
 }
@@ -626,6 +650,21 @@ void ResDetailsLayer::updataLeftTime(float dt)
 	else
 	{
 		lefttimelbl->setVisible(false);
+	}
+}
+
+void ResDetailsLayer::sliderEvent(Ref * pSender, cocos2d::ui::Slider::EventType type)
+{
+	if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED)            //进度条的值发生变化
+	{
+		cocos2d::ui::Slider* slider = (cocos2d::ui::Slider*)pSender;
+		int percent = slider->getPercent();
+		int max = MyPackage::canTakeCount(m_packageData->strid);
+		int selectcount = max * percent/100;
+		std::string str = StringUtils::format("%d", selectcount);
+		selectCountlbl->setString(str);
+		str = StringUtils::format("库存%d", m_packageData->count - selectcount);
+		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 	}
 }
 

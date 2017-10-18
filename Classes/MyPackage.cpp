@@ -150,6 +150,22 @@ bool MyPackage::isFull(PackageData pdata)
 	return ret;
 }
 
+int MyPackage::canTakeCount(std::string strid)
+{
+	int tcount = (MyPackage::getMax() - MyPackage::getSize()) * 10;
+
+	for (int i = 0; i < MyPackage::getSize(); i++)
+	{
+		if (vec_packages[i].strid.compare(strid) == 0)
+		{
+			int leftcount = 10 - vec_packages[i].count;
+			tcount += leftcount;
+		}
+	}
+	return tcount;
+
+}
+
 void MyPackage::save()
 {
 	std::string str;

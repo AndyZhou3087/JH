@@ -489,7 +489,13 @@
           <Image Name="relationtitlebox.png" />
           <Image Name="repairokquan.png" />
           <Image Name="repairoktext.png" />
+          <Image Name="resadd1.png" />
           <Image Name="resbox.png" />
+          <Image Name="rescontrolslider.png" />
+          <Image Name="resminus1.png" />
+          <Image Name="resselectcountbox.png" />
+          <Image Name="ressliderbg.png" />
+          <Image Name="ressliderinner.png" />
           <Image Name="saveitembg.png" />
           <Image Name="sbed.png" />
           <Image Name="sbookshelf.png" />

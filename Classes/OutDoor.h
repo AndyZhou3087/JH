@@ -21,20 +21,25 @@ public:
 	void updataStorageUI();
 	void updata();
 	void showNewerGuide(int step);
+	void takeout(PackageData* pdata);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onOut(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	Node* m_csbnode;
 	cocos2d::ui::ScrollView * scrollview;
 
-	void onStorageItem(cocos2d::Ref* pSender);
+	void onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onPackageItem(cocos2d::Ref* pSender);
+	void longTouchUpdate(float dt);
+
 private:
 	std::vector<PackageData*> allStorageData;
 	HeroProperNode* m_heroproper;
 	cocos2d::ui::Button* m_outbtn;
 	int lastSrollViewHeight;
 	int lastrows;
+	bool m_isLongPress;
+	Node* m_longTouchNode;
 };
 #endif
 

@@ -31,9 +31,13 @@ private:
 	void updateUI();
 private:
 	PackageData* m_packageData;
+	cocos2d::ui::Text* valuelbl;
 	cocos2d::ui::Text* uselbl;
 	cocos2d::ui::Text* lefttimelbl;
+	cocos2d::ui::Text* selectCountlbl;
+	cocos2d::ui::Slider* slider;
 	cocos2d::ui::Button* m_okbtn;
+	void sliderEvent(Ref * pSender, cocos2d::ui::Slider::EventType type);
 	Node* m_csbnode;
 	int m_expendtime;
 };

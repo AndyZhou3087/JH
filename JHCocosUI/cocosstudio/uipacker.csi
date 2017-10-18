@@ -564,6 +564,12 @@
       <FilePathData Path="ui/m1-10.png" />
       <FilePathData Path="ui/achivebar.png" />
       <FilePathData Path="ui/achivebarbg.png" />
+      <FilePathData Path="ui/resadd1.png" />
+      <FilePathData Path="ui/rescontrolslider.png" />
+      <FilePathData Path="ui/resminus1.png" />
+      <FilePathData Path="ui/resselectcountbox.png" />
+      <FilePathData Path="ui/ressliderbg.png" />
+      <FilePathData Path="ui/ressliderinner.png" />
     </ImageFiles>
     <MaxSize Width="2048" Height="4096" />
   </Content>

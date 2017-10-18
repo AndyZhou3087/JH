@@ -23,6 +23,10 @@ bool LoginRewardLayer::init()
 
 	Node* csbnode = CSLoader::createNode("loginRewardLayer.csb");
 	this->addChild(csbnode);
+
+	cocos2d::ui::Widget *closebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("closebtn");
+	closebtn->addTouchEventListener(CC_CALLBACK_2(LoginRewardLayer::onClose, this));
+
 	int logindays = GlobalData::continueLoginDays;
 
 
@@ -76,12 +80,12 @@ bool LoginRewardLayer::init()
 
 		Sprite * rwdboximg = Sprite::createWithSpriteFrameName(str);
 		rwdboximg->setPosition(Vec2(72, 130));
-		item->addChild(rwdboximg);
+		item->addChild(rwdboximg, 0, "rwdboximg");
 
 		str = StringUtils::format("ui/%s.png", resid.c_str());
 		Sprite * rwdimg = Sprite::createWithSpriteFrameName(str);
 		rwdimg->setPosition(Vec2(72, 130));
-		item->addChild(rwdimg);
+		item->addChild(rwdimg, 0, "rwdimg");
 
 		if (i < logindays)
 		{
@@ -140,8 +144,17 @@ void LoginRewardLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		cocos2d::ui::Button* getbtn = (cocos2d::ui::Button*)pSender;
-		getbtn->setEnabled(false);
+		cocos2d::ui::ImageView* getimg = (cocos2d::ui::ImageView*)pSender;
+
+		cocos2d::ui::ImageView* item = (cocos2d::ui::ImageView*)getimg->getParent();
+		item->loadTexture("ui/loginritem0.png", cocos2d::ui::Widget::TextureResType::PLIST);
+		getimg->loadTexture("ui/disnpcbtn1.png", cocos2d::ui::Widget::TextureResType::PLIST);
+		getimg->setEnabled(false);
+		cocos2d::ui::Text* statutext = (cocos2d::ui::Text*)getimg->getChildByName("statutext");
+		statutext->setString(CommonFuncs::gbk2utf("已领取"));
+		CommonFuncs::changeGray(item->getChildByName("rwdboximg"));
+		CommonFuncs::changeGray(item->getChildByName("rwdimg"));
+
 		std::string resid = LOGINREWARDS[GlobalData::continueLoginDays - 1];
 		int res = atoi(resid.c_str());
 		int count = 1;
@@ -167,6 +180,15 @@ void LoginRewardLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 		}
 
 		GlobalData::continueLoginDays = 0;
+
+	}
+}
+
+void LoginRewardLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
 		this->removeFromParentAndCleanup(true);
 	}
 }
