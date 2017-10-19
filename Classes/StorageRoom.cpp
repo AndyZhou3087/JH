@@ -131,6 +131,11 @@ void StorageRoom::add(PackageData data)
 	if (i == typesize)
 		map_storageData[data.type].push_back(data);
 	StorageRoom::save();
+	
+	if (data.strid.compare("80") == 0)
+	{
+		GlobalData::doAchive(A_3, StorageRoom::getCountById("80"));
+	}
 }
 
 void StorageRoom::use(std::string strid, int count)

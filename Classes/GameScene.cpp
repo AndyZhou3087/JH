@@ -174,6 +174,11 @@ bool GameScene::init()
 			GlobalData::setMakeWarmConfig("");
 		}
 	}
+
+	GlobalData::doAchive(A_3, StorageRoom::getCountById("80"));
+	int goldcount = GlobalData::getMyGoldCount();
+	GlobalData::doAchive(A_1, goldcount);
+
 	ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
 	ServerDataSwap::init(NULL)->getFactionList();
     return true;
