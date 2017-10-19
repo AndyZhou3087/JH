@@ -1934,8 +1934,12 @@ void GlobalData::getAchiveData()
 void GlobalData::saveAchiveData()
 {
 	std::string str;
-	std::vector<AchiveData> saveAchives = GlobalData::vec_achiveData;
+	std::vector<AchiveData> saveAchives;
 
+	for (unsigned int i = 0; i < saveAchives.size(); i++)
+	{
+		saveAchives.push_back(GlobalData::vec_achiveData[i]);
+	}
 	sort(saveAchives.begin(), saveAchives.end(), sortAchiveById_CallBack);
 
 	for (unsigned int i = 0; i < saveAchives.size(); i++)

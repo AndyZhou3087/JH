@@ -141,6 +141,7 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			selectCountNode->setVisible(true);
 			selectCountlbl = (cocos2d::ui::Text*)selectCountNode->getChildByName("rescountlbl");
 			slider = (cocos2d::ui::Slider*)selectCountNode->getChildByName("slider");
+			slider->setPercent(0);
 			slider->addEventListener(CC_CALLBACK_2(ResDetailsLayer::sliderEvent, this));
 
 			cocos2d::ui::Button* addone = (cocos2d::ui::Button*)selectCountNode->getChildByName("addone");
@@ -468,15 +469,18 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else if (whereClick == 2)
 		{
-			OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
-			int usecount = atoi(selectCountlbl->getString().c_str());
-			if (Olayer != NULL)
+			if (atoi(m_packageData->strid.c_str()) > 0)
 			{
-				for (int i = 0; i < usecount; i++)
+				OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
+				int usecount = atoi(selectCountlbl->getString().c_str());
+				if (Olayer != NULL)
 				{
-					Olayer->takeout(m_packageData);
+					for (int i = 0; i < usecount; i++)
+					{
+						Olayer->takeout(m_packageData);
+					}
+					Olayer->updata();
 				}
-				Olayer->updata();
 			}
 		}
 		removSelf();

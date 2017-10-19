@@ -412,8 +412,8 @@ void Winlayer::updataLV()
 			g_hero->setLVValue(lv);
 			g_hero->setLifeValue(g_hero->getMaxLifeValue());
 			showHeroLvUp();
-			GlobalData::doAchive(A_2, lv + 1);
 		}
+		GlobalData::doAchive(A_2, lv + 1);
 	}
 	else
 	{

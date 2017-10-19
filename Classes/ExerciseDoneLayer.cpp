@@ -228,8 +228,8 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 		{
 			g_hero->setLVValue(lv);
 			g_hero->setLifeValue(g_hero->getMaxLifeValue());
-			GlobalData::doAchive(A_2, lv + 1);
 		}
+		GlobalData::doAchive(A_2, lv + 1);
 	}
 	else
 	{

@@ -149,6 +149,8 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 
 	int cheat = GlobalData::dataIsModified?1:0;
 	writedoc.AddMember("cheat", cheat, allocator);
+	std::string achivestr = GameDataSave::getInstance()->getAchiveData();
+	writedoc.AddMember("achievement", rapidjson::Value(achivestr.c_str(), allocator), allocator);
 	GlobalData::dataIsModified = false;
 
 	int fightingpower = 0;
@@ -848,6 +850,13 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 						std::string friendshipstr = v.GetString();
 						GameDataSave::getInstance()->setFriendly(friendshipstr);
 					}
+					if (item.HasMember("achievement"))
+					{
+						v = item["achievement"];
+						std::string achivestr = v.GetString();
+						GameDataSave::getInstance()->setAchiveData(achivestr);
+					}
+					
 
 					if (item.HasMember("mixgf"))
 					{
