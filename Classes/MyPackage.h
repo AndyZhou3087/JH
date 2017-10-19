@@ -49,7 +49,7 @@ public:
 	static void save();
 	static void load();
 
-	static int canTakeCount(std::string strid);
+	static int canTakeCount(PackageData* pdata);
 
 	static int getMax();
 	static void setMax(int val);

@@ -256,7 +256,6 @@ void OutDoor::longTouchUpdate(float delay){
 
 void OutDoor::onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 	Node* node = (Node*)pSender;
 	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
@@ -267,6 +266,7 @@ void OutDoor::onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 	else if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		unschedule(schedule_selector(OutDoor::longTouchUpdate));
 		if (!m_isLongPress)
 		{
