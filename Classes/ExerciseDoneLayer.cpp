@@ -231,6 +231,13 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 			GlobalData::doAchive(A_2, lv + 1);
 		}
 	}
+	else
+	{
+		if (g_hero->getLVValue() == vec_heroExp.size() - 1)
+		{
+			GlobalData::doAchive(A_2, g_hero->getLVValue() + 1);
+		}
+	}
 
 	std::string str = StringUtils::format("%s经验值： +%d", heroname[g_hero->getHeadID()-1].c_str(), f_heroexp);
 	m_herotext->setString(CommonFuncs::gbk2utf(str.c_str()));
