@@ -211,8 +211,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 				{
 					if (GlobalData::vec_achiveData[i].vec_para[0].compare(m_npcid) == 0)
 					{
-						GlobalData::vec_achiveData[i].finish = 1;
-						GlobalData::saveAchiveData();
+						if (GlobalData::vec_achiveData[i].finish != -1)
+						{
+							GlobalData::vec_achiveData[i].finish = 1;
+							GlobalData::saveAchiveData();
+						}
 					}
 				}
 			}
@@ -382,7 +385,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		{
 			std::string astr = GlobalData::vec_achiveData[i].vec_para[0];
 			PackageData* mePackageData = g_hero->getMeHas(astr);
-			if (mePackageData != NULL)
+			if (mePackageData != NULL && GlobalData::vec_achiveData[i].finish != -1)
 			{
 				GlobalData::vec_achiveData[i].finish = mePackageData->lv + 1;
 				GlobalData::saveAchiveData();

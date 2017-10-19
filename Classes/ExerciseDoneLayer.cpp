@@ -188,7 +188,7 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 		{
 			std::string astr = GlobalData::vec_achiveData[i].vec_para[0];
 			PackageData* mePackageData = g_hero->getMeHas(astr);
-			if (mePackageData != NULL)
+			if (mePackageData != NULL && GlobalData::vec_achiveData[i].finish != -1)
 			{
 				GlobalData::vec_achiveData[i].finish = mePackageData->lv + 1;
 				GlobalData::saveAchiveData();
