@@ -34,7 +34,7 @@
           <AbstractNodeData Name="ScrollView" ActionTag="-2135080053" Tag="69" IconVisible="False" TopMargin="388.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical_Horizontal" ctype="ScrollViewObjectData">
             <Size X="720.0000" Y="892.0000" />
             <Children>
-              <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" LeftMargin="-1.5475" RightMargin="1.5476" TopMargin="-1.5476" BottomMargin="1.5476" ctype="SpriteObjectData">
+              <AbstractNodeData Name="mapbg" ActionTag="-1571269876" Tag="70" IconVisible="False" LeftMargin="-1.5475" RightMargin="1.5475" TopMargin="-1.5476" BottomMargin="1.5476" ctype="SpriteObjectData">
                 <Size X="2000.0000" Y="1396.0000" />
                 <Children>
                   <AbstractNodeData Name="m1-1" ActionTag="-507710369" Tag="1001" IconVisible="False" LeftMargin="1471.9771" RightMargin="471.0229" TopMargin="994.6161" BottomMargin="316.3839" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="27" Scale9Height="51" ctype="ImageViewObjectData">
@@ -140,8 +140,21 @@
                     <PreSize X="0.0700" Y="0.0931" />
                     <FileData Type="MarkedSubImage" Path="ui/m1-9.png" Plist="uipacker.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="m1-10" ActionTag="1235227395" Tag="218" IconVisible="False" LeftMargin="987.8903" RightMargin="890.1097" TopMargin="1037.2898" BottomMargin="266.7103" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="92" Scale9Height="58" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="m1-10" ActionTag="1235227395" Tag="218" IconVisible="False" LeftMargin="987.8903" RightMargin="890.1097" TopMargin="1037.2897" BottomMargin="266.7103" TouchEnable="True" LeftEage="15" RightEage="15" TopEage="17" BottomEage="17" Scale9OriginX="15" Scale9OriginY="17" Scale9Width="92" Scale9Height="58" ctype="ImageViewObjectData">
                     <Size X="122.0000" Y="92.0000" />
+                    <Children>
+                      <AbstractNodeData Name="redpoint" ActionTag="1631998943" Tag="106" IconVisible="False" LeftMargin="76.3605" RightMargin="7.6395" TopMargin="-2.9367" BottomMargin="56.9367" ctype="SpriteObjectData">
+                        <Size X="38.0000" Y="38.0000" />
+                        <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                        <Position X="95.3605" Y="75.9367" />
+                        <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                        <CColor A="255" R="255" G="255" B="255" />
+                        <PrePosition X="0.7816" Y="0.8254" />
+                        <PreSize X="0.3115" Y="0.4130" />
+                        <FileData Type="MarkedSubImage" Path="ui/redpoint.png" Plist="uipacker.plist" />
+                        <BlendFunc Src="1" Dst="771" />
+                      </AbstractNodeData>
+                    </Children>
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="1048.8903" Y="312.7103" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />

@@ -219,8 +219,8 @@
           <AbstractNodeData Name="selectcountnode" ActionTag="-1605081743" VisibleForFrame="False" Tag="19" IconVisible="True" LeftMargin="345.3146" RightMargin="374.6854" TopMargin="640.1524" BottomMargin="639.8476" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="resselectcountbox" ActionTag="1393675395" Tag="27" IconVisible="False" LeftMargin="-168.0000" RightMargin="54.0000" TopMargin="-26.9999" BottomMargin="-27.0001" ctype="SpriteObjectData">
-                <Size X="114.0000" Y="54.0000" />
+              <AbstractNodeData Name="resselectcountbox" ActionTag="1393675395" Tag="27" IconVisible="False" LeftMargin="-168.0000" RightMargin="54.0000" TopMargin="-29.9999" BottomMargin="-30.0001" ctype="SpriteObjectData">
+                <Size X="114.0000" Y="60.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="-111.0000" Y="-0.0001" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -250,10 +250,10 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="MarkedSubImage" Path="ui/resminus1.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="slider" ActionTag="-1002428070" Tag="26" IconVisible="False" LeftMargin="-53.9999" RightMargin="-176.0001" TopMargin="-4.9999" BottomMargin="-7.0001" TouchEnable="True" ctype="SliderObjectData">
-                <Size X="230.0000" Y="12.0000" />
+              <AbstractNodeData Name="slider" ActionTag="-1002428070" Tag="26" IconVisible="False" LeftMargin="-53.9998" RightMargin="-162.0002" TopMargin="-10.9999" BottomMargin="-13.0001" TouchEnable="True" PercentInfo="100" ctype="SliderObjectData">
+                <Size X="216.0000" Y="24.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="61.0001" Y="-1.0001" />
+                <Position X="54.0002" Y="-1.0001" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
@@ -264,10 +264,10 @@
                 <BallPressedData Type="MarkedSubImage" Path="ui/rescontrolslider.png" Plist="uipacker.plist" />
                 <BallDisabledData Type="MarkedSubImage" Path="ui/rescontrolslider.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="rescountlbl" ActionTag="1993746613" Tag="28" IconVisible="False" LeftMargin="-119.2757" RightMargin="102.2757" TopMargin="-10.6045" BottomMargin="-15.3955" FontSize="25" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="17.0000" Y="26.0000" />
+              <AbstractNodeData Name="rescountlbl" ActionTag="1993746613" Tag="28" IconVisible="False" LeftMargin="-115.2755" RightMargin="96.2755" TopMargin="-12.1049" BottomMargin="-16.8951" FontSize="28" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="19.0000" Y="29.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="-110.7757" Y="-2.3955" />
+                <Position X="-105.7755" Y="-2.3951" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />

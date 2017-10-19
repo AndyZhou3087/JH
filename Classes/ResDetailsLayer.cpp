@@ -142,6 +142,12 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			selectCountlbl = (cocos2d::ui::Text*)selectCountNode->getChildByName("rescountlbl");
 			slider = (cocos2d::ui::Slider*)selectCountNode->getChildByName("slider");
 			slider->addEventListener(CC_CALLBACK_2(ResDetailsLayer::sliderEvent, this));
+
+			cocos2d::ui::Button* addone = (cocos2d::ui::Button*)selectCountNode->getChildByName("addone");
+			addone->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onAddOne, this));
+
+			cocos2d::ui::Button* minusone = (cocos2d::ui::Button*)selectCountNode->getChildByName("minusone");
+			minusone->addTouchEventListener(CC_CALLBACK_2(ResDetailsLayer::onMinusOne, this));
 		}
 	}
 
@@ -462,14 +468,15 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else if (whereClick == 2)
 		{
+			OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
 			int usecount = atoi(selectCountlbl->getString().c_str());
-			for (int i = 0; i < usecount; i++)
+			if (Olayer != NULL)
 			{
-				OutDoor* Olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
-				if (Olayer != NULL)
+				for (int i = 0; i < usecount; i++)
 				{
 					Olayer->takeout(m_packageData);
 				}
+				Olayer->updata();
 			}
 		}
 		removSelf();
@@ -665,6 +672,44 @@ void ResDetailsLayer::sliderEvent(Ref * pSender, cocos2d::ui::Slider::EventType 
 		selectCountlbl->setString(str);
 		str = StringUtils::format("库存%d", m_packageData->count - selectcount);
 		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+	}
+}
+
+void ResDetailsLayer::onAddOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		int max = MyPackage::canTakeCount(m_packageData->strid);
+		int curcount = atoi(selectCountlbl->getString().c_str());
+		curcount++;
+		if (curcount > max)
+			curcount = max;
+		std::string str = StringUtils::format("%d", curcount);
+		selectCountlbl->setString(str);
+		str = StringUtils::format("库存%d", m_packageData->count - curcount);
+		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+		int percent = curcount * 100 / max;
+		slider->setPercent(percent);
+
+	}
+}
+void ResDetailsLayer::onMinusOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		int curcount = atoi(selectCountlbl->getString().c_str());
+		int max = MyPackage::canTakeCount(m_packageData->strid);
+		curcount--;
+		if (curcount < 0)
+			curcount = 0;
+		std::string str = StringUtils::format("%d", curcount);
+		selectCountlbl->setString(str);
+		str = StringUtils::format("库存%d", m_packageData->count - curcount);
+		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
+		int percent = curcount * 100 / max;
+		slider->setPercent(percent);
 	}
 }
 

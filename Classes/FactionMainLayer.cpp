@@ -459,9 +459,21 @@ void FactionListItem::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	std::string errstr = "申请失败，请检查网络设置稍后重试！！";
-	if (errcode <= -2)
+	if (errcode == 1)
 	{
-		errstr = "申请已通过，请重新进入！！";
+		errstr = "参数错误，请与客服联系！！";
+	}
+	else if (errcode == 2)
+	{
+		errstr = "帮派不存在？！请与客服联系！！";
+	}
+	else if (errcode == 3)
+	{
+		errstr = "已申请过该帮派！！";
+	}
+	else if (errcode == 4)
+	{
+		errstr = "帮派人数已达上限！！";
 	}
 
 	HintBox * box = HintBox::create(CommonFuncs::gbk2utf(errstr.c_str()));

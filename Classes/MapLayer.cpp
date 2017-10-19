@@ -81,6 +81,11 @@ bool MapLayer::init()
 			m_lotteryimg = mapname;
 			m_lotteryimg->setScale(0.0f);
 		}
+		else if (mapname->getName().compare("m1-10") == 0)
+		{
+			achiveRedpoint = (cocos2d::ui::Widget*)mapname->getChildByName("redpoint");
+			achiveRedpoint->setVisible(false);
+		}
 	}
 
 	Vec2 pos = m_mapbg->getChildren().at(heroposindex)->getPosition();
@@ -136,6 +141,7 @@ bool MapLayer::init()
 
 	checkTimeGift(0);
 	this->schedule(schedule_selector(MapLayer::checkTimeGift), 1.0f);
+	this->schedule(schedule_selector(MapLayer::checkAchive), 2.0f);
 
 	m_vulture = (cocos2d::ui::Widget*)m_mapbg->getChildByName("m1-1")->getChildByName("vulture");
 	m_vulture->setVisible(false);
@@ -755,6 +761,26 @@ void MapLayer::checkTimeGift(float dt)
 	{
 		m_herohead->setVisible(true);
 		m_lotteryimg->setScale(1.0f);
+	}
+}
+
+void MapLayer::checkAchive(float dt)
+{
+	bool ishas = false;
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		if (GlobalData::vec_achiveData[i].finish >= GlobalData::getAchiveFinishCount(GlobalData::vec_achiveData[i]))
+		{
+			ishas = true;
+		}
+	}
+	if (ishas)
+	{
+		achiveRedpoint->setVisible(true);
+	}
+	else
+	{
+		achiveRedpoint->setVisible(false);
 	}
 }
 

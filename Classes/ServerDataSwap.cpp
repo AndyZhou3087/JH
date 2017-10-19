@@ -1558,7 +1558,7 @@ void ServerDataSwap::httpRequestFactionListCB(std::string retdata, int code, std
 			if (ret == 0)
 				m_pDelegateProtocol->onSuccess();
 			else
-				m_pDelegateProtocol->onErr(-ret);
+				m_pDelegateProtocol->onErr(ret);
 		}
 		else
 			m_pDelegateProtocol->onErr(ret);

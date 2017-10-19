@@ -415,6 +415,13 @@ void Winlayer::updataLV()
 			GlobalData::doAchive(A_2, lv + 1);
 		}
 	}
+	else
+	{
+		if (g_hero->getLVValue() == vec_heroExp.size() - 1)
+		{
+			GlobalData::doAchive(A_2, g_hero->getLVValue() + 1);
+		}
+	}
 
 	iswglvup = false;
 	iswglvup = false;

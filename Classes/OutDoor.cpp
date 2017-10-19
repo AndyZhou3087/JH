@@ -160,7 +160,6 @@ void OutDoor::updataMyPackageUI()
 
 void OutDoor::updataStorageUI()
 {
-
 	for (unsigned int i = 0; i < allStorageData.size(); i++)
 	{
 		std::string name = StringUtils::format("resitem%d", i);
@@ -208,25 +207,24 @@ void OutDoor::updataStorageUI()
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
 		}
-
+		std::string name = StringUtils::format("resitem%d", i);
 		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
 		boxItem->addTouchEventListener(CC_CALLBACK_2(OutDoor::onStorageItem, this));
 		boxItem->setTouchEnabled(true);
+		scrollview->addChild(boxItem, 0, name);
 		boxItem->setUserData(allStorageData[i]);
 		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
 
-		std::string name = StringUtils::format("resitem%d", i);
-		scrollview->addChild(boxItem, 0, name);
-
 		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
-		boxItem->addChild(res);
 
+		cocos2d::ui::ImageView* res = cocos2d::ui::ImageView::create(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addChild(res, 0, "res");
+		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
 		str = StringUtils::format("%d", allStorageData[i]->count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
+
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
+		boxItem->addChild(reslbl, 0, "lbl");
 		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 25, 25));
-		boxItem->addChild(reslbl);
 
 		std::string mymixgf = GlobalData::getMixGF();
 		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
@@ -236,7 +234,7 @@ void OutDoor::updataStorageUI()
 			{
 				Sprite * mixtag = Sprite::createWithSpriteFrameName("ui/mixtag.png");
 				mixtag->setPosition(Vec2(boxItem->getContentSize().width - 15, boxItem->getContentSize().height - 15));
-				boxItem->addChild(mixtag);
+				boxItem->addChild(mixtag, 0, "mixtag");
 			}
 		}
 	}
@@ -273,7 +271,12 @@ void OutDoor::onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		if (!m_isLongPress)
 		{
 			takeout((PackageData*)node->getUserData());
+			updata();
 		}
+	}
+	else if (type == ui::Widget::TouchEventType::CANCELED)
+	{
+		unschedule(schedule_selector(OutDoor::longTouchUpdate));
 	}
 }
 
@@ -309,7 +312,6 @@ void OutDoor::takeout(PackageData* pdata)
 		}
 	}
 	m_heroproper->refreshCarryData();
-	updata();
 }
 
 void OutDoor::onPackageItem(cocos2d::Ref* pSender)

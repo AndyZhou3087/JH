@@ -142,6 +142,11 @@ private:
 	void checkTimeGift(float dt);
 
 	/****************************
+	是否有可领取的成就
+	*****************************/
+	void checkAchive(float dt);
+
+	/****************************
 	显示对话引导--马喂草引导
 	*****************************/
 	void showTalkGuide();
@@ -165,6 +170,7 @@ private:
 	int m_startClickY;
 	bool m_isDraging;
 	cocos2d::ui::Widget* m_vulture;
+	cocos2d::ui::Widget* achiveRedpoint;
 };
 extern MapLayer* g_maplayer;//全局地图层
 #endif
