@@ -666,7 +666,7 @@ void ResDetailsLayer::sliderEvent(Ref * pSender, cocos2d::ui::Slider::EventType 
 	{
 		cocos2d::ui::Slider* slider = (cocos2d::ui::Slider*)pSender;
 		int percent = slider->getPercent();
-		int max = MyPackage::canTakeCount(m_packageData->strid);
+		int max = MyPackage::canTakeCount(m_packageData);
 		int selectcount = max * percent/100;
 		std::string str = StringUtils::format("%d", selectcount);
 		selectCountlbl->setString(str);
@@ -680,7 +680,7 @@ void ResDetailsLayer::onAddOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-		int max = MyPackage::canTakeCount(m_packageData->strid);
+		int max = MyPackage::canTakeCount(m_packageData);
 		int curcount = atoi(selectCountlbl->getString().c_str());
 		curcount++;
 		if (curcount > max)
@@ -700,7 +700,7 @@ void ResDetailsLayer::onMinusOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		int curcount = atoi(selectCountlbl->getString().c_str());
-		int max = MyPackage::canTakeCount(m_packageData->strid);
+		int max = MyPackage::canTakeCount(m_packageData);
 		curcount--;
 		if (curcount < 0)
 			curcount = 0;
