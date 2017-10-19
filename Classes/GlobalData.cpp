@@ -1934,18 +1934,32 @@ void GlobalData::getAchiveData()
 void GlobalData::saveAchiveData()
 {
 	std::string str;
-	std::vector<AchiveData> saveAchives;
+    std::vector<AchiveData> tmp_saveAchives;
+    for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+    {
+        tmp_saveAchives.push_back(GlobalData::vec_achiveData[i]);
+    }
 
-	for (unsigned int i = 0; i < saveAchives.size(); i++)
-	{
-		saveAchives.push_back(GlobalData::vec_achiveData[i]);
-	}
-	sort(saveAchives.begin(), saveAchives.end(), sortAchiveById_CallBack);
+	//sort(tmp_saveAchives.begin(), tmp_saveAchives.end(), sortAchiveById_CallBack);
+    
+    int size = tmp_saveAchives.size();
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = 1; j < size - i; j++)
+        {
+            if(atoi(tmp_saveAchives[j].id.c_str())< atoi(tmp_saveAchives[j-1].id.c_str()))
+            {
+                AchiveData tempdata = tmp_saveAchives[j-1];
+                tmp_saveAchives[j-1] = tmp_saveAchives[j];
+                tmp_saveAchives[j] = tempdata;
+            }
+        }
+    }
 
-	for (unsigned int i = 0; i < saveAchives.size(); i++)
+	for (unsigned int i = 0; i < tmp_saveAchives.size(); i++)
 	{
-		int finish = saveAchives[i].finish;
-		int maxcount = GlobalData::getAchiveFinishCount(saveAchives[i]);
+		int finish = tmp_saveAchives[i].finish;
+		int maxcount = GlobalData::getAchiveFinishCount(tmp_saveAchives[i]);
 		if (finish > maxcount)
 			finish = maxcount;
 		std::string onestr = StringUtils::format("%d;", finish);
@@ -1953,14 +1967,6 @@ void GlobalData::saveAchiveData()
 	}
 
 	GameDataSave::getInstance()->setAchiveData(str.substr(0, str.length() - 1));
-}
-
-bool GlobalData::sortAchiveById_CallBack(AchiveData a, AchiveData b)
-{
-	if (atoi(a.id.c_str()) > atoi(b.id.c_str()))
-		return false;
-	else
-		return true;
 }
 
 void GlobalData::doAchive(int atype, int count)

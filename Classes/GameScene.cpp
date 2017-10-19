@@ -530,8 +530,7 @@ void GameScene::onSuccess()
 		}
 		else
 		{
-            int isnewguide47 = NewerGuideLayer::checkifNewerGuide(47);
-			if (GlobalData::continueLoginDays > 0 && (isnewguide47 == 0||g_hero->getLVValue() >= 1))
+			if (GlobalData::continueLoginDays > 0)
 			{
 				LoginRewardLayer* llayer = LoginRewardLayer::create();
 				g_gameLayer->addChild(llayer, 100);

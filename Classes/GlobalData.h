@@ -947,11 +947,6 @@ public:
 	static void saveAchiveData();
 
 	/****************************
-	成就ID排序回调
-	*****************************/
-	static bool sortAchiveById_CallBack(AchiveData a, AchiveData b);
-
-	/****************************
 	成就信息
 	*****************************/
 	static void doAchive(int atype, int count);
