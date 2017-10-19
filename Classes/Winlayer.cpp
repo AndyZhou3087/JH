@@ -370,6 +370,10 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
 
+	if (GlobalData::getUnlockChapter() > MAXCHAPTER)
+	{
+		GlobalData::doAchive(A_5, GlobalData::getUnlockChapter());
+	}
 #ifdef ANALYTICS
 	if (m_npcid.compare("n089") == 0)
 		AnalyticUtil::onEvent("allpass");
