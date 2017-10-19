@@ -179,42 +179,27 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 			}
 			vec_gfdata[m]->lv = lv;
 
-			for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
-			{
-				if (GlobalData::vec_achiveData[i].type == A_7)
-				{
-					if (GlobalData::vec_achiveData[i].vec_para[0].compare(GlobalData::map_wgngs[gfname].id) == 0)
-						GlobalData::doAchive(A_7, lv + 1);
-				}
-
-				if (GlobalData::vec_achiveData[i].type == A_10)
-				{
-					int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
-					GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
-				}
-			}
 		}
-		else
+	}
+
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		if (GlobalData::vec_achiveData[i].type == A_7)
 		{
-			if (vec_gfdata[m]->lv == gfmaxlv - 1)
+			std::string astr = GlobalData::vec_achiveData[i].vec_para[0];
+			PackageData* mePackageData = g_hero->getMeHas(astr);
+			if (mePackageData != NULL)
 			{
-				for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
-				{
-					if (GlobalData::vec_achiveData[i].type == A_7)
-					{
-						if (GlobalData::vec_achiveData[i].vec_para[0].compare(GlobalData::map_wgngs[gfname].id) == 0)
-							GlobalData::doAchive(A_7, lv + 1);
-					}
-
-					if (GlobalData::vec_achiveData[i].type == A_10)
-					{
-						int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
-						GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
-					}
-				}
+				GlobalData::vec_achiveData[i].finish = mePackageData->lv + 1;
+				GlobalData::saveAchiveData();
 			}
 		}
 
+		if (GlobalData::vec_achiveData[i].type == A_10)
+		{
+			int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
+			GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+		}
 	}
 
 	int curlv = g_hero->getLVValue();
