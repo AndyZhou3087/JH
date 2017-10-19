@@ -211,7 +211,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 				{
 					if (GlobalData::vec_achiveData[i].vec_para[0].compare(m_npcid) == 0)
 					{
-						GlobalData::doAchive(A_4, 1);
+						GlobalData::vec_achiveData[i].finish = 1;
+						GlobalData::saveAchiveData();
 					}
 				}
 			}

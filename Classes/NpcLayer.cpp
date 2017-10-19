@@ -451,7 +451,9 @@ void NpcLayer::onItemFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 			{
 				if (GlobalData::vec_achiveData[i].vec_para[0].compare(npcid) == 0)
 				{
-					GlobalData::doAchive(A_12, GlobalData::vec_achiveData[i].finish + 1);
+					//GlobalData::doAchive(A_12, GlobalData::vec_achiveData[i].finish + 1);
+					GlobalData::vec_achiveData[i].finish += 1;
+					GlobalData::saveAchiveData();
 				}
 			}
 		}
