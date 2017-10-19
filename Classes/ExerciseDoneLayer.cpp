@@ -169,9 +169,10 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 				vec_gfdata[m]->exp = vec_gfdata[m]->exp - vec_gfExp[i];
 			}
 		}
+		int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
 		if (lv > curlv)
 		{
-			int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
+
 			if (lv >= gfmaxlv)
 			{
 				lv = gfmaxlv - 1;
@@ -190,6 +191,26 @@ void ExerciseDoneLayer::exerciseDone(std::string wgidstr, std::string ngidstr, i
 				{
 					int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
 					GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+				}
+			}
+		}
+		else
+		{
+			if (vec_gfdata[m]->lv == gfmaxlv - 1)
+			{
+				for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+				{
+					if (GlobalData::vec_achiveData[i].type == A_7)
+					{
+						if (GlobalData::vec_achiveData[i].vec_para[0].compare(GlobalData::map_wgngs[gfname].id) == 0)
+							GlobalData::doAchive(A_7, lv + 1);
+					}
+
+					if (GlobalData::vec_achiveData[i].type == A_10)
+					{
+						int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
+						GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+					}
 				}
 			}
 		}

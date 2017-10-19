@@ -370,7 +370,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
 
-	if (GlobalData::getUnlockChapter() > MAXCHAPTER)
+	if (GlobalData::getUnlockChapter() >= MAXCHAPTER)
 	{
 		GlobalData::doAchive(A_5, GlobalData::getUnlockChapter());
 	}
@@ -448,9 +448,9 @@ void Winlayer::updataLV()
 					gfData->exp = gfData->exp - vec_gfExp[i];
 				}
 			}
+			int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
 			if (lv > curlv)
 			{
-				int gfmaxlv = GlobalData::map_wgngs[gfname].maxlv;
 				if (lv >= gfmaxlv)
 					gfData->lv = gfmaxlv - 1;
 				else
@@ -474,6 +474,26 @@ void Winlayer::updataLV()
 					{
 						int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
 						GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+					}
+				}
+			}
+			else
+			{
+				if (gfData->lv == gfmaxlv - 1)
+				{
+					for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+					{
+						if (GlobalData::vec_achiveData[i].type == A_7)
+						{
+							if (GlobalData::vec_achiveData[i].vec_para[0].compare(GlobalData::map_wgngs[gfname].id) == 0)
+								GlobalData::doAchive(A_7, gfData->lv + 1);
+						}
+
+						if (GlobalData::vec_achiveData[i].type == A_10)
+						{
+							int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
+							GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+						}
 					}
 				}
 			}
