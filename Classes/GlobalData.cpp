@@ -1936,7 +1936,7 @@ void GlobalData::saveAchiveData()
 	std::string str;
 	std::vector<AchiveData> saveAchives;
 
-	for (unsigned int i = 0; i < saveAchives.size(); i++)
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
 	{
 		saveAchives.push_back(GlobalData::vec_achiveData[i]);
 	}
