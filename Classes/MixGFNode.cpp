@@ -272,8 +272,11 @@ void MixGFNode::onMix(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 						{
 							if (GlobalData::vec_achiveData[i].type == A_8)
 							{
-								if (GlobalData::vec_achiveData[i].vec_para[0].compare(it->first) == 0)
-									GlobalData::doAchive(A_8, 1);
+								if (GlobalData::vec_achiveData[i].vec_para[0].compare(it->first) == 0 && GlobalData::vec_achiveData[i].finish != -1)
+								{
+									GlobalData::vec_achiveData[i].finish = 1;
+									GlobalData::saveAchiveData();
+								}
 							}
 						}
 

@@ -490,14 +490,47 @@ void TopBar::updataUI(float dt)
 					activityScene = ApprenticeScene::createScene(1);
 			}
 		}
-		//if (g_nature->getDayOrNight() == Day)
-		//{
-		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了..."));
-		//}
-		//else
-		//{
-		//	activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临..."));
-		//}
+		if (g_nature->getDayOrNight() == Day)
+		{
+			std::vector<std::string> tips;
+			if (g_hero->getLVValue() < 10)
+			{
+				for (unsigned int i = 0; i < sizeof(tipswords1) / sizeof(tipswords1[0]); i++)
+				{
+					tips.push_back(tipswords1[i]);
+				}
+			}
+			else if (g_hero->getLVValue() < 30)
+			{
+				for (unsigned int i = 0; i < sizeof(tipswords2) / sizeof(tipswords2[0]); i++)
+				{
+					tips.push_back(tipswords2[i]);
+				}
+			}
+			else
+			{
+				for (unsigned int i = 0; i < sizeof(tipswords3) / sizeof(tipswords3[0]); i++)
+				{
+					tips.push_back(tipswords3[i]);
+				}
+			}
+
+			if (g_nature->getReason() == Winter)
+			{
+				for (unsigned int i = 0; i < sizeof(tipswords0) / sizeof(tipswords0[0]); i++)
+				{
+					tips.push_back(tipswords0[i]);
+				}
+			}
+			int tsize = tips.size();
+			int r = GlobalData::createRandomNum(tsize);
+			g_uiScroll->addEventText(CommonFuncs::gbk2utf(tips[r].c_str()), 26, Color3B(27, 141, 0));
+			//activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("天亮了..."));
+		}
+		else
+		{
+			//activityScene = ActivitScene::createScene("images/cday.jpg", CommonFuncs::gbk2utf("黑夜降临..."));
+		}
 		m_lastDayOrNigth = g_nature->getDayOrNight();
 	}
 

@@ -97,6 +97,9 @@ bool GameScene::init()
 	GlobalData::loadNpcMasterJsonData();
 	GlobalData::loadFriendly();
 
+	//读取成就配置文件
+	GlobalData::loadAchiveJsonData();
+
 	GlobalData::getAchiveData();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();

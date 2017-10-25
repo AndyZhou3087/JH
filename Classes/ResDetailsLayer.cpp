@@ -11,11 +11,12 @@
 #include "GameDataSave.h"
 #include "ShopLayer.h"
 #include "OutDoor.h"
+#include "ExchangeLayer.h"
 
 #define WINESTRID "23"
 #define GRASSRID "5"
 
-int ResDetailsLayer::whereClick = 0;//0--仓库，1其他，2长按资源按钮
+int ResDetailsLayer::whereClick = 0;//0--仓库，1其他，2出门长按资源按钮，3长按交易中我的物品
 
 ResDetailsLayer::ResDetailsLayer()
 {
@@ -133,13 +134,14 @@ bool ResDetailsLayer::init(PackageData* pdata)
 			}
 		}
 	}
-	else if (whereClick == 2)
+	else if (whereClick == 2 || whereClick == 3 || whereClick == 4)
 	{
 		if (atoi(pdata->strid.c_str()) > 0)
 		{
 			Node* selectCountNode = (Node*)m_csbnode->getChildByName("selectcountnode");
 			selectCountNode->setVisible(true);
 			selectCountlbl = (cocos2d::ui::Text*)selectCountNode->getChildByName("rescountlbl");
+
 			slider = (cocos2d::ui::Slider*)selectCountNode->getChildByName("slider");
 			slider->setPercent(0);
 			slider->addEventListener(CC_CALLBACK_2(ResDetailsLayer::sliderEvent, this));
@@ -268,6 +270,16 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("desclbl");
 	resdesc->setString(GlobalData::map_allResource[pdata->strid].desc);
+
+	if (whereClick == 3 || whereClick == 4)
+	{
+		ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+		if (exlayer != NULL)
+		{
+			countstr = StringUtils::format("%d", exlayer->getCountByResId(pdata->strid, whereClick - 3));
+			valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));
+		}
+	}
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -483,6 +495,23 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 				}
 			}
 		}
+		else if (whereClick == 3 || whereClick == 4)
+		{
+			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+			int usecount = atoi(selectCountlbl->getString().c_str());
+			if (exlayer != NULL)
+			{
+				for (int i = 0; i < usecount; i++)
+				{
+					if (whereClick == 3)
+						exlayer->giveNpc(m_packageData->strid);
+					else
+						exlayer->giveHero(m_packageData->strid);
+				}
+				exlayer->updata();
+			}
+		}
+		
 		removSelf();
 	}
 }
@@ -671,10 +700,20 @@ void ResDetailsLayer::sliderEvent(Ref * pSender, cocos2d::ui::Slider::EventType 
 		cocos2d::ui::Slider* slider = (cocos2d::ui::Slider*)pSender;
 		int percent = slider->getPercent();
 		int max = MyPackage::canTakeCount(m_packageData);
+		int tcount = m_packageData->count;
+		if (whereClick == 3 || whereClick == 4)
+		{
+			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+			if (exlayer != NULL)
+			{
+				max = exlayer->getCountByResId(m_packageData->strid, whereClick - 3);
+				tcount = max;
+			}
+		}
 		int selectcount = max * percent/100;
 		std::string str = StringUtils::format("%d", selectcount);
 		selectCountlbl->setString(str);
-		str = StringUtils::format("库存%d", m_packageData->count - selectcount);
+		str = StringUtils::format("库存%d", tcount - selectcount);
 		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 	}
 }
@@ -685,13 +724,23 @@ void ResDetailsLayer::onAddOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		int max = MyPackage::canTakeCount(m_packageData);
+		int tcount = m_packageData->count;
+		if (whereClick == 3 || whereClick == 4)
+		{
+			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+			if (exlayer != NULL)
+			{
+				max = exlayer->getCountByResId(m_packageData->strid, whereClick - 3);
+				tcount = max;
+			}
+		}
 		int curcount = atoi(selectCountlbl->getString().c_str());
 		curcount++;
 		if (curcount > max)
 			curcount = max;
 		std::string str = StringUtils::format("%d", curcount);
 		selectCountlbl->setString(str);
-		str = StringUtils::format("库存%d", m_packageData->count - curcount);
+		str = StringUtils::format("库存%d", tcount - curcount);
 		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 		int percent = curcount * 100 / max;
 		slider->setPercent(percent);
@@ -705,12 +754,23 @@ void ResDetailsLayer::onMinusOne(cocos2d::Ref *pSender, cocos2d::ui::Widget::Tou
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		int curcount = atoi(selectCountlbl->getString().c_str());
 		int max = MyPackage::canTakeCount(m_packageData);
+		int tcount = m_packageData->count;
+		if (whereClick == 3 || whereClick == 4)
+		{
+			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+			if (exlayer != NULL)
+			{
+				max = exlayer->getCountByResId(m_packageData->strid, whereClick - 3);
+				tcount = max;
+			}
+		}
+
 		curcount--;
 		if (curcount < 0)
 			curcount = 0;
 		std::string str = StringUtils::format("%d", curcount);
 		selectCountlbl->setString(str);
-		str = StringUtils::format("库存%d", m_packageData->count - curcount);
+		str = StringUtils::format("库存%d", tcount - curcount);
 		valuelbl->setString(CommonFuncs::gbk2utf(str.c_str()));
 		int percent = curcount * 100 / max;
 		slider->setPercent(percent);

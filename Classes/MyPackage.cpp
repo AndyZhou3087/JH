@@ -168,6 +168,20 @@ int MyPackage::canTakeCount(PackageData* pdata)
 
 }
 
+int MyPackage::getCountById(std::string strid)
+{
+	int count = 0;
+	for (unsigned int i = 0; i < vec_packages.size(); i++)
+	{
+		if (vec_packages[i].strid.compare(strid) == 0)
+		{
+			count++;
+		}
+	}
+
+	return count;
+}
+
 void MyPackage::save()
 {
 	std::string str;

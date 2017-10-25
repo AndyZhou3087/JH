@@ -51,6 +51,8 @@ public:
 
 	static int canTakeCount(PackageData* pdata);
 
+	static int getCountById(std::string strid);
+
 	static int getMax();
 	static void setMax(int val);
 	static int getSize();

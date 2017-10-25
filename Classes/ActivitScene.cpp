@@ -52,8 +52,28 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	m_text->setString(content);
 
 	cocos2d::ui::Text* tips = (cocos2d::ui::Text*)csbnode->getChildByName("tips");
-	int r = GlobalData::createRandomNum(sizeof(tipswords) / sizeof(tipswords[0]));
-	std::string str = StringUtils::format("tips：%s", tipswords[r].c_str());
+
+	std::vector<std::string> vec_tips;
+	for (unsigned int i = 0; i < sizeof(tipswords0) / sizeof(tipswords0[0]); i++)
+	{
+		vec_tips.push_back(tipswords0[i]);
+	}
+	for (unsigned int i = 0; i < sizeof(tipswords1) / sizeof(tipswords1[0]); i++)
+	{
+		vec_tips.push_back(tipswords1[i]);
+	}
+
+	for (unsigned int i = 0; i < sizeof(tipswords2) / sizeof(tipswords2[0]); i++)
+	{
+		vec_tips.push_back(tipswords2[i]);
+	}
+	for (unsigned int i = 0; i < sizeof(tipswords3) / sizeof(tipswords3[0]); i++)
+	{
+		vec_tips.push_back(tipswords3[i]);
+	}
+	int tsize = vec_tips.size();
+	int r = GlobalData::createRandomNum(tsize);
+	std::string str = StringUtils::format("tips：%s", vec_tips[r].c_str());
 	tips->setString(CommonFuncs::gbk2utf(str.c_str()));
 
 	float distime = 3.5f;

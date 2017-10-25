@@ -273,10 +273,12 @@ void OutDoor::onStorageItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			takeout((PackageData*)node->getUserData());
 			updata();
 		}
+		m_isLongPress = false;
 	}
 	else if (type == ui::Widget::TouchEventType::CANCELED)
 	{
 		unschedule(schedule_selector(OutDoor::longTouchUpdate));
+		m_isLongPress = false;
 	}
 }
 

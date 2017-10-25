@@ -9,12 +9,16 @@
 #include "NpcLayer.h"
 #include "HintBox.h"
 #include "MyMenu.h"
+#include "ResDetailsLayer.h"
 
 ExchangeLayer::ExchangeLayer()
 {
 	lastMyGoodsSrollViewHeight = -1;
 	lastNpcGoodsSrollViewHeight = -1;
 	isExgOk = false;
+	m_isLongPress = false;
+	m_longTouchNode = NULL;
+	clickwhere = 0;
 }
 
 
@@ -235,51 +239,35 @@ void ExchangeLayer::delayShowExgData(float dt)
 
 }
 
-void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref* pSender)
+void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
-	int size0 = npcGoodsData.size();
-
 	Node* node = (Node*)pSender;
-	PackageData* data = (PackageData*)node->getUserData();
-
-	int count = data->count - 1;
-	int datatag = node->getTag();
-
-	PackageData pdata = *data;
-	pdata.count = 1;
-	if (count <= 0)
+	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
-
-		if (datatag >= size0)
-		{
-			myExgData.erase(myExgData.begin() + (datatag - size0));
-			updateMyGoods(pdata, 0);
-		}
-		else
-		{
-	
-			npcGoodsData.erase(npcGoodsData.begin() + datatag);
-			updateMyGoods(pdata, 1);
-		}
-		
-	}
-	else
-	{
-		if (datatag >= size0)
-		{
-			updateMyGoods(pdata, 0);
-		}
-		else
-		{
-			updateMyGoods(pdata, 1);
-		}
-
-		data->count--;
+		m_longTouchNode = node;
+		schedule(schedule_selector(ExchangeLayer::longTouchUpdate), 1.0f);
+		clickwhere = 4;
 	}
 
-	updata();
+	else if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+		if (!m_isLongPress)
+		{
+			PackageData* data = (PackageData*)node->getUserData();
+			giveHero(data->strid);
+			updata();
+		}
+		m_isLongPress = false;
+		clickwhere = 0;
+	}
+	else if (type == ui::Widget::TouchEventType::CANCELED)
+	{
+		unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+		m_isLongPress = false;
+		clickwhere = 0;
+	}
 }
 
 void ExchangeLayer::updateMyGoods(PackageData data, int type)
@@ -371,48 +359,235 @@ void ExchangeLayer::updateNpcGoods(PackageData data, int type)
 	}
 }
 
-void ExchangeLayer::onMyGoodsItem(cocos2d::Ref* pSender)
+void ExchangeLayer::onMyGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
-	SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
-
-	int size0 = myGoodsData.size();
 
 	Node* node = (Node*)pSender;
-	PackageData* data = (PackageData*)node->getUserData();
-	int datatag = node->getTag();
-	int count = data->count - 1;
-
-	PackageData pdata = *data;
-	pdata.count = 1;
-
-
-	if (count <= 0)
+	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
-		if (datatag >= size0)
+		m_longTouchNode = node;
+		schedule(schedule_selector(ExchangeLayer::longTouchUpdate), 1.0f);
+		clickwhere = 3;
+	}
+
+	else if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+		if (!m_isLongPress)
 		{
-			npcExgData.erase(npcExgData.begin() + (datatag - size0));
-			updateNpcGoods(pdata, 1);
+			PackageData* data = (PackageData*)node->getUserData();
+			giveNpc(data->strid);
+			updata();
+		}
+		m_isLongPress = false;
+		clickwhere = 0;
+	}
+	else if (type == ui::Widget::TouchEventType::CANCELED)
+	{
+		unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+		m_isLongPress = false;
+		clickwhere = 0;
+	}
+}
+
+void ExchangeLayer::giveNpc(std::string strid)
+{
+	PackageData* data = NULL;
+	int size0 = myGoodsData.size();
+
+	int datatag = 0;
+
+	if (m_isLongPress)
+	{
+		bool ismine = true;
+		if (m_longTouchNode != NULL)
+		{
+			datatag = m_longTouchNode->getTag();
+			if (datatag >= size0)
+				ismine = false;
+		}
+
+		if (ismine)
+		{
+			for (unsigned int i = 0; i < myGoodsData.size(); i++)
+			{
+				if (myGoodsData[i].strid.compare(strid) == 0)
+				{
+					datatag = i;
+					data = &myGoodsData[i];
+					break;
+				}
+			}
 		}
 		else
 		{
-			myGoodsData.erase(myGoodsData.begin() + datatag);
-			updateNpcGoods(pdata, 0);
+			for (unsigned int i = 0; i < npcExgData.size(); i++)
+			{
+				if (npcExgData[i].strid.compare(strid) == 0)
+				{
+					datatag = i + size0;
+					data = &npcExgData[i];
+					break;
+				}
+			}
 		}
+	}
+	else
+	{
+		if (m_longTouchNode != NULL)
+		{
+			datatag = m_longTouchNode->getTag();
+			data = (PackageData*)m_longTouchNode->getUserData();
+		}
+	}
+
+	if (data != NULL)
+	{
+		PackageData pdata = *data;
+
+		if (data->count - 1 <= 0)
+		{
+			if (datatag >= size0)
+			{
+				npcExgData.erase(npcExgData.begin() + (datatag - size0));
+				updateNpcGoods(pdata, 1);
+			}
+			else
+			{
+				myGoodsData.erase(myGoodsData.begin() + datatag);
+				updateNpcGoods(pdata, 0);
+			}
+		}
+		else
+		{
+			if (datatag >= size0)
+			{
+				updateNpcGoods(pdata, 1);
+			}
+			else
+			{
+				updateNpcGoods(pdata, 0);
+			}
+			data->count--;
+		}
+	}
+}
+
+void ExchangeLayer::giveHero(std::string strid)
+{
+	int size0 = npcGoodsData.size();
+
+	int datatag = 0;
+	PackageData* data;
+	if (m_longTouchNode != NULL)
+	{
+		datatag = m_longTouchNode->getTag();
+		data = (PackageData*)m_longTouchNode->getUserData();
+	}
+	PackageData pdata = *data;
+	if (data->count - 1<= 0)
+	{
+		if (datatag >= size0)
+		{
+			myExgData.erase(myExgData.begin() + (datatag - size0));
+			updateMyGoods(pdata, 0);
+		}
+		else
+		{
+
+			npcGoodsData.erase(npcGoodsData.begin() + datatag);
+			updateMyGoods(pdata, 1);
+		}
+
 	}
 	else
 	{
 		if (datatag >= size0)
 		{
-			updateNpcGoods(pdata, 1);
+			updateMyGoods(pdata, 0);
 		}
 		else
 		{
-			updateNpcGoods(pdata, 0);
+			updateMyGoods(pdata, 1);
 		}
 		data->count--;
 	}
+}
 
-	updata();
+int ExchangeLayer::getCountByResId(std::string strid, int inwhere)
+{
+	int count = 0;
+
+	if (inwhere == 0)
+	{
+		bool ismine = true;
+		int size0 = myGoodsData.size();
+		if (m_longTouchNode != NULL)
+		{
+			int tag = m_longTouchNode->getTag();
+			if (tag >= size0)
+			{
+				ismine = false;
+			}
+		}
+
+		if (ismine)
+		{
+			for (unsigned int i = 0; i < myGoodsData.size(); i++)
+			{
+				if (myGoodsData[i].strid.compare(strid) == 0)
+				{
+					count += myGoodsData[i].count;
+				}
+			}
+		}
+		else
+		{
+			for (unsigned int i = 0; i < npcExgData.size(); i++)
+			{
+				if (npcExgData[i].strid.compare(strid) == 0)
+				{
+					count += npcExgData[i].count;
+				}
+			}
+		}
+	}
+	else if (inwhere == 1)
+	{
+		bool isnpc = true;
+		int size0 = npcGoodsData.size();
+		if (m_longTouchNode != NULL)
+		{
+			int tag = m_longTouchNode->getTag();
+			if (tag >= size0)
+			{
+				isnpc = false;
+			}
+		}
+
+		if (isnpc)
+		{
+			for (unsigned int i = 0; i < npcGoodsData.size(); i++)
+			{
+				if (npcGoodsData[i].strid.compare(strid) == 0)
+				{
+					count += npcGoodsData[i].count;
+				}
+			}
+		}
+		else
+		{
+			for (unsigned int i = 0; i < myExgData.size(); i++)
+			{
+				if (myExgData[i].strid.compare(strid) == 0)
+				{
+					count += myExgData[i].count;
+				}
+			}
+		}
+	}
+	return count;
 }
 
 void ExchangeLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -585,36 +760,32 @@ void ExchangeLayer::updataMyGoodsUI()
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata->strid].qu);
 		}
 
-		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(ExchangeLayer::onMyGoodsItem, this));
-		boxItem->setUserData(allMydata[i]);
-		boxItem->setTag(i);
-		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
-		MyMenu* menu = MyMenu::create();
-		menu->addChild(boxItem);
-		menu->setTouchlimit(m_myGoodsSrollView);
-		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("pitem%d", i);
-		m_myGoodsSrollView->addChild(menu, 0, name);
+		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onMyGoodsItem, this));
+		boxItem->setTouchEnabled(true);
+		boxItem->setTag(i);
+		m_myGoodsSrollView->addChild(boxItem, 0, name);
+		boxItem->setUserData(allMydata[i]);
+		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
 
 		std::string str = StringUtils::format("ui/%s.png", tmpdata->strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
+
+		cocos2d::ui::ImageView* res = cocos2d::ui::ImageView::create(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addChild(res, 0, "res");
+		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
+
 		str = StringUtils::format("%d", tmpdata->count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
+
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
+		boxItem->addChild(reslbl, 0, "lbl");
+		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 25, 25));
+
 		if (i >= size0)
 		{
 			Sprite * whos = Sprite::createWithSpriteFrameName("ui/atrselected.png");
-			whos->setPosition(Vec2(box->getContentSize().width - whos->getContentSize().width/2, box->getContentSize().height - whos->getContentSize().height/2));
-			box->addChild(whos);
+			whos->setPosition(Vec2(boxItem->getContentSize().width - whos->getContentSize().width / 2, boxItem->getContentSize().height - whos->getContentSize().height / 2));
+			boxItem->addChild(whos);
 		}
 	}
 }
@@ -664,39 +835,33 @@ void ExchangeLayer::updataNpcGoodsUI()
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata->strid].qu);
 		}
 
-		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
-
-		MenuItemSprite* boxItem = MenuItemSprite::create(
-			box,
-			box,
-			box,
-			CC_CALLBACK_1(ExchangeLayer::onNpcGoodsItem, this));
-		boxItem->setUserData(allNpcdata[i]);
-		boxItem->setTag(i);
-		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
-		MyMenu* menu = MyMenu::create();
-		menu->addChild(boxItem);
-		menu->setTouchlimit(m_npcGoodsSrollView);
-
-		menu->setPosition(Vec2(0, 0));
 		std::string name = StringUtils::format("pitem%d", i);
-		m_npcGoodsSrollView->addChild(menu, 0, name);
+		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addTouchEventListener(CC_CALLBACK_2(ExchangeLayer::onNpcGoodsItem, this));
+		boxItem->setTouchEnabled(true);
+		boxItem->setTag(i);
+		m_npcGoodsSrollView->addChild(boxItem, 0, name);
+		boxItem->setUserData(allNpcdata[i]);
+		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 140));
 
 		std::string str = StringUtils::format("ui/%s.png", tmpdata->strid.c_str());
-		Sprite * res = Sprite::createWithSpriteFrameName(str);
-		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
-		box->addChild(res);
+
+		cocos2d::ui::ImageView* res = cocos2d::ui::ImageView::create(str, cocos2d::ui::Widget::TextureResType::PLIST);
+		boxItem->addChild(res, 0, "res");
+		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
 
 		str = StringUtils::format("%d", tmpdata->count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
-		box->addChild(reslbl);
+
+		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
+		boxItem->addChild(reslbl, 0, "lbl");
+		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 25, 25));
+
 
 		if (i >= size0)
 		{
 			Sprite * whos = Sprite::createWithSpriteFrameName("ui/settingselect.png");
-			whos->setPosition(Vec2(box->getContentSize().width - whos->getContentSize().width / 2, box->getContentSize().height - whos->getContentSize().height / 2));
-			box->addChild(whos);
+			whos->setPosition(Vec2(boxItem->getContentSize().width - whos->getContentSize().width / 2, boxItem->getContentSize().height - whos->getContentSize().height / 2));
+			boxItem->addChild(whos);
 		}
 	}
 }
@@ -795,6 +960,20 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 				break;
 			}
 
+		}
+	}
+}
+
+void ExchangeLayer::longTouchUpdate(float delay){
+	m_isLongPress = true;
+	if (m_longTouchNode != NULL){
+		std::string name = m_longTouchNode->getName();
+		//if (name.find("resitem") != std::string::npos)
+		{
+			unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+			ResDetailsLayer::whereClick = clickwhere;
+			PackageData* data = (PackageData*)m_longTouchNode->getUserData();
+			this->addChild(ResDetailsLayer::create(data));
 		}
 	}
 }

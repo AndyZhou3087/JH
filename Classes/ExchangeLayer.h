@@ -18,12 +18,17 @@ public:
 	void updataMyGoodsUI();
 	void updataNpcGoodsUI();
 
+	void giveNpc(std::string strid);
+	void giveHero(std::string strid);
+
+	int getCountByResId(std::string strid, int inwhere);
+	void updata();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void updata();
-	void onNpcGoodsItem(cocos2d::Ref* pSender);
-	void onMyGoodsItem(cocos2d::Ref* pSender);
+
+	void onNpcGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onMyGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void updateMyGoods(PackageData data, int type);//type:0-是我的物品，1-npc的物品
 	void updateNpcGoods(PackageData data, int type);//type:0-是我的物品，1-npc的物品
 
@@ -31,6 +36,8 @@ private:
 	void randExchgRes(std::vector<std::string> &vec_exchgres);
 
 	void delayShowExgData(float dt);
+
+	void longTouchUpdate(float dt);
 private:
 	cocos2d::ui::ScrollView* m_npcGoodsSrollView;
 	cocos2d::ui::ScrollView* m_myGoodsSrollView;
@@ -45,6 +52,9 @@ private:
 	std::vector<PackageData> npcExgData;
 	std::vector<PackageData> myExgData;
 	bool isExgOk;
+	bool m_isLongPress;
+	Node* m_longTouchNode;
+	int clickwhere;//3--mygoods,4--npcgoods
 };
 #endif
 

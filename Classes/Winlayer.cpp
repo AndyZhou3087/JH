@@ -131,9 +131,10 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			{
 				if (GlobalData::vec_achiveData[i].type == A_6)
 				{
-					if (plotdata->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0)
+					if (plotdata->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0 && GlobalData::vec_achiveData[i].finish != -1)
 					{
-						GlobalData::doAchive(A_6, 1);
+						GlobalData::vec_achiveData[i].finish = 1;
+						GlobalData::saveAchiveData();
 					}
 				}
 			}
@@ -394,8 +395,12 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 		if (GlobalData::vec_achiveData[i].type == A_10)
 		{
-			int fcount = atoi(GlobalData::vec_achiveData[i].vec_para[1].c_str());
-			GlobalData::doAchive(A_10, g_hero->getGfCountByLv(fcount));
+			if (GlobalData::vec_achiveData[i].finish != -1)
+			{
+				int nlv = atoi(GlobalData::vec_achiveData[i].vec_para[0].c_str());
+				GlobalData::vec_achiveData[i].finish = g_hero->getGfCountByLv(nlv);
+				GlobalData::saveAchiveData();
+			}
 		}
 	}
 

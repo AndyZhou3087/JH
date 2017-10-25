@@ -674,7 +674,7 @@ void NpcLayer::onItemExchange(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	{
 		Node* node = (Node*)pSender;
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[node->getTag()];
-		g_gameLayer->addChild(ExchangeLayer::create(npcid), 4);
+		g_gameLayer->addChild(ExchangeLayer::create(npcid), 4, "exchangelayer");
 	}
 }
 
@@ -908,9 +908,10 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				{
 					if (GlobalData::vec_achiveData[i].type == A_6)
 					{
-						if (plotData->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0)
+						if (plotData->id.compare(GlobalData::vec_achiveData[i].vec_para[0]) == 0 && GlobalData::vec_achiveData[i].finish != -1)
 						{
-							GlobalData::doAchive(A_6, 1);
+							GlobalData::vec_achiveData[i].finish = 1;
+							GlobalData::saveAchiveData();
 						}
 					}
 				}

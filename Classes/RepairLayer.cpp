@@ -386,8 +386,11 @@ void RepairLayer::finishAnim(Ref* pSender)
 			{
 				if (GlobalData::vec_achiveData[i].type == A_9)
 				{
-					if (GlobalData::vec_achiveData[i].vec_para[0].compare(data->strid) == 0)
-						GlobalData::doAchive(A_9, data->slv);
+					if (GlobalData::vec_achiveData[i].vec_para[0].compare(data->strid) == 0 && GlobalData::vec_achiveData[i].finish != -1)
+					{
+						GlobalData::vec_achiveData[i].finish = data->slv;
+						GlobalData::saveAchiveData();
+					}
 				}
 			}
 		}

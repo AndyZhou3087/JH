@@ -109,9 +109,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//读取组合功法配置文件
 	GlobalData::loadMixGfJsonData();
 
-	//读取成就配置文件
-	GlobalData::loadAchiveJsonData();
-
 #if defined(CC_PLATFORM_IOS) && defined(ANALYTICS)
     MOBCLICKCPP_START_WITH_APPKEY_AND_CHANNEL("59264ff476661347e2000897", "jh1");
 #endif
