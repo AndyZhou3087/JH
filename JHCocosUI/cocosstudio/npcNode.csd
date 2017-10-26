@@ -17,11 +17,11 @@
             <FileData Type="MarkedSubImage" Path="ui/npcheadbox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="-2022883638" Tag="23" IconVisible="False" LeftMargin="-301.9988" RightMargin="181.9988" TopMargin="-84.0014" BottomMargin="-35.9986" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="-2022883638" Tag="23" IconVisible="False" LeftMargin="-341.9988" RightMargin="141.9988" TopMargin="-124.0014" BottomMargin="-75.9986" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="122" Scale9Height="122" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-241.9988" Y="24.0014" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="0.6000" ScaleY="0.6000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
@@ -37,8 +37,8 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/npcrsi2.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcname" ActionTag="2031208432" Tag="107" IconVisible="False" LeftMargin="-277.9983" RightMargin="205.9983" TopMargin="37.2679" BottomMargin="-62.2679" FontSize="23" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="72.0000" Y="25.0000" />
+          <AbstractNodeData Name="npcname" ActionTag="2031208432" Tag="107" IconVisible="False" LeftMargin="-277.9983" RightMargin="205.9983" TopMargin="37.7679" BottomMargin="-61.7679" FontSize="23" LabelText="周伯通" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="72.0000" Y="24.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-241.9983" Y="-49.7679" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -282,8 +282,8 @@
             <PreSize X="0.0000" Y="0.0000" />
             <ImageFileData Type="MarkedSubImage" Path="ui/buildprogressbar.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-178.5259" RightMargin="61.5259" TopMargin="27.6807" BottomMargin="-52.6807" FontSize="23" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="117.0000" Y="25.0000" />
+          <AbstractNodeData Name="actiontext" ActionTag="1317708936" VisibleForFrame="False" Tag="44" IconVisible="False" LeftMargin="-177.5259" RightMargin="61.5259" TopMargin="28.1807" BottomMargin="-52.1807" FontSize="23" LabelText="睡觉八小时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="116.0000" Y="24.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
             <Position X="-61.5259" Y="-40.1807" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />

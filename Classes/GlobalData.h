@@ -444,6 +444,7 @@ typedef struct
 	std::vector<std::string> vec_rwd;
 	std::string desc;
 	int finish;
+	int isshowanim;
 }AchiveData;
 
 class GlobalData
@@ -947,6 +948,16 @@ public:
 	static void saveAchiveData();
 
 	/****************************
+	获取保存的成就动画显示信息
+	*****************************/
+	static void getAchiveAnimData();
+
+	/****************************
+	保存成就动画显示信息
+	*****************************/
+	static void saveAchiveAnimData();
+
+	/****************************
 	成就信息
 	*****************************/
 	static void doAchive(int atype, int count);
@@ -1013,6 +1024,8 @@ public:
 	static int factionExp;
 	
 	static std::vector<AchiveData> vec_achiveData;
+
+	static std::vector<std::string> vec_showAchiveNames;
 
 	static bool isPopingScene;
 

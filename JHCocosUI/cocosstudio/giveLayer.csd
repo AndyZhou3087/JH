@@ -31,14 +31,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="1693856358" Tag="132" IconVisible="False" LeftMargin="94.3613" RightMargin="505.6387" TopMargin="469.0798" BottomMargin="690.9202" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="1693856358" Tag="132" IconVisible="False" LeftMargin="54.3613" RightMargin="465.6387" TopMargin="429.0798" BottomMargin="650.9202" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="122" Scale9Height="122" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="154.3613" Y="750.9202" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="0.6000" ScaleY="0.6000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2144" Y="0.5867" />
-            <PreSize X="0.1667" Y="0.0938" />
+            <PreSize X="0.2778" Y="0.1563" />
             <FileData Type="MarkedSubImage" Path="ui/n004.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="npcname" ActionTag="625943095" Tag="71" IconVisible="False" LeftMargin="220.9260" RightMargin="371.0740" TopMargin="499.0841" BottomMargin="736.9159" FontSize="42" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

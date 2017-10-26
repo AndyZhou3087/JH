@@ -351,6 +351,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			}
 		}
 	}
+
 	updata();
 	updataLV();
 
@@ -445,7 +446,7 @@ void Winlayer::updataLV()
 		{
 			g_hero->setLVValue(lv);
 			g_hero->setLifeValue(g_hero->getMaxLifeValue());
-			showHeroLvUp();
+			vec_lvup.push_back("herolvup");
 		}
 		GlobalData::doAchive(A_2, lv + 1);
 	}
@@ -456,9 +457,6 @@ void Winlayer::updataLV()
 			GlobalData::doAchive(A_2, g_hero->getLVValue() + 1);
 		}
 	}
-
-	iswglvup = false;
-	iswglvup = false;
 	for (int m = H_WG; m <= H_NG; m++)
 	{
 		lv = 0;
@@ -487,13 +485,15 @@ void Winlayer::updataLV()
 				{
 					gfData->lv = lv;
 					if (m == H_WG)
-						iswglvup = true;
+						vec_lvup.push_back("wglvup");
 					else
-						iswglvup = true;
+						vec_lvup.push_back("nglvup");
 				}
 			}
 		}
 	}
+	showLvUpAnim(0);
+
 }
 
 void Winlayer::onRewardItem(cocos2d::Ref* pSender)
@@ -850,12 +850,31 @@ void Winlayer::onExit()
 	Layer::onExit();
 }
 
-void Winlayer::showHeroLvUp()
+void Winlayer::showLvUpAnim(float dt)
 {
-	Sprite* lvUpSprite = Sprite::createWithSpriteFrameName("ui/herolvuptext.png");
-	lvUpSprite->setPosition(Vec2(360, 400));
-	this->addChild(lvUpSprite);
-	lvUpSprite->runAction(Spawn::create(MoveTo::create(3.0f, Vec2(360, 700)), FadeOut::create(3.0f), NULL));
+	this->removeChildByName("lvanim");
+	if (vec_lvup.size() <= 0)
+	{
+		return;
+	}
+	//Sprite* lvUpSprite = Sprite::createWithSpriteFrameName("ui/herolvuptext.png");
+	//lvUpSprite->setPosition(Vec2(360, 400));
+	//this->addChild(lvUpSprite);
+	//lvUpSprite->runAction(Spawn::create(MoveTo::create(3.0f, Vec2(360, 700)), FadeOut::create(3.0f), NULL));
+
+	Node* csbnode = CSLoader::createNode("lvupanim.csb");
+	csbnode->setPosition(Vec2(360, 640));
+	this->addChild(csbnode, 0, "lvanim");
+	cocos2d::ui::ImageView* textimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("textimg");
+	std::string imgstr = StringUtils::format("lvuppic/%s.png", vec_lvup[0].c_str());
+	textimg->loadTexture(imgstr, cocos2d::ui::Widget::TextureResType::LOCAL);
+	auto action = CSLoader::createTimeline("lvupanim.csb");
+	csbnode->runAction(action);
+	action->gotoFrameAndPlay(0, false);
+
+	vec_lvup.erase(vec_lvup.begin());
+	float delaytime = action->getEndFrame()*1.0f / (action->getTimeSpeed() * 60);
+	this->schedule(schedule_selector(Winlayer::showLvUpAnim), delaytime + 1.5f, vec_lvup.size(), 0);
 }
 
 void Winlayer::showNewerGuide(int step)

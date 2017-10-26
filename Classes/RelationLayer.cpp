@@ -98,6 +98,7 @@ void RelationLayer::delayShowData(float dt)
 		cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)nodeitem->getChildByName("head");
 		std::string headstr = StringUtils::format("ui/%s.png", npcid.c_str());
 		headimg->loadTexture(headstr, cocos2d::ui::Widget::TextureResType::PLIST);
+		headimg->setScale(0.32f);
 
 		cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)nodeitem->getChildByName("name");
 		npcname->setString(GlobalData::map_npcs[npcid].name);

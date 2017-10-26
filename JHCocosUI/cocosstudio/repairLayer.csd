@@ -16,14 +16,14 @@
             <PreSize X="1.0000" Y="0.8594" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="27.8697" RightMargin="572.1303" TopMargin="254.3181" BottomMargin="905.6818" ctype="SpriteObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="2039758454" Tag="32" IconVisible="False" LeftMargin="-12.1303" RightMargin="532.1303" TopMargin="214.3181" BottomMargin="865.6818" ctype="SpriteObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="87.8697" Y="965.6818" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="0.6000" ScaleY="0.6000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.1220" Y="0.7544" />
-            <PreSize X="0.1667" Y="0.0938" />
+            <PreSize X="0.2778" Y="0.1563" />
             <FileData Type="MarkedSubImage" Path="ui/n092.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>

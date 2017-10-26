@@ -17,11 +17,11 @@
             <FileData Type="MarkedSubImage" Path="ui/relationheadbox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="head" ActionTag="-1137328656" Tag="127" IconVisible="False" LeftMargin="-320.2671" RightMargin="200.2671" TopMargin="-68.5159" BottomMargin="-51.4841" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="head" ActionTag="-1137328656" Tag="127" IconVisible="False" LeftMargin="-360.2671" RightMargin="160.2671" TopMargin="-106.5158" BottomMargin="-93.4842" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="122" Scale9Height="122" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-260.2671" Y="8.5159" />
-            <Scale ScaleX="0.5500" ScaleY="0.5500" />
+            <Position X="-260.2671" Y="6.5158" />
+            <Scale ScaleX="0.3200" ScaleY="0.3200" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
@@ -38,8 +38,8 @@
             <FileData Type="MarkedSubImage" Path="ui/xline.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="name" ActionTag="312641662" Tag="129" IconVisible="False" LeftMargin="-199.2880" RightMargin="94.2880" TopMargin="-25.8400" BottomMargin="-12.1600" FontSize="35" LabelText="田伯光" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="105.0000" Y="38.0000" />
+          <AbstractNodeData Name="name" ActionTag="312641662" Tag="129" IconVisible="False" LeftMargin="-199.7880" RightMargin="93.7880" TopMargin="-24.8400" BottomMargin="-11.1600" FontSize="35" LabelText="田伯光" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="106.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-146.7880" Y="6.8400" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -60,8 +60,8 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/npcprope0.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="relation" ActionTag="-1170326845" Tag="131" IconVisible="False" LeftMargin="21.2825" RightMargin="-92.2825" TopMargin="-25.8521" BottomMargin="-12.1479" FontSize="35" LabelText="好友" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="71.0000" Y="38.0000" />
+          <AbstractNodeData Name="relation" ActionTag="-1170326845" Tag="131" IconVisible="False" LeftMargin="20.2825" RightMargin="-93.2825" TopMargin="-24.8521" BottomMargin="-11.1479" FontSize="35" LabelText="好友" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="73.0000" Y="36.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="56.7825" Y="6.8521" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />

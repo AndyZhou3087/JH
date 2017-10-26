@@ -60,6 +60,7 @@ bool ExchangeLayer::init(std::string npcid)
 	cocos2d::ui::ImageView* npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());
 	npchead->loadTexture(npcheadstr, cocos2d::ui::TextureResType::PLIST);
+	npchead->setScale(0.6f);
 
 	cocos2d::ui::Text* npcname = (cocos2d::ui::Text*)csbnode->getChildByName("npcname");
 	npcname->setString(GlobalData::map_npcs[npcid].name);

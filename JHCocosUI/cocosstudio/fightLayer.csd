@@ -66,24 +66,24 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="heroicon" ActionTag="-1667479442" Tag="244" IconVisible="False" LeftMargin="175.3338" RightMargin="424.6662" TopMargin="547.0000" BottomMargin="613.0000" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="52" Scale9Height="62" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="heroicon" ActionTag="-1667479442" Tag="244" IconVisible="False" LeftMargin="135.3338" RightMargin="384.6662" TopMargin="507.0000" BottomMargin="573.0000" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="132" Scale9Height="142" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="235.3338" Y="673.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="0.6000" ScaleY="0.6000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3269" Y="0.5258" />
-            <PreSize X="0.1667" Y="0.0938" />
+            <PreSize X="0.2778" Y="0.1563" />
             <FileData Type="MarkedSubImage" Path="ui/fhero1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="npcicon" ActionTag="900521098" Tag="243" IconVisible="False" LeftMargin="425.3698" RightMargin="174.6302" TopMargin="547.0002" BottomMargin="612.9998" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="52" Scale9Height="62" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="npcicon" ActionTag="900521098" Tag="243" IconVisible="False" LeftMargin="385.3698" RightMargin="134.6302" TopMargin="507.0002" BottomMargin="572.9998" LeftEage="34" RightEage="34" TopEage="29" BottomEage="29" Scale9OriginX="34" Scale9OriginY="29" Scale9Width="132" Scale9Height="142" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="485.3698" Y="672.9998" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="0.6000" ScaleY="0.6000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.6741" Y="0.5258" />
-            <PreSize X="0.1667" Y="0.0938" />
+            <PreSize X="0.2778" Y="0.1563" />
             <FileData Type="MarkedSubImage" Path="ui/n004.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="heroname" ActionTag="-899043201" Tag="128" IconVisible="False" LeftMargin="72.0822" RightMargin="555.9178" TopMargin="634.5000" BottomMargin="614.5000" FontSize="30" LabelText="小虾米" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

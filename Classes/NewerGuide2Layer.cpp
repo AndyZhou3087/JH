@@ -50,14 +50,14 @@ bool NewerGuide2Layer::init(int step, std::vector<Node*> stencilNodes)
 
 	m_step = step;
 	m_stencilNodes = stencilNodes;
-	Node* csbnode = CSLoader::createNode("newerGuide2Layer.csb");
+	Node* csbnode = CSLoader::createNode("npctalkLayer.csb");
 	this->addChild(csbnode, 2);
 
-	cocos2d::ui::Widget* newerguider = (cocos2d::ui::Widget*)csbnode->getChildByName("node")->getChildByName("newerguider");
+	cocos2d::ui::Widget* newerguider = (cocos2d::ui::Widget*)csbnode->getChildByName("node")->getChildByName("npcimg");
 	newerguider->setOpacity(150);
 	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("node")->getChildByName("heroimg");
 
-	std::string heroidstr = StringUtils::format("ui/tophero%d.png", g_hero->getHeadID());
+	std::string heroidstr = StringUtils::format("ui/fhero%d.png", g_hero->getHeadID());
 	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
 
 	wordtext = (cocos2d::ui::Text*)csbnode->getChildByName("node")->getChildByName("text");

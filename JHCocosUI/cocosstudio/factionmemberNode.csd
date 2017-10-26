@@ -16,11 +16,11 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/factionmemberitem1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="headimg" ActionTag="-950519847" Tag="105" IconVisible="False" LeftMargin="-331.0411" RightMargin="211.0411" TopMargin="-62.8878" BottomMargin="-57.1122" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
-            <Size X="120.0000" Y="120.0000" />
+          <AbstractNodeData Name="headimg" ActionTag="-950519847" Tag="105" IconVisible="False" LeftMargin="-371.0410" RightMargin="171.0410" TopMargin="-101.8878" BottomMargin="-98.1122" LeftEage="39" RightEage="39" TopEage="39" BottomEage="39" Scale9OriginX="39" Scale9OriginY="39" Scale9Width="122" Scale9Height="122" ctype="ImageViewObjectData">
+            <Size X="200.0000" Y="200.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-271.0411" Y="2.8878" />
-            <Scale ScaleX="0.5200" ScaleY="0.5200" />
+            <Position X="-271.0410" Y="1.8878" />
+            <Scale ScaleX="0.3200" ScaleY="0.3200" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />

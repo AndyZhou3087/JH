@@ -354,7 +354,7 @@ bool FactionMemberItem::init(FactionMemberData *data)
 	std::string headstr = StringUtils::format("ui/fhero%d.png", m_data->herotype);
 	cocos2d::ui::ImageView* headimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("headimg");
 	headimg->loadTexture(headstr, cocos2d::ui::TextureResType::PLIST);
-	headimg->setScale(0.52f);
+	headimg->setScale(0.32f);
 
 	cocos2d::ui::Text* nicknamelbl = (cocos2d::ui::Text*)csbnode->getChildByName("name");
 	nicknamelbl->setString(data->nickname);

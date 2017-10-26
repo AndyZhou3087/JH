@@ -19,6 +19,8 @@
 #include "HintBox.h"
 #include "WaitingProgress.h"
 #include "LoginRewardLayer.h"
+#include "AchiveDoneAnimLayer.h"
+
 USING_NS_CC;
 
 Nature* g_nature;
@@ -101,6 +103,7 @@ bool GameScene::init()
 	GlobalData::loadAchiveJsonData();
 
 	GlobalData::getAchiveData();
+	GlobalData::getAchiveAnimData();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -154,6 +157,8 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::updata), 1.0f);
 	this->schedule(schedule_selector(GameScene::timerSaveData), 5.0f);
 	this->schedule(schedule_selector(GameScene::checkiflive), 0.1f);
+	this->schedule(schedule_selector(GameScene::checkAchiveIsDone), 1.0f);
+	
 	
 	//处理制暖
 	std::string warmConfigStr = GlobalData::getMakeWarmConfig();
@@ -562,4 +567,26 @@ void GameScene::delayChangeStartScene(float dt)
 	Scene* scene = StartScene::createScene();
 
 	Director::getInstance()->replaceScene(scene);
+}
+
+void GameScene::checkAchiveIsDone(float dt)
+{
+	GlobalData::vec_showAchiveNames.clear();
+	for (unsigned i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		AchiveData* data = &GlobalData::vec_achiveData[i];
+		int needcount = GlobalData::getAchiveFinishCount(*data);
+		if (data->finish >= needcount && data->isshowanim == 0)
+		{
+			data->isshowanim = 1;
+			GlobalData::vec_showAchiveNames.push_back(data->name);
+		}
+	}
+
+	if (GlobalData::vec_showAchiveNames.size() > 0)
+	{
+		this->unschedule(schedule_selector(GameScene::checkAchiveIsDone));
+		AchiveDoneAnimLayer* aalayer = AchiveDoneAnimLayer::create();
+		Director::getInstance()->getRunningScene()->addChild(aalayer, 100);
+	}
 }

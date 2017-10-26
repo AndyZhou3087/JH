@@ -50,6 +50,11 @@ public:
 	*****************************/
 	void showGOOut(float dt);
 
+	/****************************
+	检查成就完成
+	*****************************/
+	void checkAchiveIsDone(float dt);
+
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	Node* homeLayer;//角色家

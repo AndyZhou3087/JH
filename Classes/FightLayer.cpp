@@ -81,7 +81,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	cocos2d::ui::ImageView* heroicon = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroicon");
 	std::string heroiconstr = StringUtils::format("ui/fhero%d.png", g_hero->getHeadID());
 	heroicon->loadTexture(heroiconstr, cocos2d::ui::TextureResType::PLIST);
-
+	heroicon->setScale(0.6f);
 	// NPC 图标
 	npchead = (cocos2d::ui::ImageView*)csbnode->getChildByName("npcicon");
 	std::string npcheadstr = StringUtils::format("ui/%s.png", m_npcid.c_str());

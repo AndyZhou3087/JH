@@ -63,6 +63,7 @@ std::vector<FactionMemberData> GlobalData::vec_factionMemberData;
 int GlobalData::factionExp = 0;
 
 std::vector<AchiveData> GlobalData::vec_achiveData;
+std::vector<std::string> GlobalData::vec_showAchiveNames;
 
 bool GlobalData::unlockhero[4] = {true, false, false, false};
 
@@ -1165,6 +1166,7 @@ void GlobalData::loadAchiveJsonData()
 			}
 		}
 		data.finish = 0;
+		data.isshowanim = 0;
 		vec_achiveData.push_back(data);
 	}
 }
@@ -2007,6 +2009,52 @@ int GlobalData::getAchiveFinishCount(AchiveData adata)
 	return needcount;
 }
 
+void GlobalData::getAchiveAnimData()
+{
+	std::string str = GameDataSave::getInstance()->getAchiveAnimData();
+	if (str.length() > 0)
+	{
+		std::vector<std::string> vec_retstr;
+		CommonFuncs::split(str, vec_retstr, ";");
+		for (unsigned int i = 0; i < vec_retstr.size(); i++)
+		{
+			GlobalData::vec_achiveData[i].isshowanim = atoi(vec_retstr[i].c_str());
+		}
+	}
+}
+
+void GlobalData::saveAchiveAnimData()
+{
+	std::string str;
+	std::vector<AchiveData> tmp_saveAchives;
+	for (unsigned int i = 0; i < GlobalData::vec_achiveData.size(); i++)
+	{
+		tmp_saveAchives.push_back(GlobalData::vec_achiveData[i]);
+	}
+
+	int size = tmp_saveAchives.size();
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 1; j < size - i; j++)
+		{
+			if (atoi(tmp_saveAchives[j].id.c_str())< atoi(tmp_saveAchives[j - 1].id.c_str()))
+			{
+				AchiveData tempdata = tmp_saveAchives[j - 1];
+				tmp_saveAchives[j - 1] = tmp_saveAchives[j];
+				tmp_saveAchives[j] = tempdata;
+			}
+		}
+	}
+
+	for (unsigned int i = 0; i < tmp_saveAchives.size(); i++)
+	{
+		int isshow = tmp_saveAchives[i].isshowanim;
+		std::string onestr = StringUtils::format("%d;", isshow);
+		str.append(onestr);
+	}
+
+	GameDataSave::getInstance()->setAchiveAnimData(str.substr(0, str.length() - 1));
+}
 
 std::string GlobalData::addUidString(std::string val)
 {

@@ -62,11 +62,6 @@ private:
 
 	void onHostelAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRepair(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
-	void showTypeText(float dt);
-	void removeNpcWord(float dt);
-	void checkWordLblColor(std::string wordstr);
-	void fastShowWord();
-	void onTalkbg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	void checkUpateNpc(float dt);
 	void refreshNpcNode();
@@ -95,14 +90,9 @@ private:
 private:
 	Node* m_csbnode;
 	std::string m_addrstr;
-	UIScroll* m_talkScroll;
-	Label* m_wordlbl;
-	int m_wordcount;
-	bool isShowWord;
 	cocos2d::ui::ImageView* m_npctalkbg;
 	cocos2d::ui::ScrollView* m_scrollview;
 	std::vector<std::string> vec_wordstr;
-	int m_wordindex;
 	int m_plotindex;
 	int m_lastWxpPos;
 	int m_lastDgqbPos;

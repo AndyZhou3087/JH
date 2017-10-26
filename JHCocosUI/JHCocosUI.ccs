@@ -706,7 +706,7 @@
         <Project Name="mixDoneLayer.csd" Type="Layer" />
         <Project Name="mixGFNode.csd" Type="Node" />
         <Project Name="mixSuggestLayer.csd" Type="Layer" />
-        <Project Name="newerGuide2Layer.csd" Type="Layer" />
+        <Project Name="npctalkLayer.csd" Type="Layer" />
         <Project Name="noticeLayer.csd" Type="Layer" />
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />

@@ -693,6 +693,19 @@ public:
 	*****************************/
 	void setAchiveData(std::string strval);
 
+
+	/****************************
+	成就动画显示数据
+	return
+	*****************************/
+	std::string getAchiveAnimData();
+
+	/****************************
+	成就动画显示数据
+	@para
+	*****************************/
+	void setAchiveAnimData(std::string strval);
+
 private:
 	/****************************
 	加上userid后的字符串
