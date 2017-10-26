@@ -22,6 +22,7 @@ public:
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void onModity(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onSuccess();
 	void onErr(int errcode);

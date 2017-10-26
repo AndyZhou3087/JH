@@ -89,23 +89,17 @@ bool NpcTalkLayer::init(std::vector<std::string> vec_words, std::string npcid)
 			}
 		}
 		m_wordindex++;
-		if (m_wordindex % 2 == 0)
-		{
-			heroimg->setOpacity(150);
-			npcimg->setOpacity(255);
-		}
-		else
-		{
-			heroimg->setOpacity(255);
-			npcimg->setOpacity(150);
-		}
 
 		int size = m_wordslist.size();
 
-		if (size > 0 && m_wordindex >= size)
+		if (m_wordindex >= size)
 		{
 			this->removeFromParentAndCleanup(true);
 			return;
+		}
+		else
+		{
+			checkWordLblColor(vec_words[m_wordindex]);
 		}
 	};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -155,10 +149,8 @@ void NpcTalkLayer::checkWordLblColor(std::string wordstr)
 			m_wordlbl->getLetter(i)->setColor(Color3B(27, 141, 0));
 		}
 	}
-	float dt = 0.2f;
-	if (lasttalklbl != NULL)
-		dt = 1.0f;
-	this->scheduleOnce(schedule_selector(NpcTalkLayer::showTypeText), dt);
+
+	this->scheduleOnce(schedule_selector(NpcTalkLayer::showTypeText), 0.1f);
 }
 
 void NpcTalkLayer::showTypeText(float dt)
@@ -188,15 +180,15 @@ void NpcTalkLayer::showTypeText(float dt)
 		int len = m_wordlbl->getString().length();
 		if (m_wordcount >= len)
 		{
-			m_wordindex++;
+			//m_wordindex++;
 			m_wordcount = 0;
 			isShowWord = false;
 			m_wordlbl->unschedule("schedule_typecallback");
-			int size = m_wordslist.size();
-			if (m_wordindex < size)
-			{
-				checkWordLblColor(m_wordslist[m_wordindex]);
-			}
+			//int size = m_wordslist.size();
+			//if (m_wordindex < size)
+			//{
+			//	checkWordLblColor(m_wordslist[m_wordindex]);
+			//}
 		}
 
 	}, 0.1f, "schedule_typecallback");
@@ -206,7 +198,6 @@ void NpcTalkLayer::fastShowWord()
 {
 	isShowWord = false;
 	m_wordcount = 0;
-	m_wordindex++;
 
 	this->unscheduleAllCallbacks();
 	m_wordlbl->unscheduleAllCallbacks();
@@ -221,6 +212,4 @@ void NpcTalkLayer::fastShowWord()
 	{
 		return;
 	}
-
-	checkWordLblColor(m_wordslist[m_wordindex]);
 }

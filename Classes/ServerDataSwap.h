@@ -32,7 +32,7 @@ public:
 	void getFactionList();
 	void requestFaction(int factionid);
 	void getFactionMembers(int factionid);
-
+	void modifyFaciton(int factionid, std::string name, int lvlimit, int sexlimit, std::string desc);
 	void joinFaction(int factionid, int requesterId, int requestertype);
 	void kickFaction(int factionid, int requesterId, int requestertype);
 	void promotionFaction(int factionid, int requesterId, int requestertype, int position);
@@ -72,7 +72,7 @@ private:
 
 	void httpPromotionFactionCB(std::string retdata, int code, std::string tag);
 	void httpLeaveFactionCB(std::string retdata, int code, std::string tag);
-
+	void httpModifyFactionCB(std::string retdata, int code, std::string tag);
 	void httpContributionFactionCB(std::string retdata, int code, std::string tag);
 
 	void httpCancelFactionCB(std::string retdata, int code, std::string tag);

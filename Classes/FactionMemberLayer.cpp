@@ -10,6 +10,7 @@
 #include "MD5.h"
 #include "GameDataSave.h"
 #include "FactionKickComfirmLayer.h"
+#include "FactionCreateLayer.h"
 
 const std::string positionstr[] = { "", "帮主", "副帮主", "长老", "帮众" };
 FactionMemberLayer::FactionMemberLayer()
@@ -47,10 +48,17 @@ bool FactionMemberLayer::init(FactionListData *fldata)
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberLayer::onBack, this));
 
+	cocos2d::ui::Button* modifybtn = (cocos2d::ui::Button*)csbnode->getChildByName("moditybtn");
+	modifybtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberLayer::onModity, this));
+
 	cocos2d::ui::Button* actionbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 	actionbtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberLayer::onAction, this));
 	if (GlobalData::mytitle == 1)
+	{
+		actionbtn->setPositionX(220);
 		actionbtn->setTitleText(CommonFuncs::gbk2utf("解散帮派"));
+		modifybtn->setVisible(true);
+	}
 
 	cocos2d::ui::Widget *sliserContriBtn = (cocos2d::ui::Widget*)csbnode->getChildByName("sliverbtn");
 	sliserContriBtn->addTouchEventListener(CC_CALLBACK_2(FactionMemberLayer::onContribution, this));
@@ -133,6 +141,18 @@ void FactionMemberLayer::onAction(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		this->addChild(fclayer);
 	}
 }
+
+void FactionMemberLayer::onModity(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		FactionCreateLayer* fclayer = FactionCreateLayer::create(1, m_fldata);
+		g_gameLayer->addChild(fclayer, 5);
+		this->removeFromParentAndCleanup(true);
+	}
+}
+
 
 void FactionMemberLayer::onContribution(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {

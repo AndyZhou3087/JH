@@ -119,7 +119,7 @@ void FactionMainLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Widge
 			return;
 		}
 
-		FactionCreateLayer* flayer = FactionCreateLayer::create();
+		FactionCreateLayer* flayer = FactionCreateLayer::create(0);
 		this->addChild(flayer);
 	}
 }

@@ -394,6 +394,32 @@ void ServerDataSwap::createFaciton(std::string name, int lvlimit, int sexlimit, 
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpCreateFactionCB, this));
 }
 
+void ServerDataSwap::modifyFaciton(int factionid, std::string name, int lvlimit, int sexlimit, std::string desc)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_updatefaction?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&nickname=");
+	url.append(name);
+
+	std::string fidstr = StringUtils::format("%d", factionid);
+	url.append("&factionid=");
+	url.append(fidstr);
+
+	url.append("&levellower=");
+	std::string str = StringUtils::format("%d", lvlimit);
+	url.append(str);
+	url.append("&sex=");
+	str = StringUtils::format("%d", sexlimit);
+	url.append(str);
+	url.append("&remark=");
+	url.append(desc);
+
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpModifyFactionCB, this));
+}
+
 void ServerDataSwap::getFactionList()
 {
 	std::string url;
@@ -1431,6 +1457,34 @@ void ServerDataSwap::httpIsGetVipCB(std::string retdata, int code, std::string t
 }
 
 void ServerDataSwap::httpCreateFactionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpModifyFactionCB(std::string retdata, int code, std::string tag)
 {
 	int ret = code;
 	if (m_pDelegateProtocol != NULL)

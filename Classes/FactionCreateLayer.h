@@ -12,9 +12,9 @@ public:
 	FactionCreateLayer();
 	~FactionCreateLayer();
 
-	bool init();
+	bool init(int action, FactionListData* modifyfdata);
 	virtual void onEnterTransitionDidFinish();
-	static FactionCreateLayer* create();
+	static FactionCreateLayer* create(int action, FactionListData* modifyfdata = NULL);
 
 
 private:
@@ -41,11 +41,13 @@ private:
 	cocos2d::ui::EditBox* m_factionNameEdit;
 	cocos2d::ui::EditBox* m_factionDescEdit;
 	cocos2d::ui::TextField* descinput;
+	cocos2d::ui::Button *m_createbtn;
 
 	cocos2d::ui::Button* lvlimitbtn[4];
 	cocos2d::ui::Button* sexlimitbtn[5];
 	int selectlv;
 	int selectsex;
-
+	int m_action;//0--创建；1--修改
+	FactionListData* m_modifyfdata;
 };
 #endif

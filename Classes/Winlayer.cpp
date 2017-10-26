@@ -492,7 +492,9 @@ void Winlayer::updataLV()
 			}
 		}
 	}
-	showLvUpAnim(0);
+
+	if (vec_lvup.size() > 0)
+		showLvUpAnim(0);
 
 }
 

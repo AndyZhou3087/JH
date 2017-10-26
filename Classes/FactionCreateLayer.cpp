@@ -11,7 +11,7 @@
 
 FactionCreateLayer::FactionCreateLayer()
 {
-
+	m_action = 0;
 }
 
 
@@ -21,10 +21,10 @@ FactionCreateLayer::~FactionCreateLayer()
 }
 
 
-FactionCreateLayer* FactionCreateLayer::create()
+FactionCreateLayer* FactionCreateLayer::create(int action, FactionListData* modifyfdata)
 {
 	FactionCreateLayer *pRet = new FactionCreateLayer();
-	if (pRet && pRet->init())
+	if (pRet && pRet->init(action, modifyfdata))
 	{
 		pRet->autorelease();
 	}
@@ -36,16 +36,18 @@ FactionCreateLayer* FactionCreateLayer::create()
 	return pRet;
 }
 
-bool FactionCreateLayer::init()
+bool FactionCreateLayer::init(int action, FactionListData* modifyfdata)
 {
+	m_action = action;
+	m_modifyfdata = modifyfdata;
 	Node* csbnode = CSLoader::createNode("factionCreateLayer.csb");
 	this->addChild(csbnode);
 
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(FactionCreateLayer::onBack, this));
 
-	cocos2d::ui::Widget *createbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("createbtn");
-	createbtn->addTouchEventListener(CC_CALLBACK_2(FactionCreateLayer::onCreateFaction, this));
+	m_createbtn = (cocos2d::ui::Button*)csbnode->getChildByName("createbtn");
+	m_createbtn->addTouchEventListener(CC_CALLBACK_2(FactionCreateLayer::onCreateFaction, this));
 
 	cocos2d::ui::TextField* nameInput = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
 	nameInput->setString("");
@@ -91,6 +93,45 @@ bool FactionCreateLayer::init()
 
 	GlobalData::g_gameStatus = GAMEPAUSE;
 
+	if (m_action == 1)
+	{
+		m_createbtn->setTitleText(CommonFuncs::gbk2utf("修改"));
+		m_createbtn->setEnabled(false);
+		csbnode->getChildByName("ruletext")->setVisible(false);
+		csbnode->getChildByName("rule")->setVisible(false);
+		m_factionNameEdit->setText(modifyfdata->factionname.c_str());
+		int lv = modifyfdata->lvlimit;
+		int sex = modifyfdata->sexlimit;
+
+		int lvl[] = { 30, 50, 80, 0 };
+		int index = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			if (lv == lvl[i])
+			{
+				lvlimitbtn[i]->setBright(false);
+				index = i;
+			}
+			else
+				lvlimitbtn[i]->setBright(true);
+		}
+		selectlv = lvl[index];
+
+		int sexl[] = { 1, 2, 3, 0, 4 };
+		for (int i = 0; i < 5; i++)
+		{
+			if (sex == sexl[i])
+			{
+				sexlimitbtn[i]->setBright(false);
+				index = i;
+			}
+			else
+				sexlimitbtn[i]->setBright(true);
+		}
+		selectsex = sexl[index];
+		descinput->setString(modifyfdata->desc);
+	}
+
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -129,18 +170,39 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 			return;
 		}
 
-		int mygold = GlobalData::getMyGoldCount();
 
-		if (mygold >= 50)
+		if (m_action == 0)
 		{
-			if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
+			int mygold = GlobalData::getMyGoldCount();
+
+			if (mygold >= 50)
 			{
-				GlobalData::dataIsModified = true;
-				GlobalData::setMyGoldCount(0);
-				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
-				this->addChild(hint);
-				return;
+				if (GlobalData::getMD5MyGoldCount().compare(md5(mygold)) != 0)
+				{
+					GlobalData::dataIsModified = true;
+					GlobalData::setMyGoldCount(0);
+					HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("发现有作弊行为，金元宝清零作为处罚！！"));
+					this->addChild(hint);
+					return;
+				}
+				WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+				std::string utf8name = factionname;
+				std::string utf8desc = descinput->getString();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+				utf8name = gbkToUTF8(factionname.c_str());
+				utf8desc = gbkToUTF8(descinput->getString().c_str());
+#endif
+				ServerDataSwap::init(this)->createFaciton(utf8name, selectlv, selectsex, utf8desc);
 			}
+			else
+			{
+				HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！！"));
+				this->addChild(hint);
+			}
+		}
+		else
+		{
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			std::string utf8name = factionname;
@@ -149,21 +211,20 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 			utf8name = gbkToUTF8(factionname.c_str());
 			utf8desc = gbkToUTF8(descinput->getString().c_str());
 #endif
-			ServerDataSwap::init(this)->createFaciton(utf8name, selectlv, selectsex, utf8desc);
-		}
-		else
-		{
-			HintBox* hint = HintBox::create(CommonFuncs::gbk2utf("金元宝不足！！"));
-			this->addChild(hint);
+			ServerDataSwap::init(this)->modifyFaciton(m_modifyfdata->id, utf8name, selectlv, selectsex, utf8desc);
+
 		}
 	}
 }
 
 void FactionCreateLayer::onSuccess()
 {
-	GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 50);
-	int usegold = GlobalData::getUseGold() + 50;
-	GlobalData::setUseGold(usegold);
+	if (m_action == 0)
+	{
+		GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - 50);
+		int usegold = GlobalData::getUseGold() + 50;
+		GlobalData::setUseGold(usegold);
+	}
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	FactionMainLayer* parent = (FactionMainLayer*)this->getParent();
 	parent->getFactionListData();
@@ -172,29 +233,53 @@ void FactionCreateLayer::onSuccess()
 
 void FactionCreateLayer::onErr(int errcode)
 {
-	if (errcode == -1 || errcode == -2)
+	if (m_action == 0)
 	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("创建帮派失败，请检查网络设置或者联系客服！！"));
-		this->addChild(box);
+		if (errcode == -1 || errcode == -2)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("创建帮派失败，请检查网络设置或者联系客服！！"));
+			this->addChild(box);
+		}
+		else if (errcode == -3)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("输入中包含敏感词！！"));
+			this->addChild(box);
+		}
+		else if (errcode == -4)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("已创建过帮派！！"));
+			this->addChild(box);
+		}
+		else if (errcode == -5)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("帮派名称已存在！！"));
+			this->addChild(box);
+		}
 	}
-	else if (errcode == -3)
+	else
 	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("输入中包含敏感词！！"));
-		this->addChild(box);
-	}
-	else if (errcode == -4)
-	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("已创建过帮派！！"));
-		this->addChild(box);
-	}
-	else if (errcode == -5)
-	{
-		Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("帮派名称已存在！！"));
-		this->addChild(box);
+		if (errcode == -3)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("输入中包含敏感词！！"));
+			this->addChild(box);
+		}
+		else if (errcode == -5)
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("帮派名称已存在！！"));
+			this->addChild(box);
+		}
+		else
+		{
+			Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("修改失败，请检查网络设置或者联系客服！！"));
+			this->addChild(box);
+		}
 	}
 }
 
@@ -214,6 +299,7 @@ void FactionCreateLayer::onSelectLv(cocos2d::Ref *pSender, cocos2d::ui::Widget::
 				lvlimitbtn[i]->setBright(true);
 		}
 		selectlv = lvl[tag];
+		m_createbtn->setEnabled(true);
 	}
 
 }
@@ -234,6 +320,7 @@ void FactionCreateLayer::onSelectSex(cocos2d::Ref *pSender, cocos2d::ui::Widget:
 				sexlimitbtn[i]->setBright(true);
 		}
 		selectsex = sexl[tag];
+		m_createbtn->setEnabled(true);
 	}
 }
 
@@ -249,6 +336,7 @@ void FactionCreateLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 
 void FactionCreateLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
 {
+	m_createbtn->setEnabled(true);
 }
 
 void FactionCreateLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
@@ -264,6 +352,7 @@ void FactionCreateLayer::textFieldEvent(cocos2d::Ref *pSender, cocos2d::ui::Text
 	{
 		cocos2d::ui::TextField * textField = dynamic_cast<cocos2d::ui::TextField*>(pSender);
 		std::string str = textField->getString();
+		m_createbtn->setEnabled(true);
 	}
 	break;
 	case cocos2d::ui::TextField::EventType::DETACH_WITH_IME:
