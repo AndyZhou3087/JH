@@ -5,6 +5,7 @@
 #include "Const.h"
 #include "FactionMainLayer.h"
 #include "MD5.h"
+#include "GameScene.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -229,8 +230,11 @@ void FactionCreateLayer::onSuccess()
 		GlobalData::setUseGold(usegold);
 	}
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	FactionMainLayer* parent = (FactionMainLayer*)this->getParent();
-	parent->getFactionListData();
+	FactionMainLayer* fmlayer = (FactionMainLayer*)g_gameLayer->getChildByName("factionmainlayer");
+	if (fmlayer != NULL)
+	{
+		fmlayer->getFactionListData();
+	}
 	this->removeFromParentAndCleanup(true);
 }
 

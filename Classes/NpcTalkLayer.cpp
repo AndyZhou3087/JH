@@ -58,6 +58,9 @@ bool NpcTalkLayer::init(std::vector<std::string> vec_words, std::string npcid)
 	cocos2d::ui::Text* wordlbl = (cocos2d::ui::Text*)m_talknode->getChildByName("text");
 	wordlbl->setVisible(false);
 
+	heroimg->setOpacity(150);
+	npcimg->setOpacity(255);
+
 	checkWordLblColor(vec_words[0]);
 
 	//float dt = 0.0f;
