@@ -27,7 +27,7 @@
             <FileData Type="MarkedSubImage" Path="ui/relationtitlebox.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-939992939" Tag="295" IconVisible="False" LeftMargin="275.0000" RightMargin="275.0000" TopMargin="26.0000" BottomMargin="1206.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="title" ActionTag="-1527141312" Tag="1908" IconVisible="False" LeftMargin="275.0000" RightMargin="275.0000" TopMargin="26.0000" BottomMargin="1206.0000" LeftEage="56" RightEage="56" TopEage="15" BottomEage="15" Scale9OriginX="56" Scale9OriginY="15" Scale9Width="58" Scale9Height="18" ctype="ImageViewObjectData">
             <Size X="170.0000" Y="48.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="1230.0000" />
@@ -36,7 +36,6 @@
             <PrePosition X="0.5000" Y="0.9609" />
             <PreSize X="0.2361" Y="0.0375" />
             <FileData Type="MarkedSubImage" Path="ui/factioncreatetitle.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="inputbox" ActionTag="529407882" Tag="317" IconVisible="False" LeftMargin="162.7382" RightMargin="162.2618" TopMargin="138.0984" BottomMargin="1081.9016" ctype="SpriteObjectData">
             <Size X="395.0000" Y="60.0000" />

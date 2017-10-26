@@ -570,7 +570,8 @@
       <FilePathData Path="ui/resselectcountbox.png" />
       <FilePathData Path="ui/ressliderbg.png" />
       <FilePathData Path="ui/ressliderinner.png" />
+      <FilePathData Path="ui/modifyftitle.png" />
     </ImageFiles>
-    <MaxSize Width="2048" Height="4096" />
+    <MaxSize Width="4096" Height="4096" />
   </Content>
 </PlistInfoProjectFile>
