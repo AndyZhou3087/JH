@@ -139,7 +139,7 @@ void PrizeLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 		{
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->getCoupons();
+			ServerDataSwap::init(this)->getCoupons(codestr);
 		}
 		else
 		{

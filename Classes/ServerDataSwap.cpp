@@ -661,12 +661,14 @@ void ServerDataSwap::playCoinpoolData()
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPlayCoinpoolCB, this));
 }
 
-void ServerDataSwap::getCoupons()
+void ServerDataSwap::getCoupons(std::string codestr)
 {
 	std::string url;
 	url.append(HTTPURL);
 	url.append("wx_coupons?");
 	url.append("playerid=");
+	url.append("&code=");
+	url.append(codestr);
 	url.append(GlobalData::UUID());
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetCouponsCB, this));
 }

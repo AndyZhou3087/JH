@@ -46,7 +46,7 @@ public:
 	void getCoinpoolData();
 	void playCoinpoolData();
 
-	void getCoupons();
+	void getCoupons(std::string codestr);
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
