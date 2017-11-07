@@ -1,4 +1,4 @@
-﻿#include "PrizeLayer.h"
+#include "PrizeLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "GlobalData.h"
@@ -55,7 +55,7 @@ bool PrizeLayer::init()
 	this->addChild(m_edit);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	name->setVisible(false);
+	m_input->setVisible(false);
 	m_edit->setVisible(true);
 #endif
 	//layer 点击事件，屏蔽下层事件

@@ -1,4 +1,4 @@
-﻿#include "GlobalData.h"
+#include "GlobalData.h"
 #include "Building.h"
 #include "StorageRoom.h"
 #include "MyPackage.h"
@@ -2104,7 +2104,7 @@ std::string GlobalData::getVersion()
 void GlobalData::copyToClipBoard(std::string text)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	copytoclipboard((char*)qq->getString().c_str());
+	copytoclipboard((char*)text.c_str());
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	JniMethodInfo methodInfo;
 	char p_str[256] = { 0 };

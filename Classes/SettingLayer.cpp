@@ -1,4 +1,4 @@
-﻿#include "SettingLayer.h"
+#include "SettingLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "GlobalData.h"
@@ -72,7 +72,7 @@ bool SettingLayer::init()
 	cocos2d::ui::Button* resumebuybtn = (cocos2d::ui::Button*)csbnode->getChildByName("resumebuybtn");
 	resumebuybtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onResumeBuy, this));
 	resumebuybtn->setVisible(true);
-	name->setVisible(false);
+	m_nameTextField->setVisible(false);
 	m_editName->setVisible(true);
 #endif
 
@@ -193,7 +193,7 @@ void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 	editstr = editBox->getText();
 	std::string utf8str = editstr;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    utf8str = gbkToUTF8(editboxstr.c_str());
+    utf8str = gbkToUTF8(editstr.c_str());
 #endif
 	modifyName(utf8str);
 }
