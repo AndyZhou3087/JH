@@ -10,6 +10,8 @@
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/android/jni/JniHelper.h"
 #endif
 
 std::map<std::string, std::vector<BuildActionData>> GlobalData::map_buidACData;
@@ -114,6 +116,8 @@ MyLotteryData GlobalData::myLotteryData;
 RaffleData GlobalData::myRaffleData;
 
 int GlobalData::continueLoginDays = 0;
+
+bool GlobalData::isFrozen = false;
 
 GlobalData::GlobalData()
 {
@@ -458,7 +462,7 @@ void GlobalData::saveResData()
 	std::string str;
 	for (unsigned int i = 0; i < vec_resData.size(); i++)
 	{
-		std::string onestr = StringUtils::format("%d-%d-%.1f;", vec_resData[i].count, vec_resData[i].pastmin, vec_resData[i].waittime);
+		std::string onestr = StringUtils::format("%d-%.1f-%.1f;", vec_resData[i].count, vec_resData[i].pastmin, vec_resData[i].waittime);
 		str.append(onestr);
 	}
 	GameDataSave::getInstance()->setResData(str.substr(0, str.length() - 1));
@@ -477,7 +481,7 @@ void GlobalData::loadResData()
 			std::vector<std::string> tmp;
 			CommonFuncs::split(vec_retstr[i], tmp, "-");
 			vec_resData[i].count = atoi(tmp[0].c_str());
-			vec_resData[i].pastmin = atoi(tmp[1].c_str());
+			vec_resData[i].pastmin = atof(tmp[1].c_str());
 			vec_resData[i].waittime = atof(tmp[2].c_str());
 		}
 	}
@@ -2066,8 +2070,16 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "qwerqqwer123";//"325E6676-4607-444E-BFE9-FADD69F470D1";
+	return "qwerqqw";//"325E6676-4607-444E-BFE9-FADD69F470D1";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	std::string ret;
+	JniMethodInfo methodInfo;
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "UUID", "()Ljava/lang/String;"))
+	{
+		jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+		ret = methodInfo.env->GetStringUTFChars(jstr, 0);
+	}
+	return ret;
 #endif
 }
 
@@ -2078,6 +2090,30 @@ std::string GlobalData::getVersion()
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	return "1.2.4";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	std::string ret;
+	JniMethodInfo methodInfo;
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "getVersion", "()Ljava/lang/String;"))
+	{
+		jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+		ret = methodInfo.env->GetStringUTFChars(jstr, 0);
+	}
+	return ret;
+#endif
+}
+
+void GlobalData::copyToClipBoard(std::string text)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	copytoclipboard((char*)qq->getString().c_str());
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	JniMethodInfo methodInfo;
+	char p_str[256] = { 0 };
+	sprintf(p_str, "%s", text.c_str());
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/AppActivity", "copyToClipboard", "(Ljava/lang/String;)V"))
+	{
+		jstring para1 = methodInfo.env->NewStringUTF(p_str);
+		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, para1);
+}
 #endif
 }
 

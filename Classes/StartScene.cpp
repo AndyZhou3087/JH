@@ -12,10 +12,6 @@
 #include "NoticeLayer.h"
 #include "Const.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#include "iosfunc.h"
-#endif
-
 USING_NS_CC;
 
 StartScene::StartScene()
@@ -78,14 +74,23 @@ bool StartScene::init()
 	cocos2d::ui::Text* vesiontxt = (cocos2d::ui::Text*)csbnode->getChildByName("version");
 	vesiontxt->setString(GlobalData::getVersion());
 
-	int rqq = GlobalData::createRandomNum(2);
+	int qqsize = sizeof(QQNUM) / sizeof(QQNUM[0]);
+	int rqq = GlobalData::createRandomNum(qqsize);
 	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)csbnode->getChildByName("qq");
 	qq1->setString(QQNUM[rqq]);
 	qq1->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
 
 	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)csbnode->getChildByName("qq_1");
-	qq2->setString(QQNUM[1-rqq]);
-	qq2->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+	if (qqsize > 1)
+	{
+		qq2->setString(QQNUM[1 - rqq]);
+		qq2->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+	}
+	else
+	{
+		qq2->setVisible(false);
+		csbnode->getChildByName("qqline_1")->setVisible(false);
+	}
 
 	clicklogocount = 0;
 	isdouserdata = false;
@@ -151,12 +156,9 @@ void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender; 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		copytoclipboard((char*)qq->getString().c_str());
-#endif
+		GlobalData::copyToClipBoard(qq->getString());
 	}
 
 }

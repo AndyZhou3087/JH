@@ -661,6 +661,16 @@ void ServerDataSwap::playCoinpoolData()
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPlayCoinpoolCB, this));
 }
 
+void ServerDataSwap::getCoupons()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_coupons?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetCouponsCB, this));
+}
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -1259,6 +1269,13 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				int days = retval.GetInt();
 				if (days > 0)
 					GlobalData::continueLoginDays = retval.GetInt();
+			}
+
+			if (doc.HasMember("hei"))
+			{
+				rapidjson::Value& retval = doc["hei"];
+				int vhei = retval.GetInt();
+				GlobalData::isFrozen = vhei == 1 ? true : false;
 			}
 
 		
@@ -2060,6 +2077,33 @@ void ServerDataSwap::httpPlayCoinpoolCB(std::string retdata, int code, std::stri
 				{
 					rapidjson::Value& v = doc["pool"];
 					GlobalData::myRaffleData.poolgold = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetCouponsCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
 				}
 			}
 			if (ret == 0)

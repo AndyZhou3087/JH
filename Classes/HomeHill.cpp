@@ -234,14 +234,14 @@ void HomeHill::showNewerGuide(int step)
 	if (step == 23)
 	{
 		Node* resnode = scrollView->getChildByName("node0");
-		resnode->getChildByName("actionbtn");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
 	else if (step == 28)
 	{
 		scrollView->jumpToPercentVertical(20);
 		Node* resnode = scrollView->getChildByName("node4");
-		resnode->getChildByName("actionbtn");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
 
@@ -249,12 +249,13 @@ void HomeHill::showNewerGuide(int step)
 	{
 		scrollView->jumpToPercentVertical(70);
 		Node* resnode = scrollView->getChildByName("node7");
-		resnode->getChildByName("actionbtn");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
 	else if (step == 39)
 	{
 		nodes.push_back(m_backbtn);
+
 	}
 
 	g_gameLayer->showNewerGuide(step, nodes);

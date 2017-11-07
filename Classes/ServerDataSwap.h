@@ -45,6 +45,8 @@ public:
 
 	void getCoinpoolData();
 	void playCoinpoolData();
+
+	void getCoupons();
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -84,6 +86,8 @@ private:
 	void httpGetCoinpoolCB(std::string retdata, int code, std::string tag);
 
 	void httpPlayCoinpoolCB(std::string retdata, int code, std::string tag);
+
+	void httpGetCouponsCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

@@ -30,11 +30,11 @@ bool FactionComfirmLayer::init(FactionListData *fldata)
 	std::string str;
 	if (GlobalData::mytitle == 1)
 	{
-		str = StringUtils::format("%s%s", CommonFuncs::gbk2utf("是否确认花费50金元宝解散").c_str(), m_fldata->factionname.c_str(), CommonFuncs::gbk2utf("？").c_str());
+		str = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("是否确认花费50金元宝解散").c_str(), m_fldata->factionname.c_str(), CommonFuncs::gbk2utf("？").c_str());
 	}
 	else
 	{
-		str = StringUtils::format("%s%s", CommonFuncs::gbk2utf("是否确认退出").c_str(), m_fldata->factionname.c_str(), CommonFuncs::gbk2utf("？").c_str());
+		str = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("是否确认退出").c_str(), m_fldata->factionname.c_str(), CommonFuncs::gbk2utf("？").c_str());
 
 	}
 	desctext->setString(str);

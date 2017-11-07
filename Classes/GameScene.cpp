@@ -20,6 +20,7 @@
 #include "WaitingProgress.h"
 #include "LoginRewardLayer.h"
 #include "AchiveDoneAnimLayer.h"
+#include "FrozenLayer.h"
 
 USING_NS_CC;
 
@@ -518,28 +519,36 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
+
+	if (GlobalData::isFrozen)
+	{
+		GlobalData::g_gameStatus = GAMEPAUSE;
+		Director::getInstance()->getRunningScene()->addChild(FrozenLayer::create(), 10000);
+		return;
+	}
 	if (isAnewGetData)
 	{
 		isAnewGetData = false;
 		this->scheduleOnce(schedule_selector(GameScene::delayChangeStartScene), 0.5f);
+		return;
 	}
 
-	if (GlobalData::vec_buyVipIds.size() > 0)
+	if (GlobalData::ispunishment)
 	{
-		GetVipRewardLayer* layer = GetVipRewardLayer::create();
-		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(layer, 10, "viprewardlayer");
+		issavedata = false;
+		GlobalData::ispunishment = false;
+		isAnewGetData = true;
+		WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::init(this)->getAllData();
 	}
 	else
 	{
-		if (GlobalData::ispunishment)
+		if (GlobalData::vec_buyVipIds.size() > 0)
 		{
-            issavedata = false;
-            GlobalData::ispunishment = false;
-			isAnewGetData = true;
-			WaitingProgress* waitbox = WaitingProgress::create("数据异常...");
-			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->getAllData();
+			GetVipRewardLayer* layer = GetVipRewardLayer::create();
+			if (g_gameLayer != NULL)
+				g_gameLayer->addChild(layer, 10, "viprewardlayer");
 		}
 		else
 		{

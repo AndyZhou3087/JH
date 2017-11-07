@@ -119,14 +119,30 @@ bool ShopLayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onBack, this));
 
-	int rqq = GlobalData::createRandomNum(2);
+	int qqsize = sizeof(QQNUM) / sizeof(QQNUM[0]);
+	int rqq = GlobalData::createRandomNum(qqsize);
+
 	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq");
+	cocos2d::ui::Widget* qq1line = (cocos2d::ui::Widget*)m_csbnode->getChildByName("qqline");
 	qq1->setString(QQNUM[rqq]);
 	qq1->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
 
 	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq_1");
-	qq2->setString(QQNUM[1 - rqq]);
-	qq2->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
+	cocos2d::ui::Text* qq2line = (cocos2d::ui::Text*)m_csbnode->getChildByName("qqline_1");
+
+	if (qqsize > 1)
+	{
+		qq2->setString(QQNUM[1 - rqq]);
+		qq2->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
+	}
+	else
+	{
+		qq2->setVisible(false);
+		qq2line->setVisible(false);
+		qq1->setPositionX(qq2->getPositionX());
+		qq1line->setPositionX(qq2line->getPositionX());
+		m_csbnode->getChildByName("qqtext")->setPositionX(510); 
+	}
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -171,7 +187,14 @@ void ShopLayer::beginPay(int index)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	setMessage(PAY_SUCC);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+	JniMethodInfo methodInfo;
+	char p_str[32] = { 0 };
+	sprintf(p_str, "%s", payCode[index].c_str());
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/PayAction", "pay", "(Ljava/lang/String;I)V"))
+	{
+		jstring str1 = methodInfo.env->NewStringUTF(p_str);
+		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, str1, payindex);
+	}
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	//payCode
 	buy((char*)payCode[payindex].c_str());
@@ -262,9 +285,7 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender;
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		copytoclipboard((char*)qq->getString().c_str());
-#endif
+		GlobalData::copyToClipBoard(qq->getString());
 	}
 
 }

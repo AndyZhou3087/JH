@@ -52,15 +52,16 @@ bool FactionCreateLayer::init(int action, FactionListData* modifyfdata)
 	m_createbtn = (cocos2d::ui::Button*)csbnode->getChildByName("createbtn");
 	m_createbtn->addTouchEventListener(CC_CALLBACK_2(FactionCreateLayer::onCreateFaction, this));
 
-	cocos2d::ui::TextField* nameInput = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
+	nameInput = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
 	nameInput->setString("");
+	nameInput->setTag(0);
 	nameInput->addEventListener(CC_CALLBACK_2(FactionCreateLayer::textFieldEvent, this));
-	nameInput->setVisible(false);
 
 	descinput = (cocos2d::ui::TextField*)csbnode->getChildByName("descinput");
 	descinput->setString("");
+	descinput->setTag(1);
 	descinput->addEventListener(CC_CALLBACK_2(FactionCreateLayer::textFieldEvent, this));
-
+	
 	m_factionNameEdit = cocos2d::ui::EditBox::create(Size(380, 40), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
 	m_factionNameEdit->setPosition(Point(165, 1110));
 	m_factionNameEdit->setAnchorPoint(Vec2(0, 0.5));
@@ -73,6 +74,7 @@ bool FactionCreateLayer::init(int action, FactionListData* modifyfdata)
 	m_factionNameEdit->setText("");
 	m_factionNameEdit->setDelegate(this);
 	csbnode->addChild(m_factionNameEdit);
+	m_factionNameEdit->setVisible(false);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -98,12 +100,19 @@ bool FactionCreateLayer::init(int action, FactionListData* modifyfdata)
 
 	if (m_action == 1)
 	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		m_factionNameEdit->setEnabled(false);
+		m_factionNameEdit->setText(modifyfdata->factionname.c_str());
+#else
+		nameInput->setEnabled(false);
+		nameInput->setString(m_modifyfdata->factionname);
+#endif
 		title->loadTexture("ui/modifyftitle.png", cocos2d::ui::Widget::TextureResType::PLIST);
 		m_createbtn->setTitleText(CommonFuncs::gbk2utf("修改"));
 		m_createbtn->setEnabled(false);
 		csbnode->getChildByName("ruletext")->setVisible(false);
 		csbnode->getChildByName("rule")->setVisible(false);
-		m_factionNameEdit->setText(modifyfdata->factionname.c_str());
+
 		int lv = modifyfdata->lvlimit;
 		int sex = modifyfdata->sexlimit;
 
@@ -136,6 +145,12 @@ bool FactionCreateLayer::init(int action, FactionListData* modifyfdata)
 		descinput->setString(modifyfdata->desc);
 	}
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	nameInput->setVisible(false);
+	m_factionNameEdit->setVisible(true);
+#endif
+
+
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -166,14 +181,48 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		std::string factionname = m_factionNameEdit->getText();
+		std::string factionname;
+
+		std::string utf8name;
+		std::string utf8desc = descinput->getString();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		factionname = m_factionNameEdit->getText();
+		utf8name = gbkToUTF8(factionname.c_str());
+		utf8desc = gbkToUTF8(descinput->getString().c_str());
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		factionname = nameInput->getString();
+		const char* retstr = "";
+		JniMethodInfo methodInfo;
+		char p_str[256] = { 0 };
+		sprintf(p_str, "%s", factionname.c_str());
+		if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "gbkToUTF8", "(Ljava/lang/String;)Ljava/lang/String;"))
+		{
+			jstring para1 = methodInfo.env->NewStringUTF(p_str);
+			jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, para1);
+
+			retstr = methodInfo.env->GetStringUTFChars(jstr, 0);
+		}
+		utf8name = retstr;
+
+		sprintf(p_str, "%s", utf8desc.c_str());
+		if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "gbkToUTF8", "(Ljava/lang/String;)Ljava/lang/String;"))
+		{
+			jstring para1 = methodInfo.env->NewStringUTF(p_str);
+			jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, para1);
+
+			retstr = methodInfo.env->GetStringUTFChars(jstr, 0);
+	}
+		utf8desc = retstr;
+#else
+		factionname = nameInput->getString();
+		utf8name = factionname;
+#endif
 		if (factionname.length() <= 0)
 		{
 			HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf("请输入帮派名称！！"));
 			this->addChild(hintbox);
 			return;
-		}
-
+	}
 
 		if (m_action == 0)
 		{
@@ -191,12 +240,7 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 				}
 				WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 				Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-				std::string utf8name = factionname;
-				std::string utf8desc = descinput->getString();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-				utf8name = gbkToUTF8(factionname.c_str());
-				utf8desc = gbkToUTF8(descinput->getString().c_str());
-#endif
+
 				ServerDataSwap::init(this)->createFaciton(utf8name, selectlv, selectsex, utf8desc);
 			}
 			else
@@ -209,12 +253,6 @@ void FactionCreateLayer::onCreateFaction(cocos2d::Ref *pSender, cocos2d::ui::Wid
 		{
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			std::string utf8name = factionname;
-			std::string utf8desc = descinput->getString();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-			utf8name = gbkToUTF8(factionname.c_str());
-			utf8desc = gbkToUTF8(descinput->getString().c_str());
-#endif
 			ServerDataSwap::init(this)->modifyFaciton(m_modifyfdata->id, utf8name, selectlv, selectsex, utf8desc);
 
 		}
@@ -353,6 +391,7 @@ void FactionCreateLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
 
 void FactionCreateLayer::textFieldEvent(cocos2d::Ref *pSender, cocos2d::ui::TextField::EventType type)
 {
+	Node* node = (Node*)pSender;
 	switch (type)
 	{
 	case cocos2d::ui::TextField::EventType::ATTACH_WITH_IME:

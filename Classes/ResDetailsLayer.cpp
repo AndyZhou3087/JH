@@ -157,7 +157,18 @@ bool ResDetailsLayer::init(PackageData* pdata)
 	std::string countstr;
 
 	if (pdata->type == FOOD || pdata->type == MEDICINAL || pdata->type == RES_1 || pdata->type == RES_2)
+	{
 		countstr = StringUtils::format("库存%d", count);
+
+		if (whereClick == 3 || whereClick == 4)
+		{
+			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+			if (exlayer != NULL)
+			{
+				countstr = StringUtils::format("库存%d", exlayer->getCountByResId(pdata->strid, whereClick - 3));
+			}
+		}
+	}
 	else if (pdata->type == WEAPON || pdata->type == PROTECT_EQU || pdata->type == TOOLS)
 	{
 		if (g_hero->getMeHas(pdata->strid) != NULL)
@@ -270,16 +281,6 @@ bool ResDetailsLayer::init(PackageData* pdata)
 
 	cocos2d::ui::Text* resdesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("desclbl");
 	resdesc->setString(GlobalData::map_allResource[pdata->strid].desc);
-
-	if (whereClick == 3 || whereClick == 4)
-	{
-		ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
-		if (exlayer != NULL)
-		{
-			countstr = StringUtils::format("%d", exlayer->getCountByResId(pdata->strid, whereClick - 3));
-			valuelbl->setString(CommonFuncs::gbk2utf(countstr.c_str()));
-		}
-	}
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -497,18 +498,21 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else if (whereClick == 3 || whereClick == 4)
 		{
-			ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
-			int usecount = atoi(selectCountlbl->getString().c_str());
-			if (exlayer != NULL)
+			if (atoi(m_packageData->strid.c_str()) > 0)
 			{
-				for (int i = 0; i < usecount; i++)
+				ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
+				int usecount = atoi(selectCountlbl->getString().c_str());
+				if (exlayer != NULL)
 				{
-					if (whereClick == 3)
-						exlayer->giveNpc(m_packageData->strid);
-					else
-						exlayer->giveHero(m_packageData->strid);
+					for (int i = 0; i < usecount; i++)
+					{
+						if (whereClick == 3)
+							exlayer->giveNpc(m_packageData->strid);
+						else
+							exlayer->giveHero(m_packageData->strid);
+					}
+					exlayer->updata();
 				}
-				exlayer->updata();
 			}
 		}
 		

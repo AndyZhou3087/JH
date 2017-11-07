@@ -23,6 +23,7 @@
 #include "NewerGuide2Layer.h"
 #include "RaffleLayer.h"
 #include "AchiveLayer.h"
+#include "PrizeLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -148,6 +149,9 @@ bool MapLayer::init()
 
 	if (GlobalData::isHasVulture())
 		vultureAnim();
+
+	cocos2d::ui::Widget* prizebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("prizebtn");
+	prizebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onPrize, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -411,6 +415,16 @@ void MapLayer::onRaffle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		RaffleLayer* rlayer = RaffleLayer::create();
 		g_gameLayer->addChild(rlayer, 5);
+	}
+}
+
+void MapLayer::onPrize(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		PrizeLayer* pzlayer = PrizeLayer::create();
+		g_gameLayer->addChild(pzlayer, 5);
 	}
 }
 

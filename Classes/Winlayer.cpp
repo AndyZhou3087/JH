@@ -336,7 +336,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					for (ite = GlobalData::map_equips.begin(); ite != GlobalData::map_equips.end(); ++ite)
 					{
 						EquipData edata = GlobalData::map_equips[ite->first];
-						if (winres[i].compare(edata.id) == 0)
+						if (winres[i].compare(edata.id) == 0 && !g_hero->checkifHasGF_Equip(winres[i]) && GlobalData::tempHasGf_Equip(winres[i]).length() <= 0)
 						{
 							data.strid = edata.id;
 							data.count = 1;

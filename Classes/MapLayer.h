@@ -122,6 +122,11 @@ private:
 	void onRaffle(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	点击兑换码按钮回调
+	*****************************/
+	void onPrize(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();

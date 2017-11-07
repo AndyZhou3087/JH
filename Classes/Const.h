@@ -12,6 +12,9 @@
 #define ANALYTICS
 #define UMENG_SHARE
 #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#define ANALYTICS
+#endif
 
 #define MAXCHAPTER (13)
 
@@ -58,11 +61,11 @@ static std::string heroname[] = { "小虾米", "三少爷", "江小白", "阿青
 static std::string herodesc[] = { "名门之后，因家族武功被邪教窥觑，惨遭灭门，只剩孤身一人", "从未来穿越而来的特种兵，为了回到属于自己的时代而被迫行走江湖", "恶人谷出身，习得各大恶人的看家本领，但本性善良，被送出谷历练", "情郎被邪教蛊惑，为寻回情郎，孤身一人闯荡江湖！" };
 static int heroprice[] = { 0, 6, 12, 30 };
 
-static int buyprice[] = { 0, 6, 12, 30, 6, 12, 30, 68};
-
 static std::string payCode[] = { "", "awx010", "awx011", "awx013", "awx018", "awx019", "awx020", "awx021", "awx022", "awx023","awx024","awx025"};
 static int goldcount[] = {60, 140, 400, 1080};
 static int vipgoldcount[] = { 10, 20, 50 };
+
+static int buyprice[] = { 0, 6, 12, 30, 6, 12, 30, 68, 6, 30, 68, 18 };
 
 static std::string tipswords0[] = { "温度过低时会加速你的各项属性消耗，记得保持好温度！" };
 static std::string tipswords1[] = { "后山的狼和兔子是个练基本功的好对手", "季节的变换会影响温度与后山的资源动态！" };
@@ -83,7 +86,11 @@ static cocos2d::Color4B qucolor[] = { cocos2d::Color4B(76, 54, 51, 255), cocos2d
 static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"}; 
 
 static std::string dgqbinmap[] = { "m7-3", "m3-4", "m4-9", "m6-3", "m7-12", "m2-3", "m7-8", "m10-1", "m11-3" };
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 static std::string QQNUM[] = { "552393763", "621564945" };
+#else
+static std::string QQNUM[] = { "641759306" };
+#endif
 static std::string LOGINREWARDS[] = { "80020", "g10", "12010", "80050", "g20", "81010", "82005" };
 
 typedef enum

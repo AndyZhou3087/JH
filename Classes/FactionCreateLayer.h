@@ -49,5 +49,6 @@ private:
 	int selectsex;
 	int m_action;//0--创建；1--修改
 	FactionListData* m_modifyfdata;
+	cocos2d::ui::TextField* nameInput;
 };
 #endif

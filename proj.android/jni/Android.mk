@@ -13,6 +13,8 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 FILE_LIST := $(wildcard $(LOCAL_PATH)/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/hellocpp/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/UmengShare/Common/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/UmengShare/Android/*.cpp)
 LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%) 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
@@ -22,13 +24,13 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
-
+LOCAL_STATIC_LIBRARIES += libmobclickcpp
 # _COCOS_LIB_ANDROID_BEGIN
 # _COCOS_LIB_ANDROID_END
 
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,.)
-
+$(call import-module,libmobclickcpp)
 # _COCOS_LIB_IMPORT_ANDROID_BEGIN
 # _COCOS_LIB_IMPORT_ANDROID_END

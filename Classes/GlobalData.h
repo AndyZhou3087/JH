@@ -967,6 +967,11 @@ public:
 	*****************************/
 	static int getAchiveFinishCount(AchiveData adata);
 
+	/****************************
+	复制内容到剪切板
+	*****************************/
+	static void copyToClipBoard(std::string text);
+
     static void setNoAds(bool val);
     static bool getNoAds();
     
@@ -1043,6 +1048,7 @@ public:
 
 	static RaffleData myRaffleData;
 	static int continueLoginDays;
+	static bool isFrozen;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

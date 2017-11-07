@@ -53,13 +53,17 @@ private:
 	void onSuccess();
 	void onErr(int errcode);
 
+	void modifyName(std::string utf8name);
+
 private:
 	cocos2d::ui::CheckBox* m_soundCheckBox;//checkbox控件
 	cocos2d::ui::Text* m_soundOnOffText;//点击checkbox的文件说明控件 “开”,“关”
 	cocos2d::ui::EditBox* m_editName;
 
 	std::string mynamestr;
-    std::string editboxstr;
+	std::string editstr;
+
+	cocos2d::ui::TextField* m_nameTextField;
 };
 #endif
 

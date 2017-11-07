@@ -34,12 +34,6 @@ bool SettingLayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onBack, this));
 	backbtn->setVisible(true);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	//ios 恢复购买按钮
-	cocos2d::ui::Button* resumebuybtn = (cocos2d::ui::Button*)csbnode->getChildByName("resumebuybtn");
-	resumebuybtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onResumeBuy, this));
-	resumebuybtn->setVisible(true);
-#endif
 
 	//checkbox
 	m_soundCheckBox = (cocos2d::ui::CheckBox*)csbnode->getChildByName("soundcheck");
@@ -54,10 +48,9 @@ bool SettingLayer::init()
 
     mynamestr = GlobalData::getMyNickName();
     
-	cocos2d::ui::TextField* name = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
-	name->setString(mynamestr);
-	name->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
-	name->setVisible(false);
+	m_nameTextField = (cocos2d::ui::TextField*)csbnode->getChildByName("name");
+	m_nameTextField->setString(mynamestr);
+	m_nameTextField->addEventListener(CC_CALLBACK_2(SettingLayer::textFieldEvent, this));
 
 	m_editName = cocos2d::ui::EditBox::create(Size(380, 44), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui/blank.png"));
 	m_editName->setPosition(Point(225, 875));
@@ -71,7 +64,17 @@ bool SettingLayer::init()
 	m_editName->setText(mynamestr.c_str());
 	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);
 	m_editName->setDelegate(this);
+	m_editName->setVisible(false);
 	csbnode->addChild(m_editName);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	//ios 恢复购买按钮
+	cocos2d::ui::Button* resumebuybtn = (cocos2d::ui::Button*)csbnode->getChildByName("resumebuybtn");
+	resumebuybtn->addTouchEventListener(CC_CALLBACK_2(SettingLayer::onResumeBuy, this));
+	resumebuybtn->setVisible(true);
+	name->setVisible(false);
+	m_editName->setVisible(true);
+#endif
 
 	//layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -143,15 +146,34 @@ void SettingLayer::onResumeBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 void SettingLayer::textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventType type)
 {
+	std::string str;
+	cocos2d::ui::TextField * textField = dynamic_cast<cocos2d::ui::TextField*>(pSender);
 	switch (type)
 	{
-	case cocos2d::ui::TextField::EventType::ATTACH_WITH_IME:
-	{
-		cocos2d::ui::TextField * textField = dynamic_cast<cocos2d::ui::TextField*>(pSender);
-		std::string str = textField->getString();
-	}
+		case cocos2d::ui::TextField::EventType::ATTACH_WITH_IME:
+			str = textField->getString();
 			break;
 		case cocos2d::ui::TextField::EventType::DETACH_WITH_IME:
+		{
+			str = textField->getString();
+			editstr = str;
+			std::string utf8str = str;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			const char* retstr = "";
+			JniMethodInfo methodInfo;
+			char p_str[64] = { 0 };
+			sprintf(p_str, "%s", str.c_str());
+			if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "gbkToUTF8", "(Ljava/lang/String;)Ljava/lang/String;"))
+			{
+				jstring para1 = methodInfo.env->NewStringUTF(p_str);
+				jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, para1);
+
+				retstr = methodInfo.env->GetStringUTFChars(jstr, 0);
+			}
+			utf8str = retstr;
+#endif
+			modifyName(utf8str);
+		}
 			break;
 		case cocos2d::ui::TextField::EventType::INSERT_TEXT:
 			break;
@@ -168,16 +190,12 @@ void SettingLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 
 void SettingLayer::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox)
 {
-    editboxstr = editBox->getText();
-    std::string utf8str = editboxstr;
+	editstr = editBox->getText();
+	std::string utf8str = editstr;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     utf8str = gbkToUTF8(editboxstr.c_str());
 #endif
-    
-    WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-    Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-    
-	ServerDataSwap::init(this)->modifyNickName(utf8str);
+	modifyName(utf8str);
 }
 
 void SettingLayer::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string &text)
@@ -189,10 +207,21 @@ void SettingLayer::editBoxReturn(cocos2d::ui::EditBox *editBox)
 
 }
 
+void SettingLayer::modifyName(std::string utf8name)
+{
+	if (utf8name.length() > 0)
+	{
+		WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+
+		ServerDataSwap::init(this)->modifyNickName(utf8name);
+	}
+}
+
 void SettingLayer::onSuccess()
 {
 
-    GlobalData::setMyNickName(editboxstr);
+	GlobalData::setMyNickName(editstr);
     Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 }
 

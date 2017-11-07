@@ -48,6 +48,8 @@
           <Image Name="normalboxgb.png" />
           <Image Name="noticebg.png" />
           <Image Name="npctalkbg.png" />
+          <Image Name="prizebtn.png" />
+          <Image Name="priztitle.png" />
           <Image Name="rafflerettitle.png" />
           <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
@@ -90,6 +92,7 @@
           <Image Name="unselect.png" />
           <Image Name="vipbg.png" />
           <Image Name="vipshoptitle.png" />
+          <Image Name="warning.png" />
           <Image Name="wxb0.png" />
           <Image Name="wxb1.png" />
         </Folder>
@@ -707,12 +710,13 @@
         <Project Name="mixDoneLayer.csd" Type="Layer" />
         <Project Name="mixGFNode.csd" Type="Node" />
         <Project Name="mixSuggestLayer.csd" Type="Layer" />
-        <Project Name="npctalkLayer.csd" Type="Layer" />
         <Project Name="noticeLayer.csd" Type="Layer" />
         <Project Name="npcLayer.csd" Type="Layer" />
         <Project Name="npcNode.csd" Type="Node" />
+        <Project Name="npctalkLayer.csd" Type="Layer" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="pauseLayer.csd" Type="Layer" />
+        <Project Name="prizeLayer.csd" Type="Layer" />
         <Project Name="promotionLayer.csd" Type="Layer" />
         <Project Name="raffleLayer.csd" Type="Layer" />
         <Project Name="raffleResultLayer.csd" Type="Scene" />
@@ -745,6 +749,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="frozenLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
