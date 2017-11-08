@@ -327,7 +327,7 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                         Cocos2dxGLSurfaceView.this.mCocos2dxRenderer.handleKeyDown(pKeyCode);
                     }
                 });
-                return true;
+                return false;
             default:
                 return super.onKeyDown(pKeyCode, pKeyEvent);
         }
@@ -351,7 +351,7 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                         Cocos2dxGLSurfaceView.this.mCocos2dxRenderer.handleKeyUp(keyCode);
                     }
                 });
-                return true;
+                return false;
             default:
                 return super.onKeyUp(keyCode, event);
         }

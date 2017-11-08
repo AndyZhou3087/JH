@@ -48,13 +48,13 @@ bool PrizeLayer::init()
 	m_edit->setPlaceHolder(CommonFuncs::gbk2utf("请输入兑换码:").c_str());
 	m_edit->setPlaceholderFontSize(30);
 	m_edit->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
-	m_edit->setPlaceholderFontColor(Color3B::WHITE);
+	m_edit->setPlaceholderFontColor(Color3B(112, 116, 109));
 	m_edit->setMaxLength(10);
 	m_edit->setVisible(false);
 	m_edit->setDelegate(this);
 	this->addChild(m_edit);
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if 1//(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	m_input->setVisible(false);
 	m_edit->setVisible(true);
 #endif
@@ -129,7 +129,7 @@ void PrizeLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 		std::string codestr;
 		
 		codestr = m_input->getString();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if 1//(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		codestr = m_edit->getText();
 #else
 		codestr = m_input->getString();

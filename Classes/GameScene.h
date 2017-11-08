@@ -19,6 +19,8 @@ public:
 	~GameScene();
     static cocos2d::Scene* createScene();
     virtual bool init();
+
+	virtual void onExit();
 	CREATE_FUNC(GameScene);
 	/****************************
 	角色复活更新UI
@@ -54,6 +56,16 @@ public:
 	检查成就完成
 	*****************************/
 	void checkAchiveIsDone(float dt);
+
+	/****************************
+	安卓返回键保存数据
+	*****************************/
+	static void saveMyData();
+
+	/****************************
+	安卓返回键时改变游戏状态
+	*****************************/
+	static void changeGameStates(int status);
 
 private:
 	TopBar* topBar;//角色属性和天气NODE

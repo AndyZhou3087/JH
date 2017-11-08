@@ -404,7 +404,9 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 			}
 		}
 	}
-
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	ServerDataSwap::init(NULL)->postOneData(GlobalData::getUId());
+#endif
 #ifdef ANALYTICS
 	if (m_npcid.compare("n089") == 0)
 		AnalyticUtil::onEvent("allpass");

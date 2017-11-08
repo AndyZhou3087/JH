@@ -95,7 +95,7 @@ public class PayActivity extends Activity {
 	}
 	
 	public void closeWebView(){
-		webView.destroy();
+		this.finish();
 	}
 	
 	@Override

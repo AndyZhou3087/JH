@@ -358,6 +358,42 @@ void GameScene::saveAllData()
 	g_hero->saveProperData();
 }
 
+void GameScene::onExit()
+{
+	saveAllData();
+	Layer::onExit();
+}
+
+void GameScene::saveMyData()
+{
+	if (g_gameLayer != NULL)
+	{
+		g_gameLayer->saveAllData();
+	}
+}
+
+void GameScene::changeGameStates(int status)
+{
+	if (g_gameLayer != NULL)
+	{
+		GameStatus gs = (GameStatus)status;
+		if (gs == GAMEPAUSE)
+		{
+			if (GlobalData::g_gameStatus == GAMESTART)
+			{
+				GlobalData::g_gameStatus = gs;
+			}
+		}
+		else if (gs == GAMESTART)
+		{
+			if (GlobalData::g_gameStatus == GAMEPAUSE)
+			{
+				GlobalData::g_gameStatus = gs;
+			}
+		}
+	}	
+}
+
 void GameScene::updata(float dt)
 {
 	GlobalData::setTimeGiftLeftTime(GlobalData::getTimeGiftLeftTime() - 1);
@@ -519,10 +555,10 @@ void GameScene::delayShowNewerGuide(float dt)
 
 void GameScene::onSuccess()
 {
-
 	if (GlobalData::isFrozen)
 	{
-		GlobalData::g_gameStatus = GAMEPAUSE;
+		if (GlobalData::g_gameStatus == GAMESTART)
+			GlobalData::g_gameStatus = GAMEPAUSE;
 		Director::getInstance()->getRunningScene()->addChild(FrozenLayer::create(), 10000);
 		return;
 	}

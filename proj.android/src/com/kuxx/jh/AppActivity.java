@@ -31,14 +31,19 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import com.umeng.analytics.mobclick.game.MobClickCppHelper;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -89,7 +94,38 @@ public class AppActivity extends Cocos2dxActivity {
 		MobClickCppHelper.onResume(this);
 	}
 
-
+    @Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK )
+		{
+			JNI.changeGameStates(1);
+			new AlertDialog.Builder(theOnly)
+		    .setMessage("确认退出"+ theOnly.getString(R.string.app_name) + "吗？")
+		    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int whichButton) 
+		        {
+		        	JNI.saveData();
+		        	theOnly.finish();
+		        	System.exit(0);
+		        }
+		    })
+		    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int whichButton) {
+		        }
+		    })
+		    .setOnDismissListener(new OnDismissListener() {
+	            
+	            @Override
+	            public void onDismiss(DialogInterface dialog) {
+	                 //处理监听事件
+	            	JNI.changeGameStates(0);
+	            }
+	        })
+		    .show();
+		}
+		return false;
+	}
     public static void copyToClipboard(String text)
     {
         Message msg = AppActivity.handler.obtainMessage();

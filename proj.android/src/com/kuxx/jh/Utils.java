@@ -93,7 +93,7 @@ public class Utils{
 		if (macAddr == null)
 			macAddr = "";
 		uuid += macAddr.replaceAll(":", "");
-		return "loc" + uuid;
+		return uuid;
     }
     
     /**

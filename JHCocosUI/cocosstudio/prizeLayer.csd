@@ -93,14 +93,14 @@
             <FileData Type="MarkedSubImage" Path="ui/setmodifybtn.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="input" ActionTag="1153239178" Tag="14" IconVisible="False" LeftMargin="160.0000" RightMargin="180.0000" TopMargin="548.4984" BottomMargin="686.5016" TouchEnable="True" FontSize="44" IsCustomSize="True" LabelText="" PlaceHolderText="请输入兑换码" MaxLengthEnable="True" MaxLengthText="10" ctype="TextFieldObjectData">
-            <Size X="380.0000" Y="45.0000" />
+          <AbstractNodeData Name="input" ActionTag="1153239178" Tag="14" IconVisible="False" LeftMargin="160.0000" RightMargin="180.0000" TopMargin="551.9984" BottomMargin="690.0016" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入兑换码" MaxLengthEnable="True" MaxLengthText="10" ctype="TextFieldObjectData">
+            <Size X="380.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="350.0000" Y="709.0016" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.4861" Y="0.5539" />
-            <PreSize X="0.5278" Y="0.0352" />
+            <PreSize X="0.5278" Y="0.0297" />
           </AbstractNodeData>
           <AbstractNodeData Name="desc_0" ActionTag="290101845" Tag="172" IconVisible="False" LeftMargin="106.0000" RightMargin="106.0000" TopMargin="855.1049" BottomMargin="378.8951" IsCustomSize="True" FontSize="23" LabelText="温馨提示：兑换码由大写字母和数字组成。兑换码每人只能兑换一次，奖励自动发放到仓库中" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="508.0000" Y="46.0000" />

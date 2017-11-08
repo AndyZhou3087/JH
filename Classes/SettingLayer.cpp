@@ -59,7 +59,7 @@ bool SettingLayer::init()
 	m_editName->setPlaceHolder(CommonFuncs::gbk2utf("请输入昵称:").c_str());
 	m_editName->setPlaceholderFontSize(30);
 	m_editName->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
-	m_editName->setPlaceholderFontColor(Color3B::WHITE);
+	m_editName->setPlaceholderFontColor(Color3B(112, 116, 109));
 	m_editName->setMaxLength(12);
 	m_editName->setText(mynamestr.c_str());
 	//editName->setReturnType(EditBox::KeyboardReturnType::DONE);

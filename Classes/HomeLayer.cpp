@@ -207,6 +207,10 @@ bool HomeLayer::init()
 
 	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.2f);
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	ServerDataSwap::init(NULL)->postOneData(GlobalData::getUId());
+#endif
+
 	return true;
 }
 
