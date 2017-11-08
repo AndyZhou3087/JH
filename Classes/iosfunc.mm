@@ -87,7 +87,8 @@ void alterView() {
     //[alert setValue:hogan forKey:@"attributedTitle"];
     alert.popoverPresentationController.barButtonItem = s.navigationItem.leftBarButtonItem;
     UIAlertAction * ac = [UIAlertAction actionWithTitle:@"好说好说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1243387739"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/id1215576714?mt=8&action=write-review"]];
+
         GlobalData::setNoComments(true);
     }];
     //[ac setValue:[UIColor greenColor] forKey:@"_titleTextColor"];
