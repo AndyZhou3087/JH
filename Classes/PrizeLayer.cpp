@@ -261,16 +261,18 @@ bool PrizeLayer::checkCode(std::string codestr)
 
 	for (int i = 0; i < 10; i++)
 	{
-		if (!((code[i] >= 'A' && code[i] <= 'Z' && code[i] != 'O') || (code[i] >= '1' && code[i] <= '9')))
+		if (!((code[i] >= 'A' && code[i] <= 'Z') || (code[i] >= '0' && code[i] <= '9')))
 			return false;
 	}
 
 	int r1 = 1;
 	for (int i = 0; i < 4; i++)
 	{
+		if (code[i] == 'O' || code[i] == '0')
+			return false;
 		if (code[i] >= 'A' && code[i] <= 'Z')
 			r1 += code[i] - 'A';
-		else if (code[i] >= '1' && code[i] <= '9')
+		else if (code[i] >= '0' && code[i] <= '9')
 			r1 += code[i] - '0';
 	}
 
@@ -280,9 +282,12 @@ bool PrizeLayer::checkCode(std::string codestr)
 	int r2 = 2;
 	for (int i = 5; i < 9; i++)
 	{
+		if (code[i] == 'O' || code[i] == '0')
+			return false;
+
 		if (code[i] >= 'A' && code[i] <= 'Z')
 			r2 += code[i] - 'A';
-		else if (code[i] >= '1' && code[i] <= '9')
+		else if (code[i] >= '0' && code[i] <= '9')
 			r2 += code[i] - '0';
 	}
 
