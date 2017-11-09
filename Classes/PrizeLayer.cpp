@@ -8,7 +8,7 @@
 #include "MyPackage.h"
 #include "StorageRoom.h"
 
-const std::string prizerwd[] = {"18010", "22010", "23010"};
+const std::string prizerwd[] = {"g20", "80020", "82005"};
 
 PrizeLayer::PrizeLayer()
 {
@@ -34,8 +34,8 @@ bool PrizeLayer::init()
 	cocos2d::ui::Button* closebtn = (cocos2d::ui::Button*)csbnode->getChildByName("closebtn");
 	closebtn->addTouchEventListener(CC_CALLBACK_2(PrizeLayer::onClose, this));
 
-	cocos2d::ui::Button* okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
-	okbtn->addTouchEventListener(CC_CALLBACK_2(PrizeLayer::onOk, this));
+	m_okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
+	m_okbtn->addTouchEventListener(CC_CALLBACK_2(PrizeLayer::onOk, this));
 
 	m_input = (cocos2d::ui::TextField*)csbnode->getChildByName("input");
 	m_input->setString("");
@@ -124,8 +124,6 @@ void PrizeLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
-
 		std::string codestr;
 		
 		codestr = m_input->getString();
@@ -134,7 +132,6 @@ void PrizeLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 #else
 		codestr = m_input->getString();
 #endif
-
 		if (checkCode(codestr))
 		{
 			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
@@ -168,10 +165,20 @@ void PrizeLayer::showRwd()
 
 		std::string resid = prizerwd[i];
 		int intresid = atoi(resid.c_str());
-		resstr = StringUtils::format("ui/%d.png", intresid / 1000);
-		strcount = StringUtils::format("x%d", intresid % 1000);
-		std::string ridstr = StringUtils::format("%d", intresid / 1000);
-		namstr = GlobalData::map_allResource[ridstr].cname;
+
+		if (resid.compare(0, 1, "g") == 0)
+		{
+			strcount = StringUtils::format("x%d", atoi(resid.substr(1).c_str()));
+			namstr = CommonFuncs::gbk2utf("金元宝");
+			resstr = "ui/gd0.png";
+		}
+		else
+		{
+			resstr = StringUtils::format("ui/%d.png", intresid / 1000);
+			strcount = StringUtils::format("x%d", intresid % 1000);
+			std::string ridstr = StringUtils::format("%d", intresid / 1000);
+			namstr = GlobalData::map_allResource[ridstr].cname;
+		}
 
 		Sprite* res = Sprite::createWithSpriteFrameName(resstr);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().width / 2));
@@ -194,20 +201,30 @@ void PrizeLayer::addRes()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		int intresid = atoi(prizerwd[i].c_str());
-		std::string resid = StringUtils::format("%d", intresid / 1000);
+		if (prizerwd[i].compare(0, 1, "g") == 0)
+		{
+			int count = atoi(prizerwd[i].substr(1).c_str());
+			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + count);
+		}
+		else
+		{
+			int intresid = atoi(prizerwd[i].c_str());
+			std::string resid = StringUtils::format("%d", intresid / 1000);
 
-		PackageData pdata;
-		pdata.strid = resid;
-		pdata.count = intresid % 1000;
-		pdata.type = GlobalData::getResType(resid);
-		pdata.extype = GlobalData::getResExType(resid);
-		StorageRoom::add(pdata);
+			PackageData pdata;
+			pdata.strid = resid;
+			pdata.count = intresid % 1000;
+			pdata.type = GlobalData::getResType(resid);
+			pdata.extype = GlobalData::getResExType(resid);
+			StorageRoom::add(pdata);
+		}
 	}
 }
 
 void PrizeLayer::onSuccess()
 {
+	m_okbtn->setEnabled(false);
+	m_edit->setEnabled(false);
 	showRwd();
 	addRes();
 
@@ -222,6 +239,10 @@ void PrizeLayer::onErr(int errcode)
 	if (errcode == -3)
 	{
 		str = "兑换失败！已经兑换过了，每人只有兑换一次！";
+	}
+	else if (errcode == -4)
+	{
+		str = "兑换失败！兑换码已经兑换过了！";
 	}
 
     Director::getInstance()->getRunningScene()->removeChildByName("waitbox");

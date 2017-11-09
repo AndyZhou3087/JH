@@ -7,5 +7,22 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="vipShopLayer.csd" />
+          <FilePathData Path="prizeLayer.csd" />
+          <FilePathData Path="timeGfitLayer.csd" />
+          <FilePathData Path="settingLayer.csd" />
+          <FilePathData Path="mapLayer.csd" />
+          <FilePathData Path="vipGoodsNode.csd" />
+          <FilePathData Path="loginRewardLayer.csd" />
+          <FilePathData Path="hintLayer.csd" />
+          <FilePathData Path="startLayer.csd" />
+          <FilePathData Path="factionCreateLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="prizeLayer.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

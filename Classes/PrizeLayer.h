@@ -38,6 +38,7 @@ private:
 private:
 	cocos2d::ui::EditBox* m_edit;
 	cocos2d::ui::TextField* m_input;
+	cocos2d::ui::Button* m_okbtn;
 private:
 	void textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventType type);
 	void showRwd();

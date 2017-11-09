@@ -696,6 +696,7 @@
         <Project Name="fightLayer.csd" Type="Layer" />
         <Project Name="friendExgLayer.csd" Type="Layer" />
         <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
+        <Project Name="frozenLayer.csd" Type="Layer" />
         <Project Name="getVipRewardLayer.csd" Type="Layer" />
         <Project Name="giveLayer.csd" Type="Layer" />
         <Project Name="goldGoodsNode.csd" Type="Node" />
@@ -749,7 +750,6 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="frozenLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
