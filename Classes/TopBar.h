@@ -19,7 +19,7 @@ public:
 
 	void showNewerGuide(int step);
 	void stopLoseAnim();
-	int newerStep;
+	int newerstep;
 private:
 	cocos2d::ui::ImageView* heroimg;
 	cocos2d::ui::ImageView* reason;
@@ -55,6 +55,7 @@ private:
 	EDAYNIGTH m_lastDayOrNigth;
 	int m_lastpastLiveDay;
 	bool isHunter;
+	bool isShowingGuide;
 
 private:
 	void onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

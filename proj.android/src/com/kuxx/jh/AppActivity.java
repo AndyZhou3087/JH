@@ -36,7 +36,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -69,7 +69,7 @@ public class AppActivity extends Cocos2dxActivity {
     
     public Cocos2dxGLSurfaceView onCreateView() {
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
-    	// llk should create stencil buffer
+    	
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
     	
     	return glSurfaceView;
@@ -112,15 +112,16 @@ public class AppActivity extends Cocos2dxActivity {
 		    })
 		    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
 		        public void onClick(DialogInterface dialog, int whichButton) {
+		        	JNI.changeGameStates(0);
 		        }
 		    })
-		    .setOnDismissListener(new OnDismissListener() {
-	            
-	            @Override
-	            public void onDismiss(DialogInterface dialog) {
-	                 //处理监听事件
-	            	JNI.changeGameStates(0);
-	            }
+		    .setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					JNI.changeGameStates(0);
+				}
 	        })
 		    .show();
 		}

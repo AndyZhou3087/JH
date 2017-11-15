@@ -9,6 +9,7 @@
 #include "ActivitScene.h"
 #include "MyMenu.h"
 #include "ResDetailsLayer.h"
+#include "NewerGuideLayer.h"
 
 OutDoor::OutDoor()
 {
@@ -27,11 +28,11 @@ OutDoor::~OutDoor()
 bool OutDoor::init()
 {
 	m_csbnode = CSLoader::createNode("outDoorLayer.csb");
-	this->addChild(m_csbnode);
+	this->addChild(m_csbnode, 0, "csbnode");
 
 	m_heroproper = HeroProperNode::create();
 	m_heroproper->setPosition(Vec2(360, 790));
-	m_csbnode->addChild(m_heroproper, 1);
+	m_csbnode->addChild(m_heroproper, 1, "HeroProperNode");
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 	scrollview->setScrollBarEnabled(false);
@@ -56,14 +57,26 @@ bool OutDoor::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
+	checkNewerGuide();
+
 	return true;
 }
 
-void OutDoor::onEnterTransitionDidFinish()
-{
-	Layer::onEnterTransitionDidFinish();
 
-	showNewerGuide(19);
+void OutDoor::checkNewerGuide()
+{
+	if (NewerGuideLayer::checkifNewerGuide(13))
+	{
+		showNewerGuide(13);
+	}
+	else if (!NewerGuideLayer::checkifNewerGuide(46) && NewerGuideLayer::checkifNewerGuide(47))
+	{
+		showNewerGuide(47);
+	}
+	else if (!NewerGuideLayer::checkifNewerGuide(56) && NewerGuideLayer::checkifNewerGuide(57))
+	{
+		showNewerGuide(57);
+	}
 }
 
 void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -333,9 +346,7 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 void OutDoor::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 19)
-	{
-		nodes.push_back(m_outbtn);
-	}
+	nodes.push_back(m_outbtn);
+	NewerGuideLayer::pushUserData("normalbtn");
 	g_gameLayer->showNewerGuide(step, nodes);
 }

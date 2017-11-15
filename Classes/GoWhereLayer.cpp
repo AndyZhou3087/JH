@@ -15,6 +15,7 @@
 #include "SepcialNpcLayer.h"
 #include "AnalyticUtil.h"
 #include "RollDiceLayer.h"
+#include "TopBar.h"
 GoWhereLayer::GoWhereLayer()
 {
 
@@ -156,7 +157,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->schedule(schedule_selector(GoWhereLayer::checkRedPoint), 1.0f);
-	this->scheduleOnce(schedule_selector(GoWhereLayer::delayShowNewerGuide), 0.2f);
+	checkNewerGuide();
 	return true;
 }
 
@@ -211,7 +212,8 @@ void GoWhereLayer::onComeIn(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	{
 		if (m_addrstr.compare("m1-1") == 0)//进入家
 		{
-			g_gameLayer->addChild(HomeLayer::create(), 1, "homelayer");
+			HomeLayer* homelayer = HomeLayer::create();
+			g_gameLayer->addChild(homelayer, 1, "homelayer");
 			g_maplayer->removeFromParentAndCleanup(true);
 			g_maplayer = NULL;
 		}
@@ -273,27 +275,53 @@ void GoWhereLayer::checkRedPoint(float dt)
 void GoWhereLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if ((step == 21 || step == 41) && m_type == GOWHERE)
+	if ((step == 15) && m_type == GOWHERE)
+	{
+		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+		topbar->showNewerGuide(15);
+	}
+	else if ((step == 16) && m_type == GOWHERE)
+	{
 		nodes.push_back(m_gobtn);
-	else if ((step == 22 || step == 42) && m_type == ARRIVE)
-		nodes.push_back(m_enterbtn);	
-	else if (step == 51 && m_type == ARRIVE)
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
+	else if ((step == 17) && m_type == ARRIVE)
+	{
+		nodes.push_back(m_enterbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
+	else if ((step == 39) && m_type == GOWHERE)
+	{
+		nodes.push_back(m_gobtn);
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
+	else if (step == 40 && m_type == ARRIVE)
+	{
+		nodes.push_back(m_enterbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
+	else if (step == 69 && m_type == ARRIVE)
+	{
 		nodes.push_back(m_stbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
 	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
-void GoWhereLayer::delayShowNewerGuide(float dt)
+void GoWhereLayer::checkNewerGuide()
 {
-	if (NewerGuideLayer::checkifNewerGuide(21))
-		showNewerGuide(21);
-	else if (NewerGuideLayer::checkifNewerGuide(22))
-		showNewerGuide(22);
-	else if (NewerGuideLayer::checkifNewerGuide(41))
-		showNewerGuide(41);
-	else if (NewerGuideLayer::checkifNewerGuide(42))
-		showNewerGuide(42);
-	else if (NewerGuideLayer::checkifNewerGuide(51))
+	if (NewerGuideLayer::checkifNewerGuide(15))
+		showNewerGuide(15);
+	else if (NewerGuideLayer::checkifNewerGuide(16))
+		showNewerGuide(16);
+	else if (NewerGuideLayer::checkifNewerGuide(17))
+		showNewerGuide(17);
+	else if (NewerGuideLayer::checkifNewerGuide(39))
+		showNewerGuide(39);
+	else if (NewerGuideLayer::checkifNewerGuide(40))
+		showNewerGuide(40);
+	else if (NewerGuideLayer::checkifNewerGuide(69))
 	{
 		if (m_type == ARRIVE)
 		{
@@ -301,7 +329,7 @@ void GoWhereLayer::delayShowNewerGuide(float dt)
 			std::vector<std::string> vec_retstr;
 			CommonFuncs::split(datastr, vec_retstr, ";");
 			if (vec_retstr.size() > 0)
-				showNewerGuide(51);
+				showNewerGuide(69);
 		}
 	}
 }

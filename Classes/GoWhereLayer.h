@@ -34,6 +34,17 @@ public:
 	*****************************/
 	bool init(std::string addrname, WHERELAYER_TYPE type, float distance = 0.0f);
 	static GoWhereLayer* create(std::string addrid, WHERELAYER_TYPE type, float distance = 0.0f);
+
+	/****************************
+	新手引导
+	*****************************/
+	void checkNewerGuide();
+
+	/****************************
+	新手引导
+	*****************************/
+	void showNewerGuide(int step);
+
 private:
 
 	/****************************
@@ -61,15 +72,6 @@ private:
 	*****************************/
 	void checkRedPoint(float dt);
 
-	/****************************
-	新手引导
-	*****************************/
-	void showNewerGuide(int step);
-
-	/****************************
-	延迟显示新手引导
-	*****************************/
-	void delayShowNewerGuide(float dt);
 private:
 	std::string m_addrstr;//地点ID
 	WHERELAYER_TYPE m_type;

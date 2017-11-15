@@ -11,7 +11,9 @@
 #include "TopBar.h"
 #include "Nature.h"
 #include "Hero.h"
+#include "HomeLayer.h"
 #include "ServerDataSwap.h"
+
 class GameScene : public cocos2d::Layer, public ServerDataDelegateProtocol
 {
 public:
@@ -21,6 +23,7 @@ public:
     virtual bool init();
 
 	virtual void onExit();
+
 	CREATE_FUNC(GameScene);
 	/****************************
 	角色复活更新UI
@@ -69,7 +72,7 @@ public:
 
 private:
 	TopBar* topBar;//角色属性和天气NODE
-	Node* homeLayer;//角色家
+	HomeLayer *homeLayer;//角色家
 	std::vector<Node*> m_newerNode;
 	int m_newerStep;
 	bool issavedata;
@@ -118,6 +121,7 @@ private:
 	void onErr(int errcode);
 
 	void delayChangeStartScene(float dt);
+
 };
 extern Nature* g_nature;//天气数据
 extern Hero* g_hero;//角色数据

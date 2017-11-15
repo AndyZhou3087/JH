@@ -10,6 +10,8 @@
 #include "GameDataSave.h"
 #include "MapLayer.h"
 #include "MixGFNode.h"
+#include "HomeLayer.h"
+#include "NewerGuideLayer.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -87,9 +89,9 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	{
 		this->removeFromParentAndCleanup(true);
 
-		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
-		if (topbar != NULL)
-			topbar->showNewerGuide(13);
+		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+		if (homelayer != NULL)
+			homelayer->showNewerGuide(12);
 	}
 }
 
@@ -213,6 +215,7 @@ void HeroStateUILayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
 	nodes.push_back(m_csbnode->getChildByName("backbtn"));
+	NewerGuideLayer::pushUserData("backbtn");
 	g_gameLayer->showNewerGuide(step, nodes);
 }
 

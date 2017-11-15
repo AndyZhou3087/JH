@@ -18,6 +18,7 @@
 #include "SpecialHintLayer.h"
 #include "HintBox.h"
 #include "MixGFNode.h"
+#include "OutDoor.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};
@@ -29,7 +30,12 @@ HeroProperNode::HeroProperNode()
 {
 	lastclickindex = -1;
 	m_lastSelectedData = NULL;
-	m_step = 3;
+
+	m_step = 8;
+	if (!NewerGuideLayer::checkifNewerGuide(46))
+	{
+		m_step = 48;
+	}
 }
 
 
@@ -92,13 +98,16 @@ bool HeroProperNode::init()
 	m_listener->setSwallowTouches(false);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
 
+	if (m_step == 8)
+		showNewerGuide(m_step);
+
 	return true;
 }
 
 void HeroProperNode::onEnterTransitionDidFinish()
 {
 	Node::onEnterTransitionDidFinish();
-	showNewerGuide(m_step);
+
 }
 
 void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -113,8 +122,13 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		MixGFNode* mixnode = (MixGFNode*)this->getParent()->getChildByName("mixnode");
 		if (heroStateUILayer != NULL)
 		{
-			if (NewerGuideLayer::checkifNewerGuide(12))
-				heroStateUILayer->showNewerGuide(12);
+			if (NewerGuideLayer::checkifNewerGuide(11))
+				heroStateUILayer->showNewerGuide(11);
+			else if (NewerGuideLayer::checkifNewerGuide(57))
+			{
+				OutDoor* olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
+				olayer->checkNewerGuide();
+			}
 			else
 			{
 				if (mixnode != NULL && m_lastSelectedData != NULL && ((m_lastSelectedData->type == N_GONG && g_hero->getAtrByType(H_NG)->count >0) || (m_lastSelectedData->type == W_GONG && g_hero->getAtrByType(H_WG)->count >0)))
@@ -856,35 +870,73 @@ void HeroProperNode::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
 	Node* resItemNode = NULL;
-	if (step == 3)
-		nodes.push_back(propeImages[0]);
-	else if (step == 4 || step == 6 || step == 8 || step == 10)
+	if (step == 8)
+	{
+		nodes.push_back(propeImages[5]);
+		NewerGuideLayer::pushUserData("buildsmall");
+	}
+	else if (step == 9)
 	{
 		resItemNode = m_scrollView->getChildByName("resitem0");
 		if (resItemNode != NULL)
 		{
 			if (resItemNode->getChildrenCount() > 0)
+			{
 				nodes.push_back(resItemNode->getChildren().at(0));
+				NewerGuideLayer::pushUserData("buildsmall");
+			}
+
 		}
 		if (NewerGuideLayer::checkifNewerGuide(step))
 			m_scrollView->setEnabled(false);
 	}
-	else if (step == 5)
-	{
-		nodes.push_back(propeImages[1]);
-	}
-	else if (step == 7)
-	{
-		nodes.push_back(propeImages[2]);
-	}
-	else if (step == 9)
-	{
-		nodes.push_back(propeImages[3]);
-	}
-	else if (step == 11)
+	else if (step == 10)
 	{
 		nodes.push_back(heroselectbg->getChildByName("okbtn"));
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	if (step <= 11 && nodes.size() > 0)
-		g_gameLayer->showNewerGuide(step, nodes);
+
+	if (!NewerGuideLayer::checkifNewerGuide(47))
+	{
+		if (step == 48)
+		{
+			nodes.push_back(propeImages[0]);
+			NewerGuideLayer::pushUserData("buildsmall");
+		}
+		else if (step == 49 || step == 51 || step == 53 || step == 55)
+		{
+			resItemNode = m_scrollView->getChildByName("resitem0");
+			if (resItemNode != NULL)
+			{
+				if (resItemNode->getChildrenCount() > 0)
+				{
+					nodes.push_back(resItemNode->getChildren().at(0));
+					NewerGuideLayer::pushUserData("buildsmall");
+				}
+			}
+			if (NewerGuideLayer::checkifNewerGuide(step))
+				m_scrollView->setEnabled(false);
+		}
+		else if (step == 50)
+		{
+			nodes.push_back(propeImages[1]);
+			NewerGuideLayer::pushUserData("buildsmall");
+		}
+		else if (step == 52)
+		{
+			nodes.push_back(propeImages[2]);
+			NewerGuideLayer::pushUserData("buildsmall");
+		}
+		else if (step == 54)
+		{
+			nodes.push_back(propeImages[3]);
+			NewerGuideLayer::pushUserData("buildsmall");
+		}
+		else if (step == 56)
+		{
+			nodes.push_back(heroselectbg->getChildByName("okbtn"));
+			NewerGuideLayer::pushUserData("normalbtn");
+		}
+	}
+	g_gameLayer->showNewerGuide(step, nodes);
 }

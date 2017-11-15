@@ -1,4 +1,4 @@
-#include "PrizeLayer.h"
+﻿#include "PrizeLayer.h"
 #include "CommonFuncs.h"
 #include "SoundManager.h"
 #include "GlobalData.h"

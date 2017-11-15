@@ -511,7 +511,7 @@
       <FilePathData Path="ui/w042.png" />
       <FilePathData Path="ui/waitingbg.png" />
       <FilePathData Path="ui/waitingprogress.png" />
-      <FilePathData Path="ui/winemake.png" />
+      <FilePathData Path="ui/winemaker.png" />
       <FilePathData Path="ui/winetable.png" />
       <FilePathData Path="ui/wintitle.png" />
       <FilePathData Path="ui/x001.png" />
@@ -571,6 +571,8 @@
       <FilePathData Path="ui/ressliderbg.png" />
       <FilePathData Path="ui/ressliderinner.png" />
       <FilePathData Path="ui/modifyftitle.png" />
+      <FilePathData Path="ui/buildingguide.png" />
+      <FilePathData Path="ui/timeguide.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

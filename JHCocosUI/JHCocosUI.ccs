@@ -190,6 +190,7 @@
           <Image Name="bigbgclosebtn.png" />
           <Image Name="blank.png" />
           <Image Name="bookshelf.png" />
+          <Image Name="buildingguide.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />
           <Image Name="buildprogressbg.png" />
@@ -540,6 +541,7 @@
           <Image Name="timegiftbtn.png" />
           <Image Name="timegiftpricebox.png" />
           <Image Name="timegifttitle.png" />
+          <Image Name="timeguide.png" />
           <Image Name="top_r_season0.png" />
           <Image Name="top_r_season1.png" />
           <Image Name="top_r_season2.png" />
@@ -632,7 +634,7 @@
           <Image Name="w042.png" />
           <Image Name="waitingbg.png" />
           <Image Name="waitingprogress.png" />
-          <Image Name="winemake.png" />
+          <Image Name="winemaker.png" />
           <Image Name="winetable.png" />
           <Image Name="wintitle.png" />
           <Image Name="x001.png" />

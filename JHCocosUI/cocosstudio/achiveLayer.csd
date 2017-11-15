@@ -6,14 +6,14 @@
       <ObjectData Name="Layer" Tag="132" ctype="GameLayerObjectData">
         <Size X="720.0000" Y="1280.0000" />
         <Children>
-          <AbstractNodeData Name="bg" ActionTag="-1819832377" Tag="136" IconVisible="False" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
-            <Size X="720.0000" Y="1280.0000" />
+          <AbstractNodeData Name="bg" ActionTag="-1819832377" Tag="136" IconVisible="False" TopMargin="21.0000" BottomMargin="21.0000" LeftEage="237" RightEage="237" TopEage="349" BottomEage="349" Scale9OriginX="237" Scale9OriginY="349" Scale9Width="246" Scale9Height="361" ctype="ImageViewObjectData">
+            <Size X="720.0000" Y="1238.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="640.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="1.0000" Y="1.0000" />
+            <PreSize X="1.0000" Y="0.9672" />
             <FileData Type="Normal" Path="images/normalboxgb.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="backbtn" ActionTag="1267473787" Tag="133" IconVisible="False" LeftMargin="635.8517" RightMargin="18.1483" TopMargin="15.3209" BottomMargin="1198.6791" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="36" Scale9Height="44" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">

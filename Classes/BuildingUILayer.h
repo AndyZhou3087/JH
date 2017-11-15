@@ -34,6 +34,12 @@ public:
 	void resetExercise();
 
 	void getServerTime();
+
+	/****************************
+	延迟显示新手引导
+	*****************************/
+	void checkNewerGuide();
+
 private:
 
 	/****************************
@@ -82,19 +88,9 @@ private:
 	void updataActionRes();
 
 	/****************************
-	更新建筑物自己操作的UI
-	****************************/
-	void showNewerGuide(float dt);
-
-	/****************************
 	新手引导
 	*****************************/
 	void showNewerGuide(int step);
-
-	/****************************
-	延迟显示新手引导
-	*****************************/
-	void delayShowNewerGuide(float dt);
 
 	/****************************
 	更新闭关的说明

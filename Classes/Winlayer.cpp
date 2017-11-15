@@ -374,7 +374,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
+	checkNewerGuide();
 
 	if (GlobalData::getUnlockChapter() >= MAXCHAPTER)
 	{
@@ -889,21 +889,25 @@ void Winlayer::showNewerGuide(int step)
 		Node* resnode = this->getChildByName("resitem0");
 		if (resnode != NULL)
 			nodes.push_back(resnode->getChildren().at(0));
+
+		NewerGuideLayer::pushUserData("buildsmall");
 	}
 	else if (step == 35 || step == 38)
 	{
 		nodes.push_back(m_backbtn);
+		NewerGuideLayer::pushUserData("backbtn");
 	}
 	else if (step == 37)
 	{
 		nodes.push_back(m_getallbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
 	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 
-void Winlayer::delayShowNewerGuide(float dt)
+void Winlayer::checkNewerGuide()
 {
 	if (NewerGuideLayer::checkifNewerGuide(34))
 		showNewerGuide(34);

@@ -130,7 +130,15 @@ void ActionGetLayer::doAction(float dt)
 		m_getbtn->setEnabled(false);
 	}
 
-	if (NewerGuideLayer::checkifNewerGuide(24))
+	if (NewerGuideLayer::checkifNewerGuide(19))
+	{
+		showNewerGuide(19);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(22))
+	{
+		showNewerGuide(22);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(24))
 	{
 		showNewerGuide(24);
 	}
@@ -138,6 +146,7 @@ void ActionGetLayer::doAction(float dt)
 	{
 		showNewerGuide(26);
 	}
+
 	else if (NewerGuideLayer::checkifNewerGuide(29))
 	{
 		showNewerGuide(29);
@@ -145,6 +154,14 @@ void ActionGetLayer::doAction(float dt)
 	else if (NewerGuideLayer::checkifNewerGuide(31))
 	{
 		showNewerGuide(31);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(33))
+	{
+		showNewerGuide(33);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(35))
+	{
+		showNewerGuide(35);
 	}
 }
 
@@ -197,8 +214,9 @@ void ActionGetLayer::onRewardItem(cocos2d::Ref* pSender)
 
 	//更新UI
 	updata();
-	if (NewerGuideLayer::checkifNewerGuide(25))
-		showNewerGuide(25);
+
+	if (NewerGuideLayer::checkifNewerGuide(21))
+		showNewerGuide(21);
 	else if (NewerGuideLayer::checkifNewerGuide(30))
 		showNewerGuide(30);
 }
@@ -269,8 +287,8 @@ void ActionGetLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		{
 			if (NewerGuideLayer::checkifNewerGuide(28))
 				homehill->showNewerGuide(28);
-			else if (NewerGuideLayer::checkifNewerGuide(33))
-				homehill->showNewerGuide(33);
+			else if (NewerGuideLayer::checkifNewerGuide(37))
+				homehill->showNewerGuide(37);
 		}
 		this->removeFromParentAndCleanup(true);
 	}
@@ -394,10 +412,19 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		}
 		saveTempData();
 		updata();
-		if (NewerGuideLayer::checkifNewerGuide(27))
+		if (NewerGuideLayer::checkifNewerGuide(23))
+			showNewerGuide(23);
+		else if (NewerGuideLayer::checkifNewerGuide(25))
+			showNewerGuide(25);
+		else if (NewerGuideLayer::checkifNewerGuide(27))
 			showNewerGuide(27);
+
 		else if (NewerGuideLayer::checkifNewerGuide(32))
 			showNewerGuide(32);
+		else if (NewerGuideLayer::checkifNewerGuide(34))
+			showNewerGuide(34);
+		else if (NewerGuideLayer::checkifNewerGuide(36))
+			showNewerGuide(36);
 	}
 }
 
@@ -621,21 +648,30 @@ void ActionGetLayer::addEventText2(float dt)
 void ActionGetLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 24 || step == 29)
+	if (step == 19)
 	{
+
+	}
+	if (step == 20 || step == 29)
+	{
+		Node* resitem0 = this->getChildByName("resitem0")->getChildren().at(0);
+		NewerGuideLayer::pushUserData("buildsmall");
 		nodes.push_back(this->getChildByName("resitem0")->getChildren().at(0));
 	}
-	else if (step == 25 || step == 30)
+	else if (step == 21 || step == 23 || step == 25 || step == 30 || step == 32 || step == 34)
 	{
 		nodes.push_back(m_getbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	else if (step == 26 || step == 31)
+	else if (step == 22 || step == 24 || step == 26 || step == 31 || step == 33 || step == 35)
 	{
 		nodes.push_back(m_getallbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	else if (step == 27 || step == 32)
+	else if (step == 27 || step == 36)
 	{
 		nodes.push_back(m_backbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
 }

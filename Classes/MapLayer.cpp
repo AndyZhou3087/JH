@@ -229,7 +229,7 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 				type = GOWHERE;
 
 			if (g_gameLayer != NULL)
-				g_gameLayer->addChild(GoWhereLayer::create(m_addrname, type, m_distance), 2);
+				g_gameLayer->addChild(GoWhereLayer::create(m_addrname, type, m_distance), 2, "gowherelayer");
 		}
 
 	}
@@ -263,7 +263,7 @@ void MapLayer::showJump(float dt)
 {
 	heroPauseMoving();
 
-	g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ONWAY_JUMP), 2);
+	g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ONWAY_JUMP), 2, "gowherelayer");
 }
 
 void MapLayer::showMoveToDest()
@@ -366,7 +366,7 @@ void MapLayer::Arrive()
 		}
 	}
 	if (g_gameLayer != NULL)
-		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2);
+		g_gameLayer->addChild(GoWhereLayer::create(m_addrname, ARRIVE), 2, "gowherelayer");
 
 	this->scheduleOnce(schedule_selector(MapLayer::finishMove), 0.1f);
 }
@@ -630,14 +630,14 @@ void MapLayer::mapMoveTo(Vec2 pos)
 	m_mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 }
 
-void MapLayer::delayShowMapNewerGuide(float dt)
+void MapLayer::checkNewerGuide()
 {
-	if (NewerGuideLayer::checkifNewerGuide(20))
-		showNewerGuide(20);
-	else if (NewerGuideLayer::checkifNewerGuide(40))
-		showNewerGuide(40);
-	else if (NewerGuideLayer::checkifNewerGuide(48))
-		showNewerGuide(48);
+	if (NewerGuideLayer::checkifNewerGuide(14))
+		showNewerGuide(14);
+	else if (NewerGuideLayer::checkifNewerGuide(38))
+		showNewerGuide(38);
+	else if (NewerGuideLayer::checkifNewerGuide(58))
+		showNewerGuide(58);
 }
 
 float MapLayer::moveToDestTime(float distance)
@@ -672,17 +672,20 @@ void MapLayer::showEndAnim(float dt)
 void MapLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 20)
+	if (step == 14)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-2"));
+		NewerGuideLayer::pushUserData("m1-2");
 	}
-	else if (step == 40)
+	else if (step == 38)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-1"));
+		NewerGuideLayer::pushUserData("m1-1");
 	}
-	else if (step == 48)
+	else if (step == 58)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-4"));
+		NewerGuideLayer::pushUserData("m1-4");
 	}
 	g_gameLayer->showNewerGuide(step, nodes);
 }

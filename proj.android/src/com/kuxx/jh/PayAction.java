@@ -17,14 +17,11 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class PayAction {
 	static Activity context;
@@ -89,7 +86,6 @@ public class PayAction {
 		String orderLifeStr = "60";
 		//String payChannel = "wechat_app";
 		String typeStr = "app";
-		
 		
 		List<NameValuePair> paierList = new ArrayList<NameValuePair>();
 		paierList.add(new BasicNameValuePair("backendUrl", BACKURL));

@@ -103,6 +103,20 @@ bool BuildingUILayer::init(Building* build)
 
 	updataBuildRes();
 
+
+	if (strcmp(m_build->data.name, "forgingtable") == 0)
+	{
+		Node* categoryBtnNode = m_csbnode->getChildByName("tagnode");
+		for (int i = 0; i < categoryBtnNode->getChildrenCount(); i++)
+		{
+			std::string btnstr = StringUtils::format("btn%d", i);
+			cocos2d::ui::Button* btn = (cocos2d::ui::Button*)categoryBtnNode->getChildByName(btnstr);
+			btn->setTag(i);
+			btn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onCategory, this));
+			vec_categoryBtn.push_back(btn);
+		}
+	}
+
 	if (m_build->data.level > 0)
 	{
 		setActionScrollViewUI();
@@ -124,8 +138,8 @@ bool BuildingUILayer::init(Building* build)
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-
-	this->scheduleOnce(schedule_selector(BuildingUILayer::delayShowNewerGuide), 0.2f);
+	if (strcmp(m_build->data.name, "forgingtable") == 0 && m_build->data.level <= 0)
+		checkNewerGuide();
 	return true;
 }
 
@@ -139,17 +153,17 @@ void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (NewerGuideLayer::checkifNewerGuide(2))
+		if (NewerGuideLayer::checkifNewerGuide(7))
 		{
 			TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
 			if (topbar != NULL)
-				topbar->showNewerGuide(2);
+				topbar->showNewerGuide(7);
 		}
-		else if (NewerGuideLayer::checkifNewerGuide(45))
+		else if (NewerGuideLayer::checkifNewerGuide(46))
 		{
 			HomeLayer* homlayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
 			if (homlayer != NULL)
-				homlayer->showNewerGuide(45);
+				homlayer->showNewerGuide(46);
 		}
 		this->removeFromParentAndCleanup(true);
 	}
@@ -166,14 +180,6 @@ void BuildingUILayer::setActionScrollViewUI()
 	if (strcmp(m_build->data.name, "forgingtable") == 0)
 	{
 		Node* categoryBtnNode = m_csbnode->getChildByName("tagnode");
-		for (int i = 0; i < categoryBtnNode->getChildrenCount(); i++)
-		{
-			std::string btnstr = StringUtils::format("btn%d", i);
-			cocos2d::ui::Button* btn = (cocos2d::ui::Button*)categoryBtnNode->getChildByName(btnstr);
-			btn->setTag(i);
-			btn->addTouchEventListener(CC_CALLBACK_2(BuildingUILayer::onCategory, this));
-			vec_categoryBtn.push_back(btn);
-		}
 		vec_categoryBtn[0]->setBright(false);
 		categoryBtnNode->setVisible(true);
 		scrollview->setContentSize(Size(scrollview->getContentSize().width, 600));
@@ -247,6 +253,8 @@ void BuildingUILayer::loadActionUi()
 			needtimelbl->setVisible(false);
 	}
 	updataActionRes();
+
+	checkNewerGuide();
 }
 
 void BuildingUILayer::delayLoadActionUi(float dt)
@@ -538,6 +546,11 @@ void BuildingUILayer::onfinish(Ref* pSender, BACTIONTYPE type)
 
 		updataActionRes();
 		updataBuildRes();
+
+		if (strcmp(m_build->data.name, "forgingtable") == 0)
+		{
+			checkNewerGuide();
+		}
 	}
 }
 
@@ -759,27 +772,80 @@ void BuildingUILayer::finishAnim(Ref* pSender, Node* node)
 void BuildingUILayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 1)
+	if (step == 2)
 	{
-		cocos2d::ui::Widget* mainitem = (cocos2d::ui::Widget*)buildnode->getChildByName("item");
-		cocos2d::ui::Widget* resitem = (cocos2d::ui::Widget*)mainitem->getChildByName("res0");
+		nodes.push_back(buildnode->getChildByName("item")->getChildByName("res0"));
+		nodes.push_back(buildnode->getChildByName("item")->getChildByName("res1"));
+		nodes.push_back(buildnode->getChildByName("item")->getChildByName("res2"));
+		NewerGuideLayer::pushUserData("resbox");
+		NewerGuideLayer::pushUserData("resbox");
+		NewerGuideLayer::pushUserData("resbox");
+	}
+	else if (step == 3)
+	{
+		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
+	else if (step == 5)
+	{
+		nodes.push_back(vec_categoryBtn[2]);
+		NewerGuideLayer::pushUserData("buildtagbtn1");
+	}
+	else if (step == 6)
+	{
+		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
+		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+		nodes.push_back(actbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
+	}
 
-		nodes.push_back(resitem);
+	else if (step == 42)
+	{
+		nodes.push_back(vec_categoryBtn[2]);
+		NewerGuideLayer::pushUserData("buildtagbtn1");
+	}
+	else if (step == 43)
+	{
+		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
+		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+		nodes.push_back(actbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
 	else if (step == 44)
 	{
-		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
+		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
+		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+		nodes.push_back(actbtn);
+		NewerGuideLayer::pushUserData("normalbtn");
 	}
+	else if (step == 45)
+	{
+
+	}
+	
 	g_gameLayer->showNewerGuide(step, nodes);
 }
 
-void BuildingUILayer::delayShowNewerGuide(float dt)
+void BuildingUILayer::checkNewerGuide()
 {
-	
-	if (NewerGuideLayer::checkifNewerGuide(1) && strcmp(m_build->data.name, "bed") == 0 && m_build->data.level <= 0)
-		showNewerGuide(1);
-	else if (NewerGuideLayer::checkifNewerGuide(44))
+	if (NewerGuideLayer::checkifNewerGuide(2))
+		showNewerGuide(2);
+	else if (NewerGuideLayer::checkifNewerGuide(3))
+		showNewerGuide(3);
+	else if (NewerGuideLayer::checkifNewerGuide(4))
+		showNewerGuide(4);
+	else if (NewerGuideLayer::checkifNewerGuide(5))
+		showNewerGuide(5);
+	else if (NewerGuideLayer::checkifNewerGuide(6))
+		showNewerGuide(6);
+	else if (!NewerGuideLayer::checkifNewerGuide(41) && NewerGuideLayer::checkifNewerGuide(42))
+		showNewerGuide(42);
+	else if (!NewerGuideLayer::checkifNewerGuide(42) && NewerGuideLayer::checkifNewerGuide(43))
+		showNewerGuide(43);
+	else if (!NewerGuideLayer::checkifNewerGuide(43) && NewerGuideLayer::checkifNewerGuide(44))
 		showNewerGuide(44);
+	else if (!NewerGuideLayer::checkifNewerGuide(44) && NewerGuideLayer::checkifNewerGuide(45))
+		showNewerGuide(45);
 }
 
 void BuildingUILayer::onExercisefinish(int index)

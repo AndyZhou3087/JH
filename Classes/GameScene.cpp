@@ -1,6 +1,5 @@
 ﻿#include "GameScene.h"
 #include "TopBar.h"
-#include "HomeLayer.h"
 #include "UIScroll.h"
 #include "GameDataSave.h"
 #include "StorageRoom.h"
@@ -21,6 +20,7 @@
 #include "LoginRewardLayer.h"
 #include "AchiveDoneAnimLayer.h"
 #include "FrozenLayer.h"
+#include "CannotTouchLayer.h"
 
 USING_NS_CC;
 
@@ -34,6 +34,7 @@ GameScene::GameScene()
 {
 	issavedata = true;
 	isAnewGetData = false;
+	homeLayer = NULL;
 }
 GameScene::~GameScene()
 {
@@ -519,7 +520,7 @@ void GameScene::showGOOut(float dt)
 	g_gameLayer->removeChildByName("homelayer");
 	g_hero->setIsOut(true);
 	if (g_maplayer != NULL)
-		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
+		g_maplayer->checkNewerGuide();
 }
 
 void GameScene::getNpcRandMap()
@@ -539,7 +540,9 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 	{
 		m_newerStep = step;
 		m_newerNode = nodes;
-		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide),0.05f);
+		CannotTouchLayer* layer = CannotTouchLayer::create();
+		g_gameLayer->addChild(layer, 11, "newernotouchlayer");
+		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide),0.25f);
 	}
 }
 
@@ -548,9 +551,9 @@ void GameScene::delayShowNewerGuide(float dt)
 	if (g_NewerGuideLayer == NULL)
 	{
 		g_NewerGuideLayer = NewerGuideLayer::create(m_newerStep, m_newerNode);
-		if (g_gameLayer != NULL)
-			g_gameLayer->addChild(g_NewerGuideLayer, 10);
+		this->addChild(g_NewerGuideLayer, 10, "newerguidelayer");
 	}
+	g_gameLayer->removeChildByName("newernotouchlayer");
 }
 
 void GameScene::onSuccess()

@@ -16,7 +16,6 @@ public:
 	~HomeLayer();
 
 	virtual bool init();
-	virtual void onEnterTransitionDidFinish();
 
 	CREATE_FUNC(HomeLayer);
 
@@ -26,6 +25,13 @@ public:
 	void updateBuilding();
 
 	void showNewerGuide(int step);
+	/****************************
+	新手引导
+	*****************************/
+	void checkNewerGuide();
+
+	void delayShowNewerGuide(float dt);
+
 private:
 	/****************************
 	点击建筑物
@@ -47,10 +53,6 @@ private:
 	*****************************/
 	void loadJsonData();
 
-	/****************************
-	延迟显示新手引导
-	*****************************/
-	void delayShowNewerGuide(float dt);
 private:
 	Building* m_storageroom;//仓库
 	Building* m_fence;//围墙

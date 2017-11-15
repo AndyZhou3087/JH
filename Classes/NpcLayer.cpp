@@ -88,7 +88,7 @@ bool NpcLayer::init(std::string addrid)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_ENTER_MAPADDR);
-	this->scheduleOnce(schedule_selector(NpcLayer::delayShowNewerGuide), 0.2f);
+
 	this->schedule(schedule_selector(NpcLayer::checkUpateNpc), 1.0f);
 	return true;
 }
@@ -1123,24 +1123,6 @@ void NpcLayer::getWinRes(int type)
 		GameDataSave::getInstance()->setTempStorage(m_addrstr, datastr);
 	}
 
-}
-
-void NpcLayer::showNewerGuide(int step)
-{
-	std::vector<Node*> nodes;
-	std::string childname = StringUtils::format("npcnode%d", 0);
-	Node* npcitem = m_scrollview->getChildByName(childname);
-	cocos2d::ui::Button* talkbtn = (cocos2d::ui::Button*)npcitem->getChildByName("talkbtn");
-	nodes.push_back(talkbtn);
-	g_gameLayer->showNewerGuide(step, nodes);
-}
-
-void NpcLayer::delayShowNewerGuide(float dt)
-{
-	if (NewerGuideLayer::checkifNewerGuide(49) && m_addrstr.compare("m1-4") == 0)
-		showNewerGuide(49);
-	else if (NewerGuideLayer::checkifNewerGuide(50) && m_addrstr.compare("m1-3") == 0)
-		showNewerGuide(50);
 }
 
 int NpcLayer::checkFightCount(std::string npcid)

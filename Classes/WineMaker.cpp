@@ -16,7 +16,7 @@ WineMaker::~WineMaker()
 
 bool WineMaker::init()
 {
-	if (Sprite::initWithSpriteFrameName("ui/winemake.png"))
+	if (Sprite::initWithSpriteFrameName("ui/winemaker.png"))
 	{
 
 		return true;

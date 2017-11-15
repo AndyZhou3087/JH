@@ -7,6 +7,7 @@
 #include "SoundManager.h"
 #include "ShopLayer.h"
 #include "MyMenu.h"
+#include "NewerGuideLayer.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源", "工具", "其他"};
 
@@ -56,15 +57,13 @@ bool StorageUILayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-
+	showNewerGuide(67);
 	return true;
 }
 
 void StorageUILayer::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
-	showNewerGuide(46);
 }
 
 void StorageUILayer::updateResContent()
@@ -222,17 +221,19 @@ void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 void StorageUILayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 46)
+	if (step == 67)
 	{
 		Node* itemnode = scrollview->getChildByName("resitem0");
 		if (itemnode != NULL)
 			nodes.push_back(itemnode->getChildren().at(0));
+		NewerGuideLayer::pushUserData("buildsmall");
 	}
-	else if (step == 47)
+	else if (step == 68)
 	{
 		Node* itemnode = scrollview->getChildByName("resitem100");
 		if (itemnode != NULL)
 			nodes.push_back(itemnode->getChildren().at(0));
+		NewerGuideLayer::pushUserData("buildsmall");
 	}
 	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);

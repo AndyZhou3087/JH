@@ -9,6 +9,7 @@
 #include "FightLayer.h"
 #include "SoundManager.h"
 #include "MapLayer.h"
+#include "NewerGuideLayer.h"
 HomeHill::HomeHill()
 {
 }
@@ -129,7 +130,7 @@ bool HomeHill::init()
 void HomeHill::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	showNewerGuide(23);
+	showNewerGuide(18);
 }
 
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -137,8 +138,8 @@ void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-        if (g_maplayer != NULL)
-            g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
+		if (g_maplayer != NULL)
+			g_maplayer->checkNewerGuide();
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -231,31 +232,23 @@ void HomeHill::updateUI(float dt)
 void HomeHill::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 23)
+	if (step == 18)
 	{
 		Node* resnode = scrollView->getChildByName("node0");
-
+		NewerGuideLayer::pushUserData("normalbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
 	else if (step == 28)
 	{
 		scrollView->jumpToPercentVertical(20);
 		Node* resnode = scrollView->getChildByName("node4");
-
+		NewerGuideLayer::pushUserData("normalbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
 	}
-
-	else if (step == 33 || step == 36)
-	{
-		scrollView->jumpToPercentVertical(70);
-		Node* resnode = scrollView->getChildByName("node7");
-
-		nodes.push_back(resnode->getChildByName("actionbtn"));
-	}
-	else if (step == 39)
+	else if (step == 37)
 	{
 		nodes.push_back(m_backbtn);
-
+		NewerGuideLayer::pushUserData("backbtn");
 	}
 
 	g_gameLayer->showNewerGuide(step, nodes);

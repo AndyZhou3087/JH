@@ -625,7 +625,7 @@ void ResDetailsLayer::removSelf()
 {
 	StorageUILayer* storagelayer = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
 	if (storagelayer != NULL)
-		storagelayer->showNewerGuide(47);
+		storagelayer->showNewerGuide(68);
 	this->removeFromParentAndCleanup(true);
 }
 

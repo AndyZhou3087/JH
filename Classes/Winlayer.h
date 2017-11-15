@@ -22,9 +22,9 @@ public:
 	*****************************/
 	void showNewerGuide(int step);
 	/****************************
-	延迟显示新手引导
+	新手引导
 	*****************************/
-	void delayShowNewerGuide(float dt);
+	void checkNewerGuide();
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

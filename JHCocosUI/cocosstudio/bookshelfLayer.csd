@@ -68,14 +68,14 @@
             <ColorVector ScaleY="1.0000" />
             <InnerNodeSize Width="680" Height="745" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-362399671" Tag="38" IconVisible="False" LeftMargin="308.4992" RightMargin="308.5008" TopMargin="253.7341" BottomMargin="971.2659" FontSize="50" LabelText="图鉴" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="103.0000" Y="55.0000" />
+          <AbstractNodeData Name="title" ActionTag="-362399671" Tag="38" IconVisible="False" LeftMargin="308.4992" RightMargin="308.5008" TopMargin="255.2341" BottomMargin="972.7659" FontSize="50" LabelText="图鉴" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="103.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9992" Y="998.7659" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.7803" />
-            <PreSize X="0.1431" Y="0.0430" />
+            <PreSize X="0.1431" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

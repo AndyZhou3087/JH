@@ -237,15 +237,10 @@ void ShopLayer::setMessage(PYARET ret)
 			//	GlobalData::map_buyVipDays[vipid] = monthdays;
 
 			ServerDataSwap::init()->vipSuccNotice(vipid);
-			GetVipRewardLayer* layer = GetVipRewardLayer::create();
 			if (g_gameLayer != NULL)
 			{
-				g_gameLayer->addChild(layer, 10, "viprewardlayer");
-				VipShopLayer* vipshop = (VipShopLayer*)g_gameLayer->getChildByName("vipshoplayer");
-				if (vipshop != NULL)
-					vipshop->getLeftDays();
+				g_gameLayer->scheduleOnce(schedule_selector(ShopLayer::showVipReward), 0.1f);
 			}
-
 #ifdef ANALYTICS
 			std::string name[] = { "byk6", "byk30", "byk68"};
 			AnalyticUtil::onEvent(name[payindex - herocount - golditemcount].c_str());
@@ -270,6 +265,18 @@ void ShopLayer::setMessage(PYARET ret)
 #endif
 	}
 	isPaying = false;
+}
+
+void ShopLayer::showVipReward(float dt)
+{
+	GetVipRewardLayer* layer = GetVipRewardLayer::create();
+	if (g_gameLayer != NULL)
+	{
+		g_gameLayer->addChild(layer, 10, "viprewardlayer");
+		VipShopLayer* vipshop = (VipShopLayer*)g_gameLayer->getChildByName("vipshoplayer");
+		if (vipshop != NULL)
+			vipshop->getLeftDays();
+	}
 }
 
 void ShopLayer::refreshGoldCount(float dt)
