@@ -250,7 +250,7 @@ void StartScene::onSuccess()
 
 			if (GameDataSave::getInstance()->getHeroLV() >= 1)
 			{
-				for (int i = 0; i < 50; i++)
+				for (int i = 0; i < 68; i++)
 				{
 					GameDataSave::getInstance()->setIsNewerGuide(i, 0);
 				}

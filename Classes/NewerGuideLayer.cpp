@@ -97,10 +97,12 @@ std::string descText[][6] = { { "我是老贤，从现在开始，再也没有�
 NewerGuideLayer* g_NewerGuideLayer = NULL;
 
 std::vector<std::string> NewerGuideLayer::vec_userdata;
+bool NewerGuideLayer::isShowing = false;
 NewerGuideLayer::NewerGuideLayer()
 {
 	wordindex = 0;
 	iscannext = false;
+	isShowing = false;
 }
 
 NewerGuideLayer::~NewerGuideLayer()
@@ -466,6 +468,7 @@ void NewerGuideLayer::initDialog()
 void NewerGuideLayer::removeSelf()
 {
 	vec_userdata.clear();
+	isShowing = false;
 	this->removeFromParentAndCleanup(true);
 	g_NewerGuideLayer = NULL;
 }

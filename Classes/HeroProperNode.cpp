@@ -18,7 +18,6 @@
 #include "SpecialHintLayer.h"
 #include "HintBox.h"
 #include "MixGFNode.h"
-#include "OutDoor.h"
 
 //装备栏类型显示文字
 const std::string name[] = { "武功", "内功", "武器", "防具", "工具", "工具", "工具", "坐骑"};

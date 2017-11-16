@@ -17,6 +17,7 @@ public:
 	static NewerGuideLayer* create(int step, std::vector<Node*> stencilNodes);
 	static bool checkifNewerGuide(int index);
 	static void pushUserData(std::string strdata);
+	static bool isShowing;
 private:
 	ClippingNode* m_clippingNode;
 	int m_step;

@@ -117,14 +117,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="text1" ActionTag="-209861601" Tag="64" IconVisible="False" LeftMargin="52.7731" RightMargin="524.2269" TopMargin="1014.6287" BottomMargin="230.3713" FontSize="32" LabelText="消耗时间：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="143.0000" Y="35.0000" />
+          <AbstractNodeData Name="text1" ActionTag="-209861601" Tag="64" IconVisible="False" LeftMargin="53.7731" RightMargin="525.2269" TopMargin="1015.6287" BottomMargin="231.3713" FontSize="32" LabelText="消耗时间：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="141.0000" Y="33.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="124.2731" Y="247.8713" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.1726" Y="0.1936" />
-            <PreSize X="0.1986" Y="0.0273" />
+            <PreSize X="0.1958" Y="0.0258" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

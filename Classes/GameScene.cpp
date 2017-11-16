@@ -538,6 +538,10 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 {
 	if (NewerGuideLayer::checkifNewerGuide(step))
 	{
+		if (NewerGuideLayer::isShowing)
+			return;
+
+		NewerGuideLayer::isShowing = true;
 		m_newerStep = step;
 		m_newerNode = nodes;
 		CannotTouchLayer* layer = CannotTouchLayer::create();
