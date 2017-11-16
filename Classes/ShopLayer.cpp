@@ -269,7 +269,7 @@ void ShopLayer::setMessage(PYARET ret)
 
 void ShopLayer::showVipReward(float dt)
 {
-	GetVipRewardLayer* layer = GetVipRewardLayer::create();
+	VipPrizeLayer* layer = VipPrizeLayer::create();
 	if (g_gameLayer != NULL)
 	{
 		g_gameLayer->addChild(layer, 10, "viprewardlayer");
