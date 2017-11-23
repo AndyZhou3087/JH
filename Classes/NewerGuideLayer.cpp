@@ -190,7 +190,10 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		m_clippingNode->setAlphaThreshold(0.5f);//设置透明度Alpha值为0
 		this->addChild(m_clippingNode, -1);
 
-		m_colorlayer = LayerColor::create(Color4B(0, 0, 0, 200));
+		int al = 200;
+		if (map_words[step].size() <= 0)
+			al = 0;
+		m_colorlayer = LayerColor::create(Color4B(0, 0, 0, al));
 		m_clippingNode->addChild(m_colorlayer);
 
 		Node* stencil = Node::create();
@@ -252,43 +255,50 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 
 			wordindex++;
 
-			if (wordindex >= map_words[m_step].size())
+			int size = map_words[m_step].size();
+			if (wordindex >= size)
 			{
 				if (m_step == 0)
 				{
 					removeSelf();
 					HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
-					homelayer->checkNewerGuide();
+					if (homelayer != NULL)
+						homelayer->checkNewerGuide();
 				}
 				else if (m_step == 2)
 				{
 					removeSelf();
 					BuildingUILayer* buildlayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
-					buildlayer->checkNewerGuide();
+					if (buildlayer != NULL)
+						buildlayer->checkNewerGuide();
 				}
 				else if (m_step == 4)
 				{
 					removeSelf();
 					BuildingUILayer* buildlayer = (BuildingUILayer*)g_gameLayer->getChildByName("builduilayer");
-					buildlayer->checkNewerGuide();
+					if (buildlayer != NULL)
+						buildlayer->checkNewerGuide();
 				}
 				else if (m_step == 15)
 				{
 					removeSelf();
 					GoWhereLayer* golayer = (GoWhereLayer*)g_gameLayer->getChildByName("gowherelayer");
-					golayer->showNewerGuide(16);
+					if (golayer != NULL)
+						golayer->showNewerGuide(16);
 				}
 				else if (m_step == 19)
 				{
 					removeSelf();
 					ActionGetLayer* alayer = (ActionGetLayer*)g_gameLayer->getChildByName("ActionGetLayer");
-					alayer->showNewerGuide(20);
+					if (alayer != NULL)
+						alayer->showNewerGuide(20);
 				}
 				else if (m_step == 47)
 				{
 					removeSelf();
 					HeroProperNode* heroProperNode = (HeroProperNode*)g_gameLayer->getChildByName("OutDoor")->getChildByName("csbnode")->getChildByName("HeroProperNode");
-					heroProperNode->showNewerGuide(48);
+					if (heroProperNode != NULL)
+						heroProperNode->showNewerGuide(48);
 				}
 				else if (m_step == 59)
 				{
@@ -301,7 +311,8 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 				{
 					removeSelf();
 					HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
-					homelayer->checkNewerGuide();
+					if (homelayer != NULL)
+						homelayer->checkNewerGuide();
 				}
 				else
 				{
@@ -348,7 +359,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 #ifdef ANALYTICS
 	if (step == 0)
 		AnalyticUtil::onEvent("newerstart");
-	else if (step == 44)
+	else if (step == 68)
 		AnalyticUtil::onEvent("newerend");
 #endif
 	return true;
@@ -372,9 +383,18 @@ bool NewerGuideLayer::checkifNewerGuide(int index)
 
 void NewerGuideLayer::showAnim(Vec2 pos)
 {
+
+	if (map_words[m_step].size() <= 0)
+	{
+		Sprite* quan = Sprite::create("images/newerguide/newerquan.png");
+		quan->setPosition(pos);
+		quan->runAction(RepeatForever::create(Sequence::create(ScaleTo::create(0.5f, 0.8f), ScaleTo::create(0.5f, 1.0f), NULL)));
+		this->addChild(quan, 1);
+	}
+
 	auto sj = Sprite::create("images/newerguide/newersj0.png");
 	sj->setAnchorPoint(Vec2(0, 1));
-	sj->setPosition(pos.x + 20, pos.y - 20);
+	sj->setPosition(pos.x, pos.y);
 	this->addChild(sj, 1);
 
 	//创建帧动画序列，名词形式

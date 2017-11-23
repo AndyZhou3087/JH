@@ -136,7 +136,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5182" />
             <PreSize X="0.4778" Y="0.1141" />
-            <FileData Type="MarkedSubImage" Path="ui/wintitle.png" Plist="uipacker.plist" />
+            <FileData Type="MarkedSubImage" Path="ui/wintitle1.png" Plist="uipacker.plist" />
           </AbstractNodeData>
           <AbstractNodeData Name="exptext" ActionTag="-320672389" Tag="31" IconVisible="False" LeftMargin="189.8999" RightMargin="427.1001" TopMargin="688.0000" BottomMargin="568.0000" FontSize="23" LabelText="我的经验：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="103.0000" Y="24.0000" />

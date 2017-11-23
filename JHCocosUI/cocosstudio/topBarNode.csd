@@ -16,10 +16,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="MarkedSubImage" Path="ui/blank.png" Plist="uipacker.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="topbg" ActionTag="-762573810" Tag="3" IconVisible="False" LeftMargin="-360.0000" RightMargin="-360.0000" TopMargin="-217.5000" BottomMargin="-217.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="topbg" ActionTag="-762573810" Tag="3" IconVisible="False" LeftMargin="-358.6618" RightMargin="-361.3382" TopMargin="-217.5000" BottomMargin="-217.5000" ctype="SpriteObjectData">
             <Size X="720.0000" Y="435.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position />
+            <Position X="1.3382" Y="0.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -308,6 +308,50 @@
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <LabelBMFontFile_CNB Type="Normal" Path="fonts/topnum.fnt" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="topexpbg" ActionTag="1820912260" Tag="275" IconVisible="False" LeftMargin="-319.6065" RightMargin="187.6065" TopMargin="-3.6025" BottomMargin="-4.3975" ctype="SpriteObjectData">
+            <Size X="132.0000" Y="8.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-253.6065" Y="-0.3975" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/topexpbg.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="toplvbox" ActionTag="-1912790181" Tag="276" IconVisible="False" LeftMargin="-361.1731" RightMargin="319.1731" TopMargin="-34.7627" BottomMargin="-13.2373" ctype="SpriteObjectData">
+            <Size X="42.0000" Y="48.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-340.1731" Y="10.7627" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="MarkedSubImage" Path="ui/toplvbox.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="toplvexpbar" ActionTag="-1519176729" Tag="277" IconVisible="False" LeftMargin="-319.9993" RightMargin="187.9993" TopMargin="-4.4997" BottomMargin="-5.5003" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="132.0000" Y="10.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-253.9993" Y="-0.5003" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <ImageFileData Type="MarkedSubImage" Path="ui/topexpbar.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="lvtext" ActionTag="-905153322" Tag="278" IconVisible="False" LeftMargin="-350.8302" RightMargin="330.8302" TopMargin="-14.6647" BottomMargin="-4.3353" FontSize="18" LabelText="10" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="20.0000" Y="19.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-340.8302" Y="5.1647" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

@@ -513,7 +513,7 @@
       <FilePathData Path="ui/waitingprogress.png" />
       <FilePathData Path="ui/winemaker.png" />
       <FilePathData Path="ui/winetable.png" />
-      <FilePathData Path="ui/wintitle.png" />
+      <FilePathData Path="ui/wintitle1.png" />
       <FilePathData Path="ui/x001.png" />
       <FilePathData Path="ui/x002.png" />
       <FilePathData Path="ui/x003.png" />
@@ -573,6 +573,26 @@
       <FilePathData Path="ui/modifyftitle.png" />
       <FilePathData Path="ui/buildingguide.png" />
       <FilePathData Path="ui/timeguide.png" />
+      <FilePathData Path="ui/playerfighttext.png" />
+      <FilePathData Path="ui/fightitem0.png" />
+      <FilePathData Path="ui/fightitem1.png" />
+      <FilePathData Path="ui/fightnodebtn.png" />
+      <FilePathData Path="ui/rankcatatitlebox1.png" />
+      <FilePathData Path="ui/addfightcountbtn.png" />
+      <FilePathData Path="ui/myfighttie.png" />
+      <FilePathData Path="ui/topexpbar.png" />
+      <FilePathData Path="ui/topexpbg.png" />
+      <FilePathData Path="ui/toplvbox.png" />
+      <FilePathData Path="ui/fightaddcounttitle.png" />
+      <FilePathData Path="ui/fightaddicon0.png" />
+      <FilePathData Path="ui/fightaddicon1.png" />
+      <FilePathData Path="ui/winbox0.png" />
+      <FilePathData Path="ui/winbox1.png" />
+      <FilePathData Path="ui/winicon1.png" />
+      <FilePathData Path="ui/wintext0.png" />
+      <FilePathData Path="ui/wintext1.png" />
+      <FilePathData Path="ui/winicon0.png" />
+      <FilePathData Path="ui/wintitle0.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

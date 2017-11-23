@@ -662,3 +662,13 @@ void GameDataSave::setAchiveAnimData(std::string strval)
 {
 	saveStringDataByKey(addUIDString("achiveanim"), strval);
 }
+
+void GameDataSave::setPlayerChallengeData(std::string strval)
+{
+	saveStringDataByKey(addUIDString("playerchallenge"), strval);
+}
+
+std::string GameDataSave::getPlayerChallengeData()
+{
+	return loadStringDataByKey(addUIDString("playerchallenge"), "");
+}

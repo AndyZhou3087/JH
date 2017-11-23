@@ -1,4 +1,4 @@
-#include "GlobalData.h"
+﻿#include "GlobalData.h"
 #include "Building.h"
 #include "StorageRoom.h"
 #include "MyPackage.h"
@@ -118,6 +118,19 @@ RaffleData GlobalData::myRaffleData;
 int GlobalData::continueLoginDays = 0;
 
 bool GlobalData::isFrozen = false;
+
+int GlobalData::myFihgtCount = 0;
+int GlobalData::myTotalFihgtCount = 0;
+int GlobalData::myFihgtexp = 0;
+
+std::map<std::string, int> GlobalData::map_fighterPlayerData;
+
+std::map<std::string, FriendlyData> GlobalData::map_fightPlayerfriendly;
+
+std::string GlobalData::fightPlayerMixgf;
+
+int GlobalData::fightPlayerFactionLv = 0;
+bool GlobalData::isPlayerChallenging = false;
 
 GlobalData::GlobalData()
 {

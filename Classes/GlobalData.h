@@ -224,6 +224,7 @@ typedef struct
 	std::string desc;
 	std::string desc1;//书架描述
 	int leftval;
+	int fightPlayerleftval;
 }GFSkillData;
 
 /****************************
@@ -344,6 +345,7 @@ typedef struct
 {
 	int rank;
 	std::string nickname;
+	std::string playerid;
 	int herotype;
 	int herolv;
 	int herosex;
@@ -1006,7 +1008,7 @@ public:
 	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
 	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
-	static std::map<std::string, FriendlyData> map_myfriendly;//技能数据
+	static std::map<std::string, FriendlyData> map_myfriendly;//好友数据
 
 	static std::vector<std::string> vec_buyVipIds;
 	static std::map<std::string,int> map_buyVipDays;
@@ -1031,6 +1033,15 @@ public:
 	static std::vector<AchiveData> vec_achiveData;
 
 	static std::vector<std::string> vec_showAchiveNames;
+	//挑战对手装备数据
+	static std::map<std::string, int> map_fighterPlayerData;
+
+	//挑战对手好友数据
+	static std::map<std::string, FriendlyData> map_fightPlayerfriendly;
+
+	static std::string fightPlayerMixgf;
+
+	static int fightPlayerFactionLv;
 
 	static bool isPopingScene;
 
@@ -1049,6 +1060,11 @@ public:
 	static RaffleData myRaffleData;
 	static int continueLoginDays;
 	static bool isFrozen;
+	static int myFihgtCount;
+	static int myTotalFihgtCount;
+	static int myFihgtexp;
+
+	static bool isPlayerChallenging;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

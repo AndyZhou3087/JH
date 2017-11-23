@@ -150,7 +150,7 @@ int Nature::getTemperature()
 
 void Nature::updateData(float dt)
 {
-	if (GlobalData::g_gameStatus != GAMESTART)
+	if (GlobalData::g_gameStatus != GAMESTART || GlobalData::isPlayerChallenging)
 		return;
 	if (g_hero != NULL && g_hero->getIsWDChallenge())
 		return;

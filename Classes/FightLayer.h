@@ -151,6 +151,10 @@ private:
 	****************************/
 	void showNpcTextAmin(std::string filename);
 
+	/****************************
+	重置技能
+	****************************/
+	void resetSkills();
 private:
 	UIScroll* m_fihgtScorll;//文字滚动控件
 	cocos2d::ui::Button* m_escapebtn;//逃跑按钮控件

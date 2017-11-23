@@ -793,10 +793,13 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 6)
 	{
-		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
-		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-		nodes.push_back(actbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
+		if (vec_actionItem.size() > 1)
+		{
+			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
+			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+			nodes.push_back(actbtn);
+			NewerGuideLayer::pushUserData("normalbtn");
+		}
 	}
 
 	else if (step == 42)
@@ -806,17 +809,23 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 43)
 	{
-		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
-		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-		nodes.push_back(actbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
+		if (vec_actionItem.size() > 0)
+		{
+			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
+			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+			nodes.push_back(actbtn);
+			NewerGuideLayer::pushUserData("normalbtn");
+		}
 	}
 	else if (step == 44)
 	{
-		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
-		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-		nodes.push_back(actbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
+		if (vec_actionItem.size() > 2)
+		{
+			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
+			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+			nodes.push_back(actbtn);
+			NewerGuideLayer::pushUserData("normalbtn");
+		}
 	}
 	else if (step == 45)
 	{

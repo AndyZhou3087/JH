@@ -47,6 +47,15 @@ public:
 	void playCoinpoolData();
 
 	void getCoupons(std::string codestr);
+
+	void getChallengeranklist();
+
+	void getMyFihgterData(std::string fightplayerid, int fightplayertype);
+
+	void getFightCount(int count);
+
+	void getChallengeResult(std::string fightplayerid, int fightplayertype, int fightrank, int win);
+
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -88,6 +97,14 @@ private:
 	void httpPlayCoinpoolCB(std::string retdata, int code, std::string tag);
 
 	void httpGetCouponsCB(std::string retdata, int code, std::string tag);
+
+	void httpGetChallengeranklistCB(std::string retdata, int code, std::string tag);
+
+	void httpGetMyFihgterDataCB(std::string retdata, int code, std::string tag);
+
+	void httpGetFightCountCB(std::string retdata, int code, std::string tag);
+
+	void httpGetChallengeResult(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

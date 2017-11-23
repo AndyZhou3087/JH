@@ -45,6 +45,8 @@ private:
 	cocos2d::ui::ImageView* hunger;
 	cocos2d::ui::ImageView* spirit;
 	cocos2d::ui::ImageView* life;
+	cocos2d::ui::LoadingBar* toplvexpbar;
+	cocos2d::ui::Text* lvtext;
 
 	int m_lastinnerinjury;
 	int m_lastoutinjury;

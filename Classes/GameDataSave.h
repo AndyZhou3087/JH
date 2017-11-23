@@ -706,6 +706,18 @@ public:
 	*****************************/
 	void setAchiveAnimData(std::string strval);
 
+	/****************************
+	正在挑战的数据，防止强退刷
+	@para
+	*****************************/
+	void setPlayerChallengeData(std::string strval);
+
+	/****************************
+	正在挑战的数据，防止强退刷
+	@para
+	*****************************/
+	std::string getPlayerChallengeData();
+
 private:
 	/****************************
 	加上userid后的字符串

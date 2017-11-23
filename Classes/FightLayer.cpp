@@ -101,7 +101,6 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 	std::string hpstr = StringUtils::format("%d/%d", (int)g_hero->getLifeValue(), maxlife);
 	herohpvaluetext->setString(hpstr);
 
-
 	//角色血量进度
 	float herohppercent = 100 * g_hero->getLifeValue() / maxlife;
 
@@ -159,7 +158,7 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 		m_escapebtn->setPositionX(480);
 		this->schedule(schedule_selector(FightLayer::checkHeroLife), 0.5f);
 	}
-
+	resetSkills();
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -986,10 +985,8 @@ void FightLayer::nextFightNpc(float dt)
 
 	updateNpcLife();
 
-    GlobalData::map_gfskills[S_SKILL_1].leftval = 0;
-    GlobalData::map_gfskills[S_SKILL_2].leftval = 0;
-    GlobalData::map_gfskills[S_SKILL_3].leftval = 0;
-    GlobalData::map_gfskills[S_SKILL_5].leftval = 0;
+	resetSkills();
+
 	this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 }
 
@@ -1110,4 +1107,13 @@ void FightLayer::restartFightNpc(std::string npcid)
 {
 	m_npcid = npcid;
 	updateFightNextNpc();
+}
+
+void FightLayer::resetSkills()
+{
+	for (int i = S_SKILL_1; i <= S_SKILL_8; i++)
+	{
+		GlobalData::map_gfskills[i].leftval = 0;
+		GlobalData::map_gfskills[i].fightPlayerleftval = 0;
+	}
 }

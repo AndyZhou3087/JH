@@ -60,7 +60,7 @@ void Hero::updateData(float dt)
 	if (GlobalData::g_gameStatus != GAMESTART)
 		return;
 
-	if (m_isWDChallenge)
+	if (m_isWDChallenge || GlobalData::isPlayerChallenging)
 		return;
 
 	//12s，（游戏时间1小时更新一次）

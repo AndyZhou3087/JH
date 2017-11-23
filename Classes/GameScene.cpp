@@ -398,7 +398,7 @@ void GameScene::changeGameStates(int status)
 void GameScene::updata(float dt)
 {
 	GlobalData::setTimeGiftLeftTime(GlobalData::getTimeGiftLeftTime() - 1);
-	if (GlobalData::g_gameStatus != GAMESTART)
+	if (GlobalData::g_gameStatus != GAMESTART || GlobalData::isPlayerChallenging)
 		return;
 
 	if (g_hero != NULL && g_hero->getIsWDChallenge())

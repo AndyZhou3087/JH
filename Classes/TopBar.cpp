@@ -168,6 +168,21 @@ bool TopBar::init()
 	lifeRed = (cocos2d::ui::Widget*)csbnode->getChildByName("toplifered");
 	lifeRed->setLocalZOrder(1);
 
+	
+	int maxlv = GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp.size();
+	int lv = g_hero->getLVValue();
+	if (lv >= maxlv)
+		lv = maxlv - 1;
+		
+	int percent = g_hero->getExpValue() * 100 / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp[lv];
+	
+	toplvexpbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("toplvexpbar");
+	toplvexpbar->setPercent(percent);
+	//等级属性
+	str = StringUtils::format("%d", lv + 1);
+	lvtext = (cocos2d::ui::Text*)csbnode->getChildByName("lvtext");
+	lvtext->setString(str);
+
 	m_lastinnerinjury = g_hero->getInnerinjuryValue();
 	m_lastoutinjury = g_hero->getOutinjuryValue();
 	m_lasthunger = g_hero->getHungerValue();
@@ -313,7 +328,7 @@ void TopBar::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 
 void TopBar::updataUI(float dt)
 {
-	if (GlobalData::g_gameStatus != GAMESTART)
+	if (GlobalData::g_gameStatus != GAMESTART || GlobalData::isPlayerChallenging)
 		return;
 
 	if (g_hero != NULL && g_hero->getIsWDChallenge())
@@ -556,6 +571,13 @@ void TopBar::updataUI(float dt)
 	hungerBar->setPercentage(g_hero->getHungerValue());
 	spiritBar->setPercentage(g_hero->getSpiritValue());
 	lifeBar->setPercentage(g_hero->getLifeValue() * 100.0f / g_hero->getMaxLifeValue());
+
+	int lv = g_hero->getLVValue();
+	int percent = g_hero->getExpValue() * 100 / GlobalData::map_heroAtr[g_hero->getHeadID()].vec_exp[lv];
+	toplvexpbar->setPercent(percent);
+	//等级属性
+	str = StringUtils::format("%d", lv + 1);
+	lvtext->setString(str);
 
 	bool isnewer = false;
 	if (m_lastinnerinjury != (int)g_hero->getInnerinjuryValue())

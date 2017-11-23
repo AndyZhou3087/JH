@@ -41,7 +41,7 @@ static std::string herododgedesc[] = {"%s这一招来势汹汹，%s只得收住�
 static std::string herofightdesc3[] = { "拳头打在%s身上如同挠痒痒一样。受到%d点伤害。" };
 
 static std::string bossfight[] = {"%s雷鸣闪电样迅速击中%s，硬生生的接住这一掌，受到%d点伤害。"};
-static std::string bossfight1[] = { "%s雷鸣闪电样迅速击中%s，幸亏有%s挡了一下，虽然没有大碍，但还是受到%d点伤害。" };
+static std::string bossfight1[] = { "%s雷鸣闪电样迅速击中%s，但有%s挡了一下，虽然没有大碍，但还是受到%d点伤害。" };
 
 static std::string herofightworfword[] = { "%s面对眼前的%s，凝神运气，迅速踢出一脚。 " };
 static std::string herofightworfword2[] = { "%s被突如其来的一脚踢中脊梁，向后滚了好几圈。受到%d点伤害 " };
