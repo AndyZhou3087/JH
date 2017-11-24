@@ -75,6 +75,7 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 
 	ranknum->setString(str);
 
+	int lastrank = GlobalData::myrank;
 	cocos2d::ui::Text* rankup = (cocos2d::ui::Text*)m_csbnode->getChildByName("rankup");
 	rankup->setVisible(false);
 	if (win == 1)
@@ -105,7 +106,7 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 	GlobalData::myFihgtCount--;
 	
 	
-	ServerDataSwap::init(this)->getChallengeResult(fightPlayerData->playerid, fightPlayerData->herotype, fightPlayerData->rank, win);
+	ServerDataSwap::init(NULL)->getChallengeResult(lastrank, fightPlayerData->playerid, fightPlayerData->herotype, fightPlayerData->rank, win);
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{

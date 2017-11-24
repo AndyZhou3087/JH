@@ -257,7 +257,7 @@ void RankLayer::delayShowData(float dt)
 		cocos2d::ui::Text* fightpowertext = (cocos2d::ui::Text*)myFihgtNode->getChildByName("myfight");
 		fightpowertext->setString(str);
 
-		str = StringUtils::format("%d/%d", GlobalData::myFihgtCount, GlobalData::myTotalFihgtCount);
+		str = StringUtils::format("%d/%d", GlobalData::myFihgtCount, 5);
 		countext = (cocos2d::ui::Text*)myFihgtNode->getChildByName("countext");
 		countext->setString(str);
 
@@ -291,7 +291,7 @@ void RankLayer::onSuccess()
 				isLastFight = true;
 				GameDataSave::getInstance()->setPlayerChallengeData("");
 
-				ServerDataSwap::init(this)->getChallengeResult(tmp[0], atoi(tmp[1].c_str()), 1, 0);
+				ServerDataSwap::init(this)->getChallengeResult(10000, tmp[0], atoi(tmp[1].c_str()), 1, 0);
 			}
 		}
 		else
@@ -314,7 +314,7 @@ void RankLayer::onErr(int errcode)
 
 void RankLayer::updateFightCount(float dt)
 {
-	std::string str = StringUtils::format("%d/%d", GlobalData::myFihgtCount, GlobalData::myTotalFihgtCount);
+	std::string str = StringUtils::format("%d/%d", GlobalData::myFihgtCount, 5);
 	countext->setString(str);
 
 	str = StringUtils::format("%d", GlobalData::myrank);

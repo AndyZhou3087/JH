@@ -75,7 +75,7 @@ bool PlayerChallengeLayer::init(std::string addrid, RankData* rankData)
 		playernametxt->setFontSize(25);
 	//角色名
 	cocos2d::ui::Text* heronametxt = (cocos2d::ui::Text*)csbnode->getChildByName("heroname");
-	heronametxt->setString(CommonFuncs::gbk2utf("你"));
+	heronametxt->setString(GlobalData::getMyNickName());
 
 	int maxlife = g_hero->getMaxLifeValue();
 

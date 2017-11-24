@@ -786,6 +786,10 @@ void BuildingUILayer::showNewerGuide(int step)
 		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
 		NewerGuideLayer::pushUserData("normalbtn");
 	}
+	else if (step == 4)
+	{
+
+	}
 	else if (step == 5)
 	{
 		nodes.push_back(vec_categoryBtn[2]);
@@ -831,7 +835,7 @@ void BuildingUILayer::showNewerGuide(int step)
 	{
 
 	}
-	if ((step == 2 || step == 3 || step == 5 || step == 6) || (step >= 42 && step <= 45))
+	if ((step >= 2 && step <= 6) || (step >= 42 && step <= 45))
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 

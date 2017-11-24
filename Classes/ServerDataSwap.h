@@ -54,7 +54,7 @@ public:
 
 	void getFightCount(int count);
 
-	void getChallengeResult(std::string fightplayerid, int fightplayertype, int fightrank, int win);
+	void getChallengeResult(int myrank, std::string fightplayerid, int fightplayertype, int fightrank, int win);
 
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象

@@ -720,7 +720,7 @@ void ServerDataSwap::getFightCount(int count)
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetFightCountCB, this));
 }
 
-void ServerDataSwap::getChallengeResult(std::string fightplayerid, int fightplayertype, int fightrank, int win)
+void ServerDataSwap::getChallengeResult(int myrank, std::string fightplayerid, int fightplayertype, int fightrank, int win)
 {
 	std::string url;
 	url.append(HTTPURL);
@@ -731,7 +731,7 @@ void ServerDataSwap::getChallengeResult(std::string fightplayerid, int fightplay
 	std::string str = StringUtils::format("%d", g_hero->getHeadID());
 	url.append(str);
 	url.append("&rank=");
-	str = StringUtils::format("%d", GlobalData::myrank);
+	str = StringUtils::format("%d", myrank);
 	url.append(str);
 
 	url.append("&accepterplayerid=");
