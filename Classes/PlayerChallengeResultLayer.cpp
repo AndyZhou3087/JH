@@ -6,6 +6,7 @@
 #include "Const.h"
 #include "SoundManager.h"
 #include "GameDataSave.h"
+#include "RankLayer.h"
 
 PlayerChallengeResultLayer::PlayerChallengeResultLayer()
 {
@@ -37,7 +38,11 @@ PlayerChallengeResultLayer* PlayerChallengeResultLayer::create(RankData* fightPl
 
 bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 {
+	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 200));
+	this->addChild(color);
+
 	m_csbnode = CSLoader::createNode("playerChallengeResultLayer.csb");
+	m_csbnode->setPositionY(100);
 	this->addChild(m_csbnode);
 
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("backbtn");
@@ -65,8 +70,10 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 
 	cocos2d::ui::Text* explbl = (cocos2d::ui::Text*)m_csbnode->getChildByName("explbl");
 
-	cocos2d::ui::TextBMFont* ranknum = (cocos2d::ui::TextBMFont*)m_csbnode->getChildByName("ranknum");
+	ranknum = (cocos2d::ui::TextBMFont*)m_csbnode->getChildByName("ranknum");
 	str = StringUtils::format("%d", GlobalData::myrank);
+
+	ranknum->setString(str);
 
 	cocos2d::ui::Text* rankup = (cocos2d::ui::Text*)m_csbnode->getChildByName("rankup");
 
@@ -75,12 +82,14 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 		explbl->setString("+3");
 		if (fightPlayerData->rank < GlobalData::myrank)
 		{
-			str = StringUtils::format("%d", fightPlayerData->rank);
-			ranknum->setString(str);
-
+			//str = StringUtils::format("%d", fightPlayerData->rank);
+			//ranknum->setString(str);
+			_myrank = fightPlayerData->rank;
+			_visualmyrank = GlobalData::myrank;
 			std::string upstr = StringUtils::format("%d", GlobalData::myrank - fightPlayerData->rank);
 			rankup->setString(upstr);
 			GlobalData::myrank = fightPlayerData->rank;
+			this->scheduleOnce(schedule_selector(PlayerChallengeResultLayer::delayShowRank), 1.0f);
 		}
 		GlobalData::myFihgtexp += 3;
 	}
@@ -114,6 +123,9 @@ void PlayerChallengeResultLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widg
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->removeFromParentAndCleanup(true);
+		RankLayer* rlayer = (RankLayer*)g_gameLayer->getChildByName("ranklayer");
+		if (rlayer != NULL)
+			rlayer->getRankData(2);
 	}
 }
 
@@ -127,4 +139,30 @@ void PlayerChallengeResultLayer::onErr(int errcode)
 
 	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
 	this->addChild(box);
+}
+
+void PlayerChallengeResultLayer::showRank(float dt)
+{
+
+	float step = (_myrank - _visualmyrank) * 0.2f;
+	if (fabs(step) < 0.21)
+	{
+		step = 0.21 * ((step > 0) ? 1 : -1);
+	}
+	_visualmyrank += step;
+
+	if (fabs(_myrank - _visualmyrank) < 1.0f) {
+		_visualmyrank = _myrank;
+		this->unschedule(schedule_selector(PlayerChallengeResultLayer::showRank));
+	}
+
+	std::string rankstr = StringUtils::format("%d", (int)_visualmyrank);
+	ranknum->setString(rankstr);
+
+}
+
+void PlayerChallengeResultLayer::delayShowRank(float dt)
+{
+	this->schedule(schedule_selector(PlayerChallengeResultLayer::showRank), 1.0f / 30);
+
 }

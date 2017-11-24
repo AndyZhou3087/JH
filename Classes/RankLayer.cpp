@@ -407,6 +407,9 @@ bool RankItem::init(RankData *data, int type)
 		headimg->loadTexture(headimgstr, cocos2d::ui::TextureResType::PLIST);
 		cocos2d::ui::Button* fightbtn = (cocos2d::ui::Button*)csbnode->getChildByName("actionbtn");
 		fightbtn->addTouchEventListener(CC_CALLBACK_2(RankItem::onFight, this));
+
+		if (data->playerid.compare(GlobalData::UUID()) == 0 && data->herotype == g_hero->getHeadID())
+			fightbtn->setEnabled(false);
 	}
 
 	cocos2d::ui::Text* herolvlbl = (cocos2d::ui::Text*)csbnode->getChildByName("herolv");

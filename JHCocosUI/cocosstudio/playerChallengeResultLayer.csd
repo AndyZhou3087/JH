@@ -72,7 +72,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="exptext" ActionTag="27917090" Tag="525" IconVisible="False" LeftMargin="269.9017" RightMargin="377.0983" TopMargin="755.4993" BottomMargin="493.5008" FontSize="30" LabelText="积分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="exptext" ActionTag="27917090" Tag="525" IconVisible="False" LeftMargin="269.9017" RightMargin="377.0983" TopMargin="755.4992" BottomMargin="493.5008" FontSize="30" LabelText="积分：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="73.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="306.4017" Y="509.0008" />
@@ -84,7 +84,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="backbtn" ActionTag="-636992728" Tag="527" IconVisible="False" LeftMargin="285.0009" RightMargin="284.9991" TopMargin="1133.1656" BottomMargin="56.8343" TouchEnable="True" FontSize="40" ButtonText="返回" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="backbtn" ActionTag="-636992728" Tag="527" IconVisible="False" LeftMargin="285.0009" RightMargin="284.9991" TopMargin="1133.1658" BottomMargin="56.8343" TouchEnable="True" FontSize="40" ButtonText="返回" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="68" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="150.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0009" Y="101.8343" />

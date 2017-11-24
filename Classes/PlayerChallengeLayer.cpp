@@ -48,6 +48,7 @@ bool PlayerChallengeLayer::init(std::string addrid, RankData* rankData)
 	this->addChild(color);
 
 	Node* csbnode = CSLoader::createNode("fightLayer.csb");
+	csbnode->setPositionY(100);
 	this->addChild(csbnode);
 
 	m_playerData = rankData;
@@ -591,7 +592,7 @@ void PlayerChallengeLayer::showFightWord(int type, int value)
 			}
 			if (isUseWg)
 			{
-				herowordstr = getHeroGfFightStr(wstrid);
+				herowordstr = getHeroGfFightStr(g_hero->getAtrByType(H_WG)->strid);
 			}
 			else
 			{

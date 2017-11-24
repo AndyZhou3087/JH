@@ -178,6 +178,7 @@
           <Image Name="achivetitle.png" />
           <Image Name="addatkicon.png" />
           <Image Name="adddficon.png" />
+          <Image Name="addfightcountbtn.png" />
           <Image Name="addlifeicon.png" />
           <Image Name="arrowdown.png" />
           <Image Name="arrowup.png" />
@@ -241,10 +242,16 @@
           <Image Name="fhero2.png" />
           <Image Name="fhero3.png" />
           <Image Name="fhero4.png" />
+          <Image Name="fightaddcounttitle.png" />
+          <Image Name="fightaddicon0.png" />
+          <Image Name="fightaddicon1.png" />
           <Image Name="fighthpbar.png" />
           <Image Name="fighthpbar2.png" />
           <Image Name="fighthpbg.png" />
           <Image Name="fighticon.png" />
+          <Image Name="fightitem0.png" />
+          <Image Name="fightitem1.png" />
+          <Image Name="fightnodebtn.png" />
           <Image Name="forgingtable.png" />
           <Image Name="furnace.png" />
           <Image Name="gd0.png" />
@@ -366,6 +373,7 @@
           <Image Name="mixsectext.png" />
           <Image Name="mixtag.png" />
           <Image Name="modifyftitle.png" />
+          <Image Name="myfighttie.png" />
           <Image Name="mygoldbox.png" />
           <Image Name="myrankitem.png" />
           <Image Name="n002.png" />
@@ -469,6 +477,7 @@
           <Image Name="npcrsi1.png" />
           <Image Name="npcrsi2.png" />
           <Image Name="pausebtn.png" />
+          <Image Name="playerfighttext.png" />
           <Image Name="qqline0.png" />
           <Image Name="qubox1.png" />
           <Image Name="qubox2.png" />
@@ -478,6 +487,7 @@
           <Image Name="rafflebtn.png" />
           <Image Name="rankatktitle.png" />
           <Image Name="rankcatatitlebox.png" />
+          <Image Name="rankcatatitlebox1.png" />
           <Image Name="rankdaytitle.png" />
           <Image Name="rankitem0.png" />
           <Image Name="rankitem1.png" />
@@ -553,6 +563,8 @@
           <Image Name="topbox.png" />
           <Image Name="topdegree.png" />
           <Image Name="topdown.png" />
+          <Image Name="topexpbar.png" />
+          <Image Name="topexpbg.png" />
           <Image Name="tophero1.png" />
           <Image Name="tophero2.png" />
           <Image Name="tophero3.png" />
@@ -567,6 +579,7 @@
           <Image Name="toplifebg.png" />
           <Image Name="toplifered.png" />
           <Image Name="toplivedaysicon.png" />
+          <Image Name="toplvbox.png" />
           <Image Name="topoutinjurybar.png" />
           <Image Name="topoutinjurybg.png" />
           <Image Name="topoutinjuryred.png" />
@@ -634,9 +647,16 @@
           <Image Name="w042.png" />
           <Image Name="waitingbg.png" />
           <Image Name="waitingprogress.png" />
+          <Image Name="winbox0.png" />
+          <Image Name="winbox1.png" />
           <Image Name="winemaker.png" />
           <Image Name="winetable.png" />
-          <Image Name="wintitle.png" />
+          <Image Name="winicon0.png" />
+          <Image Name="winicon1.png" />
+          <Image Name="wintext0.png" />
+          <Image Name="wintext1.png" />
+          <Image Name="wintitle0.png" />
+          <Image Name="wintitle1.png" />
           <Image Name="x001.png" />
           <Image Name="x002.png" />
           <Image Name="x003.png" />
@@ -674,6 +694,7 @@
         <Project Name="actionGetLayer.csd" Type="Layer" />
         <Project Name="actionNode.csd" Type="Node" />
         <Project Name="activityLayer.csd" Type="Layer" />
+        <Project Name="addChallengeCountLayer.csd" Type="Layer" />
         <Project Name="apprenticeLayer.csd" Type="Layer" />
         <Project Name="bookDetailsLayer.csd" Type="Layer" />
         <Project Name="bookshelfLayer.csd" Type="Layer" />
@@ -696,6 +717,7 @@
         <Project Name="factionMemberLayer.csd" Type="Layer" />
         <Project Name="factionmemberNode.csd" Type="Node" />
         <Project Name="fightLayer.csd" Type="Layer" />
+        <Project Name="fightlistNode.csd" Type="Node" />
         <Project Name="friendExgLayer.csd" Type="Layer" />
         <Project Name="friendNpcChallengeLayer.csd" Type="Layer" />
         <Project Name="frozenLayer.csd" Type="Layer" />
@@ -719,6 +741,7 @@
         <Project Name="npctalkLayer.csd" Type="Layer" />
         <Project Name="outDoorLayer.csd" Type="Layer" />
         <Project Name="pauseLayer.csd" Type="Layer" />
+        <Project Name="playerChallengeResultLayer.csd" Type="Layer" />
         <Project Name="prizeLayer.csd" Type="Layer" />
         <Project Name="promotionLayer.csd" Type="Layer" />
         <Project Name="raffleLayer.csd" Type="Layer" />

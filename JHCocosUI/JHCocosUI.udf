@@ -9,7 +9,17 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <ActiveDocument />
+        <OpenedDocuments>
+          <FilePathData Path="uipacker.csi" />
+          <FilePathData Path="prizeLayer.csd" />
+          <FilePathData Path="timeGfitLayer.csd" />
+          <FilePathData Path="addChallengeCountLayer.csd" />
+          <FilePathData Path="raffleLayer.csd" />
+          <FilePathData Path="playerChallengeResultLayer.csd" />
+          <FilePathData Path="winLayer.csd" />
+          <FilePathData Path="topBarNode.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="playerChallengeResultLayer.csd" />
       </Value>
     </Item>
   </Properties>

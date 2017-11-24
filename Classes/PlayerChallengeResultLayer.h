@@ -20,7 +20,12 @@ private:
 
 	void onSuccess();
 	void onErr(int errcode);
+	void showRank(float dt);
+	void delayShowRank(float dt);
 private:
 	Node* m_csbnode;
+	float _myrank;
+	float _visualmyrank;
+	cocos2d::ui::TextBMFont* ranknum;
 };
 #endif

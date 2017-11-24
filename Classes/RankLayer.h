@@ -16,6 +16,8 @@ public:
 	virtual void onEnterTransitionDidFinish();
 	static RankLayer* create();
 
+	void getRankData(int type);
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onRank(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -24,7 +26,7 @@ private:
 	void delayShowData(float dt);
 	void onSuccess();
 	void onErr(int errcode);
-	void getRankData(int type);
+
 	void updateFightCount(float dt);
 private:
 	cocos2d::ui::ScrollView* srollView;
