@@ -831,8 +831,8 @@ void BuildingUILayer::showNewerGuide(int step)
 	{
 
 	}
-	
-	g_gameLayer->showNewerGuide(step, nodes);
+	if ((step == 2 || step == 3 || step == 5 || step == 6) || (step >= 42 && step <= 45))
+		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 void BuildingUILayer::checkNewerGuide()

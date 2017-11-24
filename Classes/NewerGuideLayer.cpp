@@ -234,7 +234,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	{
 		Vec2 point = Director::getInstance()->convertToGL(touch->getLocationInView());//获得当前触摸的坐标 
 		starPos = touch->getLocation();
-		if (!isallclick)
+		if (!isallclick && stencilNodes.size() > 0)
 		{
 			Vec2 vec = stencilNodes[stencilNodes.size() - 1]->getParent()->convertToWorldSpace(stencilNodes[stencilNodes.size() - 1]->getPosition());
 

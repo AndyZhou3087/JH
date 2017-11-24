@@ -687,7 +687,8 @@ void MapLayer::showNewerGuide(int step)
 		nodes.push_back(m_mapbg->getChildByName("m1-4"));
 		NewerGuideLayer::pushUserData("m1-4");
 	}
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (step == 14 || step == 38 || step == 58)
+		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 void MapLayer::rain()

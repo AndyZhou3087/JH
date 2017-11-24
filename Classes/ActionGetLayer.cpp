@@ -673,5 +673,7 @@ void ActionGetLayer::showNewerGuide(int step)
 		nodes.push_back(m_backbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	g_gameLayer->showNewerGuide(step, nodes);
+
+	if ((step >= 19 && step <= 27) || (step >= 29 && step <= 36))
+		g_gameLayer->showNewerGuide(step, nodes);
 }

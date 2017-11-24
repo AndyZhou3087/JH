@@ -76,7 +76,7 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 	ranknum->setString(str);
 
 	cocos2d::ui::Text* rankup = (cocos2d::ui::Text*)m_csbnode->getChildByName("rankup");
-
+	rankup->setVisible(false);
 	if (win == 1)
 	{
 		explbl->setString("+3");
@@ -88,6 +88,7 @@ bool PlayerChallengeResultLayer::init(RankData* fightPlayerData, int win)
 			_visualmyrank = GlobalData::myrank;
 			std::string upstr = StringUtils::format("%d", GlobalData::myrank - fightPlayerData->rank);
 			rankup->setString(upstr);
+			rankup->setVisible(true);
 			GlobalData::myrank = fightPlayerData->rank;
 			this->scheduleOnce(schedule_selector(PlayerChallengeResultLayer::delayShowRank), 1.0f);
 		}

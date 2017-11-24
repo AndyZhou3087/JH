@@ -250,6 +250,6 @@ void HomeHill::showNewerGuide(int step)
 		nodes.push_back(m_backbtn);
 		NewerGuideLayer::pushUserData("backbtn");
 	}
-
-	g_gameLayer->showNewerGuide(step, nodes);
+	if (step == 18 || step == 28 || step == 37)
+		g_gameLayer->showNewerGuide(step, nodes);
 }

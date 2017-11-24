@@ -126,7 +126,8 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 			else if (NewerGuideLayer::checkifNewerGuide(57))
 			{
 				OutDoor* olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
-				olayer->checkNewerGuide();
+				if (olayer != NULL)
+					olayer->checkNewerGuide();
 			}
 			else
 			{
@@ -937,5 +938,7 @@ void HeroProperNode::showNewerGuide(int step)
 			NewerGuideLayer::pushUserData("normalbtn");
 		}
 	}
-	g_gameLayer->showNewerGuide(step, nodes);
+
+	if ((step == 8 || step == 9 || step == 10) || (step >= 48 && step <= 56))
+		g_gameLayer->showNewerGuide(step, nodes);
 }
