@@ -870,10 +870,12 @@ void HeroProperNode::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
 	Node* resItemNode = NULL;
+    bool isshowguide = false;
 	if (step == 8)
 	{
 		nodes.push_back(propeImages[5]);
 		NewerGuideLayer::pushUserData("buildsmall");
+        isshowguide = true;
 	}
 	else if (step == 9)
 	{
@@ -884,6 +886,7 @@ void HeroProperNode::showNewerGuide(int step)
 			{
 				nodes.push_back(resItemNode->getChildren().at(0));
 				NewerGuideLayer::pushUserData("buildsmall");
+                isshowguide = true;
 			}
 
 		}
@@ -894,6 +897,7 @@ void HeroProperNode::showNewerGuide(int step)
 	{
 		nodes.push_back(heroselectbg->getChildByName("okbtn"));
 		NewerGuideLayer::pushUserData("normalbtn");
+        isshowguide = true;
 	}
 
 	if (!NewerGuideLayer::checkifNewerGuide(47))
@@ -902,6 +906,7 @@ void HeroProperNode::showNewerGuide(int step)
 		{
 			nodes.push_back(propeImages[0]);
 			NewerGuideLayer::pushUserData("buildsmall");
+            isshowguide = true;
 		}
 		else if (step == 49 || step == 51 || step == 53 || step == 55)
 		{
@@ -912,6 +917,7 @@ void HeroProperNode::showNewerGuide(int step)
 				{
 					nodes.push_back(resItemNode->getChildren().at(0));
 					NewerGuideLayer::pushUserData("buildsmall");
+                    isshowguide = true;
 				}
 			}
 			if (NewerGuideLayer::checkifNewerGuide(step))
@@ -921,24 +927,28 @@ void HeroProperNode::showNewerGuide(int step)
 		{
 			nodes.push_back(propeImages[1]);
 			NewerGuideLayer::pushUserData("buildsmall");
+            isshowguide = true;
 		}
 		else if (step == 52)
 		{
 			nodes.push_back(propeImages[2]);
 			NewerGuideLayer::pushUserData("buildsmall");
+            isshowguide = true;
 		}
 		else if (step == 54)
 		{
 			nodes.push_back(propeImages[3]);
 			NewerGuideLayer::pushUserData("buildsmall");
+            isshowguide = true;
 		}
 		else if (step == 56)
 		{
 			nodes.push_back(heroselectbg->getChildByName("okbtn"));
 			NewerGuideLayer::pushUserData("normalbtn");
+            isshowguide = true;
 		}
 	}
+    if (isshowguide)
+        g_gameLayer->showNewerGuide(step, nodes);
 
-	if ((step == 8 || step == 9 || step == 10) || (step >= 48 && step <= 56))
-		g_gameLayer->showNewerGuide(step, nodes);
 }

@@ -251,8 +251,6 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	{
 		if (iscannext)
 		{
-			GameDataSave::getInstance()->setIsNewerGuide(step, 0);
-
 			wordindex++;
 
 			int size = map_words[m_step].size();
@@ -355,7 +353,8 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	};
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
-
+    GameDataSave::getInstance()->setIsNewerGuide(step, 0);
+    
 #ifdef ANALYTICS
 	if (step == 0)
 		AnalyticUtil::onEvent("newerstart");

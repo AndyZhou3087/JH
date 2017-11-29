@@ -771,6 +771,7 @@ void BuildingUILayer::finishAnim(Ref* pSender, Node* node)
 
 void BuildingUILayer::showNewerGuide(int step)
 {
+    bool isshowguide = false;
 	std::vector<Node*> nodes;
 	if (step == 2)
 	{
@@ -780,29 +781,33 @@ void BuildingUILayer::showNewerGuide(int step)
 		NewerGuideLayer::pushUserData("resbox");
 		NewerGuideLayer::pushUserData("resbox");
 		NewerGuideLayer::pushUserData("resbox");
+        isshowguide = true;
 	}
 	else if (step == 3)
 	{
 		nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
 		NewerGuideLayer::pushUserData("normalbtn");
+        isshowguide = true;
 	}
 	else if (step == 4)
 	{
-
+        isshowguide = true;
 	}
 	else if (step == 5)
 	{
 		nodes.push_back(vec_categoryBtn[2]);
 		NewerGuideLayer::pushUserData("buildtagbtn1");
+        isshowguide = true;
 	}
 	else if (step == 6)
 	{
-		if (vec_actionItem.size() > 1)
+		if (vec_actionItem.size() > 1 && !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 			nodes.push_back(actbtn);
 			NewerGuideLayer::pushUserData("normalbtn");
+            isshowguide = true;
 		}
 	}
 
@@ -810,32 +815,35 @@ void BuildingUILayer::showNewerGuide(int step)
 	{
 		nodes.push_back(vec_categoryBtn[2]);
 		NewerGuideLayer::pushUserData("buildtagbtn1");
+        isshowguide = true;
 	}
 	else if (step == 43)
 	{
-		if (vec_actionItem.size() > 0)
+		if (vec_actionItem.size() > 0 && !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 			nodes.push_back(actbtn);
 			NewerGuideLayer::pushUserData("normalbtn");
+            isshowguide = true;
 		}
 	}
 	else if (step == 44)
 	{
-		if (vec_actionItem.size() > 2)
+		if (vec_actionItem.size() > 2&& !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
 			nodes.push_back(actbtn);
 			NewerGuideLayer::pushUserData("normalbtn");
+            isshowguide = true;
 		}
 	}
 	else if (step == 45)
 	{
-
+        isshowguide = true;
 	}
-	if ((step >= 2 && step <= 6) || (step >= 42 && step <= 45))
+	if (isshowguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
