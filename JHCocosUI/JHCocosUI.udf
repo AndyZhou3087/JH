@@ -18,8 +18,9 @@
           <FilePathData Path="playerChallengeResultLayer.csd" />
           <FilePathData Path="winLayer.csd" />
           <FilePathData Path="topBarNode.csd" />
+          <FilePathData Path="fightLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="playerChallengeResultLayer.csd" />
+        <ActiveDocument Path="fightLayer.csd" />
       </Value>
     </Item>
   </Properties>
