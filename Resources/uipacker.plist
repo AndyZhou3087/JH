@@ -3876,17 +3876,6 @@
 				<key>sourceSize</key>
 				<string>{86,82}</string>
 			</dict>
-			<key>ui/qqline0.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{3893,121},{127,2}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{127,2}</string>
-			</dict>
 			<key>ui/qubox1.png</key>
 			<dict>
 				<key>frame</key>
@@ -6515,6 +6504,17 @@
 				<true />
 				<key>sourceSize</key>
 				<string>{122,48}</string>
+			</dict>
+			<key>ui/qqline0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{3893,121},{127,2}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{127,2}</string>
 			</dict>
 		</dict>
 		<key>metadata</key>
