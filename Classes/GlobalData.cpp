@@ -132,6 +132,8 @@ std::string GlobalData::fightPlayerMixgf;
 int GlobalData::fightPlayerFactionLv = 0;
 bool GlobalData::isPlayerChallenging = false;
 
+bool GlobalData::isExchangeGift = false;
+
 GlobalData::GlobalData()
 {
 

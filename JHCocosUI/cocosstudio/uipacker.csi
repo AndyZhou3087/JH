@@ -593,6 +593,7 @@
       <FilePathData Path="ui/wintext1.png" />
       <FilePathData Path="ui/winicon0.png" />
       <FilePathData Path="ui/wintitle0.png" />
+      <FilePathData Path="ui/hurticon.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

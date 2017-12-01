@@ -138,6 +138,10 @@ bool MapLayer::init()
 	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onRaffle, this));
 	m_rafflebtn->setVisible(false);
 
+	m_prizebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("prizebtn");
+	m_prizebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onPrize, this));
+	m_prizebtn->setVisible(false);
+
 	m_tgiftlefttimelbl = (cocos2d::ui::Text*)m_timegiftbtn->getChildByName("lefttimelbl");
 
 	checkTimeGift(0);
@@ -149,9 +153,6 @@ bool MapLayer::init()
 
 	if (GlobalData::isHasVulture())
 		vultureAnim();
-
-	cocos2d::ui::Widget* prizebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("prizebtn");
-	prizebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onPrize, this));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -780,6 +781,8 @@ void MapLayer::checkTimeGift(float dt)
 		m_herohead->setVisible(true);
 		m_lotteryimg->setScale(1.0f);
 	}
+
+	m_prizebtn->setVisible(GlobalData::isExchangeGift);
 }
 
 void MapLayer::checkAchive(float dt)

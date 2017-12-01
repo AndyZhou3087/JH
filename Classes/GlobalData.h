@@ -1065,6 +1065,8 @@ public:
 	static int myFihgtexp;
 
 	static bool isPlayerChallenging;
+
+	static bool isExchangeGift;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

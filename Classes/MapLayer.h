@@ -176,6 +176,7 @@ private:
 	bool m_isDraging;
 	cocos2d::ui::Widget* m_vulture;
 	cocos2d::ui::Widget* achiveRedpoint;
+	cocos2d::ui::Widget* m_prizebtn;
 };
 extern MapLayer* g_maplayer;//全局地图层
 #endif

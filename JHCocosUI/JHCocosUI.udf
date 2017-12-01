@@ -7,21 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="prizeLayer.csd" />
-          <FilePathData Path="timeGfitLayer.csd" />
-          <FilePathData Path="addChallengeCountLayer.csd" />
-          <FilePathData Path="raffleLayer.csd" />
-          <FilePathData Path="playerChallengeResultLayer.csd" />
-          <FilePathData Path="winLayer.csd" />
-          <FilePathData Path="topBarNode.csd" />
-          <FilePathData Path="fightLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="fightLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

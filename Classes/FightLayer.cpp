@@ -158,6 +158,10 @@ bool FightLayer::init(std::string addrid, std::string npcid)
 		m_escapebtn->setPositionX(480);
 		this->schedule(schedule_selector(FightLayer::checkHeroLife), 0.5f);
 	}
+
+	herohurticon = (cocos2d::ui::Widget*)csbnode->getChildByName("herohurt");
+	npchurticon = (cocos2d::ui::Widget*)csbnode->getChildByName("npchurt");
+
 	resetSkills();
 	////layer 点击事件，屏蔽下层事件
 	auto listener = EventListenerTouchOneByOne::create();
@@ -304,6 +308,8 @@ void FightLayer::delayHeroFight(float dt)
 	if (isecapeok)//逃跑成功
 		return;
 
+	bool isnormalAct = true;
+
 	int npchurt = getNpcHurt();
 
 	isHeroAct = -1;
@@ -318,6 +324,7 @@ void FightLayer::delayHeroFight(float dt)
 		{
 			critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].skilleffect * 100;
 		}
+		isnormalAct = false;
 	}
 
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
@@ -337,6 +344,7 @@ void FightLayer::delayHeroFight(float dt)
 		tmpstr = StringUtils::format("%d", npchurt);
 		npccritfnt->setString(tmpstr);
 		npccritfnt->setVisible(true);
+		isnormalAct = false;
 	}
 	else if (r < npcdodgernd)
 	{
@@ -350,6 +358,7 @@ void FightLayer::delayHeroFight(float dt)
 		npcactimg->setScale(3);
 		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
 		npcactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
+		isnormalAct = false;
 
 	}
 
@@ -377,9 +386,16 @@ void FightLayer::delayHeroFight(float dt)
 			{
 				showSkill(S_SKILL_3);
 				this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
+				isnormalAct = false;
 			}
 		}
 		this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.5f);//延迟显示NPC 攻击，主要文字显示，需要看一下，所以延迟下
+	}
+
+	if (isnormalAct)
+	{
+		//ActionInterval* ac1 = Spawn::create(Show::create(), FadeIn::create(0.15f), EaseSineIn::create(ScaleTo::create(0.15f, 1)), NULL);
+		//npchurticon->runAction(Sequence::create(ac1, DelayTime::create(0.8f), Hide::create(), NULL));
 	}
 }
 
@@ -388,6 +404,7 @@ void FightLayer::delayBossFight(float dt)
 	if (isecapeok)//逃跑成功
 		return;
 
+	bool isnormalAct = true;
 	float curheroHp = g_hero->getLifeValue();
 
 	int curheroDf = g_hero->getTotalDf();
@@ -418,11 +435,14 @@ void FightLayer::delayBossFight(float dt)
 		
 		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
 		{
+			isnormalAct = false;
 			showSkill(skilltype);
+
 			npchp -= getNpcHurt() * 3 / 10;
 			if (npchp < 0)
 				npchp = 0;
 			updateNpcLife();
+
 			if (npchp <= 0)
 			{
 				npcDie();
@@ -431,6 +451,7 @@ void FightLayer::delayBossFight(float dt)
 		}
 		else if (skilltype == S_SKILL_2)
 		{
+			isnormalAct = false;
 			showSkill(skilltype);
 			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 			return;
@@ -438,6 +459,7 @@ void FightLayer::delayBossFight(float dt)
 		skilltype = checkSkill(H_NG);
 		if (skilltype == S_SKILL_6)
 		{
+			isnormalAct = false;
 			showSkill(skilltype);
 			if (g_hero->getAtrByType(H_NG)->count > 0)
 			{
@@ -446,6 +468,7 @@ void FightLayer::delayBossFight(float dt)
 		}
 		else if (skilltype == S_SKILL_7)
 		{
+			isnormalAct = false;
 			showSkill(skilltype);
 			int npclosthp = 0;
 			if (g_hero->getAtrByType(H_NG)->count > 0)
@@ -474,6 +497,7 @@ void FightLayer::delayBossFight(float dt)
 	int dodgernd = g_hero->getdodgeRate() * 100;
 	if (checkSkill(H_NG) == S_SKILL_8)
 	{
+		isnormalAct = false;
 		showSkill(S_SKILL_8);
 		if (g_hero->getAtrByType(H_NG)->count > 0)
 		{
@@ -499,6 +523,7 @@ void FightLayer::delayBossFight(float dt)
 		heroactimg->runAction(Sequence::create(ac1, DelayTime::create(1.0f), Hide::create(), NULL));
 		tmpstr = StringUtils::format("%d", herohurt);
 		herocritfnt->setString(tmpstr);
+		isnormalAct = false;
 	}
 	else if (r < dodgernd)
 	{
@@ -512,7 +537,7 @@ void FightLayer::delayBossFight(float dt)
 		heroactimg->setScale(3);
 		ActionInterval* ac1 = Spawn::create(FadeIn::create(0.1f), EaseSineIn::create(ScaleTo::create(0.1f, 1)), NULL);
 		heroactimg->runAction(Sequence::create(ac1, Shake::create(0.2f, 20, 1), DelayTime::create(0.8f), Hide::create(), NULL));
-
+		isnormalAct = false;
 	}
 
 	if (isHeroAct != 1)
@@ -551,6 +576,12 @@ void FightLayer::delayBossFight(float dt)
 					curvalue = 0.0f;
 				g_hero->setOutinjuryValue(curvalue);
 			}
+		}
+
+		if (isnormalAct)
+		{
+			//ActionInterval* ac1 = Spawn::create(Show::create(), FadeIn::create(0.15f), EaseSineIn::create(ScaleTo::create(0.15f, 1)), NULL);
+			//herohurticon->runAction(Sequence::create(ac1, DelayTime::create(0.8f), Hide::create(), NULL));
 		}
 	}
 	else

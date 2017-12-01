@@ -267,6 +267,28 @@
             <PreSize X="0.1819" Y="0.0523" />
             <FileData Type="MarkedSubImage" Path="ui/crit.png" Plist="uipacker.plist" />
           </AbstractNodeData>
+          <AbstractNodeData Name="herohurt" ActionTag="1261037440" VisibleForFrame="False" Tag="25" IconVisible="False" LeftMargin="166.5748" RightMargin="431.4252" TopMargin="620.1088" BottomMargin="611.8912" FlipY="True" ctype="SpriteObjectData">
+            <Size X="122.0000" Y="48.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="227.5748" Y="635.8912" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3161" Y="0.4968" />
+            <PreSize X="0.0639" Y="0.0359" />
+            <FileData Type="MarkedSubImage" Path="ui/hurticon.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="npchurt" ActionTag="623103489" VisibleForFrame="False" Tag="26" IconVisible="False" LeftMargin="430.5702" RightMargin="167.4298" TopMargin="619.1091" BottomMargin="612.8909" FlipX="True" FlipY="True" ctype="SpriteObjectData">
+            <Size X="122.0000" Y="48.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="491.5702" Y="636.8909" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6827" Y="0.4976" />
+            <PreSize X="0.1694" Y="0.0375" />
+            <FileData Type="MarkedSubImage" Path="ui/hurticon.png" Plist="uipacker.plist" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

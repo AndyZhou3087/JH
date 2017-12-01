@@ -173,6 +173,8 @@ private:
 	cocos2d::ui::ImageView* npcactimg;//NPC暴击闪避图片
 	cocos2d::ui::TextBMFont* herocritfnt;//角色暴击数字
 	cocos2d::ui::TextBMFont* npccritfnt;//NPC暴击数字
+	cocos2d::ui::Widget* herohurticon;//角色受伤
+	cocos2d::ui::Widget* npchurticon;//NPC受伤
 
 	int npchp;//NPC 血量
 	int npcmaxhp;// NPC 最大血量

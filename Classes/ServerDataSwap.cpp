@@ -1359,6 +1359,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				GlobalData::isFrozen = vhei == 1 ? true : false;
 			}
 
+			if (doc.HasMember("opencoupon"))
+			{
+				rapidjson::Value& retval = doc["opencoupon"];
+				int v = retval.GetInt();
+				GlobalData::isExchangeGift = v == 1 ? true : false;
+			}
 		
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();
