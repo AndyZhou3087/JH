@@ -114,6 +114,30 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="line" ActionTag="-838694210" Tag="67" IconVisible="False" LeftMargin="523.0463" RightMargin="31.9537" TopMargin="941.8605" BottomMargin="302.1395" FontSize="35" LabelText="_________" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="165.0000" Y="36.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="605.5463" Y="320.1395" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.8410" Y="0.2501" />
+            <PreSize X="0.2292" Y="0.0281" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="huafeienter" ActionTag="-623391205" Tag="66" IconVisible="False" LeftMargin="523.0453" RightMargin="35.9547" TopMargin="939.3604" BottomMargin="299.6396" TouchEnable="True" FontSize="40" LabelText="查询中奖" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="161.0000" Y="41.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="603.5453" Y="320.1396" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="204" G="4" B="4" />
+            <PrePosition X="0.8383" Y="0.2501" />
+            <PreSize X="0.2236" Y="0.0320" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

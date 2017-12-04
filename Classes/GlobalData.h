@@ -449,6 +449,13 @@ typedef struct
 	int isshowanim;
 }AchiveData;
 
+typedef struct
+{
+	int rank;
+	std::string nickname;
+	int herotype;
+}HuafeiRankData;
+
 class GlobalData
 {
 public:
@@ -1038,6 +1045,8 @@ public:
 
 	//挑战对手好友数据
 	static std::map<std::string, FriendlyData> map_fightPlayerfriendly;
+
+	static int myLastHuafeiRank;
 
 	static std::string fightPlayerMixgf;
 

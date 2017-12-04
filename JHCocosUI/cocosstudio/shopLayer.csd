@@ -44,7 +44,7 @@
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="512.0043" Y="18.4428" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7111" Y="0.0144" />
             <PreSize X="0.1764" Y="0.0016" />
@@ -201,7 +201,7 @@
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="656.7383" Y="18.5337" />
-            <Scale ScaleX="1.0000" ScaleY="0.9091" />
+            <Scale ScaleX="1.0000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9121" Y="0.0145" />
             <PreSize X="0.1764" Y="0.0016" />

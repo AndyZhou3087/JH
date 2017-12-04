@@ -91,7 +91,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="qqtext" ActionTag="-1872460011" Tag="171" IconVisible="False" LeftMargin="1.6541" RightMargin="590.3458" TopMargin="1233.3242" BottomMargin="20.6758" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="qqtext" ActionTag="-1872460011" Tag="171" IconVisible="False" LeftMargin="1.6541" RightMargin="590.3459" TopMargin="1233.3242" BottomMargin="20.6758" FontSize="25" LabelText="官方QQ群：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="128.0000" Y="26.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="65.6541" Y="33.6758" />
@@ -119,7 +119,7 @@
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="203.1833" Y="23.9126" />
-            <Scale ScaleX="1.0000" ScaleY="0.9091" />
+            <Scale ScaleX="1.0000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2822" Y="0.0187" />
             <PreSize X="0.1764" Y="0.0016" />
@@ -166,7 +166,7 @@
             <Size X="127.0000" Y="2.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="351.1777" Y="23.5206" />
-            <Scale ScaleX="1.0000" ScaleY="0.9091" />
+            <Scale ScaleX="1.0000" ScaleY="1.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4877" Y="0.0184" />
             <PreSize X="0.1764" Y="0.0016" />

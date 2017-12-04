@@ -749,7 +749,33 @@ void ServerDataSwap::getChallengeResult(int myrank, std::string fightplayerid, i
 	str = StringUtils::format("%d", win);
 	url.append(str);
 
-	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetChallengeResult, this));
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetChallengeResultCB, this));
+}
+
+void ServerDataSwap::getKajuanAction()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_kajuanevent?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&type=");
+	std::string str = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(str);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetKajuanActionCB, this));
+}
+
+void ServerDataSwap::getKajuanAwardList()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_kajuaneventawardlist?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&type=");
+	std::string str = StringUtils::format("%d", g_hero->getHeadID());
+	url.append(str);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetKajuanAwardListCB, this));
 }
 
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
@@ -1363,7 +1389,7 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 			{
 				rapidjson::Value& retval = doc["opencoupon"];
 				int v = retval.GetInt();
-				GlobalData::isExchangeGift = v == 1 ? true : false;
+				GlobalData::isExchangeGift = true; // = v == 1 ? true : false;
 			}
 		
 			if (m_pDelegateProtocol != NULL)
@@ -2444,7 +2470,7 @@ void ServerDataSwap::httpGetFightCountCB(std::string retdata, int code, std::str
 	release();
 }
 
-void ServerDataSwap::httpGetChallengeResult(std::string retdata, int code, std::string tag)
+void ServerDataSwap::httpGetChallengeResultCB(std::string retdata, int code, std::string tag)
 {
 	int ret = code;
 	if (m_pDelegateProtocol != NULL)
@@ -2470,4 +2496,67 @@ void ServerDataSwap::httpGetChallengeResult(std::string retdata, int code, std::
 	}
 	release();
 }
+
+void ServerDataSwap::httpGetKajuanActionCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+void ServerDataSwap::httpGetKajuanAwardListCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	GlobalData::myLastHuafeiRank = 0;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			isok = true;
+
+			if (doc.HasMember("lastrank"))
+			{
+				rapidjson::Value& v = doc["lastrank"];
+				GlobalData::myLastHuafeiRank = v.GetInt();
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
 

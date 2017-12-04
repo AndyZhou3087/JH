@@ -56,6 +56,9 @@ public:
 
 	void getChallengeResult(int myrank, std::string fightplayerid, int fightplayertype, int fightrank, int win);
 
+	void getKajuanAction();
+
+	void getKajuanAwardList();
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -104,7 +107,11 @@ private:
 
 	void httpGetFightCountCB(std::string retdata, int code, std::string tag);
 
-	void httpGetChallengeResult(std::string retdata, int code, std::string tag);
+	void httpGetChallengeResultCB(std::string retdata, int code, std::string tag);
+
+	void httpGetKajuanActionCB(std::string retdata, int code, std::string tag);
+
+	void httpGetKajuanAwardListCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

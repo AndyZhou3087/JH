@@ -411,6 +411,11 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	if (m_npcid.compare("n089") == 0)
 		AnalyticUtil::onEvent("allpass");
 #endif
+	//n044
+
+	if (npcid.compare("n004") == 0 && GlobalData::isExchangeGift)
+		ServerDataSwap::init(this)->getKajuanAction();
+
 	return true;
 }
 
@@ -955,3 +960,22 @@ int Winlayer::addGfExp()
 
 	return (int)gfwinexp;
 }
+
+void Winlayer::onSuccess()
+{
+	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
+	csbnode->setPosition(Vec2(360, 720));
+	csbnode->getChildByName("cjz_1")->setVisible(false);
+	this->addChild(csbnode, 0, "achiveanim");
+	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
+	textname->setString(CommonFuncs::gbk2utf("挑战扫地僧成功"));
+	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
+	csbnode->runAction(action);
+	action->gotoFrameAndPlay(0, false);
+	//win donghua
+}
+
+void Winlayer::onErr(int errcode)
+{
+}
+

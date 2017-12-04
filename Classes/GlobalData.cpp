@@ -134,6 +134,8 @@ bool GlobalData::isPlayerChallenging = false;
 
 bool GlobalData::isExchangeGift = false;
 
+int GlobalData::myLastHuafeiRank = 0;
+
 GlobalData::GlobalData()
 {
 

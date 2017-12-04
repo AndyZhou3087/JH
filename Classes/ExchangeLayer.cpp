@@ -19,6 +19,7 @@ ExchangeLayer::ExchangeLayer()
 	m_isLongPress = false;
 	m_longTouchNode = NULL;
 	clickwhere = 0;
+	isWxbExg = false;
 }
 
 
@@ -394,14 +395,15 @@ void ExchangeLayer::onMyGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 
 void ExchangeLayer::giveNpc(std::string strid)
 {
+	
 	PackageData* data = NULL;
 	int size0 = myGoodsData.size();
-
+	bool ismine = true;
 	int datatag = 0;
 
 	if (m_isLongPress)
 	{
-		bool ismine = true;
+
 		if (m_longTouchNode != NULL)
 		{
 			datatag = m_longTouchNode->getTag();
@@ -440,7 +442,16 @@ void ExchangeLayer::giveNpc(std::string strid)
 		{
 			datatag = m_longTouchNode->getTag();
 			data = (PackageData*)m_longTouchNode->getUserData();
+			if (datatag >= size0)
+				ismine = false;
 		}
+	}
+
+	//韦小宝只要银子
+	if (ismine && m_npcid.compare("n012") == 0 && strid.compare("80") != 0)
+	{
+		isWxbExg = true;
+		return;
 	}
 
 	if (data != NULL)
@@ -639,6 +650,15 @@ void ExchangeLayer::onExg(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 }
 void ExchangeLayer::checkValue()
 {
+	if (isWxbExg)
+	{
+		m_npcWordLbl->setVisible(true);
+		m_npcWordLbl->setString(CommonFuncs::gbk2utf("拿走这些破东西，记住小宝我只要银子！！"));					
+		m_npcWordLbl->setTextColor(Color4B(204, 4, 4, 255));
+		isWxbExg = false;
+		return;
+	}
+
 	int myval = 0;
 	int npcval = 0;
 

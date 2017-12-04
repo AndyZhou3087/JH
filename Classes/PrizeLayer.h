@@ -24,6 +24,8 @@ private:
 
 	void onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
+	void onHuafeiEnter(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
 	void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
 
 	void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
@@ -42,7 +44,6 @@ private:
 private:
 	void textFieldEvent(Ref * pSender, cocos2d::ui::TextField::EventType type);
 	void showRwd();
-	bool checkCode(std::string codestr);
 	void addRes();
 };
 #endif

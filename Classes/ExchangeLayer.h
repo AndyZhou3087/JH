@@ -55,6 +55,7 @@ private:
 	bool m_isLongPress;
 	Node* m_longTouchNode;
 	int clickwhere;//3--mygoods,4--npcgoods
+	bool isWxbExg;
 };
 #endif
 

@@ -4,8 +4,10 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "MyPackage.h"
+#include "ServerDataSwap.h"
+
 USING_NS_CC;
-class Winlayer :public Layer
+class Winlayer :public Layer, public ServerDataDelegateProtocol
 {
 public:
 	Winlayer();
@@ -38,6 +40,9 @@ private:
 	void showLvUpAnim(float dt);
 	int addHeroExp();
 	int addGfExp();
+
+	void onSuccess();
+	void onErr(int errcode);
 private:
 	std::string m_npcid;
 	std::string m_addrid;

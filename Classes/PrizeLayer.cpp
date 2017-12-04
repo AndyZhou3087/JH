@@ -7,6 +7,7 @@
 #include "WaitingProgress.h"
 #include "MyPackage.h"
 #include "StorageRoom.h"
+#include "HuafeiAwardListLayer.h"
 
 const std::string prizerwd[] = {"g20", "80020", "82005"};
 
@@ -17,7 +18,7 @@ PrizeLayer::PrizeLayer()
 
 PrizeLayer::~PrizeLayer()
 {
-
+	GlobalData::g_gameStatus = GAMESTART;
 }
 
 bool PrizeLayer::init()
@@ -36,6 +37,9 @@ bool PrizeLayer::init()
 
 	m_okbtn = (cocos2d::ui::Button*)csbnode->getChildByName("okbtn");
 	m_okbtn->addTouchEventListener(CC_CALLBACK_2(PrizeLayer::onOk, this));
+
+	cocos2d::ui::Widget* huafeienter = (cocos2d::ui::Widget*)csbnode->getChildByName("huafeienter");
+	huafeienter->addTouchEventListener(CC_CALLBACK_2(PrizeLayer::onHuafeiEnter, this));
 
 	m_input = (cocos2d::ui::TextField*)csbnode->getChildByName("input");
 	m_input->setString("");
@@ -59,6 +63,8 @@ bool PrizeLayer::init()
 	m_edit->setVisible(true);
 #endif
 	//layer 点击事件，屏蔽下层事件
+
+	GlobalData::g_gameStatus = GAMEPAUSE;
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
@@ -80,6 +86,14 @@ void PrizeLayer::onClose(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventT
 	}
 }
 
+void PrizeLayer::onHuafeiEnter(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		HuafeiAwardListLayer* layer = HuafeiAwardListLayer::create();
+		this->addChild(layer);
+	}
+}
 
 void PrizeLayer::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox)
 {
@@ -132,18 +146,9 @@ void PrizeLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 #else
 		codestr = m_input->getString();
 #endif
-		if (checkCode(codestr))
-		{
-			WaitingProgress* waitbox = WaitingProgress::create("处理中...");
-			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-			ServerDataSwap::init(this)->getCoupons(codestr);
-		}
-		else
-		{
-			HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf("无效的兑换码！"));
-			this->addChild(hintbox);
-		}
-
+		WaitingProgress* waitbox = WaitingProgress::create("处理中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::init(this)->getCoupons(codestr);
 	}
 }
 
@@ -248,51 +253,4 @@ void PrizeLayer::onErr(int errcode)
     Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	HintBox* hintbox = HintBox::create(CommonFuncs::gbk2utf(str.c_str()));
 	this->addChild(hintbox);
-}
-
-bool PrizeLayer::checkCode(std::string codestr)
-{
-
-	if (codestr.length() != 10)
-		return false;
-
-	char code[11];
-	sprintf(code, "%s", codestr.c_str());
-
-	for (int i = 0; i < 10; i++)
-	{
-		if (!((code[i] >= 'A' && code[i] <= 'Z') || (code[i] >= '0' && code[i] <= '9')))
-			return false;
-	}
-
-	int r1 = 1;
-	for (int i = 0; i < 4; i++)
-	{
-		if (code[i] == 'O' || code[i] == '0')
-			return false;
-		if (code[i] >= 'A' && code[i] <= 'Z')
-			r1 += code[i] - 'A';
-		else if (code[i] >= '0' && code[i] <= '9')
-			r1 += code[i] - '0';
-	}
-
-	if (r1%10 != (code[4] - '0'))
-		return false;
-
-	int r2 = 2;
-	for (int i = 5; i < 9; i++)
-	{
-		if (code[i] == 'O' || code[i] == '0')
-			return false;
-
-		if (code[i] >= 'A' && code[i] <= 'Z')
-			r2 += code[i] - 'A';
-		else if (code[i] >= '0' && code[i] <= '9')
-			r2 += code[i] - '0';
-	}
-
-	if (r2%10 != (code[9] - '0'))
-		return false;
-
-	return true;
 }

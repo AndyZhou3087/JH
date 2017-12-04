@@ -37,6 +37,7 @@
           <Image Name="friendgive.jpg" />
           <Image Name="gameovertext.png" />
           <Image Name="heroselectbg.png" />
+          <Image Name="huafeititle.png" />
           <Image Name="logo.png" />
           <Image Name="lotterycontent2.png" />
           <Image Name="lotterygoldtext.png" />
@@ -731,6 +732,7 @@
         <Project Name="hintLayer.csd" Type="Layer" />
         <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
+        <Project Name="huafeiAwardListLayer.csd" Type="Layer" />
         <Project Name="loginRewardLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
         <Project Name="mixDoneLayer.csd" Type="Layer" />

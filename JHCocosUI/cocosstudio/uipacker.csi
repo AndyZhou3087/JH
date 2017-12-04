@@ -354,7 +354,6 @@
       <FilePathData Path="ui/npcrsi1.png" />
       <FilePathData Path="ui/npcrsi2.png" />
       <FilePathData Path="ui/pausebtn.png" />
-      <FilePathData Path="ui/qqline0.png" />
       <FilePathData Path="ui/qubox1.png" />
       <FilePathData Path="ui/qubox2.png" />
       <FilePathData Path="ui/qubox3.png" />
@@ -594,6 +593,7 @@
       <FilePathData Path="ui/winicon0.png" />
       <FilePathData Path="ui/wintitle0.png" />
       <FilePathData Path="ui/hurticon.png" />
+      <FilePathData Path="ui/qqline0.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>
