@@ -259,6 +259,7 @@
           <Image Name="gd1.png" />
           <Image Name="gd2.png" />
           <Image Name="gd3.png" />
+          <Image Name="gettext.png" />
           <Image Name="gold.png" />
           <Image Name="golditem.png" />
           <Image Name="golditemselect.png" />
@@ -269,6 +270,7 @@
           <Image Name="gp3.png" />
           <Image Name="gp4.png" />
           <Image Name="gp5.png" />
+          <Image Name="gp6.png" />
           <Image Name="heroatrmixbox.png" />
           <Image Name="heroatrmixhint.png" />
           <Image Name="herohead1.png" />
@@ -527,6 +529,7 @@
           <Image Name="sfurnace.png" />
           <Image Name="shareicon.png" />
           <Image Name="shopbtn.png" />
+          <Image Name="shopexgicon.png" />
           <Image Name="shopsepline.png" />
           <Image Name="skill1text.png" />
           <Image Name="skill2text.png" />
@@ -538,6 +541,7 @@
           <Image Name="skill8text.png" />
           <Image Name="slock.png" />
           <Image Name="smedicinekit.png" />
+          <Image Name="specialshopitem.png" />
           <Image Name="ssepline.jpg" />
           <Image Name="sshopbtn.png" />
           <Image Name="sstartbtn.png" />
@@ -778,6 +782,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="buyOrangeGFLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

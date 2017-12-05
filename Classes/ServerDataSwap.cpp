@@ -1308,6 +1308,7 @@ void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::st
 
 void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string tag)
 {
+	GlobalData::isExchangeGift = false;
 	if (code == 0)
 	{
 		rapidjson::Document doc;

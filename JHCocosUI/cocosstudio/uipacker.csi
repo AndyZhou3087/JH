@@ -594,6 +594,10 @@
       <FilePathData Path="ui/wintitle0.png" />
       <FilePathData Path="ui/hurticon.png" />
       <FilePathData Path="ui/qqline0.png" />
+      <FilePathData Path="ui/specialshopitem.png" />
+      <FilePathData Path="ui/gettext.png" />
+      <FilePathData Path="ui/gp6.png" />
+      <FilePathData Path="ui/shopexgicon.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

@@ -81,7 +81,7 @@ void HuafeiAwardListLayer::delayShowData(float dt)
 	}
 	else
 	{
-		str = StringUtils::format("很遗憾！未排名上榜，再接再励！", GlobalData::myLastHuafeiRank);
+		str = "很遗憾！未排名上榜，再接再励！";
 		resultlbl->setTextColor(Color4B(27, 141, 0, 255));
 	}
 

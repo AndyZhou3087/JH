@@ -29,7 +29,10 @@ bool GoldGoodsItem::init(GoodsData* gdata)
 	csbnode->setPosition(Vec2(this->getContentSize().width / 2, this->getContentSize().height / 2));
 	this->addChild(csbnode);
 
-	Node* bgnode = csbnode->getChildByName("itembg");
+	cocos2d::ui::ImageView* bgnode = (cocos2d::ui::ImageView*)csbnode->getChildByName("itembg");
+
+	if (gdata->icon.compare("gp5") == 0 || gdata->icon.compare("gp6") == 0)
+		bgnode->loadTexture("ui/specialshopitem.png", cocos2d::ui::Widget::TextureResType::PLIST);
 
 	icon = (cocos2d::ui::ImageView*)bgnode->getChildByName("icon");
 	nameTxt = (cocos2d::ui::Text*)bgnode->getChildByName("name");

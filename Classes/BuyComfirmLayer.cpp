@@ -9,6 +9,7 @@
 #include "Const.h"
 #include "AnalyticUtil.h"
 #include "MD5.h"
+#include "BuyOrangeGFLayer.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
 {
@@ -98,7 +99,7 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() - m_gdata->price);
-			GoldGoodsItem::addBuyGoods(m_gdata);
+
 			int usegold = GlobalData::getUseGold() + m_gdata->price;
 			GlobalData::setUseGold(usegold);
 
@@ -106,6 +107,13 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			if (storageUI != NULL)
 				storageUI->updateResContent();
 
+			if (m_gdata->icon.compare("gp6") == 0)
+			{
+				BuyOrangeGFLayer* buygflayer = BuyOrangeGFLayer::create();
+				Director::getInstance()->getRunningScene()->addChild(buygflayer);
+				m_gdata->vec_res = buygflayer->getRandQu5Gf();
+			}
+			GoldGoodsItem::addBuyGoods(m_gdata);
 #ifdef ANALYTICS
 			std::string name = StringUtils::format("b%s", m_gdata->icon.c_str());
 			AnalyticUtil::onEvent(name.c_str());
