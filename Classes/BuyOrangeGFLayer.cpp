@@ -4,6 +4,8 @@
 #include "SoundManager.h"
 #include "GameScene.h"
 
+#define SILVERCOUNT 30
+
 BuyOrangeGFLayer::BuyOrangeGFLayer()
 {
 }
@@ -46,7 +48,7 @@ bool BuyOrangeGFLayer::init()
 	cocos2d::ui::Text* gfname = (cocos2d::ui::Text*)csbnode->getChildByName("namelbl");
 	cocos2d::ui::Widget* shopexgicon = (cocos2d::ui::Widget*)csbnode->getChildByName("shopexgicon");
 	cocos2d::ui::Widget* yinliangbox = (cocos2d::ui::Widget*)csbnode->getChildByName("buildsmall_0");
-	cocos2d::ui::Widget* yinliangname = (cocos2d::ui::Widget*)csbnode->getChildByName("namelbl_0");
+	cocos2d::ui::Text* yinliangname = (cocos2d::ui::Text*)csbnode->getChildByName("namelbl_0");
 	cocos2d::ui::Text* desc = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
 
 	std::string descstr;
@@ -77,7 +79,11 @@ bool BuyOrangeGFLayer::init()
 	}
 	else
 	{
-		vec_qu5gf.push_back("80030");
+		std::string str = StringUtils::format("%d", 80 * 1000 + SILVERCOUNT);
+		vec_qu5gf.push_back(str);
+
+		str = StringUtils::format("银两x%d", SILVERCOUNT);
+		yinliangname->setString(str);
 		descstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("当前已拥有“").c_str(), GlobalData::map_allResource[vec_tmpqu5gf[r]].cname.c_str(), CommonFuncs::gbk2utf("”，自动转换成60元宝").c_str());
 	}
 	std::string iconstr = StringUtils::format("ui/%s.png", vec_tmpqu5gf[r].c_str());
