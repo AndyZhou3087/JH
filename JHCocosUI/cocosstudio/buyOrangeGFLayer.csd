@@ -112,7 +112,7 @@
             <FileData Type="MarkedSubImage" Path="ui/buildsmall.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="namelbl_0" ActionTag="1690464897" Tag="43" IconVisible="False" LeftMargin="419.5507" RightMargin="151.4493" TopMargin="636.0007" BottomMargin="602.9993" FontSize="40" LabelText="银两x60" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="namelbl_0" ActionTag="1690464897" Tag="43" IconVisible="False" LeftMargin="419.5507" RightMargin="151.4493" TopMargin="636.0007" BottomMargin="602.9993" FontSize="40" LabelText="银两x30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="149.0000" Y="41.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="494.0507" Y="623.4993" />
