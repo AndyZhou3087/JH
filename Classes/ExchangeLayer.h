@@ -56,6 +56,7 @@ private:
 	Node* m_longTouchNode;
 	int clickwhere;//3--mygoods,4--npcgoods
 	bool isWxbExg;
+	bool isClickMyGoods;
 };
 #endif
 

@@ -20,6 +20,7 @@ ExchangeLayer::ExchangeLayer()
 	m_longTouchNode = NULL;
 	clickwhere = 0;
 	isWxbExg = false;
+	isClickMyGoods = false;
 }
 
 
@@ -243,6 +244,7 @@ void ExchangeLayer::delayShowExgData(float dt)
 
 void ExchangeLayer::onNpcGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	isClickMyGoods = false;
 	Node* node = (Node*)pSender;
 	if (type == ui::Widget::TouchEventType::BEGAN)
 	{
@@ -370,6 +372,15 @@ void ExchangeLayer::onMyGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		m_longTouchNode = node;
 		schedule(schedule_selector(ExchangeLayer::longTouchUpdate), 1.0f);
 		clickwhere = 3;
+
+		if (node->getTag() < myGoodsData.size())
+		{
+			isClickMyGoods = true;
+		}
+		else
+		{
+			isClickMyGoods = false;
+		}
 	}
 
 	else if (type == ui::Widget::TouchEventType::ENDED)
@@ -454,7 +465,7 @@ void ExchangeLayer::giveNpc(std::string strid)
 		return;
 	}
 
-	if (data != NULL)
+	if (data != NULL && data->strid.length() > 0)
 	{
 		PackageData pdata = *data;
 
@@ -462,13 +473,19 @@ void ExchangeLayer::giveNpc(std::string strid)
 		{
 			if (datatag >= size0)
 			{
-				npcExgData.erase(npcExgData.begin() + (datatag - size0));
-				updateNpcGoods(pdata, 1);
+				if (npcExgData.size() > 0)
+				{
+					npcExgData.erase(npcExgData.begin() + (datatag - size0));
+					updateNpcGoods(pdata, 1);
+				}
 			}
 			else
 			{
-				myGoodsData.erase(myGoodsData.begin() + datatag);
-				updateNpcGoods(pdata, 0);
+				if (myGoodsData.size() > 0)
+				{
+					myGoodsData.erase(myGoodsData.begin() + datatag);
+					updateNpcGoods(pdata, 0);
+				}
 			}
 		}
 		else
@@ -498,32 +515,41 @@ void ExchangeLayer::giveHero(std::string strid)
 		data = (PackageData*)m_longTouchNode->getUserData();
 	}
 	PackageData pdata = *data;
-	if (data->count - 1<= 0)
+
+	if (data != NULL && data->strid.length() > 0)
 	{
-		if (datatag >= size0)
+		if (data->count - 1 <= 0)
 		{
-			myExgData.erase(myExgData.begin() + (datatag - size0));
-			updateMyGoods(pdata, 0);
+			if (datatag >= size0)
+			{
+				if (myExgData.size() > 0)
+				{
+					myExgData.erase(myExgData.begin() + (datatag - size0));
+					updateMyGoods(pdata, 0);
+				}
+			}
+			else
+			{
+				if (npcGoodsData.size() > 0)
+				{
+					npcGoodsData.erase(npcGoodsData.begin() + datatag);
+					updateMyGoods(pdata, 1);
+				}
+			}
+
 		}
 		else
 		{
-
-			npcGoodsData.erase(npcGoodsData.begin() + datatag);
-			updateMyGoods(pdata, 1);
+			if (datatag >= size0)
+			{
+				updateMyGoods(pdata, 0);
+			}
+			else
+			{
+				updateMyGoods(pdata, 1);
+			}
+			data->count--;
 		}
-
-	}
-	else
-	{
-		if (datatag >= size0)
-		{
-			updateMyGoods(pdata, 0);
-		}
-		else
-		{
-			updateMyGoods(pdata, 1);
-		}
-		data->count--;
 	}
 }
 
@@ -988,13 +1014,24 @@ void ExchangeLayer::randExchgRes(std::vector<std::string> &vec_exchgres)
 void ExchangeLayer::longTouchUpdate(float delay){
 	m_isLongPress = true;
 	if (m_longTouchNode != NULL){
-		std::string name = m_longTouchNode->getName();
-		//if (name.find("resitem") != std::string::npos)
+
+		PackageData* data = (PackageData*)m_longTouchNode->getUserData();
+		if (isClickMyGoods)
 		{
-			unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
-			ResDetailsLayer::whereClick = clickwhere;
-			PackageData* data = (PackageData*)m_longTouchNode->getUserData();
-			this->addChild(ResDetailsLayer::create(data));
+			for (unsigned int i = 0; i < myGoodsData.size(); i++)
+			{
+				if (data->strid.compare(myGoodsData[i].strid) == 0)
+				{
+					m_longTouchNode->setUserData(&myGoodsData[i]);
+					m_longTouchNode->setTag(i);
+					break;
+				}
+			}
 		}
+
+		unschedule(schedule_selector(ExchangeLayer::longTouchUpdate));
+		ResDetailsLayer::whereClick = clickwhere;
+
+		this->addChild(ResDetailsLayer::create(data));
 	}
 }

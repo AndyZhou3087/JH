@@ -29,7 +29,6 @@ private:
 private:
 	int typerow[RES_MAX];
 	int getCountByType(int type);
-	int lastScrollViewHeight;
 };
 #endif
 

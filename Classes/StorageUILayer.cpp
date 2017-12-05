@@ -13,13 +13,13 @@ const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "
 
 StorageUILayer::StorageUILayer()
 {
-	lastScrollViewHeight = -1;
+
 }
 
 
 StorageUILayer::~StorageUILayer()
 {
-	lastScrollViewHeight = -1;
+
 }
 
 bool StorageUILayer::init()
@@ -86,21 +86,19 @@ void StorageUILayer::updateResContent()
 	}
 
 	int innerheight = scrollview->getInnerContainerSize().height;
-	if (lastScrollViewHeight < 0)
-	{
-		int dataheigth = 0;
-		for (int i = 0; i < RES_MAX; i++)
-		{
-			dataheigth += typerow[i] * 130;
-		}
-		innerheight = textheigth + dataheigth;
 
-		int contentheight = scrollview->getContentSize().height;
-		if (innerheight < contentheight)
-			innerheight = contentheight;
-		scrollview->setInnerContainerSize(Size(650, innerheight));
-		lastScrollViewHeight = innerheight;
+	int dataheigth = 0;
+	for (int i = 0; i < RES_MAX; i++)
+	{
+		dataheigth += typerow[i] * 130;
 	}
+	innerheight = textheigth + dataheigth;
+
+	int contentheight = scrollview->getContentSize().height;
+	if (innerheight < contentheight)
+		innerheight = contentheight;
+	scrollview->setInnerContainerSize(Size(650, innerheight));
+
 
 	for (int i = 0; i < RES_MAX; i++)
 	{

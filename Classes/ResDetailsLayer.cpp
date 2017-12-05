@@ -498,7 +498,8 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 		}
 		else if (whereClick == 3 || whereClick == 4)
 		{
-			if (atoi(m_packageData->strid.c_str()) > 0)
+			std::string resstrid = m_packageData->strid;
+			if (atoi(resstrid.c_str()) > 0)
 			{
 				ExchangeLayer* exlayer = (ExchangeLayer*)g_gameLayer->getChildByName("exchangelayer");
 				int usecount = atoi(selectCountlbl->getString().c_str());
@@ -507,9 +508,9 @@ void ResDetailsLayer::onOk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 					for (int i = 0; i < usecount; i++)
 					{
 						if (whereClick == 3)
-							exlayer->giveNpc(m_packageData->strid);
+							exlayer->giveNpc(resstrid);
 						else
-							exlayer->giveHero(m_packageData->strid);
+							exlayer->giveHero(resstrid);
 					}
 					exlayer->updata();
 				}
