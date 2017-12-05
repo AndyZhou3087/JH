@@ -136,6 +136,17 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="wxb1_10" ActionTag="1781933545" Tag="45" IconVisible="False" LeftMargin="351.5685" RightMargin="-1.5685" TopMargin="853.9261" BottomMargin="0.0739" ctype="SpriteObjectData">
+            <Size X="370.0000" Y="426.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="536.5685" Y="213.0739" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7452" Y="0.1665" />
+            <PreSize X="0.5139" Y="0.3328" />
+            <FileData Type="Normal" Path="images/wxb1.png" Plist="" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

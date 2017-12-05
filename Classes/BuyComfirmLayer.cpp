@@ -103,10 +103,6 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			int usegold = GlobalData::getUseGold() + m_gdata->price;
 			GlobalData::setUseGold(usegold);
 
-			StorageUILayer* storageUI = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
-			if (storageUI != NULL)
-				storageUI->updateResContent();
-
 			if (m_gdata->icon.compare("gp6") == 0)
 			{
 				BuyOrangeGFLayer* buygflayer = BuyOrangeGFLayer::create();
@@ -114,6 +110,10 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				m_gdata->vec_res = buygflayer->getRandQu5Gf();
 			}
 			GoldGoodsItem::addBuyGoods(m_gdata);
+
+			StorageUILayer* storageUI = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
+			if (storageUI != NULL)
+				storageUI->updateResContent();
 #ifdef ANALYTICS
 			std::string name = StringUtils::format("b%s", m_gdata->icon.c_str());
 			AnalyticUtil::onEvent(name.c_str());

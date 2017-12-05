@@ -77,7 +77,7 @@ bool BuyOrangeGFLayer::init()
 	}
 	else
 	{
-		vec_qu5gf.push_back("80060");
+		vec_qu5gf.push_back("80030");
 		descstr = StringUtils::format("%s%s%s", CommonFuncs::gbk2utf("当前已拥有“").c_str(), GlobalData::map_allResource[vec_tmpqu5gf[r]].cname.c_str(), CommonFuncs::gbk2utf("”，自动转换成60元宝").c_str());
 	}
 	std::string iconstr = StringUtils::format("ui/%s.png", vec_tmpqu5gf[r].c_str());
