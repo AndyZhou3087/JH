@@ -240,14 +240,14 @@ void PrizeLayer::onSuccess()
 
 void PrizeLayer::onErr(int errcode)
 {
-	std::string str = "兑换失败！请检查网络设置！";
+	std::string str;
 	if (errcode == -3)
 	{
 		str = "兑换失败！已经兑换过了，每人只有兑换一次！";
 	}
-	else if (errcode == -4)
+	else
 	{
-		str = "兑换失败！兑换码已经兑换过了！";
+		str = "兑换失败！无效的兑换码！";
 	}
 
     Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
