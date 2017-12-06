@@ -53,7 +53,7 @@ bool PrizeLayer::init()
 	m_edit->setPlaceholderFontSize(30);
 	m_edit->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
 	m_edit->setPlaceholderFontColor(Color3B(112, 116, 109));
-	m_edit->setMaxLength(10);
+	m_edit->setMaxLength(20);
 	m_edit->setVisible(false);
 	m_edit->setDelegate(this);
 	this->addChild(m_edit);

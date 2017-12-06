@@ -93,7 +93,7 @@
             <FileData Type="MarkedSubImage" Path="ui/setmodifybtn.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="input" ActionTag="1153239178" Tag="14" IconVisible="False" LeftMargin="160.0000" RightMargin="180.0000" TopMargin="551.9984" BottomMargin="690.0016" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入兑换码" MaxLengthEnable="True" MaxLengthText="10" ctype="TextFieldObjectData">
+          <AbstractNodeData Name="input" ActionTag="1153239178" Tag="14" IconVisible="False" LeftMargin="160.0000" RightMargin="180.0000" TopMargin="551.9984" BottomMargin="690.0016" TouchEnable="True" FontSize="38" IsCustomSize="True" LabelText="" PlaceHolderText="请输入兑换码" MaxLengthEnable="True" MaxLengthText="20" ctype="TextFieldObjectData">
             <Size X="380.0000" Y="38.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="350.0000" Y="709.0016" />
