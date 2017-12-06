@@ -413,7 +413,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 #endif
 	//n044
 
-	if (npcid.compare("n004") == 0 && GlobalData::isExchangeGift && m_addrid.compare("m13-1") != 0)
+	if (npcid.compare("n044") == 0 && GlobalData::isExchangeGift && m_addrid.compare("m13-1") != 0)
 		ServerDataSwap::init(this)->getKajuanAction();
 
 	return true;
