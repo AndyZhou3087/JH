@@ -41,6 +41,10 @@ bool HuafeiAwardListLayer::init()
 
 	resultlbl = (cocos2d::ui::Text*)csbnode->getChildByName("resultlbl");
 	resultlbl->setString("");
+
+	cocos2d::ui::Text* desclbl = (cocos2d::ui::Text*)csbnode->getChildByName("desc");
+	desclbl->setString(GlobalData::couponinfo);
+
 	getData();
 
 	auto listener = EventListenerTouchOneByOne::create();

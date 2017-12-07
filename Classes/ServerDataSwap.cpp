@@ -1309,6 +1309,7 @@ void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::st
 void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string tag)
 {
 	GlobalData::isExchangeGift = false;
+	GlobalData::couponinfo = "";
 	if (code == 0)
 	{
 		rapidjson::Document doc;
@@ -1391,6 +1392,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				rapidjson::Value& retval = doc["opencoupon"];
 				int v = retval.GetInt();
 				GlobalData::isExchangeGift = true; // = v == 1 ? true : false;
+			}
+
+			if (doc.HasMember("couponinfo"))
+			{
+				rapidjson::Value& retval = doc["couponinfo"];
+				GlobalData::couponinfo = retval.GetString();
 			}
 		
 			if (m_pDelegateProtocol != NULL)

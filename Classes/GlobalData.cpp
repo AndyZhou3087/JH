@@ -136,6 +136,8 @@ bool GlobalData::isExchangeGift = false;
 
 int GlobalData::myLastHuafeiRank = 0;
 
+std::string GlobalData::couponinfo;
+
 GlobalData::GlobalData()
 {
 

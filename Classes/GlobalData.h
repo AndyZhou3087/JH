@@ -1076,6 +1076,7 @@ public:
 	static bool isPlayerChallenging;
 
 	static bool isExchangeGift;
+	static std::string couponinfo;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//
