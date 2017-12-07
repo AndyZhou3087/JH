@@ -184,7 +184,8 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		winresrnd.clear();
 		for (unsigned int i = 0; i < winres.size(); i++)
 		{
-			winresrnd.push_back(GlobalData::map_challengeReward[npcid].vec_winrnd[i]);
+			int intrnd = GlobalData::map_challengeReward[npcid].vec_winrnd[i] * 10;
+			winresrnd.push_back(intrnd);
 		}
 		iswd = true;
 	}
@@ -234,28 +235,36 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 		int r = 0;
 		int winrnd = winresrnd[i];
-		if (winrnd < 10 && !iswd)
+
+		if (!iswd)
 		{
-			if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
+			if (winrnd < 10)
 			{
-				r = GlobalData::createRandomNum(100) + 1;
-				GlobalData::map_npcs[npcid].winrescount[i] = 1;
-			}
-			else
-			{
-				GlobalData::map_npcs[npcid].winrescount[i]++;
-				if (GlobalData::map_npcs[npcid].winrescount[i] < 3)
-					r = 200;
-				else
+				if (GlobalData::map_npcs[npcid].winrescount[i] < 0)
 				{
 					r = GlobalData::createRandomNum(100) + 1;
 					GlobalData::map_npcs[npcid].winrescount[i] = 1;
 				}
+				else
+				{
+					GlobalData::map_npcs[npcid].winrescount[i]++;
+					if (GlobalData::map_npcs[npcid].winrescount[i] < 3)
+						r = 200;
+					else
+					{
+						r = GlobalData::createRandomNum(100) + 1;
+						GlobalData::map_npcs[npcid].winrescount[i] = 1;
+					}
+				}
+			}
+			else
+			{
+				r = GlobalData::createRandomNum(100) + 1;
 			}
 		}
 		else
 		{
-			r = GlobalData::createRandomNum(100) + 1;
+			r = GlobalData::createRandomNum(1000) + 1;
 		}
 
 		if (r <= winrnd)

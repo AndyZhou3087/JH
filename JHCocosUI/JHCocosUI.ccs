@@ -708,6 +708,7 @@
         <Project Name="buildingDetailsLayer.csd" Type="Layer" />
         <Project Name="buyComfirmLayer.csd" Type="Layer" />
         <Project Name="buyDetailsLayer.csd" Type="Layer" />
+        <Project Name="buyOrangeGFLayer.csd" Type="Layer" />
         <Project Name="challengeCountLayer.csd" Type="Layer" />
         <Project Name="comfirmSaveLayer.csd" Type="Layer" />
         <Project Name="deathLayer.csd" Type="Layer" />
@@ -782,7 +783,6 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="buyOrangeGFLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

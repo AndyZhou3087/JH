@@ -84,7 +84,7 @@ bool BuyOrangeGFLayer::init()
 
 		str = StringUtils::format("银两x%d", SILVERCOUNT);
 		yinliangname->setString(str);
-		descstr = StringUtils::format("%s%s%s%d%s", CommonFuncs::gbk2utf("当前已拥有“").c_str(), GlobalData::map_allResource[vec_tmpqu5gf[r]].cname.c_str(), CommonFuncs::gbk2utf("”，自动转换成").c_str(), SILVERCOUNT, CommonFuncs::gbk2utf("银两！").c_str());
+		descstr = StringUtils::format("%s%s%s%d%s", CommonFuncs::gbk2utf("当前已拥有“").c_str(), GlobalData::map_allResource[vec_tmpqu5gf[r]].cname.c_str(), CommonFuncs::gbk2utf("”，自动转换成").c_str(), SILVERCOUNT, CommonFuncs::gbk2utf("银两！拿着银两去客栈找小宝买秘籍吧！").c_str());
 	}
 	std::string iconstr = StringUtils::format("ui/%s.png", vec_tmpqu5gf[r].c_str());
 	gfimg->loadTexture(iconstr, cocos2d::ui::Widget::TextureResType::PLIST);

@@ -715,11 +715,12 @@ void MapLayer::snow()
 
 void MapLayer::removeWeatherPaticle()
 {
-	if (g_maplayer != NULL)
-	{
-		g_maplayer->removeChildByName("rain");
-		g_maplayer->removeChildByName("snow");
-	}
+	Node* prain = this->getChildByName("rain");
+	if (prain != NULL)
+		prain->removeFromParentAndCleanup(true);
+	Node* psnow = this->getChildByName("snow");
+	if (psnow != NULL)
+		psnow->removeFromParentAndCleanup(true);
 }
 
 void MapLayer::vultureAnim()

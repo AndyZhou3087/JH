@@ -124,14 +124,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-1084213961" Tag="44" IconVisible="False" LeftMargin="87.5000" RightMargin="87.5000" TopMargin="797.7916" BottomMargin="453.2084" FontSize="28" LabelText="恭喜获得神功葵花宝典，一统江湖指日可待！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="545.0000" Y="29.0000" />
+          <AbstractNodeData Name="desc" ActionTag="-1084213961" Tag="44" IconVisible="False" LeftMargin="66.5000" RightMargin="66.5000" TopMargin="782.2916" BottomMargin="437.7084" IsCustomSize="True" FontSize="28" LabelText="当前已拥有“葵花宝典”，自动转换成30银两！拿着银两去客栈找小宝买秘籍吧！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="587.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="360.0000" Y="467.7084" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="52" G="45" B="45" />
             <PrePosition X="0.5000" Y="0.3654" />
-            <PreSize X="0.7569" Y="0.0227" />
+            <PreSize X="0.8153" Y="0.0469" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

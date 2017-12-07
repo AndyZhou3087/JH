@@ -257,7 +257,7 @@ typedef enum
 typedef struct
 {
 	std::vector<std::string> vec_winres;
-	std::vector<int> vec_winrnd;
+	std::vector<float> vec_winrnd;
 }ChallengeRewardData;
 
 /****************************

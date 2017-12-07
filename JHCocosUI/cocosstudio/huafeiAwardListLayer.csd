@@ -32,18 +32,18 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-153183703" Tag="101" IconVisible="False" LeftMargin="254.2562" RightMargin="268.7438" TopMargin="251.5942" BottomMargin="983.4057" ctype="SpriteObjectData">
+          <AbstractNodeData Name="title" ActionTag="-153183703" Tag="101" IconVisible="False" LeftMargin="238.7562" RightMargin="253.2438" TopMargin="241.0942" BottomMargin="972.9057" ctype="SpriteObjectData">
             <Size X="228.0000" Y="66.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="352.7562" Y="1005.9057" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4899" Y="0.7859" />
-            <PreSize X="0.2736" Y="0.0352" />
+            <PreSize X="0.3167" Y="0.0516" />
             <FileData Type="Normal" Path="images/huafeititle.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-619977260" Tag="105" IconVisible="False" LeftMargin="41.0120" RightMargin="41.9880" TopMargin="695.7105" BottomMargin="290.2895" IsCustomSize="True" FontSize="28" LabelText="说明：解锁第七章节并打败少林寺里的扫地僧和尚，按打败扫地僧的时间进行排名，每个用户最多只能获得一次话费奖励，第一名奖励50元话费，第二名到第十名奖励30元话费，第11名到第20名奖励10元话费，第21名到第40名奖励5元话费。&#xA;每周一的00:00到周日的23:59为一个活动周期，每周一中午12点公布上周的中奖用户。&#xA;兑奖请加QQ群：iOS:552393763   621564945 &#xA;安卓：641759306" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desc" ActionTag="-619977260" Tag="105" IconVisible="False" LeftMargin="41.0120" RightMargin="41.9880" TopMargin="695.7105" BottomMargin="290.2895" IsCustomSize="True" FontSize="28" LabelText="说明：解锁第七章节并打败少林寺里的扫地僧和尚，按打败扫地僧的时间进行排名，第1~5名每人奖励50元话费。每个用户最多只能获得一次话费奖励，&#xA;每周一的00:00到周日的23:59为一个活动周期，每周一中午12点公布上周的中奖用户。&#xA;兑奖请加QQ群：iOS:552393763   621564945 &#xA;安卓：641759306" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="637.0000" Y="294.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.5120" Y="437.2895" />
