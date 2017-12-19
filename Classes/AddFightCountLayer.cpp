@@ -5,10 +5,13 @@
 #include "Const.h"
 #include "SoundManager.h"
 #include "MD5.h"
+#include "HSLJMainLayer.h"
+#include "GameScene.h"
 
 AddFightCountLayer::AddFightCountLayer()
 {
 	buycount = 0;
+	m_matchtype = 0;
 }
 
 
@@ -18,10 +21,10 @@ AddFightCountLayer::~AddFightCountLayer()
 }
 
 
-AddFightCountLayer* AddFightCountLayer::create()
+AddFightCountLayer* AddFightCountLayer::create(int matchtype)
 {
 	AddFightCountLayer *pRet = new AddFightCountLayer();
-	if (pRet && pRet->init())
+	if (pRet && pRet->init(matchtype))
 	{
 		pRet->autorelease();
 	}
@@ -33,7 +36,7 @@ AddFightCountLayer* AddFightCountLayer::create()
 	return pRet;
 }
 
-bool AddFightCountLayer::init()
+bool AddFightCountLayer::init(int matchtype)
 {
 	LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 200));
 	this->addChild(color);
@@ -52,6 +55,8 @@ bool AddFightCountLayer::init()
 	cocos2d::ui::Widget *buy5btn = (cocos2d::ui::Button*)m_csbnode->getChildByName("buy5btn");
 	buy5btn->addTouchEventListener(CC_CALLBACK_2(AddFightCountLayer::onAddCount, this));
 	buy5btn->setTag(5);
+
+	m_matchtype = matchtype;
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -106,15 +111,25 @@ void AddFightCountLayer::onAddCount(cocos2d::Ref *pSender, cocos2d::ui::Widget::
 		WaitingProgress* waitbox = WaitingProgress::create("处理中...");
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 
-		ServerDataSwap::init(this)->getFightCount(buycount);
+		ServerDataSwap::init(this)->getFightCount(m_matchtype, buycount);
 	}
 }
 
 void AddFightCountLayer::onSuccess()
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	GlobalData::myTotalFihgtCount += buycount;
-	GlobalData::myFihgtCount += buycount;
+	if (m_matchtype == 0)
+	{
+		GlobalData::myTotalFihgtCount += buycount;
+		GlobalData::myFihgtCount += buycount;
+	}
+	else if (m_matchtype == 1)
+	{
+		GlobalData::myMatchInfo.leftcount += buycount;
+		HSLJMainLayer* layer = (HSLJMainLayer*)g_gameLayer->getChildByName("hsljmainlayer");
+		if (layer != NULL)
+			layer->updateMyFightCount();
+	}
 	int needgold = 20;
 	int mygold = GlobalData::getMyGoldCount();
 	if (buycount == 5)

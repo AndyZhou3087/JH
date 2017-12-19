@@ -704,7 +704,7 @@ void ServerDataSwap::getMyFihgterData(std::string fightplayerid, int fightplayer
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetMyFihgterDataCB, this));
 }
 
-void ServerDataSwap::getFightCount(int count)
+void ServerDataSwap::getFightCount(int matchtype, int count)
 {
 	std::string url;
 	url.append(HTTPURL);
@@ -716,6 +716,9 @@ void ServerDataSwap::getFightCount(int count)
 	url.append(str);
 	url.append("&count=");
 	str = StringUtils::format("%d", count);
+	url.append(str);
+	url.append("&matchtype=");
+	str = StringUtils::format("%d", matchtype);
 	url.append(str);
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetFightCountCB, this));
 }
@@ -776,6 +779,64 @@ void ServerDataSwap::getKajuanAwardList()
 	std::string str = StringUtils::format("%d", g_hero->getHeadID());
 	url.append(str);
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetKajuanAwardListCB, this));
+}
+
+void ServerDataSwap::getMyMatchInfo()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_matchmatchselfinfo?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetMyMatchInfoCB, this));
+}
+
+void ServerDataSwap::getMatchFight()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_matchmatchinfo?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetMatchFightCB, this));
+}
+
+void ServerDataSwap::getMatchFightResult(std::string fightplayerid, int score)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_matchmatchresult?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+
+	url.append("&matchplayerid=");
+	url.append(fightplayerid);
+
+	url.append("&score=");
+	std::string str = StringUtils::format("%d", score);
+	url.append(str);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetMatchFightResultCB, this));
+}
+
+void ServerDataSwap::getHSLJRankData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_matchmatchranklist?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetHSLJRankDataCB, this));
+}
+
+void ServerDataSwap::getHSLJRewardData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_matchmatchgetaward?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetHSLJRewardDataCB, this));
+	
 }
 
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
@@ -2546,6 +2607,376 @@ void ServerDataSwap::httpGetKajuanAwardListCB(std::string retdata, int code, std
 			{
 				rapidjson::Value& v = doc["lastrank"];
 				GlobalData::myLastHuafeiRank = v.GetInt();
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetMyMatchInfoCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	GlobalData::myMatchInfo.vec_factionlv.clear();
+	GlobalData::myMatchInfo.matchaward = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		GlobalData::myMatchInfo.vec_factionlv.push_back(0);
+	}
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			isok = true;
+
+			if (doc.HasMember("startday"))
+			{
+				rapidjson::Value& v = doc["startday"];
+				GlobalData::myMatchInfo.starttime = v.GetString();
+			}
+			if (doc.HasMember("endday"))
+			{
+				rapidjson::Value& v = doc["endday"];
+				GlobalData::myMatchInfo.endtime = v.GetString();
+			}
+			if (doc.HasMember("matchno"))
+			{
+				rapidjson::Value& v = doc["matchno"];
+				GlobalData::myMatchInfo.matchno = atoi(v.GetString());
+			}
+			if (doc.HasMember("score"))
+			{
+				rapidjson::Value& v = doc["score"];
+				GlobalData::myMatchInfo.myexp = atoi(v.GetString());
+			}
+			if (doc.HasMember("wincount"))
+			{
+				rapidjson::Value& v = doc["wincount"];
+				GlobalData::myMatchInfo.mywincount = atoi(v.GetString());
+			}
+			if (doc.HasMember("lostcount"))
+			{
+				rapidjson::Value& v = doc["lostcount"];
+				GlobalData::myMatchInfo.myfailcount = atoi(v.GetString());
+			}
+			if (doc.HasMember("matchfinishedcount"))
+			{
+				rapidjson::Value& v = doc["matchfinishedcount"];
+				GlobalData::myMatchInfo.finishedcount = atoi(v.GetString());
+			}
+			if (doc.HasMember("matchcount"))
+			{
+				rapidjson::Value& v = doc["matchcount"];
+				GlobalData::myMatchInfo.leftcount = atoi(v.GetString());
+			}
+			if (doc.HasMember("matchaward"))
+			{
+				rapidjson::Value& v = doc["matchaward"];
+				GlobalData::myMatchInfo.matchaward = atoi(v.GetString());
+			}
+
+			if (doc.HasMember("level1"))
+			{
+				rapidjson::Value& v = doc["level1"];
+				GlobalData::myMatchInfo.vec_factionlv[0] = atoi(v.GetString());
+			}
+			if (doc.HasMember("level2"))
+			{
+				rapidjson::Value& v = doc["level2"];
+				GlobalData::myMatchInfo.vec_factionlv[1] = atoi(v.GetString());
+			}
+			if (doc.HasMember("level3"))
+			{
+				rapidjson::Value& v = doc["level3"];
+				GlobalData::myMatchInfo.vec_factionlv[2] = atoi(v.GetString());
+			}
+			if (doc.HasMember("level4"))
+			{
+				rapidjson::Value& v = doc["level4"];
+				GlobalData::myMatchInfo.vec_factionlv[3] = atoi(v.GetString());
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetMatchFightCB(std::string retdata, int code, std::string tag)
+{
+	int ret = code;
+	GlobalData::vec_matchPlayerData.clear();
+	if (m_pDelegateProtocol != NULL)
+	{
+		if (code == 0)
+		{
+			rapidjson::Document doc;
+			if (JsonReader(retdata, doc))
+			{
+				if (doc.HasMember("ret"))
+				{
+					rapidjson::Value& v = doc["ret"];
+					ret = v.GetInt();
+
+					v = doc["matchscore"];
+					GlobalData::matchPlayerInfo.exp = atoi(v.GetString());
+
+					v = doc["matchwincount"];
+					GlobalData::matchPlayerInfo.wincount = atoi(v.GetString());
+
+					v = doc["matchlostcount"];
+					GlobalData::matchPlayerInfo.failcount = atoi(v.GetString());
+
+					v = doc["nickname"];
+					GlobalData::matchPlayerInfo.nickname = v.GetString();
+
+					v = doc["matchplayerid"];
+					GlobalData::matchPlayerInfo.playerid = v.GetString();
+
+					if (doc.HasMember("data"))
+					{
+						rapidjson::Value& playerArray = doc["data"];
+						for (unsigned int i = 0; i < playerArray.Size();i++)
+						{
+							rapidjson::Value& item = playerArray[i];
+							MatchPlayerData mpdata;
+							if (item.HasMember("holding"))
+							{
+								rapidjson::Value& dataArray = item["holding"];
+								if (dataArray.Size() > 0)
+								{
+									rapidjson::Value& item = dataArray[0];
+									for (rapidjson::Value::ConstMemberIterator iter = item.MemberBegin(); iter != item.MemberEnd(); ++iter)
+									{
+										std::string keyname = iter->name.GetString();
+										int keyval = atoi(iter->value.GetString());
+										mpdata.map_playerData[keyname] = keyval;
+									}
+								}
+							}
+
+							std::string datastr;
+							if (item.HasMember("friendship"))
+							{
+								rapidjson::Value& v = item["friendship"];
+								datastr = v.GetString();
+							}
+
+							if (datastr.length() > 0)
+							{
+								std::vector<std::string> vec_retstr;
+								CommonFuncs::split(datastr, vec_retstr, ";");
+								for (unsigned int i = 0; i < vec_retstr.size(); i++)
+								{
+									std::vector<std::string> tmp;
+									CommonFuncs::split(vec_retstr[i], tmp, ",");
+									if (tmp.size() >= 3)
+									{
+										int friendly = atoi(tmp[1].c_str());
+										if (friendly < -100000 || friendly > 100000)
+											friendly = 0;
+										mpdata.map_playerfriendly[tmp[0]].friendly = friendly;
+										mpdata.map_playerfriendly[tmp[0]].relation = atoi(tmp[2].c_str());
+									}
+								}
+							}
+
+							if (item.HasMember("mixgf"))
+							{
+								rapidjson::Value& v = item["mixgf"];
+								mpdata.mixgf = v.GetString();
+							}
+							int herotype = 1;
+							if (item.HasMember("type"))
+							{
+								rapidjson::Value& v = item["type"];
+								mpdata.type = atoi(v.GetString());
+								herotype = mpdata.type;
+							}
+							mpdata.factionlv = 0;
+							if (item.HasMember("level"))
+							{
+								rapidjson::Value& v = item["level"];
+								if (v.IsString())
+									mpdata.factionlv = atoi(v.GetString());
+								else if (v.IsInt())
+									mpdata.factionlv = v.GetInt();
+
+							}
+							if (item.HasMember("exp"))
+							{
+								rapidjson::Value& v = item["exp"];
+								int exp = atoi(v.GetString());
+								int lv = 0;
+								int size = GlobalData::map_heroAtr[herotype].vec_exp.size();
+								for (int i = 0; i < size; i++)
+								{
+									if (exp > GlobalData::map_heroAtr[herotype].vec_exp[i])
+									{
+										lv = i;
+										exp = exp - GlobalData::map_heroAtr[herotype].vec_exp[i];
+									}
+									else
+									{
+										break;
+									}
+								}
+								if (lv >= size)
+								{
+									lv = size - 1;
+								}
+								mpdata.herolv = lv;
+							}
+
+							GlobalData::vec_matchPlayerData.push_back(mpdata);
+						}
+					}
+				}
+			}
+			if (ret == 0)
+				m_pDelegateProtocol->onSuccess();
+			else
+				m_pDelegateProtocol->onErr(-ret);
+		}
+		else
+			m_pDelegateProtocol->onErr(ret);
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetMatchFightResultCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			isok = true;
+
+			rapidjson::Value& v = doc["before"];
+			GlobalData::myMatchInfo.beforerank = v.GetInt();
+
+			v = doc["after"];
+			GlobalData::myMatchInfo.afterrank = v.GetInt();
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetHSLJRankDataCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	GlobalData::vec_hsljRankData.clear();
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			isok = true;
+			if (doc.HasMember("data"))
+			{
+				rapidjson::Value& dataArray = doc["data"];
+				for (unsigned int i = 0; i < dataArray.Size(); i++)
+				{
+					rapidjson::Value& item = dataArray[i];
+					HSLJRankData data;
+					data.rank = i + 1;
+					rapidjson::Value& v = item["nickname"];
+					data.nickname = v.GetString();
+
+					v = item["matchscore"];
+					data.exp = atoi(v.GetString());
+
+					v = item["wincount"];
+					data.wincount = atoi(v.GetString());
+					v = item["lostcount"];
+					int failcount = atoi(v.GetString());
+					int totalcount = data.wincount + failcount;
+					if (totalcount > 0)
+					{
+						data.totalcount = totalcount;
+						GlobalData::vec_hsljRankData.push_back(data);
+					}
+				}
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetHSLJRewardDataCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("ret"))
+			{
+				rapidjson::Value& v = doc["ret"];
+				int ret = v.GetInt();
+				if (ret == 0)
+					isok = true;
 			}
 		}
 	}

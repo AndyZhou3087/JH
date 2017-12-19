@@ -220,6 +220,12 @@ public:
 	int getHeroLV();
 
 	/****************************
+	获取角色等级
+	@para localid
+	****************************/
+	int getHeroLV(std::string localid);
+
+	/****************************
 	保存角色等级
 	****************************/
 	void setHeroLV(int lv);
@@ -248,6 +254,12 @@ public:
 	获取角色属性数据 （装备栏）
 	****************************/
 	std::string getHeroProperData();
+
+	/****************************
+	获取角色属性数据 （装备栏）
+	@para localid
+	****************************/
+	std::string getHeroProperData(std::string localid);
 
 	/****************************
 	保存角色属性数据 （装备栏）
@@ -562,6 +574,12 @@ public:
 	std::string getFriendly();
 
 	/****************************
+	加载保存的好友度
+	@para
+	*****************************/
+	std::string getFriendly(std::string localid);
+
+	/****************************
 	保存好友度
 	*****************************/
 	void setFriendly(std::string str);
@@ -570,6 +588,12 @@ public:
 	加载保存的组合功法ID
 	*****************************/
 	std::string getMixGF();
+
+	/****************************
+	加载保存的组合功法ID
+	@para localid
+	*****************************/
+	std::string getMixGF(std::string localid);
 
 	/****************************
 	保存组合功法ID
@@ -717,6 +741,18 @@ public:
 	@para
 	*****************************/
 	std::string getPlayerChallengeData();
+
+	/****************************
+	正在华山论剑，防止强退刷
+	@para
+	*****************************/
+	void setHsljMatchPlayer(std::string val);
+
+	/****************************
+	正在华山论剑，防止强退刷
+	@para
+	*****************************/
+	std::string getHsljMatchPlayer();
 
 private:
 	/****************************

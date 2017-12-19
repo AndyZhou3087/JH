@@ -202,6 +202,13 @@ int GameDataSave::getHeroLV()
 {
 	return loadIntDataByKey(addUIDString("herolv"), 0);
 }
+
+int GameDataSave::getHeroLV(std::string localid)
+{
+	std::string key = localid + "herolv";
+	return loadIntDataByKey(key, 0);
+}
+
 void GameDataSave::setHeroLV(int lv)
 {
 	saveIntDataByKey(addUIDString("herolv"), lv);
@@ -231,6 +238,13 @@ std::string GameDataSave::getHeroProperData()
 {
 	return loadStringDataByKey(addUIDString("heroproper"));
 }
+
+std::string GameDataSave::getHeroProperData(std::string localid)
+{
+	std::string key = localid + "heroproper";
+	return loadStringDataByKey(key);
+}
+
 void GameDataSave::setHeroProperData(std::string strval)
 {
 	saveStringDataByKey(addUIDString("heroproper"), strval);
@@ -532,6 +546,12 @@ std::string GameDataSave::getFriendly()
 	return loadStringDataByKey(addUIDString("friendly"), "");
 }
 
+std::string GameDataSave::getFriendly(std::string localid)
+{
+	std::string key = localid + "friendly";
+	return loadStringDataByKey(key, "");
+}
+
 void GameDataSave::setFriendly(std::string str)
 {
 	saveStringDataByKey(addUIDString("friendly"), str);
@@ -540,6 +560,12 @@ void GameDataSave::setFriendly(std::string str)
 std::string GameDataSave::getMixGF()
 {
 	return loadStringDataByKey(addUIDString("mixgf"), "");
+}
+
+std::string GameDataSave::getMixGF(std::string localid)
+{
+	std::string key = localid + "mixgf";
+	return loadStringDataByKey(key, "");
 }
 
 void GameDataSave::setMixGF(std::string str)
@@ -671,4 +697,14 @@ void GameDataSave::setPlayerChallengeData(std::string strval)
 std::string GameDataSave::getPlayerChallengeData()
 {
 	return loadStringDataByKey(addUIDString("playerchallenge"), "");
+}
+
+void GameDataSave::setHsljMatchPlayer(std::string val)
+{
+	saveStringDataByKey("shljmatch", val);
+}
+
+std::string GameDataSave::getHsljMatchPlayer()
+{
+	return loadStringDataByKey("shljmatch", "");
 }

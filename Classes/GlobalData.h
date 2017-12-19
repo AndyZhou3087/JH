@@ -451,10 +451,52 @@ typedef struct
 
 typedef struct
 {
+	std::string starttime;
+	std::string endtime;
+	int mywincount;
+	int myfailcount;
+	int myexp;
+	int matchno;
+	int leftcount;
+	int finishedcount;
+	std::map<std::string, FriendlyData> map_myfriendly;
+	std::map<std::string, int> map_EquipData;
+	std::vector<int> vec_factionlv;
+	int beforerank;
+	int afterrank;
+	int matchaward;
+}MyMatchInfoData;
+
+typedef struct
+{
+	std::string mixgf;
+	int type;
+	std::map<std::string, int> map_playerData;
+	std::map<std::string, FriendlyData> map_playerfriendly;
+	int herolv;
+	int factionlv;
+}MatchPlayerData;
+
+typedef struct
+{
+	std::string nickname;
+	std::string playerid;
+	int exp;
+	int wincount;
+	int failcount;
+}MatchPlayerInfo;
+
+/****************************
+华山论剑排行榜数据
+*****************************/
+typedef struct
+{
 	int rank;
 	std::string nickname;
-	int herotype;
-}HuafeiRankData;
+	int wincount;
+	int totalcount;
+	int exp;
+}HSLJRankData;
 
 class GlobalData
 {
@@ -1077,6 +1119,13 @@ public:
 
 	static bool isExchangeGift;
 	static std::string couponinfo;
+
+	static MyMatchInfoData myMatchInfo;
+
+	static MatchPlayerInfo matchPlayerInfo;
+	static std::vector<MatchPlayerData> vec_matchPlayerData;
+
+	static std::vector<HSLJRankData> vec_hsljRankData;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

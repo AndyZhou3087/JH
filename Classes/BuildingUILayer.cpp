@@ -795,13 +795,17 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 5)
 	{
-		nodes.push_back(vec_categoryBtn[2]);
-		NewerGuideLayer::pushUserData("buildtagbtn1");
-        isshowguide = true;
+		if (vec_categoryBtn.size() > 2)
+		{
+			nodes.push_back(vec_categoryBtn[2]);
+			NewerGuideLayer::pushUserData("buildtagbtn1");
+			isshowguide = true;
+		}
 	}
 	else if (step == 6)
 	{
-		if (vec_actionItem.size() > 1 && !vec_categoryBtn[2]->isBright())
+		
+		if (vec_actionItem.size() > 1 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
@@ -813,13 +817,16 @@ void BuildingUILayer::showNewerGuide(int step)
 
 	else if (step == 42)
 	{
-		nodes.push_back(vec_categoryBtn[2]);
-		NewerGuideLayer::pushUserData("buildtagbtn1");
-        isshowguide = true;
+		if (vec_categoryBtn.size() > 2)
+		{
+			nodes.push_back(vec_categoryBtn[2]);
+			NewerGuideLayer::pushUserData("buildtagbtn1");
+			isshowguide = true;
+		}
 	}
 	else if (step == 43)
 	{
-		if (vec_actionItem.size() > 0 && !vec_categoryBtn[2]->isBright())
+		if (vec_actionItem.size() > 0 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
@@ -830,7 +837,7 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 44)
 	{
-		if (vec_actionItem.size() > 2&& !vec_categoryBtn[2]->isBright())
+		if (vec_actionItem.size() > 2 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
 		{
 			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
 			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");

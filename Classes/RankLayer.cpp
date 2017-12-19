@@ -272,7 +272,7 @@ void RankLayer::onAddCount(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		AddFightCountLayer* layer = AddFightCountLayer::create();
+		AddFightCountLayer* layer = AddFightCountLayer::create(0);
 		g_gameLayer->addChild(layer, 5);
 	}
 }
@@ -453,7 +453,7 @@ void RankItem::onFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	{
 		if (GlobalData::myFihgtCount <= 0)
 		{
-			AddFightCountLayer* alayer = AddFightCountLayer::create();
+			AddFightCountLayer* alayer = AddFightCountLayer::create(0);
 			Director::getInstance()->getRunningScene()->addChild(alayer, 1);
 			return;
 		}

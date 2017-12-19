@@ -138,7 +138,6 @@ void PlayerChallengeResultLayer::onSuccess()
 
 void PlayerChallengeResultLayer::onErr(int errcode)
 {
-
 	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
 	this->addChild(box);
 }

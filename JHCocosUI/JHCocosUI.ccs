@@ -49,6 +49,10 @@
           <Image Name="normalboxgb.png" />
           <Image Name="noticebg.png" />
           <Image Name="npctalkbg.png" />
+          <Image Name="payback.png" />
+          <Image Name="paybg.jpg" />
+          <Image Name="payqqbtn.png" />
+          <Image Name="paywxbtn.png" />
           <Image Name="prizebtn.png" />
           <Image Name="priztitle.png" />
           <Image Name="rafflerettitle.png" />
@@ -783,6 +787,7 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
+        <Project Name="paySelectLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

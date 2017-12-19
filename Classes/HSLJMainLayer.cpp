@@ -1,0 +1,362 @@
+﻿#include "HSLJMainLayer.h"
+#include "CommonFuncs.h"
+#include "HintBox.h"
+#include "WaitingProgress.h"
+#include "FactionCreateLayer.h"
+#include "Const.h"
+#include "GameScene.h"
+#include "MatchFightLayer.h"
+#include "AddFightCountLayer.h"
+#include "HSLJRewardDescLayer.h"
+#include "HSLJRankLayer.h"
+#include "HSLJRewardLayer.h"
+#include "GameDataSave.h"
+
+HSLJMainLayer::HSLJMainLayer()
+{
+	datatype = 0;
+}
+
+
+HSLJMainLayer::~HSLJMainLayer()
+{
+	GlobalData::g_gameStatus = GAMESTART;
+}
+
+
+HSLJMainLayer* HSLJMainLayer::create()
+{
+	HSLJMainLayer *pRet = new HSLJMainLayer();
+	if (pRet && pRet->init())
+	{
+		pRet->autorelease();
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+	}
+	return pRet;
+}
+
+bool HSLJMainLayer::init()
+{
+	Node* csbnode = CSLoader::createNode("HSLJMainLayer.csb");
+	this->addChild(csbnode);
+
+	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onBack, this));
+
+	m_matchbtn = (cocos2d::ui::Button*)csbnode->getChildByName("findbtn");
+	m_matchbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onMacth, this));
+
+	cocos2d::ui::Widget* addbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("addbtn");
+	addbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onAddCount, this));
+
+	cocos2d::ui::Widget* rewarddescbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("awarddescbtn");
+	rewarddescbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onRewardDesc, this));
+
+	cocos2d::ui::Widget* ranbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("ranbtn");
+	ranbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onRank, this));
+
+	heroNode = (cocos2d::ui::Widget*)csbnode->getChildByName("heronode");
+	heroNode->setVisible(false);
+
+	m_time = (cocos2d::ui::Text*)csbnode->getChildByName("time");
+	m_time->setString("");
+
+	m_matchno = (cocos2d::ui::Text*)csbnode->getChildByName("cccount");
+	m_matchno->setString("");
+
+	m_matchwincount = (cocos2d::ui::Text*)csbnode->getChildByName("matchwincount");
+	m_matchno->setString("");
+
+	cocos2d::ui::Text* mynicknamelbl = (cocos2d::ui::Text*)csbnode->getChildByName("mynickname");
+	mynicknamelbl->setString(GlobalData::getMyNickName());
+	
+	m_mydw = (cocos2d::ui::Text*)csbnode->getChildByName("mydw");
+	m_mydw->setString("");
+	
+	m_mywinpercent = (cocos2d::ui::Text*)csbnode->getChildByName("mywin");
+	m_mywinpercent->setString("");
+
+	m_progresstext = (cocos2d::ui::Text*)csbnode->getChildByName("progresstext");
+	m_progresstext->setString("");
+
+	m_expbar = (cocos2d::ui::LoadingBar*)csbnode->getChildByName("expbar");
+	m_expbar->setPercent(0);
+
+	m_fightcount = (cocos2d::ui::Text*)csbnode->getChildByName("fightcount");
+	m_fightcount->setString("10/10");
+
+	m_herodw = (cocos2d::ui::Text*)heroNode->getChildByName("herodw");
+	m_herowinpercent = (cocos2d::ui::Text*)heroNode->getChildByName("herowin");
+	m_heroname = (cocos2d::ui::Text*)heroNode->getChildByName("heronickname");
+	
+	GlobalData::g_gameStatus = GAMEPAUSE;
+
+	getMyMatchInfo();
+
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = [=](Touch *touch, Event *event)
+	{
+		return true;
+	};
+	listener->setSwallowTouches(true);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	return true;
+}
+
+void HSLJMainLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		this->removeFromParentAndCleanup(true);
+	}
+}
+
+void HSLJMainLayer::onAddCount(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		AddFightCountLayer* layer = AddFightCountLayer::create(1);
+		g_gameLayer->addChild(layer, 5);
+	}
+}
+
+void HSLJMainLayer::onMacth(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		if (GlobalData::myMatchInfo.leftcount <= 0)
+		{
+			AddFightCountLayer* alayer = AddFightCountLayer::create(1);
+			Director::getInstance()->getRunningScene()->addChild(alayer, 1);
+			return;
+		}
+		datatype = 1;
+		m_matchbtn->setEnabled(false);
+		m_backbtn->setEnabled(false);
+		WaitingProgress* waitbox = WaitingProgress::create("加载中...");
+		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+		ServerDataSwap::init(this)->getMatchFight();
+	}
+}
+
+void HSLJMainLayer::onRewardDesc(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		HSLJRewardDescLayer* layer = HSLJRewardDescLayer::create();
+		this->addChild(layer);
+	}
+}
+
+void HSLJMainLayer::onRank(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		HSLJRankLayer* layer = HSLJRankLayer::create();
+		g_gameLayer->addChild(layer,5, "shljranklayer");
+	}
+}
+
+void HSLJMainLayer::getMyMatchInfo()
+{
+	WaitingProgress* waitbox = WaitingProgress::create("加载中...");
+	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
+	std::string mplayerid = GameDataSave::getInstance()->getHsljMatchPlayer();
+	if (mplayerid.length() > 0)
+	{
+		datatype = 2;
+		ServerDataSwap::init(this)->getMatchFightResult(mplayerid, -13);
+	}
+	else
+	{
+		datatype = 0;
+		ServerDataSwap::init(this)->getMyMatchInfo();
+	}
+}
+
+void HSLJMainLayer::onSuccess()
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (datatype == 0)
+	{
+		showMyInfo();
+	}
+	else if (datatype == 1)
+	{
+		showMatchInfo();
+		this->scheduleOnce(schedule_selector(HSLJMainLayer::delayEnterFight), 0.5f);
+	}
+	else if (datatype == 2)
+	{
+		GameDataSave::getInstance()->setHsljMatchPlayer("");
+		getMyMatchInfo();
+	}
+}
+
+void HSLJMainLayer::onErr(int errcode)
+{
+	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
+	if (datatype != 2)
+	{
+		datatype = 0;
+		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
+		this->addChild(box);
+		m_matchbtn->setEnabled(true);
+		m_backbtn->setEnabled(true);
+	}
+	else
+	{
+		datatype = 0;
+		getMyMatchInfo();
+	}
+}
+
+void HSLJMainLayer::showMyInfo()
+{
+	std::string str = StringUtils::format("%s至%s", GlobalData::myMatchInfo.starttime.c_str(), GlobalData::myMatchInfo.endtime.c_str());
+	m_time->setString(CommonFuncs::gbk2utf(str.c_str()));
+
+	std::string progressstr;
+	int barpercent = 0;
+	if (GlobalData::myMatchInfo.myexp <= 100)
+	{
+		progressstr = StringUtils::format("%d/100", GlobalData::myMatchInfo.myexp);
+		barpercent = GlobalData::myMatchInfo.myexp * 100 / 100;
+	}
+	else if (GlobalData::myMatchInfo.myexp <= 300)
+	{
+		progressstr = StringUtils::format("%d/300", GlobalData::myMatchInfo.myexp);
+		barpercent = GlobalData::myMatchInfo.myexp * 100 / 300;
+	}
+	else if (GlobalData::myMatchInfo.myexp <= 700)
+	{
+		progressstr = StringUtils::format("%d/700", GlobalData::myMatchInfo.myexp);
+		barpercent = GlobalData::myMatchInfo.myexp * 100 / 700;
+	}
+	else if (GlobalData::myMatchInfo.myexp <= 1000)
+	{
+		progressstr = StringUtils::format("%d/1000", GlobalData::myMatchInfo.myexp);
+		barpercent = GlobalData::myMatchInfo.myexp * 100 / 1000;
+	}
+	else
+	{
+		progressstr = StringUtils::format("%d/1000", 1000);
+		barpercent = 100;
+	}
+	str = getDwStr(GlobalData::myMatchInfo.myexp);
+	m_mydw->setString(CommonFuncs::gbk2utf(str.c_str()));
+
+	int percent = 0;
+	int totalcount = GlobalData::myMatchInfo.mywincount + GlobalData::myMatchInfo.myfailcount;
+	if (totalcount > 0)
+	{
+		percent = GlobalData::myMatchInfo.mywincount * 100 / totalcount;
+	}
+	str = StringUtils::format("%d%%", percent);
+	m_mywinpercent->setString(str);
+
+	str = StringUtils::format("%d", GlobalData::myMatchInfo.matchno);
+	m_matchno->setString(str);
+
+	str = StringUtils::format("%d", GlobalData::myMatchInfo.mywincount);
+	m_matchwincount->setString(str);
+
+	m_progresstext->setString(progressstr);
+	m_expbar->setPercent(barpercent);
+	
+	updateMyFightCount();
+
+	showMyReWard();
+}
+
+void HSLJMainLayer::updateMyFightCount()
+{
+	std::string str = StringUtils::format("%d/10", GlobalData::myMatchInfo.leftcount);
+	m_fightcount->setString(str);
+}
+
+void HSLJMainLayer::showMatchInfo()
+{
+	std::string str = getDwStr(GlobalData::matchPlayerInfo.exp);
+
+	m_herodw->setString(CommonFuncs::gbk2utf(str.c_str()));
+	
+	int percent = 0;
+	int totalcount = GlobalData::matchPlayerInfo.wincount + GlobalData::matchPlayerInfo.failcount;
+	if (totalcount > 0)
+	{
+		percent = GlobalData::matchPlayerInfo.wincount * 100 / totalcount;
+	}
+	str = StringUtils::format("%d%%", percent);
+
+	m_herowinpercent->setString(str);
+
+	m_heroname->setString(GlobalData::matchPlayerInfo.nickname);
+	heroNode->setVisible(true);
+
+	showVSAnim();
+}
+
+void HSLJMainLayer::showMyReWard()
+{
+	if (GlobalData::myMatchInfo.matchaward > 0)
+	{
+		HSLJRewardLayer* layer = HSLJRewardLayer::create(GlobalData::myMatchInfo.matchaward);
+		this->addChild(layer);
+	}
+}
+
+std::string HSLJMainLayer::getDwStr(int exp)
+{
+	std::string str;
+	if (exp <= 100)
+	{
+		str = "乡野义士";
+	}
+	else if (exp <= 300)
+	{
+		str = "江湖侠士";
+	}
+	else if (exp <= 700)
+	{
+		str = "名门侠客";
+	}
+	else if (exp <= 1000)
+	{
+		str = "一方大侠";
+	}
+	else
+	{
+		str = "墨者";
+	}
+	return str;
+}
+
+void HSLJMainLayer::showVSAnim()
+{
+	std::string vscsb = "VS.csb";
+	Node* csbnode = CSLoader::createNode(vscsb);
+	csbnode->setPosition(Vec2(360, 650));
+	this->addChild(csbnode);
+	auto action = CSLoader::createTimeline(vscsb);
+	csbnode->runAction(action);
+	action->gotoFrameAndPlay(0, false);
+}
+
+void HSLJMainLayer::delayEnterFight(float dt)
+{
+	this->removeFromParentAndCleanup(true);
+	MatchFightLayer* layer = MatchFightLayer::create("m1-11");
+	g_gameLayer->addChild(layer, 5);
+}

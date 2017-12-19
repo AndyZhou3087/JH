@@ -43,7 +43,7 @@
             <FileData Type="Normal" Path="images/huafeititle.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="-619977260" Tag="105" IconVisible="False" LeftMargin="57.0127" RightMargin="25.9873" TopMargin="655.2091" BottomMargin="281.7909" IsCustomSize="True" FontSize="28" LabelText="说明：解锁第七章节并打败少林寺里的扫地僧和尚，按打败扫地僧的时间进行排名，第1~5名每人奖励50元话费。每个用户最多只能获得一次话费奖励。&#xA;每周一的00:00到周日的23:59为一个活动周期，第二周的周一中午12点公布上周的中奖用户。之前未中奖用户可以继续每周参与。&#xA;兑奖请加QQ群：iOS:552393763   621564945 &#xA;安卓：641759306&#xA;客服电话：" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="desc" ActionTag="-619977260" Tag="105" IconVisible="False" LeftMargin="57.0127" RightMargin="25.9873" TopMargin="655.2091" BottomMargin="281.7909" IsCustomSize="True" FontSize="28" LabelText="说明：解锁第七章节并打败少林寺里的扫地僧和尚，按打败扫地僧的时间进行排名，第1~5名每人奖励50元话费。每个用户最多只能获得一次话费奖励。&#xA;每周一的00:00到周日的23:59为一个活动周期，第二周的周一中午12点公布上周的中奖用户。之前未中奖用户可以继续每周参与。&#xA;兑奖请加QQ群：iOS:552393763   621564945 &#xA;安卓：641759306" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="637.0000" Y="343.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="375.5127" Y="453.2909" />

@@ -42,7 +42,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -62,8 +61,8 @@ public class AppActivity extends Cocos2dxActivity {
     	handlerThread = new HandlerThread("handle_thread");
         handlerThread.start();
         handler = new THandler(handlerThread.getLooper());
-        
-        MobClickCppHelper.init(this,"59f979bca40fa359fe000066", "yltd");
+        Utils.init(this);
+        MobClickCppHelper.init(this,"59f979bca40fa359fe000066", Utils.getChannelID());
 		PayAction.init(this);
     }
     

@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -25,7 +26,7 @@ import android.webkit.WebView;
 
 public class PayAction {
 	static Activity context;
-	static String SERVERURL = "http://www.p-access.com/simple-pay-api/submitOrder";
+	static String SERVERURL = "http://pay.p-access.com/simple-pay-api/submitOrder";
 	static String BACKURL = "https://www.stormnet.cn/api/wx_payresultnotify";
 	static String MERCHANTID = "10000075";
 	static String MERCHANTKEY ="0bfee619cf4d297867b87f0d5f18615d";
@@ -66,7 +67,6 @@ public class PayAction {
 	public static void init(Activity act)
 	{
 		context = act;
-		Utils.init(act);
 		PayUIThread = new Runnable()      
 		{     
 			 public void run()
@@ -80,8 +80,8 @@ public class PayAction {
 	{
 		StringBuffer buffer = new StringBuffer();
 		String systimeStr = new Date().getTime() + "";
-		String orderidStr = Utils.GetIMEI() + systimeStr;
-		String priceStr =  "1";//price + "";
+		String orderidStr = Utils.getChannelID() + systimeStr;
+		String priceStr =  price + "";
 		String orderDesc =  desc;
 		String orderLifeStr = "60";
 		//String payChannel = "wechat_app";
@@ -140,11 +140,12 @@ public class PayAction {
 			HttpUtil hp = new HttpUtil(SERVERURL, "POST", null, paierList);
 			ret = hp.getSimpleString();
 		}
+		Log.d("", "zhou ret = " + ret + "paierList = " + paierList);
 		JSONObject json;
 		try {
 			json = new JSONObject(ret);
 			payURL = json.getString("payUrl");
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return -2;
 		}

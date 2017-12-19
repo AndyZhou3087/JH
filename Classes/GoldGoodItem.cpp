@@ -106,7 +106,7 @@ void GoldGoodsItem::onItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEven
 	}
 }
 
-void GoldGoodsItem::addBuyGoods(GoodsData* gdata)
+void GoldGoodsItem::addBuyGoods(GoodsData* gdata) 
 {
 	std::vector<std::string> payRes = gdata->vec_res;
 	for (unsigned int i = 0; i < payRes.size(); i++)

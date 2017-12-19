@@ -138,6 +138,13 @@ int GlobalData::myLastHuafeiRank = 0;
 
 std::string GlobalData::couponinfo;
 
+MyMatchInfoData GlobalData::myMatchInfo;
+
+MatchPlayerInfo GlobalData::matchPlayerInfo;
+std::vector<MatchPlayerData> GlobalData::vec_matchPlayerData;
+
+std::vector<HSLJRankData> GlobalData::vec_hsljRankData;
+
 GlobalData::GlobalData()
 {
 

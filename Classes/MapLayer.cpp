@@ -24,6 +24,7 @@
 #include "RaffleLayer.h"
 #include "AchiveLayer.h"
 #include "PrizeLayer.h"
+#include "HSLJMainLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -218,6 +219,11 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		{
 			AchiveLayer* alayer = AchiveLayer::create();
 			g_gameLayer->addChild(alayer, 5);
+		}
+		else if (m_addrname.compare("m1-11") == 0)
+		{
+			HSLJMainLayer* alayer = HSLJMainLayer::create();
+			g_gameLayer->addChild(alayer, 5, "hsljmainlayer");
 		}
 		else
 		{

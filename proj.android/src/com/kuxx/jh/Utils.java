@@ -132,7 +132,7 @@ public class Utils{
 	public static String getChannelID() {
 		String channel = "";
 		try {
-			channel = sContext.getPackageManager().getApplicationInfo(getPkgName(), PackageManager.GET_META_DATA).metaData.getString("OT_APPCHANNEL");
+			channel = sContext.getPackageManager().getApplicationInfo(getPkgName(), PackageManager.GET_META_DATA).metaData.getString("TH_PAYCHANNEL");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -52,13 +52,23 @@ public:
 
 	void getMyFihgterData(std::string fightplayerid, int fightplayertype);
 
-	void getFightCount(int count);
+	void getFightCount(int matchtype, int count);
 
 	void getChallengeResult(int myrank, std::string fightplayerid, int fightplayertype, int fightrank, int win);
 
 	void getKajuanAction();
 
 	void getKajuanAwardList();
+
+	void getMyMatchInfo();
+
+	void getMatchFight();
+
+	void getMatchFightResult(std::string fightplayerid, int score);
+
+	void getHSLJRankData();
+
+	void getHSLJRewardData();
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -112,6 +122,17 @@ private:
 	void httpGetKajuanActionCB(std::string retdata, int code, std::string tag);
 
 	void httpGetKajuanAwardListCB(std::string retdata, int code, std::string tag);
+
+	void httpGetMyMatchInfoCB(std::string retdata, int code, std::string tag);
+
+	void httpGetMatchFightCB(std::string retdata, int code, std::string tag);
+
+	void httpGetMatchFightResultCB(std::string retdata, int code, std::string tag);
+
+	void httpGetHSLJRankDataCB(std::string retdata, int code, std::string tag);
+
+	void httpGetHSLJRewardDataCB(std::string retdata, int code, std::string tag);
+
 };
 
 class ServerDataDelegateProtocol

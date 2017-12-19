@@ -12,8 +12,8 @@ public:
 	AddFightCountLayer();
 	~AddFightCountLayer();
 
-	bool init();
-	static AddFightCountLayer* create();
+	bool init(int matchtype);
+	static AddFightCountLayer* create(int matchtype);
 
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -23,5 +23,6 @@ private:
 private:
 	Node* m_csbnode;
 	int buycount;
+	int m_matchtype;
 };
 #endif
