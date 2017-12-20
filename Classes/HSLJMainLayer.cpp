@@ -15,6 +15,7 @@
 HSLJMainLayer::HSLJMainLayer()
 {
 	datatype = 0;
+	changenexthero = 1;
 }
 
 
@@ -49,6 +50,7 @@ bool HSLJMainLayer::init()
 
 	m_matchbtn = (cocos2d::ui::Button*)csbnode->getChildByName("findbtn");
 	m_matchbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onMacth, this));
+	m_matchbtn->setEnabled(false);
 
 	cocos2d::ui::Widget* addbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("addbtn");
 	addbtn->addTouchEventListener(CC_CALLBACK_2(HSLJMainLayer::onAddCount, this));
@@ -62,6 +64,8 @@ bool HSLJMainLayer::init()
 	heroNode = (cocos2d::ui::Widget*)csbnode->getChildByName("heronode");
 	heroNode->setVisible(false);
 
+	m_hinttext = (cocos2d::ui::Text*)csbnode->getChildByName("hinttext");
+
 	m_time = (cocos2d::ui::Text*)csbnode->getChildByName("time");
 	m_time->setString("");
 
@@ -74,6 +78,10 @@ bool HSLJMainLayer::init()
 	cocos2d::ui::Text* mynicknamelbl = (cocos2d::ui::Text*)csbnode->getChildByName("mynickname");
 	mynicknamelbl->setString(GlobalData::getMyNickName());
 	
+	cocos2d::ui::ImageView* myheroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("myheroimg");
+	std::string headimgstr = StringUtils::format("images/hsljhero%d.png", g_hero->getHeadID());
+	myheroimg->loadTexture(headimgstr, cocos2d::ui::Widget::TextureResType::LOCAL);
+
 	m_mydw = (cocos2d::ui::Text*)csbnode->getChildByName("mydw");
 	m_mydw->setString("");
 	
@@ -93,10 +101,15 @@ bool HSLJMainLayer::init()
 	m_herowinpercent = (cocos2d::ui::Text*)heroNode->getChildByName("herowin");
 	m_heroname = (cocos2d::ui::Text*)heroNode->getChildByName("heronickname");
 	
-	GlobalData::g_gameStatus = GAMEPAUSE;
+	m_playerheadimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("heroimg");
+
+	std::string mplayerid = GameDataSave::getInstance()->getHsljMatchPlayer();
+	if (mplayerid.length() > 0)
+		datatype = 2;
 
 	getMyMatchInfo();
 
+	GlobalData::g_gameStatus = GAMEPAUSE;
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [=](Touch *touch, Event *event)
@@ -142,9 +155,12 @@ void HSLJMainLayer::onMacth(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 		datatype = 1;
 		m_matchbtn->setEnabled(false);
 		m_backbtn->setEnabled(false);
+		m_hinttext->setString(CommonFuncs::gbk2utf("匹配中..."));
 		WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 		Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 		ServerDataSwap::init(this)->getMatchFight();
+		changeHeroImg(0);
+		this->schedule(schedule_selector(HSLJMainLayer::changeHeroImg), 0.3f);
 	}
 }
 
@@ -172,15 +188,12 @@ void HSLJMainLayer::getMyMatchInfo()
 {
 	WaitingProgress* waitbox = WaitingProgress::create("加载中...");
 	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-	std::string mplayerid = GameDataSave::getInstance()->getHsljMatchPlayer();
-	if (mplayerid.length() > 0)
+	if (datatype == 2)
 	{
-		datatype = 2;
-		ServerDataSwap::init(this)->getMatchFightResult(mplayerid, -13);
+		ServerDataSwap::init(this)->getMatchFightResult(GameDataSave::getInstance()->getHsljMatchPlayer(), -13);
 	}
-	else
+	else if (datatype == 0)
 	{
-		datatype = 0;
 		ServerDataSwap::init(this)->getMyMatchInfo();
 	}
 }
@@ -190,6 +203,7 @@ void HSLJMainLayer::onSuccess()
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	if (datatype == 0)
 	{
+		m_matchbtn->setEnabled(true);
 		showMyInfo();
 	}
 	else if (datatype == 1)
@@ -197,17 +211,26 @@ void HSLJMainLayer::onSuccess()
 		if (GlobalData::vec_matchPlayerData.size() > 0)
 		{
 			showMatchInfo();
-			this->scheduleOnce(schedule_selector(HSLJMainLayer::delayEnterFight), 0.5f);
+			int r = GlobalData::createRandomNum(3);
+			this->scheduleOnce(schedule_selector(HSLJMainLayer::stopChangeHeroImg), r + 1);
 		}
 		else
 		{
 			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("匹配失败！！请重新匹配！"));
 			this->addChild(box);
+			m_matchbtn->setEnabled(true);
+			m_backbtn->setEnabled(true);
+			m_hinttext->setString(CommonFuncs::gbk2utf("请匹配你的对手..."));
+			this->unschedule(schedule_selector(HSLJMainLayer::changeHeroImg));
+			std::string str = StringUtils::format("images/hsljhero%d.png", 0);
+			m_playerheadimg->setFlippedX(true);
+			m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
 		}
 	}
 	else if (datatype == 2)
 	{
 		GameDataSave::getInstance()->setHsljMatchPlayer("");
+		datatype = 0;
 		getMyMatchInfo();
 	}
 }
@@ -217,11 +240,20 @@ void HSLJMainLayer::onErr(int errcode)
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	if (datatype != 2)
 	{
-		datatype = 0;
+
 		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
 		this->addChild(box);
-		m_matchbtn->setEnabled(true);
-		m_backbtn->setEnabled(true);
+		if (datatype == 1)
+		{
+			m_matchbtn->setEnabled(true);
+			m_backbtn->setEnabled(true);
+			m_hinttext->setString(CommonFuncs::gbk2utf("请匹配你的对手..."));
+			this->unschedule(schedule_selector(HSLJMainLayer::changeHeroImg));
+			std::string str = StringUtils::format("images/hsljhero%d.png", 0);
+			m_playerheadimg->setFlippedX(true);
+			m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+		}
+		datatype = 0;
 	}
 	else
 	{
@@ -311,9 +343,6 @@ void HSLJMainLayer::showMatchInfo()
 	m_herowinpercent->setString(str);
 
 	m_heroname->setString(GlobalData::matchPlayerInfo.nickname);
-	heroNode->setVisible(true);
-
-	showVSAnim();
 }
 
 void HSLJMainLayer::showMyReWard()
@@ -362,9 +391,31 @@ void HSLJMainLayer::showVSAnim()
 	action->gotoFrameAndPlay(0, false);
 }
 
+void HSLJMainLayer::stopChangeHeroImg(float dt)
+{
+	this->unschedule(schedule_selector(HSLJMainLayer::changeHeroImg));
+
+	heroNode->setVisible(true);
+	m_hinttext->setVisible(false);
+
+	showVSAnim();
+
+	this->scheduleOnce(schedule_selector(HSLJMainLayer::delayEnterFight), 1.5f);
+}
+
 void HSLJMainLayer::delayEnterFight(float dt)
 {
 	this->removeFromParentAndCleanup(true);
 	MatchFightLayer* layer = MatchFightLayer::create("m1-11");
 	g_gameLayer->addChild(layer, 5);
+}
+
+void HSLJMainLayer::changeHeroImg(float dt)
+{
+	if (changenexthero > 4)
+		changenexthero = 1;
+	std::string str = StringUtils::format("images/hsljhero%d.png", changenexthero);
+	m_playerheadimg->setFlippedX(true);
+	m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+	changenexthero++;
 }

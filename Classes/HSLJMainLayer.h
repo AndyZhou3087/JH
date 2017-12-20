@@ -38,6 +38,10 @@ private:
 	void delayEnterFight(float dt);
 
 	void showMyReWard();
+
+	void changeHeroImg(float dt);
+
+	void stopChangeHeroImg(float dt);
 private:
 	cocos2d::ui::Button* m_matchbtn;
 	cocos2d::ui::Widget *m_backbtn;
@@ -54,6 +58,10 @@ private:
 	cocos2d::ui::Text* m_herodw;//对手的段位
 	cocos2d::ui::Text* m_herowinpercent;//对手胜率
 	cocos2d::ui::Text* m_heroname;//对手胜率
+
+	cocos2d::ui::Text* m_hinttext;
+	cocos2d::ui::ImageView* m_playerheadimg;
 	int datatype;
+	int changenexthero;
 };
 #endif

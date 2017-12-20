@@ -124,7 +124,7 @@ void MatchFightResultLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::T
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		HSLJMainLayer* alayer = HSLJMainLayer::create();
-		g_gameLayer->addChild(alayer, 5);
+		g_gameLayer->addChild(alayer, 5, "hsljmainlayer");
 		this->removeFromParentAndCleanup(true);
 	}
 }
