@@ -2701,22 +2701,22 @@ void ServerDataSwap::httpGetMyMatchInfoCB(std::string retdata, int code, std::st
 				if (doc.HasMember("level1"))
 				{
 					rapidjson::Value& v = doc["level1"];
-					GlobalData::myMatchInfo.vec_factionlv[0] = atoi(v.GetString());
+					GlobalData::myMatchInfo.vec_factionlv[0] = v.GetInt();
 				}
 				if (doc.HasMember("level2"))
 				{
 					rapidjson::Value& v = doc["level2"];
-					GlobalData::myMatchInfo.vec_factionlv[1] = atoi(v.GetString());
+					GlobalData::myMatchInfo.vec_factionlv[1] = v.GetInt();
 				}
 				if (doc.HasMember("level3"))
 				{
 					rapidjson::Value& v = doc["level3"];
-					GlobalData::myMatchInfo.vec_factionlv[2] = atoi(v.GetString());
+					GlobalData::myMatchInfo.vec_factionlv[2] = v.GetInt();
 				}
 				if (doc.HasMember("level4"))
 				{
 					rapidjson::Value& v = doc["level4"];
-					GlobalData::myMatchInfo.vec_factionlv[3] = atoi(v.GetString());
+					GlobalData::myMatchInfo.vec_factionlv[3] = v.GetInt();
 				}
 			}
 		}

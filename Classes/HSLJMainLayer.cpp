@@ -73,7 +73,7 @@ bool HSLJMainLayer::init()
 	m_matchno->setString("");
 
 	m_matchwincount = (cocos2d::ui::Text*)csbnode->getChildByName("matchwincount");
-	m_matchno->setString("");
+	m_matchwincount->setString("");
 
 	cocos2d::ui::Text* mynicknamelbl = (cocos2d::ui::Text*)csbnode->getChildByName("mynickname");
 	mynicknamelbl->setString(GlobalData::getMyNickName());
@@ -302,7 +302,7 @@ void HSLJMainLayer::showMyInfo()
 	str = StringUtils::format("%d%%", percent);
 	m_mywinpercent->setString(str);
 
-	str = StringUtils::format("%d", GlobalData::myMatchInfo.matchno);
+	str = StringUtils::format("%d", totalcount);
 	m_matchno->setString(str);
 
 	str = StringUtils::format("%d", GlobalData::myMatchInfo.mywincount);
