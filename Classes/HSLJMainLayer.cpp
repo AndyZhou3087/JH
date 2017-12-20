@@ -238,8 +238,12 @@ void HSLJMainLayer::onErr(int errcode)
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	if (datatype != 2)
 	{
-
-		HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
+		std::string desc = "数据获取异常，请检查网络连接！！";
+		if (datatype == 1 && errcode == -3)
+		{
+			desc = "匹配失败，暂时无对手数据，请稍后重试！！";
+		}
+		HintBox * box = HintBox::create(CommonFuncs::gbk2utf(desc.c_str()));
 		this->addChild(box);
 		if (datatype == 1)
 		{
