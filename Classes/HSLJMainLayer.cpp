@@ -194,8 +194,16 @@ void HSLJMainLayer::onSuccess()
 	}
 	else if (datatype == 1)
 	{
-		showMatchInfo();
-		this->scheduleOnce(schedule_selector(HSLJMainLayer::delayEnterFight), 0.5f);
+		if (GlobalData::vec_matchPlayerData.size() > 0)
+		{
+			showMatchInfo();
+			this->scheduleOnce(schedule_selector(HSLJMainLayer::delayEnterFight), 0.5f);
+		}
+		else
+		{
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("匹配失败！！请重新匹配！"));
+			this->addChild(box);
+		}
 	}
 	else if (datatype == 2)
 	{
