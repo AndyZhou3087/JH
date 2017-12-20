@@ -42,6 +42,8 @@ private:
 	void changeHeroImg(float dt);
 
 	void stopChangeHeroImg(float dt);
+
+	void showPlayerHeadImg(int herotype);
 private:
 	cocos2d::ui::Button* m_matchbtn;
 	cocos2d::ui::Widget *m_backbtn;

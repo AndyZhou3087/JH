@@ -222,9 +222,7 @@ void HSLJMainLayer::onSuccess()
 			m_backbtn->setEnabled(true);
 			m_hinttext->setString(CommonFuncs::gbk2utf("请匹配你的对手..."));
 			this->unschedule(schedule_selector(HSLJMainLayer::changeHeroImg));
-			std::string str = StringUtils::format("images/hsljhero%d.png", 0);
-			m_playerheadimg->setFlippedX(true);
-			m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+			showPlayerHeadImg(0);
 		}
 	}
 	else if (datatype == 2)
@@ -249,9 +247,7 @@ void HSLJMainLayer::onErr(int errcode)
 			m_backbtn->setEnabled(true);
 			m_hinttext->setString(CommonFuncs::gbk2utf("请匹配你的对手..."));
 			this->unschedule(schedule_selector(HSLJMainLayer::changeHeroImg));
-			std::string str = StringUtils::format("images/hsljhero%d.png", 0);
-			m_playerheadimg->setFlippedX(true);
-			m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+			showPlayerHeadImg(0);
 		}
 		datatype = 0;
 	}
@@ -414,8 +410,15 @@ void HSLJMainLayer::changeHeroImg(float dt)
 {
 	if (changenexthero > 4)
 		changenexthero = 1;
-	std::string str = StringUtils::format("images/hsljhero%d.png", changenexthero);
-	m_playerheadimg->setFlippedX(true);
-	m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
+	
+	showPlayerHeadImg(changenexthero);
 	changenexthero++;
+}
+
+void HSLJMainLayer::showPlayerHeadImg(int herotype)
+{
+	std::string str = StringUtils::format("images/hsljhero%d.png", herotype);
+	m_playerheadimg->setFlippedX(true);
+	m_playerheadimg->setContentSize(Sprite::create(str)->getContentSize());
+	m_playerheadimg->loadTexture(str, cocos2d::ui::Widget::TextureResType::LOCAL);
 }

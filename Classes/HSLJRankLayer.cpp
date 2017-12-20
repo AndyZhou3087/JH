@@ -166,7 +166,7 @@ bool HSLJRankItem::init(HSLJRankData *data)
 	}
 	else if (rank % 2 == 0)
 	{
-		itemstr = "ui/rankitem0.png";
+		itemstr = "ui/hsljitem0.png";
 	}
 
 	if (itemstr.length() > 0)
