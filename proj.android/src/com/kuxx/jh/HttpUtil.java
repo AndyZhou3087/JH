@@ -49,7 +49,6 @@ public class HttpUtil
 	    } 
 	    catch (Exception e) 
 	    {
-	    	e.printStackTrace();
 	        return ret;
 	    }
 	    
@@ -72,11 +71,9 @@ public class HttpUtil
 		} 
 	    catch (IllegalStateException e) 
 	    {
-	    	e.printStackTrace();
 		} 
 	    catch (IOException e) 
 	    {
-	    	e.printStackTrace();
 		}
 	    
 	    return ret;

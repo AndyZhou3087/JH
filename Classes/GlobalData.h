@@ -1126,6 +1126,9 @@ public:
 	static std::vector<MatchPlayerData> vec_matchPlayerData;
 
 	static std::vector<HSLJRankData> vec_hsljRankData;
+
+	static std::string updateDownLoadURL;
+	static bool isPopUpdate;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

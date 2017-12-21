@@ -1,5 +1,5 @@
 <GameFile>
-  <PropertyGroup Name="upNode" Type="Node" ID="cdd13e6b-b182-44f6-b0b1-8fb06ea5280e" Version="3.10.0.0" />
+  <PropertyGroup Name="lvupanim" Type="Node" ID="cdd13e6b-b182-44f6-b0b1-8fb06ea5280e" Version="3.10.0.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="46" Speed="1.0000">
@@ -2006,7 +2006,7 @@
       <ObjectData Name="Node" Tag="86" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="s1_1" ActionTag="-632743041" Alpha="196" Tag="199" IconVisible="False" LeftMargin="-360.0000" RightMargin="-360.0000" TopMargin="-124.0000" BottomMargin="-124.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="s1_1" ActionTag="-632743041" Alpha="220" Tag="199" IconVisible="False" LeftMargin="-360.0000" RightMargin="-360.0000" TopMargin="-124.0000" BottomMargin="-124.0000" ctype="SpriteObjectData">
             <Size X="720.0000" Y="248.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
@@ -2236,10 +2236,10 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Default" Path="Default/ImageFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="x1_22" ActionTag="239597270" Alpha="0" Tag="220" IconVisible="False" LeftMargin="-107.0000" RightMargin="-107.0000" TopMargin="-45.5000" BottomMargin="-85.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="x1_22" ActionTag="239597270" Tag="220" IconVisible="False" LeftMargin="-107.0000" RightMargin="-107.0000" TopMargin="-65.5000" BottomMargin="-65.5000" ctype="SpriteObjectData">
             <Size X="214.0000" Y="131.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position Y="-20.0000" />
+            <Position />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -2258,10 +2258,10 @@
             <FileData Type="Normal" Path="lvuppic/x2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="x3_31" ActionTag="-1192208965" Tag="222" IconVisible="False" LeftMargin="-107.0000" RightMargin="-107.0000" TopMargin="-65.5000" BottomMargin="-65.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="x3_31" ActionTag="-1192208965" Alpha="0" Tag="222" IconVisible="False" LeftMargin="-107.0000" RightMargin="-107.0000" TopMargin="-135.5000" BottomMargin="4.5000" ctype="SpriteObjectData">
             <Size X="214.0000" Y="131.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position />
+            <Position Y="70.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

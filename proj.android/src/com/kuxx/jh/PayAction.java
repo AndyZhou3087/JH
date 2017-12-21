@@ -17,7 +17,6 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -140,7 +139,6 @@ public class PayAction {
 			HttpUtil hp = new HttpUtil(SERVERURL, "POST", null, paierList);
 			ret = hp.getSimpleString();
 		}
-		Log.d("", "zhou ret = " + ret + "paierList = " + paierList);
 		JSONObject json;
 		try {
 			json = new JSONObject(ret);

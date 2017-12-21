@@ -79,7 +79,7 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -144,9 +144,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\AchiveDoneAnimLayer.cpp" />
     <ClCompile Include="..\Classes\AchiveLayer.cpp" />
     <ClCompile Include="..\Classes\ActionGetLayer.cpp" />
     <ClCompile Include="..\Classes\ActivitScene.cpp" />
+    <ClCompile Include="..\Classes\AddFightCountLayer.cpp" />
     <ClCompile Include="..\Classes\AnalyticUtil.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\ApprenticeScene.cpp" />
@@ -159,6 +161,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BuildingUILayer.cpp" />
     <ClCompile Include="..\Classes\BuyComfirmLayer.cpp" />
     <ClCompile Include="..\Classes\BuyDetailsLayer.cpp" />
+    <ClCompile Include="..\Classes\BuyOrangeGFLayer.cpp" />
     <ClCompile Include="..\Classes\CannotTouchLayer.cpp" />
     <ClCompile Include="..\Classes\ChallengeCountLayer.cpp" />
     <ClCompile Include="..\Classes\ComfirmSaveLayer.cpp" />
@@ -182,6 +185,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Forgingtable.cpp" />
     <ClCompile Include="..\Classes\FriendExgScene.cpp" />
     <ClCompile Include="..\Classes\FriendNpcScene.cpp" />
+    <ClCompile Include="..\Classes\FrozenLayer.cpp" />
     <ClCompile Include="..\Classes\Furnace.cpp" />
     <ClCompile Include="..\Classes\GameDataSave.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -196,10 +200,17 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HintBox.cpp" />
     <ClCompile Include="..\Classes\HomeHill.cpp" />
     <ClCompile Include="..\Classes\HomeLayer.cpp" />
+    <ClCompile Include="..\Classes\HSLJMainLayer.cpp" />
+    <ClCompile Include="..\Classes\HSLJRankLayer.cpp" />
+    <ClCompile Include="..\Classes\HSLJRewardDescLayer.cpp" />
+    <ClCompile Include="..\Classes\HSLJRewardLayer.cpp" />
     <ClCompile Include="..\Classes\HttpUtil.cpp" />
+    <ClCompile Include="..\Classes\HuafeiAwardListLayer.cpp" />
     <ClCompile Include="..\Classes\json.cpp" />
     <ClCompile Include="..\Classes\LoginRewardLayer.cpp" />
     <ClCompile Include="..\Classes\MapLayer.cpp" />
+    <ClCompile Include="..\Classes\MatchFightLayer.cpp" />
+    <ClCompile Include="..\Classes\MatchFightResultLayer.cpp" />
     <ClCompile Include="..\Classes\MD5.cpp" />
     <ClCompile Include="..\Classes\MedicineKit.cpp" />
     <ClCompile Include="..\Classes\MixGFDoneLayer.cpp" />
@@ -214,8 +225,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\NewerGuideLayer.cpp" />
     <ClCompile Include="..\Classes\NoticeLayer.cpp" />
     <ClCompile Include="..\Classes\NpcLayer.cpp" />
+    <ClCompile Include="..\Classes\NpcTalkLayer.cpp" />
     <ClCompile Include="..\Classes\OutDoor.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
+    <ClCompile Include="..\Classes\PaySelectLayer.cpp" />
+    <ClCompile Include="..\Classes\PlayerChallengeLayer.cpp" />
+    <ClCompile Include="..\Classes\PlayerChallengeResultLayer.cpp" />
+    <ClCompile Include="..\Classes\PrizeLayer.cpp" />
     <ClCompile Include="..\Classes\PromotionLayer.cpp" />
     <ClCompile Include="..\Classes\RaffleLayer.cpp" />
     <ClCompile Include="..\Classes\RaffleResultLayer.cpp" />
@@ -256,9 +272,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\AchiveDoneAnimLayer.h" />
     <ClInclude Include="..\Classes\AchiveLayer.h" />
     <ClInclude Include="..\Classes\ActionGetLayer.h" />
     <ClInclude Include="..\Classes\ActivitScene.h" />
+    <ClInclude Include="..\Classes\AddFightCountLayer.h" />
     <ClInclude Include="..\Classes\AnalyticUtil.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\ApprenticeScene.h" />
@@ -271,6 +289,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\BuildingUILayer.h" />
     <ClInclude Include="..\Classes\BuyComfirmLayer.h" />
     <ClInclude Include="..\Classes\BuyDetailsLayer.h" />
+    <ClInclude Include="..\Classes\BuyOrangeGFLayer.h" />
     <ClInclude Include="..\Classes\CannotTouchLayer.h" />
     <ClInclude Include="..\Classes\ChallengeCountLayer.h" />
     <ClInclude Include="..\Classes\ComfirmSaveLayer.h" />
@@ -295,6 +314,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Forgingtable.h" />
     <ClInclude Include="..\Classes\FriendExgScene.h" />
     <ClInclude Include="..\Classes\FriendNpcScene.h" />
+    <ClInclude Include="..\Classes\FrozenLayer.h" />
     <ClInclude Include="..\Classes\Furnace.h" />
     <ClInclude Include="..\Classes\GameDataSave.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
@@ -309,10 +329,17 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HintBox.h" />
     <ClInclude Include="..\Classes\HomeHill.h" />
     <ClInclude Include="..\Classes\HomeLayer.h" />
+    <ClInclude Include="..\Classes\HSLJMainLayer.h" />
+    <ClInclude Include="..\Classes\HSLJRankLayer.h" />
+    <ClInclude Include="..\Classes\HSLJRewardDescLayer.h" />
+    <ClInclude Include="..\Classes\HSLJRewardLayer.h" />
     <ClInclude Include="..\Classes\HttpUtil.h" />
+    <ClInclude Include="..\Classes\HuafeiAwardListLayer.h" />
     <ClInclude Include="..\Classes\json.h" />
     <ClInclude Include="..\Classes\LoginRewardLayer.h" />
     <ClInclude Include="..\Classes\MapLayer.h" />
+    <ClInclude Include="..\Classes\MatchFightLayer.h" />
+    <ClInclude Include="..\Classes\MatchFightResultLayer.h" />
     <ClInclude Include="..\Classes\MD5.h" />
     <ClInclude Include="..\Classes\MedicineKit.h" />
     <ClInclude Include="..\Classes\MixGFDoneLayer.h" />
@@ -327,8 +354,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\NewerGuideLayer.h" />
     <ClInclude Include="..\Classes\NoticeLayer.h" />
     <ClInclude Include="..\Classes\NpcLayer.h" />
+    <ClInclude Include="..\Classes\NpcTalkLayer.h" />
     <ClInclude Include="..\Classes\OutDoor.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
+    <ClInclude Include="..\Classes\PaySelectLayer.h" />
+    <ClInclude Include="..\Classes\PlayerChallengeLayer.h" />
+    <ClInclude Include="..\Classes\PlayerChallengeResultLayer.h" />
+    <ClInclude Include="..\Classes\PrizeLayer.h" />
     <ClInclude Include="..\Classes\PromotionLayer.h" />
     <ClInclude Include="..\Classes\RaffleLayer.h" />
     <ClInclude Include="..\Classes\RaffleResultLayer.h" />

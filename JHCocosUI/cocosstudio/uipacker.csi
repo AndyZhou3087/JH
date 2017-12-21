@@ -598,6 +598,18 @@
       <FilePathData Path="ui/gettext.png" />
       <FilePathData Path="ui/gp6.png" />
       <FilePathData Path="ui/shopexgicon.png" />
+      <FilePathData Path="ui/hsljtitle.png" />
+      <FilePathData Path="ui/hsljmsgbox.png" />
+      <FilePathData Path="ui/hsljexpbar.png" />
+      <FilePathData Path="ui/hsljexpbarbg.png" />
+      <FilePathData Path="ui/m1-11.png" />
+      <FilePathData Path="ui/wintext-1.png" />
+      <FilePathData Path="ui/hsljrankbtn.png" />
+      <FilePathData Path="ui/hsljrewarddescbtn.png" />
+      <FilePathData Path="ui/hsljcate.png" />
+      <FilePathData Path="ui/hsljitem0.png" />
+      <FilePathData Path="ui/hsljitem1.png" />
+      <FilePathData Path="ui/hsljmyitem.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

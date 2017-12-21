@@ -1460,6 +1460,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				rapidjson::Value& retval = doc["couponinfo"];
 				GlobalData::couponinfo = retval.GetString();
 			}
+
+			if (doc.HasMember("durl"))
+			{
+				rapidjson::Value& retval = doc["durl"];
+				GlobalData::updateDownLoadURL = retval.GetString();
+			}
 		
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();

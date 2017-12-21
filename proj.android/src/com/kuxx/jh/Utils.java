@@ -54,6 +54,22 @@ public class Utils{
     		return null;
     		
     }
+    
+    public static boolean IsExistFile(String path)
+    {
+        try
+        {
+            File file = new File(path);
+            if (file.exists())
+            {
+                return true;
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        return false;
+    }
 	
     public static String GetIMSI()
 	{

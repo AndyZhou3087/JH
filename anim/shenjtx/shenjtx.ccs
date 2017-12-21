@@ -41,10 +41,7 @@
           <Image Name="x8.png" />
           <Image Name="x9.png" />
         </Folder>
-        <Image Name="js.jpg" />
-        <Project Name="tx.csd" Type="Layer" />
         <Project Name="lvupanim.csd" Type="Node" />
-        <PlistInfo Name="lvupanimpackaer.csi" Type="Plist" />
       </RootFolder>
     </Group>
   </SolutionFolder>

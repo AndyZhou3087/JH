@@ -187,16 +187,16 @@ void ShopLayer::beginPay(int index)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	setMessage(PAY_SUCC);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	PaySelectLayer* layer = PaySelectLayer::create(payindex);
-	Director::getInstance()->getRunningScene()->addChild(layer, 1);
-//	JniMethodInfo methodInfo;
-//	char p_str[32] = { 0 };
-//	sprintf(p_str, "%s", payCode[index].c_str());
-//	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/PayAction", "pay", "(Ljava/lang/String;I)V"))
-//	{
-//		jstring str1 = methodInfo.env->NewStringUTF(p_str);
-//		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, str1, payindex);
-//	}
+	//PaySelectLayer* layer = PaySelectLayer::create(payindex);
+	//Director::getInstance()->getRunningScene()->addChild(layer, 1);
+	JniMethodInfo methodInfo;
+	char p_str[32] = { 0 };
+	sprintf(p_str, "%s", payCode[index].c_str());
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/PayAction", "pay", "(Ljava/lang/String;I)V"))
+	{
+		jstring str1 = methodInfo.env->NewStringUTF(p_str);
+		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, str1, payindex);
+	}
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	//payCode
 	buy((char*)payCode[payindex].c_str());

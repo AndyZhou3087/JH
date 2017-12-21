@@ -145,6 +145,10 @@ std::vector<MatchPlayerData> GlobalData::vec_matchPlayerData;
 
 std::vector<HSLJRankData> GlobalData::vec_hsljRankData;
 
+std::string GlobalData::updateDownLoadURL;
+
+bool GlobalData::isPopUpdate = false;
+
 GlobalData::GlobalData()
 {
 

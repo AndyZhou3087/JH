@@ -37,6 +37,11 @@
           <Image Name="friendgive.jpg" />
           <Image Name="gameovertext.png" />
           <Image Name="heroselectbg.png" />
+          <Image Name="hsljhero0.png" />
+          <Image Name="hsljhero1.png" />
+          <Image Name="hsljhero2.png" />
+          <Image Name="hsljhero3.png" />
+          <Image Name="hsljhero4.png" />
           <Image Name="huafeititle.png" />
           <Image Name="logo.png" />
           <Image Name="lotterycontent2.png" />
@@ -49,10 +54,6 @@
           <Image Name="normalboxgb.png" />
           <Image Name="noticebg.png" />
           <Image Name="npctalkbg.png" />
-          <Image Name="payback.png" />
-          <Image Name="paybg.jpg" />
-          <Image Name="payqqbtn.png" />
-          <Image Name="paywxbtn.png" />
           <Image Name="prizebtn.png" />
           <Image Name="priztitle.png" />
           <Image Name="rafflerettitle.png" />
@@ -292,6 +293,16 @@
           <Image Name="hp8-2.png" />
           <Image Name="hp8-3.png" />
           <Image Name="hp9-4.png" />
+          <Image Name="hsljcate.png" />
+          <Image Name="hsljexpbar.png" />
+          <Image Name="hsljexpbarbg.png" />
+          <Image Name="hsljitem0.png" />
+          <Image Name="hsljitem1.png" />
+          <Image Name="hsljmsgbox.png" />
+          <Image Name="hsljmyitem.png" />
+          <Image Name="hsljrankbtn.png" />
+          <Image Name="hsljrewarddescbtn.png" />
+          <Image Name="hsljtitle.png" />
           <Image Name="hurticon.png" />
           <Image Name="loginrbtn.png" />
           <Image Name="loginritem0.png" />
@@ -306,6 +317,7 @@
           <Image Name="m1-1.png" />
           <Image Name="m1-10.png" />
           <Image Name="m11-1.png" />
+          <Image Name="m1-11.png" />
           <Image Name="m11-2.png" />
           <Image Name="m11-3.png" />
           <Image Name="m11-4.png" />
@@ -665,6 +677,7 @@
           <Image Name="winicon1.png" />
           <Image Name="wintext0.png" />
           <Image Name="wintext1.png" />
+          <Image Name="wintext-1.png" />
           <Image Name="wintitle0.png" />
           <Image Name="wintitle1.png" />
           <Image Name="x001.png" />
@@ -741,6 +754,11 @@
         <Project Name="hintLayer.csd" Type="Layer" />
         <Project Name="homeHillLayer.csd" Type="Layer" />
         <Project Name="homeLayer.csd" Type="Layer" />
+        <Project Name="HSLJMainLayer.csd" Type="Layer" />
+        <Project Name="HSLJRankLayer.csd" Type="Layer" />
+        <Project Name="hsljRankNode.csd" Type="Node" />
+        <Project Name="HSLJRewardDescLayer.csd" Type="Layer" />
+        <Project Name="hsljRewardLayer.csd" Type="Layer" />
         <Project Name="huafeiAwardListLayer.csd" Type="Layer" />
         <Project Name="loginRewardLayer.csd" Type="Layer" />
         <Project Name="mapLayer.csd" Type="Layer" />
@@ -787,7 +805,6 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="paySelectLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

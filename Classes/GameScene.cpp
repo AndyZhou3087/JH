@@ -122,6 +122,15 @@ bool GameScene::init()
 
 	loadSaveHeroData();
 
+	//等级大于1级跳过新手引导
+	if (g_hero->getLVValue() >= 1)
+	{
+		for (int i = 0; i < 68; i++)
+		{
+			GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+		}
+	}
+
 	//读取剧情配置文件
 	GlobalData::loadPlotMissionJsonData(g_hero->getHeadID());
 
@@ -599,6 +608,23 @@ void GameScene::onSuccess()
 			{
 				LoginRewardLayer* llayer = LoginRewardLayer::create();
 				g_gameLayer->addChild(llayer, 100);
+			}
+			else
+			{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+				if (GlobalData::updateDownLoadURL.length() > 0 && !GlobalData::isPopUpdate)
+				{
+					JniMethodInfo methodInfo;
+					char p_str[256] = { 0 };
+					sprintf(p_str, "%s", GlobalData::updateDownLoadURL.c_str());
+					if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/AppActivity", "updateApk", "(Ljava/lang/String;)V"))
+					{
+						GlobalData::isPopUpdate = true;
+						jstring para1 = methodInfo.env->NewStringUTF(p_str);
+						methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, para1);
+					}
+				}
+#endif
 			}
 		}
 	}
