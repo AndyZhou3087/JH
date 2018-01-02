@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "NpcLayer.h"
 #include "MyMenu.h"
+#include "GameDataSave.h"
 
 GiveLayer::GiveLayer()
 {
@@ -22,10 +23,10 @@ GiveLayer::~GiveLayer()
 }
 
 
-GiveLayer* GiveLayer::create(std::string npcid)
+GiveLayer* GiveLayer::create(std::string npcid, std::string addrid)
 {
 	GiveLayer *pRet = new GiveLayer();
-	if (pRet && pRet->init(npcid))
+	if (pRet && pRet->init(npcid, addrid))
 	{
 		pRet->autorelease();
 	}
@@ -37,12 +38,13 @@ GiveLayer* GiveLayer::create(std::string npcid)
 	return pRet;
 }
 
-bool GiveLayer::init(std::string npcid)
+bool GiveLayer::init(std::string npcid, std::string addrid)
 {
 	Node* csbnode = CSLoader::createNode("giveLayer.csb");
 	this->addChild(csbnode);
 
 	m_npcid = npcid;
+	m_addrid = addrid;
 
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(GiveLayer::onBack, this));
@@ -191,6 +193,11 @@ void GiveLayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	}
 }
 
+void GiveLayer::removeSelf(float dt)
+{
+	this->removeFromParentAndCleanup(true);
+}
+
 void GiveLayer::onGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);
@@ -208,7 +215,7 @@ void GiveLayer::onGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		MyPackage::save();
 		NpcLayer* npclayer = (NpcLayer*)this->getParent();
 		npclayer->reFreshFriendlyUI();
-		this->removeFromParentAndCleanup(true);
+		doGiveMission();
 	}
 }
 void GiveLayer::checkValue()
@@ -365,4 +372,139 @@ void GiveLayer::updataGiveGoodsUI()
 		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
 		box->addChild(reslbl);
 	}
+}
+
+void GiveLayer::doGiveMission()
+{
+	bool isAnim = false;
+	std::string curmid = GlobalData::getCurBranchPlotMissison();
+	std::map<std::string, int> map_needGoods;
+	std::map<std::string, int>::iterator it;
+	
+	if (curmid.length() > 0)
+	{
+		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
+		PlotMissionData pd = GlobalData::map_BranchPlotMissionData[curmid][subindex];
+
+		std::string savedgstr = GameDataSave::getInstance()->getBranchPlotMissionGiveGoods();
+		std::vector<std::string> needgoods;
+		if (savedgstr.length() > 0)
+		{
+			std::vector<std::string> vec_retstr;
+			CommonFuncs::split(savedgstr, needgoods, ";");
+		}
+		else
+		{
+			needgoods = pd.needgoods;
+		}
+		if (pd.status == M_DOING && pd.type == 2 && GlobalData::map_BranchPlotMissionItem[curmid].count > 0)
+		{
+			for (unsigned int i = 0; i < needgoods.size(); i++)
+			{
+				std::string resid = needgoods[i];
+				int intresid = atoi(resid.c_str());
+				int count = 1;
+				if (intresid > 0)
+				{
+					resid = StringUtils::format("%d", intresid / 1000);
+					count = intresid % 1000;
+				}
+				map_needGoods[resid] = count;
+			}
+			for (unsigned int i = 0; i < myGiveData.size(); i++)
+			{
+				for (it = map_needGoods.begin(); it != map_needGoods.end(); it++)
+				{
+					if (myGiveData[i].strid.compare(it->first) == 0)
+					{
+						if (myGiveData[i].count >= map_needGoods[it->first])
+						{
+							map_needGoods.erase(it);
+							break;
+						}
+						else
+						{
+							map_needGoods[it->first] -= myGiveData[i].count;
+						}
+					}
+				}
+			}
+			if (needgoods.size() > 0)
+			{
+				if (map_needGoods.size() <= 0)
+				{
+					//完成
+					int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
+					GlobalData::map_BranchPlotMissionData[curmid][subindex].status = M_NONE;
+
+					giveRes(GlobalData::map_BranchPlotMissionData[curmid][subindex].rewords);
+
+					if (subindex + 1 >= GlobalData::map_BranchPlotMissionData[curmid].size())
+					{
+						GlobalData::map_BranchPlotMissionItem[curmid].subindex = 0;
+						GlobalData::map_BranchPlotMissionItem[curmid].count--;
+						GlobalData::map_BranchPlotMissionItem[curmid].time = GlobalData::map_BranchPlotMissionItem[curmid].maxtime;
+						GlobalData::saveBranchPlotMissionStatus("", 0);
+					}
+					else
+					{
+						GlobalData::map_BranchPlotMissionItem[curmid].subindex++;
+						GlobalData::saveBranchPlotMissionStatus(curmid, M_NONE);
+					}
+
+					GameDataSave::getInstance()->setBranchPlotMissionGiveGoods("");
+					showMissionDoneAnim();
+					isAnim = true;
+				}
+				else
+				{
+					std::string str;
+					//未完成
+					for (it = map_needGoods.begin(); it != map_needGoods.end(); it++)
+					{
+						std::string tempstr;
+						int intresid = atoi(it->first.c_str());
+						if (intresid > 0)
+							tempstr = StringUtils::format("%d;", intresid * 1000 + map_needGoods[it->first]);
+						else
+							tempstr = StringUtils::format("%s;", it->first.c_str());
+
+						str.append(tempstr);
+					}
+					if (str.length() > 0)
+					{
+						GameDataSave::getInstance()->setBranchPlotMissionGiveGoods(str.substr(0, str.length() - 1));
+					}
+				}
+			}
+		}
+	}
+
+	if (isAnim)
+	{
+		this->scheduleOnce(schedule_selector(GiveLayer::removeSelf), 1.5f);
+	}
+	else
+	{
+		removeSelf(0);
+	}
+}
+
+void GiveLayer::showMissionDoneAnim()
+{
+	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
+	csbnode->setPosition(Vec2(360, 720));
+	csbnode->getChildByName("cjz_1")->setVisible(false);
+	this->addChild(csbnode, 0, "achiveanim");
+	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
+	textname->setString(CommonFuncs::gbk2utf("任务完成"));
+	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
+	csbnode->runAction(action);
+	action->gotoFrameAndPlay(0, false);
+	csbnode->getChildByName("light")->runAction(RepeatForever::create(RotateTo::create(8, 720)));
+}
+
+void GiveLayer::giveRes(std::vector<std::string> vec_res)
+{
+	NpcLayer::getWinRes(vec_res, m_addrid);
 }

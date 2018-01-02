@@ -70,6 +70,12 @@ public:
 	*****************************/
 	static void changeGameStates(int status);
 
+
+	/****************************
+	重置支线任务（每天重置）
+	*****************************/
+	void checkRestBranchMisson();
+
 private:
 	TopBar* topBar;//角色属性和天气NODE
 	HomeLayer *homeLayer;//角色家

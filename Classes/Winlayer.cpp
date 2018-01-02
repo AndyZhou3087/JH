@@ -96,17 +96,40 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 	if (GlobalData::map_maps[m_addrid].npcs.size() >= 10)
 		fnpc = GlobalData::map_maps[m_addrid].npcs[0];
 
-	if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(fnpc) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
+	if (m_addrid.compare("m13-1") != 0)
 	{
-		plotdata = &GlobalData::vec_PlotMissionData[curplot];
-		plottype = 0;
-	}
-	else
-	{
-		curplot = GlobalData::getBranchPlotMissionIndex();
-		if (GlobalData::vec_BranchPlotMissionData[curplot].dnpc.compare(m_npcid) == 0 && GlobalData::vec_BranchPlotMissionData[curplot].type == 1 && GlobalData::vec_BranchPlotMissionData[curplot].status == M_DOING)
-			plotdata = &GlobalData::vec_BranchPlotMissionData[curplot];
-		plottype = 1;
+		if (GlobalData::vec_PlotMissionData[curplot].dnpc.compare(fnpc) == 0 && GlobalData::vec_PlotMissionData[curplot].type == 1 && GlobalData::vec_PlotMissionData[curplot].status == M_DOING)
+		{
+			plotdata = &GlobalData::vec_PlotMissionData[curplot];
+			plottype = 0;
+		}
+		else
+		{
+			std::string mid = GlobalData::getCurBranchPlotMissison();
+			if (mid.length() > 0)
+			{
+				int subindex = GlobalData::map_BranchPlotMissionItem[mid].subindex;
+				if (GlobalData::map_BranchPlotMissionData[mid][subindex].dnpc.compare(m_npcid) == 0 && GlobalData::map_BranchPlotMissionData[mid][subindex].type == 1 && GlobalData::map_BranchPlotMissionItem[mid].count > 0)
+					plotdata = &GlobalData::map_BranchPlotMissionData[mid][subindex];
+				plottype = 1;
+			}
+			else
+			{
+				std::map<std::string, std::vector<PlotMissionData>>::iterator it;
+				for (it = GlobalData::map_BranchPlotMissionData.begin(); it != GlobalData::map_BranchPlotMissionData.end(); it++)
+				{
+					if (GlobalData::map_BranchPlotMissionData[it->first].size() > 0)
+					{
+						PlotMissionData* pmdata = &GlobalData::map_BranchPlotMissionData[it->first][0];
+						if (pmdata->snpc.compare(npcid) == 0 && pmdata->unlockchapter <= GlobalData::getUnlockChapter() && GlobalData::map_BranchPlotMissionItem[pmdata->id].count > 0)
+						{
+							plotdata = pmdata;
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	if (plotdata != NULL)
@@ -141,24 +164,37 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 		}
 		else
 		{
-			GlobalData::setBranchPlotMissionIndex(curplot + 1);
-			GlobalData::saveBranchPlotMissionStatus();
-		}
+			int subindex = GlobalData::map_BranchPlotMissionItem[plotdata->id].subindex;
+			GlobalData::map_BranchPlotMissionData[plotdata->id][subindex].status = M_NONE;
+			if (subindex + 1 >= GlobalData::map_BranchPlotMissionData[plotdata->id].size())
+			{
+				GlobalData::map_BranchPlotMissionItem[plotdata->id].subindex = 0;
+				GlobalData::map_BranchPlotMissionItem[plotdata->id].count--;
+				GlobalData::map_BranchPlotMissionItem[plotdata->id].time = GlobalData::map_BranchPlotMissionItem[plotdata->id].maxtime;
+				GlobalData::saveBranchPlotMissionStatus("", 0);
+			}
+			else
+			{
+				GlobalData::map_BranchPlotMissionItem[plotdata->id].subindex++;
+				GlobalData::saveBranchPlotMissionStatus(plotdata->id, M_NONE);
+			}
 
+			showMissionAnim("任务完成");
+		}
 
 		if (g_gameLayer != NULL)
 		{
 			NpcLayer * npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
-			if (npclayer != NULL)
+			if (npclayer != NULL && plottype == 0)
 			{
 				npclayer->updatePlotUI(plottype);
 			}
 		}
 
-		if (g_maplayer != NULL )
+		if (g_maplayer != NULL && plottype == 0)
 		{
 			g_maplayer->updataPlotMissionIcon(plottype);
-			if (unlockchapter > 0 && plottype == 0 && unlockchapter <= MAXCHAPTER)
+			if (unlockchapter > 0  && unlockchapter <= MAXCHAPTER)
 				g_maplayer->scheduleOnce(schedule_selector(MapLayer::showUnlockLayer), 1.0f);
 
 			if (plotdata->dnpc.compare("n089") == 0)
@@ -972,19 +1008,24 @@ int Winlayer::addGfExp()
 
 void Winlayer::onSuccess()
 {
-	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
-	csbnode->setPosition(Vec2(360, 720));
-	csbnode->getChildByName("cjz_1")->setVisible(false);
-	this->addChild(csbnode, 0, "achiveanim");
-	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
-	textname->setString(CommonFuncs::gbk2utf("挑战扫地僧成功"));
-	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
-	csbnode->runAction(action);
-	action->gotoFrameAndPlay(0, false);
-	//win donghua
+	showMissionAnim("挑战扫地僧成功");
 }
 
 void Winlayer::onErr(int errcode)
 {
+}
+
+void Winlayer::showMissionAnim(std::string text)
+{
+	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
+	csbnode->setPosition(Vec2(360, 800));
+	csbnode->getChildByName("cjz_1")->setVisible(false);
+	this->addChild(csbnode, 0, "achiveanim");
+	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
+	textname->setString(CommonFuncs::gbk2utf(text.c_str()));
+	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
+	csbnode->runAction(action);
+	action->gotoFrameAndPlay(0, false);
+	csbnode->getChildByName("light")->runAction(RepeatForever::create(RotateTo::create(8, 720)));
 }
 

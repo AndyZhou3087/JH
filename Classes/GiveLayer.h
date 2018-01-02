@@ -11,9 +11,9 @@ public:
 	GiveLayer();
 	~GiveLayer();
 
-	bool init(std::string npcid);
+	bool init(std::string npcid, std::string addrid);
 	virtual void onEnterTransitionDidFinish();
-	static GiveLayer* create(std::string npcid);
+	static GiveLayer* create(std::string npcid, std::string addrid);
 	void updataMyGoodsUI();
 	void updataGiveGoodsUI();
 
@@ -27,6 +27,14 @@ private:
 	void updateGiveGoods(PackageData data);
 
 	void checkValue();
+
+	void doGiveMission();
+
+	void showMissionDoneAnim();
+
+	void giveRes(std::vector<std::string> vec_res);
+
+	void removeSelf(float dt);
 private:
 	cocos2d::ui::ScrollView* m_giveGoodsSrollView;
 	cocos2d::ui::ScrollView* m_myGoodsSrollView;
@@ -39,6 +47,7 @@ private:
 	cocos2d::ui::Text* friendlylbl;
 	int friendly;
 	int giveval;
+	std::string m_addrid;
 };
 #endif
 

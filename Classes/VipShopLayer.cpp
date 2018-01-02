@@ -70,12 +70,24 @@ bool VipShopLayer::init()
 		innerheight = contentheight;
 	m_vipScrollview->setInnerContainerSize(Size(m_vipScrollview->getContentSize().width, innerheight));
 
-	for (unsigned int i = 0; i < vec_vipGoods.size(); i++)
+	//去掉第一个6月月卡
+	int starti = 1;
+	std::map<std::string, int>::iterator it;
+
+	for (it = GlobalData::map_buyVipDays.begin(); it != GlobalData::map_buyVipDays.end(); ++it)
+	{
+		if (it->first.find("vip1") != std::string::npos)
+		{
+			starti = 0;
+		}
+	}
+
+	for (unsigned int i = starti; i < vec_vipGoods.size(); i++)
 	{
 		VipGoodsItem* node = VipGoodsItem::create(vec_vipGoods[i]);
 		node->setTag(sizeof(heroprice) / sizeof(heroprice[0]) + sizeof(goldcount) / sizeof(goldcount[0]) + i);
 		m_vipScrollview->addChild(node);
-		node->setPosition(Vec2(360, innerheight - itemheight / 2 - i * itemheight));
+		node->setPosition(Vec2(360, innerheight - itemheight / 2 - (i - starti) * itemheight));
 	}
 
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");

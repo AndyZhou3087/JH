@@ -30,6 +30,7 @@ private:
 	cocos2d::ui::Text* leftday_0;
 	cocos2d::ui::Text* leftday_1;
 	GoodsData* m_goodData;
+	cocos2d::ui::Button* m_buybtn;
 private:
 
 	/****************************

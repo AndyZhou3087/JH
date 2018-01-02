@@ -732,7 +732,6 @@ void TopBar::checkNpcRandMap()
 			if (g_maplayer != NULL)
 			{
 				g_maplayer->updataPlotMissionIcon(0);
-				g_maplayer->updataPlotMissionIcon(1);
 			}
 		}
 	}
@@ -755,7 +754,6 @@ void TopBar::checkNpcRandMap()
 		if (g_maplayer != NULL)
 		{
 			g_maplayer->updataPlotMissionIcon(0);
-			g_maplayer->updataPlotMissionIcon(1);
 		}
 	}
 }

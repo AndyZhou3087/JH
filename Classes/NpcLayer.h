@@ -50,6 +50,9 @@ public:
 	*****************************/
 	void showTalkGuider();
 
+
+	static void getWinRes(std::vector<std::string> vec_res, std::string addrid);
+
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onItemTalk(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -66,8 +69,6 @@ private:
 	void checkUpateNpc(float dt);
 	void refreshNpcNode();
 
-	void getWinRes(int type);
-
 	int checkFightCount(std::string npcid);
 
 	std::string replaceSexWord(std::string dstr);
@@ -77,7 +78,7 @@ private:
 	/****************************
 	是否任务中
 	*****************************/
-	int checkIsMissiong(int type, std::string npcid);
+	int checkIsMissing(int type, std::string npcid);
 
 private:
 	Node* m_csbnode;

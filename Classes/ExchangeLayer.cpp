@@ -372,8 +372,8 @@ void ExchangeLayer::onMyGoodsItem(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
 		m_longTouchNode = node;
 		schedule(schedule_selector(ExchangeLayer::longTouchUpdate), 1.0f);
 		clickwhere = 3;
-
-		if (node->getTag() < myGoodsData.size())
+		int gsize = myGoodsData.size();
+		if (node->getTag() < gsize)
 		{
 			isClickMyGoods = true;
 		}

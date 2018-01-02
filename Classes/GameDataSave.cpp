@@ -310,29 +310,29 @@ int GameDataSave::getPlotUnlockChapter()
 	return loadIntDataByKey(addUIDString("unlockchapter"), 1);
 }
 
-void GameDataSave::setBranchPlotMissionIndex(int val)
-{
-	saveIntDataByKey(addUIDString("bplot"), val);
-}
-
-int GameDataSave::getBranchPlotMissionIndex()
-{
-	return loadIntDataByKey(addUIDString("bplot"), 0);
-}
-
 void GameDataSave::setBranchPlotMissionStatus(std::string strval)
 {
-	saveStringDataByKey(addUIDString("bplotstatus"), strval);
+	saveStringDataByKey(addUIDString("newbplotstatus"), strval);
 }
 
 std::string GameDataSave::getBranchPlotMissionStatus()
 {
-	return loadStringDataByKey(addUIDString("bplotstatus"));
+	return loadStringDataByKey(addUIDString("newbplotstatus"));
 }
 
 std::string GameDataSave::getSaveListId()
 {
 	return loadStringDataByKey("savelistid", ";;;");
+}
+
+void GameDataSave::setBranchPlotMissionGiveGoods(std::string strval)
+{
+	saveStringDataByKey(addUIDString("bmggs"), strval);
+}
+
+std::string GameDataSave::getBranchPlotMissionGiveGoods()
+{
+	return loadStringDataByKey(addUIDString("bmggs"), "");
 }
 
 void GameDataSave::setSaveListId(std::string val)
@@ -707,4 +707,14 @@ void GameDataSave::setHsljMatchPlayer(std::string val)
 std::string GameDataSave::getHsljMatchPlayer()
 {
 	return loadStringDataByKey("shljmatch", "");
+}
+
+int GameDataSave::getEnterGameDaysOfYear()
+{
+	return loadIntDataByKey(addUIDString("daysofyear"), -1);
+}
+
+void GameDataSave::setEnterGameDaysOfYear(int days)
+{
+	saveIntDataByKey(addUIDString("daysofyear"), days);
 }

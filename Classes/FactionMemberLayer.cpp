@@ -414,53 +414,23 @@ bool FactionMemberItem::init(FactionMemberData *data)
 			actionbtn->setVisible(false);
 			modifybtn->setVisible(false);
 		}
-		else if (GlobalData::mytitle == 1)
-		{
-			if (data->position == 0)
-			{
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
-				modifybtn->setVisible(false);
-				refusebtn->setVisible(true);
-			}
-			else
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
-		}
-		else if (GlobalData::mytitle == 2)
-		{
-			if (data->position == 0)
-			{
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
-				modifybtn->setVisible(false);
-				refusebtn->setVisible(true);
-			}
-			else if (data->position == 1 || data->position == 2)
-			{
-				actionbtn->setVisible(false);
-				modifybtn->setVisible(false);
-			}
-			else
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
-		}
-		else if (GlobalData::mytitle == 3)
-		{
-			if (data->position == 0)
-			{
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
-				modifybtn->setVisible(false);
-				refusebtn->setVisible(true);
-			}
-			else if (data->position == 1 || data->position == 2 || data->position == 3)
-			{
-				actionbtn->setVisible(false);
-				modifybtn->setVisible(false);
-			}
-			else
-				actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
-		}
 		else
 		{
-			actionbtn->setVisible(false);
-			modifybtn->setVisible(false);
+			if (data->position == 0)
+			{
+				actionbtn->setTitleText(CommonFuncs::gbk2utf("同意加入"));
+				modifybtn->setVisible(false);
+				refusebtn->setVisible(true);
+			}
+			else if (data->position <= GlobalData::mytitle)
+			{
+				actionbtn->setVisible(false);
+				modifybtn->setVisible(false);
+			}
+			else
+			{
+				actionbtn->setTitleText(CommonFuncs::gbk2utf("逐出"));
+			}
 		}
 	}
 

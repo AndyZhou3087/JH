@@ -100,9 +100,9 @@ bool VipGoodsItem::init(GoodsData* gdata)
 		this->addChild(coutlbl);
 	}
 
-	cocos2d::ui::Button* buybtn = (cocos2d::ui::Button*)csbnode->getChildByName("buybtn");
-	buybtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onBuyBtn, this));
-	buybtn->setSwallowTouches(false);
+	m_buybtn = (cocos2d::ui::Button*)csbnode->getChildByName("buybtn");
+	m_buybtn->addTouchEventListener(CC_CALLBACK_2(VipGoodsItem::onBuyBtn, this));
+	m_buybtn->setSwallowTouches(false);
 
 	updateLeftDays(0);
 	this->schedule(schedule_selector(VipGoodsItem::updateLeftDays), 1.0f);
@@ -166,6 +166,11 @@ void VipGoodsItem::updateLeftDays(float dt)
 			leftday->setVisible(true);
 			std::string leftdaystr = StringUtils::format("%d", GlobalData::map_buyVipDays[it->first]);
 			leftday->setString(leftdaystr);
+
+			if (it->first.find("vip1") != std::string::npos)
+			{
+				m_buybtn->setVisible(false);
+			}
 			break;
 		}
 	}

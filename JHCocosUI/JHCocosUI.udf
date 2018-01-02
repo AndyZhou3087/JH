@@ -7,22 +7,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="uipacker.csi" />
-          <FilePathData Path="apprenticeLayer.csd" />
-          <FilePathData Path="addChallengeCountLayer.csd" />
-          <FilePathData Path="bookDetailsLayer.csd" />
-          <FilePathData Path="bookshelfLayer.csd" />
-          <FilePathData Path="buidingUiLayer.csd" />
-          <FilePathData Path="buildingDetailsLayer.csd" />
-          <FilePathData Path="buyOrangeGFLayer.csd" />
-          <FilePathData Path="hsljRewardLayer.csd" />
-          <FilePathData Path="HSLJMainLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="HSLJMainLayer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

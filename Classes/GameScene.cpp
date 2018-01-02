@@ -137,6 +137,9 @@ bool GameScene::init()
 	//读取支线剧情配置文件
 	GlobalData::loadBranchPlotMissionJsonData();
 
+
+	checkRestBranchMisson();
+
 	//角色目前在哪个地点，第一次进入家
 	std::string addrstr = GameDataSave::getInstance()->getHeroAddr();
 	if (addrstr.compare("m1-1") == 0)//家
@@ -366,6 +369,15 @@ void GameScene::saveAllData()
 
 	//保存装备数据
 	g_hero->saveProperData();
+
+	std::string curmid = GlobalData::getCurBranchPlotMissison();
+
+	if (curmid.length() > 0)
+	{
+		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
+		PlotMissionData pd = GlobalData::map_BranchPlotMissionData[curmid][subindex];
+		GlobalData::saveBranchPlotMissionStatus(curmid, pd.status);
+	}
 }
 
 void GameScene::onExit()
@@ -470,6 +482,27 @@ void GameScene::updata(float dt)
 						}
 					}
 				}
+			}
+		}
+	}
+
+	std::string curmid = GlobalData::getCurBranchPlotMissison();
+
+	if (curmid.length() > 0 && GlobalData::map_BranchPlotMissionItem[curmid].count > 0)
+	{
+		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
+		PlotMissionData *pd = &GlobalData::map_BranchPlotMissionData[curmid][subindex];
+
+		if (GlobalData::map_BranchPlotMissionItem[curmid].time > 0)
+		{
+			GlobalData::map_BranchPlotMissionItem[curmid].time--;
+			if (GlobalData::map_BranchPlotMissionItem[curmid].time <= 0)
+			{
+				GlobalData::map_BranchPlotMissionItem[curmid].count--;
+				GlobalData::map_BranchPlotMissionItem[curmid].time = GlobalData::map_BranchPlotMissionItem[curmid].maxtime;
+				pd->status = M_NONE;
+				GlobalData::saveBranchPlotMissionStatus("", 0);
+				GameDataSave::getInstance()->setBranchPlotMissionGiveGoods("");
 			}
 		}
 	}
@@ -666,5 +699,18 @@ void GameScene::checkAchiveIsDone(float dt)
 		this->unschedule(schedule_selector(GameScene::checkAchiveIsDone));
 		AchiveDoneAnimLayer* aalayer = AchiveDoneAnimLayer::create();
 		Director::getInstance()->getRunningScene()->addChild(aalayer, 100);
+	}
+}
+
+void GameScene::checkRestBranchMisson()
+{
+	int days = GameDataSave::getInstance()->getEnterGameDaysOfYear();
+
+	if (days != GlobalData::getDayOfYear())
+	{
+		GameDataSave::getInstance()->setBranchPlotMissionGiveGoods("");
+		GameDataSave::getInstance()->setBranchPlotMissionStatus("");
+		GlobalData::loadBranchPlotMissionJsonData();
+		GameDataSave::getInstance()->setEnterGameDaysOfYear(GlobalData::getDayOfYear());
 	}
 }

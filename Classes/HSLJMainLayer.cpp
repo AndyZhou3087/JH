@@ -95,7 +95,7 @@ bool HSLJMainLayer::init()
 	m_expbar->setPercent(0);
 
 	m_fightcount = (cocos2d::ui::Text*)csbnode->getChildByName("fightcount");
-	m_fightcount->setString("10/10");
+	m_fightcount->setString("5/5");
 
 	m_herodw = (cocos2d::ui::Text*)heroNode->getChildByName("herodw");
 	m_herowinpercent = (cocos2d::ui::Text*)heroNode->getChildByName("herowin");
@@ -238,6 +238,13 @@ void HSLJMainLayer::onErr(int errcode)
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
 	if (datatype != 2)
 	{
+		if (datatype == 0 && errcode == -3)
+		{
+			HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据异常！！"));
+			this->addChild(box);
+			return;
+		}
+
 		std::string desc = "数据获取异常，请检查网络连接！！";
 		if (datatype == 1 && errcode == -3)
 		{
@@ -322,7 +329,7 @@ void HSLJMainLayer::showMyInfo()
 
 void HSLJMainLayer::updateMyFightCount()
 {
-	std::string str = StringUtils::format("%d/10", GlobalData::myMatchInfo.leftcount);
+	std::string str = StringUtils::format("%d/5", GlobalData::myMatchInfo.leftcount);
 	m_fightcount->setString(str);
 }
 

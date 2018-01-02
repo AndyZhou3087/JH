@@ -34,7 +34,8 @@ std::map<std::string, EquipData> GlobalData::map_equips;
 
 std::vector<PlotMissionData> GlobalData::vec_PlotMissionData;
 
-std::vector<PlotMissionData> GlobalData::vec_BranchPlotMissionData;
+std::map<std::string, std::vector<PlotMissionData>> GlobalData::map_BranchPlotMissionData;
+std::map<std::string, BranchPlotMissionItem> GlobalData::map_BranchPlotMissionItem;
 
 std::map<std::string, GFTrickData> GlobalData::map_gftricks;
 
@@ -148,6 +149,8 @@ std::vector<HSLJRankData> GlobalData::vec_hsljRankData;
 std::string GlobalData::updateDownLoadURL;
 
 bool GlobalData::isPopUpdate = false;
+
+std::string GlobalData::curBranchMissionID;
 
 GlobalData::GlobalData()
 {
@@ -802,6 +805,26 @@ int GlobalData::getMonth_Days()
 	return day;
 }
 
+int GlobalData::getTomorrowZeroTimeDif()
+{
+	struct tm *tm;
+	time_t timep;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	time(&timep);
+#else
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	timep = tv.tv_sec;
+#endif
+	tm = localtime(&timep);
+	int hour = tm->tm_hour;
+	int min = tm->tm_min;
+	int sec = tm->tm_sec;
+
+	int dif = (23 - hour) * 3600 + (59 - min) * 60 + (60 - sec);
+	return dif;
+}
+
 std::string GlobalData::getUId()
 {
 	uid = GameDataSave::getInstance()->getUserId();
@@ -863,21 +886,6 @@ int GlobalData::getPlotMissionIndex()
 	if (plotindex >= max)
 		plotindex = max - 1;
 	//迭代2个版本后删除 end
-	return plotindex;
-}
-
-
-void GlobalData::setBranchPlotMissionIndex(int val)
-{
-	GameDataSave::getInstance()->setBranchPlotMissionIndex(val);
-}
-
-int GlobalData::getBranchPlotMissionIndex()
-{
-	int plotindex = GameDataSave::getInstance()->getBranchPlotMissionIndex();
-	int max = vec_BranchPlotMissionData.size();
-	if (plotindex >= max)
-		plotindex = max - 1;
 	return plotindex;
 }
 
@@ -950,7 +958,7 @@ void GlobalData::loadPlotMissionJsonData(int herotype)
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
 			std::string str = v[j].GetString();
-			if (str.length() > 0)
+			if (str.length() > 1)
 				data.rewords.push_back(str);
 		}
 		vec_PlotMissionData.push_back(data);
@@ -961,7 +969,8 @@ void GlobalData::loadPlotMissionJsonData(int herotype)
 
 void GlobalData::loadBranchPlotMissionJsonData()
 {
-	vec_BranchPlotMissionData.clear();
+	map_BranchPlotMissionData.clear();
+	map_BranchPlotMissionItem.clear();
 	std::string plotfilename = "data/branchplotmission.json";
 
 	rapidjson::Document doc = ReadJsonFile(plotfilename);
@@ -971,8 +980,8 @@ void GlobalData::loadBranchPlotMissionJsonData()
 		rapidjson::Value& vitem = values[i];
 		PlotMissionData data;
 		rapidjson::Value& v = vitem["id"];
-		data.id = v.GetString();
-
+		std::string mid = v.GetString();
+		data.id = mid;
 		v = vitem["snpc"];
 		data.snpc = v.GetString();
 
@@ -1014,10 +1023,32 @@ void GlobalData::loadBranchPlotMissionJsonData()
 		for (unsigned int j = 0; j < v.Size(); j++)
 		{
 			std::string str = v[j].GetString();
-			if (str.length() > 0)
+			if (str.length() > 1)
 				data.rewords.push_back(str);
 		}
-		vec_BranchPlotMissionData.push_back(data);
+
+		v = vitem["para"];
+		for (unsigned int j = 0; j < v.Size(); j++)
+		{
+			std::string str = v[j].GetString();
+			if (str.length() > 1)
+				data.needgoods.push_back(str);
+		}
+
+		map_BranchPlotMissionData[mid].push_back(data);
+		BranchPlotMissionItem bitme;
+		int time = -1;
+		int count = -1;
+		v = vitem["time"];
+		time = atoi(v.GetString());
+		bitme.time = time*60;
+		bitme.maxtime = time*60;
+		v = vitem["count"];
+		count = atoi(v.GetString());
+		bitme.count = count<0?99:count;
+		bitme.maxcount = bitme.count;
+		bitme.subindex = 0;
+		map_BranchPlotMissionItem[mid] = bitme;
 	}
 
 	GlobalData::updateBranchPlotMissionStatus();
@@ -1063,15 +1094,28 @@ void GlobalData::updatePlotMissionStatus()
 	}
 }
 
-void GlobalData::saveBranchPlotMissionStatus()
+void GlobalData::saveBranchPlotMissionStatus(std::string mid, int status)
 {
 	//保存支线剧情状态"-"分割
 	std::string str;
-	for (unsigned int i = 0; i < GlobalData::vec_BranchPlotMissionData.size(); i++)
+	std::map<std::string, BranchPlotMissionItem>::iterator it;
+
+	int count = 0;
+
+	if (mid.length() > 0)
 	{
-		std::string tmpstr = StringUtils::format("%d-", GlobalData::vec_BranchPlotMissionData[i].status);
-		str.append(tmpstr);
+		std::string curstr = StringUtils::format("%s,%d,%d,%d", mid.c_str(), GlobalData::map_BranchPlotMissionItem[mid].subindex, status, GlobalData::map_BranchPlotMissionItem[mid].time);
+		str.append(curstr);
 	}
+	str.append(";");
+
+	for (it = GlobalData::map_BranchPlotMissionItem.begin(); it != GlobalData::map_BranchPlotMissionItem.end(); it++)
+	{
+		std::string countstr = StringUtils::format("%d,", GlobalData::map_BranchPlotMissionItem[it->first].count);
+		str.append(countstr);
+	}
+
+	curBranchMissionID = mid;
 	GameDataSave::getInstance()->setBranchPlotMissionStatus(str.substr(0, str.length() - 1));
 }
 
@@ -1081,25 +1125,83 @@ void GlobalData::updateBranchPlotMissionStatus()
 	std::string str = GameDataSave::getInstance()->getBranchPlotMissionStatus();
 	if (str.length() > 0)
 	{
-		std::vector<std::string> tmp;
-		CommonFuncs::split(str, tmp, "-");
-		int msize = GlobalData::vec_BranchPlotMissionData.size();
-		unsigned int i = 0;
-		for (i = 0; i < tmp.size(); i++)
+		std::vector<std::string> savestr;
+		CommonFuncs::split(str, savestr, ";");
+		if (savestr.size() >= 2)
 		{
-			GlobalData::vec_BranchPlotMissionData[i].status = atoi(tmp[i].c_str());
-		}
-
-		int localsavesize = tmp.size();
-		if (msize > localsavesize)
-		{
-			int addcount = msize - tmp.size();
-			for (int m = 0; m < addcount; m++)
+			std::vector<std::string> tmp;
+			CommonFuncs::split(savestr[0], tmp, ",");
+			if (tmp.size() >= 4)
 			{
-				GlobalData::vec_BranchPlotMissionData[i + m].status = M_NONE;
+				std::string mid = tmp[0];
+				curBranchMissionID = mid;
+				int subindex = atoi(tmp[1].c_str());
+				int status = atoi(tmp[2].c_str());
+				int time = atoi(tmp[3].c_str());
+
+				GlobalData::map_BranchPlotMissionData[mid][subindex].status = status;
+				GlobalData::map_BranchPlotMissionItem[mid].subindex = subindex;
+				GlobalData::map_BranchPlotMissionItem[mid].time = time;
+			}
+			std::vector<std::string> tmp1;
+			CommonFuncs::split(savestr[1], tmp1, ",");
+			int i = 0;
+			if (tmp1.size() >= GlobalData::map_BranchPlotMissionItem.size())
+			{
+				std::map<std::string, BranchPlotMissionItem>::iterator it;
+				for (it = GlobalData::map_BranchPlotMissionItem.begin(); it != GlobalData::map_BranchPlotMissionItem.end(); it++)
+				{
+					GlobalData::map_BranchPlotMissionItem[it->first].count = atoi(tmp1[i].c_str());
+					i++;
+				}
+
 			}
 		}
 	}
+}
+
+std::string GlobalData::getCurBranchPlotMissison()
+{
+	//std::string str = GameDataSave::getInstance()->getBranchPlotMissionStatus();
+	//if (str.length() > 0)
+	//{
+	//	std::vector<std::string> tmp;
+	//	CommonFuncs::split(str, tmp, ",");
+	//	if (tmp.size() >= 3)
+	//	{
+	//		std::string mid = tmp[0];
+	//		return mid;
+	//	}
+	//}
+	//return "";
+	return curBranchMissionID;
+}
+
+bool GlobalData::isDoingBranchPlotMisson()
+{
+	std::map<std::string, std::vector<PlotMissionData>>::iterator it;
+	for (it = map_BranchPlotMissionData.begin(); it != map_BranchPlotMissionData.end(); it++)
+	{
+		std::vector<PlotMissionData>::iterator sit;
+		for (sit = map_BranchPlotMissionData[it->first].begin(); sit != map_BranchPlotMissionData[it->first].end(); sit++)
+		{
+			if (sit->status == M_DOING)
+				return true;
+		}
+	}
+
+	std::string mid = getCurBranchPlotMissison();
+
+	if (mid.length() > 0)
+	{
+		int subindex = GlobalData::map_BranchPlotMissionItem[mid].subindex;
+
+		if (subindex < GlobalData::map_BranchPlotMissionData[mid].size() - 1 && GlobalData::map_BranchPlotMissionData[mid][subindex].status == M_DONE)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 int GlobalData::getUnlockChapter()

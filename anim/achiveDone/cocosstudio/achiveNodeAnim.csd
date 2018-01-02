@@ -275,7 +275,7 @@
             <FileData Type="Normal" Path="achiveanim/pp.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="gq_3" ActionTag="-1907191131" Alpha="0" Tag="46" IconVisible="False" LeftMargin="-345.5000" RightMargin="-339.5000" TopMargin="-352.5000" BottomMargin="-332.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="light" ActionTag="-1907191131" Alpha="0" Tag="46" IconVisible="False" LeftMargin="-345.5000" RightMargin="-339.5000" TopMargin="-352.5000" BottomMargin="-332.5000" ctype="SpriteObjectData">
             <Size X="685.0000" Y="685.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-3.0000" Y="10.0000" />

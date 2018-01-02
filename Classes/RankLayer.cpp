@@ -308,7 +308,11 @@ void RankLayer::onSuccess()
 void RankLayer::onErr(int errcode)
 {
 	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-	HintBox * box = HintBox::create(CommonFuncs::gbk2utf("数据获取异常，请检查网络连接！！"));
+
+	std::string descstr = "数据获取异常，请检查网络连接！！";
+	if (selectrank == 2 && errcode == -3)
+		descstr = "检测到你有作弊行为，无法使用该功能！！";
+	HintBox * box = HintBox::create(CommonFuncs::gbk2utf(descstr.c_str()));
 	this->addChild(box);
 }
 

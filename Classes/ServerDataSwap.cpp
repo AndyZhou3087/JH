@@ -118,7 +118,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	int days = GameDataSave::getInstance()->getLiveDays();
 	int sprite = GameDataSave::getInstance()->getHeroSpirit();
 	int plotindex = GameDataSave::getInstance()->getPlotMissionIndex();
-	int bpotindex = GameDataSave::getInstance()->getBranchPlotMissionIndex();
+	std::string bpotstr = GameDataSave::getInstance()->getBranchPlotMissionStatus();
 	int unlock = GameDataSave::getInstance()->getPlotUnlockChapter();
 	int sex = GameDataSave::getInstance()->getHeroSex();
 
@@ -137,7 +137,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 	writedoc.AddMember("days", days, allocator);
 	writedoc.AddMember("mood", sprite, allocator);
 	writedoc.AddMember("task", plotindex, allocator);
-	writedoc.AddMember("btask", bpotindex, allocator);
+	writedoc.AddMember("newbtask", rapidjson::Value(bpotstr.c_str(), allocator), allocator);
 	writedoc.AddMember("unlock", unlock, allocator);
 	writedoc.AddMember("sex", sex, allocator);
 
@@ -1013,24 +1013,10 @@ void ServerDataSwap::httpGetAllDataCB(std::string retdata, int code, std::string
 					}
 					GameDataSave::getInstance()->setPlotMissionStatus(str.substr(0, str.length() - 1));
 
-					v = item["btask"];
-					int btask = atoi(v.GetString());
-					GameDataSave::getInstance()->setBranchPlotMissionIndex(btask);
+					v = item["newbtask"];
+					std::string btask = v.GetString();
 
-					GlobalData::loadBranchPlotMissionJsonData();
-
-					std::string bstr;
-					int bpdatasize = GlobalData::vec_BranchPlotMissionData.size();
-					for (int i = 0; i < bpdatasize; i++)
-					{
-						std::string tmpstr;
-						if (i < btask)
-							tmpstr = "2-";
-						else
-							tmpstr = "0-";
-						bstr.append(tmpstr);
-					}
-					GameDataSave::getInstance()->setBranchPlotMissionStatus(bstr.substr(0, bstr.length() - 1));
+					GameDataSave::getInstance()->setBranchPlotMissionStatus(btask);
 
 					v = item["unlock"];
 					int unlock = atoi(v.GetString());
@@ -2308,7 +2294,7 @@ void ServerDataSwap::httpGetCouponsCB(std::string retdata, int code, std::string
 
 void ServerDataSwap::httpGetChallengeranklistCB(std::string retdata, int code, std::string tag)
 {
-	bool isok = false;
+	int ret = code;
 	if (code == 0)
 	{
 		rapidjson::Document doc;
@@ -2320,113 +2306,120 @@ void ServerDataSwap::httpGetChallengeranklistCB(std::string retdata, int code, s
 
 			GlobalData::myTotalFihgtCount = 0;
 
-			if (doc.HasMember("my"))
+			if (doc.HasMember("ret"))
 			{
-				rapidjson::Value& dataobject = doc["my"];
-				if (dataobject.HasMember("fightrank"))
-				{
-					rapidjson::Value& v = dataobject["fightrank"];
-					GlobalData::myrank = v.GetInt();
-				}
-				if (dataobject.HasMember("challengecount"))
-				{
-					rapidjson::Value& v = dataobject["challengecount"];
-					GlobalData::myFihgtCount = atoi(v.GetString());
-				}
-				if (dataobject.HasMember("finishedcount"))
-				{
-					rapidjson::Value& v = dataobject["finishedcount"];
-					GlobalData::myTotalFihgtCount = GlobalData::myFihgtCount + atoi(v.GetString());
-				}
-
-				if (dataobject.HasMember("challengescore"))
-				{
-					rapidjson::Value& v = dataobject["challengescore"];
-					GlobalData::myFihgtexp = atoi(v.GetString());
-				}
-
+				rapidjson::Value& v = doc["ret"];
+				ret = v.GetInt();
 			}
-			for (int i = 1; i <= 3; i++)
+
+			if (ret == 0)
 			{
-				std::string datastr = StringUtils::format("data%d", i);
-				if (doc.HasMember(datastr.c_str()))
+				if (doc.HasMember("my"))
 				{
-					rapidjson::Value& dataArray = doc[datastr.c_str()];
-
-					for (unsigned int m = 0; m < dataArray.Size(); m++)
+					rapidjson::Value& dataobject = doc["my"];
+					if (dataobject.HasMember("fightrank"))
 					{
-						RankData rdata;
-						rapidjson::Value& item = dataArray[m];
+						rapidjson::Value& v = dataobject["fightrank"];
+						GlobalData::myrank = v.GetInt();
+					}
+					if (dataobject.HasMember("challengecount"))
+					{
+						rapidjson::Value& v = dataobject["challengecount"];
+						GlobalData::myFihgtCount = atoi(v.GetString());
+					}
+					if (dataobject.HasMember("finishedcount"))
+					{
+						rapidjson::Value& v = dataobject["finishedcount"];
+						GlobalData::myTotalFihgtCount = GlobalData::myFihgtCount + atoi(v.GetString());
+					}
 
-						rapidjson::Value& v = item["fightrank"];
-						rdata.rank = atoi(v.GetString());
+					if (dataobject.HasMember("challengescore"))
+					{
+						rapidjson::Value& v = dataobject["challengescore"];
+						GlobalData::myFihgtexp = atoi(v.GetString());
+					}
 
-						v = item["nickname"];
-						rdata.nickname = v.GetString();
+				}
+				for (int i = 1; i <= 3; i++)
+				{
+					std::string datastr = StringUtils::format("data%d", i);
+					if (doc.HasMember(datastr.c_str()))
+					{
+						rapidjson::Value& dataArray = doc[datastr.c_str()];
 
-						if (item.HasMember("playerid"))
+						for (unsigned int m = 0; m < dataArray.Size(); m++)
 						{
-							v = item["playerid"];
-							rdata.playerid = v.GetString();
-						}
+							RankData rdata;
+							rapidjson::Value& item = dataArray[m];
 
-						v = item["sex"];
-						rdata.herosex = atoi(v.GetString());
+							rapidjson::Value& v = item["fightrank"];
+							rdata.rank = atoi(v.GetString());
 
-						v = item["type"];
-						rdata.herotype = atoi(v.GetString());
+							v = item["nickname"];
+							rdata.nickname = v.GetString();
 
-						v = item["exp"];
-						int exp = atoi(v.GetString());
-						int lv = 0;
-						int size = GlobalData::map_heroAtr[rdata.herotype].vec_exp.size();
-						for (int i = 0; i < size; i++)
-						{
-							if (exp > GlobalData::map_heroAtr[rdata.herotype].vec_exp[i])
+							if (item.HasMember("playerid"))
 							{
-								lv = i;
-								exp = exp - GlobalData::map_heroAtr[rdata.herotype].vec_exp[i];
+								v = item["playerid"];
+								rdata.playerid = v.GetString();
+							}
+
+							v = item["sex"];
+							rdata.herosex = atoi(v.GetString());
+
+							v = item["type"];
+							rdata.herotype = atoi(v.GetString());
+
+							v = item["exp"];
+							int exp = atoi(v.GetString());
+							int lv = 0;
+							int size = GlobalData::map_heroAtr[rdata.herotype].vec_exp.size();
+							for (int i = 0; i < size; i++)
+							{
+								if (exp > GlobalData::map_heroAtr[rdata.herotype].vec_exp[i])
+								{
+									lv = i;
+									exp = exp - GlobalData::map_heroAtr[rdata.herotype].vec_exp[i];
+								}
+								else
+								{
+									break;
+								}
+							}
+							rdata.herolv = lv;
+
+							int heroval = 0;
+
+							if (item.HasMember("fightingpower"))
+							{
+								v = item["fightingpower"];
+								heroval = atoi(v.GetString());
 							}
 							else
-							{
-								break;
-							}
+								heroval = 0;
+
+							rdata.heroval = heroval;
+							GlobalData::vec_rankData.push_back(rdata);
 						}
-						rdata.herolv = lv;
-
-						int heroval = 0;
-
-						if (item.HasMember("fightingpower"))
-						{
-							v = item["fightingpower"];
-							heroval = atoi(v.GetString());
-						}
-						else
-							heroval = 0;
-
-						rdata.heroval = heroval;
-						GlobalData::vec_rankData.push_back(rdata);
 					}
-					isok = true;
+				}
+				if (m_pDelegateProtocol != NULL)
+				{
+					m_pDelegateProtocol->onSuccess();
 				}
 			}
+			else
+			{
+				if (m_pDelegateProtocol != NULL)
+					m_pDelegateProtocol->onErr(-ret);
+			}
 
-		}
-	}
-
-	if (isok)
-	{
-		if (m_pDelegateProtocol != NULL)
-		{
-			m_pDelegateProtocol->onSuccess();
 		}
 	}
 	else
 	{
 		if (m_pDelegateProtocol != NULL)
-		{
-			m_pDelegateProtocol->onErr(-1);
-		}
+			m_pDelegateProtocol->onErr(ret);
 	}
 	release();
 }

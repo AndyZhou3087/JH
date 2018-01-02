@@ -131,6 +131,9 @@ bool MapLayer::init()
 	cocos2d::ui::Widget* vipbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("vipbtn");
 	vipbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onVipShop, this));
 
+	brachmissionicon = (cocos2d::ui::Widget*)csbnode->getChildByName("branchmission");
+	brachmissionicon->setVisible(false);
+
 	m_timegiftbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("timegiftbtn");
 	m_timegiftbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
 	m_timegiftbtn->setVisible(false);
@@ -490,26 +493,17 @@ void MapLayer::updataPlotMissionIcon(int type)
 	m_dmissionIcon[type]->stopAllActions();
 	m_dmissionIcon[type]->setVisible(false);
 
-	PlotMissionData* plotData = NULL;
-	int plotindex = 0;
+	int mapnamecount = GlobalData::map_maps.size();
+
 	if (type == 0)
 	{
+		PlotMissionData* plotData = NULL;
+		int plotindex = 0;
 		plotindex = GlobalData::getPlotMissionIndex();
 		plotData = &GlobalData::vec_PlotMissionData[plotindex];
-	}
-	else
-	{
-		plotindex = GlobalData::getBranchPlotMissionIndex();
-		if (GlobalData::vec_BranchPlotMissionData[plotindex].unlockchapter <= GlobalData::getUnlockChapter())
-			plotData = &GlobalData::vec_BranchPlotMissionData[plotindex];
-	}
-	if (plotData != NULL)
-	{
+
 		std::string snpc = plotData->snpc;
 		std::string dnpc = plotData->dnpc;
-
-
-		int mapnamecount = GlobalData::map_maps.size();
 
 		if (plotData->mapid.length() > 0)
 		{
@@ -611,7 +605,6 @@ void MapLayer::updataPlotMissionIcon(int type)
 							m_dmissionIcon[type]->stopAllActions();
 							m_dmissionIcon[type]->setVisible(false);
 						}
-
 					}
 				}
 			}
@@ -793,6 +786,8 @@ void MapLayer::checkTimeGift(float dt)
 	}
 
 	m_prizebtn->setVisible(GlobalData::isExchangeGift);
+
+	updateBranchMissionTime();
 }
 
 void MapLayer::checkAchive(float dt)
@@ -822,5 +817,28 @@ void MapLayer::showTalkGuide()
 		std::vector<Node*> vec_node;
 		NewerGuide2Layer *layer = NewerGuide2Layer::create(103, vec_node);
 		g_gameLayer->addChild(layer, NEWERLAYERZOER);
+	}
+}
+
+void MapLayer::updateBranchMissionTime()
+{
+	std::string curmid = GlobalData::getCurBranchPlotMissison();
+
+	if (curmid.length() > 0)
+	{
+		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
+
+		string str;
+		brachmissionicon->setVisible(true);
+		cocos2d::ui::Text* timetext = (cocos2d::ui::Text*)brachmissionicon->getChildByName("timetext");
+		if (GlobalData::map_BranchPlotMissionItem[curmid].time > 0)
+			str = StringUtils::format("%02d:%02d", GlobalData::map_BranchPlotMissionItem[curmid].time / 60, GlobalData::map_BranchPlotMissionItem[curmid].time % 60);
+		else
+			str = StringUtils::format("不限时", GlobalData::map_BranchPlotMissionItem[curmid].time / 60, GlobalData::map_BranchPlotMissionItem[curmid].time % 60);
+		timetext->setString(str);
+	}
+	else
+	{
+		brachmissionicon->setVisible(false);
 	}
 }

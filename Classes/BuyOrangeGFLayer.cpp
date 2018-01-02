@@ -58,7 +58,7 @@ bool BuyOrangeGFLayer::init()
 	for (it = GlobalData::map_wgngs.begin(); it != GlobalData::map_wgngs.end(); ++it)
 	{
 		WG_NGData gfdata = GlobalData::map_wgngs[it->first];
-		if (gfdata.qu == 5)
+		if (gfdata.qu == 5 || gfdata.qu == 4)
 		{
 			vec_tmpqu5gf.push_back(gfdata.id);
 		}

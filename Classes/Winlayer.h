@@ -43,6 +43,8 @@ private:
 
 	void onSuccess();
 	void onErr(int errcode);
+
+	void showMissionAnim(std::string text);
 private:
 	std::string m_npcid;
 	std::string m_addrid;

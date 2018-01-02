@@ -910,6 +910,30 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="branchmission" ActionTag="-1789424580" Tag="123" IconVisible="False" LeftMargin="564.7181" RightMargin="113.2819" TopMargin="407.5294" BottomMargin="822.4706" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="16" Scale9Height="18" ctype="ImageViewObjectData">
+            <Size X="42.0000" Y="50.0000" />
+            <Children>
+              <AbstractNodeData Name="timetext" ActionTag="-1428191315" Tag="124" IconVisible="False" LeftMargin="55.0831" RightMargin="-95.0831" TopMargin="11.0640" BottomMargin="7.9360" FontSize="30" LabelText="30:00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="82.0000" Y="31.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="96.0831" Y="23.4360" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="2.2877" Y="0.4687" />
+                <PreSize X="1.9524" Y="0.6200" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="585.7181" Y="847.4706" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8135" Y="0.6621" />
+            <PreSize X="0.0583" Y="0.0391" />
+            <FileData Type="MarkedSubImage" Path="ui/mapmission1_0.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

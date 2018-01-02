@@ -199,11 +199,25 @@ typedef struct
 	std::vector<std::string> mywords;//角色对话
 	std::vector<std::string> bossword;//找到挑战NPC对话
 	std::vector<std::string> rewords;//完成后的奖励
+	std::vector<std::string> needgoods;//送的物品
 	int unlockchapter;//完成后解锁的章节
 	int status;//状态
-	int type;//对话0；需要战斗1
+	int type;//对话0；需要战斗1;2--送物品
 	std::string mapid;//dnpc所在地图
 }PlotMissionData;
+
+/****************************
+支线剧情Key
+*****************************/
+typedef struct
+{
+	std::string mid;//发剧情的ID
+	int time;//限制时间
+	int count;//限制次数
+	int subindex;//
+	int maxcount;
+	int maxtime;
+}BranchPlotMissionItem;
 
 /****************************
 招式招数数据
@@ -592,6 +606,11 @@ public:
 	static int getSysSecTime();
 
 	/****************************
+	获取到明天的时间差
+	*****************************/
+	static int getTomorrowZeroTimeDif();
+
+	/****************************
 	一年中的天数
 	@return 一年中的天数(0-365)
 	*****************************/
@@ -652,17 +671,6 @@ public:
 	static void updatePlotMissionStatus();
 
 	/****************************
-	设置支线剧情ID
-	@param 剧情ID
-	*****************************/
-	static void setBranchPlotMissionIndex(int val);
-
-	/****************************
-	获取支线剧情ID
-	*****************************/
-	static int getBranchPlotMissionIndex();
-
-	/****************************
 	解析支线剧情ID
 	*****************************/
 	static void loadBranchPlotMissionJsonData();
@@ -670,12 +678,22 @@ public:
 	/****************************
 	保存支线剧情状态
 	*****************************/
-	static void saveBranchPlotMissionStatus();
+	static void saveBranchPlotMissionStatus(std::string mid, int status);
 
 	/****************************
 	更新支线剧情状态
 	*****************************/
 	static void updateBranchPlotMissionStatus();
+
+	/****************************
+	获取当前支线任务的ID
+	*****************************/
+	static std::string getCurBranchPlotMissison();
+
+	/****************************
+	是否有正在进行任务
+	*****************************/
+	static bool isDoingBranchPlotMisson();
 
 	/****************************
 	获取解锁的章节
@@ -1053,7 +1071,9 @@ public:
 	static std::map<std::string, EquipData> map_equips;//武器防具数据
 	static std::map<std::string, std::vector<BuildActionData>> map_buidACData;//建筑物数据
 	static std::vector<PlotMissionData> vec_PlotMissionData;//剧情数据
-	static std::vector<PlotMissionData> vec_BranchPlotMissionData;//支线剧情数据
+	static std::map<std::string, std::vector<PlotMissionData>> map_BranchPlotMissionData;//支线剧情数据
+	static std::map<std::string, BranchPlotMissionItem> map_BranchPlotMissionItem;//支线剧情数据
+
 	static std::map<std::string, GFTrickData> map_gftricks;//招式数据
 	static std::map<int, GFSkillData> map_gfskills;//技能数据
 	static std::vector<GoodsData> vec_goods;
@@ -1129,6 +1149,8 @@ public:
 
 	static std::string updateDownLoadURL;
 	static bool isPopUpdate;
+
+	static std::string curBranchMissionID;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

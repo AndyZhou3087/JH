@@ -143,9 +143,6 @@ void FactionMainLayer::getFactionListData()
 
 void FactionMainLayer::delayShowData(float dt)
 {
-	WaitingProgress* waitbox = WaitingProgress::create("加载中...");
-	Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
-
 	srollView->removeAllChildrenWithCleanup(true);
 	int size = GlobalData::vec_factionListData.size();
 
@@ -180,8 +177,6 @@ void FactionMainLayer::updateLvAndMember()
 
 void FactionMainLayer::onSuccess()
 {
-	Director::getInstance()->getRunningScene()->removeChildByName("waitbox");
-
 	if (GlobalData::myFaction > 0)
 	{
 		createbtn->setEnabled(false);

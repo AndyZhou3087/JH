@@ -94,24 +94,11 @@ bool ReviveLayer::init()
 	m_closebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("closebtn");
 	m_closebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onCancel, this));
 
-	cocos2d::ui::Button* freeRevivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("freerevivebtn");
-	freeRevivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onFreeRevive, this));
+	m_freeRevivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("freerevivebtn");
+	m_freeRevivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onFreeRevive, this));
 
-	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
-	{
-		m_closebtn->setVisible(true);
-		m_cancelbtn->setVisible(false);
-		m_sharetext->setString(CommonFuncs::gbk2utf("（每天免费复活一次！）"));
-		m_sharetext->setVisible(true);
-		freeRevivebtn->setVisible(true);
-	}
-	else
-	{
-		m_closebtn->setVisible(false);
-		m_cancelbtn->setVisible(true);
-		freeRevivebtn->setVisible(false);
-		m_sharetext->setVisible(false);
-	}
+	checkFreeReviveCount(0);
+	this->schedule(schedule_selector(ReviveLayer::checkFreeReviveCount), 0.1f);
 #endif
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -336,5 +323,29 @@ void ReviveLayer::checkShareReviveCount(float dt)
 		m_cancelbtn->setVisible(true);
 		m_sharebtn->setVisible(false);
 		m_sharetext->setVisible(false);
+	}
+}
+void ReviveLayer::checkFreeReviveCount(float dt)
+{
+	if (GlobalData::getDayOfYear() != GlobalData::getShareDay() && GlobalData::getFreeReviveCount() > 0)
+	{
+		m_closebtn->setVisible(true);
+		m_cancelbtn->setVisible(false);
+		m_sharetext->setString(CommonFuncs::gbk2utf("（每天免费复活一次！）"));
+		m_sharetext->setTextColor(Color4B(255, 255, 255, 255));
+		m_sharetext->setVisible(true);
+		m_freeRevivebtn->setVisible(true);
+	}
+	else
+	{
+		m_closebtn->setVisible(false);
+		m_cancelbtn->setVisible(true);
+		m_freeRevivebtn->setVisible(false);
+
+		int difsec = GlobalData::getTomorrowZeroTimeDif();
+		std::string rtext = StringUtils::format("%02d:%02d:%02d后可免费复活一次！", difsec / 3600, difsec % 3600 / 60, difsec % 3600 % 60);
+		m_sharetext->setVisible(true);
+		m_sharetext->setString(CommonFuncs::gbk2utf(rtext.c_str()));
+		m_sharetext->setTextColor(Color4B(204, 4, 4, 255));
 	}
 }

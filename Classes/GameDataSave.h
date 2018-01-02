@@ -323,16 +323,6 @@ public:
 	int getPlotUnlockChapter();
 
 	/****************************
-	获取支线剧情完成到哪一个
-	****************************/
-	void setBranchPlotMissionIndex(int val);
-
-	/****************************
-	保存支线剧情完成到哪一个
-	****************************/
-	int getBranchPlotMissionIndex();
-
-	/****************************
 	获取支线剧情完成状态
 	****************************/
 	void setBranchPlotMissionStatus(std::string strval);
@@ -341,6 +331,17 @@ public:
 	保存支线剧情完成状态
 	****************************/
 	std::string getBranchPlotMissionStatus();
+
+
+	/****************************
+	获取支线剧情完成状态
+	****************************/
+	void setBranchPlotMissionGiveGoods(std::string strval);
+
+	/****************************
+	保存支线剧情完成状态
+	****************************/
+	std::string getBranchPlotMissionGiveGoods();
 
 	/****************************
 	获取存档ID
@@ -753,6 +754,16 @@ public:
 	@para
 	*****************************/
 	std::string getHsljMatchPlayer();
+
+	/****************************
+	登录的日期
+	*****************************/
+	int getEnterGameDaysOfYear();
+
+	/****************************
+	登录的日期
+	*****************************/
+	void setEnterGameDaysOfYear(int days);
 
 private:
 	/****************************
