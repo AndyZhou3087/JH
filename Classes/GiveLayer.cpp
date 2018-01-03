@@ -1,4 +1,4 @@
-﻿#include "GiveLayer.h"
+#include "GiveLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "MyPackage.h"
