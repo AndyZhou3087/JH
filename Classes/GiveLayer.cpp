@@ -9,6 +9,7 @@
 #include "NpcLayer.h"
 #include "MyMenu.h"
 #include "GameDataSave.h"
+#include "Winlayer.h"
 
 GiveLayer::GiveLayer()
 {
@@ -46,8 +47,8 @@ bool GiveLayer::init(std::string npcid, std::string addrid)
 	m_npcid = npcid;
 	m_addrid = addrid;
 
-	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
-	backbtn->addTouchEventListener(CC_CALLBACK_2(GiveLayer::onBack, this));
+	m_backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
+	m_backbtn->addTouchEventListener(CC_CALLBACK_2(GiveLayer::onBack, this));
 
 	m_givebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("givebtn");
 	m_givebtn->addTouchEventListener(CC_CALLBACK_2(GiveLayer::onGive, this));
@@ -203,7 +204,8 @@ void GiveLayer::onGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		m_backbtn->setEnabled(false);
+		m_givebtn->setEnabled(false);
 		MyPackage::vec_packages.clear();
 
 		for (unsigned int i = 0; i < myGoodsData.size(); i++)
@@ -213,7 +215,7 @@ void GiveLayer::onGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		GlobalData::map_myfriendly[m_npcid].friendly = friendly + giveval;
 		GlobalData::saveFriendly();
 		MyPackage::save();
-		NpcLayer* npclayer = (NpcLayer*)this->getParent();
+		NpcLayer* npclayer = (NpcLayer*)g_gameLayer->getChildByName("npclayer");
 		npclayer->reFreshFriendlyUI();
 		doGiveMission();
 	}
@@ -385,7 +387,7 @@ void GiveLayer::doGiveMission()
 	{
 		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
 		PlotMissionData pd = GlobalData::map_BranchPlotMissionData[curmid][subindex];
-
+		std::vector<std::string> vec_rwdres = pd.rewords;
 		std::string savedgstr = GameDataSave::getInstance()->getBranchPlotMissionGiveGoods();
 		std::vector<std::string> needgoods;
 		if (savedgstr.length() > 0)
@@ -453,7 +455,7 @@ void GiveLayer::doGiveMission()
 					}
 
 					GameDataSave::getInstance()->setBranchPlotMissionGiveGoods("");
-					showMissionDoneAnim();
+					Winlayer::showMissionAnim(this, "任务完成", vec_rwdres);
 					isAnim = true;
 				}
 				else
@@ -482,26 +484,12 @@ void GiveLayer::doGiveMission()
 
 	if (isAnim)
 	{
-		this->scheduleOnce(schedule_selector(GiveLayer::removeSelf), 1.5f);
+		this->scheduleOnce(schedule_selector(GiveLayer::removeSelf), 2.5f);
 	}
 	else
 	{
 		removeSelf(0);
 	}
-}
-
-void GiveLayer::showMissionDoneAnim()
-{
-	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
-	csbnode->setPosition(Vec2(360, 720));
-	csbnode->getChildByName("cjz_1")->setVisible(false);
-	this->addChild(csbnode, 0, "achiveanim");
-	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
-	textname->setString(CommonFuncs::gbk2utf("任务完成"));
-	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
-	csbnode->runAction(action);
-	action->gotoFrameAndPlay(0, false);
-	csbnode->getChildByName("light")->runAction(RepeatForever::create(RotateTo::create(8, 720)));
 }
 
 void GiveLayer::giveRes(std::vector<std::string> vec_res)

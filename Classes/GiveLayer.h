@@ -30,8 +30,6 @@ private:
 
 	void doGiveMission();
 
-	void showMissionDoneAnim();
-
 	void giveRes(std::vector<std::string> vec_res);
 
 	void removeSelf(float dt);
@@ -48,6 +46,7 @@ private:
 	int friendly;
 	int giveval;
 	std::string m_addrid;
+	cocos2d::ui::Widget *m_backbtn;
 };
 #endif
 

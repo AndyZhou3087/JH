@@ -179,7 +179,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 				GlobalData::saveBranchPlotMissionStatus(plotdata->id, M_NONE);
 			}
 
-			showMissionAnim("任务完成");
+			showMissionAnim(this, "任务完成", winres);
 		}
 
 		if (g_gameLayer != NULL)
@@ -1008,24 +1008,71 @@ int Winlayer::addGfExp()
 
 void Winlayer::onSuccess()
 {
-	showMissionAnim("挑战扫地僧成功");
+	std::vector<std::string> res;
+
+	showMissionAnim(this, "挑战扫地僧成功", res);
 }
 
 void Winlayer::onErr(int errcode)
 {
 }
 
-void Winlayer::showMissionAnim(std::string text)
+void Winlayer::showMissionAnim(Node* _target, std::string text, std::vector<std::string> vec_res)
 {
-	Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
-	csbnode->setPosition(Vec2(360, 800));
-	csbnode->getChildByName("cjz_1")->setVisible(false);
-	this->addChild(csbnode, 0, "achiveanim");
-	cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
-	textname->setString(CommonFuncs::gbk2utf(text.c_str()));
-	auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
-	csbnode->runAction(action);
-	action->gotoFrameAndPlay(0, false);
-	csbnode->getChildByName("light")->runAction(RepeatForever::create(RotateTo::create(8, 720)));
+	if (_target != NULL)
+	{
+		LayerColor* color = LayerColor::create(Color4B(11, 32, 22, 150));
+		_target->addChild(color, 10, "missionanimlayer");
+
+		auto listener = EventListenerTouchOneByOne::create();
+		listener->onTouchBegan = [=](Touch *touch, Event *event)
+		{
+			return true;
+		};
+		listener->setSwallowTouches(true);
+		color->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, color);
+
+		Node* csbnode = CSLoader::createNode("achiveNodeAnim.csb");
+		csbnode->setPosition(Vec2(360, 800));
+		csbnode->getChildByName("cjz_1")->setVisible(false);
+		color->addChild(csbnode);
+		cocos2d::ui::Text* textname = (cocos2d::ui::Text*)csbnode->getChildByName("name");
+		textname->setString(CommonFuncs::gbk2utf(text.c_str()));
+		auto action = CSLoader::createTimeline("achiveNodeAnim.csb");
+		csbnode->runAction(action);
+		action->gotoFrameAndPlay(0, false);
+		csbnode->getChildByName("light")->runAction(RepeatForever::create(RotateTo::create(8, 720)));
+
+		if (vec_res.size() > 0)
+		{
+			std::string resstr = CommonFuncs::gbk2utf("获得任务奖励：");
+			for (unsigned int i = 0; i < vec_res.size(); i++)
+			{
+				std::string resid = vec_res[i];
+				int intres = atoi(resid.c_str());
+				int count = 1;
+				if (intres != 0)
+				{
+					resid = StringUtils::format("%d", intres / 1000);
+					count = intres % 1000;
+				}
+
+				resstr.append(StringUtils::format("%sx%d", GlobalData::map_allResource[resid].cname.c_str(), count));
+				resstr.append(CommonFuncs::gbk2utf("，"));
+			}
+			Label * reslbl = Label::createWithTTF(resstr.substr(0, resstr.length()-3), "fonts/STXINGKA.TTF", 32);
+			reslbl->setMaxLineWidth(650);
+			reslbl->setPosition(Vec2(0, -200));
+			reslbl->setColor(Color3B(255, 255, 255));
+			csbnode->addChild(reslbl);
+		}
+		_target->runAction(Sequence::create(DelayTime::create(2.3f), CallFunc::create(CC_CALLBACK_0(Winlayer::removeMissionAnim, _target)), NULL));
+	}
 }
 
+void Winlayer::removeMissionAnim(Ref* pSender)
+{
+	Node* _target = (Node*)pSender;
+	if (_target != NULL)
+		_target->removeChildByName("missionanimlayer");
+}

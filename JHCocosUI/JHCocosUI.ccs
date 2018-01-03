@@ -197,6 +197,7 @@
           <Image Name="bigbgclosebtn.png" />
           <Image Name="blank.png" />
           <Image Name="bookshelf.png" />
+          <Image Name="branchmissionbox.png" />
           <Image Name="buildingguide.png" />
           <Image Name="builditem.png" />
           <Image Name="buildprogressbar.png" />

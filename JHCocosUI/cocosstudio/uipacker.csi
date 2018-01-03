@@ -610,6 +610,7 @@
       <FilePathData Path="ui/hsljitem0.png" />
       <FilePathData Path="ui/hsljitem1.png" />
       <FilePathData Path="ui/hsljmyitem.png" />
+      <FilePathData Path="ui/branchmissionbox.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>
