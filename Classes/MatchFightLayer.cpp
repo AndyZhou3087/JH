@@ -20,6 +20,7 @@ MatchFightLayer::MatchFightLayer()
 	win = 0;
 	nextmyhero = 1;
 	nextplayerhero = 1;
+	GlobalData::isPlayerChallenging = true;
 }
 
 

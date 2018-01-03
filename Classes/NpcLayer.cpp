@@ -254,6 +254,7 @@ void NpcLayer::refreshNpcNode()
 	reFreshFriendlyUI();
 
 	updatePlotUI(0);
+	updatePlotUI(1);
 }
 
 void NpcLayer::checkUpateNpc(float dt)
@@ -1035,6 +1036,15 @@ void NpcLayer::updatePlotUI(int type)
 						micon->setPosition(Vec2(talkbtn->getContentSize().width - 10, talkbtn->getContentSize().height - 10));
 						talkbtn->addChild(micon, 0, smissionname);
 					}
+					//支线任务不现实提示标签
+					if (type == 1)
+					{
+						if (onFight->getChildByName(smissionname) != NULL)
+							onFight->removeChildByName(smissionname);
+
+						if (talkbtn->getChildByName(smissionname) != NULL)
+							talkbtn->removeChildByName(smissionname);
+					}
 				}
 			}
 		}
@@ -1088,8 +1098,6 @@ void NpcLayer::updatePlotUI(int type)
 			//支线任务不现实提示标签
 			if (type == 1)
 			{
-				std::string dmissionname = StringUtils::format("m%d_1", type);
-
 				if (onFight->getChildByName(dmissionname) != NULL)
 					onFight->removeChildByName(dmissionname);
 

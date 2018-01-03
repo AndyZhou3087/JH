@@ -113,22 +113,23 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 					plotdata = &GlobalData::map_BranchPlotMissionData[mid][subindex];
 				plottype = 1;
 			}
-			else
-			{
-				std::map<std::string, std::vector<PlotMissionData>>::iterator it;
-				for (it = GlobalData::map_BranchPlotMissionData.begin(); it != GlobalData::map_BranchPlotMissionData.end(); it++)
-				{
-					if (GlobalData::map_BranchPlotMissionData[it->first].size() > 0)
-					{
-						PlotMissionData* pmdata = &GlobalData::map_BranchPlotMissionData[it->first][0];
-						if (pmdata->snpc.compare(npcid) == 0 && pmdata->unlockchapter <= GlobalData::getUnlockChapter() && GlobalData::map_BranchPlotMissionItem[pmdata->id].count > 0)
-						{
-							plotdata = pmdata;
-							break;
-						}
-					}
-				}
-			}
+			//else
+			//{
+			//	std::map<std::string, std::vector<PlotMissionData>>::iterator it;
+			//	for (it = GlobalData::map_BranchPlotMissionData.begin(); it != GlobalData::map_BranchPlotMissionData.end(); it++)
+			//	{
+			//		if (GlobalData::map_BranchPlotMissionData[it->first].size() > 0)
+			//		{
+			//			PlotMissionData* pmdata = &GlobalData::map_BranchPlotMissionData[it->first][0];
+			//			if (pmdata->snpc.compare(npcid) == 0 && pmdata->unlockchapter <= GlobalData::getUnlockChapter() && GlobalData::map_BranchPlotMissionItem[pmdata->id].count > 0)
+			//			{
+			//				plotdata = pmdata;
+			//				plottype = 1;
+			//				break;
+			//			}
+			//		}
+			//	}
+			//}
 		}
 	}
 

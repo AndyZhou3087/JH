@@ -17,7 +17,7 @@ MatchFightResultLayer::MatchFightResultLayer()
 
 MatchFightResultLayer::~MatchFightResultLayer()
 {
-
+	GlobalData::isPlayerChallenging = false;
 }
 
 
