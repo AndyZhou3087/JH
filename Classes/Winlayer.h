@@ -27,6 +27,9 @@ public:
 	新手引导
 	*****************************/
 	void checkNewerGuide();
+
+	static void showMissionAnim(Node* _target, std::string text, std::vector<std::string> vec_res);
+	static void removeMissionAnim(Ref* pSender);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
@@ -44,7 +47,6 @@ private:
 	void onSuccess();
 	void onErr(int errcode);
 
-	void showMissionAnim(std::string text);
 private:
 	std::string m_npcid;
 	std::string m_addrid;

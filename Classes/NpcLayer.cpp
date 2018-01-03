@@ -15,6 +15,7 @@
 #include "GiveLayer.h"
 #include "NewerGuide2Layer.h"
 #include "NpcTalkLayer.h"
+#include "Winlayer.h"
 
 std::string replacestr[] = {"少侠","小子","小兄弟","小伙子", "兄台"};
 std::string areplacestr[] = {"女侠","小娘子","小姑娘","小姑娘","姑娘"};
@@ -626,7 +627,7 @@ void NpcLayer::onItemGive(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		Node* node = (Node*)pSender;
 		std::string npcid = GlobalData::map_maps[m_addrstr].npcs[node->getTag()];
 		Layer* layer = GiveLayer::create(npcid, m_addrstr);
-		this->addChild(layer);
+		g_gameLayer->addChild(layer, 4);
 	}
 }
 
@@ -841,7 +842,8 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 				if (plotData->type == 0)
 				{
 					plotData->status = M_DONE;
-					getWinRes(plotData->rewords, m_addrstr);
+					std::vector<std::string> vec_rwdres = plotData->rewords;
+					getWinRes(vec_rwdres, m_addrstr);
 
 					int unlockchapter = 0;
 					if (type == 0)
@@ -867,6 +869,7 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 							GlobalData::map_BranchPlotMissionItem[plotData->id].subindex++;
 							GlobalData::saveBranchPlotMissionStatus(plotData->id, M_NONE);
 						}
+						Winlayer::showMissionAnim(g_gameLayer, "任务完成", vec_rwdres);
 					}
 
 					updatePlotUI(type);

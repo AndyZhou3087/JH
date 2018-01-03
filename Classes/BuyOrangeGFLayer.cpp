@@ -42,7 +42,7 @@ bool BuyOrangeGFLayer::init()
 	cocos2d::ui::Widget *backbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(BuyOrangeGFLayer::onBack, this));
 
-	cocos2d::ui::Widget* gfbox = (cocos2d::ui::Widget*)csbnode->getChildByName("buildsmall");
+	cocos2d::ui::ImageView* gfbox = (cocos2d::ui::ImageView*)csbnode->getChildByName("buildsmall");
 
 	cocos2d::ui::ImageView* gfimg = (cocos2d::ui::ImageView*)gfbox->getChildByName("Image");
 	cocos2d::ui::Text* gfname = (cocos2d::ui::Text*)csbnode->getChildByName("namelbl");
@@ -86,10 +86,18 @@ bool BuyOrangeGFLayer::init()
 		yinliangname->setString(str);
 		descstr = StringUtils::format("%s%s%s%d%s", CommonFuncs::gbk2utf("当前已拥有“").c_str(), GlobalData::map_allResource[vec_tmpqu5gf[r]].cname.c_str(), CommonFuncs::gbk2utf("”，自动转换成").c_str(), SILVERCOUNT, CommonFuncs::gbk2utf("银两！拿着银两去客栈找小宝买秘籍吧！").c_str());
 	}
-	std::string iconstr = StringUtils::format("ui/%s.png", vec_tmpqu5gf[r].c_str());
+
+	std::string gwstr = vec_tmpqu5gf[r];
+	if (GlobalData::map_wgngs[gwstr].qu == 4)
+	{
+		std::string gwboxstr = "ui/qubox4.png";//StringUtils::format("ui/qubox4.png");
+		gfbox->loadTexture(gwboxstr, cocos2d::ui::Widget::TextureResType::PLIST);
+	}
+
+	std::string iconstr = StringUtils::format("ui/%s.png", gwstr.c_str());
 	gfimg->loadTexture(iconstr, cocos2d::ui::Widget::TextureResType::PLIST);
 	gfimg->setContentSize(Sprite::createWithSpriteFrameName(iconstr)->getContentSize());
-	gfname->setString(GlobalData::map_allResource[vec_tmpqu5gf[r]].cname);
+	gfname->setString(GlobalData::map_allResource[gwstr].cname);
 	desc->setString(descstr);
 
 	auto listener = EventListenerTouchOneByOne::create();

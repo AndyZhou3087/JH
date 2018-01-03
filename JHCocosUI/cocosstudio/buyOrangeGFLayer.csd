@@ -43,7 +43,7 @@
             <FileData Type="MarkedSubImage" Path="ui/gettext.png" Plist="uipacker.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="buildsmall" ActionTag="-1278453679" Tag="37" IconVisible="False" LeftMargin="153.9997" RightMargin="444.0003" TopMargin="503.6424" BottomMargin="654.3576" ctype="SpriteObjectData">
+          <AbstractNodeData Name="buildsmall" ActionTag="-1094556289" Tag="51" IconVisible="False" LeftMargin="154.0000" RightMargin="444.0000" TopMargin="503.6400" BottomMargin="654.3600" LeftEage="40" RightEage="40" TopEage="40" BottomEage="40" Scale9OriginX="40" Scale9OriginY="40" Scale9Width="42" Scale9Height="42" ctype="ImageViewObjectData">
             <Size X="122.0000" Y="122.0000" />
             <Children>
               <AbstractNodeData Name="Image" ActionTag="651381979" Tag="38" IconVisible="False" LeftMargin="38.0000" RightMargin="38.0000" TopMargin="38.0000" BottomMargin="38.0000" LeftEage="15" RightEage="15" TopEage="15" BottomEage="15" Scale9OriginX="15" Scale9OriginY="15" Scale9Width="16" Scale9Height="16" ctype="ImageViewObjectData">
@@ -58,13 +58,12 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="214.9997" Y="715.3576" />
+            <Position X="215.0000" Y="715.3600" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2986" Y="0.5589" />
             <PreSize X="0.1694" Y="0.0953" />
             <FileData Type="MarkedSubImage" Path="ui/qubox5.png" Plist="uipacker.plist" />
-            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="namelbl" ActionTag="-1842722369" Tag="39" IconVisible="False" LeftMargin="144.4992" RightMargin="434.5008" TopMargin="641.0022" BottomMargin="602.9978" FontSize="35" LabelText="葵花宝典" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="141.0000" Y="36.0000" />

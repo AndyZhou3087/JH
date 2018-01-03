@@ -332,7 +332,7 @@ void ReviveLayer::checkFreeReviveCount(float dt)
 		m_closebtn->setVisible(true);
 		m_cancelbtn->setVisible(false);
 		m_sharetext->setString(CommonFuncs::gbk2utf("（每天免费复活一次！）"));
-		m_sharetext->setTextColor(Color4B(255, 255, 255, 255));
+		m_sharetext->setTextColor(Color4B(0, 0, 0, 255));
 		m_sharetext->setVisible(true);
 		m_freeRevivebtn->setVisible(true);
 	}

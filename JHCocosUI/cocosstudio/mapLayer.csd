@@ -910,29 +910,52 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="branchmission" ActionTag="-1789424580" Tag="123" IconVisible="False" LeftMargin="564.7181" RightMargin="113.2819" TopMargin="407.5294" BottomMargin="822.4706" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="16" Scale9Height="18" ctype="ImageViewObjectData">
-            <Size X="42.0000" Y="50.0000" />
+          <AbstractNodeData Name="branchmission" ActionTag="-1789424580" Tag="123" IconVisible="False" LeftMargin="538.7158" RightMargin="1.2842" TopMargin="415.5306" BottomMargin="762.4694" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="154" Scale9Height="70" ctype="ImageViewObjectData">
+            <Size X="180.0000" Y="102.0000" />
             <Children>
-              <AbstractNodeData Name="timetext" ActionTag="-1428191315" Tag="124" IconVisible="False" LeftMargin="55.0831" RightMargin="-95.0831" TopMargin="11.0640" BottomMargin="7.9360" FontSize="30" LabelText="30:00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="82.0000" Y="31.0000" />
+              <AbstractNodeData Name="mapmission" ActionTag="-173228260" Tag="112" IconVisible="False" LeftMargin="19.3143" RightMargin="118.6857" TopMargin="43.6623" BottomMargin="8.3377" ctype="SpriteObjectData">
+                <Size X="42.0000" Y="50.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="96.0831" Y="23.4360" />
+                <Position X="40.3143" Y="33.3377" />
+                <Scale ScaleX="0.8000" ScaleY="0.8000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2240" Y="0.3268" />
+                <PreSize X="0.2333" Y="0.4902" />
+                <FileData Type="MarkedSubImage" Path="ui/mapmission1_0.png" Plist="uipacker.plist" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="text" ActionTag="-178986496" Tag="111" IconVisible="False" LeftMargin="19.5144" RightMargin="19.4856" TopMargin="13.5497" BottomMargin="59.4503" FontSize="28" LabelText="任务倒计时" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="141.0000" Y="29.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="90.0144" Y="73.9503" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="204" G="4" B="4" />
-                <PrePosition X="2.2877" Y="0.4687" />
-                <PreSize X="1.9524" Y="0.6200" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5001" Y="0.7250" />
+                <PreSize X="0.7833" Y="0.2843" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="timetext" ActionTag="-1428191315" Tag="124" IconVisible="False" LeftMargin="74.0825" RightMargin="23.9175" TopMargin="56.0643" BottomMargin="14.9357" FontSize="30" LabelText="30:00" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="82.0000" Y="31.0000" />
+                <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                <Position X="156.0825" Y="30.4357" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.8671" Y="0.2984" />
+                <PreSize X="0.4556" Y="0.3039" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="585.7181" Y="847.4706" />
+            <Position X="628.7158" Y="813.4694" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8135" Y="0.6621" />
-            <PreSize X="0.0583" Y="0.0391" />
-            <FileData Type="MarkedSubImage" Path="ui/mapmission1_0.png" Plist="uipacker.plist" />
+            <PrePosition X="0.8732" Y="0.6355" />
+            <PreSize X="0.2500" Y="0.0797" />
+            <FileData Type="MarkedSubImage" Path="ui/branchmissionbox.png" Plist="uipacker.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
