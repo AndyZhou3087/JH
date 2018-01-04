@@ -1,4 +1,4 @@
-#include "GiveLayer.h"
+﻿#include "GiveLayer.h"
 #include "GlobalData.h"
 #include "CommonFuncs.h"
 #include "MyPackage.h"
@@ -399,6 +399,7 @@ void GiveLayer::doGiveMission()
 		{
 			needgoods = pd.needgoods;
 		}
+
 		if (pd.status == M_DOING && pd.type == 2 && GlobalData::map_BranchPlotMissionItem[curmid].count > 0)
 		{
 			for (unsigned int i = 0; i < needgoods.size(); i++)

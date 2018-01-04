@@ -382,7 +382,7 @@ void GameScene::saveAllData()
 
 void GameScene::onExit()
 {
-	saveAllData();
+	//saveAllData();
 	Layer::onExit();
 }
 

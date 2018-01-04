@@ -315,7 +315,8 @@ bool Hero::checkifHasGF_Equip(std::string gfeid)
 	//背包中是否有
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
-		if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
+		PackageData* pone = &MyPackage::vec_packages[i];
+		if (pone->strid.compare(gfeid) == 0 && (pone->type == N_GONG || pone->type == W_GONG || pone->type == WEAPON || pone->type == PROTECT_EQU))
 			return true;
 	}
 	//仓库中是否有
@@ -358,7 +359,8 @@ PackageData* Hero::getGF_Equip(std::string gfeid)
 	//背包中是否有
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
-		if (MyPackage::vec_packages[i].strid.compare(gfeid) == 0)
+		PackageData* pone = &MyPackage::vec_packages[i];
+		if (pone->strid.compare(gfeid) == 0 && (pone->type == N_GONG || pone->type == W_GONG || pone->type == WEAPON || pone->type == PROTECT_EQU))
 			return &MyPackage::vec_packages[i];
 	}
 	//仓库中是否有
