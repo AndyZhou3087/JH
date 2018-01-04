@@ -819,6 +819,8 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 		{
 			isplotMissioning = true;
 			plotData->status = M_DOING;
+			if (type == 1)
+				GlobalData::saveBranchPlotMissionStatus(plotData->id, plotData->status);
 			updatePlotUI(type);
 			for (unsigned int m = 0; m < plotData->words.size(); m++)
 			{
@@ -870,6 +872,7 @@ bool NpcLayer::doCheckPlotMisson(int type, NpcData npcdata)
 							GlobalData::map_BranchPlotMissionItem[plotData->id].subindex++;
 							GlobalData::saveBranchPlotMissionStatus(plotData->id, M_NONE);
 						}
+						
 						Winlayer::showMissionAnim(g_gameLayer, "任务完成", vec_rwdres);
 					}
 
