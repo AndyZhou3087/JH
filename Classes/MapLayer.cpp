@@ -828,8 +828,6 @@ void MapLayer::updateBranchMissionTime()
 
 	if (curmid.length() > 0)
 	{
-		int subindex = GlobalData::map_BranchPlotMissionItem[curmid].subindex;
-
 		string str;
 		brachmissionicon->setVisible(true);
 		cocos2d::ui::Text* timetext = (cocos2d::ui::Text*)brachmissionicon->getChildByName("timetext");
@@ -842,7 +840,8 @@ void MapLayer::updateBranchMissionTime()
 	else
 	{
 		brachmissionicon->setVisible(false);
-		g_gameLayer->removeChildByName("bmissionlayer");
+		if (g_gameLayer != NULL)
+			g_gameLayer->removeChildByName("bmissionlayer");
 	}
 }
 
