@@ -25,6 +25,7 @@
 #include "AchiveLayer.h"
 #include "PrizeLayer.h"
 #include "HSLJMainLayer.h"
+#include "BranchMissionLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -133,6 +134,7 @@ bool MapLayer::init()
 
 	brachmissionicon = (cocos2d::ui::Widget*)csbnode->getChildByName("branchmission");
 	brachmissionicon->setVisible(false);
+	brachmissionicon->addTouchEventListener(CC_CALLBACK_2(MapLayer::onBranchMisson, this));
 
 	m_timegiftbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("timegiftbtn");
 	m_timegiftbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onTimeGift, this));
@@ -840,5 +842,20 @@ void MapLayer::updateBranchMissionTime()
 	else
 	{
 		brachmissionicon->setVisible(false);
+		g_gameLayer->removeChildByName("bmissionlayer");
+	}
+}
+
+void MapLayer::onBranchMisson(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		if (GlobalData::getCurBranchPlotMissison().length() > 0)
+		{
+			BranchMissionLayer* layer = BranchMissionLayer::create();
+			g_gameLayer->addChild(layer, 5, "bmissionlayer");
+		}
+
 	}
 }

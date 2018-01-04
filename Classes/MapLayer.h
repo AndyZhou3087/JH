@@ -129,6 +129,11 @@ private:
 	void onPrize(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	支线任务详情
+	*****************************/
+	void onBranchMisson(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();
