@@ -120,6 +120,7 @@ void HelpMainLayer::onTextClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touc
 {
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		Node* node = (Node*)pSender;
 		int index = node->getTag();
 		this->addChild(HelpDescLayer::create(vec_helpdata[index].title, vec_helpdata[index].content));

@@ -232,6 +232,7 @@ int StorageUILayer::getCountByType(int type)
 
 void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->addChild(ShopLayer::create());
@@ -240,6 +241,7 @@ void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 
 void StorageUILayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
+	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->addChild(HelpMainLayer::create());
