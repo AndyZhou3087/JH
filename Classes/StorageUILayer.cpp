@@ -8,6 +8,7 @@
 #include "ShopLayer.h"
 #include "MyMenu.h"
 #include "NewerGuideLayer.h"
+#include "HelpMainLayer.h"
 
 const std::string name[] = { "食物", "药材", "武器", "防具", "内功", "武功", "资源", "工具", "其他"};
 
@@ -38,6 +39,10 @@ bool StorageUILayer::init()
 	cocos2d::ui::Widget* shopbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("shopbtn");
 	shopbtn->setVisible(true);
 	shopbtn->addTouchEventListener(CC_CALLBACK_2(StorageUILayer::onShop, this));
+
+	cocos2d::ui::Widget* helpbtn = (cocos2d::ui::Widget*)m_csbnode->getChildByName("helpbtn");
+	helpbtn->setVisible(true);
+	helpbtn->addTouchEventListener(CC_CALLBACK_2(StorageUILayer::onHelp, this));
 
 	scrollview = (cocos2d::ui::ScrollView*)m_csbnode->getChildByName("ScrollView");
 	scrollview->setScrollBarEnabled(false);
@@ -125,18 +130,34 @@ void StorageUILayer::updateResContent()
 
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
 			{
-
 				std::string boxstr = "ui/buildsmall.png";
 				PackageData tmpdata = StorageRoom::map_storageData[i][m];
+
+				bool isin = false;
+				std::map<std::string, AllResource>::iterator resit;
+				for (resit = GlobalData::map_allResource.begin(); resit != GlobalData::map_allResource.end(); resit++)
+				{
+					if (tmpdata.strid.compare(GlobalData::map_allResource[resit->first].strid) == 0)
+					{
+						isin = true;
+						break;
+					}
+				}
+				if (!isin)
+					continue;
+
+				std::string countorlvstr = StringUtils::format("%d", tmpdata.count);
 				if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 				{
 					boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+					countorlvstr = StringUtils::format("Lv%d", tmpdata.slv + 1);
 				}
 				else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
 				{
 					boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+					countorlvstr = StringUtils::format("Lv%d", tmpdata.lv + 1);
 				}
-
+				
 				Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
 				//box->setPosition(Vec2(box->getContentSize().width/2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m/5*130));
 				//scrollview->addChild(box);
@@ -161,9 +182,10 @@ void StorageUILayer::updateResContent()
 				res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 				box->addChild(res);
 
-				str = StringUtils::format("%d", StorageRoom::map_storageData[i].at(m).count);
-				Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
-				reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+
+				Label * reslbl = Label::createWithTTF(countorlvstr, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
+				reslbl->setAnchorPoint(Vec2(1, 0.5));
+				reslbl->setPosition(Vec2(box->getContentSize().width - 10, 20));
 				box->addChild(reslbl);
 
 				std::string mymixgf = GlobalData::getMixGF();
@@ -213,6 +235,14 @@ void StorageUILayer::onShop(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->addChild(ShopLayer::create());
+	}
+}
+
+void StorageUILayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		this->addChild(HelpMainLayer::create());
 	}
 }
 

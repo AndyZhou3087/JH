@@ -54,14 +54,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-816213853" Tag="41" IconVisible="False" LeftMargin="337.4992" RightMargin="337.5008" TopMargin="253.7341" BottomMargin="971.2659" FontSize="50" LabelText="床" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="45.0000" Y="55.0000" />
+          <AbstractNodeData Name="title" ActionTag="-816213853" Tag="41" IconVisible="False" LeftMargin="333.4992" RightMargin="333.5008" TopMargin="255.2341" BottomMargin="972.7659" FontSize="50" LabelText="床" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="53.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="359.9992" Y="998.7659" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.7803" />
-            <PreSize X="0.0625" Y="0.0430" />
+            <PreSize X="0.0736" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -80,18 +80,18 @@
             <ColorVector ScaleY="1.0000" />
             <InnerNodeSize Width="680" Height="670" />
           </AbstractNodeData>
-          <AbstractNodeData Name="shopbtn" ActionTag="-480739763" VisibleForFrame="False" Tag="716" IconVisible="False" LeftMargin="78.0000" RightMargin="568.0000" TopMargin="194.0000" BottomMargin="1014.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="44" Scale9Height="50" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="74.0000" Y="72.0000" />
+          <AbstractNodeData Name="shopbtn" ActionTag="-480739763" VisibleForFrame="False" Tag="716" IconVisible="False" LeftMargin="68.4999" RightMargin="558.5001" TopMargin="174.2501" BottomMargin="1014.2499" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="94" Scale9Height="100" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="93.0000" Y="91.5000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="115.0000" Y="1050.0000" />
+            <Position X="114.9999" Y="1059.9999" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1597" Y="0.8203" />
-            <PreSize X="0.1028" Y="0.0562" />
+            <PrePosition X="0.1597" Y="0.8281" />
+            <PreSize X="0.1292" Y="0.0715" />
             <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
-            <PressedFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="ui/sshopbtn.png" Plist="uipacker.plist" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/smallshopbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/smallshopbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/smallshopbtn.png" Plist="uipacker.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -185,6 +185,21 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.6250" />
             <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="helpbtn" ActionTag="-1235858783" VisibleForFrame="False" Tag="257" IconVisible="False" LeftMargin="206.0529" RightMargin="420.9471" TopMargin="170.0178" BottomMargin="1018.4822" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="94" Scale9Height="105" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="93.0000" Y="91.5000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="252.5529" Y="1064.2322" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3508" Y="0.8314" />
+            <PreSize X="0.1292" Y="0.0715" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="MarkedSubImage" Path="ui/helpbtn.png" Plist="uipacker.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="ui/helpbtn.png" Plist="uipacker.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="ui/helpbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

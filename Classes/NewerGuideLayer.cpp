@@ -197,7 +197,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		m_clippingNode->addChild(m_colorlayer);
 
 		Node* stencil = Node::create();
-		for (unsigned int i = 0; i < stencilNodes.size(); i++)
+		for (unsigned int i = 0; i < vec_userdata.size(); i++)
 		{
 			std::string path = StringUtils::format("ui/%s.png", vec_userdata[i].c_str());
 			Sprite* cnode = Sprite::createWithSpriteFrameName(path);

@@ -480,8 +480,12 @@ void HeroProperNode::selectCarryData()
 			}
 			if (issametool || issameother)
 			{
+				if (!isCanTakeOn())
+					return;
+
 				if (isout)
 				{
+
 					if (m_select->isVisible())
 					{
 						if (MyPackage::add(*m_lastSelectedData) < 0)
@@ -494,8 +498,6 @@ void HeroProperNode::selectCarryData()
 				}
 				else
 				{
-					if (!isCanTakeOn())
-						return;
 					if (m_select->isVisible())
 					{
 						if (m_lastSelectedData->type == N_GONG || m_lastSelectedData->type == W_GONG)

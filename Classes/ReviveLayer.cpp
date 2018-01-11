@@ -9,6 +9,7 @@
 #include "MD5.h"
 #include "HintBox.h"
 #include "AnalyticUtil.h"
+#include "HelpMainLayer.h"
 
 #ifdef UMENG_SHARE
 #include "UmengShare/Common/CCUMSocialSDK.h"
@@ -42,6 +43,9 @@ bool ReviveLayer::init()
 
 	cocos2d::ui::Button* revivebtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("revivebtn");
 	revivebtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onRevive, this));
+
+	cocos2d::ui::Button* helpbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("helpbtn");
+	helpbtn->addTouchEventListener(CC_CALLBACK_2(ReviveLayer::onHelp, this));
 
 	m_revivedesc = (cocos2d::ui::Text*)m_csbnode->getChildByName("revivecountlbl");
 
@@ -347,5 +351,15 @@ void ReviveLayer::checkFreeReviveCount(float dt)
 		m_sharetext->setVisible(true);
 		m_sharetext->setString(CommonFuncs::gbk2utf(rtext.c_str()));
 		m_sharetext->setTextColor(Color4B(204, 4, 4, 255));
+	}
+}
+
+void ReviveLayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		HelpMainLayer* layer = HelpMainLayer::create();
+		this->addChild(layer);
 	}
 }

@@ -210,6 +210,7 @@
           <Image Name="cooktable.png" />
           <Image Name="createfactionicon.png" />
           <Image Name="crit.png" />
+          <Image Name="csex.png" />
           <Image Name="dice1.png" />
           <Image Name="dice2.png" />
           <Image Name="dice3.png" />
@@ -277,6 +278,8 @@
           <Image Name="gp4.png" />
           <Image Name="gp5.png" />
           <Image Name="gp6.png" />
+          <Image Name="helpbtn.png" />
+          <Image Name="helptitle.png" />
           <Image Name="heroatrmixbox.png" />
           <Image Name="heroatrmixhint.png" />
           <Image Name="herohead1.png" />
@@ -557,6 +560,7 @@
           <Image Name="skill7text.png" />
           <Image Name="skill8text.png" />
           <Image Name="slock.png" />
+          <Image Name="smallshopbtn.png" />
           <Image Name="smedicinekit.png" />
           <Image Name="specialshopitem.png" />
           <Image Name="ssepline.jpg" />
@@ -722,6 +726,7 @@
         <Project Name="apprenticeLayer.csd" Type="Layer" />
         <Project Name="bookDetailsLayer.csd" Type="Layer" />
         <Project Name="bookshelfLayer.csd" Type="Layer" />
+        <Project Name="branchMissionLayer.csd" Type="Layer" />
         <Project Name="buidingUiLayer.csd" Type="Layer" />
         <Project Name="buildingDetailsLayer.csd" Type="Layer" />
         <Project Name="buyComfirmLayer.csd" Type="Layer" />
@@ -806,7 +811,8 @@
         <Project Name="vipGoodsNode.csd" Type="Node" />
         <Project Name="vipShopLayer.csd" Type="Layer" />
         <Project Name="winLayer.csd" Type="Layer" />
-        <Project Name="branchMissionLayer.csd" Type="Layer" />
+        <Project Name="helpLayer.csd" Type="Layer" />
+        <Project Name="helpDescLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

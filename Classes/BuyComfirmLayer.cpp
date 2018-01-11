@@ -10,6 +10,7 @@
 #include "AnalyticUtil.h"
 #include "MD5.h"
 #include "BuyOrangeGFLayer.h"
+#include "GameDataSave.h"
 
 BuyComfirmLayer::BuyComfirmLayer()
 {
@@ -109,7 +110,13 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 				Director::getInstance()->getRunningScene()->addChild(buygflayer);
 				m_gdata->vec_res = buygflayer->getRandQu5Gf();
 			}
-			GoldGoodsItem::addBuyGoods(m_gdata);
+
+			if (m_gdata->icon.compare("csex") == 0)
+			{
+				changeSex();
+			}
+			else
+				GoldGoodsItem::addBuyGoods(m_gdata);
 
 			StorageUILayer* storageUI = (StorageUILayer*)g_gameLayer->getChildByName("storageuilayer");
 			if (storageUI != NULL)
@@ -131,5 +138,45 @@ void BuyComfirmLayer::onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 			}
 		}
 		this->removeFromParentAndCleanup(true);
+	}
+}
+
+void BuyComfirmLayer::changeSex()
+{
+	if (g_hero->getSex() == S_NONE)
+	{
+		g_hero->setSex(S_MAN);
+		GameDataSave::getInstance()->setHeroSex(S_MAN);
+		bool istakeoff = false;
+
+		PackageData* carryData = NULL;
+		if (g_hero->getAtrByType(H_WG)->count > 0 && (g_hero->getAtrByType(H_WG)->strid.compare("w040") == 0 || g_hero->getAtrByType(H_WG)->strid.compare("w022") == 0))
+		{
+			carryData = g_hero->getAtrByType(H_WG);
+		}
+		else
+		{
+			std::string mymixgf = GlobalData::getMixGF();
+			if (mymixgf.length() > 0)
+			{
+				MixGfData mdata = GlobalData::map_MixGfData[mymixgf];
+				if (g_hero->getAtrByType(H_WG)->count > 0 && g_hero->getAtrByType(H_WG)->strid.compare(mdata.mastergf) == 0 && mdata.sex == 0)
+				{
+					carryData = g_hero->getAtrByType(H_WG);
+				}
+				else if (g_hero->getAtrByType(H_NG)->count > 0 && g_hero->getAtrByType(H_NG)->strid.compare(mdata.mastergf) == 0 && mdata.sex == 0)
+				{
+					carryData = g_hero->getAtrByType(H_NG);
+				}
+			}
+		}
+		if (carryData != NULL)
+		{
+			if (StorageRoom::getCountById(carryData->strid) <= 0)
+			{
+				StorageRoom::add(*carryData);
+				carryData->count = 0;
+			}
+		}
 	}
 }

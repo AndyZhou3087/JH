@@ -124,13 +124,16 @@ void OutDoor::updataMyPackageUI()
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData tmpdata = MyPackage::vec_packages[i];
+		std::string countorlvstr = StringUtils::format("%d", tmpdata.count);
 		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv+1);
 		}
 		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.lv+1);
 		}
 
 		Sprite * box = Sprite::createWithSpriteFrameName(boxstr);
@@ -152,9 +155,10 @@ void OutDoor::updataMyPackageUI()
 		Sprite * res = Sprite::createWithSpriteFrameName(str);
 		res->setPosition(Vec2(box->getContentSize().width / 2, box->getContentSize().height / 2));
 		box->addChild(res);
-		str = StringUtils::format("%d", MyPackage::vec_packages[i].count);
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
-		reslbl->setPosition(Vec2(box->getContentSize().width - 25, 25));
+
+		Label * reslbl = Label::createWithTTF(countorlvstr, "fonts/STXINGKA.TTF", 18);//Label::createWithSystemFont(str, "", 18);
+		reslbl->setAnchorPoint(Vec2(1, 0.5));
+		reslbl->setPosition(Vec2(box->getContentSize().width - 10, 20));
 		box->addChild(reslbl);
 
 		std::string mymixgf = GlobalData::getMixGF();
@@ -212,13 +216,18 @@ void OutDoor::updataStorageUI()
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData tmpdata = *allStorageData[i];
+
+		std::string countorlvstr = StringUtils::format("%d", tmpdata.count);
+
 		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv + 1);
 		}
 		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.lv + 1);
 		}
 		std::string name = StringUtils::format("resitem%d", i);
 		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
@@ -233,11 +242,12 @@ void OutDoor::updataStorageUI()
 		cocos2d::ui::ImageView* res = cocos2d::ui::ImageView::create(str, cocos2d::ui::Widget::TextureResType::PLIST);
 		boxItem->addChild(res, 0, "res");
 		res->setPosition(Vec2(boxItem->getContentSize().width / 2, boxItem->getContentSize().height / 2));
-		str = StringUtils::format("%d", allStorageData[i]->count);
 
-		Label * reslbl = Label::createWithTTF(str, "fonts/STXINGKA.TTF", 18);
+		Label * reslbl = Label::createWithTTF(countorlvstr, "fonts/STXINGKA.TTF", 18);
 		boxItem->addChild(reslbl, 0, "lbl");
-		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 25, 25));
+		reslbl->setAnchorPoint(Vec2(1, 0.5f));
+
+		reslbl->setPosition(Vec2(boxItem->getContentSize().width - 10, 20));
 
 		std::string mymixgf = GlobalData::getMixGF();
 		MixGfData mdata = GlobalData::map_MixGfData[mymixgf];

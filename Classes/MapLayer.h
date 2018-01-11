@@ -134,6 +134,11 @@ private:
 	void onBranchMisson(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	攻略
+	*****************************/
+	void onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();
@@ -184,7 +189,7 @@ private:
 	cocos2d::ui::Widget* m_vulture;
 	cocos2d::ui::Widget* achiveRedpoint;
 	cocos2d::ui::Widget* m_prizebtn;
-
+	cocos2d::ui::Widget* m_helpbtn;
 	cocos2d::ui::Widget* brachmissionicon;
 };
 extern MapLayer* g_maplayer;//全局地图层

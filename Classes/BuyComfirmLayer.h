@@ -20,6 +20,7 @@ private:
 private:
 	void onCancel(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void onBuy(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+	void changeSex();
 };
 #endif
 

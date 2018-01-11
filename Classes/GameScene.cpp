@@ -363,6 +363,7 @@ void GameScene::saveAllData()
 	GameDataSave::getInstance()->setHeroId(g_hero->getHeadID());
 	GameDataSave::getInstance()->setHeroExp(g_hero->getExpValue());
 	GameDataSave::getInstance()->setHeroIsOut(g_hero->getIsOut());
+	GameDataSave::getInstance()->setHeroSex(g_hero->getSex());
 
 	//保存资源数据
 	GlobalData::saveResData();

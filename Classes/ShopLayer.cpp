@@ -25,13 +25,14 @@ int ShopLayer::payindex = -1;
 bool ShopLayer::isPaying = false;
 ShopLayer::ShopLayer()
 {
+	ischangePause = false;
 }
 
 
 ShopLayer::~ShopLayer()
 {
-
-	GlobalData::g_gameStatus = GAMESTART;
+	if (GlobalData::g_gameStatus == GAMEPAUSE && ischangePause)
+		GlobalData::g_gameStatus = GAMESTART;
 	if (g_hero != NULL && g_hero->getIsMoving())
 	{
 		g_maplayer->heroResumeMoving();
@@ -154,7 +155,10 @@ bool ShopLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	if (GlobalData::g_gameStatus == GAMESTART)
+	{
 		GlobalData::g_gameStatus = GAMEPAUSE;
+		ischangePause = true;
+	}
 
 	if (g_hero != NULL && g_hero->getIsMoving())
 	{

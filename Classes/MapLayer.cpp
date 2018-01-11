@@ -26,6 +26,8 @@
 #include "PrizeLayer.h"
 #include "HSLJMainLayer.h"
 #include "BranchMissionLayer.h"
+#include "HintBox.h"
+#include "HelpMainLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -70,7 +72,7 @@ bool MapLayer::init()
 		mapname->addTouchEventListener(CC_CALLBACK_2(MapLayer::onclick, this));
 		mapname->setSwallowTouches(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		mapname->setVisible(true);
+		mapname->setVisible(false);
 #else
 		mapname->setVisible(false);
 #endif
@@ -88,6 +90,10 @@ bool MapLayer::init()
 		{
 			achiveRedpoint = (cocos2d::ui::Widget*)mapname->getChildByName("redpoint");
 			achiveRedpoint->setVisible(false);
+		}
+		else if (mapname->getName().compare("m13-1") == 0)
+		{
+			mapname->setVisible(true);
 		}
 	}
 
@@ -143,6 +149,9 @@ bool MapLayer::init()
 	m_rafflebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("rafflebtn");
 	m_rafflebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onRaffle, this));
 	m_rafflebtn->setVisible(false);
+
+	m_helpbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("helpbtn");
+	m_helpbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onHelp, this));
 
 	m_prizebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("prizebtn");
 	m_prizebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onPrize, this));
@@ -232,6 +241,12 @@ void MapLayer::onclick(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTyp
 		}
 		else
 		{
+			if (m_addrname.compare("m13-1") == 0 && GlobalData::getUnlockChapter() < 13)
+			{
+				HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("解锁第13章方可进入！挑战过程中角色会死亡，复活后可继续挑战，挑战过程中可通过胜点购买属性，中途退出也可获得收益。"));
+				g_gameLayer->addChild(hbox, 5);
+				return;
+			}
 			m_destPos = node->getPosition();
 			m_distance = fabsf(m_heroPos.distance(m_destPos));
 			WHERELAYER_TYPE type = ARRIVE;
@@ -787,7 +802,7 @@ void MapLayer::checkTimeGift(float dt)
 		m_lotteryimg->setScale(1.0f);
 	}
 
-	m_prizebtn->setVisible(GlobalData::isExchangeGift);
+	//m_prizebtn->setVisible(GlobalData::isExchangeGift);
 
 	updateBranchMissionTime();
 }
@@ -856,5 +871,15 @@ void MapLayer::onBranchMisson(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 			g_gameLayer->addChild(layer, 5, "bmissionlayer");
 		}
 
+	}
+}
+
+void MapLayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		HelpMainLayer* layer = HelpMainLayer::create();
+		g_gameLayer->addChild(layer, 5);
 	}
 }

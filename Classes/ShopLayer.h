@@ -36,6 +36,7 @@ private:
 	Node* m_csbnode;
 	static int payindex;
 	static bool isPaying;
+	bool ischangePause;
 };
 #endif
 
