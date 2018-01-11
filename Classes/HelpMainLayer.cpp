@@ -74,10 +74,13 @@ bool HelpMainLayer::init()
 
 		cocos2d::ui::ImageView* line = cocos2d::ui::ImageView::create("ui/qqline0.png", cocos2d::ui::Widget::TextureResType::PLIST);
 		line->setAnchorPoint(Vec2(0, 0.5));
+		line->setTouchEnabled(true);
 		line->setPosition(Vec2(0,-2));
 		line->setScale9Enabled(true);
 		line->setColor(Color3B(8, 70, 127));
 		line->setContentSize(Size(titletxt->getContentSize().width, 3));
+		line->addTouchEventListener(CC_CALLBACK_2(HelpMainLayer::onTextClick, this));
+		line->setTag(i);
 		titletxt->addChild(line);
 	}
 

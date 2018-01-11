@@ -26,14 +26,14 @@
             <PreSize X="0.8361" Y="0.2109" />
             <FileData Type="Normal" Path="images/t001.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="2053406277" Tag="41" IconVisible="False" LeftMargin="82.0186" RightMargin="434.9814" TopMargin="437.2279" BottomMargin="787.7721" FontSize="50" LabelText="武道大会" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="203.0000" Y="55.0000" />
+          <AbstractNodeData Name="title" ActionTag="2053406277" Tag="41" IconVisible="False" LeftMargin="82.0186" RightMargin="433.9814" TopMargin="438.7279" BottomMargin="789.2721" FontSize="50" LabelText="武道大会" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="204.0000" Y="52.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="82.0186" Y="815.2721" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.1139" Y="0.6369" />
-            <PreSize X="0.2819" Y="0.0430" />
+            <PreSize X="0.2833" Y="0.0406" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -53,14 +53,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="desc" ActionTag="18067938" Tag="56" IconVisible="False" LeftMargin="88.6567" RightMargin="468.3433" TopMargin="790.8793" BottomMargin="445.1207" FontSize="40" LabelText="武道大会" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="163.0000" Y="44.0000" />
+          <AbstractNodeData Name="desc" ActionTag="18067938" Tag="56" IconVisible="False" LeftMargin="88.6567" RightMargin="467.3433" TopMargin="792.3793" BottomMargin="446.6207" FontSize="40" LabelText="武道大会" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="164.0000" Y="41.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="88.6567" Y="467.1207" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.1231" Y="0.3649" />
-            <PreSize X="0.2264" Y="0.0344" />
+            <PreSize X="0.2278" Y="0.0320" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -78,6 +78,18 @@
             <DisabledFileData Type="MarkedSubImage" Path="ui/disbtn.png" Plist="uipacker.plist" />
             <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
             <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="desc_0" ActionTag="1670778424" Tag="243" IconVisible="False" LeftMargin="88.6564" RightMargin="91.3436" TopMargin="888.8582" BottomMargin="326.1419" IsCustomSize="True" FontSize="32" LabelText="挑战各大武林高手可获得祝福宝石、混沌石、玄铁、银两等资源。" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="540.0000" Y="65.0000" />
+            <AnchorPoint ScaleY="0.5000" />
+            <Position X="88.6564" Y="358.6419" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.1231" Y="0.2802" />
+            <PreSize X="0.7500" Y="0.0508" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

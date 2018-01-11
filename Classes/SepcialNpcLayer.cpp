@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "GameScene.h"
 #include "FightLayer.h"
+#include "HintBox.h"
 SepcialNpcLayer::SepcialNpcLayer()
 {
 
@@ -78,6 +79,13 @@ void SepcialNpcLayer::onFight(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
+		if (m_addrstr.compare("m13-1") == 0 && GlobalData::getUnlockChapter() < 13)
+		{
+			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("解锁第13章方可挑战！挑战失败，复活后可继续挑战，挑战过程中可通过胜点购买属性，中途退出也可获得收益。"));
+			g_gameLayer->addChild(hbox, 5);
+			return;
+		}
+
 		GlobalData::map_maps[m_addrstr].npcs.clear();
 		std::map<std::string, NpcData>::iterator it;
 		for (it = GlobalData::map_npcs.begin(); it != GlobalData::map_npcs.end(); ++it)

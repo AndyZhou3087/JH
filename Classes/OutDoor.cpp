@@ -124,6 +124,22 @@ void OutDoor::updataMyPackageUI()
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData tmpdata = MyPackage::vec_packages[i];
+
+		int countindex = -1;
+		bool isin = false;
+		std::map<std::string, AllResource>::iterator resit;
+		for (resit = GlobalData::map_allResource.begin(); resit != GlobalData::map_allResource.end(); resit++)
+		{
+			if (tmpdata.strid.compare(GlobalData::map_allResource[resit->first].strid) == 0)
+			{
+				isin = true;
+				countindex++;
+				break;
+			}
+		}
+		if (!isin)
+			continue;
+
 		std::string countorlvstr = StringUtils::format("%d", tmpdata.count);
 		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 		{
@@ -144,11 +160,11 @@ void OutDoor::updataMyPackageUI()
 			box,
 			CC_CALLBACK_1(OutDoor::onPackageItem, this));
 		boxItem->setTag(i);
-		boxItem->setPosition(Vec2(110 + i * 125, 530));
+		boxItem->setPosition(Vec2(110 + countindex * 125, 530));
 		Menu* menu = Menu::create();
 		menu->addChild(boxItem);
 		menu->setPosition(Vec2(0, 0));
-		std::string name = StringUtils::format("pitem%d", i);
+		std::string name = StringUtils::format("pitem%d", countindex);
 		m_csbnode->addChild(menu, 0, name);
 
 		std::string str = StringUtils::format("ui/%s.png", MyPackage::vec_packages[i].strid.c_str());
@@ -212,10 +228,25 @@ void OutDoor::updataStorageUI()
 		}
 	}
 
+	int countindex = -1;
 	for (unsigned int i = 0; i < allStorageData.size(); i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData tmpdata = *allStorageData[i];
+
+		bool isin = false;
+		std::map<std::string, AllResource>::iterator resit;
+		for (resit = GlobalData::map_allResource.begin(); resit != GlobalData::map_allResource.end(); resit++)
+		{
+			if (tmpdata.strid.compare(GlobalData::map_allResource[resit->first].strid) == 0)
+			{
+				isin = true;
+				countindex++;
+				break;
+			}
+		}
+		if (!isin)
+			continue;
 
 		std::string countorlvstr = StringUtils::format("%d", tmpdata.count);
 
@@ -229,13 +260,13 @@ void OutDoor::updataStorageUI()
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_wgngs[tmpdata.strid].qu);
 			countorlvstr = StringUtils::format("Lv%d", tmpdata.lv + 1);
 		}
-		std::string name = StringUtils::format("resitem%d", i);
+		std::string name = StringUtils::format("resitem%d", countindex);
 		cocos2d::ui::ImageView* boxItem = cocos2d::ui::ImageView::create(boxstr, cocos2d::ui::Widget::TextureResType::PLIST);
 		boxItem->addTouchEventListener(CC_CALLBACK_2(OutDoor::onStorageItem, this));
 		boxItem->setTouchEnabled(true);
 		scrollview->addChild(boxItem, 0, name);
 		boxItem->setUserData(allStorageData[i]);
-		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + i % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - i / 5 * 130));
+		boxItem->setPosition(Vec2(boxItem->getContentSize().width / 2 + 10 + countindex % 5 * 125, innerheight - boxItem->getContentSize().height / 2 - countindex / 5 * 130));
 
 		std::string str = StringUtils::format("ui/%s.png", allStorageData[i]->strid.c_str());
 

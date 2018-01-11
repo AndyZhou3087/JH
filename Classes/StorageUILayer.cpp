@@ -128,6 +128,7 @@ void StorageUILayer::updateResContent()
 			namelbl->setPosition(Vec2(25, 25));
 			sepline->addChild(namelbl);
 
+			int countindex = -1;
 			for (unsigned int m = 0; m < StorageRoom::map_storageData[i].size(); m++)
 			{
 				std::string boxstr = "ui/buildsmall.png";
@@ -140,6 +141,7 @@ void StorageUILayer::updateResContent()
 					if (tmpdata.strid.compare(GlobalData::map_allResource[resit->first].strid) == 0)
 					{
 						isin = true;
+						countindex++;
 						break;
 					}
 				}
@@ -169,12 +171,12 @@ void StorageUILayer::updateResContent()
 					CC_CALLBACK_1(StorageUILayer::onclick, this));
 				boxItem->setTag(0);
 				boxItem->setUserData(&StorageRoom::map_storageData[i].at(m));
-				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + m % 5 * 120, sepline->getPositionY() - 5 - 65 - m / 5 * 130));
+				boxItem->setPosition(Vec2(box->getContentSize().width / 2 + 20 + countindex % 5 * 120, sepline->getPositionY() - 5 - 65 - countindex / 5 * 130));
 				MyMenu* menu = MyMenu::create();
 				menu->addChild(boxItem);
 				menu->setTouchlimit(scrollview);
 				menu->setPosition(Vec2(0, 0));
-				std::string namestr = StringUtils::format("resitem%d", i * 100 + m);
+				std::string namestr = StringUtils::format("resitem%d", i * 100 + countindex);
 				scrollview->addChild(menu, 0, namestr);
 
 				std::string str = StringUtils::format("ui/%s.png", StorageRoom::map_storageData[i].at(m).strid.c_str());
