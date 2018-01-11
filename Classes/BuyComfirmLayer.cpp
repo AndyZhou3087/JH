@@ -170,13 +170,19 @@ void BuyComfirmLayer::changeSex()
 				}
 			}
 		}
+		std::string str = CommonFuncs::gbk2utf("已恢复男儿身！！");
 		if (carryData != NULL)
 		{
 			if (StorageRoom::getCountById(carryData->strid) <= 0)
 			{
 				StorageRoom::add(*carryData);
 				carryData->count = 0;
+				str = CommonFuncs::gbk2utf("恢复男儿身！！【%s】无法使用，已放置到仓库中。");
+				str = StringUtils::format(str.c_str(), GlobalData::map_allResource[carryData->strid].cname.c_str());
 			}
 		}
+
+		HintBox* box = HintBox::create(str);
+		g_gameLayer->addChild(box, 5);
 	}
 }
