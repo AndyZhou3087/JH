@@ -53,7 +53,7 @@ bool HelpMainLayer::init()
 	m_srollView->setTouchEnabled(false);
 	loadHelpText();
 
-	int itemh = 80;
+	int itemh = 70;
 	int innerheight = vec_helpdata.size() * itemh;
 	int contentheight = m_srollView->getContentSize().height;
 	if (innerheight < contentheight)
