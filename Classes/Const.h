@@ -87,7 +87,7 @@ static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"};
 
 static std::string dgqbinmap[] = { "m7-3", "m3-4", "m4-9", "m6-3", "m7-12", "m2-3", "m7-8", "m10-1", "m11-3" };
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-static std::string QQNUM[] = { "552393763", "593243749" };
+static std::string QQNUM[] = { "621564945", "593243749" };
 #else
 static std::string QQNUM[] = { "641759306" };
 #endif
