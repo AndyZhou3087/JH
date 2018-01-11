@@ -35,14 +35,14 @@
                 <PreSize X="0.8548" Y="0.6709" />
                 <FileData Type="MarkedSubImage" Path="ui/gd0.png" Plist="uipacker.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="name" ActionTag="690578992" Tag="55" IconVisible="False" LeftMargin="-0.4766" RightMargin="1.4766" TopMargin="116.8699" BottomMargin="0.1301" FontSize="40" LabelText="1360两" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="123.0000" Y="41.0000" />
+              <AbstractNodeData Name="name" ActionTag="690578992" Tag="55" IconVisible="False" LeftMargin="4.0234" RightMargin="5.9766" TopMargin="119.3699" BottomMargin="2.6301" FontSize="35" LabelText="2388两" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="114.0000" Y="36.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="61.0234" Y="20.6301" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.4921" Y="0.1306" />
-                <PreSize X="0.9919" Y="0.2595" />
+                <PreSize X="0.9194" Y="0.2278" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

@@ -63,24 +63,22 @@ bool HelpMainLayer::init()
 	for (unsigned int i = 0; i < vec_helpdata.size(); i++)
 	{
 		std::string str = StringUtils::format("%s.%s", vec_helpdata[i].id.c_str(), vec_helpdata[i].title.c_str());
-		cocos2d::ui::TextField* textField = cocos2d::ui::TextField::create(str, "fonts/STXINGKA.TTF", 30);
-		textField->setMaxLengthEnabled(true);
-		textField->setMaxLength(550);
-		textField->setAnchorPoint(Vec2(0, 0.5));
-		textField->setColor(Color3B(8, 70, 127));
-		textField->setPosition(Vec2(50, innerheight - 30 - i* itemh));
-		textField->addTouchEventListener(CC_CALLBACK_2(HelpMainLayer::onTextClick, this));
-		textField->setTag(i);
-		m_srollView->addChild(textField);
+		cocos2d::ui::Text* titletxt = cocos2d::ui::Text::create(str, "fonts/STXINGKA.TTF", 30);
+		titletxt->setTouchEnabled(true);
+		titletxt->setAnchorPoint(Vec2(0, 0.5));
+		titletxt->setColor(Color3B(8, 70, 127));
+		titletxt->setPosition(Vec2(50, innerheight - 30 - i* itemh));
+		titletxt->addTouchEventListener(CC_CALLBACK_2(HelpMainLayer::onTextClick, this));
+		titletxt->setTag(i);
+		m_srollView->addChild(titletxt);
 
 		cocos2d::ui::ImageView* line = cocos2d::ui::ImageView::create("ui/qqline0.png", cocos2d::ui::Widget::TextureResType::PLIST);
 		line->setAnchorPoint(Vec2(0, 0.5));
 		line->setPosition(Vec2(0,-2));
-		line->ignoreContentAdaptWithSize(false);
 		line->setScale9Enabled(true);
 		line->setColor(Color3B(8, 70, 127));
-		line->setContentSize(Size(textField->getContentSize().width, 3));
-		textField->addChild(line);
+		line->setContentSize(Size(titletxt->getContentSize().width, 3));
+		titletxt->addChild(line);
 	}
 
 	if (GlobalData::g_gameStatus == GAMESTART)

@@ -129,6 +129,7 @@ private:
 	cocos2d::ui::ImageView* imgbtn[8];//8种装备框
 	cocos2d::ui::Text* lvtext[8];//8种装备等级或者耐久度
 	cocos2d::ui::Widget* heroselectbg;//选择装备背景
+	cocos2d::ui::Widget* amountdesc;//坐骑说明
 	cocos2d::ui::Widget* heroppoint;//装备背景上的三角形
 	cocos2d::ui::Text* title;//标题
 	int lastclickindex;//上次选中装备栏类型index

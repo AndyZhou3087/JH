@@ -298,14 +298,14 @@
                 <FileData Type="MarkedSubImage" Path="ui/syssmalltie.png" Plist="uipacker.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="title" ActionTag="-2042744108" Tag="72" IconVisible="False" LeftMargin="274.5802" RightMargin="272.4198" TopMargin="15.5114" BottomMargin="498.4886" FontSize="50" LabelText="外功" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="97.0000" Y="52.0000" />
+              <AbstractNodeData Name="title" ActionTag="-2042744108" Tag="72" IconVisible="False" LeftMargin="284.0802" RightMargin="281.9198" TopMargin="21.0114" BottomMargin="503.9886" FontSize="40" LabelText="外功" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="78.0000" Y="41.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="323.0802" Y="524.4886" />
-                <Scale ScaleX="0.6500" ScaleY="0.6500" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.5017" Y="0.9267" />
-                <PreSize X="0.1506" Y="0.0919" />
+                <PreSize X="0.1211" Y="0.0724" />
                 <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -337,6 +337,18 @@
                 <DisabledFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
                 <NormalFileData Type="MarkedSubImage" Path="ui/normalbtn.png" Plist="uipacker.plist" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="amountdesc" ActionTag="-1996743308" Tag="203" IconVisible="False" LeftMargin="26.0001" RightMargin="37.9999" TopMargin="404.1428" BottomMargin="107.8572" IsCustomSize="True" FontSize="26" LabelText="白马可在仓库通过喂草来恢复生命值，商城购买的名驹不需要喂养，并且可加快移动速度！" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="580.0000" Y="54.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="316.0001" Y="134.8572" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="204" G="4" B="4" />
+                <PrePosition X="0.4907" Y="0.2383" />
+                <PreSize X="0.9006" Y="0.0954" />
+                <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

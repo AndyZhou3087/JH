@@ -40,6 +40,11 @@ private:
 	Node* m_csbnode;
 	//7个属性值显示控件
 	cocos2d::ui::Text* herostatus[7];
+
+	/****************************
+	性别提示
+	*****************************/
+	void onSexHelpHint(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 private:
 	/****************************
 	定时更新7个属性值
@@ -58,6 +63,7 @@ private:
 	cocos2d::ui::ImageView* arrow1;
 	cocos2d::ui::ImageView* arrow2;
 	cocos2d::ui::ImageView* arrow3;
+	cocos2d::ui::ImageView* sexhintimg;
 };
 #endif
 

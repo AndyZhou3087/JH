@@ -95,14 +95,18 @@ bool ActivitScene::init(std::string imagepath, std::string content)
 	}
 	else if (imagepath.compare("images/thieves.jpg") == 0)
 	{
-		tips->setVisible(false);
+
 		if (!GlobalData::isHasVulture())
 		{
 			this->scheduleOnce(schedule_selector(ActivitScene::checkstoleData), 0.1f);
 			distime = 3.5f;
+			tips->setString(CommonFuncs::gbk2utf("tip：可在商城购买【看门雕】预防盗贼！"));
+			tips->setTextColor(Color4B(204, 4, 4, 255));
+			tips->setPositionY(45);
 		}
 		else
 		{
+			tips->setVisible(false);
 			m_text->setString(CommonFuncs::gbk2utf("盗贼前来偷窃，被看门雕及时发现，避免了不必要的损失！"));
 			distime = 3.5f;
 		}

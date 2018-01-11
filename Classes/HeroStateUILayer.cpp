@@ -12,6 +12,7 @@
 #include "MixGFNode.h"
 #include "HomeLayer.h"
 #include "NewerGuideLayer.h"
+#include "HintBox.h"
 
 HeroStateUILayer::HeroStateUILayer()
 {
@@ -51,6 +52,9 @@ bool HeroStateUILayer::init()
 	arrow1 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow1");
 	arrow2 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow2");
 	arrow3 = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("arrow3");
+
+	sexhintimg = (cocos2d::ui::ImageView*)m_csbnode->getChildByName("sexhintimg");
+	sexhintimg->addTouchEventListener(CC_CALLBACK_2(HeroStateUILayer::onSexHelpHint, this));
 
 	m_heroexpendtime = GameDataSave::getInstance()->getHeroExpEndTime();
 	m_gfexpendtime = GameDataSave::getInstance()->getGfEndTime();
@@ -164,6 +168,7 @@ void HeroStateUILayer::updateStatus(float dt)
 		m_csbnode->getChildByName("herostatetext7")->setVisible(true);
 		herostatus[6]->setVisible(true);
 		herostatus[6]->setString(CommonFuncs::gbk2utf("不详"));
+		sexhintimg->setVisible(true);
 	}
 
 	int letftime1 = m_heroexpendtime - GlobalData::getSysSecTime();
@@ -288,5 +293,15 @@ void HeroStateUILayer::updateArrow()
 	{
 		arrow3->stopAllActions();
 		arrow3->setVisible(false);
+	}
+}
+
+void HeroStateUILayer::onSexHelpHint(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	CommonFuncs::BtnAction(pSender, type);
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("可在商城购买【华佗之手】恢复男儿之身！"));
+		this->addChild(hbox);
 	}
 }

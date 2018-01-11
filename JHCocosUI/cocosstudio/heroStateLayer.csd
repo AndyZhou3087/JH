@@ -236,14 +236,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="herostate7" ActionTag="-168572098" VisibleForFrame="False" Tag="199" IconVisible="False" LeftMargin="501.6148" RightMargin="198.3852" TopMargin="761.4981" BottomMargin="487.5019" FontSize="30" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="20.0000" Y="31.0000" />
+          <AbstractNodeData Name="herostate7" ActionTag="-168572098" VisibleForFrame="False" Tag="199" IconVisible="False" LeftMargin="501.6148" RightMargin="158.3852" TopMargin="761.4981" BottomMargin="487.5019" FontSize="30" LabelText="不详" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="60.0000" Y="31.0000" />
             <AnchorPoint ScaleY="0.5000" />
             <Position X="501.6148" Y="503.0019" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="204" G="4" B="4" />
             <PrePosition X="0.6967" Y="0.3930" />
-            <PreSize X="0.0278" Y="0.0242" />
+            <PreSize X="0.0833" Y="0.0242" />
             <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -301,6 +301,16 @@
             <PrePosition X="0.9310" Y="0.4750" />
             <PreSize X="0.0250" Y="0.0203" />
             <FileData Type="MarkedSubImage" Path="ui/arrowup.png" Plist="uipacker.plist" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="sexhintimg" ActionTag="-574798800" VisibleForFrame="False" Tag="160" IconVisible="False" LeftMargin="568.3499" RightMargin="121.6501" TopMargin="760.0681" BottomMargin="489.9319" TouchEnable="True" LeftEage="19" RightEage="19" TopEage="19" BottomEage="19" Scale9OriginX="19" Scale9OriginY="19" Scale9Width="22" Scale9Height="22" ctype="ImageViewObjectData">
+            <Size X="30.0000" Y="30.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="583.3499" Y="504.9319" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8102" Y="0.3945" />
+            <PreSize X="0.0417" Y="0.0234" />
+            <FileData Type="MarkedSubImage" Path="ui/factionmore.png" Plist="uipacker.plist" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

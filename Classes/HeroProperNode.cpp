@@ -82,6 +82,8 @@ bool HeroProperNode::init()
 
 	title = (cocos2d::ui::Text*)heroselectbg->getChildByName("title");
 
+	amountdesc = (cocos2d::ui::Widget*)heroselectbg->getChildByName("amountdesc");
+
 	isout = g_hero->getIsOut();
 
 	m_select = Sprite::createWithSpriteFrameName("ui/atrselected.png");
@@ -306,6 +308,10 @@ void HeroProperNode::showSelectFrame(HeroAtrType index)
 	m_scrollView->setInnerContainerSize(Size(650, innerheight));
 
 	m_select->setVisible(false);
+	if (index == H_MOUNT)
+		amountdesc->setVisible(true);
+	else
+		amountdesc->setVisible(false);
 
 	for (int i = 0; i < tempsize; i++)
 	{
