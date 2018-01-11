@@ -615,10 +615,9 @@ void FightLayer::delayShowWinLayer(float dt)
 		m_npcid = GlobalData::map_maps[m_addrid].npcs[totalnpc - continuefight];
 		continuefight--;
 	}
-
+	isWin = false;
 	if (m_addrid.compare("m1-6") == 0)
 		this->removeFromParentAndCleanup(true);
-	isWin = false;
 }
 
 void FightLayer::showFightWord(int type, int value)

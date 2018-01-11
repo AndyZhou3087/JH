@@ -49,6 +49,7 @@ MapLayer::~MapLayer()
 	ismoving = false;
 	if (g_hero != NULL)
 		g_hero->setIsMoving(false);
+	g_maplayer = NULL;
 }
 
 bool MapLayer::init()
@@ -725,12 +726,11 @@ void MapLayer::snow()
 
 void MapLayer::removeWeatherPaticle()
 {
-	Node* prain = this->getChildByName("rain");
-	if (prain != NULL)
-		prain->removeFromParentAndCleanup(true);
-	Node* psnow = this->getChildByName("snow");
-	if (psnow != NULL)
-		psnow->removeFromParentAndCleanup(true);
+	if (g_maplayer != NULL)
+	{
+		g_maplayer->removeChildByName("rain");
+		g_maplayer->removeChildByName("snow");
+	}
 }
 
 void MapLayer::vultureAnim()

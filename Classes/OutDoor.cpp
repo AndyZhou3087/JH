@@ -120,12 +120,12 @@ void OutDoor::updataMyPackageUI()
 		m_csbnode->removeChildByName(name);
 	}
 
+	int countindex = -1;
 	for (int i = 0; i < MyPackage::getSize(); i++)
 	{
 		std::string boxstr = "ui/buildsmall.png";
 		PackageData tmpdata = MyPackage::vec_packages[i];
 
-		int countindex = -1;
 		bool isin = false;
 		std::map<std::string, AllResource>::iterator resit;
 		for (resit = GlobalData::map_allResource.begin(); resit != GlobalData::map_allResource.end(); resit++)
