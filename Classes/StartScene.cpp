@@ -74,23 +74,21 @@ bool StartScene::init()
 	cocos2d::ui::Text* vesiontxt = (cocos2d::ui::Text*)csbnode->getChildByName("version");
 	vesiontxt->setString(GlobalData::getVersion());
 
-	int qqsize = sizeof(QQNUM) / sizeof(QQNUM[0]);
-	int rqq = GlobalData::createRandomNum(qqsize);
-	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)csbnode->getChildByName("qq");
-	qq1->setString(QQNUM[rqq]);
-	qq1->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+	GlobalData::noticecontent = "";
+	GlobalData::vec_qq.clear();
 
-	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)csbnode->getChildByName("qq_1");
-	if (qqsize > 1)
-	{
-		qq2->setString(QQNUM[1 - rqq]);
-		qq2->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
-	}
-	else
-	{
-		qq2->setVisible(false);
-		csbnode->getChildByName("qqline_1")->setVisible(false);
-	}
+	qq1 = (cocos2d::ui::Text*)csbnode->getChildByName("qq");
+	qq1->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+	qq1->setVisible(false);
+
+	qq2 = (cocos2d::ui::Text*)csbnode->getChildByName("qq_1");
+	qq2->addTouchEventListener(CC_CALLBACK_2(StartScene::onQQ, this));
+	qq2->setVisible(false);
+
+	qqtitle = (cocos2d::ui::Text*)csbnode->getChildByName("qqtext");
+	qqtitle->setVisible(false);
+
+	ServerDataSwap::init(this)->getCommonData();
 
 	clicklogocount = 0;
 	isdouserdata = false;
@@ -259,7 +257,13 @@ void StartScene::onSuccess()
 		}
 		else
 		{
-			Director::getInstance()->getRunningScene()->addChild(NoticeLayer::create(GlobalData::noticecontent), 1);
+			if (GlobalData::noticecontent.length() > 0)
+				Director::getInstance()->getRunningScene()->addChild(NoticeLayer::create(GlobalData::noticecontent), 1);
+		}
+
+		if (GlobalData::vec_qq.size() > 0)
+		{
+			showQQ();
 		}
 	}
 }
@@ -274,5 +278,24 @@ void StartScene::onErr(int errcode)
 			descstr = "没有数据，请与客服确认！";
 		HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf(descstr.c_str()));
 		this->addChild(hbox);
+	}
+}
+
+void StartScene::showQQ()
+{
+	int qqsize = GlobalData::vec_qq.size();
+	int rqq = GlobalData::createRandomNum(qqsize);
+	qqtitle->setVisible(true);
+	qq1->setString(GlobalData::vec_qq[rqq]);
+	qq1->setVisible(true);
+
+	if (qqsize > 1)
+	{
+		qq2->setString(GlobalData::vec_qq[1 - rqq]);
+		qq2->setVisible(true);
+	}
+	else
+	{
+		qq2->setVisible(false);
 	}
 }

@@ -120,29 +120,36 @@ bool ShopLayer::init()
 	cocos2d::ui::Button* backbtn = (cocos2d::ui::Button*)m_csbnode->getChildByName("backbtn");
 	backbtn->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onBack, this));
 
-	int qqsize = sizeof(QQNUM) / sizeof(QQNUM[0]);
-	int rqq = GlobalData::createRandomNum(qqsize);
 
-	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq");
-	cocos2d::ui::Widget* qq1line = (cocos2d::ui::Widget*)m_csbnode->getChildByName("qqline");
-	qq1->setString(QQNUM[rqq]);
+	qqtitle = (cocos2d::ui::Text*)m_csbnode->getChildByName("qqtext");
+	qqtitle->setVisible(false);
+
+	qq1 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq");
+	qq1->setVisible(false);
 	qq1->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
 
-	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq_1");
-	cocos2d::ui::Text* qq2line = (cocos2d::ui::Text*)m_csbnode->getChildByName("qqline_1");
+	qq2 = (cocos2d::ui::Text*)m_csbnode->getChildByName("qq_1");
+	qq2->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
+	qq2->setVisible(false);
 
-	if (qqsize > 1)
+	int qqsize = GlobalData::vec_qq.size();
+	if (qqsize > 0)
 	{
-		qq2->setString(QQNUM[1 - rqq]);
-		qq2->addTouchEventListener(CC_CALLBACK_2(ShopLayer::onQQ, this));
-	}
-	else
-	{
-		qq2->setVisible(false);
-		qq2line->setVisible(false);
-		qq1->setPositionX(qq2->getPositionX());
-		qq1line->setPositionX(qq2line->getPositionX());
-		m_csbnode->getChildByName("qqtext")->setPositionX(510); 
+		qqtitle->setVisible(true);
+		int rqq = GlobalData::createRandomNum(qqsize);
+		qq1->setString(GlobalData::vec_qq[rqq]);
+		qq1->setVisible(true);
+		if (qqsize > 1)
+		{
+			qq2->setVisible(true);
+			qq2->setString(GlobalData::vec_qq[1 - rqq]);
+		}
+		else
+		{
+			qq2->setVisible(false);
+			qq1->setPositionX(qq2->getPositionX());
+			m_csbnode->getChildByName("qqtext")->setPositionX(510);
+		}
 	}
 
 	auto listener = EventListenerTouchOneByOne::create();

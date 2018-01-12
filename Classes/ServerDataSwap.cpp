@@ -839,6 +839,18 @@ void ServerDataSwap::getHSLJRewardData()
 	
 }
 
+void ServerDataSwap::getCommonData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_qq?");
+	url.append("pkg=");
+	url.append(GlobalData::getPackageName());
+	url.append("&vercode=");
+	url.append(GlobalData::getVersion());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetCommonDataCB, this));
+}
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -2994,6 +3006,50 @@ void ServerDataSwap::httpGetHSLJRewardDataCB(std::string retdata, int code, std:
 				int ret = v.GetInt();
 				if (ret == 0)
 					isok = true;
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpGetCommonDataCB(std::string retdata, int code, std::string tag)
+{
+	GlobalData::vec_qq.clear();
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("ret"))
+			{
+				rapidjson::Value& v = doc["ret"];
+				int ret = v.GetInt();
+				if (ret == 0)
+					isok = true;
+
+			}
+			if (doc.HasMember("qq"))
+			{
+				rapidjson::Value& v = doc["qq"];
+				std::string qqstr = v.GetString();
+				if (qqstr.length() > 0)
+					CommonFuncs::split(v.GetString(), GlobalData::vec_qq);
 			}
 		}
 	}

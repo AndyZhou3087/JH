@@ -69,6 +69,8 @@ public:
 	void getHSLJRankData();
 
 	void getHSLJRewardData();
+
+	void getCommonData();
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -132,6 +134,8 @@ private:
 	void httpGetHSLJRankDataCB(std::string retdata, int code, std::string tag);
 
 	void httpGetHSLJRewardDataCB(std::string retdata, int code, std::string tag);
+
+	void httpGetCommonDataCB(std::string retdata, int code, std::string tag);
 
 };
 

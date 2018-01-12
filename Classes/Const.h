@@ -86,11 +86,11 @@ static cocos2d::Color4B qucolor[] = { cocos2d::Color4B(76, 54, 51, 255), cocos2d
 static std::string wxbinmap[] = {"m3-1","m4-1", "m7-2"}; 
 
 static std::string dgqbinmap[] = { "m7-3", "m3-4", "m4-9", "m6-3", "m7-12", "m2-3", "m7-8", "m10-1", "m11-3" };
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-static std::string QQNUM[] = { "621564945", "593243749" };
-#else
-static std::string QQNUM[] = { "641759306" };
-#endif
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//static std::string QQNUM[] = { "621564945", "593243749" };
+//#else
+//static std::string QQNUM[] = { "641759306" };
+//#endif
 static std::string LOGINREWARDS[] = { "80020", "g10", "12010", "80050", "g20", "81010", "82005" };
 
 typedef enum

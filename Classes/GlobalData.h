@@ -994,6 +994,8 @@ public:
 
 	static std::string getVersion();
 
+	static std::string getPackageName();
+
 	/****************************
 	获取不再弹出公告的日期，只记录天数（一年中的天数）
 	return 天数（一年中的天数）
@@ -1151,6 +1153,7 @@ public:
 	static bool isPopUpdate;
 
 	static std::string curBranchMissionID;
+	static std::vector<std::string> vec_qq;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

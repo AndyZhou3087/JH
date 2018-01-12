@@ -28,6 +28,7 @@ private:
 	void onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 	void refreshGoldCount(float dt);
 	void showVipReward(float dt);
+	void showQQ();
 private:
 
 	cocos2d::ui::ScrollView* m_rmbScrollview;
@@ -37,6 +38,9 @@ private:
 	static int payindex;
 	static bool isPaying;
 	bool ischangePause;
+	cocos2d::ui::Text* qq1;
+	cocos2d::ui::Text* qq2;
+	cocos2d::ui::Text* qqtitle;
 };
 #endif
 

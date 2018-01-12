@@ -17,23 +17,39 @@ bool FrozenLayer::init()
 	Node* csbnode = CSLoader::createNode("frozenLayer.csb");
 	this->addChild(csbnode);
 
+	cocos2d::ui::Text* content_0 = (cocos2d::ui::Text*)csbnode->getChildByName("content_0");
+	cocos2d::ui::Text* qqtitle = (cocos2d::ui::Text*)csbnode->getChildByName("qqtext");
+	content_0->setVisible(false);
+	qqtitle->setVisible(false);
 
-	int qqsize = sizeof(QQNUM) / sizeof(QQNUM[0]);
-	int rqq = GlobalData::createRandomNum(qqsize);
 	cocos2d::ui::Text* qq1 = (cocos2d::ui::Text*)csbnode->getChildByName("qq");
-	qq1->setString(QQNUM[rqq]);
 	qq1->addTouchEventListener(CC_CALLBACK_2(FrozenLayer::onQQ, this));
+	qq1->setVisible(false);
 
 	cocos2d::ui::Text* qq2 = (cocos2d::ui::Text*)csbnode->getChildByName("qq_1");
-	if (qqsize > 1)
+	qq2->addTouchEventListener(CC_CALLBACK_2(FrozenLayer::onQQ, this));
+	qq2->setVisible(false);
+
+
+	int qqsize = GlobalData::vec_qq.size();
+
+	if (qqsize > 0)
 	{
-		qq2->setString(QQNUM[1 - rqq]);
-		qq2->addTouchEventListener(CC_CALLBACK_2(FrozenLayer::onQQ, this));
-	}
-	else
-	{
-		qq2->setVisible(false);
-		csbnode->getChildByName("qqline_1")->setVisible(false);
+		content_0->setVisible(true);
+		qqtitle->setVisible(true);
+		int rqq = GlobalData::createRandomNum(qqsize);
+		qq1->setString(GlobalData::vec_qq[rqq]);
+		qq1->setVisible(true);
+
+		if (qqsize > 1)
+		{
+			qq2->setString(GlobalData::vec_qq[1 - rqq]);
+			qq2->setVisible(true);
+		}
+		else
+		{
+			qq2->setVisible(false);
+		}
 	}
 
 	//////layer 点击事件，屏蔽下层事件
