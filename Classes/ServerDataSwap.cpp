@@ -155,7 +155,7 @@ void ServerDataSwap::postOneData(std::string userid, int tag)
 
 	int fightingpower = 0;
 
-	if (g_hero != NULL)
+	if (g_hero != NULL && !g_hero->getIsWDChallenge())
 	{
 		fightingpower = g_hero->getMaxLifeValue() + g_hero->getTotalDf() * 20 + g_hero->getTotalAtck() * 10 + g_hero->getCritRate() * 100 + g_hero->getdodgeRate() * 100;
 	}

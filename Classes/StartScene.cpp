@@ -88,8 +88,6 @@ bool StartScene::init()
 	qqtitle = (cocos2d::ui::Text*)csbnode->getChildByName("qqtext");
 	qqtitle->setVisible(false);
 
-	ServerDataSwap::init(this)->getCommonData();
-
 	clicklogocount = 0;
 	isdouserdata = false;
 	GlobalData::isPopUpdate = false;
@@ -164,6 +162,8 @@ void StartScene::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 
 void StartScene::checkServerData(float dt)
 {
+	ServerDataSwap::init(this)->getCommonData();
+
 	if (GlobalData::getUId().length() > 0)
 	{
 		if (!GameDataSave::getInstance()->getIsPostAllData())
