@@ -615,6 +615,8 @@
       <FilePathData Path="ui/helpbtn.png" />
       <FilePathData Path="ui/helptitle.png" />
       <FilePathData Path="ui/smallshopbtn.png" />
+      <FilePathData Path="ui/gd4.png" />
+      <FilePathData Path="ui/12d.png" />
     </ImageFiles>
     <MaxSize Width="4096" Height="4096" />
   </Content>

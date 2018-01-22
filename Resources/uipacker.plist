@@ -6747,6 +6747,28 @@
 				<key>sourceSize</key>
 				<string>{124,122}</string>
 			</dict>
+			<key>ui/gd4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2917,864},{106,106}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,106}</string>
+			</dict>
+			<key>ui/12d.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{3025,884},{106,106}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{106,106}</string>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>

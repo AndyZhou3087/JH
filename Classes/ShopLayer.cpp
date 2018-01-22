@@ -83,7 +83,7 @@ bool ShopLayer::init()
 	m_rmbScrollview->setScrollBarEnabled(false);
 	m_rmbScrollview->setBounceEnabled(true);
 
-	int itemwidth = 160;
+	int itemwidth = 130;
 	int innerwidth = itemwidth * vec_rmbGoods.size();
 	int contentwidth = m_rmbScrollview->getContentSize().width;
 	if (innerwidth < contentwidth)
@@ -93,7 +93,7 @@ bool ShopLayer::init()
 	for (unsigned int i = 0; i < vec_rmbGoods.size(); i++)
 	{
 		RmbGoodsItem* node = RmbGoodsItem::create(vec_rmbGoods[i]);
-
+		node->setScale(0.9f);
 		node->setTag(sizeof(heroprice) / sizeof(heroprice[0]) + i);
 		m_rmbScrollview->addChild(node);
 		node->setPosition(Vec2(itemwidth / 2  + 10 + i * itemwidth, m_rmbScrollview->getContentSize().height/2));
@@ -235,7 +235,7 @@ void ShopLayer::setMessage(PYARET ret)
 			GlobalData::setMyGoldCount(GlobalData::getMyGoldCount() + goldcount[payindex - herocount]);
 			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUYOK);
 #ifdef ANALYTICS
-			std::string name[] = { "b6", "b12", "b30", "b68"};
+			std::string name[] = { "b6", "b12", "b30", "b68", "b128"};
 			AnalyticUtil::onEvent(name[payindex - herocount].c_str());
 #endif
 		}
