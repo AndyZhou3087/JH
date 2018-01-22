@@ -230,6 +230,16 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	m_listener = EventListenerTouchOneByOne::create();
 	m_listener->setSwallowTouches(true);
 
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
+	GameDataSave::getInstance()->setIsNewerGuide(step, 0);
+
+#ifdef ANALYTICS
+	if (step == 0)
+		AnalyticUtil::onEvent("newerstart");
+	else if (step == 68)
+		AnalyticUtil::onEvent("newerend");
+#endif
+
 	m_listener->onTouchBegan = [=](Touch *touch, Event *event)
 	{
 		Vec2 point = Director::getInstance()->convertToGL(touch->getLocationInView());//获得当前触摸的坐标 
@@ -351,16 +361,6 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		}
 		return;
 	};
-
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
-    GameDataSave::getInstance()->setIsNewerGuide(step, 0);
-    
-#ifdef ANALYTICS
-	if (step == 0)
-		AnalyticUtil::onEvent("newerstart");
-	else if (step == 68)
-		AnalyticUtil::onEvent("newerend");
-#endif
 	return true;
 }
 
