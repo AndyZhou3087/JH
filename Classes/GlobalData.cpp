@@ -154,6 +154,8 @@ std::string GlobalData::curBranchMissionID;
 
 std::vector<std::string> GlobalData::vec_qq;
 
+bool GlobalData::isOnline = false;
+
 GlobalData::GlobalData()
 {
 
@@ -2204,7 +2206,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "292ECD05-4F18-46C6-8683-A9C81FFEB7CA";//"";
+	return "q33";//"";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	std::string ret;
 	JniMethodInfo methodInfo;
@@ -2222,7 +2224,7 @@ std::string GlobalData::getVersion()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     return getvercode();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "1.2.4";
+	return "1.0";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	std::string ret;
 	JniMethodInfo methodInfo;
@@ -2245,6 +2247,24 @@ std::string GlobalData::getPackageName()
 	std::string ret;
 	JniMethodInfo methodInfo;
 	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "getPkgName", "()Ljava/lang/String;"))
+	{
+		jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+		ret = methodInfo.env->GetStringUTFChars(jstr, 0);
+	}
+	return ret;
+#endif
+}
+
+std::string GlobalData::getChannelId()
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	return getbundleid();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	return "win32";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	std::string ret;
+	JniMethodInfo methodInfo;
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "getChannelID", "()Ljava/lang/String;"))
 	{
 		jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
 		ret = methodInfo.env->GetStringUTFChars(jstr, 0);

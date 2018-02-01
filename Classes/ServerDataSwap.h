@@ -71,6 +71,7 @@ public:
 	void getHSLJRewardData();
 
 	void getCommonData();
+
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;

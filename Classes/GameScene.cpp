@@ -173,7 +173,6 @@ bool GameScene::init()
 	this->schedule(schedule_selector(GameScene::checkiflive), 0.1f);
 	this->schedule(schedule_selector(GameScene::checkAchiveIsDone), 1.0f);
 	
-	
 	//处理制暖
 	std::string warmConfigStr = GlobalData::getMakeWarmConfig();
 	if (warmConfigStr.length() > 0)
@@ -201,8 +200,11 @@ bool GameScene::init()
 	int goldcount = GlobalData::getMyGoldCount();
 	GlobalData::doAchive(A_1, goldcount);
 
-	ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
-	ServerDataSwap::init(NULL)->getFactionList();
+	if (GlobalData::isOnline)
+	{
+		ServerDataSwap::init(this)->vipIsOn(g_hero->getHeadID());
+		ServerDataSwap::init(NULL)->getFactionList();
+	}
     return true;
 }
 

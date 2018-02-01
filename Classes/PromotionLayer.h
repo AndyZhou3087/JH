@@ -3,7 +3,7 @@
 * 任命界面
 * 
 *********************************************************************/
-#define _SETTING_LAYER_H_
+#define _PROMOTION_LAYER_H_
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
