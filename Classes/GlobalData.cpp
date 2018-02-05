@@ -489,6 +489,17 @@ void GlobalData::loadNpcJsonData()
 		v = item["crit"];
 		data.crit = atof(v.GetString());
 
+		v = item["skrnd"];
+		data.skillrnd = atof(v.GetString());
+
+		v = item["skef"];
+		data.skilleffect = atoi(v.GetString());
+
+		v = item["sk"];
+		data.skilltype = atoi(v.GetString());
+
+		data.skillleftval = 0;
+
 		map_npcs[data.id] = data;
 	}
 }

@@ -93,6 +93,10 @@ typedef struct
 	std::vector<int> winrescount;//打多少次随机
 	std::vector<std::string> exchgres;//兑换的资源
 	std::vector<std::string> words;//npc 对话
+	float skillrnd;//技能触发概率
+	int skilltype;//技能类型
+	int skilleffect;//技能影响
+	int skillleftval;//剩下回合数
 }NpcData;
 
 /****************************

@@ -285,22 +285,76 @@ int FightLayer::getNpcHurt()
 	if (npchurt < intminack)
 		npchurt = intminack;
 
+	int skilltype = checkNpcSkill();
+	if (isBossS6)
+	{
+		npchurt = npchurt * (100 - GlobalData::map_npcs[m_npcid].skilleffect) / 100;
+	}
+
 	return npchurt;
 }
 
-void FightLayer::skillComboAtk(float dt)
+int FightLayer::getHeroHurt()
+{
+	int curheroDf = g_hero->getTotalDf();
+
+	int herohurt = npcatk - curheroDf;
+
+	float fminack = 0.1f * npcatk;
+	int intminack = int(fminack + 0.5f);
+
+	if (herohurt < intminack)
+		herohurt = intminack;
+
+	if (isHeroS6)
+	{
+		herohurt = herohurt * (100 - GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect) / 100;
+	}
+	return herohurt;
+}
+
+void FightLayer::skillHeroComboAtk(float dt)
 {
 	int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
 	int c = getNpcHurt();
-	npchp -= c * count / 10;
+
+	int totalcount = 0;
+	int skilltype = checkHeroSkill(H_WG);
+	if (skilltype == S_SKILL_3)
+	{
+		if (g_hero->getAtrByType(H_WG)->count > 0)
+		{
+			totalcount = GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].skilleffect;
+		}
+	}
+
+	npchp -= c*(100 - (totalcount - count)*10) / 100;
+
 	GlobalData::map_gfskills[S_SKILL_3].leftval--;
 
 	if (npchp <= 0)
 	{
 		npchp = 0;
-		this->unschedule(schedule_selector(FightLayer::skillComboAtk));
+		this->unschedule(schedule_selector(FightLayer::skillHeroComboAtk));
 	}
 	updateNpcLife();
+}
+
+void FightLayer::skillNpcComboAtk(float dt)
+{
+	int totalcount = GlobalData::map_npcs[m_npcid].skilleffect;
+	int count = GlobalData::map_npcs[m_npcid].skillleftval;
+	int c = getHeroHurt();
+	float curheroHp = g_hero->getLifeValue();
+	curheroHp -= c*(100 - (totalcount - count) * 10) / 100;
+	GlobalData::map_npcs[m_npcid].skillleftval--;
+	if (curheroHp <= 0)
+	{
+		curheroHp = 0;
+		this->unschedule(schedule_selector(FightLayer::skillHeroComboAtk));
+	}
+	g_hero->setLifeValue(curheroHp);
+	checkHeroLife(0);
 }
 
 void FightLayer::delayHeroFight(float dt)
@@ -309,17 +363,77 @@ void FightLayer::delayHeroFight(float dt)
 		return;
 
 	bool isnormalAct = true;
-
+	isBossS6 = false;
+	isHeroS6 = false;
 	int npchurt = getNpcHurt();
+
+	int skilltype = checkNpcSkill();
+
+	if (skilltype == S_SKILL_1 || skilltype == S_SKILL_2 || skilltype == S_SKILL_5)
+	{
+		GlobalData::map_npcs[m_npcid].skillleftval--;
+	}
+	float curheroHp = g_hero->getLifeValue();
+	if (isHeroAct != 1)
+	{
+		if (curheroHp <= 0)
+		{
+			curheroHp = 0;
+			g_hero->setLifeValue(curheroHp);
+			checkHeroLife(0);
+			return;
+		}
+
+		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
+		{
+			isnormalAct = false;
+			showNpcSkill(skilltype);
+
+			curheroHp -= getHeroHurt() * 3 / 10;
+			if (curheroHp < 0)
+				curheroHp = 0;
+			g_hero->setLifeValue(curheroHp);
+			checkHeroLife(0);
+		}
+		else if (skilltype == S_SKILL_2)
+		{
+			isnormalAct = false;
+			showNpcSkill(skilltype);
+			this->scheduleOnce(schedule_selector(FightLayer::delayBossFight), 1.5f);
+			return;
+		}
+		skilltype = checkNpcSkill();
+		if (skilltype == S_SKILL_6)
+		{
+			isnormalAct = false;
+			isBossS6 = true;
+			npchurt = getNpcHurt();
+			showNpcSkill(skilltype);
+		}
+		else if (skilltype == S_SKILL_7)
+		{
+			isnormalAct = false;
+			showNpcSkill(skilltype);
+			int herolosthp = curheroHp * GlobalData::map_npcs[m_npcid].skilleffect / 100;
+			
+			curheroHp -= herolosthp;
+			if (curheroHp < 0)
+				curheroHp = 0;
+			checkHeroLife(0);
+			npchp += herolosthp;
+			updateNpcLife();
+		}
+
+	}
 
 	isHeroAct = -1;
 	isNpcAct = - 1;
 
 	int critrnd = g_hero->getCritRate() * 100;
 
-	if (checkSkill(H_WG) == S_SKILL_4)
+	if (checkHeroSkill(H_WG) == S_SKILL_4)
 	{
-		showSkill(S_SKILL_4);
+		showHeroSkill(S_SKILL_4);
 		if (g_hero->getAtrByType(H_WG)->count > 0)
 		{
 			critrnd += GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].skilleffect * 100;
@@ -328,6 +442,14 @@ void FightLayer::delayHeroFight(float dt)
 	}
 
 	int npcdodgernd = GlobalData::map_npcs[m_npcid].dodge * 100;
+	if (checkNpcSkill() == S_SKILL_8)
+	{
+		isnormalAct = false;
+		showNpcSkill(S_SKILL_8);
+
+		npcdodgernd += GlobalData::map_npcs[m_npcid].skilleffect * 100;
+	}
+
 	int r = GlobalData::createRandomNum(10000);
 	if (r < critrnd)
 	{
@@ -379,13 +501,13 @@ void FightLayer::delayHeroFight(float dt)
 	}
 	else
 	{
-		if (checkSkill(H_WG) == S_SKILL_3)
+		if (checkHeroSkill(H_WG) == S_SKILL_3)
 		{
 			int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
 			if (count > 0)
 			{
-				showSkill(S_SKILL_3);
-				this->schedule(schedule_selector(FightLayer::skillComboAtk), 0.3f, count - 1, 0.2f);
+				showHeroSkill(S_SKILL_3);
+				this->schedule(schedule_selector(FightLayer::skillHeroComboAtk), 0.3f, count - 1, 0.2f);
 				isnormalAct = false;
 			}
 		}
@@ -404,20 +526,14 @@ void FightLayer::delayBossFight(float dt)
 	if (isecapeok)//逃跑成功
 		return;
 
+	isBossS6 = false;
+	isHeroS6 = false;
 	bool isnormalAct = true;
 	float curheroHp = g_hero->getLifeValue();
 
-	int curheroDf = g_hero->getTotalDf();
+	int herohurt = getHeroHurt();
 
-	int herohurt = npcatk - curheroDf;
-
-	float fminack = 0.1f * npcatk;
-	int intminack = int(fminack + 0.5f);
-
-	if (herohurt < intminack)
-		herohurt = intminack;
-
-    int skilltype = checkSkill(H_WG);
+	int skilltype = checkHeroSkill(H_WG);
     
     if (skilltype == S_SKILL_1 || skilltype == S_SKILL_2 || skilltype == S_SKILL_5)
     {
@@ -436,7 +552,7 @@ void FightLayer::delayBossFight(float dt)
 		if (skilltype == S_SKILL_1 || skilltype == S_SKILL_5)
 		{
 			isnormalAct = false;
-			showSkill(skilltype);
+			showHeroSkill(skilltype);
 
 			npchp -= getNpcHurt() * 3 / 10;
 			if (npchp < 0)
@@ -452,24 +568,22 @@ void FightLayer::delayBossFight(float dt)
 		else if (skilltype == S_SKILL_2)
 		{
 			isnormalAct = false;
-			showSkill(skilltype);
+			showHeroSkill(skilltype);
 			this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 			return;
 		}
-		skilltype = checkSkill(H_NG);
+		skilltype = checkHeroSkill(H_NG);
 		if (skilltype == S_SKILL_6)
 		{
 			isnormalAct = false;
-			showSkill(skilltype);
-			if (g_hero->getAtrByType(H_NG)->count > 0)
-			{
-				herohurt = herohurt * (100 - GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect) / 100;
-			}
+			isHeroS6 = true;
+			herohurt = getHeroHurt();
+			showHeroSkill(skilltype);
 		}
 		else if (skilltype == S_SKILL_7)
 		{
 			isnormalAct = false;
-			showSkill(skilltype);
+			showHeroSkill(skilltype);
 			int npclosthp = 0;
 			if (g_hero->getAtrByType(H_NG)->count > 0)
 			{
@@ -495,10 +609,10 @@ void FightLayer::delayBossFight(float dt)
 	isNpcAct = -1;
 
 	int dodgernd = g_hero->getdodgeRate() * 100;
-	if (checkSkill(H_NG) == S_SKILL_8)
+	if (checkHeroSkill(H_NG) == S_SKILL_8)
 	{
 		isnormalAct = false;
-		showSkill(S_SKILL_8);
+		showHeroSkill(S_SKILL_8);
 		if (g_hero->getAtrByType(H_NG)->count > 0)
 		{
 			dodgernd += GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect * 100;
@@ -507,6 +621,15 @@ void FightLayer::delayBossFight(float dt)
 	}
 
 	int npccritrnd = GlobalData::map_npcs[m_npcid].crit * 100;
+
+	if (checkNpcSkill() == S_SKILL_4)
+	{
+		showNpcSkill(S_SKILL_4);
+
+		npccritrnd += GlobalData::map_npcs[m_npcid].skilleffect * 100;
+		isnormalAct = false;
+	}
+
 	int r = GlobalData::createRandomNum(10000);
 	if (r < npccritrnd)
 	{
@@ -555,6 +678,18 @@ void FightLayer::delayBossFight(float dt)
 
 	if (g_hero->getLifeValue() > 0.0f)
 	{
+
+		if (checkNpcSkill() == S_SKILL_3)
+		{
+			int count = GlobalData::map_npcs[m_npcid].skillleftval;
+			if (count > 0)
+			{
+				showNpcSkill(S_SKILL_3);
+				this->schedule(schedule_selector(FightLayer::skillNpcComboAtk), 0.3f, count - 1, 0.2f);
+				isnormalAct = false;
+			}
+		}
+
 		this->scheduleOnce(schedule_selector(FightLayer::delayHeroFight), 1.5f);
 
 		float f1maxlife = g_hero->getMaxLifeValue() * 0.05f;
@@ -1061,7 +1196,7 @@ void FightLayer::showChallengeCountLayer(bool isRevive)
 	g_gameLayer->addChild(layer, 4, "challengecountlayer");
 }
 
-int FightLayer::checkSkill(HeroAtrType gftype)
+int FightLayer::checkHeroSkill(HeroAtrType gftype)
 {
 	int ret = S_SNONE;
 	if (g_hero->getAtrByType(gftype)->count > 0)
@@ -1089,11 +1224,56 @@ int FightLayer::checkSkill(HeroAtrType gftype)
 		}
 	}
 
+	if (ret == S_SKILL_6)
+		isHeroS6 = true;
 	return ret;
-
 }
 
-void FightLayer::showSkill(int skilltype)
+int FightLayer::checkNpcSkill()
+{
+	int ret = S_SNONE;
+
+	int stype = GlobalData::map_npcs[m_npcid].skilltype;
+	if (GlobalData::map_npcs[m_npcid].skillleftval > 0)
+	{
+		ret = stype;
+	}
+	else
+	{
+		if (stype > S_SNONE)
+		{
+			int rand = GlobalData::map_npcs[m_npcid].skillrnd * 100;
+			int r = GlobalData::createRandomNum(10000);
+			if (r < rand)
+			{
+				if (stype != S_SKILL_4 && stype != S_SKILL_6 && stype != S_SKILL_7 && stype != S_SKILL_8)
+					GlobalData::map_npcs[m_npcid].skillleftval = GlobalData::map_npcs[m_npcid].skilleffect;
+				ret = stype;
+			}
+		}
+	}
+
+	if (ret == S_SKILL_6)
+		isBossS6 = true;
+	return ret;
+}
+
+void FightLayer::showNpcSkill(int skilltype)
+{
+	if (skilltype >= S_SKILL_1 && skilltype <= S_SKILL_5)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", skilltype);
+		showHeroTextAmin(str);
+	}
+	else if (skilltype >= S_SKILL_6 && skilltype <= S_SKILL_8)
+	{
+		std::string str = StringUtils::format("ui/skill%dtext.png", skilltype);
+		showNpcTextAmin(str);
+	}
+}
+
+
+void FightLayer::showHeroSkill(int skilltype)
 {
 	if (skilltype >= S_SKILL_1 && skilltype <= S_SKILL_5)
 	{
@@ -1146,4 +1326,6 @@ void FightLayer::resetSkills()
 		GlobalData::map_gfskills[i].leftval = 0;
 		GlobalData::map_gfskills[i].fightPlayerleftval = 0;
 	}
+
+	GlobalData::map_npcs[m_npcid].skillleftval = 0;
 }

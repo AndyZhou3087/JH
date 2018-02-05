@@ -867,7 +867,7 @@ void MapLayer::updateBranchMissionTime()
 		if (GlobalData::map_BranchPlotMissionItem[curmid].time > 0)
 			str = StringUtils::format("%02d:%02d", GlobalData::map_BranchPlotMissionItem[curmid].time / 60, GlobalData::map_BranchPlotMissionItem[curmid].time % 60);
 		else
-			str = "不限时";
+			str = CommonFuncs::gbk2utf("不限时");
 		timetext->setString(str);
 	}
 	else

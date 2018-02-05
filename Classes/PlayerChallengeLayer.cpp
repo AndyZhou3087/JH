@@ -157,6 +157,21 @@ int PlayerChallengeLayer::getPlayerHurt()
 	if (playerhurt < intminack)
 		playerhurt = intminack;
 
+	if (isPlayerS6)
+	{
+		std::map<std::string, int>::iterator fite;
+		for (fite = GlobalData::map_fighterPlayerData.begin(); fite != GlobalData::map_fighterPlayerData.end(); ++fite)
+		{
+			std::string nid = fite->first;
+			int value = GlobalData::map_fighterPlayerData[nid];
+
+			if (nid.compare(0, 1, "x") == 0)
+			{
+				playerhurt = playerhurt * (100 - GlobalData::map_wgngs[nid].skilleffect) / 100;
+			}
+		}
+	}
+
 	return playerhurt;
 }
 
@@ -164,7 +179,19 @@ void PlayerChallengeLayer::heroSkillComboAtk(float dt)
 {
 	int count = GlobalData::map_gfskills[S_SKILL_3].leftval;
 	int c = getPlayerHurt();
-	playerlife -= c * count / 10;
+
+	int totalcount = 0;
+	int skilltype = checkHeroSkill(H_WG);
+	if (skilltype == S_SKILL_3)
+	{
+		if (g_hero->getAtrByType(H_WG)->count > 0)
+		{
+			totalcount = GlobalData::map_wgngs[g_hero->getAtrByType(H_WG)->strid].skilleffect;
+		}
+	}
+
+	playerlife -= c*(100 - (totalcount - count) * 10) / 100;
+
 	GlobalData::map_gfskills[S_SKILL_3].leftval--;
 
 	if (playerlife <= 0)
@@ -179,7 +206,19 @@ void PlayerChallengeLayer::playerSkillComboAtk(float dt)
 {
 	int count = GlobalData::map_gfskills[S_SKILL_3].fightPlayerleftval;
 	int c = getHeroHurt();
-	herolife -= c * count / 10;
+	int totalcount = 0;
+	std::map<std::string, int>::iterator fite;
+	for (fite = GlobalData::map_fighterPlayerData.begin(); fite != GlobalData::map_fighterPlayerData.end(); ++fite)
+	{
+		std::string nid = fite->first;
+		int value = GlobalData::map_fighterPlayerData[nid];
+
+		if (nid.compare(0, 1, "w") == 0)
+		{
+			totalcount = GlobalData::map_wgngs[nid].skilleffect;
+		}
+	}
+	herolife -= c*(100 - (totalcount - count) * 10) / 100;
 	GlobalData::map_gfskills[S_SKILL_3].fightPlayerleftval--;
 
 	if (herolife <= 0)
@@ -192,6 +231,9 @@ void PlayerChallengeLayer::playerSkillComboAtk(float dt)
 
 void PlayerChallengeLayer::delayHeroFight(float dt)
 {
+	isHeroS6 = false;
+	isPlayerS6 = false;
+
 	int playerhurt = getPlayerHurt();
 
 	int skilltype = checkPlayerSkill(H_WG);
@@ -231,19 +273,9 @@ void PlayerChallengeLayer::delayHeroFight(float dt)
 		skilltype = checkPlayerSkill(H_NG);
 		if (skilltype == S_SKILL_6)
 		{
+			isPlayerS6 = true;
+			playerhurt = getPlayerHurt();
 			showPlayerSkill(skilltype);
-
-			std::map<std::string, int>::iterator fite;
-			for (fite = GlobalData::map_fighterPlayerData.begin(); fite != GlobalData::map_fighterPlayerData.end(); ++fite)
-			{
-				std::string nid = fite->first;
-				int value = GlobalData::map_fighterPlayerData[nid];
-
-				if (nid.compare(0, 1, "x") == 0)
-				{
-					playerhurt = playerhurt * (100 - GlobalData::map_wgngs[nid].skilleffect) / 100;
-				}
-			}
 		}
 		else if (skilltype == S_SKILL_7)
 		{
@@ -372,7 +404,8 @@ void PlayerChallengeLayer::delayHeroFight(float dt)
 
 void PlayerChallengeLayer::delayPlayerFight(float dt)
 {
-
+	isHeroS6 = false;
+	isPlayerS6 = false;
 	float curheroHp = herolife;
 
 	int herohurt = getHeroHurt();
@@ -414,11 +447,9 @@ void PlayerChallengeLayer::delayPlayerFight(float dt)
 		skilltype = checkHeroSkill(H_NG);
 		if (skilltype == S_SKILL_6)
 		{
+			isHeroS6 = true;
+			herohurt = getHeroHurt();
 			showHeroSkill(skilltype);
-			if (g_hero->getAtrByType(H_NG)->count > 0)
-			{
-				herohurt = herohurt * (100 - GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect) / 100;
-			}
 		}
 		else if (skilltype == S_SKILL_7)
 		{
@@ -552,6 +583,10 @@ int PlayerChallengeLayer::getHeroHurt()
 
 	if (herohurt < intminack)
 		herohurt = intminack;
+
+	if (isHeroS6)
+		herohurt = herohurt * (100 - GlobalData::map_wgngs[g_hero->getAtrByType(H_NG)->strid].skilleffect) / 100;
+
 	return herohurt;
 }
 
@@ -1079,7 +1114,8 @@ int PlayerChallengeLayer::checkHeroSkill(HeroAtrType gftype)
 			}
 		}
 	}
-
+	if (ret == S_SKILL_6)
+		isHeroS6 = true;
 	return ret;
 
 }
@@ -1129,7 +1165,8 @@ int PlayerChallengeLayer::checkPlayerSkill(HeroAtrType gftype)
 			}
 		}
 	}
-
+	if (ret == S_SKILL_6)
+		isPlayerS6 = true;
 	return ret;
 }
 

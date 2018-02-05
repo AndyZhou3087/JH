@@ -117,14 +117,24 @@ private:
 	void nextFightNpc(float dt);
 
 	/****************************
-	检查技能
+	检查角色技能
 	****************************/
-	int checkSkill(HeroAtrType gftype);
+	int checkHeroSkill(HeroAtrType gftype);
 
 	/****************************
-	显示技能
+	显示角色技能
 	****************************/
-	void showSkill(int skilltype);
+	void showHeroSkill(int skilltype);
+
+	/****************************
+	检查NPC技能
+	****************************/
+	int checkNpcSkill();
+
+	/****************************
+	显示NPC技能
+	****************************/
+	void showNpcSkill(int skilltype);
 
 	/****************************
 	NPC 死亡
@@ -137,9 +147,19 @@ private:
 	int getNpcHurt();
 
 	/****************************
-	技能连击
+	获得角色收到的伤害值
 	****************************/
-	void skillComboAtk(float dt);
+	int getHeroHurt();
+
+	/****************************
+	角色技能连击
+	****************************/
+	void skillHeroComboAtk(float dt);
+
+	/****************************
+	NPC技能连击
+	****************************/
+	void skillNpcComboAtk(float dt);
 
 	/****************************
 	显示角色位置文字动画
@@ -191,6 +211,9 @@ private:
 
 	int isNpcAct;//0--暴击；1-闪避
 	bool isWin;
+
+	bool isHeroS6;//角色触发了技能6（铜墙铁壁）
+	bool isBossS6;//npc触发了技能6（铜墙铁壁）
 };
 #endif
 

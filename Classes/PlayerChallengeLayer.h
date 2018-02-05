@@ -168,6 +168,8 @@ private:
 
 	RankData* m_playerData;
 	int win;
+	bool isHeroS6;//角色触发了技能6（铜墙铁壁）
+	bool isPlayerS6;//npc触发了技能6（铜墙铁壁）
 };
 #endif
 
