@@ -90,6 +90,8 @@ void RechargeLayer::showdata()
 	if (maxamount > 0)
 	{
 		float percent = GlobalData::recharageData.myrechage * 100 / maxamount;
+		if (percent > 100.00f)
+			percent = 100.00f;
 		progressbar->setPercent(percent);
 	}
 	std::map<int, std::vector<std::string>>::iterator it;
@@ -270,7 +272,7 @@ void RechargeLayer::onBoxClick(cocos2d::Ref *pSender, cocos2d::ui::Widget::Touch
 
 void RechargeLayer::splitRechargeAward()
 {
-	GlobalData::recharageData.rewardstr = "6-10005,11005,20005,21005,22005;88-12020;168-82020;368-15e010;498-15a020";
+	//GlobalData::recharageData.rewardstr = "6-10005,11005,20005,21005,22005;88-12020;168-82020;368-15e010;498-15a020";
 	std::vector<std::string> vec_tmp;
 	CommonFuncs::split(GlobalData::recharageData.rewardstr, vec_tmp, ";");
 	for (unsigned int i = 0; i < vec_tmp.size(); i++)

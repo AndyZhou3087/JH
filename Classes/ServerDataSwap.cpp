@@ -1516,11 +1516,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				GlobalData::updateDownLoadURL = retval.GetString();
 			}
 
-			//if (doc.HasMember("topup"))
-			//{
-				//rapidjson::Value& retval = doc["topup"];
-				GlobalData::isRecharge = true; // = v == 1 ? true : false;
-			//}
+			if (doc.HasMember("opentopup"))
+			{
+				rapidjson::Value& retval = doc["opentopup"];
+				int v = retval.GetInt();
+				GlobalData::isRecharge = v == 1 ? true : false;
+			}
 		
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();

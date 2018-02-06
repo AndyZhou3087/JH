@@ -148,6 +148,18 @@
             <PreSize X="0.9917" Y="0.2344" />
             <FileData Type="Normal" Path="images/syssmallbg.png" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="desc1" ActionTag="-1740639490" Tag="104" IconVisible="False" LeftMargin="18.6287" RightMargin="341.3713" TopMargin="881.7228" BottomMargin="367.2772" FontSize="30" LabelText="领取后物品直接放到仓库中" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="360.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="198.6287" Y="382.7772" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="108" G="99" B="83" />
+            <PrePosition X="0.2759" Y="0.2990" />
+            <PreSize X="0.5000" Y="0.0242" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>
