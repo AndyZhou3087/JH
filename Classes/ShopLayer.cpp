@@ -319,7 +319,7 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 void ShopLayer::delayShowRecharge(float dt)
 {
 	int maxamount = RechargeLayer::getRechargeMaxAmount();
-	if (maxamount > 0 && GlobalData::recharageData.mygotton < maxamount)
+	if ((maxamount == 0 || GlobalData::recharageData.mygotton < maxamount) && g_gameLayer != NULL)
 		g_gameLayer->addChild(RechargeLayer::create(), 5);
 
 }
