@@ -516,6 +516,18 @@ typedef struct
 	int exp;
 }HSLJRankData;
 
+
+/****************************
+充值活动数据
+*****************************/
+typedef struct
+{
+	std::string rtime;
+	std::string rewardstr;
+	int myrechage;
+	int mygotton;
+}RechargeData;
+
 class GlobalData
 {
 public:
@@ -1162,6 +1174,9 @@ public:
 	static std::vector<std::string> vec_qq;
 
 	static bool isOnline;
+
+	static bool isRecharge;
+	static RechargeData recharageData;
 private:
 	static bool unlockhero[4];//角色解锁
 	static std::string uid;//

@@ -139,6 +139,11 @@ private:
 	void onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
 
 	/****************************
+	充值活动
+	*****************************/
+	void onRecharge(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);
+
+	/****************************
 	到达目的地
 	*****************************/
 	void Arrive();
@@ -190,6 +195,7 @@ private:
 	cocos2d::ui::Widget* achiveRedpoint;
 	cocos2d::ui::Widget* m_prizebtn;
 	cocos2d::ui::Widget* m_helpbtn;
+	cocos2d::ui::Widget* m_rechargebtn;
 	cocos2d::ui::Widget* brachmissionicon;
 };
 extern MapLayer* g_maplayer;//全局地图层

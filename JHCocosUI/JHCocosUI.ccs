@@ -57,6 +57,13 @@
           <Image Name="prizebtn.png" />
           <Image Name="priztitle.png" />
           <Image Name="rafflerettitle.png" />
+          <Image Name="rechargebar.png" />
+          <Image Name="rechargebarbg.png" />
+          <Image Name="rechargebox0.png" />
+          <Image Name="rechargebox1.png" />
+          <Image Name="rechargebtn.png" />
+          <Image Name="rechargeget.png" />
+          <Image Name="rechargetitle.png" />
           <Image Name="repairbox.png" />
           <Image Name="room.jpg" />
           <Image Name="select.png" />
@@ -788,6 +795,7 @@
         <Project Name="raffleResultLayer.csd" Type="Scene" />
         <Project Name="rankLayer.csd" Type="Layer" />
         <Project Name="rankNode.csd" Type="Node" />
+        <Project Name="rechargeLayer.csd" Type="Scene" />
         <Project Name="relationLayer.csd" Type="Layer" />
         <Project Name="relationNode.csd" Type="Node" />
         <Project Name="repairLayer.csd" Type="Layer" />

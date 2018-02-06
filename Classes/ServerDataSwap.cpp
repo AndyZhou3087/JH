@@ -855,6 +855,32 @@ void ServerDataSwap::getCommonData()
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetCommonDataCB, this));
 }
 
+void ServerDataSwap::getRechargeData()
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_topupevent?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetRechargeDataCB, this));
+}
+
+void ServerDataSwap::postMyRecharge(int amount, int type)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_topup?");
+	url.append("playerid=");
+	url.append(GlobalData::UUID());
+	url.append("&amount=");
+	std::string str = StringUtils::format("%d", amount);
+	url.append(str);
+	url.append("&type=");
+	str = StringUtils::format("%d", type);
+	url.append(str);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPostMyRechargeCB, this));
+}
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -1392,6 +1418,7 @@ void ServerDataSwap::httpModifyNickNameCB(std::string retdata, int code, std::st
 void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string tag)
 {
 	GlobalData::isExchangeGift = false;
+	GlobalData::isRecharge = false;
 	GlobalData::couponinfo = "";
 	if (code == 0)
 	{
@@ -1488,6 +1515,12 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				rapidjson::Value& retval = doc["durl"];
 				GlobalData::updateDownLoadURL = retval.GetString();
 			}
+
+			//if (doc.HasMember("topup"))
+			//{
+				//rapidjson::Value& retval = doc["topup"];
+				GlobalData::isRecharge = true; // = v == 1 ? true : false;
+			//}
 		
 			if (m_pDelegateProtocol != NULL)
 				m_pDelegateProtocol->onSuccess();
@@ -3101,4 +3134,102 @@ void ServerDataSwap::httpGetCommonDataCB(std::string retdata, int code, std::str
 	release();
 }
 
+void ServerDataSwap::httpGetRechargeDataCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	GlobalData::recharageData.rtime = "";
+	GlobalData::recharageData.myrechage = 0;
+	GlobalData::recharageData.rewardstr = "";
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("ret"))
+			{
+				rapidjson::Value& v = doc["ret"];
+				int ret = v.GetInt();
+				if (ret == 0)
+					isok = true;
+
+			}
+			if (doc.HasMember("date"))
+			{
+				rapidjson::Value& v = doc["date"];
+				GlobalData::recharageData.rtime = v.GetString();
+
+			}
+
+			if (doc.HasMember("award"))
+			{
+				rapidjson::Value& v = doc["award"];
+				GlobalData::recharageData.rewardstr = v.GetString();
+			}
+			if (doc.HasMember("topup"))
+			{
+				rapidjson::Value& v = doc["topup"];
+				GlobalData::recharageData.myrechage = atoi(v.GetString());
+			}
+			if (doc.HasMember("gotten"))
+			{
+				rapidjson::Value& v = doc["gotten"];
+				GlobalData::recharageData.mygotton = atoi(v.GetString());
+			}
+
+			
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
+
+void ServerDataSwap::httpPostMyRechargeCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		rapidjson::Document doc;
+		if (JsonReader(retdata, doc))
+		{
+			if (doc.HasMember("ret"))
+			{
+				rapidjson::Value& v = doc["ret"];
+				int ret = v.GetInt();
+				if (ret == 0)
+					isok = true;
+
+			}
+		}
+	}
+
+	if (isok)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
 

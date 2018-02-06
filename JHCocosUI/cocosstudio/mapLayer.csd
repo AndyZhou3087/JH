@@ -973,6 +973,22 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="rechargebtn" ActionTag="-791560280" Tag="123" IconVisible="False" LeftMargin="-2.0118" RightMargin="594.0118" TopMargin="868.0000" BottomMargin="288.0000" TouchEnable="True" FontSize="50" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="98" Scale9Height="102" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="128.0000" Y="124.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="61.9882" Y="350.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0861" Y="0.2734" />
+            <PreSize X="0.1778" Y="0.0969" />
+            <FontResource Type="Normal" Path="fonts/STXINGKA.TTF" Plist="" />
+            <TextColor A="255" R="255" G="255" B="255" />
+            <DisabledFileData Type="Normal" Path="images/rechargebtn.png" Plist="" />
+            <PressedFileData Type="Normal" Path="images/rechargebtn.png" Plist="" />
+            <NormalFileData Type="Normal" Path="images/rechargebtn.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

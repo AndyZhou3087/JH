@@ -156,6 +156,10 @@ std::vector<std::string> GlobalData::vec_qq;
 
 bool GlobalData::isOnline = false;
 
+RechargeData GlobalData::recharageData;
+
+bool GlobalData::isRecharge = false;
+
 GlobalData::GlobalData()
 {
 

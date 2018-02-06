@@ -72,6 +72,10 @@ public:
 
 	void getCommonData();
 
+	void getRechargeData();
+
+	void postMyRecharge(int amount, int type);
+
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -137,6 +141,10 @@ private:
 	void httpGetHSLJRewardDataCB(std::string retdata, int code, std::string tag);
 
 	void httpGetCommonDataCB(std::string retdata, int code, std::string tag);
+
+	void httpGetRechargeDataCB(std::string retdata, int code, std::string tag);
+
+	void httpPostMyRechargeCB(std::string retdata, int code, std::string tag);
 
 };
 

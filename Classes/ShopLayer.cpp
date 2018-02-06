@@ -276,6 +276,7 @@ void ShopLayer::setMessage(PYARET ret)
 #ifdef ANALYTICS
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);
 #endif
+		ServerDataSwap::init(NULL)->postMyRecharge(buyprice[payindex], 0);
 	}
 	isPaying = false;
 }

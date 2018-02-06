@@ -28,6 +28,7 @@
 #include "BranchMissionLayer.h"
 #include "HintBox.h"
 #include "HelpMainLayer.h"
+#include "RechargeLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "iosfunc.h"
 #endif
@@ -153,6 +154,10 @@ bool MapLayer::init()
 
 	m_helpbtn = (cocos2d::ui::Widget*)csbnode->getChildByName("helpbtn");
 	m_helpbtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onHelp, this));
+
+	m_rechargebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("rechargebtn");
+	m_rechargebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onRecharge, this));
+	m_rechargebtn->setVisible(false);
 
 	m_prizebtn = (cocos2d::ui::Widget*)csbnode->getChildByName("prizebtn");
 	m_prizebtn->addTouchEventListener(CC_CALLBACK_2(MapLayer::onPrize, this));
@@ -802,7 +807,7 @@ void MapLayer::checkTimeGift(float dt)
 		else
 			m_timegiftbtn->setVisible(false);
 	}
-	if (GlobalData::myRaffleData.isshow)
+	if (GlobalData::myRaffleData.isshow && GlobalData::isOnline)
 	{
 		m_rafflebtn->setVisible(true);
 		if (m_timegiftbtn->isVisible())
@@ -812,6 +817,23 @@ void MapLayer::checkTimeGift(float dt)
 		else
 		{
 			m_rafflebtn->setPositionY(665);
+		}
+	}
+
+	if (GlobalData::isRecharge && GlobalData::isOnline)
+	{
+		m_rechargebtn->setVisible(true);
+		if (m_timegiftbtn->isVisible() && GlobalData::myRaffleData.isshow)
+		{
+			m_rechargebtn->setPositionY(350);
+		}
+		else if ((m_timegiftbtn->isVisible() && !GlobalData::myRaffleData.isshow) || (!m_timegiftbtn->isVisible() && GlobalData::myRaffleData.isshow))
+		{
+			m_rechargebtn->setPositionY(500);
+		}
+		else if (!m_timegiftbtn->isVisible() && !GlobalData::myRaffleData.isshow)
+		{
+			m_rechargebtn->setPositionY(665);
 		}
 	}
 	if (GlobalData::myLotteryData.isshow && m_lotteryimg != NULL)
@@ -898,6 +920,16 @@ void MapLayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	{
 		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
 		HelpMainLayer* layer = HelpMainLayer::create();
+		g_gameLayer->addChild(layer, 5);
+	}
+}
+
+void MapLayer::onRecharge(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
+{
+	if (type == ui::Widget::TouchEventType::ENDED)
+	{
+		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_BUTTON);
+		RechargeLayer* layer = RechargeLayer::create();
 		g_gameLayer->addChild(layer, 5);
 	}
 }

@@ -144,7 +144,7 @@ void OutDoor::updataMyPackageUI()
 		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
-			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv+1);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv);
 		}
 		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
 		{
@@ -253,7 +253,7 @@ void OutDoor::updataStorageUI()
 		if (tmpdata.type == WEAPON || tmpdata.type == PROTECT_EQU)
 		{
 			boxstr = StringUtils::format("ui/qubox%d.png", GlobalData::map_equips[tmpdata.strid].qu);
-			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv + 1);
+			countorlvstr = StringUtils::format("Lv%d", tmpdata.slv);
 		}
 		else if (tmpdata.type == N_GONG || tmpdata.type == W_GONG)
 		{
