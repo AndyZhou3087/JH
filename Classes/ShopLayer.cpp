@@ -16,6 +16,7 @@
 #include "MapLayer.h"
 #include "ServerDataSwap.h"
 #include "VipShopLayer.h"
+#include "RechargeLayer.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "IOSPurchaseWrap.h"
 #include "iosfunc.h"
@@ -277,6 +278,10 @@ void ShopLayer::setMessage(PYARET ret)
 		AnalyticUtil::pay("pay", buyprice[payindex], 1);
 #endif
 		ServerDataSwap::init(NULL)->postMyRecharge(buyprice[payindex], 0);
+		if (GlobalData::isRecharge && g_gameLayer != NULL)
+		{
+			g_gameLayer->scheduleOnce(schedule_selector(ShopLayer::delayShowRecharge), 1.0f);
+		}
 	}
 	isPaying = false;
 }
@@ -308,5 +313,13 @@ void ShopLayer::onQQ(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType 
 		cocos2d::ui::Text* qq = (cocos2d::ui::Text*)pSender;
 		GlobalData::copyToClipBoard(qq->getString());
 	}
+
+}
+
+void ShopLayer::delayShowRecharge(float dt)
+{
+	int maxamount = RechargeLayer::getRechargeMaxAmount();
+	if (maxamount > 0 && GlobalData::recharageData.mygotton < maxamount)
+		g_gameLayer->addChild(RechargeLayer::create(), 5);
 
 }

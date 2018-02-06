@@ -287,6 +287,25 @@ void RechargeLayer::splitRechargeAward()
 			maxamount = price;
 	}
 }
+
+int RechargeLayer::getRechargeMaxAmount()
+{
+	if (GlobalData::recharageData.rewardstr.length() > 0)
+	{
+		std::vector<std::string> vec_tmp;
+		CommonFuncs::split(GlobalData::recharageData.rewardstr, vec_tmp, ";");
+		for (unsigned int i = 0; i < vec_tmp.size(); i++)
+		{
+			std::vector<std::string> vec_tmp1;
+			CommonFuncs::split(vec_tmp[i], vec_tmp1, "-");
+			int price = atoi(vec_tmp1[0].c_str());
+			if (i == vec_tmp.size() - 1)
+				return price;
+		}
+	}
+	return 0;
+}
+
 void RechargeLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
 	CommonFuncs::BtnAction(pSender, type);

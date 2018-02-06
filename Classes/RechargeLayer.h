@@ -15,7 +15,7 @@ public:
 
 	bool init();
 	static RechargeLayer* create();
-
+	static int getRechargeMaxAmount();
 private:
 	
 	cocos2d::ui::Button* getbtn;
