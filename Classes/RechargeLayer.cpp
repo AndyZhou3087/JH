@@ -311,7 +311,7 @@ void RechargeLayer::onGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-
+		getbtn->setEnabled(false);
 		for (int i = 0; i < vec_myawrd.size(); i++)
 		{
 			std::string boxstr = "ui/buildsmall.png";
