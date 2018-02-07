@@ -3109,12 +3109,14 @@ void ServerDataSwap::httpGetCommonDataCB(std::string retdata, int code, std::str
 				if (qqstr.length() > 0)
 					CommonFuncs::split(v.GetString(), GlobalData::vec_qq);
 			}
-
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#else
 			if (doc.HasMember("online"))
 			{
 				rapidjson::Value& v = doc["online"];
 				GlobalData::isOnline = v.GetInt() == 1?true : false;
 			}
+#endif
 		}
 	}
 

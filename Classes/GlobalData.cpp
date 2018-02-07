@@ -154,7 +154,12 @@ std::string GlobalData::curBranchMissionID;
 
 std::vector<std::string> GlobalData::vec_qq;
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+bool GlobalData::isOnline = true;
+#else
 bool GlobalData::isOnline = false;
+#endif
+
 
 RechargeData GlobalData::recharageData;
 
