@@ -131,9 +131,9 @@ void HomeHill::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
 
-	if (!NewerGuideLayer::checkifNewerGuide(7))
+	if (!NewerGuideLayer::checkifNewerGuide(7) && NewerGuideLayer::checkifNewerGuide(8))
 		showNewerGuide(8);
-	else
+	else if (NewerGuideLayer::checkifNewerGuide(18))
 		showNewerGuide(18);
 }
 

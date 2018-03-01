@@ -25,7 +25,7 @@ std::string descText[][6] = { { "我是老贤，从现在开始，再也没有�
 { "", "", ""},
 {"", "", ""},//7
 {"", "", ""},
-{"", "", ""},
+{"好了，基础的东西你都了解了，有其它不了解的地方可以点击地图右下角的攻略查看，切记保持资源充足！", "", ""},
 {"", "", ""},
 { "", "", "" },
 { "初出江湖我们来看看外面的世界", "", "" },//12
@@ -224,7 +224,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		this->addChild(m_colorlayer, -1);
 	}
 	isallclick = false;
-	if (m_step == 0 || m_step == 2 || m_step == 4 || m_step == 15 || m_step == 19 || m_step == 41 || m_step == 45 || m_step == 47 || m_step == 58 || m_step == 59 || m_step == 65)
+	if (m_step == 0 || m_step == 2 || m_step == 4 || m_step == 9|| m_step == 15 || m_step == 19 || m_step == 41 || m_step == 45 || m_step == 47 || m_step == 58 || m_step == 59 || m_step == 65)
 		isallclick = true;
 
 	if (isallclick)

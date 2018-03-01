@@ -936,35 +936,20 @@ void Winlayer::showLvUpAnim(float dt)
 void Winlayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 34)
+	bool showguide = false;
+	if (step == 9)
 	{
-		Node* resnode = this->getChildByName("resitem0");
-		if (resnode != NULL)
-			nodes.push_back(resnode->getChildren().at(0));
-
-		NewerGuideLayer::pushUserData("buildsmall");
+		showguide = true;
 	}
-	else if (step == 35 || step == 38)
-	{
-		nodes.push_back(m_backbtn);
-		NewerGuideLayer::pushUserData("backbtn");
-	}
-	else if (step == 37)
-	{
-		nodes.push_back(m_getallbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
-	if (nodes.size() > 0)
+	if (showguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 
 void Winlayer::checkNewerGuide()
 {
-	if (NewerGuideLayer::checkifNewerGuide(34))
-		showNewerGuide(34);
-	else if (NewerGuideLayer::checkifNewerGuide(37))
-		showNewerGuide(37);
+	if (NewerGuideLayer::checkifNewerGuide(9))
+		showNewerGuide(9);
 }
 
 int Winlayer::addHeroExp()
