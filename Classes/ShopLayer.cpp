@@ -216,7 +216,7 @@ void ShopLayer::beginPay(int index)
 }
 void ShopLayer::setMessage(PYARET ret)
 {
-	if (ret == PAY_SUCC)
+	if (ret == PAY_SUCC && payindex >= 0)
 	{
 		int herocount = sizeof(heroprice) / sizeof(heroprice[0]);
 		int golditemcount = sizeof(goldcount) / sizeof(goldcount[0]);
@@ -283,6 +283,7 @@ void ShopLayer::setMessage(PYARET ret)
 			g_gameLayer->scheduleOnce(schedule_selector(ShopLayer::delayShowRecharge), 1.0f);
 		}
 	}
+	payindex = -1;
 	isPaying = false;
 }
 
