@@ -638,33 +638,38 @@ void ActionGetLayer::addEventText2(float dt)
 
 void ActionGetLayer::showNewerGuide(int step)
 {
+	bool showguide = false;
 	std::vector<Node*> nodes;
 	if (step == 19)
 	{
-
+		showguide = true;
 	}
 	if (step == 20 || step == 29)
 	{
 		Node* resitem0 = this->getChildByName("resitem0")->getChildren().at(0);
 		NewerGuideLayer::pushUserData("buildsmall");
 		nodes.push_back(this->getChildByName("resitem0")->getChildren().at(0));
+		showguide = true;
 	}
 	else if (step == 21 || step == 23 || step == 25 || step == 30 || step == 32 || step == 34)
 	{
 		nodes.push_back(m_getbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
+		showguide = true;
 	}
 	else if (step == 31 || step == 35)
 	{
 		nodes.push_back(m_getallbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
+		showguide = true;
 	}
 	else if (step == 27 || step == 36)
 	{
 		nodes.push_back(m_backbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
+		showguide = true;
 	}
 
-	if ((step >= 19 && step <= 27) || (step >= 29 && step <= 36))
+	if (showguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
