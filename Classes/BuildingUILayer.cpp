@@ -155,16 +155,20 @@ void BuildingUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEv
 	{
 		if (NewerGuideLayer::checkifNewerGuide(7))
 		{
-			TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
-			if (topbar != NULL)
-				topbar->showNewerGuide(7);
-		}
-		else if (NewerGuideLayer::checkifNewerGuide(46))
-		{
+			//TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+			//if (topbar != NULL)
+			//	topbar->showNewerGuide(7);
+
 			HomeLayer* homlayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
 			if (homlayer != NULL)
-				homlayer->showNewerGuide(46);
+				homlayer->showNewerGuide(12);
 		}
+		//else if (NewerGuideLayer::checkifNewerGuide(46))
+		//{
+		//	HomeLayer* homlayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+		//	if (homlayer != NULL)
+		//		homlayer->showNewerGuide(46);
+		//}
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -795,61 +799,61 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 5)
 	{
-		if (vec_categoryBtn.size() > 2)
-		{
-			nodes.push_back(vec_categoryBtn[2]);
-			NewerGuideLayer::pushUserData("buildtagbtn1");
-			isshowguide = true;
-		}
+		//if (vec_categoryBtn.size() > 2)
+		//{
+		//	nodes.push_back(vec_categoryBtn[2]);
+		//	NewerGuideLayer::pushUserData("buildtagbtn1");
+		//	isshowguide = true;
+		//}
 	}
-	else if (step == 6)
-	{
-		
-		if (vec_actionItem.size() > 1 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
-		{
-			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
-			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-			nodes.push_back(actbtn);
-			NewerGuideLayer::pushUserData("normalbtn");
-            isshowguide = true;
-		}
-	}
+	//else if (step == 6)
+	//{
+	//	
+	//	if (vec_actionItem.size() > 1 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
+	//	{
+	//		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[1]->getChildByName("item");
+	//		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+	//		nodes.push_back(actbtn);
+	//		NewerGuideLayer::pushUserData("normalbtn");
+ //           isshowguide = true;
+	//	}
+	//}
 
-	else if (step == 42)
-	{
-		if (vec_categoryBtn.size() > 2)
-		{
-			nodes.push_back(vec_categoryBtn[2]);
-			NewerGuideLayer::pushUserData("buildtagbtn1");
-			isshowguide = true;
-		}
-	}
-	else if (step == 43)
-	{
-		if (vec_actionItem.size() > 0 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
-		{
-			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
-			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-			nodes.push_back(actbtn);
-			NewerGuideLayer::pushUserData("normalbtn");
-            isshowguide = true;
-		}
-	}
-	else if (step == 44)
-	{
-		if (vec_actionItem.size() > 2 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
-		{
-			cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
-			cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
-			nodes.push_back(actbtn);
-			NewerGuideLayer::pushUserData("normalbtn");
-            isshowguide = true;
-		}
-	}
-	else if (step == 45)
-	{
-        isshowguide = true;
-	}
+	//else if (step == 42)
+	//{
+	//	if (vec_categoryBtn.size() > 2)
+	//	{
+	//		nodes.push_back(vec_categoryBtn[2]);
+	//		NewerGuideLayer::pushUserData("buildtagbtn1");
+	//		isshowguide = true;
+	//	}
+	//}
+	//else if (step == 43)
+	//{
+	//	if (vec_actionItem.size() > 0 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
+	//	{
+	//		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[0]->getChildByName("item");
+	//		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+	//		nodes.push_back(actbtn);
+	//		NewerGuideLayer::pushUserData("normalbtn");
+ //           isshowguide = true;
+	//	}
+	//}
+	//else if (step == 44)
+	//{
+	//	if (vec_actionItem.size() > 2 && vec_categoryBtn.size() > 2 && !vec_categoryBtn[2]->isBright())
+	//	{
+	//		cocos2d::ui::Widget* item = (cocos2d::ui::Widget*)vec_actionItem[2]->getChildByName("item");
+	//		cocos2d::ui::Button* actbtn = (cocos2d::ui::Button*)item->getChildByName("actionbtn");
+	//		nodes.push_back(actbtn);
+	//		NewerGuideLayer::pushUserData("normalbtn");
+ //           isshowguide = true;
+	//	}
+	//}
+	//else if (step == 45)
+	//{
+ //       isshowguide = true;
+	//}
 	if (isshowguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
@@ -862,18 +866,18 @@ void BuildingUILayer::checkNewerGuide()
 		showNewerGuide(3);
 	else if (NewerGuideLayer::checkifNewerGuide(4))
 		showNewerGuide(4);
-	else if (NewerGuideLayer::checkifNewerGuide(5))
-		showNewerGuide(5);
-	else if (NewerGuideLayer::checkifNewerGuide(6))
-		showNewerGuide(6);
-	else if (!NewerGuideLayer::checkifNewerGuide(41) && NewerGuideLayer::checkifNewerGuide(42))
-		showNewerGuide(42);
-	else if (!NewerGuideLayer::checkifNewerGuide(42) && NewerGuideLayer::checkifNewerGuide(43))
-		showNewerGuide(43);
-	else if (!NewerGuideLayer::checkifNewerGuide(43) && NewerGuideLayer::checkifNewerGuide(44))
-		showNewerGuide(44);
-	else if (!NewerGuideLayer::checkifNewerGuide(44) && NewerGuideLayer::checkifNewerGuide(45))
-		showNewerGuide(45);
+	//else if (NewerGuideLayer::checkifNewerGuide(5))
+	//	showNewerGuide(5);
+	//else if (NewerGuideLayer::checkifNewerGuide(6))
+	//	showNewerGuide(6);
+	//else if (!NewerGuideLayer::checkifNewerGuide(41) && NewerGuideLayer::checkifNewerGuide(42))
+	//	showNewerGuide(42);
+	//else if (!NewerGuideLayer::checkifNewerGuide(42) && NewerGuideLayer::checkifNewerGuide(43))
+	//	showNewerGuide(43);
+	//else if (!NewerGuideLayer::checkifNewerGuide(43) && NewerGuideLayer::checkifNewerGuide(44))
+	//	showNewerGuide(44);
+	//else if (!NewerGuideLayer::checkifNewerGuide(44) && NewerGuideLayer::checkifNewerGuide(45))
+	//	showNewerGuide(45);
 }
 
 void BuildingUILayer::onExercisefinish(int index)

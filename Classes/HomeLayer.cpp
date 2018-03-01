@@ -321,17 +321,18 @@ void HomeLayer::showNewerGuide(int step)
 		NewerGuideLayer::pushUserData("fence");
 		showguide = true;
 	}
-	else if (step == 41)
+	else if (step == 41 || step == 45)
 	{
-		if (Vec_Buildings.size() > 2)
-		{
-			nodes.push_back(Vec_Buildings[2]->getParent());
-			if (Vec_Buildings[2]->data.level > 0)
-				NewerGuideLayer::pushUserData("forgingtable");
-			else
-				NewerGuideLayer::pushUserData("buildingguide");
-			showguide = true;
-		}
+		//if (Vec_Buildings.size() > 2)
+		//{
+		//	nodes.push_back(Vec_Buildings[2]->getParent());
+		//	if (Vec_Buildings[2]->data.level > 0)
+		//		NewerGuideLayer::pushUserData("forgingtable");
+		//	else
+		//		NewerGuideLayer::pushUserData("buildingguide");
+		//	showguide = true;
+		//}
+		showguide = true;
 	}
 	else if (step == 65)
 	{

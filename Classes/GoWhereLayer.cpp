@@ -280,12 +280,12 @@ void GoWhereLayer::showNewerGuide(int step)
 		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
 		topbar->showNewerGuide(15);
 	}
-	else if ((step == 16) && m_type == GOWHERE)
+	else if ((step == 16 || step == 6) && m_type == GOWHERE)
 	{
 		nodes.push_back(m_gobtn);
 		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	else if ((step == 17) && m_type == ARRIVE)
+	else if ((step == 17 || step == 7) && m_type == ARRIVE)
 	{
 		nodes.push_back(m_enterbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
@@ -321,6 +321,10 @@ void GoWhereLayer::checkNewerGuide()
 		showNewerGuide(39);
 	else if (NewerGuideLayer::checkifNewerGuide(40))
 		showNewerGuide(40);
+	else if (NewerGuideLayer::checkifNewerGuide(6))
+		showNewerGuide(6);
+	else if (NewerGuideLayer::checkifNewerGuide(7))
+		showNewerGuide(7);
 	else if (NewerGuideLayer::checkifNewerGuide(69))
 	{
 		if (m_type == ARRIVE)

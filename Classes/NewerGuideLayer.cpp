@@ -12,6 +12,7 @@
 #include "GoWhereLayer.h"
 #include "ActionGetLayer.h"
 #include "HeroProperNode.h"
+#include "MapLayer.h"
 
 std::map<int, std::vector<std::string>> map_words;
 
@@ -19,15 +20,15 @@ std::string descText[][6] = { { "我是老贤，从现在开始，再也没有�
 { "这里可以制作一系列的工具和武器，先制作锻造台吧", "", ""},//1
 { "这里可以查看制作所需要的材料", "", ""},//2
 { "", "", ""},
-{ "这么多东西可以制造？", "锻造台等级越高，能制造的东西越多！先造个斧头试试", ""},//4
+{ "这么多东西可以制造？", "锻造台等级越高，能制造的东西越多！", ""},//4
 { "", "", ""},
 { "", "", ""},
-{"现在资源有点不够了，咱们要出去采集资源，不过出门之前先把刚才的工具带上", "", ""},//7
+{"", "", ""},//7
 {"", "", ""},
 {"", "", ""},
 {"", "", ""},
 { "", "", "" },
-{ "", "", "" },
+{ "初出江湖我们来看看外面的世界", "", "" },//12
 { "", "", "" },
 { "世界这么大，去每一个位置都会根据距离消耗不同的时间，切记状态不好时就不要到处去浪了！", "", "" },//14
 { "这里记录时间，注意照顾好自己的生活时间！", "", "" },//15
@@ -53,14 +54,14 @@ std::string descText[][6] = { { "我是老贤，从现在开始，再也没有�
 { "", "", "" },
 { "", "", "" },
 { "", "", "" },
+{ "现在收集了一些资源，背包貌似有点重了，我们先回家把资源放下", "", "" },//38
+{ "", "", "" },
+{ "", "", "" },
+{ "回到家里，背包物品会自动放到仓库（锻造台下方）", "", "" },//41
 { "", "", "" },
 { "", "", "" },
 { "", "", "" },
-{ "好了，材料够了，现在先把其它两个工具造好吧", "", "" },//41
-{ "", "", "" },
-{ "", "", "" },
-{ "", "", "" },
-{ "这样就算是造好基础工具了？", "是啊！你看看，你现在家徒四壁，有个好工具你才能更有效率的采集资源来建造房子啊！还等什么呢！快出去收集资源啊！多收集写木材、石矿、铁矿回来！", ""},//45
+{ "你看看，你现在家徒四壁，有个好工具你才能更有效率的采集资源来建造房子啊！还等什么呢！快出去收集资源啊！多收集写木材、石矿、铁矿回来！", "", ""},//45
 { "", "", "" },
 { "慢着！出门前先把所有装备都带上，后山有狼出没，你要小心！", "", "" },//47
 { "", "", "" },
@@ -73,7 +74,7 @@ std::string descText[][6] = { { "我是老贤，从现在开始，再也没有�
 { "", "", "" },
 { "", "", "" },
 { "", "", "" },
-{"感叹号提示着在这个地点的角色有任务找你，快去看一下是什么事情吧，以你现在的实力还打不过这里的任何人，千万不要轻易进行挑战，切记！！！", "", ""},//58
+{"感叹号提示着在这个地点的角色有任务找你，以你现在的实力还打不过这里的任何人，先去后山打打狼和兔子提升一下你的功力！", "", ""},//58
 { "慢！你看看你现在自己的状态，快回去补充一下！", "", "" },//59
 { "", "", "" },
 { "", "", "" },
@@ -170,6 +171,10 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 	{
 		m_talknode->setPositionY(560);
 	}
+	else if (m_step == 12)
+	{
+		m_talknode->setPositionY(350);
+	}
 
 	if (map_words[step].size() > 0)
 	{
@@ -219,7 +224,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 		this->addChild(m_colorlayer, -1);
 	}
 	isallclick = false;
-	if (m_step == 0 || m_step == 2 || m_step == 4 || m_step == 15 || m_step == 19 || m_step == 45 || m_step == 47 || m_step == 59 || m_step == 65)
+	if (m_step == 0 || m_step == 2 || m_step == 4 || m_step == 15 || m_step == 19 || m_step == 41 || m_step == 45 || m_step == 47 || m_step == 58 || m_step == 59 || m_step == 65)
 		isallclick = true;
 
 	if (isallclick)
@@ -292,12 +297,33 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 					if (alayer != NULL)
 						alayer->showNewerGuide(20);
 				}
+				else if (m_step == 41)
+				{
+					removeSelf();
+					HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+					if (homelayer != NULL)
+						homelayer->showNewerGuide(45);
+				}
+				else if (m_step == 45)
+				{
+					removeSelf();
+					HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
+					if (homelayer != NULL)
+						homelayer->showNewerGuide(46);
+				}
 				else if (m_step == 47)
 				{
 					removeSelf();
 					HeroProperNode* heroProperNode = (HeroProperNode*)g_gameLayer->getChildByName("OutDoor")->getChildByName("csbnode")->getChildByName("HeroProperNode");
 					if (heroProperNode != NULL)
 						heroProperNode->showNewerGuide(48);
+				}
+				else if (m_step == 58)
+				{
+					removeSelf();
+					MapLayer* maplayer = (MapLayer*)g_gameLayer->getChildByName("maplayer");
+					if (maplayer != NULL)
+						maplayer->showNewerGuide(5);
 				}
 				else if (m_step == 59)
 				{
@@ -320,7 +346,7 @@ bool NewerGuideLayer::init(int step, std::vector<Node*> stencilNodes)
 			}
 			else
 			{
-				if (m_step == 4 || m_step == 19 || m_step == 45 || m_step == 65)
+				if (m_step == 4 || m_step == 19 || m_step == 65)
 				{
 					if (wordindex % 2 == 0)
 					{
@@ -388,6 +414,8 @@ bool NewerGuideLayer::checkifNewerGuide(int index)
 
 void NewerGuideLayer::showAnim(Vec2 pos)
 {
+	if (m_step == 58)
+		return;
 
 	if (map_words[m_step].size() <= 0)
 	{
@@ -401,6 +429,8 @@ void NewerGuideLayer::showAnim(Vec2 pos)
 	sj->setAnchorPoint(Vec2(0, 1));
 	sj->setPosition(pos.x, pos.y);
 	this->addChild(sj, 1);
+
+
 
 	//创建帧动画序列，名词形式
 	auto animation = Animation::create();
@@ -454,7 +484,9 @@ void NewerGuideLayer::showWord(std::string wordstr)
 	vec_resname.push_back(CommonFuncs::gbk2utf("石矿"));
 	vec_resname.push_back(CommonFuncs::gbk2utf("铁矿"));
 	vec_resname.push_back(CommonFuncs::gbk2utf("切记喝酒必须在酒桌上才能喝！"));
-	
+	vec_resname.push_back(CommonFuncs::gbk2utf("仓库（锻造台下方）")); 
+	vec_resname.push_back(CommonFuncs::gbk2utf("狼"));
+	vec_resname.push_back(CommonFuncs::gbk2utf("兔子"));
 	std::vector<std::string>::iterator it;
 	for (unsigned int i = 0;i < vec_resname.size(); i++)
 	{

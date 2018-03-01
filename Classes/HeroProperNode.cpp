@@ -99,8 +99,8 @@ bool HeroProperNode::init()
 	m_listener->setSwallowTouches(false);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(m_listener, this);
 
-	if (m_step == 8)
-		showNewerGuide(m_step);
+	//if (m_step == 8)
+	//	showNewerGuide(m_step);
 
 	return true;
 }
@@ -123,9 +123,9 @@ void HeroProperNode::onOK(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEvent
 		MixGFNode* mixnode = (MixGFNode*)this->getParent()->getChildByName("mixnode");
 		if (heroStateUILayer != NULL)
 		{
-			if (NewerGuideLayer::checkifNewerGuide(11))
-				heroStateUILayer->showNewerGuide(11);
-			else if (NewerGuideLayer::checkifNewerGuide(57))
+			//if (NewerGuideLayer::checkifNewerGuide(11))
+			//	heroStateUILayer->showNewerGuide(11);
+			if (NewerGuideLayer::checkifNewerGuide(57))
 			{
 				OutDoor* olayer = (OutDoor*)g_gameLayer->getChildByName("OutDoor");
 				if (olayer != NULL)
@@ -879,34 +879,34 @@ void HeroProperNode::showNewerGuide(int step)
 	std::vector<Node*> nodes;
 	Node* resItemNode = NULL;
     bool isshowguide = false;
-	if (step == 8)
-	{
-		nodes.push_back(propeImages[5]);
-		NewerGuideLayer::pushUserData("buildsmall");
-        isshowguide = true;
-	}
-	else if (step == 9)
-	{
-		resItemNode = m_scrollView->getChildByName("resitem0");
-		if (resItemNode != NULL)
-		{
-			if (resItemNode->getChildrenCount() > 0)
-			{
-				nodes.push_back(resItemNode->getChildren().at(0));
-				NewerGuideLayer::pushUserData("buildsmall");
-                isshowguide = true;
-			}
+	//if (step == 8)
+	//{
+	//	nodes.push_back(propeImages[5]);
+	//	NewerGuideLayer::pushUserData("buildsmall");
+ //       isshowguide = true;
+	//}
+	//else if (step == 9)
+	//{
+	//	resItemNode = m_scrollView->getChildByName("resitem0");
+	//	if (resItemNode != NULL)
+	//	{
+	//		if (resItemNode->getChildrenCount() > 0)
+	//		{
+	//			nodes.push_back(resItemNode->getChildren().at(0));
+	//			NewerGuideLayer::pushUserData("buildsmall");
+ //               isshowguide = true;
+	//		}
 
-		}
-		if (NewerGuideLayer::checkifNewerGuide(step))
-			m_scrollView->setEnabled(false);
-	}
-	else if (step == 10)
-	{
-		nodes.push_back(heroselectbg->getChildByName("okbtn"));
-		NewerGuideLayer::pushUserData("normalbtn");
-        isshowguide = true;
-	}
+	//	}
+	//	if (NewerGuideLayer::checkifNewerGuide(step))
+	//		m_scrollView->setEnabled(false);
+	//}
+	//else if (step == 10)
+	//{
+	//	nodes.push_back(heroselectbg->getChildByName("okbtn"));
+	//	NewerGuideLayer::pushUserData("normalbtn");
+ //       isshowguide = true;
+	//}
 
 	if (!NewerGuideLayer::checkifNewerGuide(47))
 	{

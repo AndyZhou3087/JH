@@ -130,7 +130,11 @@ bool HomeHill::init()
 void HomeHill::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-	showNewerGuide(18);
+
+	if (!NewerGuideLayer::checkifNewerGuide(7))
+		showNewerGuide(8);
+	else
+		showNewerGuide(18);
 }
 
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -232,11 +236,13 @@ void HomeHill::updateUI(float dt)
 void HomeHill::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
+	bool showguide = false;
 	if (step == 18)
 	{
 		Node* resnode = scrollView->getChildByName("node0");
 		NewerGuideLayer::pushUserData("normalbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
+		showguide = true;
 	}
 	else if (step == 28)
 	{
@@ -244,12 +250,22 @@ void HomeHill::showNewerGuide(int step)
 		Node* resnode = scrollView->getChildByName("node4");
 		NewerGuideLayer::pushUserData("normalbtn");
 		nodes.push_back(resnode->getChildByName("actionbtn"));
+		showguide = true;
+	}
+	else if (step == 8)
+	{
+		scrollView->jumpToPercentVertical(50);
+		Node* resnode = scrollView->getChildByName("node6");
+		NewerGuideLayer::pushUserData("normalbtn");
+		nodes.push_back(resnode->getChildByName("actionbtn"));
+		showguide = true;
 	}
 	else if (step == 37)
 	{
 		nodes.push_back(m_backbtn);
 		NewerGuideLayer::pushUserData("backbtn");
+		showguide = true;
 	}
-	if (step == 18 || step == 28 || step == 37)
+	if (showguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }

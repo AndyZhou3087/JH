@@ -92,10 +92,6 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->removeFromParentAndCleanup(true);
-
-		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
-		if (homelayer != NULL)
-			homelayer->showNewerGuide(12);
 	}
 }
 

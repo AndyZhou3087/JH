@@ -647,13 +647,14 @@ void TopBar::stopLoseAnim()
 void TopBar::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 7)
+/*	if (step == 7)
 	{
 		nodes.push_back(heroimg);
 		std::string str = StringUtils::format("tophero%d", g_hero->getHeadID());
 		NewerGuideLayer::pushUserData(str);
 	}
-	else if (step == 15)
+	else */
+	if (step == 15)
 	{
 		nodes.push_back(timelbl);
 		NewerGuideLayer::pushUserData("timeguide");

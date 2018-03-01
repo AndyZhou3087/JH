@@ -121,13 +121,13 @@ bool MapLayer::init()
 	{
 		std::string missionstr = StringUtils::format("ui/mapmission%d_0.png", i);
 		m_smissionIcon[i] = Sprite::createWithSpriteFrameName(missionstr);
-		m_smissionIcon[i]->setAnchorPoint(Vec2(0.5, 0));
+		//m_smissionIcon[i]->setAnchorPoint(Vec2(0.5, 0));
 		m_smissionIcon[i]->setVisible(false);
 		m_mapbg->addChild(m_smissionIcon[i]);
 
 		missionstr = StringUtils::format("ui/mapmission%d_1.png", i);
 		m_dmissionIcon[i] = Sprite::createWithSpriteFrameName(missionstr);
-		m_dmissionIcon[i]->setAnchorPoint(Vec2(0.5, 0));
+		//m_dmissionIcon[i]->setAnchorPoint(Vec2(0.5, 0));
 		m_dmissionIcon[i]->setVisible(false);
 		m_mapbg->addChild(m_dmissionIcon[i]);
 		updataPlotMissionIcon(i);
@@ -557,7 +557,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 						}
 						else
 						{
-							m_smissionIcon[type]->setPosition(m_mapbg->getChildByName(plotData->mapid)->getPosition());
+							m_smissionIcon[type]->setPosition(Vec2(m_mapbg->getChildByName(plotData->mapid)->getPosition().x, m_mapbg->getChildByName(plotData->mapid)->getPosition().y + m_smissionIcon[type]->getContentSize().height/2));
 							m_smissionIcon[type]->setVisible(true);
 							m_smissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
 						}
@@ -587,7 +587,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 							}
 							else
 							{
-								m_smissionIcon[type]->setPosition(mapname->getPosition());
+								m_smissionIcon[type]->setPosition(Vec2(mapname->getPosition().x, mapname->getPosition().y + m_smissionIcon[type]->getContentSize().height/2));
 								m_smissionIcon[type]->setVisible(true);
 								m_smissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
 							}
@@ -612,7 +612,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 					{
 						m_dmissionIcon[type]->setVisible(true);
 						m_dmissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
-						m_dmissionIcon[type]->setPosition(m_mapbg->getChildByName(plotData->mapid)->getPosition());
+						m_dmissionIcon[type]->setPosition(Vec2(m_mapbg->getChildByName(plotData->mapid)->getPosition().x, m_mapbg->getChildByName(plotData->mapid)->getPosition().y + m_dmissionIcon[type]->getContentSize().height / 2));
 					}
 					else
 					{
@@ -636,7 +636,7 @@ void MapLayer::updataPlotMissionIcon(int type)
 						{
 							m_dmissionIcon[type]->setVisible(true);
 							m_dmissionIcon[type]->runAction(RepeatForever::create(Blink::create(2, 3)));
-							m_dmissionIcon[type]->setPosition(mapname->getPosition());
+							m_dmissionIcon[type]->setPosition(Vec2(mapname->getPosition().x, mapname->getPosition().y + m_dmissionIcon[type]->getContentSize().height / 2));
 						}
 						else
 						{
@@ -710,22 +710,28 @@ void MapLayer::showEndAnim(float dt)
 void MapLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 14)
+	bool showguide = false;
+	if (step == 14 || step == 5)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-2"));
 		NewerGuideLayer::pushUserData("m1-2");
+		showguide = true;
 	}
 	else if (step == 38)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-1"));
 		NewerGuideLayer::pushUserData("m1-1");
+		showguide = true;
 	}
 	else if (step == 58)
 	{
-		nodes.push_back(m_mapbg->getChildByName("m1-4"));
-		NewerGuideLayer::pushUserData("m1-4");
+		//nodes.push_back(m_mapbg->getChildByName("m1-4"));
+		//NewerGuideLayer::pushUserData("m1-4");
+		nodes.push_back(m_smissionIcon[0]);
+		NewerGuideLayer::pushUserData("mapmission0_0");
+		showguide = true;
 	}
-	if (step == 14 || step == 38 || step == 58)
+	if (showguide)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 

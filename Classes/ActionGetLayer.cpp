@@ -134,30 +134,29 @@ void ActionGetLayer::doAction(float dt)
 	{
 		showNewerGuide(19);
 	}
-	else if (NewerGuideLayer::checkifNewerGuide(22))
+	else if (NewerGuideLayer::checkifNewerGuide(23))
 	{
-		showNewerGuide(22);
+		showNewerGuide(23);
 	}
-	else if (NewerGuideLayer::checkifNewerGuide(24))
+	else if (NewerGuideLayer::checkifNewerGuide(25))
 	{
-		showNewerGuide(24);
-	}
-	else if (NewerGuideLayer::checkifNewerGuide(26))
-	{
-		showNewerGuide(26);
-	}
-
-	else if (NewerGuideLayer::checkifNewerGuide(29))
-	{
-		showNewerGuide(29);
+		showNewerGuide(25);
 	}
 	else if (NewerGuideLayer::checkifNewerGuide(31))
 	{
 		showNewerGuide(31);
 	}
-	else if (NewerGuideLayer::checkifNewerGuide(33))
+	else if (!NewerGuideLayer::checkifNewerGuide(27) && NewerGuideLayer::checkifNewerGuide(29))
 	{
-		showNewerGuide(33);
+		showNewerGuide(29);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(32))
+	{
+		showNewerGuide(32);
+	}
+	else if (NewerGuideLayer::checkifNewerGuide(34))
+	{
+		showNewerGuide(34);
 	}
 	else if (NewerGuideLayer::checkifNewerGuide(35))
 	{
@@ -412,17 +411,9 @@ void ActionGetLayer::onAllGet(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 		}
 		saveTempData();
 		updata();
-		if (NewerGuideLayer::checkifNewerGuide(23))
-			showNewerGuide(23);
-		else if (NewerGuideLayer::checkifNewerGuide(25))
-			showNewerGuide(25);
-		else if (NewerGuideLayer::checkifNewerGuide(27))
-			showNewerGuide(27);
 
-		else if (NewerGuideLayer::checkifNewerGuide(32))
-			showNewerGuide(32);
-		else if (NewerGuideLayer::checkifNewerGuide(34))
-			showNewerGuide(34);
+		if (NewerGuideLayer::checkifNewerGuide(27))
+			showNewerGuide(27);
 		else if (NewerGuideLayer::checkifNewerGuide(36))
 			showNewerGuide(36);
 	}
@@ -663,7 +654,7 @@ void ActionGetLayer::showNewerGuide(int step)
 		nodes.push_back(m_getbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
 	}
-	else if (step == 22 || step == 24 || step == 26 || step == 31 || step == 33 || step == 35)
+	else if (step == 31 || step == 35)
 	{
 		nodes.push_back(m_getallbtn);
 		NewerGuideLayer::pushUserData("normalbtn");
