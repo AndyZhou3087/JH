@@ -926,7 +926,10 @@ void FightLayer::showFightWord(int type, int value)
 		checkWordLblColor(bosswordstr);
 
 		isUseWg = false;
-		SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT);
+		if (g_hero->getHeadID() == 4)
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT1);
+		else
+			SoundManager::getInstance()->playSound(SoundManager::SOUND_ID_HURT0);
 	}
 }
 

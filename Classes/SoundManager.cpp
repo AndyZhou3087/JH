@@ -34,7 +34,8 @@ void SoundManager::loadSounds()
 	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_KANSHU, "sounds/kanshu.mp3"));
 	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_WAJUE, "sounds/wajue.mp3"));
 	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_ATTACK, "sounds/attack.mp3"));
-	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_HURT, "sounds/hurt.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_HURT0, "sounds/hurt0.mp3"));
+	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_HURT1, "sounds/hurt1.mp3"));
 	_soundIds.insert(SoundIdMapType::value_type((int)SOUND_ID_BUYOK, "sounds/buyok.mp3"));
 	//²åÈë±³¾°ÒôÀÖÁÐ±í
 	_musicIds.insert(SoundIdMapType::value_type((int)MUSIC_ID_START, "sounds/start.mp3"));
@@ -54,7 +55,8 @@ void SoundManager::loadSounds()
 	SimpleAudioEngine::getInstance()->preloadEffect("sounds/kanshu.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("sounds/wajue.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("sounds/attack.mp3");
-	SimpleAudioEngine::getInstance()->preloadEffect("sounds/hurt.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/hurt0.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("sounds/hurt1.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("sounds/buyok.mp3");
 }
 
