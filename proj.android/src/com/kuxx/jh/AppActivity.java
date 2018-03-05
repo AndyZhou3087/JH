@@ -53,7 +53,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
-public class AppActivity extends Cocos2dxActivity implements onDownloadApkListener {
+public class AppActivity extends Cocos2dxActivity implements onDownloadApkListener{
 	
 	
 	public static HandlerThread handlerThread;
@@ -91,14 +91,14 @@ public class AppActivity extends Cocos2dxActivity implements onDownloadApkListen
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		MobClickCppHelper.onPause(this);
+		MobClickCppHelper.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		MobClickCppHelper.onResume(this);
+		MobClickCppHelper.onPause(this);
 	}
 
     @Override
@@ -220,17 +220,25 @@ public class AppActivity extends Cocos2dxActivity implements onDownloadApkListen
    					  JNI.sendMessage(-1);
    					  break;
    				  case -4:
-   			        ClipboardManager cm = (ClipboardManager) theOnly.getSystemService(Context.CLIPBOARD_SERVICE);
-   			        // 将文本内容放到系统剪贴板里。
-   			        ClipData myClip = ClipData.newPlainText("qqnum", (String)msg.obj);
-   			        cm.setPrimaryClip(myClip);
+	   			      ClipboardManager cm = (ClipboardManager) theOnly.getSystemService(Context.CLIPBOARD_SERVICE);
+	   			        // 将文本内容放到系统剪贴板里。
+	   			      ClipData myClip = ClipData.newPlainText("qqnum", (String)msg.obj);
+	   			      cm.setPrimaryClip(myClip);
    					  Toast.makeText(theOnly, "客服QQ已复制到剪切板！！", Toast.LENGTH_SHORT).show();
    					  break;
    				  case 0:
+   					  Toast.makeText(theOnly, "支付成功！！", Toast.LENGTH_SHORT).show();
    					  JNI.sendMessage(0);
    					  break;
-   				  default:
+   				  case 1:
+   					  Toast.makeText(theOnly, "支付失败！！", Toast.LENGTH_SHORT).show();
    					  JNI.sendMessage(-1);
+   					  break;
+   				  case 2:
+   					  Toast.makeText(theOnly, "支付取消！！", Toast.LENGTH_SHORT).show();
+   					  JNI.sendMessage(-1);
+   					  break;
+   				  default:
    					  break;
    				  }
    			  } 
@@ -280,5 +288,4 @@ public class AppActivity extends Cocos2dxActivity implements onDownloadApkListen
                 "application/vnd.android.package-archive");
        theOnly.startActivity(intent);
 	}
-
 }

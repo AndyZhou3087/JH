@@ -1,36 +1,34 @@
 package com.kuxx.jh.wxapi;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.kuxx.jh.AppActivity;
+import com.kuxx.jh.R;
+import com.kuxx.jh.WXPay;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.os.Message;
+import android.view.Window;
+import android.view.WindowManager;
 
-import com.bukaopu.pipsdk.PayChannelHandler;
-import com.bukaopu.pipsdk.PipClient;
-import com.bukaopu.pipsdk.paychannel.wechat.WechatPayHandler;
-import com.kuxx.jh.AppActivity;
-import com.kuxx.jh.R;
-import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-//import android.app.AlertDialog;
-
-public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
-	
-	private static final String TAG = "WXPayEntryActivity";
+public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 	
     private IWXAPI api;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wx_pay_result);
-    	api = WXAPIFactory.createWXAPI(this, WechatPayHandler.APP_ID);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.pay_result);
+        api = WXPay.wxapi;
         api.handleIntent(getIntent(), this);
     }
 
@@ -42,30 +40,41 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	}
 
 	@Override
-	public void onReq(BaseReq req) {
+	public void onReq(BaseReq arg0) {
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void onResp(BaseResp resp) {
-		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-			if (resp.errCode == 0) {
-				Toast.makeText(AppActivity.theOnly, "支付成功", Toast.LENGTH_SHORT).show();
-				PipClient.getInstance().payCallback(PayChannelHandler.PAY_RESULT_SUCCESS);
-			}
-			else if (resp.errCode == -2) {
-				PipClient.getInstance().payCallback(PayChannelHandler.PAY_RESULT_CANCEL);
-			}
-			else {
-				Toast.makeText(AppActivity.theOnly, "支付失败", Toast.LENGTH_SHORT).show();
-				PipClient.getInstance().payCallback(PayChannelHandler.PAY_RESULT_FAIL);
-			}
-//			Toast.makeText(this, "Wechat pay result, error code is " + resp.errCode, Toast.LENGTH_LONG).show();
-			this.finish();
+		// TODO Auto-generated method stub
+		if (resp.errCode == BaseResp.ErrCode.ERR_OK) 
+		{
+	        Message msg = AppActivity.handler.obtainMessage();
+	        msg.what = 0;
+	        msg.sendToTarget();
 		}
-		else {
-			Toast.makeText(AppActivity.theOnly, "支付失败", Toast.LENGTH_SHORT).show();
-			PipClient.getInstance().payCallback(PayChannelHandler.PAY_RESULT_FAIL);
-			this.finish();
+		else if (resp.errCode == BaseResp.ErrCode.ERR_USER_CANCEL)
+		{
+	        Message msg = AppActivity.handler.obtainMessage();
+	        msg.what = 2;
+	        msg.sendToTarget();	
 		}
+		else
+		{
+	        Message msg = AppActivity.handler.obtainMessage();
+	        msg.what = 1;
+	        msg.sendToTarget();	
+		}
+		api.unregisterApp();
+		
+		final Timer timer = new Timer();
+		TimerTask timerTask = new TimerTask() {
+		 @Override
+		 public void run() {
+			 timer.cancel();
+			 WXPayEntryActivity.this.finish();
+		 }
+		};
+		timer.schedule(timerTask, 1000, 1000);	
 	}
 }

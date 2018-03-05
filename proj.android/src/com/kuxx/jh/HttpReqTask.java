@@ -12,10 +12,7 @@ import org.apache.http.cookie.SM;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-
 import android.os.AsyncTask;
-import android.util.Log;
 
 class HttpReqTask extends AsyncTask<Object, Object, HttpResponse>
 {
