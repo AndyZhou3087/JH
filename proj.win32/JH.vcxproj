@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BookDetailsLayer.cpp" />
     <ClCompile Include="..\Classes\BookShelf.cpp" />
     <ClCompile Include="..\Classes\BookShelfLayer.cpp" />
+    <ClCompile Include="..\Classes\BranchMissionLayer.cpp" />
     <ClCompile Include="..\Classes\Building.cpp" />
     <ClCompile Include="..\Classes\BuildingDetailsLayer.cpp" />
     <ClCompile Include="..\Classes\BuildingUILayer.cpp" />
@@ -194,6 +195,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GlobalData.cpp" />
     <ClCompile Include="..\Classes\GoldGoodItem.cpp" />
     <ClCompile Include="..\Classes\GoWhereLayer.cpp" />
+    <ClCompile Include="..\Classes\HelpDescLayer.cpp" />
+    <ClCompile Include="..\Classes\HelpMainLayer.cpp" />
     <ClCompile Include="..\Classes\Hero.cpp" />
     <ClCompile Include="..\Classes\HeroProperNode.cpp" />
     <ClCompile Include="..\Classes\HeroStateUILayer.cpp" />
@@ -236,6 +239,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\RaffleLayer.cpp" />
     <ClCompile Include="..\Classes\RaffleResultLayer.cpp" />
     <ClCompile Include="..\Classes\RankLayer.cpp" />
+    <ClCompile Include="..\Classes\RechargeLayer.cpp" />
     <ClCompile Include="..\Classes\RelationLayer.cpp" />
     <ClCompile Include="..\Classes\RepairLayer.cpp" />
     <ClCompile Include="..\Classes\RepairOKLayer.cpp" />
@@ -284,6 +288,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\BookDetailsLayer.h" />
     <ClInclude Include="..\Classes\BookShelf.h" />
     <ClInclude Include="..\Classes\BookShelfLayer.h" />
+    <ClInclude Include="..\Classes\BranchMissionLayer.h" />
     <ClInclude Include="..\Classes\Building.h" />
     <ClInclude Include="..\Classes\BuildingDetailsLayer.h" />
     <ClInclude Include="..\Classes\BuildingUILayer.h" />
@@ -323,6 +328,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GlobalData.h" />
     <ClInclude Include="..\Classes\GoldGoodsItem.h" />
     <ClInclude Include="..\Classes\GoWhereLayer.h" />
+    <ClInclude Include="..\Classes\HelpDescLayer.h" />
+    <ClInclude Include="..\Classes\HelpMainLayer.h" />
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroProperNode.h" />
     <ClInclude Include="..\Classes\HeroStateUILayer.h" />
@@ -365,6 +372,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\RaffleLayer.h" />
     <ClInclude Include="..\Classes\RaffleResultLayer.h" />
     <ClInclude Include="..\Classes\RankLayer.h" />
+    <ClInclude Include="..\Classes\RechargeLayer.h" />
     <ClInclude Include="..\Classes\RelationLayer.h" />
     <ClInclude Include="..\Classes\RepairLayer.h" />
     <ClInclude Include="..\Classes\RepairOKLayer.h" />
