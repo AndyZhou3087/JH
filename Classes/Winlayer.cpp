@@ -420,7 +420,7 @@ bool Winlayer::init(std::string addrid, std::string npcid)
 
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	checkNewerGuide();
+	this->scheduleOnce(schedule_selector(Winlayer::delayShowNewerGuide), 0.2f);
 
 	if (GlobalData::getUnlockChapter() >= MAXCHAPTER)
 	{
@@ -936,20 +936,31 @@ void Winlayer::showLvUpAnim(float dt)
 void Winlayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	bool showguide = false;
-	if (step == 9)
+	if (step == 34)
 	{
-		showguide = true;
+		Node* resnode = this->getChildByName("resitem0");
+		if (resnode != NULL)
+			nodes.push_back(resnode->getChildren().at(0));
 	}
-	if (showguide)
+	else if (step == 35 || step == 38)
+	{
+		nodes.push_back(m_backbtn);
+	}
+	else if (step == 37)
+	{
+		nodes.push_back(m_getallbtn);
+	}
+	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 
-void Winlayer::checkNewerGuide()
+void Winlayer::delayShowNewerGuide(float dt)
 {
-	if (NewerGuideLayer::checkifNewerGuide(9))
-		showNewerGuide(9);
+	if (NewerGuideLayer::checkifNewerGuide(34))
+		showNewerGuide(34);
+	else if (NewerGuideLayer::checkifNewerGuide(37))
+		showNewerGuide(37);
 }
 
 int Winlayer::addHeroExp()

@@ -265,6 +265,13 @@ void StartScene::onSuccess()
 
 				m_continuebtn->setEnabled(GlobalData::getUId().length() <= 0 ? false : true);
 
+			if (GameDataSave::getInstance()->getHeroLV() >= 1)
+			{
+				for (int i = 0; i < 50; i++)
+				{
+					GameDataSave::getInstance()->setIsNewerGuide(i, 0);
+				}
+			}
 				GlobalData::init();
 				if (GlobalData::getNoPopNoticeDay() != GlobalData::getDayOfYear())
 				{

@@ -20,8 +20,6 @@ public:
 	void updataStorageUI();
 	void updata();
 	void showNewerGuide(int step);
-
-	void checkNewerGuide();
 	void takeout(PackageData* pdata);
 private:
 	void onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type);

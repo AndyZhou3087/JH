@@ -668,14 +668,14 @@ void MapLayer::mapMoveTo(Vec2 pos)
 	m_mapscroll->setInnerContainerPosition(Vec2(-offsetx, -offsety));
 }
 
-void MapLayer::checkNewerGuide()
+void MapLayer::delayShowMapNewerGuide(float dt)
 {
-	if (NewerGuideLayer::checkifNewerGuide(14))
-		showNewerGuide(14);
-	else if (NewerGuideLayer::checkifNewerGuide(38))
-		showNewerGuide(38);
-	else if (NewerGuideLayer::checkifNewerGuide(58))
-		showNewerGuide(58);
+	if (NewerGuideLayer::checkifNewerGuide(20))
+		showNewerGuide(20);
+	else if (NewerGuideLayer::checkifNewerGuide(40))
+		showNewerGuide(40);
+	else if (NewerGuideLayer::checkifNewerGuide(48))
+		showNewerGuide(48);
 }
 
 float MapLayer::moveToDestTime(float distance)
@@ -710,29 +710,19 @@ void MapLayer::showEndAnim(float dt)
 void MapLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	bool showguide = false;
-	if (step == 14 || step == 5)
+	if (step == 20)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-2"));
-		NewerGuideLayer::pushUserData("m1-2");
-		showguide = true;
 	}
-	else if (step == 38)
+	else if (step == 40)
 	{
 		nodes.push_back(m_mapbg->getChildByName("m1-1"));
-		NewerGuideLayer::pushUserData("m1-1");
-		showguide = true;
 	}
-	else if (step == 58)
+	else if (step == 48)
 	{
-		//nodes.push_back(m_mapbg->getChildByName("m1-4"));
-		//NewerGuideLayer::pushUserData("m1-4");
-		nodes.push_back(m_smissionIcon[0]);
-		NewerGuideLayer::pushUserData("mapmission0_0");
-		showguide = true;
+		nodes.push_back(m_mapbg->getChildByName("m1-4"));
 	}
-	if (showguide)
-		g_gameLayer->showNewerGuide(step, nodes);
+	g_gameLayer->showNewerGuide(step, nodes);
 }
 
 void MapLayer::rain()
@@ -879,7 +869,7 @@ void MapLayer::showTalkGuide()
 	{
 		std::vector<Node*> vec_node;
 		NewerGuide2Layer *layer = NewerGuide2Layer::create(103, vec_node);
-		g_gameLayer->addChild(layer, NEWERLAYERZOER);
+		g_gameLayer->addChild(layer, NEWERLAYERZOER, "NewerGuide2Layer");
 	}
 }
 
@@ -897,6 +887,18 @@ void MapLayer::updateBranchMissionTime()
 		else
 			str = CommonFuncs::gbk2utf("不限时");
 		timetext->setString(str);
+
+		if (g_gameLayer != NULL && g_gameLayer->getChildByName("NewerGuide2Layer") == NULL && g_gameLayer->getChildByName("npclayer") == NULL)
+		{
+			if (NewerGuide2Layer::checkifNewerGuide(104))
+			{
+				std::vector<Node*> vec_node;
+				brachmissionicon->setUserData((void*)"branchmissionbox");
+				vec_node.push_back(brachmissionicon);
+				NewerGuide2Layer *layer = NewerGuide2Layer::create(104, vec_node);
+				g_gameLayer->addChild(layer, NEWERLAYERZOER, "NewerGuide2Layer");
+			}
+		}
 	}
 	else
 	{

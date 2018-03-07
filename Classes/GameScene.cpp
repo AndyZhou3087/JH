@@ -122,15 +122,6 @@ bool GameScene::init()
 
 	loadSaveHeroData();
 
-	//等级大于1级跳过新手引导
-	if (g_hero->getLVValue() >= 1)
-	{
-		for (int i = 0; i < 68; i++)
-		{
-			GameDataSave::getInstance()->setIsNewerGuide(i, 0);
-		}
-	}
-
 	//读取剧情配置文件
 	GlobalData::loadPlotMissionJsonData(g_hero->getHeadID());
 
@@ -565,7 +556,7 @@ void GameScene::showGOOut(float dt)
 	g_gameLayer->removeChildByName("homelayer");
 	g_hero->setIsOut(true);
 	if (g_maplayer != NULL)
-		g_maplayer->checkNewerGuide();
+		g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 }
 
 void GameScene::getNpcRandMap()
@@ -583,15 +574,9 @@ void GameScene::showNewerGuide(int step, std::vector<Node*> nodes)
 {
 	if (NewerGuideLayer::checkifNewerGuide(step))
 	{
-		if (NewerGuideLayer::isShowing)
-			return;
-
-		NewerGuideLayer::isShowing = true;
 		m_newerStep = step;
 		m_newerNode = nodes;
-		CannotTouchLayer* layer = CannotTouchLayer::create();
-		g_gameLayer->addChild(layer, 11, "newernotouchlayer");
-		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide),0.25f);
+		this->scheduleOnce(schedule_selector(GameScene::delayShowNewerGuide),0.05f);
 	}
 }
 
@@ -600,9 +585,9 @@ void GameScene::delayShowNewerGuide(float dt)
 	if (g_NewerGuideLayer == NULL)
 	{
 		g_NewerGuideLayer = NewerGuideLayer::create(m_newerStep, m_newerNode);
-		this->addChild(g_NewerGuideLayer, 10, "newerguidelayer");
+		if (g_gameLayer != NULL)
+			g_gameLayer->addChild(g_NewerGuideLayer, 10);
 	}
-	g_gameLayer->removeChildByName("newernotouchlayer");
 }
 
 void GameScene::onSuccess()

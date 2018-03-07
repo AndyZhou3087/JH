@@ -62,7 +62,7 @@ bool StorageUILayer::init()
 	listener->setSwallowTouches(true);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	showNewerGuide(67);
+	showNewerGuide(46);
 	return true;
 }
 
@@ -253,19 +253,17 @@ void StorageUILayer::onHelp(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEve
 void StorageUILayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if (step == 67)
+	if (step == 46)
 	{
 		Node* itemnode = scrollview->getChildByName("resitem0");
 		if (itemnode != NULL)
 			nodes.push_back(itemnode->getChildren().at(0));
-		NewerGuideLayer::pushUserData("buildsmall");
 	}
-	else if (step == 68)
+	else if (step == 47)
 	{
 		Node* itemnode = scrollview->getChildByName("resitem100");
 		if (itemnode != NULL)
 			nodes.push_back(itemnode->getChildren().at(0));
-		NewerGuideLayer::pushUserData("buildsmall");
 	}
 	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);

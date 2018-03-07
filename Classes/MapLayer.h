@@ -44,9 +44,9 @@ public:
 	void updataPlotMissionIcon(int type);
 
 	/****************************
-	新手引导
+	延迟显示新手引导
 	*****************************/
-	void checkNewerGuide();
+	void delayShowMapNewerGuide(float dt);
 
 	/****************************
 	新手引导

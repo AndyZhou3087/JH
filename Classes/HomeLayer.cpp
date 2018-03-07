@@ -205,12 +205,12 @@ bool HomeLayer::init()
 
 	SoundManager::getInstance()->playBackMusic(SoundManager::MUSIC_ID_HOME);
 
+	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.2f);
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if (GlobalData::isOnline)
 		ServerDataSwap::init(NULL)->postOneData(GlobalData::getUId());
 #endif
-
-	this->scheduleOnce(schedule_selector(HomeLayer::delayShowNewerGuide), 0.1f);
 
 	return true;
 }
@@ -300,77 +300,37 @@ void HomeLayer::updateBuilding()
 
 void HomeLayer::showNewerGuide(int step)
 {
-	bool showguide = false;
 	std::vector<Node*> nodes;
-	if (step == 0)
+	if (step == 0 || step == 43)
 	{
-		showguide = true;
+		nodes.push_back(Vec_Buildings[0]->getParent());
 	}
-	else if (step == 1)
-	{
-		if (Vec_Buildings.size() > 2)
-		{
-			nodes.push_back(Vec_Buildings[2]->getParent());
-			NewerGuideLayer::pushUserData("buildingguide");
-			showguide = true;
-		}
-	}
-	else if (step == 12 || step == 46)
+	else if (step == 18)
 	{
 		nodes.push_back(m_fence->getParent());
-		NewerGuideLayer::pushUserData("fence");
-		showguide = true;
 	}
-	else if (step == 41 || step == 45)
-	{
-		//if (Vec_Buildings.size() > 2)
-		//{
-		//	nodes.push_back(Vec_Buildings[2]->getParent());
-		//	if (Vec_Buildings[2]->data.level > 0)
-		//		NewerGuideLayer::pushUserData("forgingtable");
-		//	else
-		//		NewerGuideLayer::pushUserData("buildingguide");
-		//	showguide = true;
-		//}
-		showguide = true;
-	}
-	else if (step == 65)
-	{
-		showguide = true;
-	}
-	else if (step == 66)
+	else if (step == 45)
 	{
 		nodes.push_back(m_storageroom->getParent());
-		NewerGuideLayer::pushUserData("storageroom");
-		showguide = true;
 	}
-	else if (step >= 70)
+	else if (step > 55)
 	{
-		nodes.push_back(Vec_Buildings[step - 70]->getParent());
-		NewerGuideLayer::pushUserData("buildingguide");
-		showguide = true;
+		nodes.push_back(Vec_Buildings[step - 55]->getParent());
 	}
-	if (showguide)
-		g_gameLayer->showNewerGuide(step, nodes);
+	g_gameLayer->showNewerGuide(step, nodes);
 }
 
-void HomeLayer::checkNewerGuide()
+void HomeLayer::delayShowNewerGuide(float dt)
 {
 	if (NewerGuideLayer::checkifNewerGuide(0))
 		showNewerGuide(0);
-	else if (NewerGuideLayer::checkifNewerGuide(1))
-		showNewerGuide(1);
-	else if (NewerGuideLayer::checkifNewerGuide(41))
-		showNewerGuide(41);
-	else if (!NewerGuideLayer::checkifNewerGuide(64) && NewerGuideLayer::checkifNewerGuide(65))
-		showNewerGuide(65);
-	else if (!NewerGuideLayer::checkifNewerGuide(65) && NewerGuideLayer::checkifNewerGuide(66))
-		showNewerGuide(66);
+	else if (NewerGuideLayer::checkifNewerGuide(43))
+		showNewerGuide(43);
 	else
 	{
 		std::vector<PackageData>::iterator it;
 		//有足够资源引导建造
-		for (unsigned int i = 0; i < Vec_Buildings.size(); i++)
+		for (unsigned int i = 1; i < Vec_Buildings.size(); i++)
 		{
 			int findcount = 0;
 			int bulidressize = Vec_Buildings[i]->data.Res[0].size();
@@ -395,17 +355,12 @@ void HomeLayer::checkNewerGuide()
 			}
 			if (findcount == bulidressize)
 			{
-				if (NewerGuideLayer::checkifNewerGuide(70 + i) && Vec_Buildings[i]->data.level <= 0 && g_hero->getLifeValue() > 0.0f)
+				if (NewerGuideLayer::checkifNewerGuide(55 + i) && Vec_Buildings[i]->data.level <= 0)
 				{
-					showNewerGuide(70 + i);
+					showNewerGuide(55 + i);
 					break;
 				}
 			}
 		}
 	}
-}
-
-void HomeLayer::delayShowNewerGuide(float dt)
-{
-	checkNewerGuide();
 }

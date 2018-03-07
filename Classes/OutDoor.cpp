@@ -57,27 +57,12 @@ bool OutDoor::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 
-	checkNewerGuide();
+	showNewerGuide(19);
 
 	return true;
 }
 
 
-void OutDoor::checkNewerGuide()
-{
-	if (NewerGuideLayer::checkifNewerGuide(13))
-	{
-		showNewerGuide(13);
-	}
-	else if (!NewerGuideLayer::checkifNewerGuide(46) && NewerGuideLayer::checkifNewerGuide(47))
-	{
-		showNewerGuide(47);
-	}
-	else if (!NewerGuideLayer::checkifNewerGuide(56) && NewerGuideLayer::checkifNewerGuide(57))
-	{
-		showNewerGuide(57);
-	}
-}
 
 void OutDoor::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
 {
@@ -387,7 +372,9 @@ void OutDoor::onPackageItem(cocos2d::Ref* pSender)
 void OutDoor::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	nodes.push_back(m_outbtn);
-	NewerGuideLayer::pushUserData("normalbtn");
+	if (step == 19)
+	{
+		nodes.push_back(m_outbtn);
+	}
 	g_gameLayer->showNewerGuide(step, nodes);
 }

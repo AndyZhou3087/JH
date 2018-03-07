@@ -92,6 +92,10 @@ void HeroStateUILayer::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchE
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
 		this->removeFromParentAndCleanup(true);
+
+		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
+		if (topbar != NULL)
+			topbar->showNewerGuide(13);
 	}
 }
 
@@ -216,7 +220,6 @@ void HeroStateUILayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
 	nodes.push_back(m_csbnode->getChildByName("backbtn"));
-	NewerGuideLayer::pushUserData("backbtn");
 	g_gameLayer->showNewerGuide(step, nodes);
 }
 

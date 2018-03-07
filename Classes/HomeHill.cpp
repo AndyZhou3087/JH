@@ -130,11 +130,7 @@ bool HomeHill::init()
 void HomeHill::onEnterTransitionDidFinish()
 {
 	Layer::onEnterTransitionDidFinish();
-
-	if (!NewerGuideLayer::checkifNewerGuide(7) && NewerGuideLayer::checkifNewerGuide(8))
-		showNewerGuide(8);
-	else if (NewerGuideLayer::checkifNewerGuide(18))
-		showNewerGuide(18);
+	showNewerGuide(23);
 }
 
 void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType type)
@@ -142,8 +138,8 @@ void HomeHill::onBack(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType
 	CommonFuncs::BtnAction(pSender, type);
 	if (type == ui::Widget::TouchEventType::ENDED)
 	{
-		if (g_maplayer != NULL)
-			g_maplayer->checkNewerGuide();
+        if (g_maplayer != NULL)
+            g_maplayer->scheduleOnce(schedule_selector(MapLayer::delayShowMapNewerGuide), 0.2f);
 		this->removeFromParentAndCleanup(true);
 	}
 }
@@ -236,36 +232,32 @@ void HomeHill::updateUI(float dt)
 void HomeHill::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	bool showguide = false;
-	if (step == 18)
+	if (step == 23)
 	{
 		Node* resnode = scrollView->getChildByName("node0");
-		NewerGuideLayer::pushUserData("normalbtn");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
-		showguide = true;
 	}
 	else if (step == 28)
 	{
 		scrollView->jumpToPercentVertical(20);
 		Node* resnode = scrollView->getChildByName("node4");
-		NewerGuideLayer::pushUserData("normalbtn");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
-		showguide = true;
 	}
-	else if (step == 8)
+
+	else if (step == 33 || step == 36)
 	{
-		scrollView->jumpToPercentVertical(50);
-		Node* resnode = scrollView->getChildByName("node6");
-		NewerGuideLayer::pushUserData("normalbtn");
+		scrollView->jumpToPercentVertical(70);
+		Node* resnode = scrollView->getChildByName("node7");
+
 		nodes.push_back(resnode->getChildByName("actionbtn"));
-		showguide = true;
 	}
-	else if (step == 37)
+	else if (step == 39)
 	{
 		nodes.push_back(m_backbtn);
-		NewerGuideLayer::pushUserData("backbtn");
-		showguide = true;
+
 	}
-	if (showguide)
-		g_gameLayer->showNewerGuide(step, nodes);
+
+	g_gameLayer->showNewerGuide(step, nodes);
 }

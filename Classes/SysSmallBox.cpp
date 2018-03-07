@@ -52,10 +52,7 @@ bool SysSmallBox::init(BoxType type, std::string imagepath, std::string title, s
 
 		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
 		if (topbar != NULL)
-		{
-			if (topbar->newerstep >= 60)
-				topbar->showNewerGuide(++topbar->newerstep);
-		}
+			topbar->showNewerGuide(++topbar->newerStep);
 	};
 
 	listener->setSwallowTouches(true);

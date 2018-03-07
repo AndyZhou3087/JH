@@ -18,9 +18,8 @@
 TopBar::TopBar()
 {
 	pastmin = g_nature->getTime();
+	newerStep = 2;
 	isHunter = false;
-	isShowingGuide = false;
-	newerstep = 0;
 }
 
 
@@ -615,16 +614,7 @@ void TopBar::updataUI(float dt)
 		if (g_hero->getLifeValue() <= g_hero->getMaxLifeValue() * 0.5f)
 			isnewer = true;
 	}
-	if (isnewer && g_NewerGuideLayer == NULL && !isShowingGuide)
-	{
-		FightLayer* fightlayer = (FightLayer*)g_gameLayer->getChildByName("fightlayer");
-		if (fightlayer == NULL)
-		{
-			isShowingGuide = true;
-			if (NewerGuideLayer::checkifNewerGuide(59))
-				showNewerGuide(59);
-		}
-	}
+
 }
 
 void TopBar::stopLoseAnim()
@@ -647,55 +637,40 @@ void TopBar::stopLoseAnim()
 void TopBar::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-/*	if (step == 7)
+	if (step == 2)
 	{
 		nodes.push_back(heroimg);
-		std::string str = StringUtils::format("tophero%d", g_hero->getHeadID());
-		NewerGuideLayer::pushUserData(str);
 	}
-	else */
-	if (step == 15)
+	else if (step == 13)
 	{
-		nodes.push_back(timelbl);
-		NewerGuideLayer::pushUserData("timeguide");
-	}
-	else if (step == 59)
-	{
-
-	}
-	else if (step == 60)
-	{
-		newerstep = 60;
+		newerStep = 13;
 		nodes.push_back(life);
-		NewerGuideLayer::pushUserData("toplifebar");
 	}
-	else if (step == 61)
+	else if (step == 14)
 	{
 		nodes.push_back(spirit);
-		NewerGuideLayer::pushUserData("topspiritbar");
 	}
-	else if (step == 62)
+	else if (step == 15)
 	{
 		nodes.push_back(hunger);
-		NewerGuideLayer::pushUserData("tophungerbar");
 	}
-	else if (step == 63)
+	else if (step == 16)
 	{
 		nodes.push_back(innerinjury);
-		NewerGuideLayer::pushUserData("topinnerinjurybar");
 	}
-	else if (step == 64)
+	else if (step == 17)
 	{
 		nodes.push_back(outinjury);
-		NewerGuideLayer::pushUserData("topoutinjurybar");
 	}
-	else if (step == 65)
+	if (step == 2 || (step >= 13 && step <= 17))
+		g_gameLayer->showNewerGuide(step, nodes);
+
+	if (step == 18)
 	{
 		HomeLayer* homelayer = (HomeLayer*)g_gameLayer->getChildByName("homelayer");
-		homelayer->checkNewerGuide();
+		if (homelayer != NULL)
+			homelayer->showNewerGuide(step);
 	}
-	if (step == 7 || step == 15 || (step >= 59 && step <= 64))
-		g_gameLayer->showNewerGuide(step, nodes);
 }
 
 void TopBar::checkNpcRandMap()

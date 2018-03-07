@@ -157,7 +157,7 @@ bool GoWhereLayer::init(std::string addrid, WHERELAYER_TYPE type, float distance
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->schedule(schedule_selector(GoWhereLayer::checkRedPoint), 1.0f);
-	checkNewerGuide();
+	this->scheduleOnce(schedule_selector(GoWhereLayer::delayShowNewerGuide), 0.2f);
 	return true;
 }
 
@@ -275,57 +275,27 @@ void GoWhereLayer::checkRedPoint(float dt)
 void GoWhereLayer::showNewerGuide(int step)
 {
 	std::vector<Node*> nodes;
-	if ((step == 15) && m_type == GOWHERE)
-	{
-		TopBar* topbar = (TopBar*)g_gameLayer->getChildByName("topbar");
-		topbar->showNewerGuide(15);
-	}
-	else if ((step == 16 || step == 6) && m_type == GOWHERE)
-	{
+	if ((step == 21 || step == 41) && m_type == GOWHERE)
 		nodes.push_back(m_gobtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
-	else if ((step == 17 || step == 7) && m_type == ARRIVE)
-	{
-		nodes.push_back(m_enterbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
-	else if ((step == 39) && m_type == GOWHERE)
-	{
-		nodes.push_back(m_gobtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
-	else if (step == 40 && m_type == ARRIVE)
-	{
-		nodes.push_back(m_enterbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
-	else if (step == 69 && m_type == ARRIVE)
-	{
+	else if ((step == 22 || step == 42) && m_type == ARRIVE)
+		nodes.push_back(m_enterbtn);	
+	else if (step == 51 && m_type == ARRIVE)
 		nodes.push_back(m_stbtn);
-		NewerGuideLayer::pushUserData("normalbtn");
-	}
 	if (nodes.size() > 0)
 		g_gameLayer->showNewerGuide(step, nodes);
 }
 
-void GoWhereLayer::checkNewerGuide()
+void GoWhereLayer::delayShowNewerGuide(float dt)
 {
-	if (NewerGuideLayer::checkifNewerGuide(15))
-		showNewerGuide(15);
-	else if (NewerGuideLayer::checkifNewerGuide(16))
-		showNewerGuide(16);
-	else if (NewerGuideLayer::checkifNewerGuide(17))
-		showNewerGuide(17);
-	else if (NewerGuideLayer::checkifNewerGuide(39))
-		showNewerGuide(39);
-	else if (NewerGuideLayer::checkifNewerGuide(40))
-		showNewerGuide(40);
-	else if (NewerGuideLayer::checkifNewerGuide(6))
-		showNewerGuide(6);
-	else if (NewerGuideLayer::checkifNewerGuide(7))
-		showNewerGuide(7);
-	else if (NewerGuideLayer::checkifNewerGuide(69))
+	if (NewerGuideLayer::checkifNewerGuide(21))
+		showNewerGuide(21);
+	else if (NewerGuideLayer::checkifNewerGuide(22))
+		showNewerGuide(22);
+	else if (NewerGuideLayer::checkifNewerGuide(41))
+		showNewerGuide(41);
+	else if (NewerGuideLayer::checkifNewerGuide(42))
+		showNewerGuide(42);
+	else if (NewerGuideLayer::checkifNewerGuide(51))
 	{
 		if (m_type == ARRIVE)
 		{
@@ -333,7 +303,7 @@ void GoWhereLayer::checkNewerGuide()
 			std::vector<std::string> vec_retstr;
 			CommonFuncs::split(datastr, vec_retstr, ";");
 			if (vec_retstr.size() > 0)
-				showNewerGuide(69);
+				showNewerGuide(51);
 		}
 	}
 }

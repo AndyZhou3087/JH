@@ -24,9 +24,9 @@ public:
 	*****************************/
 	void showNewerGuide(int step);
 	/****************************
-	新手引导
+	延迟显示新手引导
 	*****************************/
-	void checkNewerGuide();
+	void delayShowNewerGuide(float dt);
 
 	static void showMissionAnim(Node* _target, std::string text, std::vector<std::string> vec_res);
 	static void removeMissionAnim(Ref* pSender);
