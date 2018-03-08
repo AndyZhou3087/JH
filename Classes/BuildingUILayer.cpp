@@ -774,7 +774,7 @@ void BuildingUILayer::showNewerGuide(int step)
 	}
 	else if (step == 44)
 	{
-		if (StorageRoom::getCountById("4") >= 2 && StorageRoom::getCountById("7") >= 2 && StorageRoom::getCountById("10") >= 2)
+		if (StorageRoom::getCountById("4") >= 2 && StorageRoom::getCountById("7") >= 2 && StorageRoom::getCountById("1") >= 2)
 			nodes.push_back(buildnode->getChildByName("item")->getChildByName("actionbtn"));
 	}
 	if (nodes.size() > 0)
