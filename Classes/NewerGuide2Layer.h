@@ -23,6 +23,7 @@ private:
 private:
 	int m_step;
 	cocos2d::ui::Text* wordtext;
+	Label* m_wordlbl;
 	Vec2 startPos;
 	int wordindex;
 	std::vector<Node*> m_stencilNodes;

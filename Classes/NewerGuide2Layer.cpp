@@ -56,14 +56,24 @@ bool NewerGuide2Layer::init(int step, std::vector<Node*> stencilNodes)
 	Node* csbnode = CSLoader::createNode("npctalkLayer.csb");
 	this->addChild(csbnode, 2);
 
-	cocos2d::ui::Widget* newerguider = (cocos2d::ui::Widget*)csbnode->getChildByName("node")->getChildByName("npcimg");
+	Node* talknode = (Node*)csbnode->getChildByName("node");
+	cocos2d::ui::Widget* newerguider = (cocos2d::ui::Widget*)talknode->getChildByName("npcimg");
 	newerguider->setOpacity(150);
-	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)csbnode->getChildByName("node")->getChildByName("heroimg");
+	cocos2d::ui::ImageView* heroimg = (cocos2d::ui::ImageView*)talknode->getChildByName("heroimg");
 
 	std::string heroidstr = StringUtils::format("ui/fhero%d.png", g_hero->getHeadID());
 	heroimg->loadTexture(heroidstr, cocos2d::ui::TextureResType::PLIST);
 
 	wordtext = (cocos2d::ui::Text*)csbnode->getChildByName("node")->getChildByName("text");
+
+	wordtext->setVisible(false);
+
+	m_wordlbl = Label::createWithTTF("", "fonts/STXINGKA.TTF", 26);
+	m_wordlbl->setColor(Color3B(0, 0, 0));
+	m_wordlbl->setLineBreakWithoutSpace(true);
+	m_wordlbl->setMaxLineWidth(610);
+	m_wordlbl->setPosition(Vec2(0, -115));
+	talknode->addChild(m_wordlbl);
 
 	if (m_step == 100 || m_step == 102)
 	{
@@ -145,7 +155,31 @@ bool NewerGuide2Layer::checkifNewerGuide(int index)
 
 void NewerGuide2Layer::showWords()
 {
-	wordtext->setString(CommonFuncs::gbk2utf(wordText[m_step - 100][wordindex].c_str()));
+	std::string wordstr = wordText[m_step - 100][wordindex];
+	//wordtext->setString(CommonFuncs::gbk2utf(wordstr.c_str()));
+
+	std::string utf8word = CommonFuncs::gbk2utf(wordstr.c_str());
+	m_wordlbl->setString(utf8word);
+
+	std::vector<std::string> vec_resname;
+	vec_resname.push_back(CommonFuncs::gbk2utf("赠送"));
+	vec_resname.push_back(CommonFuncs::gbk2utf("确认组合"));
+
+	std::vector<std::string>::iterator it;
+	for (unsigned int i = 0; i < vec_resname.size(); i++)
+	{
+		std::string resname = vec_resname[i];
+		std::size_t findpos = utf8word.find(resname);
+		if (findpos != std::string::npos)
+		{
+			int sindex = findpos / 3;
+			int len = resname.size() / 3;
+			for (int i = sindex; i < sindex + len; i++)
+			{
+				m_wordlbl->getLetter(i)->setColor(Color3B(204, 4, 4));
+			}
+		}
+	}
 }
 
 void NewerGuide2Layer::hightNode(std::vector<Node*> sNodes)
