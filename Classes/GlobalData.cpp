@@ -2449,3 +2449,21 @@ bool GlobalData::getHasBuy()
     return hasBuy;
 }
 
+
+std::string GlobalData::getIpAddr()
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	return getIpAddr();
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	return "127.0.0.1";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	std::string ret;
+	JniMethodInfo methodInfo;
+	if (JniHelper::getStaticMethodInfo(methodInfo, "com/kuxx/jh/Utils", "getIpAddr", "()Ljava/lang/String;"))
+	{
+		jstring jstr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+		ret = methodInfo.env->GetStringUTFChars(jstr, 0);
+	}
+	return ret;
+#endif
+}

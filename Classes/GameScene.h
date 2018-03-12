@@ -83,6 +83,7 @@ private:
 	int m_newerStep;
 	bool issavedata;
 	bool isAnewGetData;
+	bool isActivate;
 	
 private:
 	/****************************

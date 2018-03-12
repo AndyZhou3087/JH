@@ -881,6 +881,22 @@ void ServerDataSwap::postMyRecharge(int amount, int type)
 	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpPostMyRechargeCB, this));
 }
 
+void ServerDataSwap::getHutongReg(std::string idfa, int atctype)
+{
+	std::string url;
+	url.append(HTTPURL);
+	url.append("wx_hutongregist?");
+	url.append("idfa=");
+	url.append(idfa);
+	url.append("&ip=");
+	std::string ipstr = GlobalData::getIpAddr();
+	url.append(ipstr);
+	url.append("&eventtype=");
+	std::string str = StringUtils::format("%d", atctype);
+	url.append(str);
+	HttpUtil::getInstance()->doData(url, httputil_calback(ServerDataSwap::httpGetHutongRegCB, this));
+}
+
 void ServerDataSwap::httpBlankCB(std::string retdata, int code, std::string tag)
 {
 	release();
@@ -3236,3 +3252,22 @@ void ServerDataSwap::httpPostMyRechargeCB(std::string retdata, int code, std::st
 	release();
 }
 
+void ServerDataSwap::httpGetHutongRegCB(std::string retdata, int code, std::string tag)
+{
+	bool isok = false;
+	if (code == 0)
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onSuccess();
+		}
+	}
+	else
+	{
+		if (m_pDelegateProtocol != NULL)
+		{
+			m_pDelegateProtocol->onErr(-1);
+		}
+	}
+	release();
+}
