@@ -1079,7 +1079,6 @@ public:
     static int getAdsInterval();
     static void setAdsChoose(long val);
     static int getAdsChoose(int position);
-	static std::string getIpAddr();
 public:
 	static std::map<std::string, AllResource> map_allResource;//所有资源，主要是描述和交易数据
 	static std::vector<ResData> vec_resData;//一级资源vector

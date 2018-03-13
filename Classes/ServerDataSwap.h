@@ -76,8 +76,6 @@ public:
 
 	void postMyRecharge(int amount, int type);
 
-	void getHutongReg(std::string idfa, int atctype = 0);
-
 private:
 	ServerDataDelegateProtocol *m_pDelegateProtocol;//接口对象
 	static bool isdoing;
@@ -147,8 +145,6 @@ private:
 	void httpGetRechargeDataCB(std::string retdata, int code, std::string tag);
 
 	void httpPostMyRechargeCB(std::string retdata, int code, std::string tag);
-
-	void httpGetHutongRegCB(std::string retdata, int code, std::string tag);
 };
 
 class ServerDataDelegateProtocol

@@ -34,7 +34,6 @@ GameScene::GameScene()
 {
 	issavedata = true;
 	isAnewGetData = false;
-	isActivate = false;
 	homeLayer = NULL;
 }
 GameScene::~GameScene()
@@ -49,8 +48,6 @@ GameScene::~GameScene()
 	g_hero = NULL;
 	issavedata = true;
 	isAnewGetData = false;
-
-	isActivate = false;
 }
 
 Scene* GameScene::createScene()
@@ -650,19 +647,6 @@ void GameScene::onSuccess()
 				}
 #endif
 			}
-
-			if (isActivate)
-			{
-				GameDataSave::getInstance()->setIsActivate(true);
-			}
-#if 1//(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-			if (!GameDataSave::getInstance()->getIsActivate())
-			{
-				isActivate = true;
-				ServerDataSwap::init(this)->getHutongReg("123456789");
-				GameDataSave::getInstance()->setIsActivate(true);
-			}
-#endif
 		}
 	}
 }
@@ -674,8 +658,6 @@ void GameScene::onErr(int errcode)
 	{
 		isAnewGetData = false;
 	}
-	if (isActivate)
-		isActivate = false;
 }
 
 void GameScene::delayChangeStartScene(float dt)

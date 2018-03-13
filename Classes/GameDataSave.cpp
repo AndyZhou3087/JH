@@ -718,14 +718,3 @@ void GameDataSave::setEnterGameDaysOfYear(int days)
 {
 	saveIntDataByKey(addUIDString("daysofyear"), days);
 }
-
-bool GameDataSave::getIsActivate()
-{
-	int ret = loadIntDataByKey("isactivate", 0);
-	return ret == 1 ? true : false;
-}
-
-void GameDataSave::setIsActivate(bool isact)
-{
-	saveIntDataByKey("isactivate", isact ? 1 : 0);
-}
