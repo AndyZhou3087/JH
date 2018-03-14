@@ -19,6 +19,7 @@ public class PayAction {
 			return;
 		 }
 		 WXPay.pay(payCode, buyprice[payindex] * 100, goodsDesc[payindex]);
+		 //WXPay.pay(payCode, 1, goodsDesc[payindex]);
 	}
 
 	public static void init(Activity act)

@@ -109,11 +109,13 @@ public class Utils{
 		
 		if (uuid == null)
 			uuid = "";
-
+		uuid = uuid+"-";
 		String macAddr = GetLocalMacAddress();
-		if (macAddr == null)
-			macAddr = "";
 		uuid += macAddr.replaceAll(":", "");
+		for (int i = uuid.length();i<36;i++)
+		{
+			uuid+="*";
+		}
 		return uuid;
     }
     
