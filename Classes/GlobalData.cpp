@@ -2226,7 +2226,7 @@ std::string GlobalData::UUID()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	return getDeviceIDInKeychain();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	return "qwerty";//"18EF88C6-D4E2-49F4-BA81-F7D0D585E9B3";
+	return "qwer1234";//"18EF88C6-D4E2-49F4-BA81-F7D0D585E9B3";
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	std::string ret;
 	JniMethodInfo methodInfo;

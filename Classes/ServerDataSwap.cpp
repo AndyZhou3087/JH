@@ -1510,12 +1510,6 @@ void ServerDataSwap::httpVipIsOnCB(std::string retdata, int code, std::string ta
 				GlobalData::couponinfo = retval.GetString();
 			}
 
-			if (doc.HasMember("durl"))
-			{
-				rapidjson::Value& retval = doc["durl"];
-				GlobalData::updateDownLoadURL = retval.GetString();
-			}
-
 			if (doc.HasMember("opentopup"))
 			{
 				rapidjson::Value& retval = doc["opentopup"];
@@ -3109,8 +3103,15 @@ void ServerDataSwap::httpGetCommonDataCB(std::string retdata, int code, std::str
 				if (qqstr.length() > 0)
 					CommonFuncs::split(v.GetString(), GlobalData::vec_qq);
 			}
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #else
+			if (doc.HasMember("durl"))
+			{
+				rapidjson::Value& retval = doc["durl"];
+				GlobalData::updateDownLoadURL = retval.GetString();
+			}
+
 			if (doc.HasMember("online"))
 			{
 				rapidjson::Value& v = doc["online"];

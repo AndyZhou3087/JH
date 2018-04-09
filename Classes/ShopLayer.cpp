@@ -216,6 +216,7 @@ void ShopLayer::beginPay(int index)
 }
 void ShopLayer::setMessage(PYARET ret)
 {
+	log("zhou = %d", payindex);
 	if (ret == PAY_SUCC && payindex >= 0)
 	{
 		int herocount = sizeof(heroprice) / sizeof(heroprice[0]);
@@ -283,7 +284,9 @@ void ShopLayer::setMessage(PYARET ret)
 			g_gameLayer->scheduleOnce(schedule_selector(ShopLayer::delayShowRecharge), 1.0f);
 		}
 	}
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	payindex = -1;
+#endif
 	isPaying = false;
 }
 
