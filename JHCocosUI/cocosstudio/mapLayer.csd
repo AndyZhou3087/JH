@@ -910,7 +910,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="branchmission" ActionTag="-1789424580" Tag="123" IconVisible="False" LeftMargin="538.7158" RightMargin="1.2842" TopMargin="415.5306" BottomMargin="762.4694" TouchEnable="True" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="154" Scale9Height="70" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="branchmission" ActionTag="-1789424580" Tag="123" IconVisible="False" LeftMargin="538.7158" RightMargin="1.2842" TopMargin="415.5306" BottomMargin="762.4694" TouchEnable="True" StretchWidthEnable="True" LeftEage="13" RightEage="13" TopEage="16" BottomEage="16" Scale9OriginX="13" Scale9OriginY="16" Scale9Width="154" Scale9Height="70" ctype="ImageViewObjectData">
             <Size X="180.0000" Y="102.0000" />
             <Children>
               <AbstractNodeData Name="mapmission" ActionTag="-173228260" Tag="112" IconVisible="False" LeftMargin="19.3143" RightMargin="118.6857" TopMargin="43.6623" BottomMargin="8.3377" ctype="SpriteObjectData">

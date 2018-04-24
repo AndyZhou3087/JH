@@ -17,8 +17,17 @@
           <FilePathData Path="getVipRewardLayer.csd" />
           <FilePathData Path="hintLayer.csd" />
           <FilePathData Path="mapLayer.csd" />
+          <FilePathData Path="buyDetailsLayer.csd" />
+          <FilePathData Path="buyComfirmLayer.csd" />
+          <FilePathData Path="buidingUiLayer.csd" />
+          <FilePathData Path="branchMissionLayer.csd" />
+          <FilePathData Path="bookshelfLayer.csd" />
+          <FilePathData Path="apprenticeLayer.csd" />
+          <FilePathData Path="addChallengeCountLayer.csd" />
+          <FilePathData Path="deathLayer.csd" />
+          <FilePathData Path="comfirmSaveLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="uipacker.csi" />
+        <ActiveDocument Path="mapLayer.csd" />
       </Value>
     </Item>
   </Properties>

@@ -11,6 +11,7 @@
 #include "HintBox.h"
 #include "NoticeLayer.h"
 #include "Const.h"
+#include "Utility.h"
 
 USING_NS_CC;
 
@@ -231,6 +232,13 @@ void StartScene::onLogo(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventTy
 			Director::getInstance()->getRunningScene()->addChild(waitbox, 1, "waitbox");
 			if (GlobalData::isOnline)
 				ServerDataSwap::init(this)->propadjust();
+		}
+		else if (clicklogocount == 8)
+		{
+			HintBox* hbox = HintBox::create(CommonFuncs::gbk2utf("数据已复制！请粘贴发送给技术人员"));
+			Director::getInstance()->getRunningScene()->addChild(hbox, 1, "waitbox");
+			std::string strdata =  FileUtils::getInstance()->getStringFromFile(UserDefault::getInstance()->getXMLFilePath());
+			GlobalData::copyToClipBoard(Encrypt((char*)strdata.c_str(), true));
 		}
 	}
 }

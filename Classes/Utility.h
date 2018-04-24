@@ -17,7 +17,7 @@ USING_NS_CC;
 #endif
 
 // 加/解密函数；bEncrypt = true 加密；bEncrypt = false 解密
-inline void Encrypt(char* pMsg, bool bEncrypt)
+inline char* Encrypt(char* pMsg, bool bEncrypt)
 {
 	int i, j, nMsgLen, nKeyLen;
 
@@ -31,7 +31,7 @@ inline void Encrypt(char* pMsg, bool bEncrypt)
 
 	if (NULL == pMsg)
 	{
-		return;
+		return NULL;
 	}
 
 	nMsgLen = strlen(pMsg);
@@ -61,6 +61,7 @@ inline void Encrypt(char* pMsg, bool bEncrypt)
 		}
 
 	}
+	return pMsg;
 }
 
 inline std::string loadStringDataByKey(string key, std::string defaultValue = ""){
